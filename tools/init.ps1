@@ -1,0 +1,1 @@
+start "https://github.com/DamienDennehy/Imgur.API/wiki"

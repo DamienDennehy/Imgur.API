@@ -14,6 +14,6 @@
     <tags>imgur api imgur.api</tags>
   </metadata>
     <files>
-        <file src="tools\init.ps1" target="tools\init.ps1" />
+        <file src="..\..\tools\init.ps1" target="tools\init.ps1" />
     </files>
 </package>

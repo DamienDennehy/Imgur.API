@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Imgur.API.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,8 +36,40 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="Endpoints\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\IAPIAuthentication.cs" />
+    <Compile Include="Authentication\IImgurAuthentication.cs" />
+    <Compile Include="Authentication\IMashapeAuthentication.cs" />
+    <Compile Include="Authentication\IOAuth2Authentication.cs" />
+    <Compile Include="Models\IAccount.cs" />
+    <Compile Include="Models\IAccountSettings.cs" />
+    <Compile Include="Models\IAlbum.cs" />
+    <Compile Include="Models\IBasic.cs" />
+    <Compile Include="Models\IBlockedUser.cs" />
+    <Compile Include="Models\IComment.cs" />
+    <Compile Include="Models\IConversation.cs" />
+    <Compile Include="Models\ICustomGallery.cs" />
+    <Compile Include="Models\IDataModel.cs" />
+    <Compile Include="Models\IGalleryAlbum.cs" />
+    <Compile Include="Models\IGalleryImage.cs" />
+    <Compile Include="Models\IGalleryItem.cs" />
+    <Compile Include="Models\IGalleryProfile.cs" />
+    <Compile Include="Models\IImage.cs" />
+    <Compile Include="Models\IImgurError.cs" />
+    <Compile Include="Models\IMashapeError.cs" />
+    <Compile Include="Models\IMemeMetaData.cs" />
+    <Compile Include="Models\IMessage.cs" />
+    <Compile Include="Models\INotification.cs" />
+    <Compile Include="Models\IOAuth2Token.cs" />
+    <Compile Include="Models\IRateLimit.cs" />
+    <Compile Include="Models\ITag.cs" />
+    <Compile Include="Models\ITagVote.cs" />
+    <Compile Include="Models\ITopic.cs" />
+    <Compile Include="Models\ITrophy.cs" />
+    <Compile Include="Models\IVote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

@@ -1,17 +1,24 @@
 version: 3.0.1.{build}
-os: Visual Studio 2015
+os: Windows Server 2012 R2
+environment:
+  VisualStudioVersion: 14.0
+install:
+- set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
+- nuget restore
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
   assembly_version: '{version}'
   assembly_file_version: '{version}'
-  assembly_informational_version: 3.0.1-CI{build}
+  assembly_informational_version: 3.0.1-ci{build}
 build:
   project: Imgur.API.sln
   publish_nuget: true
   publish_nuget_symbols: true
   include_nuget_references: true
   verbosity: minimal
+test:
+  assemblies: '**\*.tests.dll'
 artifacts:
   path: artifacts\*.nupkg
 deploy:
@@ -20,8 +27,3 @@ deploy:
   api_key:
     secure: VKpWEiDhfRypjFf7MgnSlOJBdzQ1sOT87+aUCzjpj0wAFE8pOLJxcbXPR/6qqVBU
   symbol_server: https://nuget.symbolsource.org/MyGet/imgur-api
-install:
-- set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
-- nuget restore
-environment:
-  VisualStudioVersion: 14.0

@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Authentication\IAPIAuthentication.cs" />
+    <Compile Include="Authentication\IApiAuthentication.cs" />
     <Compile Include="Authentication\IImgurAuthentication.cs" />
     <Compile Include="Authentication\IMashapeAuthentication.cs" />
     <Compile Include="Authentication\IOAuth2Authentication.cs" />
@@ -64,6 +64,12 @@
     <Compile Include="Models\IMashapeError.cs" />
     <Compile Include="Models\IMemeMetaData.cs" />
     <Compile Include="Models\IMessage.cs" />
+    <Compile Include="Models\Impl\Account.cs" />
+    <Compile Include="Models\Impl\Basic.cs" />
+    <Compile Include="Models\Impl\ImgurError.cs" />
+    <Compile Include="Models\Impl\MashapeError.cs" />
+    <Compile Include="Models\Impl\OAuth2Token.cs" />
+    <Compile Include="Models\Impl\RateLimit.cs" />
     <Compile Include="Models\INotification.cs" />
     <Compile Include="Models\IOAuth2Token.cs" />
     <Compile Include="Models\IRateLimit.cs" />
@@ -82,6 +88,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Authentication\Impl\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>$copyright$</copyright>
-    <tags>imgur api imgur.api</tags>
+    <tags>imgur api imgur.api mashape imgur.mashape</tags>
   </metadata>
     <files>
         <file src="..\..\tools\init.ps1" target="tools\init.ps1" />

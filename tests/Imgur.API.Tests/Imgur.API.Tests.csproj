@@ -35,6 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NSubstitute, Version=1.8.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NSubstitute.1.8.2.0\lib\net45\NSubstitute.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -50,6 +58,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Authentication\ApiAuthenticationTests.cs" />
+    <Compile Include="Authentication\ImgurAuthenticationTests.cs" />
+    <Compile Include="Authentication\MashapeAuthenticationTests.cs" />
+    <Compile Include="Authentication\OAuth2AuthenticationTests.cs" />
+    <Compile Include="Authentication\OAuth2TokenTests.cs" />
+    <Compile Include="JsonAttributes\EpochTimeToDateTimeOffsetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +71,9 @@
       <Project>{59659c8e-3093-479c-ab10-f9b56571d920}</Project>
       <Name>Imgur.API</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

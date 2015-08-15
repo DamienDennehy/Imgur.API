@@ -5,7 +5,7 @@
 // associated with an assembly.
 
 [assembly: AssemblyTitle("Imgur.API")]
-[assembly: AssemblyDescription("Imgur API library.")]
+[assembly: AssemblyDescription("C# implementation of Imgur's v3 API. Supports Imgur's free and Mashape's commercial API endpoints.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Damien Dennehy")]
 [assembly: AssemblyProduct("Imgur.API")]

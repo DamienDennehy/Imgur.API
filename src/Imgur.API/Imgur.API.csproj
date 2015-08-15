@@ -13,7 +13,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -36,7 +36,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Folder Include="Endpoints\" />
     <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +43,10 @@
     <Compile Include="Authentication\IImgurAuthentication.cs" />
     <Compile Include="Authentication\IMashapeAuthentication.cs" />
     <Compile Include="Authentication\IOAuth2Authentication.cs" />
+    <Compile Include="Endpoints\IEndpoint.cs" />
+    <Compile Include="Endpoints\IImageEndpoint.cs" />
+    <Compile Include="Endpoints\IOAuth2Endpoint.cs" />
+    <Compile Include="Endpoints\IRateLimitEndpoint.cs" />
     <Compile Include="Models\IAccount.cs" />
     <Compile Include="Models\IAccountSettings.cs" />
     <Compile Include="Models\IAlbum.cs" />

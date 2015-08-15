@@ -5,7 +5,7 @@ namespace Imgur.API.Models
     /// <summary>
     ///     The data model formatted for gallery albums.
     /// </summary>
-    public interface IGalleryAlbum : IGalleryItem, IDataModel
+    public interface IGalleryAlbum : IGalleryItem
     {
         /// <summary>
         ///     The ID for the image.

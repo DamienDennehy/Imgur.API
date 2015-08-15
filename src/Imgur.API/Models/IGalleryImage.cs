@@ -5,7 +5,7 @@ namespace Imgur.API.Models
     /// <summary>
     ///     The data model formatted for gallery images.
     /// </summary>
-    public interface IGalleryImage : IGalleryItem, IDataModel
+    public interface IGalleryImage : IGalleryItem
     {
         /// <summary>
         ///     The ID for the image.
@@ -108,7 +108,7 @@ namespace Imgur.API.Models
         /// <summary>
         ///     Indicates if the image has been marked as nsfw or not. Defaults to null if information is not available.
         /// </summary>
-        bool? NSFW { get; set; }
+        bool? Nsfw { get; set; }
 
         /// <summary>
         ///     Number of comments on the gallery image.

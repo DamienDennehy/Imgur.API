@@ -6,7 +6,7 @@ using NSubstitute;
 namespace Imgur.API.Tests.Authentication.Impl
 {
     [TestClass]
-    public class ApiAuthenticationBaseTests
+    public class ApiAuthenticationBaseImplTests
     {
         [TestMethod]
         public void RateLimit_SetByInitialization_IsNotNull()

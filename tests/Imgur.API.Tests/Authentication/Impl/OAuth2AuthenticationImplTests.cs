@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Imgur.API.Tests.Authentication.Impl
 {
     [TestClass]
-    public class OAuth2AuthenticationTests
+    public class OAuth2AuthenticationImplTests
     {
         [TestMethod]
         public void OAuth2ResponseType_SetByConstructor_AreEqual()

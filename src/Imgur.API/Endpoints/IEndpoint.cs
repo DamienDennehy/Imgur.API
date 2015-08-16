@@ -33,7 +33,7 @@ namespace Imgur.API.Endpoints
         /// <param name="httpMethod">The HttpMethod that should be used.</param>
         /// <param name="content">The FormUrlEncodedContent that should be submitted.</param>
         /// <returns></returns>
-        Task<IDataModel> MakeEndpointRequestAsync<T>(
+        Task<T> MakeEndpointRequestAsync<T>(
             HttpMethod httpMethod,
             string endpointUrl,
             HttpContent content);

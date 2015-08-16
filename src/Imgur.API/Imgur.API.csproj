@@ -38,6 +38,10 @@
     <Compile Include="Authentication\IApiAuthentication.cs" />
     <Compile Include="Authentication\IImgurAuthentication.cs" />
     <Compile Include="Authentication\IMashapeAuthentication.cs" />
+    <Compile Include="Authentication\Impl\ApiAuthenticationBase.cs" />
+    <Compile Include="Authentication\Impl\ImgurAuthentication.cs" />
+    <Compile Include="Authentication\Impl\MashapeAuthentication.cs" />
+    <Compile Include="Authentication\Impl\OAuth2Authentication.cs" />
     <Compile Include="Authentication\IOAuth2Authentication.cs" />
     <Compile Include="Authentication\OAuth2ResponseType.cs" />
     <Compile Include="Endpoints\IEndpoint.cs" />
@@ -89,9 +93,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Authentication\Impl\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

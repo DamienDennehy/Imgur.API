@@ -53,13 +53,19 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <Compile Include="Authentication\ApiAuthenticationTests.cs" />
     <Compile Include="Authentication\ImgurAuthenticationTests.cs" />
+    <Compile Include="Authentication\Impl\ApiAuthenticationBaseTests.cs" />
+    <Compile Include="Authentication\Impl\ImgurAuthenticationTests.cs" />
+    <Compile Include="Authentication\Impl\MashapeAuthenticationTests.cs" />
+    <Compile Include="Authentication\Impl\OAuth2AuthenticationTests.cs" />
     <Compile Include="Authentication\MashapeAuthenticationTests.cs" />
     <Compile Include="Authentication\OAuth2AuthenticationTests.cs" />
     <Compile Include="Authentication\OAuth2TokenTests.cs" />
@@ -75,6 +81,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

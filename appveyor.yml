@@ -1,5 +1,4 @@
-version: 3.0.1.{build}
-os: Windows Server 2012 R2
+version: 3.0.1-build{build}
 environment:
   VisualStudioVersion: 14.0
 install:
@@ -8,9 +7,9 @@ install:
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: 3.0.1-ci{build}
+  assembly_version: 3.0.1
+  assembly_file_version: 3.0.1.{build}
+  assembly_informational_version: '3.0.1-build{build}'
 build:
   project: Imgur.API.sln
   publish_nuget: true

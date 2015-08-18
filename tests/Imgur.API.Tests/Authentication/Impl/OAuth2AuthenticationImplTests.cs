@@ -42,7 +42,6 @@ namespace Imgur.API.Tests.Authentication.Impl
             Assert.AreEqual(authentication.OAuth2Token.AccessToken, token.AccessToken);
             Assert.AreEqual(authentication.OAuth2Token.RefreshToken, token.RefreshToken);
             Assert.AreEqual(authentication.OAuth2Token.TokenType, token.TokenType);
-            Assert.AreEqual(authentication.OAuth2Token.ExpiresAt.UtcDateTime, token.ExpiresAt.UtcDateTime);
             Assert.AreEqual(authentication.OAuth2Token.ExpiresIn, token.ExpiresIn);
             Assert.AreEqual(authentication.OAuth2Token.AccountId, token.AccountId);
         }

@@ -6,7 +6,7 @@ namespace Imgur.API.Authentication.Impl
     ///     Imgur API application credentials.
     ///     Register at https://api.imgur.com/oauth2/addclient
     /// </summary>
-    public class ImgurAuthentication : ApiAuthenticationBase
+    public class ImgurAuthentication : ApiAuthenticationBase, IImgurAuthentication
     {
         /// <summary>
         ///     Initializes a new instance of the ImgurAuthentication class.
@@ -49,11 +49,11 @@ namespace Imgur.API.Authentication.Impl
         /// <summary>
         ///     The Imgur app's ClientId.
         /// </summary>
-        public virtual string ClientId { get; private set; }
+        public virtual string ClientId { get; }
 
         /// <summary>
         ///     The Imgur app's ClientSecret.
         /// </summary>
-        public virtual string ClientSecret { get; private set; }
+        public virtual string ClientSecret { get; }
     }
 }

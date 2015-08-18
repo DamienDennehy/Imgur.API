@@ -22,7 +22,6 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public void Endpoint_MakeEndpointRequestAsync_ReceivedIsTrue()
         {
-            var apiAuth = Substitute.For<IApiAuthentication>();
             var endpoint = Substitute.For<IEndpoint>();
             endpoint.MakeEndpointRequestAsync<IImage>(HttpMethod.Get, "", null);
             endpoint.Received().MakeEndpointRequestAsync<IImage>(HttpMethod.Get, "", null);

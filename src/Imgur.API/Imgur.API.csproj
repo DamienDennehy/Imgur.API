@@ -46,6 +46,7 @@
     <Compile Include="Authentication\OAuth2ResponseType.cs" />
     <Compile Include="Endpoints\IEndpoint.cs" />
     <Compile Include="Endpoints\IImageEndpoint.cs" />
+    <Compile Include="Endpoints\Impl\EndpointBase.cs" />
     <Compile Include="Endpoints\IOAuth2Endpoint.cs" />
     <Compile Include="Endpoints\IRateLimitEndpoint.cs" />
     <Compile Include="JsonAttributes\EpochTimeToDateTimeOffset.cs" />

@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
-using Imgur.API.Models;
 
 namespace Imgur.API.Endpoints
 {
@@ -18,7 +17,7 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Gets the endpoint url based on the authentication type.
         /// </summary>
-        string EndpointUrl { get; }
+        string GetEndpointUrl();
 
         /// <summary>
         ///     Switch from one authentication type to another.

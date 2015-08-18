@@ -11,14 +11,14 @@ namespace Imgur.API.Tests.Authentication.Impl
         [TestMethod]
         public void RateLimit_SetByInitialization_IsNotNull()
         {
-            var apiAuth = Substitute.For<ApiAuthenticationBase>();
+            var apiAuth = Substitute.ForPartsOf<ApiAuthenticationBase>();
             Assert.IsNotNull(apiAuth.RateLimit);
         }
 
         [TestMethod]
         public void RateLimit_SetByConstructor1_IsNotNull()
         {
-            var apiAuth = Substitute.For<ApiAuthenticationBase>();
+            var apiAuth = Substitute.ForPartsOf<ApiAuthenticationBase>();
             Assert.IsNotNull(apiAuth.RateLimit);
         }
 
@@ -26,7 +26,7 @@ namespace Imgur.API.Tests.Authentication.Impl
         public void RateLimit_SetByConstructor2_IsNotNull()
         {
             var oAuth = Substitute.For<IOAuth2Authentication>();
-            var apiAuth = Substitute.For<ApiAuthenticationBase>(oAuth);
+            var apiAuth = Substitute.ForPartsOf<ApiAuthenticationBase>(oAuth);
             Assert.IsNotNull(apiAuth.RateLimit);
         }
 
@@ -34,7 +34,7 @@ namespace Imgur.API.Tests.Authentication.Impl
         public void OAuth2Authentication_SetByConstructor_IsNotNull()
         {
             var oAuth = Substitute.For<IOAuth2Authentication>();
-            var apiAuth = Substitute.For<ApiAuthenticationBase>(oAuth);
+            var apiAuth = Substitute.ForPartsOf<ApiAuthenticationBase>(oAuth);
             Assert.IsNotNull(apiAuth.OAuth2Authentication);
         }
     }

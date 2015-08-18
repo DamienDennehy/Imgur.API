@@ -1,7 +1,5 @@
-﻿using System.Net.Http;
-using Imgur.API.Authentication;
+﻿using Imgur.API.Authentication;
 using Imgur.API.Endpoints;
-using Imgur.API.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 

@@ -71,6 +71,7 @@
     <Compile Include="Authentication\OAuth2AuthenticationTests.cs" />
     <Compile Include="Authentication\OAuth2TokenTests.cs" />
     <Compile Include="Endpoints\ImageEndpointTests.cs" />
+    <Compile Include="Endpoints\Impl\EndpointImplTests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />
     <Compile Include="Endpoints\RateLimitEndpointTests.cs" />
     <Compile Include="Endpoints\EndpointTests.cs" />

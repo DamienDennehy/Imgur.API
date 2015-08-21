@@ -7,11 +7,6 @@
     public interface IMashapeAuthentication : IApiAuthentication
     {
         /// <summary>
-        ///     The Imgur app's ClientId.
-        /// </summary>
-        string ClientId { get; }
-
-        /// <summary>
         ///     The Mashape Key.
         /// </summary>
         string MashapeKey { get; }

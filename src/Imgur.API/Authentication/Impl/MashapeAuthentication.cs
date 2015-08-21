@@ -12,16 +12,14 @@ namespace Imgur.API.Authentication.Impl
         ///     Initializes a new instance of the MashapeAuthentication class.
         /// </summary>
         /// <param name="clientId">The Imgur app's ClientId. </param>
+        /// <param name="clientSecret">The Imgur app's ClientSecret.</param>
         /// <param name="mashapeKey">The Mashape Key. </param>
-        public MashapeAuthentication(string clientId, string mashapeKey)
+        public MashapeAuthentication(string clientId, string clientSecret, string mashapeKey)
+            : base(clientId, clientSecret)
         {
-            if (string.IsNullOrWhiteSpace(clientId))
-                throw new ArgumentNullException(nameof(clientId));
-
             if (string.IsNullOrWhiteSpace(mashapeKey))
                 throw new ArgumentNullException(nameof(mashapeKey));
 
-            ClientId = clientId;
             MashapeKey = mashapeKey;
         }
 
@@ -29,25 +27,18 @@ namespace Imgur.API.Authentication.Impl
         ///     Initializes a new instance of the MashapeAuthentication class.
         /// </summary>
         /// <param name="clientId">The Imgur app's ClientId. </param>
+        /// <param name="clientSecret">The Imgur app's ClientSecret.</param>
         /// <param name="mashapeKey">The Mashape Key. </param>
         /// <param name="oAuth2Authentication">OAuth2 credentials.</param>
-        public MashapeAuthentication(string clientId, string mashapeKey, IOAuth2Authentication oAuth2Authentication)
-            : base(oAuth2Authentication)
+        public MashapeAuthentication(string clientId, string clientSecret, string mashapeKey,
+            IOAuth2Authentication oAuth2Authentication)
+            : base(clientId, clientSecret, oAuth2Authentication)
         {
-            if (string.IsNullOrWhiteSpace(clientId))
-                throw new ArgumentNullException(nameof(clientId));
-
             if (string.IsNullOrWhiteSpace(mashapeKey))
                 throw new ArgumentNullException(nameof(mashapeKey));
 
-            ClientId = clientId;
             MashapeKey = mashapeKey;
         }
-
-        /// <summary>
-        ///     The Imgur app's ClientId.
-        /// </summary>
-        public virtual string ClientId { get; }
 
         /// <summary>
         ///     The Mashape Key.

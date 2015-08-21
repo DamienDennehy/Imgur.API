@@ -12,7 +12,7 @@ namespace Imgur.API.Tests.Authentication.Impl
         [TestMethod]
         public void ClientId_SetByConstructor_AreEqual()
         {
-            var auth = new MashapeAuthentication("ClientId", "MashapeKey");
+            var auth = new MashapeAuthentication("ClientId", "ClientSecret", "MashapeKey");
             Assert.AreEqual("ClientId", auth.ClientId);
         }
 
@@ -20,14 +20,29 @@ namespace Imgur.API.Tests.Authentication.Impl
         [ExpectedException(typeof (ArgumentNullException))]
         public void ClientId_SetNullByConstructor_ThrowArgumentNullException()
         {
-            var auth = new MashapeAuthentication(null, "MashapeKey");
+            var auth = new MashapeAuthentication(null, "ClientSecret", "MashapeKey");
             Assert.IsNotNull(auth.MashapeKey);
+        }
+
+        [TestMethod]
+        public void ClientSecret_SetByConstructor_AreEqual()
+        {
+            var auth = new MashapeAuthentication("ClientId", "ClientSecret", "MashapeKey");
+            Assert.AreEqual("ClientSecret", auth.ClientSecret);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ClientSecret_SetNullByConstructor_ThrowArgumentNullException()
+        {
+            var auth = new MashapeAuthentication("ClientId", null, "MashapeKey");
+            Assert.IsNotNull(auth.ClientSecret);
         }
 
         [TestMethod]
         public void MashapeKey_SetByConstructor_AreEqual()
         {
-            var authentication = new MashapeAuthentication("ClientId", "MashapeKey");
+            var authentication = new MashapeAuthentication("ClientId", "ClientSecret", "MashapeKey");
             Assert.AreEqual("MashapeKey", authentication.MashapeKey);
         }
 
@@ -35,7 +50,7 @@ namespace Imgur.API.Tests.Authentication.Impl
         [ExpectedException(typeof (ArgumentNullException))]
         public void MashapeKey_SetNullByConstructor_ThrowArgumentNullException()
         {
-            var auth = new MashapeAuthentication("ClientId", null);
+            var auth = new MashapeAuthentication("ClientId", "ClientSecret", null);
             Assert.IsNotNull(auth.ClientId);
         }
 
@@ -43,7 +58,7 @@ namespace Imgur.API.Tests.Authentication.Impl
         public void OAuth2Authentication_SetByConstructor_AreEqual()
         {
             var oAuth2 = Substitute.For<IOAuth2Authentication>();
-            var auth = new MashapeAuthentication("ClientId", "MashapeKey", oAuth2);
+            var auth = new MashapeAuthentication("ClientId", "ClientSecret", "MashapeKey", oAuth2);
             Assert.AreEqual(oAuth2, auth.OAuth2Authentication);
         }
 
@@ -58,7 +73,7 @@ namespace Imgur.API.Tests.Authentication.Impl
         [TestMethod]
         public void RateLimit_SetByConstructor_IsNotNull()
         {
-            var auth = new MashapeAuthentication("ClientId", "MashapeKey");
+            var auth = new MashapeAuthentication("ClientId", "ClientSecret", "MashapeKey");
             Assert.IsNotNull(auth.RateLimit);
         }
     }

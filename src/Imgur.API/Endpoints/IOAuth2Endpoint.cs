@@ -10,11 +10,6 @@ namespace Imgur.API.Endpoints
     public interface IOAuth2Endpoint : IEndpoint
     {
         /// <summary>
-        ///     OAuth2 credentials.
-        /// </summary>
-        IOAuth2Authentication OAuth2Authentication { get; }
-
-        /// <summary>
         ///     Creates an authorization url that can be used to authorize access to a user's account.
         /// </summary>
         /// <param name="oAuth2ResponseType">Determines if Imgur returns a Code, a PIN code, or an opaque Token.</param>

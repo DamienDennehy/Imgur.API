@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Imgur.API.Authentication.Impl
+﻿namespace Imgur.API.Authentication.Impl
 {
     /// <summary>
     ///     Imgur API application credentials.
@@ -13,17 +11,8 @@ namespace Imgur.API.Authentication.Impl
         /// </summary>
         /// <param name="clientId">The Imgur app's ClientId. </param>
         /// <param name="clientSecret">The Imgur app's ClientSecret.</param>
-        /// <exception cref="ArgumentNullException" />
-        public ImgurAuthentication(string clientId, string clientSecret)
+        public ImgurAuthentication(string clientId, string clientSecret) : base(clientId, clientSecret)
         {
-            if (string.IsNullOrWhiteSpace(clientId))
-                throw new ArgumentNullException(nameof(clientId));
-
-            if (string.IsNullOrWhiteSpace(clientSecret))
-                throw new ArgumentNullException(nameof(clientSecret));
-
-            ClientId = clientId;
-            ClientSecret = clientSecret;
         }
 
         /// <summary>
@@ -32,28 +21,8 @@ namespace Imgur.API.Authentication.Impl
         /// <param name="clientId">The Imgur app's ClientId. </param>
         /// <param name="clientSecret">The Imgur app's ClientSecret.</param>
         /// <param name="oAuth2Authentication">OAuth2 credentials.</param>
-        /// <exception cref="ArgumentNullException" />
-        public ImgurAuthentication(string clientId, string clientSecret, IOAuth2Authentication oAuth2Authentication)
-            : base(oAuth2Authentication)
+        public ImgurAuthentication(string clientId, string clientSecret, IOAuth2Authentication oAuth2Authentication) : base(clientId, clientSecret, oAuth2Authentication)
         {
-            if (string.IsNullOrWhiteSpace(clientId))
-                throw new ArgumentNullException(nameof(clientId));
-
-            if (string.IsNullOrWhiteSpace(clientSecret))
-                throw new ArgumentNullException(nameof(clientSecret));
-
-            ClientId = clientId;
-            ClientSecret = clientSecret;
         }
-
-        /// <summary>
-        ///     The Imgur app's ClientId.
-        /// </summary>
-        public virtual string ClientId { get; }
-
-        /// <summary>
-        ///     The Imgur app's ClientSecret.
-        /// </summary>
-        public virtual string ClientSecret { get; }
     }
 }

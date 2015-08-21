@@ -17,7 +17,7 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Gets the endpoint url based on the authentication type.
         /// </summary>
-        string GetEndpointUrl();
+        string GetEndpointBaseUrl();
 
         /// <summary>
         ///     Switch from one authentication type to another.

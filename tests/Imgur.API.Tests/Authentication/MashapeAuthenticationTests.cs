@@ -16,6 +16,14 @@ namespace Imgur.API.Tests.Authentication
         }
 
         [TestMethod]
+        public void ClientSecret_Set_AreEqual()
+        {
+            var auth = Substitute.For<IMashapeAuthentication>();
+            auth.ClientSecret.Returns("Qwerty123");
+            Assert.AreEqual("Qwerty123", auth.ClientSecret);
+        }
+
+        [TestMethod]
         public void MashapeKey_Set_AreEqual()
         {
             var auth = Substitute.For<IMashapeAuthentication>();

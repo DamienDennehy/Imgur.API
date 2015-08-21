@@ -3,6 +3,10 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
+using Imgur.API.Exceptions;
+using Imgur.API.Models;
+using Imgur.API.Models.Impl;
+using Newtonsoft.Json;
 
 namespace Imgur.API.Endpoints.Impl
 {
@@ -39,7 +43,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     The base Endpoint Url based on the current authentication set.
         ///     Example: https://api.imgur.com/3/
         /// </summary>
-        public virtual string GetEndpointUrl()
+        public virtual string GetEndpointBaseUrl()
         {
             if (ApiAuthentication is IImgurAuthentication)
                 return "https://api.imgur.com/3/";
@@ -47,7 +51,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiAuthentication is IMashapeAuthentication)
                 return "https://imgur-apiv3.p.mashape.com/3/";
 
-            throw new InvalidOperationException("Authentication type not recognized.");
+            throw new InvalidOperationException("ApiAuthentication type not recognized.");
         }
 
         /// <summary>
@@ -60,44 +64,6 @@ namespace Imgur.API.Endpoints.Impl
                 throw new ArgumentNullException(nameof(authentication));
 
             ApiAuthentication = authentication;
-        }
-
-        /// <summary>
-        ///     Gets a new HttpClient with DefaultRequestHeaders configured based
-        ///     on the current ApiAuthentication set.
-        /// </summary>
-        /// <returns></returns>
-        public HttpClient GetHttpClient()
-        {
-            var httpClient = new HttpClient();
-
-            //Add Imgur Authentication header
-            var imgurAuthentication = ApiAuthentication as IImgurAuthentication;
-            if (imgurAuthentication != null)
-            {
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                    "Authorization", $"Client-ID {imgurAuthentication.ClientId}");
-            }
-
-            //Add Mashape Authentication header
-            var mashapeAuthentication = ApiAuthentication as IMashapeAuthentication;
-            if (mashapeAuthentication != null)
-            {
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                    "X-Mashape-Key", mashapeAuthentication.MashapeKey);
-
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                    "Authorization", $"Client-ID {mashapeAuthentication.ClientId}");
-            }
-
-            //Add OAuth Authentication header
-            if (ApiAuthentication.OAuth2Authentication?.OAuth2Token != null)
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                    "Authorization", $"Bearer {ApiAuthentication.OAuth2Authentication.OAuth2Token.AccessToken}");
-
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            return httpClient;
         }
 
         /// <summary>
@@ -143,54 +109,94 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        /// Parses the string response from the endpoint into an expected type T.
+        ///     Gets a new HttpClient with DefaultRequestHeaders configured based
+        ///     on the current ApiAuthentication set.
+        /// </summary>
+        /// <returns></returns>
+        public HttpClient GetHttpClient()
+        {
+            var httpClient = new HttpClient();
+
+            //Add Imgur Authentication header
+            var imgurAuthentication = ApiAuthentication as IImgurAuthentication;
+            if (imgurAuthentication != null)
+            {
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
+                    "Authorization", $"Client-ID {imgurAuthentication.ClientId}");
+            }
+
+            //Add Mashape Authentication header
+            var mashapeAuthentication = ApiAuthentication as IMashapeAuthentication;
+            if (mashapeAuthentication != null)
+            {
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
+                    "X-Mashape-Key", mashapeAuthentication.MashapeKey);
+
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
+                    "Authorization", $"Client-ID {mashapeAuthentication.ClientId}");
+            }
+
+            //Add OAuth Authentication header
+            if (ApiAuthentication.OAuth2Authentication?.OAuth2Token != null)
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
+                    "Authorization", $"Bearer {ApiAuthentication.OAuth2Authentication.OAuth2Token.AccessToken}");
+
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            return httpClient;
+        }
+
+        /// <summary>
+        ///     Parses the string response from the endpoint into an expected type T.
         /// </summary>
         /// <typeparam name="T">The expected output type, Image, bool, etc.</typeparam>
-        /// <param name="stringResponse">The string response from the endpoint.</param>
+        /// <param name="endpointStringResponse">The string response from the endpoint.</param>
         /// <returns></returns>
-        public T ProcessEndpointResponse<T>(string stringResponse)
+        public T ProcessEndpointResponse<T>(string endpointStringResponse)
         {
             //If no result is found, then we can't proceed
-            if (string.IsNullOrWhiteSpace(stringResponse))
-                throw new HttpRequestException("The response from the endpoint is empty.");
+            if (string.IsNullOrWhiteSpace(endpointStringResponse))
+                throw new ArgumentNullException(nameof(endpointStringResponse),
+                    "The response from the endpoint is empty.");
 
-            ////If the authentication method is Mashape, then an error response
-            ////is different to that of Imgur's response.
-            //if (ApiAuthentication is IMashapeAuthentication && stringResponse.Contains("{\"message\":"))
-            //{
-            //    var maShapeError = JsonConvert.DeserializeObject<MashapeError>(stringResponse);
-            //    throw new HttpRequestException(maShapeError.Message);
-            //}
+            //If the authentication method is Mashape, then an error response
+            //is different to that of Imgur's response.
+            if (ApiAuthentication is IMashapeAuthentication && endpointStringResponse.Contains("{\"message\":"))
+            {
+                var maShapeError = JsonConvert.DeserializeObject<MashapeError>(endpointStringResponse);
+                throw new MashapeException(maShapeError.Message);
+            }
 
-            ////If an error occurs, throw an exception
-            //if (stringResponse.Contains("{\"data\":{\"error\":"))
-            //{
-            //    var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(stringResponse);
-            //    throw new HttpRequestException(apiError.Data.ErrorMessage);
-            //}
+            //If an error occurs, throw an exception
+            if (endpointStringResponse.Contains("{\"data\":{\"error\":"))
+            {
+                var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
+                throw new ImgurException(apiError.Data.ErrorMessage);
+            }
 
-            //if (typeof(T) == typeof(IOAuth2Token))
-            //{
-            //    //Deserialize the actual response
-            //    var response = JsonConvert.DeserializeObject<OAuth2Token>(stringResponse);
-            //    return response;
-            //}
+            //If the type being requested is an oAuthToken
+            //Deserialize it immediately and return
+            if (typeof (T) == typeof (IOAuth2Token))
+            {
+                var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
+                return oAuth2Response;
+            }
 
-            ////Deserialize the response into a generic Basic<object> type
-            //response = JsonConvert.DeserializeObject<Basic<object>>(stringResponse);
+            //Deserialize the response into a generic Basic<object> type
+            var response = JsonConvert.DeserializeObject<Basic<object>>(endpointStringResponse);
 
-            ////If the response was not a success, then the response type is Basic<Error>
-            ////and should be handled as such.
-            //if (!response.Success)
-            //{
-            //    var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(stringResponse);
-            //    throw new EndpointException(apiError.Data.ErrorMessage);
-            //}
+            //If the response was not a success, then the response type is Basic<ImgurError>
+            //and should be handled as such.
+            if (!response.Success)
+            {
+                var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
+                throw new ImgurException(apiError.Data.ErrorMessage);
+            }
 
-            ////Deserialize the actual response
-            //var finalResponse = JsonConvert.DeserializeObject<Basic<T>>(stringResponse);
+            //Deserialize the actual response
+            var finalResponse = JsonConvert.DeserializeObject<Basic<T>>(endpointStringResponse);
 
-            throw new NotImplementedException();
+            return finalResponse.Data;
         }
     }
 }

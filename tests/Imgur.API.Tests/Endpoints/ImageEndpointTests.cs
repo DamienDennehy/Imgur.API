@@ -19,7 +19,7 @@ namespace Imgur.API.Tests.Endpoints
         public void ImageEndpoint_UploadImageBinaryAsync_ReceivedIsTrue()
         {
             var endpoint = Substitute.For<IImageEndpoint>();
-            var image = new byte[] { 0x20 };
+            var image = new byte[] {0x20};
             endpoint.UploadImageBinaryAsync(image, "1234", "t1234", "d1234");
             endpoint.Received().UploadImageBinaryAsync(image, "1234", "t1234", "d1234");
         }

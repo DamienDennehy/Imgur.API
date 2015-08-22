@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -73,7 +74,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="httpMethod">The HttpMethod that should be used.</param>
         /// <param name="content">The HttpContent that should be submitted.</param>
         /// <returns></returns>
-        public async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl, HttpContent content)
+        public virtual async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl, HttpContent content)
         {
             using (var httpClient = GetHttpClient())
             {
@@ -113,17 +114,16 @@ namespace Imgur.API.Endpoints.Impl
         ///     on the current ApiAuthentication set.
         /// </summary>
         /// <returns></returns>
-        public HttpClient GetHttpClient()
+        public virtual HttpClient GetHttpClient()
         {
             var httpClient = new HttpClient();
 
-            //Add Imgur Authentication header
-            var imgurAuthentication = ApiAuthentication as IImgurAuthentication;
-            if (imgurAuthentication != null)
-            {
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                    "Authorization", $"Client-ID {imgurAuthentication.ClientId}");
-            }
+            //Add OAuth Authentication header
+            httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
+                "Authorization",
+                ApiAuthentication.OAuth2Authentication?.OAuth2Token != null
+                    ? $"Bearer {ApiAuthentication.OAuth2Authentication.OAuth2Token.AccessToken}"
+                    : $"Client-ID {ApiAuthentication.ClientId}");
 
             //Add Mashape Authentication header
             var mashapeAuthentication = ApiAuthentication as IMashapeAuthentication;
@@ -131,19 +131,57 @@ namespace Imgur.API.Endpoints.Impl
             {
                 httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
                     "X-Mashape-Key", mashapeAuthentication.MashapeKey);
-
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                    "Authorization", $"Client-ID {mashapeAuthentication.ClientId}");
             }
-
-            //Add OAuth Authentication header
-            if (ApiAuthentication.OAuth2Authentication?.OAuth2Token != null)
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                    "Authorization", $"Bearer {ApiAuthentication.OAuth2Authentication.OAuth2Token.AccessToken}");
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             return httpClient;
+        }
+
+        /// <summary>
+        /// Updates the ApiAuthentication's RateLimit
+        /// with the values from the last response from the Api.
+        /// </summary>
+        /// <param name="headers"></param>
+        public virtual void UpdateRateLimit(HttpResponseHeaders headers)
+        {
+            if (headers == null)
+                throw new ArgumentNullException(nameof(headers));
+
+            if (ApiAuthentication is IImgurAuthentication)
+            {
+                var clientLimit = headers.GetValues("X-RateLimit-ClientLimit").FirstOrDefault();
+                var clientRemaining = headers.GetValues("X-RateLimit-ClientRemaining").FirstOrDefault();
+                var userLimit = headers.GetValues("X-RateLimit-UserLimit").FirstOrDefault();
+                var userRemaining = headers.GetValues("X-RateLimit-UserRemaining").FirstOrDefault();
+                var userReset = headers.GetValues("X-RateLimit-UserReset").FirstOrDefault();
+
+                ApiAuthentication.RateLimit.ClientLimit = Convert.ToInt32(clientLimit);
+                ApiAuthentication.RateLimit.ClientRemaining = Convert.ToInt32(clientRemaining);
+                ApiAuthentication.RateLimit.UserLimit = Convert.ToInt32(userLimit);
+                ApiAuthentication.RateLimit.UserRemaining = Convert.ToInt32(userRemaining);
+                ApiAuthentication.RateLimit.UserReset = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Convert.ToInt64(userReset));
+
+                ApiAuthentication.RateLimit.MashapeUploadsLimit = null;
+                ApiAuthentication.RateLimit.MashapeUploadsRemaining = null;
+            }
+
+            if (ApiAuthentication is IMashapeAuthentication)
+            {
+                var requestsLimit = headers.GetValues("X-RateLimit-Requests-Limit").FirstOrDefault();
+                var requestsRemaining = headers.GetValues("X-RateLimit-Requests-Remaining").FirstOrDefault();
+                var uploadsLimit = headers.GetValues("X-RateLimit-Uploads-Limit").FirstOrDefault();
+                var uploadsRemaining = headers.GetValues("X-RateLimit-Uploads-Remaining").FirstOrDefault();
+
+                ApiAuthentication.RateLimit.ClientLimit = Convert.ToInt32(requestsLimit);
+                ApiAuthentication.RateLimit.ClientRemaining = Convert.ToInt32(requestsRemaining);
+                ApiAuthentication.RateLimit.MashapeUploadsLimit = Convert.ToInt32(uploadsLimit);
+                ApiAuthentication.RateLimit.MashapeUploadsRemaining = Convert.ToInt32(uploadsRemaining);
+
+                ApiAuthentication.RateLimit.UserLimit = null;
+                ApiAuthentication.RateLimit.UserRemaining = null;
+                ApiAuthentication.RateLimit.UserReset = null;
+            }
         }
 
         /// <summary>
@@ -176,7 +214,7 @@ namespace Imgur.API.Endpoints.Impl
 
             //If the type being requested is an oAuthToken
             //Deserialize it immediately and return
-            if (typeof (T) == typeof (IOAuth2Token))
+            if (typeof(T) == typeof(IOAuth2Token))
             {
                 var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
                 return oAuth2Response;

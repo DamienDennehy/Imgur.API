@@ -48,6 +48,7 @@
     <Compile Include="Endpoints\IImageEndpoint.cs" />
     <Compile Include="Endpoints\Impl\EndpointBase.cs" />
     <Compile Include="Endpoints\Impl\OAuth2Endpoint.cs" />
+    <Compile Include="Endpoints\Impl\RateLimitEndpoint.cs" />
     <Compile Include="Endpoints\IOAuth2Endpoint.cs" />
     <Compile Include="Endpoints\IRateLimitEndpoint.cs" />
     <Compile Include="Exceptions\MashapeException.cs" />
@@ -75,9 +76,9 @@
     <Compile Include="Models\Impl\Account.cs" />
     <Compile Include="Models\Impl\Basic.cs" />
     <Compile Include="Models\Impl\ImgurError.cs" />
+    <Compile Include="Models\Impl\RateLimit.cs" />
     <Compile Include="Models\Impl\MashapeError.cs" />
     <Compile Include="Models\Impl\OAuth2Token.cs" />
-    <Compile Include="Models\Impl\RateLimit.cs" />
     <Compile Include="Models\INotification.cs" />
     <Compile Include="Models\IOAuth2Token.cs" />
     <Compile Include="Models\IRateLimit.cs" />

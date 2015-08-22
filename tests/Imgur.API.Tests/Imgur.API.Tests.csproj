@@ -63,22 +63,15 @@
   <ItemGroup>
     <Compile Include="Authentication\ApiAuthenticationTests.cs" />
     <Compile Include="Authentication\ImgurAuthenticationTests.cs" />
-    <Compile Include="Authentication\Impl\ApiAuthenticationBaseImplTests.cs" />
-    <Compile Include="Authentication\Impl\ImgurAuthenticationImplTests.cs" />
-    <Compile Include="Authentication\Impl\MashapeAuthenticationImplTests.cs" />
-    <Compile Include="Authentication\Impl\OAuth2AuthenticationImplTests.cs" />
     <Compile Include="Authentication\MashapeAuthenticationTests.cs" />
     <Compile Include="Authentication\OAuth2AuthenticationTests.cs" />
     <Compile Include="Authentication\OAuth2TokenTests.cs" />
     <Compile Include="Endpoints\ImageEndpointTests.cs" />
-    <Compile Include="Endpoints\Impl\EndpointImplTests.cs" />
-    <Compile Include="Endpoints\Impl\OAuth2EndpointImplTests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />
     <Compile Include="Endpoints\RateLimitEndpointTests.cs" />
     <Compile Include="Endpoints\EndpointTests.cs" />
     <Compile Include="JsonAttributes\EpochTimeToDateTimeOffsetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Imgur.API\Imgur.API.csproj">

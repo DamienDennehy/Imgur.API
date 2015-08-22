@@ -103,7 +103,6 @@ namespace Imgur.API.Tests.Authentication
                 var auth = new MashapeAuthentication("ClientId", "ClientSecret", "MashapeKey");
                 Assert.IsNotNull(auth.RateLimit);
             }
-
         }
     }
 }

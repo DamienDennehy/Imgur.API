@@ -36,7 +36,7 @@ namespace Imgur.API.Tests.Authentication
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void OAuth2Token_SetNull_ThrowArgumentNullException()
         {
             var authentication = new OAuth2Authentication(OAuth2ResponseType.Code);

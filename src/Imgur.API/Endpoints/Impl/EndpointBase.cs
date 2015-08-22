@@ -74,7 +74,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="httpMethod">The HttpMethod that should be used.</param>
         /// <param name="content">The HttpContent that should be submitted.</param>
         /// <returns></returns>
-        public virtual async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl, HttpContent content)
+        public virtual async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl,
+            HttpContent content)
         {
             using (var httpClient = GetHttpClient())
             {
@@ -139,8 +140,8 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        /// Updates the ApiAuthentication's RateLimit
-        /// with the values from the last response from the Api.
+        ///     Updates the ApiAuthentication's RateLimit
+        ///     with the values from the last response from the Api.
         /// </summary>
         /// <param name="headers"></param>
         public virtual void UpdateRateLimit(HttpResponseHeaders headers)
@@ -160,7 +161,8 @@ namespace Imgur.API.Endpoints.Impl
                 ApiAuthentication.RateLimit.ClientRemaining = Convert.ToInt32(clientRemaining);
                 ApiAuthentication.RateLimit.UserLimit = Convert.ToInt32(userLimit);
                 ApiAuthentication.RateLimit.UserRemaining = Convert.ToInt32(userRemaining);
-                ApiAuthentication.RateLimit.UserReset = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Convert.ToInt64(userReset));
+                ApiAuthentication.RateLimit.UserReset =
+                    new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Convert.ToInt64(userReset));
 
                 ApiAuthentication.RateLimit.MashapeUploadsLimit = null;
                 ApiAuthentication.RateLimit.MashapeUploadsRemaining = null;
@@ -214,7 +216,7 @@ namespace Imgur.API.Endpoints.Impl
 
             //If the type being requested is an oAuthToken
             //Deserialize it immediately and return
-            if (typeof(T) == typeof(IOAuth2Token))
+            if (typeof (T) == typeof (IOAuth2Token))
             {
                 var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
                 return oAuth2Response;

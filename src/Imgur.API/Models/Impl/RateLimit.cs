@@ -47,7 +47,7 @@ namespace Imgur.API.Models.Impl
         ///     Utc timestamp for when the credits will be reset, converted from epoch time.
         ///     Not populated when using Mashape Authentication.
         /// </summary>
-        [JsonConverter(typeof(EpochTimeToDateTimeOffset))]
+        [JsonConverter(typeof (EpochTimeToDateTimeOffset))]
         public virtual DateTimeOffset? UserReset { get; set; }
     }
 }

@@ -10,7 +10,8 @@ namespace Imgur.API.Tests.Endpoints
     [TestClass]
     public class RateLimitEndpointTests
     {
-        private const string RateLimitResponse = "{\"data\":{ \"UserLimit\":412, \"UserRemaining\":382, \"UserReset\":1439945895, \"ClientLimit\":10500, \"ClientRemaining\":9500 }, \"success\":true, \"status\":200 }";
+        private const string RateLimitResponse =
+            "{\"data\":{ \"UserLimit\":412, \"UserRemaining\":382, \"UserReset\":1439945895, \"ClientLimit\":10500, \"ClientRemaining\":9500 }, \"success\":true, \"status\":200 }";
 
         [TestMethod]
         public void RateLimitEndpoint_GetRateLimitAsync_ReceivedIsTrue()

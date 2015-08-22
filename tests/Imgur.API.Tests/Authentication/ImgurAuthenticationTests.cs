@@ -33,7 +33,7 @@ namespace Imgur.API.Tests.Authentication
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void ClientId_SetNullByConstructor_ThrowArgumentNullException()
         {
             var auth = new ImgurAuthentication(null, "ClientSecret");
@@ -48,7 +48,7 @@ namespace Imgur.API.Tests.Authentication
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void ClientSecret_SetNullByConstructor_ThrowArgumentNullException()
         {
             var auth = new ImgurAuthentication("ClientId", null);
@@ -64,7 +64,7 @@ namespace Imgur.API.Tests.Authentication
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void OAuth2Authentication_SetNullByConstructor_ThrowArgumentNullException()
         {
             var auth = new ImgurAuthentication("ClientId", "ClientSecret", null);
@@ -77,6 +77,5 @@ namespace Imgur.API.Tests.Authentication
             var auth = new ImgurAuthentication("ClientId", "ClientSecret");
             Assert.IsNotNull(auth.RateLimit);
         }
-
     }
 }

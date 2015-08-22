@@ -10,7 +10,8 @@ namespace Imgur.API.Tests.Endpoints
     [TestClass]
     public class OAuth2EndpointTests
     {
-        private const string OAuth2TokenResponse = "{\"access_token\":\"20649dae013aiuiui87878788787975ae2\",\"expires_in\":3600,\"token_type\":\"bearer\",\"scope\":null,\"refresh_token\":\"2132d34234jkljj84ce0c16fjkljfsdfdc70\",\"account_id\":45344,\"account_username\":\"Bob\"}";
+        private const string OAuth2TokenResponse =
+            "{\"access_token\":\"20649dae013aiuiui87878788787975ae2\",\"expires_in\":3600,\"token_type\":\"bearer\",\"scope\":null,\"refresh_token\":\"2132d34234jkljj84ce0c16fjkljfsdfdc70\",\"account_id\":45344,\"account_username\":\"Bob\"}";
 
         [TestMethod]
         public void OAuth2Endpoint_GetAuthorizationUrl_ReceivedIsTrue()
@@ -43,7 +44,6 @@ namespace Imgur.API.Tests.Endpoints
             endpoint.GetTokenByRefreshToken("1234");
             endpoint.Received().GetTokenByRefreshToken("1234");
         }
-
 
         [TestMethod]
         public void GetAuthorizationUrl_SetStateNull_AreEqual()

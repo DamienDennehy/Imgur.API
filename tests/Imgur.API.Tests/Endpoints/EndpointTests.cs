@@ -18,9 +18,14 @@ namespace Imgur.API.Tests.Endpoints
     [TestClass]
     public class EndpointTests
     {
-        private const string ImgurAuthErrorResponse = "{\"data\":{\"error\":\"Authentication required\",\"request\":\"/credits\",\"method\":\"POST\"},\"success\":false,\"status\":401}";
-        private const string ImgurCapacityErrorResponse = "{\"data\":{\"error\":\"Imgur is over capacity. Please try again.\", \"request\":\"/image/MwJTXbW\", \"method\":\"POST\" }, \"success\":false, \"status\":1203 }";
-        private const string MashapeErrorResponse = "{\"message\":\"Missing Mashape application key.Go to http://docs.mashape.com/api-keys to learn how to get your API application key.\"}";
+        private const string ImgurAuthErrorResponse =
+            "{\"data\":{\"error\":\"Authentication required\",\"request\":\"/credits\",\"method\":\"POST\"},\"success\":false,\"status\":401}";
+
+        private const string ImgurCapacityErrorResponse =
+            "{\"data\":{\"error\":\"Imgur is over capacity. Please try again.\", \"request\":\"/image/MwJTXbW\", \"method\":\"POST\" }, \"success\":false, \"status\":1203 }";
+
+        private const string MashapeErrorResponse =
+            "{\"message\":\"Missing Mashape application key.Go to http://docs.mashape.com/api-keys to learn how to get your API application key.\"}";
 
         [TestMethod]
         public void Endpoint_SwitchAuthentication_ReceivedIsTrue()
@@ -40,7 +45,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void ApiAuthentication_SetNullByConstructor_ThrowArgumentNullException()
         {
             try
@@ -65,7 +70,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException(typeof (InvalidOperationException))]
         public void GetEndpointUrl_GetWithoutSettingAuthentication_ThrowsInvalidOperationException()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
@@ -91,7 +96,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void SwitchAuthentication_SetNull_ThrowsArgumentNullException()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
@@ -192,7 +197,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void ProcessEndpointBaseResponse_WithNullValue_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");
@@ -201,7 +206,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MashapeException))]
+        [ExpectedException(typeof (MashapeException))]
         public void ProcessMashapeEndpointResponse_WithoutAuthorization_ThrowMashapeException()
         {
             var mashapeAuth = new MashapeAuthentication("123", "567567", "1234");
@@ -210,7 +215,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [ExpectedException(typeof (ImgurException))]
         public void ProcessImgurEndpointResponse_WithAuthorization_ThrowImgurException()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");
@@ -219,7 +224,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [ExpectedException(typeof (ImgurException))]
         public void ProcessImgurEndpointResponse_WithExpectedCapacityError_ThrowImgurException()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");
@@ -228,7 +233,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof (ArgumentException))]
         public async Task MakeEndpointRequestAsync_WithInvalidHttpMethod_ThrowArgumentException()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");
@@ -237,7 +242,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void UpdateRateLimit_WithNullHeaders_ThrowArgumentException()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");
@@ -283,7 +288,7 @@ namespace Imgur.API.Tests.Endpoints
             response.Headers.TryAddWithoutValidation("X-RateLimit-Uploads-Limit", "312");
             response.Headers.TryAddWithoutValidation("X-RateLimit-Uploads-Remaining", "445");
             endpoint.UpdateRateLimit(response.Headers);
-            
+
             Assert.IsNull(endpoint.ApiAuthentication.RateLimit.UserLimit);
             Assert.IsNull(endpoint.ApiAuthentication.RateLimit.UserRemaining);
             Assert.IsNull(endpoint.ApiAuthentication.RateLimit.UserReset);

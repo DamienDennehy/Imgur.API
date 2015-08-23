@@ -73,6 +73,15 @@ namespace Imgur.API.Authentication.Impl
         /// <summary>
         ///     OAuth2 credentials.
         /// </summary>
-        public virtual IOAuth2Authentication OAuth2Authentication { get; }
+        public virtual IOAuth2Authentication OAuth2Authentication { get; private set; }
+
+        /// <summary>
+        ///     Sets the OAuth2Authentication and token to be used.
+        /// </summary>
+        /// <param name="oAuth2Authentication">See <see cref="IOAuth2Authentication" />.</param>
+        public virtual void SetOAuth2Authentication(IOAuth2Authentication oAuth2Authentication)
+        {
+            OAuth2Authentication = oAuth2Authentication;
+        }
     }
 }

@@ -4,17 +4,17 @@ using Imgur.API.Endpoints.Impl;
 using Imgur.API.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Imgur.API.Tests.Integration.Authentication
+namespace Imgur.API.Tests.Integration.Endpoints
 {
     [TestClass]
     public class OAuth2EndpointTests : TestBase
     {
         [TestMethod]
-        public async Task GetTokenByRefreshToken_SetToken_IsNotNull()
+        public async Task GetTokenByRefreshTokenAsync_SetToken_IsNotNull()
         {
             var authentication = new ImgurAuthentication(ClientId, ClientSecret);
             var endpoint = new OAuth2Endpoint(authentication);
-            var token = await endpoint.GetTokenByRefreshToken(RefreshToken);
+            var token = await endpoint.GetTokenByRefreshTokenAsync(RefreshToken);
 
             Assert.IsNotNull(token);
             Assert.IsFalse(string.IsNullOrWhiteSpace(token.AccessToken));
@@ -25,11 +25,11 @@ namespace Imgur.API.Tests.Integration.Authentication
 
         [TestMethod]
         [ExpectedException(typeof(ImgurException))]
-        public async Task GetTokenByCode_SetCodeInvalid_ThrowsAPIResponseException()
+        public async Task GetTokenByCodeAsync_SetCodeInvalid_ThrowsAPIResponseException()
         {
             var authentication = new ImgurAuthentication(ClientId, ClientSecret);
             var endpoint = new OAuth2Endpoint(authentication);
-            await endpoint.GetTokenByCode("abc");
+            await endpoint.GetTokenByCodeAsync("abc");
         }
     }
 }

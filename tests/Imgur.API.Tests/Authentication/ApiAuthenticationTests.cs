@@ -107,5 +107,16 @@ namespace Imgur.API.Tests.Authentication
             var apiAuth = Substitute.ForPartsOf<ApiAuthenticationBase>("ClientId", "ClientSecret", oAuth);
             Assert.IsNotNull(apiAuth.OAuth2Authentication);
         }
+
+        [TestMethod]
+        public void OAuth2Token_SetBySetOAuth2Authentication_IsNotNull()
+        {
+            var oAuth = Substitute.For<IOAuth2Authentication>();
+            var apiAuth = Substitute.ForPartsOf<ApiAuthenticationBase>("ClientId", "ClientSecret");
+
+            Assert.IsNull(apiAuth.OAuth2Authentication);
+            apiAuth.SetOAuth2Authentication(oAuth);
+            Assert.IsNotNull(apiAuth.OAuth2Authentication);
+        }
     }
 }

@@ -26,5 +26,11 @@ namespace Imgur.API.Authentication
         ///     Remaining credits for the application and user.
         /// </summary>
         IRateLimit RateLimit { get; }
+
+        /// <summary>
+        ///     Sets the OAuth2Authentication and token to be used.
+        /// </summary>
+        /// <param name="oAuth2Authentication">See <see cref="IOAuth2Authentication" />.</param>
+        void SetOAuth2Authentication(IOAuth2Authentication oAuth2Authentication);
     }
 }

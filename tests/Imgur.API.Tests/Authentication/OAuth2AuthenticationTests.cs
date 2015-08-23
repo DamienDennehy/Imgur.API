@@ -37,10 +37,31 @@ namespace Imgur.API.Tests.Authentication
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public void OAuth2Token_SetNull_ThrowArgumentNullException()
+        public void OAuth2Token_SetNullBySetOAuth2Token_ThrowArgumentNullException()
         {
             var authentication = new OAuth2Authentication(OAuth2ResponseType.Code);
             authentication.SetOAuth2Token(null);
+        }
+
+        [TestMethod]
+        public void OAuth2Token_SetByConstructor_AreEqual()
+        {
+            var token = new OAuth2Token("access_token", "refresh_Token", "token_type", "account_id", 2300);
+            var authentication = new OAuth2Authentication(token);
+            Assert.IsNotNull(authentication.OAuth2Token);
+            Assert.AreEqual("access_token", authentication.OAuth2Token.AccessToken);
+            Assert.AreEqual("refresh_Token", authentication.OAuth2Token.RefreshToken);
+            Assert.AreEqual("token_type", authentication.OAuth2Token.TokenType);
+            Assert.AreEqual("account_id", authentication.OAuth2Token.AccountId);
+            Assert.AreEqual(2300, authentication.OAuth2Token.ExpiresIn);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public void OAuth2Token_SetNullByConstructor_ThrowArgumentNullException()
+        {
+            var authentication = new OAuth2Authentication(null);
+            Assert.IsNotNull(authentication);
         }
 
         [TestMethod]

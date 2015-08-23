@@ -55,7 +55,7 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="code">The code from the query string.</param>
         /// <returns></returns>
-        public async Task<IOAuth2Token> GetTokenByCode(string code)
+        public async Task<IOAuth2Token> GetTokenByCodeAsync(string code)
         {
             var parameters = new Dictionary<string, string>
             {
@@ -76,7 +76,7 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="pin">The PIN that the user is prompted to enter.</param>
         /// <returns></returns>
-        public async Task<IOAuth2Token> GetTokenByPin(string pin)
+        public async Task<IOAuth2Token> GetTokenByPinAsync(string pin)
         {
             var parameters = new Dictionary<string, string>
             {
@@ -104,7 +104,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     </para>
         /// </summary>
         /// <returns></returns>
-        public async Task<IOAuth2Token> GetTokenByRefreshToken(string refreshToken)
+        public async Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken)
         {
             var parameters = new Dictionary<string, string>
             {

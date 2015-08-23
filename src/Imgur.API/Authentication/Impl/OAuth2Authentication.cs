@@ -19,6 +19,30 @@ namespace Imgur.API.Authentication.Impl
         }
 
         /// <summary>
+        ///     Initializes a new instance of the OAuth2Authentication with a predefined token.
+        /// </summary>
+        /// <param name="token">Sets <see cref="OAuth2Token" /></param>
+        public OAuth2Authentication(IOAuth2Token token)
+        {
+            if (token == null)
+                throw new ArgumentNullException(nameof(token));
+
+            if (token.AccessToken == null)
+                throw new ArgumentNullException(nameof(token.AccessToken));
+
+            if (token.AccountId == null)
+                throw new ArgumentNullException(nameof(token.AccountId));
+
+            if (token.RefreshToken == null)
+                throw new ArgumentNullException(nameof(token.RefreshToken));
+
+            if (token.TokenType == null)
+                throw new ArgumentNullException(nameof(token.TokenType));
+
+            OAuth2Token = token;
+        }
+
+        /// <summary>
         ///     Determines if Imgur returns a Code, a PIN code, or an opaque Token.
         /// </summary>
         public virtual OAuth2ResponseType OAuth2ResponseType { get; }

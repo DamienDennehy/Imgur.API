@@ -26,7 +26,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="pin">The PIN that the user is prompted to enter.</param>
         /// <returns></returns>
-        Task<IOAuth2Token> GetTokenByPin(string pin);
+        Task<IOAuth2Token> GetTokenByPinAsync(string pin);
 
         /// <summary>
         ///     After the user authorizes, the pin is returned as a code to your application
@@ -35,7 +35,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="code">The code from the query string.</param>
         /// <returns></returns>
-        Task<IOAuth2Token> GetTokenByCode(string code);
+        Task<IOAuth2Token> GetTokenByCodeAsync(string code);
 
         /// <summary>
         ///     If a user has authorized their account but you no longer have a valid access_token for them,
@@ -50,6 +50,6 @@ namespace Imgur.API.Endpoints
         ///     </para>
         /// </summary>
         /// <returns></returns>
-        Task<IOAuth2Token> GetTokenByRefreshToken(string refreshToken);
+        Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken);
     }
 }

@@ -151,7 +151,7 @@ namespace Imgur.API.Endpoints.Impl
             if (headers == null)
                 throw new ArgumentNullException(nameof(headers));
 
-            if (ApiAuthentication is IImgurAuthentication 
+            if (ApiAuthentication is IImgurAuthentication
                 && headers.Any(x => x.Key.Equals("X-RateLimit-ClientLimit")))
             {
                 var clientLimit = headers.GetValues("X-RateLimit-ClientLimit").FirstOrDefault();
@@ -171,7 +171,7 @@ namespace Imgur.API.Endpoints.Impl
                 ApiAuthentication.RateLimit.MashapeUploadsRemaining = null;
             }
 
-            if (ApiAuthentication is IMashapeAuthentication 
+            if (ApiAuthentication is IMashapeAuthentication
                 && headers.Any(x => x.Key.Equals("X-RateLimit-Requests-Limit")))
             {
                 var requestsLimit = headers.GetValues("X-RateLimit-Requests-Limit").FirstOrDefault();
@@ -220,7 +220,7 @@ namespace Imgur.API.Endpoints.Impl
 
             //If the type being requested is an oAuthToken
             //Deserialize it immediately and return
-            if (typeof (T) == typeof (IOAuth2Token) || typeof(T) == typeof(OAuth2Token))
+            if (typeof (T) == typeof (IOAuth2Token) || typeof (T) == typeof (OAuth2Token))
             {
                 var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
                 return oAuth2Response;

@@ -103,6 +103,8 @@ namespace Imgur.API.Endpoints.Impl
                     throw new ArgumentException("Invalid HttpMethod provided.", nameof(httpMethod));
                 }
 
+                UpdateRateLimit(httpResponse.Headers);
+
                 //Get the string response
                 var stringResponse = await httpResponse.Content.ReadAsStringAsync();
 
@@ -149,7 +151,8 @@ namespace Imgur.API.Endpoints.Impl
             if (headers == null)
                 throw new ArgumentNullException(nameof(headers));
 
-            if (ApiAuthentication is IImgurAuthentication)
+            if (ApiAuthentication is IImgurAuthentication 
+                && headers.Any(x => x.Key.Equals("X-RateLimit-ClientLimit")))
             {
                 var clientLimit = headers.GetValues("X-RateLimit-ClientLimit").FirstOrDefault();
                 var clientRemaining = headers.GetValues("X-RateLimit-ClientRemaining").FirstOrDefault();
@@ -168,7 +171,8 @@ namespace Imgur.API.Endpoints.Impl
                 ApiAuthentication.RateLimit.MashapeUploadsRemaining = null;
             }
 
-            if (ApiAuthentication is IMashapeAuthentication)
+            if (ApiAuthentication is IMashapeAuthentication 
+                && headers.Any(x => x.Key.Equals("X-RateLimit-Requests-Limit")))
             {
                 var requestsLimit = headers.GetValues("X-RateLimit-Requests-Limit").FirstOrDefault();
                 var requestsRemaining = headers.GetValues("X-RateLimit-Requests-Remaining").FirstOrDefault();
@@ -216,7 +220,7 @@ namespace Imgur.API.Endpoints.Impl
 
             //If the type being requested is an oAuthToken
             //Deserialize it immediately and return
-            if (typeof (T) == typeof (IOAuth2Token))
+            if (typeof (T) == typeof (IOAuth2Token) || typeof(T) == typeof(OAuth2Token))
             {
                 var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
                 return oAuth2Response;

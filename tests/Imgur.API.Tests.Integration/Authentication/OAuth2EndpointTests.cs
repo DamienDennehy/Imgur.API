@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
+using Imgur.API.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.Integration.Authentication
@@ -23,11 +24,12 @@ namespace Imgur.API.Tests.Integration.Authentication
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ImgurException))]
         public async Task GetTokenByCode_SetCodeInvalid_ThrowsAPIResponseException()
         {
             var authentication = new ImgurAuthentication(ClientId, ClientSecret);
             var endpoint = new OAuth2Endpoint(authentication);
-            await endpoint.GetTokenByCode(RefreshToken);
+            await endpoint.GetTokenByCode("abc");
         }
     }
 }

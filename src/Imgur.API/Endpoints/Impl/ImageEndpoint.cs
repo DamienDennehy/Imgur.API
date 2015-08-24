@@ -1,19 +1,33 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Imgur.API.Authentication;
 using Imgur.API.Models;
+using Imgur.API.Models.Impl;
 
-namespace Imgur.API.Endpoints
+namespace Imgur.API.Endpoints.Impl
 {
     /// <summary>
     ///     Image related actions.
     /// </summary>
-    public interface IImageEndpoint : IEndpoint
+    public class ImageEndpoint : EndpointBase, IImageEndpoint
     {
+        private const string GetImageUrl = "image/{0}";
+        private const string UploadImageUrl = "image";
+        private const string FavoriteImageUrl = "image/{0}/favorite";
+
         /// <summary>
         ///     Get information about an image.
         /// </summary>
         /// <param name="id">The image id.</param>
         /// <returns></returns>
-        Task<IImage> GetImageAsync(string id);
+        public async Task<IImage> GetImageAsync(string id)
+        {
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetImageUrl);
+            var image = await MakeEndpointRequestAsync<Image>(HttpMethod.Get, endpointUrl, null);
+            return image;
+        }
 
         /// <summary>
         ///     Upload a new image using a binary file.
@@ -26,7 +40,25 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<IImage> UploadImageBinaryAsync(byte[] image, string album, string title, string description);
+        public async Task<IImage> UploadImageBinaryAsync(byte[] image, string album, string title, string description)
+        {
+            IImage returnImage;
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), UploadImageUrl);
+
+            using (var content = new MultipartFormDataContent(DateTime.UtcNow.Ticks.ToString()))
+            {
+                content.Add(new StringContent("type"), "file");
+                content.Add(new StringContent(title), nameof(title));
+                content.Add(new StringContent(album), nameof(album));
+                content.Add(new StringContent(description), nameof(description));
+                content.Add(new StreamContent(new MemoryStream(image)), nameof(image));
+
+                returnImage = await MakeEndpointRequestAsync<Image>(HttpMethod.Post, endpointUrl, content);
+            }
+
+            return returnImage;
+        }
 
         /// <summary>
         ///     Upload a new image using base64 data.
@@ -39,7 +71,10 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<IImage> UploadImageBase64Async(string image, string album, string title, string description);
+        public Task<IImage> UploadImageBase64Async(string image, string album, string title, string description)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Upload a new image using a URL.
@@ -52,7 +87,10 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<IImage> UploadImageUrlAsync(string image, string album, string title, string description);
+        public Task<IImage> UploadImageUrlAsync(string image, string album, string title, string description)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Deletes an image. For an anonymous image, {id} must be the image's deletehash.
@@ -60,7 +98,10 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="id">The image id.</param>
         /// <returns></returns>
-        Task<bool> DeleteImageAsync(string id);
+        public Task<bool> DeleteImageAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Updates the title or description of an image.
@@ -71,13 +112,27 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<bool> UpdateImageAsync(string id, string title, string description);
+        public Task<bool> UpdateImageAsync(string id, string title, string description)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         ///     Favorite an image with the given ID. The user is required to be logged in to favorite the image.
         /// </summary>
         /// <param name="id">The image id.</param>
         /// <returns></returns>
-        Task<bool> FavoriteImageAsync(string id);
+        public Task<bool> FavoriteImageAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the ImageEndpoint class.
+        /// </summary>
+        /// <param name="authentication"></param>
+        public ImageEndpoint(IApiAuthentication authentication) : base(authentication)
+        {
+        }
     }
 }

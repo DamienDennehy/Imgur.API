@@ -60,7 +60,7 @@ namespace Imgur.API.Models
         /// <summary>
         ///     Bandwidth consumed by the image in bytes.
         /// </summary>
-        int Bandwidth { get; set; }
+        long Bandwidth { get; set; }
 
         /// <summary>
         ///     OPTIONAL, the deletehash, if you're logged in as the image owner.

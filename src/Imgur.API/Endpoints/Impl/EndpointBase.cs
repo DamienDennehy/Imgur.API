@@ -74,8 +74,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="httpMethod">The HttpMethod that should be used.</param>
         /// <param name="content">The HttpContent that should be submitted.</param>
         /// <returns></returns>
-        public virtual async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl,
-            HttpContent content)
+        public virtual async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl, HttpContent content)
         {
             using (var httpClient = GetHttpClient())
             {
@@ -117,7 +116,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     on the current ApiAuthentication set.
         /// </summary>
         /// <returns></returns>
-        public virtual HttpClient GetHttpClient()
+        internal virtual HttpClient GetHttpClient()
         {
             var httpClient = new HttpClient();
 
@@ -146,7 +145,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     with the values from the last response from the Api.
         /// </summary>
         /// <param name="headers"></param>
-        public virtual void UpdateRateLimit(HttpResponseHeaders headers)
+        internal virtual void UpdateRateLimit(HttpResponseHeaders headers)
         {
             if (headers == null)
                 throw new ArgumentNullException(nameof(headers));
@@ -196,7 +195,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <typeparam name="T">The expected output type, Image, bool, etc.</typeparam>
         /// <param name="endpointStringResponse">The string response from the endpoint.</param>
         /// <returns></returns>
-        public T ProcessEndpointResponse<T>(string endpointStringResponse)
+        internal T ProcessEndpointResponse<T>(string endpointStringResponse)
         {
             //If no result is found, then we can't proceed
             if (string.IsNullOrWhiteSpace(endpointStringResponse))
@@ -211,17 +210,17 @@ namespace Imgur.API.Endpoints.Impl
                 throw new MashapeException(maShapeError.Message);
             }
 
-            //If an error occurs, throw an exception
-            if (endpointStringResponse.Contains("{\"data\":{\"error\":"))
-            {
-                var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
-                throw new ImgurException(apiError.Data.ErrorMessage);
-            }
-
             //If the type being requested is an oAuthToken
             //Deserialize it immediately and return
             if (typeof (T) == typeof (IOAuth2Token) || typeof (T) == typeof (OAuth2Token))
             {
+                //If an error occurs, throw an exception
+                if (endpointStringResponse.Contains("{\"data\":{\"error\":"))
+                {
+                    var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
+                    throw new ImgurException(apiError.Data.ErrorMessage);
+                }
+
                 var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
                 return oAuth2Response;
             }

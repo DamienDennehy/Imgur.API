@@ -51,6 +51,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Endpoints\ImageEndpointTests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />
     <Compile Include="Endpoints\RateLimitEndpointTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +69,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Authentication\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Banana.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

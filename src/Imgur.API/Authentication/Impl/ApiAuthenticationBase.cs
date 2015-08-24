@@ -68,7 +68,7 @@ namespace Imgur.API.Authentication.Impl
         /// <summary>
         ///     Remaining credits for the application and user.
         /// </summary>
-        public virtual IRateLimit RateLimit { get; set; } = new RateLimit();
+        public virtual IRateLimit RateLimit { get; } = new RateLimit();
 
         /// <summary>
         ///     OAuth2 credentials.

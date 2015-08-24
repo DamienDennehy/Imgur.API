@@ -27,6 +27,8 @@ namespace Imgur.API.Tests.Endpoints
         private const string MashapeErrorResponse =
             "{\"message\":\"Missing Mashape application key.Go to http://docs.mashape.com/api-keys to learn how to get your API application key.\"}";
 
+        private const string ImgurSimpleSuccessfulResponse = "{\"data\":true,\"success\":true,\"status\":200}";
+
         [TestMethod]
         public void Endpoint_SwitchAuthentication_ReceivedIsTrue()
         {
@@ -230,6 +232,15 @@ namespace Imgur.API.Tests.Endpoints
             var imgurAuth = new ImgurAuthentication("123", "1234");
             var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurAuth);
             endpoint.ProcessEndpointResponse<RateLimit>(ImgurCapacityErrorResponse);
+        }
+
+        [TestMethod]
+        public void ProcessEndpointResponse_WithSuccessfulResponse_AreEqual()
+        {
+            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurAuth);
+            var response = endpoint.ProcessEndpointResponse<bool>(ImgurSimpleSuccessfulResponse);
+            Assert.IsTrue(response);
         }
 
         [TestMethod]

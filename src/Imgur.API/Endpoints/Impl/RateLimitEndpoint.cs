@@ -27,10 +27,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IRateLimit> GetRateLimitAsync()
         {
-            var limit =
-                await
-                    MakeEndpointRequestAsync<RateLimit>(HttpMethod.Get,
-                        string.Concat(GetEndpointBaseUrl(), RateLimitUrl), null);
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), RateLimitUrl);
+            var limit = await MakeEndpointRequestAsync<RateLimit>(HttpMethod.Get, endpointUrl, null);
             return limit;
         }
     }

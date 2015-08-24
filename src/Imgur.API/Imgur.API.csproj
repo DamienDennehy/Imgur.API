@@ -47,6 +47,7 @@
     <Compile Include="Endpoints\IEndpoint.cs" />
     <Compile Include="Endpoints\IImageEndpoint.cs" />
     <Compile Include="Endpoints\Impl\EndpointBase.cs" />
+    <Compile Include="Endpoints\Impl\ImageEndpoint.cs" />
     <Compile Include="Endpoints\Impl\OAuth2Endpoint.cs" />
     <Compile Include="Endpoints\Impl\RateLimitEndpoint.cs" />
     <Compile Include="Endpoints\IOAuth2Endpoint.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Models\IMessage.cs" />
     <Compile Include="Models\Impl\Account.cs" />
     <Compile Include="Models\Impl\Basic.cs" />
+    <Compile Include="Models\Impl\Image.cs" />
     <Compile Include="Models\Impl\ImgurError.cs" />
     <Compile Include="Models\Impl\RateLimit.cs" />
     <Compile Include="Models\Impl\MashapeError.cs" />

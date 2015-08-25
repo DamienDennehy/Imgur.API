@@ -24,7 +24,11 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IImage> GetImageAsync(string id)
         {
+            if (string.IsNullOrEmpty((id)))
+                throw new ArgumentNullException(nameof(id));
+
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetImageUrl);
+            endpointUrl = string.Format(endpointUrl, id);
             var image = await MakeEndpointRequestAsync<Image>(HttpMethod.Get, endpointUrl, null);
             return image;
         }
@@ -42,6 +46,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IImage> UploadImageBinaryAsync(byte[] image, string album, string title, string description)
         {
+            if (image == null)
+                throw new ArgumentNullException(nameof(image));
+
             IImage returnImage;
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), UploadImageUrl);
@@ -49,10 +56,16 @@ namespace Imgur.API.Endpoints.Impl
             using (var content = new MultipartFormDataContent(DateTime.UtcNow.Ticks.ToString()))
             {
                 content.Add(new StringContent("type"), "file");
-                content.Add(new StringContent(title), nameof(title));
-                content.Add(new StringContent(album), nameof(album));
-                content.Add(new StringContent(description), nameof(description));
                 content.Add(new StreamContent(new MemoryStream(image)), nameof(image));
+
+                if (!string.IsNullOrWhiteSpace(album))
+                    content.Add(new StringContent(album), nameof(album));
+
+                if (!string.IsNullOrWhiteSpace(title))
+                    content.Add(new StringContent(title), nameof(title));
+
+                if (!string.IsNullOrWhiteSpace(description))
+                    content.Add(new StringContent(description), nameof(description));
 
                 returnImage = await MakeEndpointRequestAsync<Image>(HttpMethod.Post, endpointUrl, content);
             }
@@ -73,6 +86,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public Task<IImage> UploadImageBase64Async(string image, string album, string title, string description)
         {
+            if (string.IsNullOrEmpty((image)))
+                throw new ArgumentNullException(nameof(image));
+
             throw new NotImplementedException();
         }
 
@@ -89,6 +105,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public Task<IImage> UploadImageUrlAsync(string image, string album, string title, string description)
         {
+            if (string.IsNullOrEmpty((image)))
+                throw new ArgumentNullException(nameof(image));
+
             throw new NotImplementedException();
         }
 
@@ -100,6 +119,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public Task<bool> DeleteImageAsync(string id)
         {
+            if (string.IsNullOrEmpty((id)))
+                throw new ArgumentNullException(nameof(id));
+
             throw new NotImplementedException();
         }
 
@@ -114,6 +136,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public Task<bool> UpdateImageAsync(string id, string title, string description)
         {
+            if (string.IsNullOrEmpty((id)))
+                throw new ArgumentNullException(nameof(id));
+
             throw new NotImplementedException();
         }
 
@@ -124,6 +149,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public Task<bool> FavoriteImageAsync(string id)
         {
+            if (string.IsNullOrEmpty((id)))
+                throw new ArgumentNullException(nameof(id));
+
             throw new NotImplementedException();
         }
 

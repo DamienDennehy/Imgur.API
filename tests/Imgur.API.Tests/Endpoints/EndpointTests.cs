@@ -30,7 +30,7 @@ namespace Imgur.API.Tests.Endpoints
         private const string ImgurSimpleSuccessfulResponse = "{\"data\":true,\"success\":true,\"status\":200}";
 
         [TestMethod]
-        public void Endpoint_SwitchAuthentication_ReceivedIsTrue()
+        public void SwitchAuthentication_WithApiAuthentication_IsReceived()
         {
             var apiAuth = Substitute.For<IApiAuthentication>();
             var endpoint = Substitute.For<IEndpoint>();
@@ -39,11 +39,11 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void Endpoint_MakeEndpointRequestAsync_ReceivedIsTrue()
+        public void MakeEndpointRequestAsync_WithValidParameters_ReceivedIsTrue()
         {
             var endpoint = Substitute.For<IEndpoint>();
-            endpoint.MakeEndpointRequestAsync<IImage>(HttpMethod.Get, "", null);
-            endpoint.Received().MakeEndpointRequestAsync<IImage>(HttpMethod.Get, "", null);
+            endpoint.MakeEndpointRequestAsync<IImage>(HttpMethod.Get, "url", null);
+            endpoint.Received().MakeEndpointRequestAsync<IImage>(HttpMethod.Get, "url", null);
         }
 
         [TestMethod]
@@ -249,7 +249,26 @@ namespace Imgur.API.Tests.Endpoints
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");
             var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurAuth);
-            await endpoint.MakeEndpointRequestAsync<RateLimit>(HttpMethod.Options, "", null);
+            await endpoint.MakeEndpointRequestAsync<RateLimit>(HttpMethod.Options, "x", null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task MakeEndpointRequestAsync_WithNullHttpMethod_ThrowArgumentNullException()
+        {
+            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurAuth);
+            await endpoint.MakeEndpointRequestAsync<RateLimit>(null, "x", null);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task MakeEndpointRequestAsync_WithNullEndpointUrl_ThrowArgumentNullException()
+        {
+            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurAuth);
+            await endpoint.MakeEndpointRequestAsync<RateLimit>(HttpMethod.Get, null, null);
         }
 
         [TestMethod]

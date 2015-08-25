@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -56,6 +57,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByCodeAsync(string code)
         {
+            if (string.IsNullOrEmpty((code)))
+                throw new ArgumentNullException(nameof(code));
+
             var parameters = new Dictionary<string, string>
             {
                 {"client_id", ApiAuthentication.ClientId},
@@ -77,6 +81,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByPinAsync(string pin)
         {
+            if (string.IsNullOrEmpty((pin)))
+                throw new ArgumentNullException(nameof(pin));
+
             var parameters = new Dictionary<string, string>
             {
                 {"client_id", ApiAuthentication.ClientId},
@@ -105,6 +112,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken)
         {
+            if (string.IsNullOrEmpty((refreshToken)))
+                throw new ArgumentNullException(nameof(refreshToken));
+
             var parameters = new Dictionary<string, string>
             {
                 {"client_id", ApiAuthentication.ClientId},

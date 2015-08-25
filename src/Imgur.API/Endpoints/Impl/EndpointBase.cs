@@ -76,6 +76,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public virtual async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl, HttpContent content)
         {
+            if (httpMethod == null)
+                throw new ArgumentNullException(nameof(httpMethod));
+
+            if (string.IsNullOrEmpty((endpointUrl)))
+                throw new ArgumentNullException(nameof(endpointUrl));
+
             using (var httpClient = GetHttpClient())
             {
                 HttpResponseMessage httpResponse;

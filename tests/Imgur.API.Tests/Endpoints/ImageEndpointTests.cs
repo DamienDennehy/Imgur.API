@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Models.Impl;
@@ -16,7 +18,7 @@ namespace Imgur.API.Tests.Endpoints
         private const string FavoriteImageFalse = "{\"data\":\"unfavorited\",\"success\":true,\"status\":200}";
 
         [TestMethod]
-        public void ImageEndpoint_GetImageAsync_ReceivedIsTrue()
+        public void GetImageAsync_WithId_ReceivedIsTrue()
         {
             var endpoint = Substitute.For<IImageEndpoint>();
             endpoint.GetImageAsync("1234");
@@ -24,7 +26,16 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void ImageEndpoint_UploadImageBinaryAsync_ReceivedIsTrue()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetImageAsync_WithNullId_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var endpoint = new ImageEndpoint(imgurAuth);
+            await endpoint.GetImageAsync(null);
+        }
+
+        [TestMethod]
+        public void UploadImageBinaryAsync_WithImage_ReceivedIsTrue()
         {
             var endpoint = Substitute.For<IImageEndpoint>();
             var image = new byte[] { 0x20 };
@@ -33,7 +44,16 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void ImageEndpoint_UploadImageBase64Async_ReceivedIsTrue()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task UploadImageBinaryAsync_WithNullImage_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var endpoint = new ImageEndpoint(imgurAuth);
+            await endpoint.UploadImageBinaryAsync(null, null, null, null);
+        }
+
+        [TestMethod]
+        public void UploadImageBase64Async_WithImage_ImageReceivedIsTrue()
         {
             var endpoint = Substitute.For<IImageEndpoint>();
             endpoint.UploadImageBase64Async("abcd", "1234", "t1234", "d1234");
@@ -41,7 +61,16 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void ImageEndpoint_UploadImageUrlAsync_ReceivedIsTrue()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task UploadImageBase64Async_WithNullImage_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var endpoint = new ImageEndpoint(imgurAuth);
+            await endpoint.UploadImageBase64Async(null, null, null, null);
+        }
+
+        [TestMethod]
+        public void UploadImageUrlAsync_WithUrlReceivedIsTrue()
         {
             var endpoint = Substitute.For<IImageEndpoint>();
             endpoint.UploadImageUrlAsync("http://imgur.com/something", "1234", "t1234", "d1234");
@@ -49,7 +78,16 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void ImageEndpoint_DeleteImageAsync_ReceivedIsTrue()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task UploadImageUrlAsync_WithNullUrl_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var endpoint = new ImageEndpoint(imgurAuth);
+            await endpoint.UploadImageUrlAsync(null, null, null, null);
+        }
+
+        [TestMethod]
+        public void DeleteImageAsync_WithId_ReceivedIsTrue()
         {
             var endpoint = Substitute.For<IImageEndpoint>();
             endpoint.DeleteImageAsync("12345");
@@ -57,7 +95,16 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void ImageEndpoint_UpdateImageAsync_ReceivedIsTrue()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task DeleteImageAsync_WithNullId_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var endpoint = new ImageEndpoint(imgurAuth);
+            await endpoint.DeleteImageAsync(null);
+        }
+
+        [TestMethod]
+        public void UpdateImageAsync_WithId_ReceivedIsTrue()
         {
             var endpoint = Substitute.For<IImageEndpoint>();
             endpoint.UpdateImageAsync("id12345", "title12345", "desc12345");
@@ -65,7 +112,16 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void ImageEndpoint_FavoriteImageAsync_ReceivedIsTrue()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task UpdateImageAsync_WithNullId_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var endpoint = new ImageEndpoint(imgurAuth);
+            await endpoint.UpdateImageAsync(null, null, null);
+        }
+
+        [TestMethod]
+        public void FavoriteImageAsync_WithId_ReceivedIsTrue()
         {
             var endpoint = Substitute.For<IImageEndpoint>();
             endpoint.FavoriteImageAsync("id12345");
@@ -73,7 +129,16 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void ImageEndpoint_GetImageResponse_AreEqual()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task FavoriteImageAsync_WithNullId_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var endpoint = new ImageEndpoint(imgurAuth);
+            await endpoint.FavoriteImageAsync(null);
+        }
+
+        [TestMethod]
+        public void GetImageResponse_WithValidReponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
             var image = endpoint.ProcessEndpointResponse<Image>(GetImageResponse);
@@ -103,7 +168,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void ImageEndpoint_UploadImageResponse_AreEqual()
+        public void UploadImageResponse_WithValidResponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
             var image = endpoint.ProcessEndpointResponse<Image>(UploadImageResponse);
@@ -134,7 +199,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void ImageEndpoint_FavouriteImageTrueResponse_AreEqual()
+        public void FavoriteImage_WithValidTrueResponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
             var response = endpoint.ProcessEndpointResponse<string>(FavoriteImageTrue);
@@ -143,7 +208,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void ImageEndpoint_FavouriteImageFalseResponse_AreEqual()
+        public void FavoriteImage_WithValidFalseResponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
             var response = endpoint.ProcessEndpointResponse<string>(FavoriteImageFalse);

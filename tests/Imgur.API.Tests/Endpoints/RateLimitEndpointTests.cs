@@ -14,7 +14,7 @@ namespace Imgur.API.Tests.Endpoints
             "{\"data\":{ \"UserLimit\":412, \"UserRemaining\":382, \"UserReset\":1439945895, \"ClientLimit\":10500, \"ClientRemaining\":9500 }, \"success\":true, \"status\":200 }";
 
         [TestMethod]
-        public void RateLimitEndpoint_GetRateLimitAsync_ReceivedIsTrue()
+        public void RateLimit_GetRateLimitAsync_ReceivedIsTrue()
         {
             var endpoint = Substitute.For<IRateLimitEndpoint>();
             endpoint.GetRateLimitAsync();

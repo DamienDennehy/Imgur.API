@@ -74,7 +74,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="httpMethod">The HttpMethod that should be used.</param>
         /// <param name="content">The HttpContent that should be submitted.</param>
         /// <returns></returns>
-        public virtual async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl, HttpContent content)
+        public virtual async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl,
+            HttpContent content)
         {
             if (httpMethod == null)
                 throw new ArgumentNullException(nameof(httpMethod));
@@ -129,8 +130,8 @@ namespace Imgur.API.Endpoints.Impl
             //Add OAuth Authentication header
             httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
                 "Authorization",
-                ApiAuthentication.OAuth2Authentication?.OAuth2Token != null
-                    ? $"Bearer {ApiAuthentication.OAuth2Authentication.OAuth2Token.AccessToken}"
+                ApiAuthentication.OAuth2Token != null
+                    ? $"Bearer {ApiAuthentication.OAuth2Token.AccessToken}"
                     : $"Client-ID {ApiAuthentication.ClientId}");
 
             //Add Mashape Authentication header

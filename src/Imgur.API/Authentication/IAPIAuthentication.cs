@@ -18,9 +18,9 @@ namespace Imgur.API.Authentication
         string ClientSecret { get; }
 
         /// <summary>
-        ///     OAuth2 credentials.
+        ///     An OAuth2 Token used for actions against a user's account.
         /// </summary>
-        IOAuth2Authentication OAuth2Authentication { get; }
+        IOAuth2Token OAuth2Token { get; }
 
         /// <summary>
         ///     Remaining credits for the application and user.
@@ -28,9 +28,9 @@ namespace Imgur.API.Authentication
         IRateLimit RateLimit { get; }
 
         /// <summary>
-        ///     Sets the OAuth2Authentication and token to be used.
+        ///     Sets <see cref="OAuth2Token" />.
         /// </summary>
-        /// <param name="oAuth2Authentication">See <see cref="IOAuth2Authentication" />.</param>
-        void SetOAuth2Authentication(IOAuth2Authentication oAuth2Authentication);
+        /// <param name="token">The token.</param>
+        void SetOAuth2Token(IOAuth2Token token);
     }
 }

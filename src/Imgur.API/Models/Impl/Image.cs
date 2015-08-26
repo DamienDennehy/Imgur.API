@@ -27,7 +27,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Utc timestamp of when the image was uploaded, converted from epoch time.
         /// </summary>
-        [JsonConverter(typeof(EpochTimeToDateTimeOffset))]
+        [JsonConverter(typeof (EpochTimeToDateTimeOffset))]
         public virtual DateTimeOffset DateTime { get; set; }
 
         /// <summary>

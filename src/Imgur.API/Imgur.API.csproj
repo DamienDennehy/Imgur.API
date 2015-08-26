@@ -41,8 +41,6 @@
     <Compile Include="Authentication\Impl\ApiAuthenticationBase.cs" />
     <Compile Include="Authentication\Impl\ImgurAuthentication.cs" />
     <Compile Include="Authentication\Impl\MashapeAuthentication.cs" />
-    <Compile Include="Authentication\Impl\OAuth2Authentication.cs" />
-    <Compile Include="Authentication\IOAuth2Authentication.cs" />
     <Compile Include="Authentication\OAuth2ResponseType.cs" />
     <Compile Include="Endpoints\IEndpoint.cs" />
     <Compile Include="Endpoints\IImageEndpoint.cs" />

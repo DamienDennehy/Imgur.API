@@ -29,10 +29,10 @@ namespace Imgur.API.Tests.Integration.Endpoints
         {
             var authentication = new ImgurAuthentication(ClientId, ClientSecret);
             var oAuthEndpoint = new OAuth2Endpoint(authentication);
-            var token = await oAuthEndpoint.GetTokenByRefreshTokenAsync(RefreshToken);
+            var oAuth2Token = await oAuthEndpoint.GetTokenByRefreshTokenAsync(RefreshToken);
 
-            authentication.SetOAuth2Authentication(new OAuth2Authentication(token));
-      
+            authentication.SetOAuth2Token(oAuth2Token);
+
             var endpoint = new RateLimitEndpoint(authentication);
             var limit = await endpoint.GetRateLimitAsync();
 
@@ -66,9 +66,9 @@ namespace Imgur.API.Tests.Integration.Endpoints
         {
             var authentication = new ImgurAuthentication(ClientId, ClientSecret);
             var oAuthEndpoint = new OAuth2Endpoint(authentication);
-            var token = await oAuthEndpoint.GetTokenByRefreshTokenAsync(RefreshToken);
+            var oAuth2Token = await oAuthEndpoint.GetTokenByRefreshTokenAsync(RefreshToken);
 
-            authentication.SetOAuth2Authentication(new OAuth2Authentication(token));
+            authentication.SetOAuth2Token(oAuth2Token);
 
             var endpoint = new RateLimitEndpoint(authentication);
             var limit = await endpoint.GetRateLimitAsync();

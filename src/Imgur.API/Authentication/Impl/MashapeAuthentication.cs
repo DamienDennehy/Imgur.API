@@ -1,4 +1,5 @@
 ﻿using System;
+using Imgur.API.Models;
 
 namespace Imgur.API.Authentication.Impl
 {
@@ -29,10 +30,10 @@ namespace Imgur.API.Authentication.Impl
         /// <param name="clientId">The Imgur app's ClientId. </param>
         /// <param name="clientSecret">The Imgur app's ClientSecret.</param>
         /// <param name="mashapeKey">The Mashape Key. </param>
-        /// <param name="oAuth2Authentication">OAuth2 credentials.</param>
+        /// <param name="oAuth2Token">An OAuth2 Token used for actions against a user's account.</param>
         public MashapeAuthentication(string clientId, string clientSecret, string mashapeKey,
-            IOAuth2Authentication oAuth2Authentication)
-            : base(clientId, clientSecret, oAuth2Authentication)
+            IOAuth2Token oAuth2Token)
+            : base(clientId, clientSecret, oAuth2Token)
         {
             if (string.IsNullOrWhiteSpace(mashapeKey))
                 throw new ArgumentNullException(nameof(mashapeKey));

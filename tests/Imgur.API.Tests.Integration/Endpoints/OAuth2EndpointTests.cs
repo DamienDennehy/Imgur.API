@@ -24,7 +24,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [ExpectedException(typeof (ImgurException))]
         public async Task GetTokenByCodeAsync_SetCodeInvalid_ThrowsAPIResponseException()
         {
             var authentication = new ImgurAuthentication(ClientId, ClientSecret);

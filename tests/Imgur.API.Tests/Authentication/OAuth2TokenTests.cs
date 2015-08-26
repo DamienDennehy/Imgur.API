@@ -11,19 +11,19 @@ namespace Imgur.API.Tests.Authentication
         [TestMethod]
         public void IOAuth2Token_Set_AreEqual()
         {
-            var token = Substitute.For<IOAuth2Token>();
-            token.AccessToken.Returns("access_Token");
-            token.AccountId.Returns("account_Id");
-            token.ExpiresAt.Returns(DateTimeOffset.MinValue);
-            token.ExpiresIn.Returns(1000);
-            token.RefreshToken.Returns("refresh_Token");
-            token.TokenType.Returns("token_Type");
-            Assert.AreEqual("access_Token", token.AccessToken);
-            Assert.AreEqual("account_Id", token.AccountId);
-            Assert.AreEqual(DateTimeOffset.MinValue, token.ExpiresAt);
-            Assert.AreEqual(1000, token.ExpiresIn);
-            Assert.AreEqual("refresh_Token", token.RefreshToken);
-            Assert.AreEqual("token_Type", token.TokenType);
+            var oAuth2Token = Substitute.For<IOAuth2Token>();
+            oAuth2Token.AccessToken.Returns("access_Token");
+            oAuth2Token.AccountId.Returns("account_Id");
+            oAuth2Token.ExpiresAt.Returns(DateTimeOffset.MinValue);
+            oAuth2Token.ExpiresIn.Returns(1000);
+            oAuth2Token.RefreshToken.Returns("refresh_Token");
+            oAuth2Token.TokenType.Returns("token_Type");
+            Assert.AreEqual("access_Token", oAuth2Token.AccessToken);
+            Assert.AreEqual("account_Id", oAuth2Token.AccountId);
+            Assert.AreEqual(DateTimeOffset.MinValue, oAuth2Token.ExpiresAt);
+            Assert.AreEqual(1000, oAuth2Token.ExpiresIn);
+            Assert.AreEqual("refresh_Token", oAuth2Token.RefreshToken);
+            Assert.AreEqual("token_Type", oAuth2Token.TokenType);
         }
     }
 }

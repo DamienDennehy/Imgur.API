@@ -157,13 +157,11 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void GetHttpClient_WithImgurAuthenticationAndOAuth2Authentication_HeadersAreEqual()
+        public void GetHttpClient_WithImgurAuthenticationAndOAuth2Token_HeadersAreEqual()
         {
-            var token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", 3600);
-            var oAuth2Auth = new OAuth2Authentication(OAuth2ResponseType.Code);
-            oAuth2Auth.SetOAuth2Token(token);
+            var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", 3600);
 
-            var imgurAuth = new ImgurAuthentication("123", "1234", oAuth2Auth);
+            var imgurAuth = new ImgurAuthentication("123", "1234", oAuth2Token);
 
             var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurAuth);
 
@@ -178,13 +176,11 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void GetHttpClient_WithMashapeAuthenticationAndOAuth2Authentication_HeadersAreEqual()
+        public void GetHttpClient_WithMashapeAuthenticationAndOAuth2Token_HeadersAreEqual()
         {
-            var token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", 3600);
-            var oAuth2Auth = new OAuth2Authentication(OAuth2ResponseType.Code);
-            oAuth2Auth.SetOAuth2Token(token);
+            var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", 3600);
 
-            var mashapeAuth = new MashapeAuthentication("123", "1234", "2322", oAuth2Auth);
+            var mashapeAuth = new MashapeAuthentication("123", "1234", "2322", oAuth2Token);
 
             var endpoint = Substitute.ForPartsOf<EndpointBase>(mashapeAuth);
 
@@ -253,7 +249,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task MakeEndpointRequestAsync_WithNullHttpMethod_ThrowArgumentNullException()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");
@@ -261,9 +257,8 @@ namespace Imgur.API.Tests.Endpoints
             await endpoint.MakeEndpointRequestAsync<RateLimit>(null, "x", null);
         }
 
-
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task MakeEndpointRequestAsync_WithNullEndpointUrl_ThrowArgumentNullException()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");

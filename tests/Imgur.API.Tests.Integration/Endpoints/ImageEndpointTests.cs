@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Security;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
@@ -18,12 +14,12 @@ namespace Imgur.API.Tests.Integration.Endpoints
         {
             var apiAuthentication = new MashapeAuthentication(ClientId, ClientSecret, MashapeKey);
             var oAuthEndpoint = new OAuth2Endpoint(apiAuthentication);
-            var token = await oAuthEndpoint.GetTokenByRefreshTokenAsync(RefreshToken);
+            var oAuth2Token = await oAuthEndpoint.GetTokenByRefreshTokenAsync(RefreshToken);
 
-            apiAuthentication.SetOAuth2Authentication(new OAuth2Authentication(token));
+            apiAuthentication.SetOAuth2Token(oAuth2Token);
 
             var endpoint = new ImageEndpoint(apiAuthentication);
-            var file = System.IO.File.ReadAllBytes("banana.gif");
+            var file = File.ReadAllBytes("banana.gif");
             var image = await endpoint.UploadImageBinaryAsync(file, null, "binary test title!", "binary test desc!");
 
             Assert.IsFalse(string.IsNullOrEmpty(image.Id));

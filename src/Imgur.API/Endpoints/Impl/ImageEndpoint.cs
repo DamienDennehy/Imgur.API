@@ -18,6 +18,14 @@ namespace Imgur.API.Endpoints.Impl
         private const string FavoriteImageUrl = "image/{0}/favorite";
 
         /// <summary>
+        ///     Initializes a new instance of the ImageEndpoint class.
+        /// </summary>
+        /// <param name="authentication"></param>
+        public ImageEndpoint(IApiAuthentication authentication) : base(authentication)
+        {
+        }
+
+        /// <summary>
         ///     Get information about an image.
         /// </summary>
         /// <param name="id">The image id.</param>
@@ -153,14 +161,6 @@ namespace Imgur.API.Endpoints.Impl
                 throw new ArgumentNullException(nameof(id));
 
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the ImageEndpoint class.
-        /// </summary>
-        /// <param name="authentication"></param>
-        public ImageEndpoint(IApiAuthentication authentication) : base(authentication)
-        {
         }
     }
 }

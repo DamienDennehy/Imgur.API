@@ -1,4 +1,6 @@
-﻿namespace Imgur.API.Authentication.Impl
+﻿using Imgur.API.Models;
+
+namespace Imgur.API.Authentication.Impl
 {
     /// <summary>
     ///     Imgur API application credentials.
@@ -20,9 +22,9 @@
         /// </summary>
         /// <param name="clientId">The Imgur app's ClientId. </param>
         /// <param name="clientSecret">The Imgur app's ClientSecret.</param>
-        /// <param name="oAuth2Authentication">OAuth2 credentials.</param>
-        public ImgurAuthentication(string clientId, string clientSecret, IOAuth2Authentication oAuth2Authentication)
-            : base(clientId, clientSecret, oAuth2Authentication)
+        /// <param name="oAuth2Token">An OAuth2 Token used for actions against a user's account.</param>
+        public ImgurAuthentication(string clientId, string clientSecret, IOAuth2Token oAuth2Token)
+            : base(clientId, clientSecret, oAuth2Token)
         {
         }
     }

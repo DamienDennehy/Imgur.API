@@ -196,4 +196,4 @@ FakesAssemblies/
 *.opt
 
 # Project integration settings file
-tests\Imgur.API.Tests.Integration\App.Config
+tests/Imgur.API.Tests.Integration/App.Config

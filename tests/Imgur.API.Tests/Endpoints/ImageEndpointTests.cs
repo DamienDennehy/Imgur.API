@@ -12,14 +12,12 @@ namespace Imgur.API.Tests.Endpoints
     [TestClass]
     public class ImageEndpointTests
     {
-        private const string GetImageResponse =
-            "{\"data\":{\"id\":\"zVpyzhW\",\"title\":\"Look Mom, it's Bambi!\",\"description\":null,\"datetime\":1440259938,\"type\":\"image/gif\",\"animated\":true,\"width\":426,\"height\":240,\"size\":26270273,\"views\":1583864,\"bandwidth\":41608539674872,\"vote\":null,\"favorite\":false,\"nsfw\":false,\"section\":\"Eyebleach\",\"account_url\":\"ForAGoodTimeCall8675309\",\"account_id\":23095506,\"comment_preview\":null,\"gifv\":\"http://i.imgur.com/zVpyzhW.gifv\",\"webm\":\"http://i.imgur.com/zVpyzhW.webm\",\"mp4\":\"http://i.imgur.com/zVpyzhW.mp4\",\"link\":\"http://i.imgur.com/zVpyzhWh.gif\",\"looping\":true},\"success\":true,\"status\":200}";
-
-        private const string UploadImageResponse =
-            "{\"data\":{\"id\":\"kiNOcUl\",\"title\":\"Title Test\",\"description\":\"Description Test\",\"datetime\":1440373411,\"type\":\"image/gif\",\"animated\":true,\"width\":290,\"height\":189,\"size\":1038889,\"views\":0,\"bandwidth\":0,\"vote\":null,\"favorite\":false,\"nsfw\":null,\"section\":null,\"account_url\":null,\"account_id\":24234234,\"comment_preview\":null,\"deletehash\":\"nGxOKC9ML6KyTWQ\",\"name\":\"\",\"gifv\":\"http://i.imgur.com/kiNOcUl.gifv\",\"webm\":\"http://i.imgur.com/kiNOcUl.webm\",\"mp4\":\"http://i.imgur.com/kiNOcUl.mp4\",\"link\":\"http://i.imgur.com/kiNOcUl.gif\",\"looping\":true},\"success\":true,\"status\":200}";
-
-        private const string FavoriteImageTrue = "{\"data\":\"favorited\",\"success\":true,\"status\":200}";
-        private const string FavoriteImageFalse = "{\"data\":\"unfavorited\",\"success\":true,\"status\":200}";
+        private const string GetImageResponse = "{\"data\":{\"id\":\"zVpyzhW\",\"title\":\"Look Mom, it's Bambi!\",\"description\":null,\"datetime\":1440259938,\"type\":\"image/gif\",\"animated\":true,\"width\":426,\"height\":240,\"size\":26270273,\"views\":1583864,\"bandwidth\":41608539674872,\"vote\":null,\"favorite\":false,\"nsfw\":false,\"section\":\"Eyebleach\",\"account_url\":\"ForAGoodTimeCall8675309\",\"account_id\":23095506,\"comment_preview\":null,\"gifv\":\"http://i.imgur.com/zVpyzhW.gifv\",\"webm\":\"http://i.imgur.com/zVpyzhW.webm\",\"mp4\":\"http://i.imgur.com/zVpyzhW.mp4\",\"link\":\"http://i.imgur.com/zVpyzhWh.gif\",\"looping\":true},\"success\":true,\"status\":200}";
+        private const string UploadImageResponse = "{\"data\":{\"id\":\"kiNOcUl\",\"title\":\"Title Test\",\"description\":\"Description Test\",\"datetime\":1440373411,\"type\":\"image/gif\",\"animated\":true,\"width\":290,\"height\":189,\"size\":1038889,\"views\":0,\"bandwidth\":0,\"vote\":null,\"favorite\":false,\"nsfw\":null,\"section\":null,\"account_url\":null,\"account_id\":24234234,\"comment_preview\":null,\"deletehash\":\"nGxOKC9ML6KyTWQ\",\"name\":\"\",\"gifv\":\"http://i.imgur.com/kiNOcUl.gifv\",\"webm\":\"http://i.imgur.com/kiNOcUl.webm\",\"mp4\":\"http://i.imgur.com/kiNOcUl.mp4\",\"link\":\"http://i.imgur.com/kiNOcUl.gif\",\"looping\":true},\"success\":true,\"status\":200}";
+        private const string FavoriteImageImgurResponseTrue = "{\"data\":\"favorited\",\"success\":true,\"status\":200}";
+        private const string FavoriteImageImgurResponseFalse = "{\"data\":\"unfavorited\",\"success\":true,\"status\":200}";
+        private const string FavoriteImageMashapeResponseTrue = "{\"data\":{\"error\":\"f\",\"request\":\"/3/image/CgBdJN9/favorite\",\"method\":\"POST\"},\"success\":true,\"status\":200}";
+        private const string FavoriteImageMashapeResponseFalse = "{\"data\":{\"error\":\"u\",\"request\":\"/3/image/CgBdJN9/favorite\",\"method\":\"POST\"},\"success\":true,\"status\":200}";
 
         [TestMethod]
         public void GetImageAsync_WithId_ReceivedIsTrue()
@@ -30,7 +28,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task GetImageAsync_WithNullId_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");
@@ -42,35 +40,18 @@ namespace Imgur.API.Tests.Endpoints
         public void UploadImageBinaryAsync_WithImage_ReceivedIsTrue()
         {
             var endpoint = Substitute.For<IImageEndpoint>();
-            var image = new byte[] {0x20};
+            var image = new byte[] { 0x20 };
             endpoint.UploadImageBinaryAsync(image, "1234", "t1234", "d1234");
             endpoint.Received().UploadImageBinaryAsync(image, "1234", "t1234", "d1234");
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task UploadImageBinaryAsync_WithNullImage_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");
             var endpoint = new ImageEndpoint(imgurAuth);
             await endpoint.UploadImageBinaryAsync(null, null, null, null);
-        }
-
-        [TestMethod]
-        public void UploadImageBase64Async_WithImage_ImageReceivedIsTrue()
-        {
-            var endpoint = Substitute.For<IImageEndpoint>();
-            endpoint.UploadImageBase64Async("abcd", "1234", "t1234", "d1234");
-            endpoint.Received().UploadImageBase64Async("abcd", "1234", "t1234", "d1234");
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public async Task UploadImageBase64Async_WithNullImage_ThrowsArgumentNullException()
-        {
-            var imgurAuth = new ImgurAuthentication("123", "1234");
-            var endpoint = new ImageEndpoint(imgurAuth);
-            await endpoint.UploadImageBase64Async(null, null, null, null);
         }
 
         [TestMethod]
@@ -82,7 +63,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task UploadImageUrlAsync_WithNullUrl_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");
@@ -99,7 +80,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task DeleteImageAsync_WithNullId_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");
@@ -116,7 +97,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task UpdateImageAsync_WithNullId_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");
@@ -133,7 +114,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task FavoriteImageAsync_WithNullId_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");
@@ -203,21 +184,39 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void FavoriteImage_WithValidTrueResponse_AreEqual()
+        public void FavoriteImage_WithValidImgurTrueResponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
-            var response = endpoint.ProcessEndpointResponse<string>(FavoriteImageTrue);
+            var response = endpoint.ProcessEndpointResponse<string>(FavoriteImageImgurResponseTrue);
 
             Assert.AreEqual("favorited", response);
         }
 
         [TestMethod]
-        public void FavoriteImage_WithValidFalseResponse_AreEqual()
+        public void FavoriteImage_WithValidImgurFalseResponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
-            var response = endpoint.ProcessEndpointResponse<string>(FavoriteImageFalse);
+            var response = endpoint.ProcessEndpointResponse<string>(FavoriteImageImgurResponseFalse);
 
             Assert.AreEqual("unfavorited", response);
+        }
+
+        [TestMethod]
+        public void FavoriteImage_WithValidMashapeTrueResponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var response = endpoint.ProcessEndpointResponse<ImgurError>(FavoriteImageMashapeResponseTrue);
+
+            Assert.AreEqual("f", response.Error);
+        }
+
+        [TestMethod]
+        public void FavoriteImage_WithValidMashapeFalseResponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var response = endpoint.ProcessEndpointResponse<ImgurError>(FavoriteImageMashapeResponseFalse);
+
+            Assert.AreEqual("u", response.Error);
         }
     }
 }

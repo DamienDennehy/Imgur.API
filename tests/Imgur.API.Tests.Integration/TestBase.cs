@@ -12,14 +12,17 @@ namespace Imgur.API.Tests.Integration
         public string ClientSecret => ConfigurationManager.AppSettings["ClientSecret"];
         public string MashapeKey => ConfigurationManager.AppSettings["MashapeKey"];
         public string RefreshToken => ConfigurationManager.AppSettings["RefreshToken"];
+        private IOAuth2Token _oAuth2Token = null;
 
         public async Task<IOAuth2Token> GetOAuth2Token()
         {
+            if (_oAuth2Token != null)
+                return _oAuth2Token;
+
             var authentication = new ImgurAuthentication(ClientId, ClientSecret);
             var endpoint = new OAuth2Endpoint(authentication);
-            var token = await endpoint.GetTokenByRefreshTokenAsync(RefreshToken);
-
-            return token;
+            _oAuth2Token = await endpoint.GetTokenByRefreshTokenAsync(RefreshToken);
+            return _oAuth2Token;
         }
     }
 }

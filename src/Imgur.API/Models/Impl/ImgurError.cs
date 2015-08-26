@@ -11,7 +11,7 @@ namespace Imgur.API.Models.Impl
         ///     A description of the error.
         /// </summary>
         [JsonProperty("error")]
-        public string ErrorMessage { get; set; }
+        public string Error { get; set; }
 
         /// <summary>
         ///     The request Uri that the error came from.

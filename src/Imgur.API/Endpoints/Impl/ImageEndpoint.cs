@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
@@ -13,9 +15,12 @@ namespace Imgur.API.Endpoints.Impl
     /// </summary>
     public class ImageEndpoint : EndpointBase, IImageEndpoint
     {
-        private const string GetImageUrl = "image/{0}";
         private const string UploadImageUrl = "image";
+        private const string GetImageUrl = "image/{0}";
+        private const string UpdateImageUrl = "image/{0}";
+        private const string DeleteImageUrl = "image/{0}";
         private const string FavoriteImageUrl = "image/{0}/favorite";
+        private const int MaxUriLength = 32765;
 
         /// <summary>
         ///     Initializes a new instance of the ImageEndpoint class.
@@ -80,26 +85,7 @@ namespace Imgur.API.Endpoints.Impl
 
             return returnImage;
         }
-
-        /// <summary>
-        ///     Upload a new image using base64 data.
-        /// </summary>
-        /// <param name="image">Base64 data.</param>
-        /// <param name="album">
-        ///     The id of the album you want to add the image to. For anonymous albums, {album} should be the
-        ///     deletehash that is returned at creation.
-        /// </param>
-        /// <param name="title">The title of the image.</param>
-        /// <param name="description">The description of the image.</param>
-        /// <returns></returns>
-        public Task<IImage> UploadImageBase64Async(string image, string album, string title, string description)
-        {
-            if (string.IsNullOrEmpty((image)))
-                throw new ArgumentNullException(nameof(image));
-
-            throw new NotImplementedException();
-        }
-
+        
         /// <summary>
         ///     Upload a new image using a URL.
         /// </summary>
@@ -111,12 +97,33 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        public Task<IImage> UploadImageUrlAsync(string image, string album, string title, string description)
+        public async Task<IImage> UploadImageUrlAsync(string image, string album, string title, string description)
         {
             if (string.IsNullOrEmpty((image)))
                 throw new ArgumentNullException(nameof(image));
 
-            throw new NotImplementedException();
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), UploadImageUrl);
+
+            var parameters = new Dictionary<string, string>
+            {
+                {"type", "URL"},
+                {"image", image}
+            };
+
+            if (!string.IsNullOrWhiteSpace(album))
+                parameters.Add(nameof(album), album);
+
+            if (!string.IsNullOrWhiteSpace(title))
+                parameters.Add(nameof(title), title);
+
+            if (!string.IsNullOrWhiteSpace(description))
+                parameters.Add(nameof(description), description);
+
+            var content = new FormUrlEncodedContent(parameters.ToArray());
+
+            IImage returnImage = await MakeEndpointRequestAsync<Image>(HttpMethod.Post, endpointUrl, content);
+
+            return returnImage;
         }
 
         /// <summary>
@@ -125,12 +132,15 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="id">The image id.</param>
         /// <returns></returns>
-        public Task<bool> DeleteImageAsync(string id)
+        public async Task<bool> DeleteImageAsync(string id)
         {
             if (string.IsNullOrEmpty((id)))
                 throw new ArgumentNullException(nameof(id));
+            
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), DeleteImageUrl);
+            endpointUrl = string.Format(endpointUrl, id);
 
-            throw new NotImplementedException();
+            return await MakeEndpointRequestAsync<bool>(HttpMethod.Delete, endpointUrl, null);
         }
 
         /// <summary>
@@ -142,12 +152,25 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        public Task<bool> UpdateImageAsync(string id, string title, string description)
+        public async Task<bool> UpdateImageAsync(string id, string title, string description)
         {
             if (string.IsNullOrEmpty((id)))
                 throw new ArgumentNullException(nameof(id));
 
-            throw new NotImplementedException();
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), UpdateImageUrl);
+            endpointUrl = string.Format(endpointUrl, id);
+
+            var parameters = new Dictionary<string, string>();
+
+            if (!string.IsNullOrWhiteSpace(title))
+                parameters.Add(nameof(title), title);
+
+            if (!string.IsNullOrWhiteSpace(description))
+                parameters.Add(nameof(description), description);
+
+            var content = new FormUrlEncodedContent(parameters.ToArray());
+
+            return await MakeEndpointRequestAsync<bool>(HttpMethod.Post, endpointUrl, content);
         }
 
         /// <summary>
@@ -155,12 +178,24 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="id">The image id.</param>
         /// <returns></returns>
-        public Task<bool> FavoriteImageAsync(string id)
+        public async Task<bool> FavoriteImageAsync(string id)
         {
             if (string.IsNullOrEmpty((id)))
                 throw new ArgumentNullException(nameof(id));
 
-            throw new NotImplementedException();
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), FavoriteImageUrl);
+            endpointUrl = string.Format(endpointUrl, id);
+
+            //The structure of the response of favoriting an image
+            //varies on if Imgur or Mashape Authentication is used
+            if (ApiAuthentication is IImgurAuthentication)
+            {
+                var imgurResult = await MakeEndpointRequestAsync<string>(HttpMethod.Post, endpointUrl, null);
+                return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
+            }
+            
+            var mashapeResult = await MakeEndpointRequestAsync<ImgurError>(HttpMethod.Post, endpointUrl, null);
+            return mashapeResult.Error.Equals("f", StringComparison.OrdinalIgnoreCase);
         }
     }
 }

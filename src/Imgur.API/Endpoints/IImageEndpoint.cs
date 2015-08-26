@@ -29,19 +29,6 @@ namespace Imgur.API.Endpoints
         Task<IImage> UploadImageBinaryAsync(byte[] image, string album, string title, string description);
 
         /// <summary>
-        ///     Upload a new image using base64 data.
-        /// </summary>
-        /// <param name="image">Base64 data.</param>
-        /// <param name="album">
-        ///     The id of the album you want to add the image to. For anonymous albums, {album} should be the
-        ///     deletehash that is returned at creation.
-        /// </param>
-        /// <param name="title">The title of the image.</param>
-        /// <param name="description">The description of the image.</param>
-        /// <returns></returns>
-        Task<IImage> UploadImageBase64Async(string image, string album, string title, string description);
-
-        /// <summary>
         ///     Upload a new image using a URL.
         /// </summary>
         /// <param name="image">The URL for the image.</param>

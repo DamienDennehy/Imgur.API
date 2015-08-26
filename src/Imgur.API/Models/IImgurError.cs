@@ -8,7 +8,7 @@
         /// <summary>
         ///     A description of the error.
         /// </summary>
-        string ErrorMessage { get; set; }
+        string Error { get; set; }
 
         /// <summary>
         ///     The request Uri that the error came from.

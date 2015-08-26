@@ -209,6 +209,10 @@ namespace Imgur.API.Endpoints.Impl
                 throw new ArgumentNullException(nameof(endpointStringResponse),
                     "The response from the endpoint is empty.");
 
+            //If the result isn't a json response, then we can't proceed
+            if (endpointStringResponse.StartsWith("<"))
+                throw new ArgumentException("The response from the endpoint is invalid.");
+
             //If the authentication method is Mashape, then an error response
             //is different to that of Imgur's response.
             if (ApiAuthentication is IMashapeAuthentication && endpointStringResponse.Contains("{\"message\":"))
@@ -219,13 +223,13 @@ namespace Imgur.API.Endpoints.Impl
 
             //If the type being requested is an oAuthToken
             //Deserialize it immediately and return
-            if (typeof (T) == typeof (IOAuth2Token) || typeof (T) == typeof (OAuth2Token))
+            if (typeof(T) == typeof(IOAuth2Token) || typeof(T) == typeof(OAuth2Token))
             {
                 //If an error occurs, throw an exception
                 if (endpointStringResponse.Contains("{\"data\":{\"error\":"))
                 {
                     var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
-                    throw new ImgurException(apiError.Data.ErrorMessage);
+                    throw new ImgurException(apiError.Data.Error);
                 }
 
                 var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
@@ -240,7 +244,7 @@ namespace Imgur.API.Endpoints.Impl
             if (!response.Success)
             {
                 var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
-                throw new ImgurException(apiError.Data.ErrorMessage);
+                throw new ImgurException(apiError.Data.Error);
             }
 
             //Deserialize the actual response

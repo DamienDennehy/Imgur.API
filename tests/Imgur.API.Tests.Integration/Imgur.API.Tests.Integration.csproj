@@ -51,7 +51,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Endpoints\ImageEndpointTests.cs" />
+    <Compile Include="Endpoints\ImageEndpointImgurAuthTests.cs" />
+    <Compile Include="Endpoints\ImageEndpointMashapeAuthWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\ImageEndpointImgurAuthWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\ImageEndpointMashapeAuthTests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />
     <Compile Include="Endpoints\RateLimitEndpointTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -27,12 +27,8 @@ namespace Imgur.API.Tests.Integration.Endpoints
         [TestMethod]
         public async Task RateLimit_GetRateLimitWithImgurAuthenticationAndOAuth2Authentication_IsValidRateLimit()
         {
-            var authentication = new ImgurAuthentication(ClientId, ClientSecret);
-            var oAuthEndpoint = new OAuth2Endpoint(authentication);
-            var oAuth2Token = await oAuthEndpoint.GetTokenByRefreshTokenAsync(RefreshToken);
-
-            authentication.SetOAuth2Token(oAuth2Token);
-
+            var authentication = new ImgurAuthentication(ClientId, ClientSecret, await GetOAuth2Token());
+         
             var endpoint = new RateLimitEndpoint(authentication);
             var limit = await endpoint.GetRateLimitAsync();
 
@@ -64,12 +60,8 @@ namespace Imgur.API.Tests.Integration.Endpoints
 
         public async Task RateLimit_GetRateLimitWithMashapeAuthenticationAndOAuth2Authentication_IsValidRateLimit()
         {
-            var authentication = new ImgurAuthentication(ClientId, ClientSecret);
-            var oAuthEndpoint = new OAuth2Endpoint(authentication);
-            var oAuth2Token = await oAuthEndpoint.GetTokenByRefreshTokenAsync(RefreshToken);
-
-            authentication.SetOAuth2Token(oAuth2Token);
-
+            var authentication = new ImgurAuthentication(ClientId, ClientSecret, await GetOAuth2Token());
+           
             var endpoint = new RateLimitEndpoint(authentication);
             var limit = await endpoint.GetRateLimitAsync();
 

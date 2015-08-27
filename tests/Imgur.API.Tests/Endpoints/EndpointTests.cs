@@ -231,6 +231,15 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ProcessImgurEndpointResponse_WithInvalidResponse_ArgumentOutOfRangeException()
+        {
+            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurAuth);
+            endpoint.ProcessEndpointResponse<RateLimit>("<html>");
+        }
+
+        [TestMethod]
         public void ProcessEndpointResponse_WithSuccessfulResponse_AreEqual()
         {
             var imgurAuth = new ImgurAuthentication("123", "1234");

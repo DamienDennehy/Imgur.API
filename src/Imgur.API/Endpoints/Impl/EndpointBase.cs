@@ -211,7 +211,7 @@ namespace Imgur.API.Endpoints.Impl
 
             //If the result isn't a json response, then we can't proceed
             if (endpointStringResponse.StartsWith("<"))
-                throw new ArgumentException("The response from the endpoint is invalid.");
+                throw new ArgumentOutOfRangeException(nameof(endpointStringResponse), endpointStringResponse, "The response from the endpoint is invalid.");
 
             //If the authentication method is Mashape, then an error response
             //is different to that of Imgur's response.

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
+using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 
@@ -20,7 +21,6 @@ namespace Imgur.API.Endpoints.Impl
         private const string UpdateImageUrl = "image/{0}";
         private const string DeleteImageUrl = "image/{0}";
         private const string FavoriteImageUrl = "image/{0}/favorite";
-        private const int MaxUriLength = 32765;
 
         /// <summary>
         ///     Initializes a new instance of the ImageEndpoint class.
@@ -34,6 +34,10 @@ namespace Imgur.API.Endpoints.Impl
         ///     Get information about an image.
         /// </summary>
         /// <param name="id">The image id.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ImgurException"></exception>
         /// <returns></returns>
         public async Task<IImage> GetImageAsync(string id)
         {
@@ -56,6 +60,10 @@ namespace Imgur.API.Endpoints.Impl
         /// </param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ImgurException"></exception>
         /// <returns></returns>
         public async Task<IImage> UploadImageBinaryAsync(byte[] image, string album, string title, string description)
         {
@@ -85,7 +93,7 @@ namespace Imgur.API.Endpoints.Impl
 
             return returnImage;
         }
-        
+
         /// <summary>
         ///     Upload a new image using a URL.
         /// </summary>
@@ -96,6 +104,10 @@ namespace Imgur.API.Endpoints.Impl
         /// </param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ImgurException"></exception>
         /// <returns></returns>
         public async Task<IImage> UploadImageUrlAsync(string image, string album, string title, string description)
         {
@@ -131,12 +143,16 @@ namespace Imgur.API.Endpoints.Impl
         ///     If the image belongs to your account then passing the ID of the image is sufficient.
         /// </summary>
         /// <param name="id">The image id.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ImgurException"></exception>
         /// <returns></returns>
         public async Task<bool> DeleteImageAsync(string id)
         {
             if (string.IsNullOrEmpty((id)))
                 throw new ArgumentNullException(nameof(id));
-            
+
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), DeleteImageUrl);
             endpointUrl = string.Format(endpointUrl, id);
 
@@ -151,6 +167,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="id">The image id.</param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ImgurException"></exception>
         /// <returns></returns>
         public async Task<bool> UpdateImageAsync(string id, string title, string description)
         {
@@ -177,6 +197,10 @@ namespace Imgur.API.Endpoints.Impl
         ///     Favorite an image with the given ID. The user is required to be logged in to favorite the image.
         /// </summary>
         /// <param name="id">The image id.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ImgurException"></exception>
         /// <returns></returns>
         public async Task<bool> FavoriteImageAsync(string id)
         {
@@ -193,7 +217,7 @@ namespace Imgur.API.Endpoints.Impl
                 var imgurResult = await MakeEndpointRequestAsync<string>(HttpMethod.Post, endpointUrl, null);
                 return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
             }
-            
+
             var mashapeResult = await MakeEndpointRequestAsync<ImgurError>(HttpMethod.Post, endpointUrl, null);
             return mashapeResult.Error.Equals("f", StringComparison.OrdinalIgnoreCase);
         }

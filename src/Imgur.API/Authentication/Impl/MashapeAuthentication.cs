@@ -15,6 +15,7 @@ namespace Imgur.API.Authentication.Impl
         /// <param name="clientId">The Imgur app's ClientId. </param>
         /// <param name="clientSecret">The Imgur app's ClientSecret.</param>
         /// <param name="mashapeKey">The Mashape Key. </param>
+        /// <exception cref="ArgumentNullException"></exception>
         public MashapeAuthentication(string clientId, string clientSecret, string mashapeKey)
             : base(clientId, clientSecret)
         {
@@ -31,6 +32,7 @@ namespace Imgur.API.Authentication.Impl
         /// <param name="clientSecret">The Imgur app's ClientSecret.</param>
         /// <param name="mashapeKey">The Mashape Key. </param>
         /// <param name="oAuth2Token">An OAuth2 Token used for actions against a user's account.</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public MashapeAuthentication(string clientId, string clientSecret, string mashapeKey,
             IOAuth2Token oAuth2Token)
             : base(clientId, clientSecret, oAuth2Token)

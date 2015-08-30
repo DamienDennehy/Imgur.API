@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
+using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 
@@ -54,6 +55,9 @@ namespace Imgur.API.Endpoints.Impl
         ///     <para>Keep in mind that you can use localhost as a redirect URL.</para>
         /// </summary>
         /// <param name="code">The code from the query string.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByCodeAsync(string code)
         {
@@ -79,6 +83,9 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="pin">The PIN that the user is prompted to enter.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
         public async Task<IOAuth2Token> GetTokenByPinAsync(string pin)
         {
             if (string.IsNullOrEmpty((pin)))
@@ -109,6 +116,9 @@ namespace Imgur.API.Endpoints.Impl
         ///         for their login information again.
         ///     </para>
         /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken)
         {

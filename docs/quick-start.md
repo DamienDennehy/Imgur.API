@@ -9,6 +9,7 @@
         var imageEndpoint = new ImageEndpoint(auth);
         var localImage = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
         var image = await imageEndpoint.UploadImageBinaryAsync(localImage, null, "Awesome pic!", "Took me weeks to get this shot.");
+		Console.WriteLine("Image uploaded. Image Url: " + image.Link);
     }
     catch (ImgurException imgurEx)
     {
@@ -32,6 +33,7 @@
         var imageEndpoint = new ImageEndpoint(auth);
         var localImage = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
         var image = await imageEndpoint.UploadImageBinaryAsync(localImage, null, "Awesome pic!", "Took me weeks to get this shot.");
+		Console.WriteLine("Image uploaded. Image Url: " + image.Link);
     }
     catch (MashapeException mashapeEx)
     {

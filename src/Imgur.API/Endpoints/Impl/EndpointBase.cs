@@ -27,6 +27,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Initializes a new instance of the EndpointBase class.
         /// </summary>
         /// <param name="authentication"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         protected EndpointBase(IApiAuthentication authentication)
         {
             if (authentication == null)
@@ -42,8 +43,9 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     The base Endpoint Url based on the current authentication set.
-        ///     Example: https://api.imgur.com/3/
+        ///     https://api.imgur.com/3/ or https://imgur-apiv3.p.mashape.com/3/
         /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
         public virtual string GetEndpointBaseUrl()
         {
             if (ApiAuthentication is IImgurAuthentication)
@@ -59,6 +61,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Switch from one authentication type to another.
         /// </summary>
         /// <param name="authentication"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public virtual void SwitchAuthentication(IApiAuthentication authentication)
         {
             if (authentication == null)
@@ -73,8 +76,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="endpointUrl">The endpointUrl that should be called.</param>
         /// <param name="httpMethod">The HttpMethod that should be used.</param>
         /// <param name="content">The HttpContent that should be submitted.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         /// <returns></returns>
-        public virtual async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl,
+        internal async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl,
             HttpContent content)
         {
             if (httpMethod == null)
@@ -152,6 +157,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     with the values from the last response from the Api.
         /// </summary>
         /// <param name="headers"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         internal virtual void UpdateRateLimit(HttpResponseHeaders headers)
         {
             if (headers == null)
@@ -201,6 +207,10 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <typeparam name="T">The expected output type, Image, bool, etc.</typeparam>
         /// <param name="endpointStringResponse">The string response from the endpoint.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ImgurException"></exception>
         /// <returns></returns>
         internal T ProcessEndpointResponse<T>(string endpointStringResponse)
         {
@@ -211,7 +221,8 @@ namespace Imgur.API.Endpoints.Impl
 
             //If the result isn't a json response, then we can't proceed
             if (endpointStringResponse.StartsWith("<"))
-                throw new ArgumentOutOfRangeException(nameof(endpointStringResponse), endpointStringResponse, "The response from the endpoint is invalid.");
+                throw new ArgumentOutOfRangeException(nameof(endpointStringResponse), endpointStringResponse,
+                    "The response from the endpoint is invalid.");
 
             //If the authentication method is Mashape, then an error response
             //is different to that of Imgur's response.
@@ -223,7 +234,7 @@ namespace Imgur.API.Endpoints.Impl
 
             //If the type being requested is an oAuthToken
             //Deserialize it immediately and return
-            if (typeof(T) == typeof(IOAuth2Token) || typeof(T) == typeof(OAuth2Token))
+            if (typeof (T) == typeof (IOAuth2Token) || typeof (T) == typeof (OAuth2Token))
             {
                 //If an error occurs, throw an exception
                 if (endpointStringResponse.Contains("{\"data\":{\"error\":"))

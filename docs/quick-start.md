@@ -1,4 +1,6 @@
-### Upload image anonymously using Imgur authentication.
+# Quick Start
+
+## Upload image anonymously using Imgur authentication.
 
     
     try
@@ -21,7 +23,7 @@
         throw;
     }
 
-### Upload image anonymously using Mashape authentication.
+## Upload image anonymously using Mashape authentication.
 
     
     try

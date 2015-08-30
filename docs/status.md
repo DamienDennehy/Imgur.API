@@ -1,14 +1,18 @@
-### Current Status (Sep 2015)
+# Status (Sep 2015)
 
-**Completed**:
+##Completed
 
+###Authentication
 1. Imgur authentication.
 2. Mashape authentication.
 3. OAuth2 authentication.
-4. Image endpoint.
 
-**ToDo:**
+###Endpoints
+1. Image endpoint.
 
+##ToDo
+
+###Endpoints
 1. Account endpoint.
 2. Album endpoint.
 3. Comment endpoint.

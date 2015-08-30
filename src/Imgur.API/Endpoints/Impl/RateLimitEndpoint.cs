@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
-using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 
@@ -27,9 +26,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Get RateLimit.
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="MashapeException"></exception>
-        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
         /// <returns></returns>
         public async Task<IRateLimit> GetRateLimitAsync()
         {

@@ -78,6 +78,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="content">The HttpContent that should be submitted.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         internal async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl,
             HttpContent content)
@@ -158,6 +162,8 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="headers"></param>
         /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="FormatException"></exception>
+        /// <exception cref="OverflowException"></exception>
         internal virtual void UpdateRateLimit(HttpResponseHeaders headers)
         {
             if (headers == null)

@@ -39,14 +39,6 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void MakeEndpointRequestAsync_WithValidParameters_ReceivedIsTrue()
-        {
-            var endpoint = Substitute.For<IEndpoint>();
-            endpoint.MakeEndpointRequestAsync<IImage>(HttpMethod.Get, "url", null);
-            endpoint.Received().MakeEndpointRequestAsync<IImage>(HttpMethod.Get, "url", null);
-        }
-
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void ApiAuthentication_SetNullByConstructor_ThrowArgumentNullException()
         {

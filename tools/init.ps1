@@ -1,1 +1,1 @@
-start "https://github.com/DamienDennehy/Imgur.API/wiki"
+start "https://github.com/DamienDennehy/Imgur.API/wiki/Quick-Start"

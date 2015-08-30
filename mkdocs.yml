@@ -1,6 +1,7 @@
 site_name: Imgur.API
 pages:
 - 'Introduction': 'index.md'
+- 'Status': 'status.md'
 - 'Quick Start': 'quick-start.md'
 - 'Authentication': 'authentication.md'
 - 'OAuth2': 'oauth2.md'

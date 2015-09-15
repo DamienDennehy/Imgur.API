@@ -64,7 +64,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (InvalidOperationException))]
-        public void GetEndpointUrl_GetWithoutSettingAuthentication_ThrowsInvalidOperationException()
+        public void GetEndpointUrl_GetWithoutSettingClient_ThrowsInvalidOperationException()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
             endpoint.GetEndpointBaseUrl();

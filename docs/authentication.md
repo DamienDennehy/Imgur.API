@@ -1,5 +1,4 @@
 # Authentication
-More information on Imgur's api can be found at [http://api.imgur.com/](http://api.imgur.com/)
 
 ## Register an Application
 In order to use the Imgur api, register an application at [http://api.imgur.com/oauth2/addclient](http://api.imgur.com/oauth2/addclient)
@@ -16,3 +15,5 @@ you will need to use Mashape's api instead of the Imgur api. Register for Mashap
 Once you have the application registered, you can use it by declaring an instance of the MashapeClient class.
 
     var client = new MashapeClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", "YOUR_MASHAPE_KEY");
+
+More information on Imgur's api can be found at [http://api.imgur.com/](http://api.imgur.com/)

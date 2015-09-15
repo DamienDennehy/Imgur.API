@@ -13,8 +13,8 @@ namespace Imgur.API.Tests.Integration.Endpoints
         [TestMethod]
         public async Task UploadImageBinaryAsync_WithImage_AreEqual()
         {
-            var apiAuthentication = new ImgurClient(ClientId, ClientSecret);
-            var endpoint = new ImageEndpoint(apiAuthentication);
+            var client = new ImgurClient(ClientId, ClientSecret);
+            var endpoint = new ImageEndpoint(client);
 
             var file = File.ReadAllBytes("banana.gif");
             var image = await endpoint.UploadImageBinaryAsync(file, null, "binary test title!", "binary test desc!");
@@ -32,8 +32,8 @@ namespace Imgur.API.Tests.Integration.Endpoints
         [TestMethod]
         public async Task UploadImageUrlAsync_WithImage_AreEqual()
         {
-            var apiAuthentication = new ImgurClient(ClientId, ClientSecret);
-            var endpoint = new ImageEndpoint(apiAuthentication);
+            var client = new ImgurClient(ClientId, ClientSecret);
+            var endpoint = new ImageEndpoint(client);
             
             var image = await endpoint.UploadImageUrlAsync("http://i.imgur.com/Eg71tvs.gif", null, "url test title!", "url test desc!");
 
@@ -49,8 +49,8 @@ namespace Imgur.API.Tests.Integration.Endpoints
 
         public async Task GetImageAsync_WithImage_AreEqual(IImage actualImage)
         {
-            var apiAuthentication = new ImgurClient(ClientId, ClientSecret);
-            var endpoint = new ImageEndpoint(apiAuthentication);
+            var client = new ImgurClient(ClientId, ClientSecret);
+            var endpoint = new ImageEndpoint(client);
             
             var expectedImage = await endpoint.GetImageAsync(actualImage.Id);
             
@@ -74,8 +74,8 @@ namespace Imgur.API.Tests.Integration.Endpoints
 
         public async Task UpdateImageAsync_WithImage_AreEqual(IImage actualImage)
         {
-            var apiAuthentication = new ImgurClient(ClientId, ClientSecret);
-            var endpoint = new ImageEndpoint(apiAuthentication);
+            var client = new ImgurClient(ClientId, ClientSecret);
+            var endpoint = new ImageEndpoint(client);
 
             var expected = await endpoint.UpdateImageAsync(actualImage.DeleteHash, "Ti", "De");
 
@@ -84,8 +84,8 @@ namespace Imgur.API.Tests.Integration.Endpoints
         
         public async Task DeleteImageAsync_WithImage_IsTrue(IImage actualImage)
         {
-            var apiAuthentication = new ImgurClient(ClientId, ClientSecret);
-            var endpoint = new ImageEndpoint(apiAuthentication);
+            var client = new ImgurClient(ClientId, ClientSecret);
+            var endpoint = new ImageEndpoint(client);
 
             var expected = await endpoint.DeleteImageAsync(actualImage.DeleteHash);
 

@@ -4,8 +4,8 @@
 
     try
     {
-        var imgurAuth = new ImgurAuthentication("YOUR_CLIENT", "YOUR_SECRET");
-        var imageEndpoint = new ImageEndpoint(imgurAuth);
+        var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+        var imageEndpoint = new ImageEndpoint(client);
         var localImage = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
         var image = await imageEndpoint.UploadImageBinaryAsync(localImage, null, "Awesome pic!", "Took me weeks to get this shot.");
 		Console.WriteLine("Image uploaded. Image Url: " + image.Link);
@@ -25,10 +25,10 @@
 
     try
     {
-        var imgurAuth = new ImgurAuthentication("YOUR_CLIENT", "YOUR_SECRET");
-        var oAuth2Endpoint = new OAuth2Endpoint(imgurAuth);
+        var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+        var oAuth2Endpoint = new OAuth2Endpoint(client);
         var token = await oAuth2Endpoint.GetTokenByRefreshTokenAsync("YOUR_REFRESH_TOKEN");
-        imgurAuth.SetOAuth2Token(token);
+        client.SetOAuth2Token(token);
         var imageEndpoint = new ImageEndpoint(imgurAuth);
         var localImage = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
         var image = await imageEndpoint.UploadImageBinaryAsync(localImage, null, "Awesome pic!", "Took me weeks to get this shot.");
@@ -49,8 +49,8 @@
 
     try
     {
-        var mashapeAuth = new MashapeAuthentication("YOUR_CLIENT", "YOUR_SECRET", "YOUR_MASHAPE_KEY");
-        var imageEndpoint = new ImageEndpoint(mashapeAuth);
+        var client = new MashapeClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", "YOUR_MASHAPE_KEY");
+        var imageEndpoint = new ImageEndpoint(client);
         var localImage = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
         var image = await imageEndpoint.UploadImageBinaryAsync(localImage, null, "Awesome pic!", "Took me weeks to get this shot.");
 		Console.WriteLine("Image uploaded. Image Url: " + image.Link);

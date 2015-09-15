@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
+using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 
@@ -18,7 +19,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Initializes a new instance of the RateLimitEndpoint class.
         /// </summary>
         /// <param name="authentication"></param>
-        public RateLimitEndpoint(IApiAuthentication authentication) : base(authentication)
+        public RateLimitEndpoint(IApiClient authentication) : base(authentication)
         {
         }
 
@@ -27,6 +28,9 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IRateLimit> GetRateLimitAsync()
         {

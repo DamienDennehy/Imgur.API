@@ -8,75 +8,75 @@ using NSubstitute;
 namespace Imgur.API.Tests.Authentication
 {
     [TestClass]
-    public class ImgurAuthenticationTests
+    public class ImgurClientTests
     {
         [TestMethod]
         public void ClientId_Set_AreEqual()
         {
-            var auth = Substitute.For<IImgurAuthentication>();
-            auth.ClientId.Returns("AbcdE123");
-            Assert.AreEqual("AbcdE123", auth.ClientId);
+            var client = Substitute.For<IImgurClient>();
+            client.ClientId.Returns("AbcdE123");
+            Assert.AreEqual("AbcdE123", client.ClientId);
         }
 
         [TestMethod]
         public void ClientSecret_Set_AreEqual()
         {
-            var auth = Substitute.For<IImgurAuthentication>();
-            auth.ClientSecret.Returns("Qwerty123");
-            Assert.AreEqual("Qwerty123", auth.ClientSecret);
+            var client = Substitute.For<IImgurClient>();
+            client.ClientSecret.Returns("Qwerty123");
+            Assert.AreEqual("Qwerty123", client.ClientSecret);
         }
 
         [TestMethod]
         public void ClientId_SetByConstructor_AreEqual()
         {
-            var auth = new ImgurAuthentication("ClientId", "ClientSecret");
-            Assert.AreEqual("ClientId", auth.ClientId);
+            var client = new ImgurClient("ClientId", "ClientSecret");
+            Assert.AreEqual("ClientId", client.ClientId);
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void ClientId_SetNullByConstructor_ThrowArgumentNullException()
         {
-            var auth = new ImgurAuthentication(null, "ClientSecret");
-            Assert.IsNotNull(auth.ClientSecret);
+            var client = new ImgurClient(null, "ClientSecret");
+            Assert.IsNotNull(client.ClientSecret);
         }
 
         [TestMethod]
         public void ClientSecret_SetByConstructor_AreEqual()
         {
-            var auth = new ImgurAuthentication("ClientId", "ClientSecret");
-            Assert.AreEqual("ClientSecret", auth.ClientSecret);
+            var client = new ImgurClient("ClientId", "ClientSecret");
+            Assert.AreEqual("ClientSecret", client.ClientSecret);
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void ClientSecret_SetNullByConstructor_ThrowArgumentNullException()
         {
-            var auth = new ImgurAuthentication("ClientId", null);
-            Assert.IsNotNull(auth.ClientId);
+            var client = new ImgurClient("ClientId", null);
+            Assert.IsNotNull(client.ClientId);
         }
 
         [TestMethod]
         public void OAuth2Token_SetByConstructor_AreEqual()
         {
             var oAuth2Token = Substitute.For<IOAuth2Token>();
-            var auth = new ImgurAuthentication("ClientId", "ClientSecret", oAuth2Token);
-            Assert.AreEqual(oAuth2Token, auth.OAuth2Token);
+            var client = new ImgurClient("ClientId", "ClientSecret", oAuth2Token);
+            Assert.AreEqual(oAuth2Token, client.OAuth2Token);
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void OAuth2Token_SetNullByConstructor_ThrowArgumentNullException()
         {
-            var auth = new ImgurAuthentication("ClientId", "ClientSecret", null);
-            Assert.IsNotNull(auth.OAuth2Token);
+            var client = new ImgurClient("ClientId", "ClientSecret", null);
+            Assert.IsNotNull(client.OAuth2Token);
         }
 
         [TestMethod]
         public void RateLimit_SetByInitialization_IsNotNull()
         {
-            var auth = new ImgurAuthentication("ClientId", "ClientSecret");
-            Assert.IsNotNull(auth.RateLimit);
+            var client = new ImgurClient("ClientId", "ClientSecret");
+            Assert.IsNotNull(client.RateLimit);
         }
     }
 }

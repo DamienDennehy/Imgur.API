@@ -4,7 +4,7 @@
     ///     Imgur API application credentials.
     ///     Register at https://api.imgur.com/oauth2/addclient
     /// </summary>
-    public interface IImgurAuthentication : IApiAuthentication
+    public interface IImgurClient : IApiClient
     {
     }
 }

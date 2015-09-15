@@ -24,7 +24,7 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public void RateLimit_ProcessEndpointResponse_AreEqual()
         {
-            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var imgurAuth = new ImgurClient("123", "1234");
             var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurAuth);
             var rateLimit = endpoint.ProcessEndpointResponse<RateLimit>(RateLimitResponse);
 

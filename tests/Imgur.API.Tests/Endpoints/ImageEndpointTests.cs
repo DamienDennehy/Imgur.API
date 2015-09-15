@@ -31,7 +31,7 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task GetImageAsync_WithNullId_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var imgurAuth = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(imgurAuth);
             await endpoint.GetImageAsync(null);
         }
@@ -49,7 +49,7 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task UploadImageBinaryAsync_WithNullImage_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var imgurAuth = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(imgurAuth);
             await endpoint.UploadImageBinaryAsync(null, null, null, null);
         }
@@ -66,7 +66,7 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task UploadImageUrlAsync_WithNullUrl_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var imgurAuth = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(imgurAuth);
             await endpoint.UploadImageUrlAsync(null, null, null, null);
         }
@@ -83,7 +83,7 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task DeleteImageAsync_WithNullId_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var imgurAuth = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(imgurAuth);
             await endpoint.DeleteImageAsync(null);
         }
@@ -100,7 +100,7 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task UpdateImageAsync_WithNullId_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var imgurAuth = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(imgurAuth);
             await endpoint.UpdateImageAsync(null, null, null);
         }
@@ -117,7 +117,7 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task FavoriteImageAsync_WithNullId_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurAuthentication("123", "1234");
+            var imgurAuth = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(imgurAuth);
             await endpoint.FavoriteImageAsync(null);
         }

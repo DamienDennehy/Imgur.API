@@ -9,24 +9,24 @@ using NSubstitute;
 namespace Imgur.API.Tests.Authentication
 {
     [TestClass]
-    public class ApiAuthenticationTests
+    public class ApiClientTests
     {
         [TestMethod]
         public void IOAuth2Token_Set_NotNull()
         {
-            var apiAuth = Substitute.For<IApiAuthentication>();
+            var client = Substitute.For<IApiClient>();
             var oAuthToken = Substitute.For<IOAuth2Token>();
-            apiAuth.OAuth2Token.Returns(oAuthToken);
-            Assert.IsNotNull(apiAuth.OAuth2Token);
+            client.OAuth2Token.Returns(oAuthToken);
+            Assert.IsNotNull(client.OAuth2Token);
         }
 
         [TestMethod]
         public void IRateLimit_Set_NotNull()
         {
-            var apiAuth = Substitute.For<IApiAuthentication>();
+            var client = Substitute.For<IApiClient>();
             var rateLimit = Substitute.For<IRateLimit>();
-            apiAuth.RateLimit.Returns(rateLimit);
-            Assert.IsNotNull(apiAuth.RateLimit);
+            client.RateLimit.Returns(rateLimit);
+            Assert.IsNotNull(client.RateLimit);
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace Imgur.API.Tests.Authentication
         {
             try
             {
-                Substitute.ForPartsOf<ApiAuthenticationBase>(null, "ClientSecret");
+                Substitute.ForPartsOf<ApiClientBase>(null, "ClientSecret");
             }
             catch (TargetInvocationException ex)
             {
@@ -49,7 +49,7 @@ namespace Imgur.API.Tests.Authentication
         {
             try
             {
-                Substitute.ForPartsOf<ApiAuthenticationBase>("ClientId", null);
+                Substitute.ForPartsOf<ApiClientBase>("ClientId", null);
             }
             catch (TargetInvocationException ex)
             {
@@ -63,7 +63,7 @@ namespace Imgur.API.Tests.Authentication
         {
             try
             {
-                Substitute.ForPartsOf<ApiAuthenticationBase>("ClientId", "ClientSecret", null);
+                Substitute.ForPartsOf<ApiClientBase>("ClientId", "ClientSecret", null);
             }
             catch (TargetInvocationException ex)
             {
@@ -74,62 +74,62 @@ namespace Imgur.API.Tests.Authentication
         [TestMethod]
         public void RateLimit_SetByInitialization_IsNotNull()
         {
-            var apiAuth = Substitute.ForPartsOf<ApiAuthenticationBase>();
-            Assert.IsNotNull(apiAuth.RateLimit);
+            var client = Substitute.ForPartsOf<ApiClientBase>();
+            Assert.IsNotNull(client.RateLimit);
         }
 
         [TestMethod]
         public void RateLimit_SetByDefaultConstructor_IsNotNull()
         {
-            var apiAuth = Substitute.ForPartsOf<ApiAuthenticationBase>();
-            Assert.IsNotNull(apiAuth.RateLimit);
+            var client = Substitute.ForPartsOf<ApiClientBase>();
+            Assert.IsNotNull(client.RateLimit);
         }
 
         [TestMethod]
         public void RateLimit_SetByConstructor1_IsNotNull()
         {
-            var apiAuth = Substitute.ForPartsOf<ApiAuthenticationBase>("ClientId", "ClientSecret");
-            Assert.IsNotNull(apiAuth.RateLimit);
+            var client = Substitute.ForPartsOf<ApiClientBase>("ClientId", "ClientSecret");
+            Assert.IsNotNull(client.RateLimit);
         }
 
         [TestMethod]
         public void RateLimit_SetByConstructor2_IsNotNull()
         {
             var oAuth2Token = Substitute.For<IOAuth2Token>();
-            var apiAuth = Substitute.ForPartsOf<ApiAuthenticationBase>("ClientId", "ClientSecret", oAuth2Token);
-            Assert.IsNotNull(apiAuth.RateLimit);
+            var client = Substitute.ForPartsOf<ApiClientBase>("ClientId", "ClientSecret", oAuth2Token);
+            Assert.IsNotNull(client.RateLimit);
         }
 
         [TestMethod]
         public void OAuth2Token_SetByConstructor_IsNotNull()
         {
             var oAuth2Token = Substitute.For<IOAuth2Token>();
-            var apiAuth = Substitute.ForPartsOf<ApiAuthenticationBase>("ClientId", "ClientSecret", oAuth2Token);
-            Assert.IsNotNull(apiAuth.OAuth2Token);
+            var client = Substitute.ForPartsOf<ApiClientBase>("ClientId", "ClientSecret", oAuth2Token);
+            Assert.IsNotNull(client.OAuth2Token);
         }
 
         [TestMethod]
         public void OAuth2Token_SetBySetOAuth2Token_IsNotNull()
         {
             var oAuth2Token = Substitute.For<IOAuth2Token>();
-            var apiAuth = Substitute.ForPartsOf<ApiAuthenticationBase>("ClientId", "ClientSecret");
+            var client = Substitute.ForPartsOf<ApiClientBase>("ClientId", "ClientSecret");
 
-            Assert.IsNull(apiAuth.OAuth2Token);
-            apiAuth.SetOAuth2Token(oAuth2Token);
-            Assert.IsNotNull(apiAuth.OAuth2Token);
+            Assert.IsNull(client.OAuth2Token);
+            client.SetOAuth2Token(oAuth2Token);
+            Assert.IsNotNull(client.OAuth2Token);
         }
 
         [TestMethod]
         public void OAuth2Token_SetBySetOAuth2Token_IsNull()
         {
             var oAuth2Token = Substitute.For<IOAuth2Token>();
-            var apiAuth = Substitute.ForPartsOf<ApiAuthenticationBase>("ClientId", "ClientSecret");
+            var client = Substitute.ForPartsOf<ApiClientBase>("ClientId", "ClientSecret");
 
-            Assert.IsNull(apiAuth.OAuth2Token);
-            apiAuth.SetOAuth2Token(oAuth2Token);
-            Assert.IsNotNull(apiAuth.OAuth2Token);
-            apiAuth.SetOAuth2Token(null);
-            Assert.IsNull(apiAuth.OAuth2Token);
+            Assert.IsNull(client.OAuth2Token);
+            client.SetOAuth2Token(oAuth2Token);
+            Assert.IsNotNull(client.OAuth2Token);
+            client.SetOAuth2Token(null);
+            Assert.IsNull(client.OAuth2Token);
         }
     }
 }

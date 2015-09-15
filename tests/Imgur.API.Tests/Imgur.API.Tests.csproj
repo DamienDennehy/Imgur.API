@@ -61,9 +61,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Authentication\ApiAuthenticationTests.cs" />
-    <Compile Include="Authentication\ImgurAuthenticationTests.cs" />
-    <Compile Include="Authentication\MashapeAuthenticationTests.cs" />
+    <Compile Include="Authentication\ApiClientTests.cs" />
+    <Compile Include="Authentication\ImgurClientTests.cs" />
+    <Compile Include="Authentication\MashapeClientTests.cs" />
     <Compile Include="Authentication\OAuth2TokenTests.cs" />
     <Compile Include="Endpoints\ImageEndpointTests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />

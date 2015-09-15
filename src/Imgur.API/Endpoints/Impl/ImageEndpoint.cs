@@ -26,7 +26,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Initializes a new instance of the ImageEndpoint class.
         /// </summary>
         /// <param name="authentication"></param>
-        public ImageEndpoint(IApiAuthentication authentication) : base(authentication)
+        public ImageEndpoint(IApiClient authentication) : base(authentication)
         {
         }
 
@@ -36,8 +36,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="id">The image id.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="MashapeException"></exception>
         /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IImage> GetImageAsync(string id)
         {
@@ -62,8 +63,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="description">The description of the image.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="MashapeException"></exception>
         /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IImage> UploadImageBinaryAsync(byte[] image, string album, string title, string description)
         {
@@ -106,8 +108,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="description">The description of the image.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="MashapeException"></exception>
         /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IImage> UploadImageUrlAsync(string image, string album, string title, string description)
         {
@@ -145,8 +148,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="id">The image id.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="MashapeException"></exception>
         /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> DeleteImageAsync(string id)
         {
@@ -169,8 +173,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="description">The description of the image.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="MashapeException"></exception>
         /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> UpdateImageAsync(string id, string title, string description)
         {
@@ -199,8 +204,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="id">The image id.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="MashapeException"></exception>
         /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> FavoriteImageAsync(string id)
         {
@@ -212,7 +218,7 @@ namespace Imgur.API.Endpoints.Impl
 
             //The structure of the response of favoriting an image
             //varies on if Imgur or Mashape Authentication is used
-            if (ApiAuthentication is IImgurAuthentication)
+            if (ApiClient is IImgurClient)
             {
                 var imgurResult = await MakeEndpointRequestAsync<string>(HttpMethod.Post, endpointUrl, null);
                 return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);

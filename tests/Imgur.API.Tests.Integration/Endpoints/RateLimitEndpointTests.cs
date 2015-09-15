@@ -11,7 +11,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
         [TestMethod]
         public async Task RateLimit_GetRateLimitWithImgurAuthentication_IsValidRateLimit()
         {
-            var authentication = new ImgurAuthentication(ClientId, ClientSecret);
+            var authentication = new ImgurClient(ClientId, ClientSecret);
             var endpoint = new RateLimitEndpoint(authentication);
             var limit = await endpoint.GetRateLimitAsync();
             Assert.IsNotNull(limit);
@@ -27,7 +27,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
         [TestMethod]
         public async Task RateLimit_GetRateLimitWithImgurAuthenticationAndOAuth2Authentication_IsValidRateLimit()
         {
-            var authentication = new ImgurAuthentication(ClientId, ClientSecret, await GetOAuth2Token());
+            var authentication = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
          
             var endpoint = new RateLimitEndpoint(authentication);
             var limit = await endpoint.GetRateLimitAsync();
@@ -45,7 +45,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
         [TestMethod]
         public async Task RateLimit_GetRateLimitWithMashapeAuthentication_IsValidRateLimit()
         {
-            var authentication = new MashapeAuthentication(ClientId, ClientSecret, MashapeKey);
+            var authentication = new MashapeClient(ClientId, ClientSecret, MashapeKey);
             var endpoint = new RateLimitEndpoint(authentication);
             var limit = await endpoint.GetRateLimitAsync();
             Assert.IsNotNull(limit);
@@ -60,7 +60,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
 
         public async Task RateLimit_GetRateLimitWithMashapeAuthenticationAndOAuth2Authentication_IsValidRateLimit()
         {
-            var authentication = new ImgurAuthentication(ClientId, ClientSecret, await GetOAuth2Token());
+            var authentication = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
            
             var endpoint = new RateLimitEndpoint(authentication);
             var limit = await endpoint.GetRateLimitAsync();

@@ -13,7 +13,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
         [TestMethod]
         public async Task UploadImageBinaryAsync_WithImage_AreEqual()
         {
-            var apiAuthentication = new ImgurAuthentication(ClientId, ClientSecret, await GetOAuth2Token());
+            var apiAuthentication = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new ImageEndpoint(apiAuthentication);
 
             var file = File.ReadAllBytes("banana.gif");
@@ -34,7 +34,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
         [TestMethod]
         public async Task UploadImageUrlAsync_WithImage_AreEqual()
         {
-            var apiAuthentication = new ImgurAuthentication(ClientId, ClientSecret, await GetOAuth2Token());
+            var apiAuthentication = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new ImageEndpoint(apiAuthentication);
             
             var image = await endpoint.UploadImageUrlAsync("http://i.imgur.com/Eg71tvs.gif", null, "url test title!", "url test desc!");
@@ -53,7 +53,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
 
         public async Task GetImageAsync_WithImage_AreEqual(IImage actualImage)
         {
-            var apiAuthentication = new ImgurAuthentication(ClientId, ClientSecret, await GetOAuth2Token());
+            var apiAuthentication = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new ImageEndpoint(apiAuthentication);
             
             var expectedImage = await endpoint.GetImageAsync(actualImage.Id);
@@ -78,7 +78,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
 
         public async Task UpdateImageAsync_WithImage_AreEqual(IImage actualImage)
         {
-            var apiAuthentication = new ImgurAuthentication(ClientId, ClientSecret, await GetOAuth2Token());
+            var apiAuthentication = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new ImageEndpoint(apiAuthentication);
 
             var expected = await endpoint.UpdateImageAsync(actualImage.Id, "Ti", "De");
@@ -88,7 +88,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
 
         public async Task FavoriteImageAsync_WithNotFavoritedImage_IsTrue(IImage actualImage)
         {
-            var apiAuthentication = new ImgurAuthentication(ClientId, ClientSecret, await GetOAuth2Token());
+            var apiAuthentication = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new ImageEndpoint(apiAuthentication);
 
             var expected = await endpoint.FavoriteImageAsync(actualImage.Id);
@@ -98,7 +98,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
 
         public async Task UnfavoriteImageAsync_WithFavoritedImage_IsFalse(IImage actualImage)
         {
-            var apiAuthentication = new ImgurAuthentication(ClientId, ClientSecret, await GetOAuth2Token());
+            var apiAuthentication = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new ImageEndpoint(apiAuthentication);
 
             var expected = await endpoint.FavoriteImageAsync(actualImage.Id);
@@ -108,7 +108,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
 
         public async Task DeleteImageAsync_WithImage_IsTrue(IImage actualImage)
         {
-            var apiAuthentication = new ImgurAuthentication(ClientId, ClientSecret, await GetOAuth2Token());
+            var apiAuthentication = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new ImageEndpoint(apiAuthentication);
 
             var expected = await endpoint.DeleteImageAsync(actualImage.Id);

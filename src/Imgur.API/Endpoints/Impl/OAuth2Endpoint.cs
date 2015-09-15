@@ -29,7 +29,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Initializes a new instance of the OAuth2Endpoint class.
         /// </summary>
         /// <param name="authentication"></param>
-        public OAuth2Endpoint(IApiAuthentication authentication) : base(authentication)
+        public OAuth2Endpoint(IApiClient authentication) : base(authentication)
         {
         }
 
@@ -45,7 +45,7 @@ namespace Imgur.API.Endpoints.Impl
         public string GetAuthorizationUrl(OAuth2ResponseType oAuth2ResponseType, string state)
         {
             var endpointUrl = AuthorizationEndpoint + "?client_id={0}&response_type={1}&state={2}";
-            endpointUrl = string.Format(endpointUrl, ApiAuthentication.ClientId, oAuth2ResponseType, state);
+            endpointUrl = string.Format(endpointUrl, ApiClient.ClientId, oAuth2ResponseType, state);
             return endpointUrl;
         }
 
@@ -58,6 +58,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByCodeAsync(string code)
         {
@@ -66,8 +68,8 @@ namespace Imgur.API.Endpoints.Impl
 
             var parameters = new Dictionary<string, string>
             {
-                {"client_id", ApiAuthentication.ClientId},
-                {"client_secret", ApiAuthentication.ClientSecret},
+                {"client_id", ApiClient.ClientId},
+                {"client_secret", ApiClient.ClientSecret},
                 {"grant_type", "authorization_code"},
                 {"code", code}
             };
@@ -86,6 +88,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
         public async Task<IOAuth2Token> GetTokenByPinAsync(string pin)
         {
             if (string.IsNullOrEmpty((pin)))
@@ -93,8 +97,8 @@ namespace Imgur.API.Endpoints.Impl
 
             var parameters = new Dictionary<string, string>
             {
-                {"client_id", ApiAuthentication.ClientId},
-                {"client_secret", ApiAuthentication.ClientSecret},
+                {"client_id", ApiClient.ClientId},
+                {"client_secret", ApiClient.ClientSecret},
                 {"grant_type", "pin"},
                 {"pin", pin}
             };
@@ -119,6 +123,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken)
         {
@@ -127,8 +133,8 @@ namespace Imgur.API.Endpoints.Impl
 
             var parameters = new Dictionary<string, string>
             {
-                {"client_id", ApiAuthentication.ClientId},
-                {"client_secret", ApiAuthentication.ClientSecret},
+                {"client_id", ApiClient.ClientId},
+                {"client_secret", ApiClient.ClientSecret},
                 {"grant_type", "refresh_token"},
                 {"refresh_token", refreshToken}
             };

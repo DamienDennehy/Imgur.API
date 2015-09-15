@@ -19,7 +19,7 @@ namespace Imgur.API.Tests.Integration
             if (_oAuth2Token != null)
                 return _oAuth2Token;
 
-            var authentication = new ImgurAuthentication(ClientId, ClientSecret);
+            var authentication = new ImgurClient(ClientId, ClientSecret);
             var endpoint = new OAuth2Endpoint(authentication);
             _oAuth2Token = await endpoint.GetTokenByRefreshTokenAsync(RefreshToken);
             return _oAuth2Token;

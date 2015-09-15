@@ -4,7 +4,7 @@
     ///     Mashape API application credentials.
     ///     Register at https://www.mashape.com/imgur/imgur-9
     /// </summary>
-    public interface IMashapeAuthentication : IApiAuthentication
+    public interface IMashapeClient : IApiClient
     {
         /// <summary>
         ///     The Mashape Key.

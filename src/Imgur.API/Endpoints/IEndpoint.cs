@@ -10,7 +10,7 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Interface for all Api authentication types.
         /// </summary>
-        IApiAuthentication ApiAuthentication { get; }
+        IApiClient ApiClient { get; }
 
         /// <summary>
         ///     Gets the endpoint url based on the authentication type.
@@ -18,9 +18,9 @@ namespace Imgur.API.Endpoints
         string GetEndpointBaseUrl();
 
         /// <summary>
-        ///     Switch from one authentication type to another.
+        ///     Switch from one client type to another.
         /// </summary>
-        /// <param name="apiAuthentication"></param>
-        void SwitchAuthentication(IApiAuthentication apiAuthentication);
+        /// <param name="apiClient"></param>
+        void SwitchClient(IApiClient apiClient);
     }
 }

@@ -5,24 +5,24 @@ using Imgur.API.Models.Impl;
 namespace Imgur.API.Authentication.Impl
 {
     /// <summary>
-    ///     Base Authentication class.
+    ///     Base Client class.
     /// </summary>
-    public abstract class ApiAuthenticationBase : IApiAuthentication
+    public abstract class ApiClientBase : IApiClient
     {
         /// <summary>
-        ///     Initializes a new instance of the AuthenticationBase class.
+        ///     Initializes a new instance of the ApiClientBase class.
         /// </summary>
-        protected ApiAuthenticationBase()
+        protected ApiClientBase()
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the AuthenticationBase class.
+        ///     Initializes a new instance of the ApiClientBase class.
         /// </summary>
         /// <param name="clientId">The Imgur app's ClientId. </param>
         /// <param name="clientSecret">The Imgur app's ClientSecret.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        protected ApiAuthenticationBase(string clientId, string clientSecret)
+        protected ApiClientBase(string clientId, string clientSecret)
         {
             if (string.IsNullOrWhiteSpace(clientId))
                 throw new ArgumentNullException(nameof(clientId));
@@ -35,13 +35,13 @@ namespace Imgur.API.Authentication.Impl
         }
 
         /// <summary>
-        ///     Initializes a new instance of the ApiAuthenticationBase class.
+        ///     Initializes a new instance of the ApiClientBase class.
         /// </summary>
         /// <param name="clientId">The Imgur app's ClientId. </param>
         /// <param name="clientSecret">The Imgur app's ClientSecret.</param>
         /// <param name="oAuth2Token">OAuth2 credentials.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        protected ApiAuthenticationBase(string clientId, string clientSecret, IOAuth2Token oAuth2Token)
+        protected ApiClientBase(string clientId, string clientSecret, IOAuth2Token oAuth2Token)
         {
             if (string.IsNullOrWhiteSpace(clientId))
                 throw new ArgumentNullException(nameof(clientId));

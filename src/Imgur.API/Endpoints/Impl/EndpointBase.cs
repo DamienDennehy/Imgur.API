@@ -26,20 +26,20 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Initializes a new instance of the EndpointBase class.
         /// </summary>
-        /// <param name="authentication"></param>
+        /// <param name="apiClient"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        protected EndpointBase(IApiAuthentication authentication)
+        protected EndpointBase(IApiClient apiClient)
         {
-            if (authentication == null)
-                throw new ArgumentNullException(nameof(authentication));
+            if (apiClient == null)
+                throw new ArgumentNullException(nameof(apiClient));
 
-            ApiAuthentication = authentication;
+            ApiClient = apiClient;
         }
 
         /// <summary>
         ///     Interface for all API authentication types.
         /// </summary>
-        public virtual IApiAuthentication ApiAuthentication { get; private set; }
+        public virtual IApiClient ApiClient { get; private set; }
 
         /// <summary>
         ///     The base Endpoint Url based on the current authentication set.
@@ -48,26 +48,26 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="InvalidOperationException"></exception>
         public virtual string GetEndpointBaseUrl()
         {
-            if (ApiAuthentication is IImgurAuthentication)
+            if (ApiClient is IImgurClient)
                 return "https://api.imgur.com/3/";
 
-            if (ApiAuthentication is IMashapeAuthentication)
+            if (ApiClient is IMashapeClient)
                 return "https://imgur-apiv3.p.mashape.com/3/";
 
-            throw new InvalidOperationException("ApiAuthentication type not recognized.");
+            throw new InvalidOperationException("ApiClient type not recognized.");
         }
 
         /// <summary>
-        ///     Switch from one authentication type to another.
+        ///     Switch from one client type to another.
         /// </summary>
-        /// <param name="authentication"></param>
+        /// <param name="apiClient"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public virtual void SwitchAuthentication(IApiAuthentication authentication)
+        public virtual void SwitchClient(IApiClient apiClient)
         {
-            if (authentication == null)
-                throw new ArgumentNullException(nameof(authentication));
+            if (apiClient == null)
+                throw new ArgumentNullException(nameof(apiClient));
 
-            ApiAuthentication = authentication;
+            ApiClient = apiClient;
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     Gets a new HttpClient with DefaultRequestHeaders configured based
-        ///     on the current ApiAuthentication set.
+        ///     on the current ApiClient set.
         /// </summary>
         /// <returns></returns>
         internal virtual HttpClient GetHttpClient()
@@ -139,12 +139,12 @@ namespace Imgur.API.Endpoints.Impl
             //Add OAuth Authentication header
             httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
                 "Authorization",
-                ApiAuthentication.OAuth2Token != null
-                    ? $"Bearer {ApiAuthentication.OAuth2Token.AccessToken}"
-                    : $"Client-ID {ApiAuthentication.ClientId}");
+                ApiClient.OAuth2Token != null
+                    ? $"Bearer {ApiClient.OAuth2Token.AccessToken}"
+                    : $"Client-ID {ApiClient.ClientId}");
 
             //Add Mashape Authentication header
-            var mashapeAuthentication = ApiAuthentication as IMashapeAuthentication;
+            var mashapeAuthentication = ApiClient as IMashapeClient;
             if (mashapeAuthentication != null)
             {
                 httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
@@ -157,7 +157,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Updates the ApiAuthentication's RateLimit
+        ///     Updates the ApiClient's RateLimit
         ///     with the values from the last response from the Api.
         /// </summary>
         /// <param name="headers"></param>
@@ -169,7 +169,7 @@ namespace Imgur.API.Endpoints.Impl
             if (headers == null)
                 throw new ArgumentNullException(nameof(headers));
 
-            if (ApiAuthentication is IImgurAuthentication
+            if (ApiClient is IImgurClient
                 && headers.Any(x => x.Key.Equals("X-RateLimit-ClientLimit")))
             {
                 var clientLimit = headers.GetValues("X-RateLimit-ClientLimit").FirstOrDefault();
@@ -178,18 +178,18 @@ namespace Imgur.API.Endpoints.Impl
                 var userRemaining = headers.GetValues("X-RateLimit-UserRemaining").FirstOrDefault();
                 var userReset = headers.GetValues("X-RateLimit-UserReset").FirstOrDefault();
 
-                ApiAuthentication.RateLimit.ClientLimit = Convert.ToInt32(clientLimit);
-                ApiAuthentication.RateLimit.ClientRemaining = Convert.ToInt32(clientRemaining);
-                ApiAuthentication.RateLimit.UserLimit = Convert.ToInt32(userLimit);
-                ApiAuthentication.RateLimit.UserRemaining = Convert.ToInt32(userRemaining);
-                ApiAuthentication.RateLimit.UserReset =
+                ApiClient.RateLimit.ClientLimit = Convert.ToInt32(clientLimit);
+                ApiClient.RateLimit.ClientRemaining = Convert.ToInt32(clientRemaining);
+                ApiClient.RateLimit.UserLimit = Convert.ToInt32(userLimit);
+                ApiClient.RateLimit.UserRemaining = Convert.ToInt32(userRemaining);
+                ApiClient.RateLimit.UserReset =
                     new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Convert.ToInt64(userReset));
 
-                ApiAuthentication.RateLimit.MashapeUploadsLimit = null;
-                ApiAuthentication.RateLimit.MashapeUploadsRemaining = null;
+                ApiClient.RateLimit.MashapeUploadsLimit = null;
+                ApiClient.RateLimit.MashapeUploadsRemaining = null;
             }
 
-            if (ApiAuthentication is IMashapeAuthentication
+            if (ApiClient is IMashapeClient
                 && headers.Any(x => x.Key.Equals("X-RateLimit-Requests-Limit")))
             {
                 var requestsLimit = headers.GetValues("X-RateLimit-Requests-Limit").FirstOrDefault();
@@ -197,14 +197,14 @@ namespace Imgur.API.Endpoints.Impl
                 var uploadsLimit = headers.GetValues("X-RateLimit-Uploads-Limit").FirstOrDefault();
                 var uploadsRemaining = headers.GetValues("X-RateLimit-Uploads-Remaining").FirstOrDefault();
 
-                ApiAuthentication.RateLimit.ClientLimit = Convert.ToInt32(requestsLimit);
-                ApiAuthentication.RateLimit.ClientRemaining = Convert.ToInt32(requestsRemaining);
-                ApiAuthentication.RateLimit.MashapeUploadsLimit = Convert.ToInt32(uploadsLimit);
-                ApiAuthentication.RateLimit.MashapeUploadsRemaining = Convert.ToInt32(uploadsRemaining);
+                ApiClient.RateLimit.ClientLimit = Convert.ToInt32(requestsLimit);
+                ApiClient.RateLimit.ClientRemaining = Convert.ToInt32(requestsRemaining);
+                ApiClient.RateLimit.MashapeUploadsLimit = Convert.ToInt32(uploadsLimit);
+                ApiClient.RateLimit.MashapeUploadsRemaining = Convert.ToInt32(uploadsRemaining);
 
-                ApiAuthentication.RateLimit.UserLimit = null;
-                ApiAuthentication.RateLimit.UserRemaining = null;
-                ApiAuthentication.RateLimit.UserReset = null;
+                ApiClient.RateLimit.UserLimit = null;
+                ApiClient.RateLimit.UserRemaining = null;
+                ApiClient.RateLimit.UserReset = null;
             }
         }
 
@@ -232,7 +232,7 @@ namespace Imgur.API.Endpoints.Impl
 
             //If the authentication method is Mashape, then an error response
             //is different to that of Imgur's response.
-            if (ApiAuthentication is IMashapeAuthentication && endpointStringResponse.Contains("{\"message\":"))
+            if (ApiClient is IMashapeClient && endpointStringResponse.Contains("{\"message\":"))
             {
                 var maShapeError = JsonConvert.DeserializeObject<MashapeError>(endpointStringResponse);
                 throw new MashapeException(maShapeError.Message);

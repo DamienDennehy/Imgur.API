@@ -3,9 +3,9 @@
 namespace Imgur.API.Authentication
 {
     /// <summary>
-    ///     Imgur or Mashape authentication type.
+    ///     The type of client that will be used for authentication.
     /// </summary>
-    public interface IApiAuthentication
+    public interface IApiClient
     {
         /// <summary>
         ///     The Imgur app's ClientId.

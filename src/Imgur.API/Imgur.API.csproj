@@ -35,12 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Authentication\IApiAuthentication.cs" />
-    <Compile Include="Authentication\IImgurAuthentication.cs" />
-    <Compile Include="Authentication\IMashapeAuthentication.cs" />
-    <Compile Include="Authentication\Impl\ApiAuthenticationBase.cs" />
-    <Compile Include="Authentication\Impl\ImgurAuthentication.cs" />
-    <Compile Include="Authentication\Impl\MashapeAuthentication.cs" />
+    <Compile Include="Authentication\IApiClient.cs" />
+    <Compile Include="Authentication\IImgurClient.cs" />
+    <Compile Include="Authentication\IMashapeClient.cs" />
+    <Compile Include="Authentication\Impl\ApiClientBase.cs" />
+    <Compile Include="Authentication\Impl\ImgurClient.cs" />
+    <Compile Include="Authentication\Impl\MashapeClient.cs" />
     <Compile Include="Authentication\OAuth2ResponseType.cs" />
     <Compile Include="Endpoints\IEndpoint.cs" />
     <Compile Include="Endpoints\IImageEndpoint.cs" />

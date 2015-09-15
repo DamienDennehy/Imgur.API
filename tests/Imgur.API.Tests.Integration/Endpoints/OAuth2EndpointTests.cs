@@ -12,7 +12,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
         [TestMethod]
         public async Task GetTokenByRefreshTokenAsync_SetToken_IsNotNull()
         {
-            var authentication = new ImgurAuthentication(ClientId, ClientSecret);
+            var authentication = new ImgurClient(ClientId, ClientSecret);
             var endpoint = new OAuth2Endpoint(authentication);
             var token = await endpoint.GetTokenByRefreshTokenAsync(RefreshToken);
 
@@ -27,7 +27,7 @@ namespace Imgur.API.Tests.Integration.Endpoints
         [ExpectedException(typeof (ImgurException))]
         public async Task GetTokenByCodeAsync_SetCodeInvalid_ThrowsAPIResponseException()
         {
-            var authentication = new ImgurAuthentication(ClientId, ClientSecret);
+            var authentication = new ImgurClient(ClientId, ClientSecret);
             var endpoint = new OAuth2Endpoint(authentication);
             await endpoint.GetTokenByCodeAsync("abc");
         }

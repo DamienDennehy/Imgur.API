@@ -8,101 +8,101 @@ using NSubstitute;
 namespace Imgur.API.Tests.Authentication
 {
     [TestClass]
-    public class MashapeAuthenticationTests
+    public class MashapeClientTests
     {
         [TestMethod]
         public void ClientId_Set_AreEqual()
         {
-            var auth = Substitute.For<IMashapeAuthentication>();
-            auth.ClientId.Returns("AbcdE123P");
-            Assert.AreEqual("AbcdE123P", auth.ClientId);
+            var client = Substitute.For<IMashapeClient>();
+            client.ClientId.Returns("AbcdE123P");
+            Assert.AreEqual("AbcdE123P", client.ClientId);
         }
 
         [TestMethod]
         public void ClientSecret_Set_AreEqual()
         {
-            var auth = Substitute.For<IMashapeAuthentication>();
-            auth.ClientSecret.Returns("Qwerty123");
-            Assert.AreEqual("Qwerty123", auth.ClientSecret);
+            var client = Substitute.For<IMashapeClient>();
+            client.ClientSecret.Returns("Qwerty123");
+            Assert.AreEqual("Qwerty123", client.ClientSecret);
         }
 
         [TestMethod]
         public void MashapeKey_Set_AreEqual()
         {
-            var auth = Substitute.For<IMashapeAuthentication>();
-            auth.MashapeKey.Returns("Psfdsf7676");
-            Assert.AreEqual("Psfdsf7676", auth.MashapeKey);
+            var client = Substitute.For<IMashapeClient>();
+            client.MashapeKey.Returns("Psfdsf7676");
+            Assert.AreEqual("Psfdsf7676", client.MashapeKey);
         }
 
         [TestClass]
-        public class MashapeAuthenticationImplTests
+        public class MashapeClientImplTests
         {
             [TestMethod]
             public void ClientId_SetByConstructor_AreEqual()
             {
-                var auth = new MashapeAuthentication("ClientId", "ClientSecret", "MashapeKey");
-                Assert.AreEqual("ClientId", auth.ClientId);
+                var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey");
+                Assert.AreEqual("ClientId", client.ClientId);
             }
 
             [TestMethod]
             [ExpectedException(typeof (ArgumentNullException))]
             public void ClientId_SetNullByConstructor_ThrowArgumentNullException()
             {
-                var auth = new MashapeAuthentication(null, "ClientSecret", "MashapeKey");
-                Assert.IsNotNull(auth.MashapeKey);
+                var client = new MashapeClient(null, "ClientSecret", "MashapeKey");
+                Assert.IsNotNull(client.MashapeKey);
             }
 
             [TestMethod]
             public void ClientSecret_SetByConstructor_AreEqual()
             {
-                var auth = new MashapeAuthentication("ClientId", "ClientSecret", "MashapeKey");
-                Assert.AreEqual("ClientSecret", auth.ClientSecret);
+                var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey");
+                Assert.AreEqual("ClientSecret", client.ClientSecret);
             }
 
             [TestMethod]
             [ExpectedException(typeof (ArgumentNullException))]
             public void ClientSecret_SetNullByConstructor_ThrowArgumentNullException()
             {
-                var auth = new MashapeAuthentication("ClientId", null, "MashapeKey");
-                Assert.IsNotNull(auth.ClientSecret);
+                var client = new MashapeClient("ClientId", null, "MashapeKey");
+                Assert.IsNotNull(client.ClientSecret);
             }
 
             [TestMethod]
             public void MashapeKey_SetByConstructor_AreEqual()
             {
-                var authentication = new MashapeAuthentication("ClientId", "ClientSecret", "MashapeKey");
-                Assert.AreEqual("MashapeKey", authentication.MashapeKey);
+                var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey");
+                Assert.AreEqual("MashapeKey", client.MashapeKey);
             }
 
             [TestMethod]
             [ExpectedException(typeof (ArgumentNullException))]
             public void MashapeKey_SetNullByConstructor_ThrowArgumentNullException()
             {
-                var auth = new MashapeAuthentication("ClientId", "ClientSecret", null);
-                Assert.IsNotNull(auth.ClientId);
+                var client = new MashapeClient("ClientId", "ClientSecret", null);
+                Assert.IsNotNull(client.ClientId);
             }
 
             [TestMethod]
             public void OAuth2Token_SetByConstructor_AreEqual()
             {
                 var oAuth2Token = Substitute.For<IOAuth2Token>();
-                var auth = new MashapeAuthentication("ClientId", "ClientSecret", "MashapeKey", oAuth2Token);
-                Assert.AreEqual(oAuth2Token, auth.OAuth2Token);
+                var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey", oAuth2Token);
+                Assert.AreEqual(oAuth2Token, client.OAuth2Token);
             }
 
             [TestMethod]
             [ExpectedException(typeof (ArgumentNullException))]
             public void OAuth2Token_SetNullByConstructor_ThrowArgumentNullException()
             {
-                var auth = new MashapeAuthentication("ClientId", "MashapeKey", null);
-                Assert.IsNotNull(auth.OAuth2Token);
+                var client = new MashapeClient("ClientId", "MashapeKey", null);
+                Assert.IsNotNull(client.OAuth2Token);
             }
 
             [TestMethod]
             public void RateLimit_SetByConstructor_IsNotNull()
             {
-                var auth = new MashapeAuthentication("ClientId", "ClientSecret", "MashapeKey");
-                Assert.IsNotNull(auth.RateLimit);
+                var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey");
+                Assert.IsNotNull(client.RateLimit);
             }
         }
     }

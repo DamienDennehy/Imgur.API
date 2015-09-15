@@ -1,1 +1,3 @@
 # Authentication
+
+## Register an Application

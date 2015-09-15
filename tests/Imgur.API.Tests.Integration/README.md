@@ -13,7 +13,7 @@ These variables contain the Imgur and Mashape authentication settings.
 
 **RefreshToken**: An OAuth2 refresh token for testing Imgur API methods that require user authentication.
 
-## Preventing App.config commits.
+## Preventing App.config commits
 As the App.config file shouldn't be committed using your ClientId and Secret, after checking out the 
 Imgur.API repository open a Git Shell and run the following command:
 

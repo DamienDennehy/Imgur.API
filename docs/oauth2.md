@@ -9,17 +9,17 @@ The simplest way to do this is to redirect to Imgur's authorization url.
     var redirectUrl = oAuth2Endpoint.GetAuthorizationUrl(OAuth2ResponseType.Token, null);
 
 Once the user authorizes the application, the Imgur OAuth2 endpoint will redirect back to your application Redirect URL.
-The RedirectURL will contain several values that should be saved.
+The Redirect URL will contain several values that should be saved.
 
 *   access_token - The user's access token for this session.
 *   refresh_token - The user's refresh token which should be used to refresh the access_token when it expires.
-*   expires_in - The time in seconds when the user's access token expires.
+*   expires_in - The time in seconds when the user's access token expires. Default is 3600.
 *   token_type - The type of token that should be used for authorization.
 *   account_username - The account username that is now authorized.
 *   account_id - The account id that is now authorized.
 
 ## Creating an OAuth2 token from the Redirect URL.
-Using the RedirectURL values, an OAuth2 Token can be created.
+Using the Redirect URL values, an OAuth2 Token can be created.
 
     var token = new OAuth2Token("ACCESS_TOKEN", "REFRESH_TOKEN", "TOKEN_TYPE", "ACCOUNT_ID", 3600);
 

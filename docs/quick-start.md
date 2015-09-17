@@ -15,11 +15,6 @@
         Debug.Write("An error occurred uploading an image to Imgur.");
         Debug.Write(imgurEx.Message);
     }
-    catch (Exception ex)
-    {
-        Debug.Write("An unknown error occurred uploading an image to Imgur.");
-        Debug.Write(ex.Message);
-    }
 
 ## Upload image using an Imgur account with Imgur Api authentication.
 
@@ -38,11 +33,6 @@
     {
         Debug.Write("An error occurred uploading an image to Imgur.");
         Debug.Write(imgurEx.Message);
-    }
-    catch (Exception ex)
-    {
-        Debug.Write("An unknown error occurred uploading an image to Imgur.");
-        Debug.Write(ex.Message);
     }
 
 ## Upload image anonymously using Mashape Api authentication.
@@ -64,9 +54,4 @@
     {
         Debug.Write("An error occurred uploading an image to Imgur.");
         Debug.Write(imgurEx.Message);
-    }
-    catch (Exception ex)
-    {
-        Debug.Write("An unknown error occurred uploading an image to Imgur.");
-        Debug.Write(ex.Message);
     }

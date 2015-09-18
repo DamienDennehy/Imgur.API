@@ -6,6 +6,6 @@ pages:
 - 'Authentication': 'authentication.md'
 - 'OAuth2': 'oauth2.md'
 - 'Endpoints':
-    - 'Image Endpoint': 'endpoints/image-endpoint.md'
+    - 'Image Endpoint': 'image-endpoint.md'
 - 'FAQ': 'faq.md'
 - 'Release Notes': 'release-notes.md'

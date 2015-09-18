@@ -8,3 +8,4 @@ pages:
 - 'Endpoints':
     - 'Image Endpoint': 'endpoints/image-endpoint.md'
 - 'FAQ': 'faq.md'
+- 'Release Notes': 'release-notes.md'

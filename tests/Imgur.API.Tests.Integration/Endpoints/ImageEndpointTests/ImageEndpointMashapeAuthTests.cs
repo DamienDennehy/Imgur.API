@@ -5,7 +5,7 @@ using Imgur.API.Endpoints.Impl;
 using Imgur.API.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Imgur.API.Tests.Integration.Endpoints
+namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
 {
     [TestClass]
     public class ImageEndpointMashapeAuthTests : TestBase

@@ -42,8 +42,10 @@
     <Compile Include="Authentication\Impl\ImgurClient.cs" />
     <Compile Include="Authentication\Impl\MashapeClient.cs" />
     <Compile Include="Authentication\OAuth2ResponseType.cs" />
+    <Compile Include="Endpoints\IAccountEndpoint.cs" />
     <Compile Include="Endpoints\IEndpoint.cs" />
     <Compile Include="Endpoints\IImageEndpoint.cs" />
+    <Compile Include="Endpoints\Impl\AccountEndpoint.cs" />
     <Compile Include="Endpoints\Impl\EndpointBase.cs" />
     <Compile Include="Endpoints\Impl\ImageEndpoint.cs" />
     <Compile Include="Endpoints\Impl\OAuth2Endpoint.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Endpoints\IRateLimitEndpoint.cs" />
     <Compile Include="Exceptions\MashapeException.cs" />
     <Compile Include="Exceptions\ImgurException.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="JsonAttributes\EpochTimeToDateTimeOffset.cs" />
     <Compile Include="Models\AlbumPrivacy.cs" />
     <Compile Include="Models\IAccount.cs" />
@@ -74,6 +77,9 @@
     <Compile Include="Models\IMessage.cs" />
     <Compile Include="Models\Impl\Account.cs" />
     <Compile Include="Models\Impl\Basic.cs" />
+    <Compile Include="Models\Impl\GalleryItem.cs" />
+    <Compile Include="Models\Impl\GalleryAlbum.cs" />
+    <Compile Include="Models\Impl\GalleryImage.cs" />
     <Compile Include="Models\Impl\Image.cs" />
     <Compile Include="Models\Impl\ImgurError.cs" />
     <Compile Include="Models\Impl\RateLimit.cs" />
@@ -87,6 +93,7 @@
     <Compile Include="Models\ITopic.cs" />
     <Compile Include="Models\ITrophy.cs" />
     <Compile Include="Models\IVote.cs" />
+    <Compile Include="Models\SortOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

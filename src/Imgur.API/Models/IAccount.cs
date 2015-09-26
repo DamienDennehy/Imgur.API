@@ -31,10 +31,5 @@ namespace Imgur.API.Models
         ///     Utc timestamp of account creation, converted from epoch time.
         /// </summary>
         DateTimeOffset Created { get; set; }
-
-        /// <summary>
-        ///     Utc timestamp of the user's Pro expiration, converted from epoch time.
-        /// </summary>
-        DateTimeOffset? ProExpiration { get; set; }
     }
 }

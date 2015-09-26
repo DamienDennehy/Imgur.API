@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Imgur.API.Models
+﻿namespace Imgur.API.Models
 {
     /// <summary>
     ///     The account settings, only accessible if you're logged in as the user.
@@ -26,11 +24,6 @@ namespace Imgur.API.Models
         ///     Set the album privacy to this privacy setting on creation.
         /// </summary>
         AlbumPrivacy AlbumPrivacy { get; set; }
-
-        /// <summary>
-        ///     Utc timestamp of the user's Pro expiration, converted from epoch time.
-        /// </summary>
-        DateTimeOffset? ProExpiration { get; set; }
 
         /// <summary>
         ///     True if the user has accepted the terms of uploading to the Imgur gallery.

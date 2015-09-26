@@ -5,15 +5,15 @@ using Imgur.API.Endpoints.Impl;
 using Imgur.API.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Imgur.API.Tests.Integration.Endpoints
+namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
 {
     [TestClass]
-    public class ImageEndpointImgurAuthTests : TestBase
+    public class ImageEndpointImgurAuthWithOAuth2Tests : TestBase
     {
         [TestMethod]
         public async Task UploadImageBinaryAsync_WithImage_AreEqual()
         {
-            var client = new ImgurClient(ClientId, ClientSecret);
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new ImageEndpoint(client);
 
             var file = File.ReadAllBytes("banana.gif");
@@ -26,13 +26,15 @@ namespace Imgur.API.Tests.Integration.Endpoints
 
             await GetImageAsync_WithImage_AreEqual(image);
             await UpdateImageAsync_WithImage_AreEqual(image);
+            await FavoriteImageAsync_WithNotFavoritedImage_IsTrue(image);
+            await UnfavoriteImageAsync_WithFavoritedImage_IsFalse(image);
             await DeleteImageAsync_WithImage_IsTrue(image);
         }
 
         [TestMethod]
         public async Task UploadImageUrlAsync_WithImage_AreEqual()
         {
-            var client = new ImgurClient(ClientId, ClientSecret);
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new ImageEndpoint(client);
             
             var image = await endpoint.UploadImageUrlAsync("http://i.imgur.com/Eg71tvs.gif", null, "url test title!", "url test desc!");
@@ -44,12 +46,14 @@ namespace Imgur.API.Tests.Integration.Endpoints
 
             await GetImageAsync_WithImage_AreEqual(image);
             await UpdateImageAsync_WithImage_AreEqual(image);
+            await FavoriteImageAsync_WithNotFavoritedImage_IsTrue(image);
+            await UnfavoriteImageAsync_WithFavoritedImage_IsFalse(image);
             await DeleteImageAsync_WithImage_IsTrue(image);
         }
 
         public async Task GetImageAsync_WithImage_AreEqual(IImage actualImage)
         {
-            var client = new ImgurClient(ClientId, ClientSecret);
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new ImageEndpoint(client);
             
             var expectedImage = await endpoint.GetImageAsync(actualImage.Id);
@@ -74,20 +78,40 @@ namespace Imgur.API.Tests.Integration.Endpoints
 
         public async Task UpdateImageAsync_WithImage_AreEqual(IImage actualImage)
         {
-            var client = new ImgurClient(ClientId, ClientSecret);
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new ImageEndpoint(client);
 
-            var expected = await endpoint.UpdateImageAsync(actualImage.DeleteHash, "Ti", "De");
+            var expected = await endpoint.UpdateImageAsync(actualImage.Id, "Ti", "De");
 
             Assert.IsTrue(expected);
         }
-        
-        public async Task DeleteImageAsync_WithImage_IsTrue(IImage actualImage)
+
+        public async Task FavoriteImageAsync_WithNotFavoritedImage_IsTrue(IImage actualImage)
         {
-            var client = new ImgurClient(ClientId, ClientSecret);
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new ImageEndpoint(client);
 
-            var expected = await endpoint.DeleteImageAsync(actualImage.DeleteHash);
+            var expected = await endpoint.FavoriteImageAsync(actualImage.Id);
+
+            Assert.IsTrue(expected);
+        }
+
+        public async Task UnfavoriteImageAsync_WithFavoritedImage_IsFalse(IImage actualImage)
+        {
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
+            var endpoint = new ImageEndpoint(client);
+
+            var expected = await endpoint.FavoriteImageAsync(actualImage.Id);
+
+            Assert.IsFalse(expected);
+        }
+
+        public async Task DeleteImageAsync_WithImage_IsTrue(IImage actualImage)
+        {
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
+            var endpoint = new ImageEndpoint(client);
+
+            var expected = await endpoint.DeleteImageAsync(actualImage.Id);
 
             Assert.IsTrue(expected);
         }

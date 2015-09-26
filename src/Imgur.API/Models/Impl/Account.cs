@@ -1,4 +1,6 @@
 ﻿using System;
+using Imgur.API.JsonAttributes;
+using Newtonsoft.Json;
 
 namespace Imgur.API.Models.Impl
 {
@@ -30,11 +32,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Utc timestamp of account creation, converted from epoch time.
         /// </summary>
+        [JsonConverter(typeof (EpochTimeToDateTimeOffset))]
         public virtual DateTimeOffset Created { get; set; }
-
-        /// <summary>
-        ///     Utc timestamp of the user's Pro expiration, converted from epoch time.
-        /// </summary>
-        public virtual DateTimeOffset? ProExpiration { get; set; }
     }
 }

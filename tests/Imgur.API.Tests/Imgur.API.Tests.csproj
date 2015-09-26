@@ -65,10 +65,14 @@
     <Compile Include="Authentication\ImgurClientTests.cs" />
     <Compile Include="Authentication\MashapeClientTests.cs" />
     <Compile Include="Authentication\OAuth2TokenTests.cs" />
+    <Compile Include="EndpointResponses\AccountEndpointResponses.cs" />
+    <Compile Include="EndpointResponses\ImageEndpointResponses.cs" />
+    <Compile Include="Endpoints\AccountEndpointTests.cs" />
     <Compile Include="Endpoints\ImageEndpointTests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />
     <Compile Include="Endpoints\RateLimitEndpointTests.cs" />
     <Compile Include="Endpoints\EndpointTests.cs" />
+    <Compile Include="Helpers\ImageHelperTests.cs" />
     <Compile Include="JsonAttributes\EpochTimeToDateTimeOffsetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -28,8 +28,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Initializes a new instance of the OAuth2Endpoint class.
         /// </summary>
-        /// <param name="authentication"></param>
-        public OAuth2Endpoint(IApiClient authentication) : base(authentication)
+        /// <param name="apiClient"></param>
+        public OAuth2Endpoint(IApiClient apiClient) : base(apiClient)
         {
         }
 

@@ -25,8 +25,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Initializes a new instance of the ImageEndpoint class.
         /// </summary>
-        /// <param name="authentication"></param>
-        public ImageEndpoint(IApiClient authentication) : base(authentication)
+        /// <param name="apiClient"></param>
+        public ImageEndpoint(IApiClient apiClient) : base(apiClient)
         {
         }
 

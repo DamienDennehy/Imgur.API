@@ -52,6 +52,9 @@ Updates the title or description of an image.
 Favorite an image with the given ID. The user is required to be logged in to favorite the image.
 
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+            var oAuth2Endpoint = new OAuth2Endpoint(client);
+            var token = await oAuth2Endpoint.GetTokenByRefreshTokenAsync("YOUR_REFRESH_TOKEN");
+            client.SetOAuth2Token(token);
             var imageEndpoint = new ImageEndpoint(client);
             var favorited = await imageEndpoint.FavoriteImageAsync("IMAGE_ID");
             Debug.Write("Image favorited: " + favorited);

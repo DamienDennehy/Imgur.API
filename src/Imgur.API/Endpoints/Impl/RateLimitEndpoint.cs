@@ -18,8 +18,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Initializes a new instance of the RateLimitEndpoint class.
         /// </summary>
-        /// <param name="authentication"></param>
-        public RateLimitEndpoint(IApiClient authentication) : base(authentication)
+        /// <param name="apiClient"></param>
+        public RateLimitEndpoint(IApiClient apiClient) : base(apiClient)
         {
         }
 

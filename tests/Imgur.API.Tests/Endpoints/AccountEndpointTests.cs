@@ -93,7 +93,8 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public async Task GetAccountGalleryFavoritesAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        public async Task GetAccountGalleryFavoritesAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException
+            ()
         {
             var imgurAuth = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(imgurAuth);
@@ -104,7 +105,9 @@ namespace Imgur.API.Tests.Endpoints
         public void GetAccountGalleryFavoritesAsync_WithValidReponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
-            var favorites = endpoint.ProcessEndpointResponse<IEnumerable<object>>(AccountEndpointResponses.Imgur.GetAccountGalleryFavoritesResponse);
+            var favorites =
+                endpoint.ProcessEndpointResponse<IEnumerable<object>>(
+                    AccountEndpointResponses.Imgur.GetAccountGalleryFavoritesResponse);
 
             Assert.AreEqual(favorites.Count(), ImageHelper.ConvertToGalleryItems(favorites).Count());
         }
@@ -124,7 +127,7 @@ namespace Imgur.API.Tests.Endpoints
             endpoint.GetAccountFavoritesAsync();
             endpoint.Received().GetAccountFavoritesAsync();
         }
-        
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task GetAccountFavoritesAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
@@ -138,7 +141,9 @@ namespace Imgur.API.Tests.Endpoints
         public void GetAccountFavoritesAsync_WithValidReponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
-            var favorites = endpoint.ProcessEndpointResponse<IEnumerable<object>>(AccountEndpointResponses.Imgur.GetAccountFavoritesResponse);
+            var favorites =
+                endpoint.ProcessEndpointResponse<IEnumerable<object>>(
+                    AccountEndpointResponses.Imgur.GetAccountFavoritesResponse);
 
             Assert.AreEqual(favorites.Count(), ImageHelper.ConvertToGalleryItems(favorites).Count());
         }
@@ -181,9 +186,123 @@ namespace Imgur.API.Tests.Endpoints
         public void GetAccountSubmissionsAsync_WithValidReponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
-            var submissions = endpoint.ProcessEndpointResponse<IEnumerable<object>>(AccountEndpointResponses.Imgur.GetAccountSubmissionsResponse);
+            var submissions =
+                endpoint.ProcessEndpointResponse<IEnumerable<object>>(
+                    AccountEndpointResponses.Imgur.GetAccountSubmissionsResponse);
 
             Assert.AreEqual(submissions.Count(), ImageHelper.ConvertToGalleryItems(submissions).Count());
+        }
+
+        [TestMethod]
+        public void GetAccountSettingsAsync_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetAccountSettingsAsync();
+            endpoint.Received().GetAccountSettingsAsync();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetAccountSettingsAsync_OAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetAccountSettingsAsync();
+        }
+
+        [TestMethod]
+        public void GetAccountSettingsAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var accountSettings =
+                endpoint.ProcessEndpointResponse<AccountSettings>(
+                    AccountEndpointResponses.Imgur.GetAccountSettingsResponse);
+
+            Assert.AreEqual(true, accountSettings.AcceptedGalleryTerms);
+            Assert.AreEqual("ImgurApiTest@noreply.com", accountSettings.ActiveEmails.First());
+            Assert.AreEqual(AlbumPrivacy.Secret, accountSettings.AlbumPrivacy);
+            Assert.AreEqual(45454554, accountSettings.BlockedUsers.First().BlockedId);
+            Assert.AreEqual("Bob", accountSettings.BlockedUsers.First().BlockedUrl);
+            Assert.AreEqual("ImgurApiTest@noreply.com", accountSettings.Email);
+            Assert.AreEqual(false, accountSettings.HighQuality);
+            Assert.AreEqual(true, accountSettings.MessagingEnabled);
+            Assert.AreEqual(false, accountSettings.PublicImages);
+            Assert.AreEqual(true, accountSettings.ShowMature);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task UpdateAccountSettings_OAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.UpdateAccountSettingsAsync("1234");
+        }
+
+        [TestMethod]
+        public void UpdateAccountSettingsAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var updated = endpoint.ProcessEndpointResponse<bool>(
+                    AccountEndpointResponses.Imgur.UpdateAccountSettingsResponse);
+
+            Assert.IsTrue(updated);
+        }
+
+        [TestMethod]
+        public void GetGalleryProfileAsync_WithUsername_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetGalleryProfileAsync("Bob");
+            endpoint.Received().GetGalleryProfileAsync("Bob");
+        }
+        
+        [TestMethod]
+        public void GetGalleryProfileAsync_WithDefaultUsername_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetGalleryProfileAsync();
+            endpoint.Received().GetGalleryProfileAsync("me");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetGalleryProfileAsync_WithNullUsername_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetGalleryProfileAsync(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetGalleryProfileAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetGalleryProfileAsync();
+        }
+
+        [TestMethod]
+        public void GetGalleryProfileAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var profile = endpoint.ProcessEndpointResponse<GalleryProfile>(AccountEndpointResponses.Imgur.GetGalleryProfileResponse);
+
+            Assert.AreEqual(1470, profile.TotalGalleryComments);
+            Assert.AreEqual(3068, profile.TotalGalleryFavorites);
+            Assert.AreEqual(156, profile.TotalGallerySubmissions);
+
+            var trophy = profile.Trophies.First(x => x.Data == "114377540");
+
+            Assert.AreEqual("114377540", trophy.Data);
+            Assert.AreEqual("/gallery/RdU6zgv/comment/114377540", trophy.DataLink);
+            Assert.AreEqual("4852550", trophy.Id);
+            Assert.AreEqual("Comment sparked a large reply thread.", trophy.Description);
+            Assert.AreEqual("http://s.imgur.com/images/trophies/e8a901.png", trophy.Image);
+            Assert.AreEqual("Conversation Starter", trophy.Name);
+            Assert.AreEqual("ReplyThread", trophy.NameClean);
+            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1380321520), trophy.DateTime);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
@@ -19,7 +20,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
 
             var account = await endpoint.GetAccountAsync();
 
-            Assert.AreEqual("ImgurAPIDotNet", account.Url);
+            Assert.AreEqual("ImgurAPIDotNet".ToLower(), account.Url.ToLower());
         }
 
         [TestMethod]
@@ -31,6 +32,40 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
             var favourites = await endpoint.GetAccountFavoritesAsync();
 
             Assert.IsTrue(favourites.Any());
+        }
+
+        [TestMethod]
+        public async Task GetAccountSettingsAsync_IsTrue()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var settings = await endpoint.GetAccountSettingsAsync();
+
+            Assert.IsFalse(settings.PublicImages);
+        }
+
+
+        [TestMethod]
+        public async Task UpdateAccountSettingsAsync_IsTrue()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var updated = await endpoint.UpdateAccountSettingsAsync(bio: "ImgurClient_" + DateTimeOffset.UtcNow.ToString(), publicImages: false, albumPrivacy: AlbumPrivacy.Hidden);
+
+            Assert.IsTrue(updated);
+        }
+
+        [TestMethod]
+        public async Task GetGalleryProfileAsync_WithDefaultUsername_AnyTrophies_IsFalse()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var profile = await endpoint.GetGalleryProfileAsync();
+
+            Assert.IsFalse(profile.Trophies.Any());
         }
     }
 }

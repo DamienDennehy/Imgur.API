@@ -1,42 +1,42 @@
 ﻿using System;
 using System.IO;
-using Imgur.API.JsonAttributes;
+using Imgur.API.JsonConverters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace Imgur.API.Tests.JsonAttributes
+namespace Imgur.API.Tests.JsonConverters
 {
     [TestClass]
-    public class EpochTimeToDateTimeOffsetTests
+    public class EpochTimeConverterTests
     {
         [TestMethod]
-        public void EpochTimeToDateTimeOffset_CanConvertDateTimeOffset_IsTrue()
+        public void EpochTimeConverter_CanConvertDateTimeOffset_IsTrue()
         {
-            var converter = new EpochTimeToDateTimeOffset();
+            var converter = new EpochTimeConverter();
 
             Assert.IsTrue(converter.CanConvert(typeof (DateTimeOffset)));
         }
 
         [TestMethod]
-        public void EpochTimeToDateTimeOffset_CanConvertString_IsFalse()
+        public void EpochTimeConverter_CanConvertString_IsFalse()
         {
-            var converter = new EpochTimeToDateTimeOffset();
+            var converter = new EpochTimeConverter();
 
             Assert.IsFalse(converter.CanConvert(typeof (string)));
         }
 
         [TestMethod]
-        public void EpochTimeToDateTimeOffset_CanConvertInt_IsFalse()
+        public void EpochTimeConverter_CanConvertInt_IsFalse()
         {
-            var converter = new EpochTimeToDateTimeOffset();
+            var converter = new EpochTimeConverter();
 
             Assert.IsFalse(converter.CanConvert(typeof (int)));
         }
 
         [TestMethod]
-        public void EpochTimeToDateTimeOffset_ReadJsonInt64_AreEqual()
+        public void EpochTimeConverter_ReadJsonInt64_AreEqual()
         {
-            var converter = new EpochTimeToDateTimeOffset();
+            var converter = new EpochTimeConverter();
 
             var reader = new JsonTextReader(new StringReader("1439134235"));
             reader.Read();
@@ -49,9 +49,9 @@ namespace Imgur.API.Tests.JsonAttributes
         }
 
         [TestMethod]
-        public void EpochTimeToDateTimeOffset_ReadJsonInt64_AreNotEqual()
+        public void EpochTimeConverter_ReadJsonInt64_AreNotEqual()
         {
-            var converter = new EpochTimeToDateTimeOffset();
+            var converter = new EpochTimeConverter();
 
             var reader = new JsonTextReader(new StringReader("1439134235"));
             reader.Read();
@@ -65,9 +65,9 @@ namespace Imgur.API.Tests.JsonAttributes
 
         [TestMethod]
         [ExpectedException(typeof (InvalidCastException))]
-        public void EpochTimeToDateTimeOffset_ReadJsonString_ThrowsInvalidCastException()
+        public void EpochTimeConverter_ReadJsonString_ThrowsInvalidCastException()
         {
-            var converter = new EpochTimeToDateTimeOffset();
+            var converter = new EpochTimeConverter();
 
             var reader = new JsonTextReader(new StringReader("'abcdefg'"));
             reader.Read();
@@ -81,9 +81,9 @@ namespace Imgur.API.Tests.JsonAttributes
 
         [TestMethod]
         [ExpectedException(typeof (InvalidCastException))]
-        public void EpochTimeToDateTimeOffset_ReadJsonBoolean_ThrowsInvalidCastException()
+        public void EpochTimeConverter_ReadJsonBoolean_ThrowsInvalidCastException()
         {
-            var converter = new EpochTimeToDateTimeOffset();
+            var converter = new EpochTimeConverter();
 
             var reader = new JsonTextReader(new StringReader("true"));
             reader.Read();
@@ -97,9 +97,9 @@ namespace Imgur.API.Tests.JsonAttributes
 
         [TestMethod]
         [ExpectedException(typeof (NotImplementedException))]
-        public void EpochTimeToDateTimeOffset_WriteJson_ThrowsNotImplementedException()
+        public void EpochTimeConverter_WriteJson_ThrowsNotImplementedException()
         {
-            var converter = new EpochTimeToDateTimeOffset();
+            var converter = new EpochTimeConverter();
             converter.WriteJson(null, null, null);
         }
     }

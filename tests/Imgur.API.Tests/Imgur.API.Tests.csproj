@@ -73,7 +73,8 @@
     <Compile Include="Endpoints\RateLimitEndpointTests.cs" />
     <Compile Include="Endpoints\EndpointTests.cs" />
     <Compile Include="Helpers\ImageHelperTests.cs" />
-    <Compile Include="JsonAttributes\EpochTimeToDateTimeOffsetTests.cs" />
+    <Compile Include="JsonConverters\EnumerableConverterTests.cs" />
+    <Compile Include="JsonConverters\EpochTimeConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -43,5 +43,16 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
 
             Assert.IsTrue(submissions.Any());
         }
+
+        [TestMethod]
+        public async Task GetGalleryProfileAsync_AnyTrophies_IsTrue()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey);
+            var endpoint = new AccountEndpoint(client);
+
+            var profile = await endpoint.GetGalleryProfileAsync("sarah");
+
+            Assert.IsTrue(profile.Trophies.Any());
+        }
     }
 }

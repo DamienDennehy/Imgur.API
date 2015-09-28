@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Imgur.API.JsonAttributes;
+using Imgur.API.JsonConverters;
 using Newtonsoft.Json;
 
 namespace Imgur.API.Models.Impl
@@ -28,7 +28,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Utc timestamp of when the image was inserted into the gallery, converted from epoch time.
         /// </summary>
-        [JsonConverter(typeof (EpochTimeToDateTimeOffset))]
+        [JsonConverter(typeof (EpochTimeConverter))]
         public DateTimeOffset DateTime { get; set; }
 
         /// <summary>
@@ -122,6 +122,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Up to 10 top level comments, sorted by "best".
         /// </summary>
+        [JsonConverter(typeof (EnumerableConverter<Comment>))]
         public IEnumerable<IComment> CommentPreview { get; set; }
 
         /// <summary>

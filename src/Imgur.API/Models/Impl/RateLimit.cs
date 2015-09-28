@@ -1,5 +1,5 @@
 ﻿using System;
-using Imgur.API.JsonAttributes;
+using Imgur.API.JsonConverters;
 using Newtonsoft.Json;
 
 namespace Imgur.API.Models.Impl
@@ -47,7 +47,7 @@ namespace Imgur.API.Models.Impl
         ///     Utc timestamp for when the credits will be reset, converted from epoch time.
         ///     Not populated when using Mashape Authentication.
         /// </summary>
-        [JsonConverter(typeof (EpochTimeToDateTimeOffset))]
+        [JsonConverter(typeof (EpochTimeConverter))]
         public virtual DateTimeOffset? UserReset { get; set; }
     }
 }

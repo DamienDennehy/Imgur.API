@@ -55,7 +55,8 @@
     <Compile Include="Exceptions\MashapeException.cs" />
     <Compile Include="Exceptions\ImgurException.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
-    <Compile Include="JsonAttributes\EpochTimeToDateTimeOffset.cs" />
+    <Compile Include="JsonConverters\EnumerableConverter.cs" />
+    <Compile Include="JsonConverters\EpochTimeConverter.cs" />
     <Compile Include="Models\AlbumPrivacy.cs" />
     <Compile Include="Models\IAccount.cs" />
     <Compile Include="Models\IAccountSettings.cs" />
@@ -76,12 +77,17 @@
     <Compile Include="Models\IMemeMetaData.cs" />
     <Compile Include="Models\IMessage.cs" />
     <Compile Include="Models\Impl\Account.cs" />
+    <Compile Include="Models\Impl\AccountSettings.cs" />
     <Compile Include="Models\Impl\Basic.cs" />
     <Compile Include="Models\Impl\GalleryItem.cs" />
     <Compile Include="Models\Impl\GalleryAlbum.cs" />
     <Compile Include="Models\Impl\GalleryImage.cs" />
+    <Compile Include="Models\Impl\BlockedUser.cs" />
+    <Compile Include="Models\Impl\Comment.cs" />
+    <Compile Include="Models\Impl\GalleryProfile.cs" />
     <Compile Include="Models\Impl\Image.cs" />
     <Compile Include="Models\Impl\ImgurError.cs" />
+    <Compile Include="Models\Impl\Trophy.cs" />
     <Compile Include="Models\Impl\RateLimit.cs" />
     <Compile Include="Models\Impl\MashapeError.cs" />
     <Compile Include="Models\Impl\OAuth2Token.cs" />

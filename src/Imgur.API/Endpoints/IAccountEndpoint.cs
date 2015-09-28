@@ -40,5 +40,40 @@ namespace Imgur.API.Endpoints
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
         /// <returns></returns>
         Task<IEnumerable<IGalleryItem>> GetAccountSubmissionsAsync(string username = "me", int? page = null);
+
+        /// <summary>
+        ///     Returns the account settings, only accessible if you're logged in as the user.
+        /// </summary>
+        /// <returns></returns>
+        Task<IAccountSettings> GetAccountSettingsAsync();
+
+        /// <summary>
+        ///     Updates the account settings for a given user, the user must be logged in.
+        /// </summary>
+        /// <param name="bio">The biography of the user, is displayed in the gallery profile page.</param>
+        /// <param name="publicImages">Set the users images to private or public by default.</param>
+        /// <param name="messagingEnabled">Allows the user to enable / disable private messages.</param>
+        /// <param name="albumPrivacy">Sets the default privacy level of albums the users creates.</param>
+        /// <param name="acceptedGalleryTerms"> The user agreement to the Imgur Gallery terms.</param>
+        /// <param name="username">A valid Imgur username (between 4 and 63 alphanumeric characters).</param>
+        /// <param name="showMature">Toggle display of mature images in gallery list endpoints.</param>
+        /// <param name="newsletterSubscribed">Toggle subscription to email newsletter.</param>
+        /// <returns></returns>
+        Task<bool> UpdateAccountSettingsAsync(
+            string bio = null,
+            bool? publicImages = null,
+            bool? messagingEnabled = null,
+            AlbumPrivacy? albumPrivacy = null,
+            bool? acceptedGalleryTerms = null,
+            string username = null,
+            bool? showMature = null,
+            bool? newsletterSubscribed = null);
+
+        /// <summary>
+        ///     The totals for a users gallery information.
+        /// </summary>
+        /// <param name="username">The user account. Default: me</param>
+        /// <returns></returns>
+        Task<IGalleryProfile> GetGalleryProfileAsync(string username = "me");
     }
 }

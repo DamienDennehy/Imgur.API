@@ -1,30 +1,36 @@
 ﻿using System.Collections.Generic;
+using Imgur.API.JsonConverters;
+using Newtonsoft.Json;
 
-namespace Imgur.API.Models
+namespace Imgur.API.Models.Impl
 {
     /// <summary>
     ///     The totals for a users gallery information.
     /// </summary>
-    public interface IGalleryProfile
+    public class GalleryProfile : IGalleryProfile
     {
         /// <summary>
         ///     Total number of comments the user has made in the gallery.
         /// </summary>
-        int TotalGalleryComments { get; set; }
+        [JsonProperty("total_gallery_comments")]
+        public int TotalGalleryComments { get; set; }
 
         /// <summary>
         ///     Total number of items favorited by the user in the gallery.
         /// </summary>
-        int TotalGalleryFavorites { get; set; }
+        [JsonProperty("total_gallery_favorites")]
+        public int TotalGalleryFavorites { get; set; }
 
         /// <summary>
         ///     Total number of images submitted by the user.
         /// </summary>
-        int TotalGallerySubmissions { get; set; }
+        [JsonProperty("total_gallery_submissions")]
+        public int TotalGallerySubmissions { get; set; }
 
         /// <summary>
         ///     An array of trophies that the user has.
         /// </summary>
-        IEnumerable<ITrophy> Trophies { get; set; }
+        [JsonConverter(typeof (EnumerableConverter<Trophy>))]
+        public IEnumerable<ITrophy> Trophies { get; set; }
     }
 }

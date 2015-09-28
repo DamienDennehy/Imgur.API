@@ -1,12 +1,12 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Imgur.API.JsonAttributes
+namespace Imgur.API.JsonConverters
 {
     /// <summary>
     ///     Converts Epoch (Unix) timestamps to DateTimeOffsets.
     /// </summary>
-    public class EpochTimeToDateTimeOffset : JsonConverter
+    public class EpochTimeConverter : JsonConverter
     {
         /// <summary>
         ///     Determines whether this instance can convert the specified object type.
@@ -33,9 +33,9 @@ namespace Imgur.API.JsonAttributes
             if (reader.TokenType != JsonToken.Integer)
                 throw new InvalidCastException("TokenType must be of type Integer.");
 
-            var t = (long) reader.Value;
+            var time = (long) reader.Value;
 
-            var date = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(t);
+            var date = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(time);
             return new DateTimeOffset(date);
         }
 

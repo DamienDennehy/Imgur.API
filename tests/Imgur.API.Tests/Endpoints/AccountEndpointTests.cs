@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints;
 using Imgur.API.Endpoints.Impl;
+using Imgur.API.Exceptions;
 using Imgur.API.Helpers;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
@@ -244,7 +245,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
             var updated = endpoint.ProcessEndpointResponse<bool>(
-                    AccountEndpointResponses.Imgur.UpdateAccountSettingsResponse);
+                    GenericEndpointResponses.Imgur.SuccessfulResponse);
 
             Assert.IsTrue(updated);
         }
@@ -303,6 +304,54 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual("Conversation Starter", trophy.Name);
             Assert.AreEqual("ReplyThread", trophy.NameClean);
             Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1380321520), trophy.DateTime);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task VerifyEmailAsync_OAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.VerifyEmailAsync();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ImgurException))]
+        public void VerifyEmailAsync_UnauthorizedAccess_ThrowsImgurException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            var verified = endpoint.ProcessEndpointResponse<bool>(AccountEndpointResponses.Imgur.VerifyEmailErrorResponse);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task SendVerificationEmailAsync_OAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.SendVerificationEmailAsync();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ImgurException))]
+        public void SendVerificationEmailAsync_WithErrorResponse_AreEqual()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+
+            var sent = endpoint.ProcessEndpointResponse<bool>(AccountEndpointResponses.Imgur.SendEmailErrorResponse);
+        }
+
+        [TestMethod]
+        public void SendVerificationEmailAsync_WithValidResponse_AreEqual()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+
+            var sent = endpoint.ProcessEndpointResponse<bool>(GenericEndpointResponses.Imgur.SuccessfulResponse);
+
+            Assert.IsTrue(sent);
         }
     }
 }

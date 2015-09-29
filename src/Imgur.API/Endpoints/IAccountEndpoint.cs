@@ -75,5 +75,18 @@ namespace Imgur.API.Endpoints
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
         Task<IGalleryProfile> GetGalleryProfileAsync(string username = "me");
+
+        /// <summary>
+        /// Checks to see if user has verified their email address.
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> VerifyEmailAsync();
+
+        /// <summary>
+        /// Sends an email to the user to verify that their email is valid to upload to gallery. 
+        /// Must be logged in as the user to send.
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> SendVerificationEmailAsync();
     }
 }

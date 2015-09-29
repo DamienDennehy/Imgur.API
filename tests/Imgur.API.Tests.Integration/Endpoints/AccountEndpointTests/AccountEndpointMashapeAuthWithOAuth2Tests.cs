@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
+using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -67,5 +68,27 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
 
             Assert.IsFalse(profile.Trophies.Any());
         }
+
+        [TestMethod]
+        public async Task VerifyEmailAsync_IsTrue()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var verified = await endpoint.VerifyEmailAsync();
+
+            Assert.IsTrue(verified);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ImgurException))]
+        public async Task SendVerificationEmailAsync_IsTrue()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var sent = await endpoint.SendVerificationEmailAsync();
+        }
+
     }
 }

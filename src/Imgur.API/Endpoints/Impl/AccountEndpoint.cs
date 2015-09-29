@@ -22,6 +22,7 @@ namespace Imgur.API.Endpoints.Impl
         private const string GetAccountSubmissionsUrl = "account/{0}/submissions/{1}";
         private const string GetGalleryProfileUrl = "account/{0}/gallery_profile";
         private const string AccountSettingsUrl = "account/{0}/settings";
+        private const string VerifyEmailUrl = "account/{0}/verifyemail";
 
         /// <summary>
         ///     Initializes a new instance of the ImageEndpoint class.
@@ -53,7 +54,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAccountUrl);
             endpointUrl = string.Format(endpointUrl, username);
-            var account = await MakeEndpointRequestAsync<Account>(HttpMethod.Get, endpointUrl, null);
+            var account = await MakeEndpointRequestAsync<Account>(HttpMethod.Get, endpointUrl);
             return account;
         }
 
@@ -82,7 +83,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAccountGalleryFavoritesUrl);
             endpointUrl = string.Format(endpointUrl, username, page, sortOrder);
-            var favorites = await MakeEndpointRequestAsync<IEnumerable<object>>(HttpMethod.Get, endpointUrl, null);
+            var favorites = await MakeEndpointRequestAsync<IEnumerable<object>>(HttpMethod.Get, endpointUrl);
             var imageHelper = new ImageHelper();
             return imageHelper.ConvertToGalleryItems(favorites);
         }
@@ -103,7 +104,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAccountFavoritesUrl);
             endpointUrl = string.Format(endpointUrl, "me");
-            var favorites = await MakeEndpointRequestAsync<IEnumerable<object>>(HttpMethod.Get, endpointUrl, null);
+            var favorites = await MakeEndpointRequestAsync<IEnumerable<object>>(HttpMethod.Get, endpointUrl);
             var imageHelper = new ImageHelper();
             return imageHelper.ConvertToGalleryItems(favorites);
         }
@@ -130,7 +131,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAccountSubmissionsUrl);
             endpointUrl = string.Format(endpointUrl, username, page);
-            var submissions = await MakeEndpointRequestAsync<IEnumerable<object>>(HttpMethod.Get, endpointUrl, null);
+            var submissions = await MakeEndpointRequestAsync<IEnumerable<object>>(HttpMethod.Get, endpointUrl);
             var imageHelper = new ImageHelper();
             return imageHelper.ConvertToGalleryItems(submissions);
         }
@@ -151,7 +152,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), AccountSettingsUrl);
             endpointUrl = string.Format(endpointUrl, "me");
-            var settings = await MakeEndpointRequestAsync<AccountSettings>(HttpMethod.Get, endpointUrl, null);
+            var settings = await MakeEndpointRequestAsync<AccountSettings>(HttpMethod.Get, endpointUrl);
             return settings;
         }
 
@@ -240,8 +241,49 @@ namespace Imgur.API.Endpoints.Impl
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetGalleryProfileUrl);
             endpointUrl = string.Format(endpointUrl, username);
-            var galleryProfile = await MakeEndpointRequestAsync<GalleryProfile>(HttpMethod.Get, endpointUrl, null);
+            var galleryProfile = await MakeEndpointRequestAsync<GalleryProfile>(HttpMethod.Get, endpointUrl);
             return galleryProfile;
+        }
+
+        /// <summary>
+        /// Checks to see if user has verified their email address.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <returns></returns>
+        public async Task<bool> VerifyEmailAsync()
+        {
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), VerifyEmailUrl);
+            endpointUrl = string.Format(endpointUrl, "me");
+
+            return await MakeEndpointRequestAsync<bool>(HttpMethod.Get, endpointUrl);
+        }
+
+        /// <summary>
+        /// Sends an email to the user to verify that their email is valid to upload to gallery. 
+        /// Must be logged in as the user to send.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <returns></returns>
+        public async Task<bool> SendVerificationEmailAsync()
+        {
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), VerifyEmailUrl);
+            endpointUrl = string.Format(endpointUrl, "me");
+
+            return await MakeEndpointRequestAsync<bool>(HttpMethod.Post, endpointUrl);
         }
     }
 }

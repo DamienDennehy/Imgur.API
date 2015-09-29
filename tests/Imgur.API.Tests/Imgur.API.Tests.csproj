@@ -66,6 +66,7 @@
     <Compile Include="Authentication\MashapeClientTests.cs" />
     <Compile Include="Authentication\OAuth2TokenTests.cs" />
     <Compile Include="EndpointResponses\AccountEndpointResponses.cs" />
+    <Compile Include="EndpointResponses\GenericEndpointResponses.cs" />
     <Compile Include="EndpointResponses\ImageEndpointResponses.cs" />
     <Compile Include="Endpoints\AccountEndpointTests.cs" />
     <Compile Include="Endpoints\ImageEndpointTests.cs" />

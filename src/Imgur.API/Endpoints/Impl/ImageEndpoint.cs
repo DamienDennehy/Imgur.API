@@ -47,7 +47,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetImageUrl);
             endpointUrl = string.Format(endpointUrl, id);
-            var image = await MakeEndpointRequestAsync<Image>(HttpMethod.Get, endpointUrl, null);
+            var image = await MakeEndpointRequestAsync<Image>(HttpMethod.Get, endpointUrl);
             return image;
         }
 
@@ -160,7 +160,7 @@ namespace Imgur.API.Endpoints.Impl
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), DeleteImageUrl);
             endpointUrl = string.Format(endpointUrl, id);
 
-            return await MakeEndpointRequestAsync<bool>(HttpMethod.Delete, endpointUrl, null);
+            return await MakeEndpointRequestAsync<bool>(HttpMethod.Delete, endpointUrl);
         }
 
         /// <summary>
@@ -220,11 +220,11 @@ namespace Imgur.API.Endpoints.Impl
             //varies on if Imgur or Mashape Authentication is used
             if (ApiClient is IImgurClient)
             {
-                var imgurResult = await MakeEndpointRequestAsync<string>(HttpMethod.Post, endpointUrl, null);
+                var imgurResult = await MakeEndpointRequestAsync<string>(HttpMethod.Post, endpointUrl);
                 return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
             }
 
-            var mashapeResult = await MakeEndpointRequestAsync<ImgurError>(HttpMethod.Post, endpointUrl, null);
+            var mashapeResult = await MakeEndpointRequestAsync<ImgurError>(HttpMethod.Post, endpointUrl);
             return mashapeResult.Error.Equals("f", StringComparison.OrdinalIgnoreCase);
         }
     }

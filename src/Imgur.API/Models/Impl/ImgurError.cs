@@ -5,7 +5,7 @@ namespace Imgur.API.Models.Impl
     /// <summary>
     ///     Represents errors returned after a Imgur Endpoint request.
     /// </summary>
-    public class ImgurError : IImgurError
+    internal class ImgurError : IImgurError
     {
         /// <summary>
         ///     A description of the error.

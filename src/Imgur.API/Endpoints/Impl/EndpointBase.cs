@@ -84,7 +84,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         internal async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl,
-            HttpContent content)
+            HttpContent content = null)
         {
             if (httpMethod == null)
                 throw new ArgumentNullException(nameof(httpMethod));

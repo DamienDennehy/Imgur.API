@@ -90,5 +90,15 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
             var sent = await endpoint.SendVerificationEmailAsync();
         }
 
+        [TestMethod]
+        public async void GetAlbumsAsync_WithValidReponse_IsTrue()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var albums = await endpoint.GetAlbumsAsync();
+
+            Assert.IsTrue(albums.Count() > 1);
+        }
     }
 }

@@ -353,5 +353,51 @@ namespace Imgur.API.Tests.Endpoints
 
             Assert.IsTrue(sent);
         }
+
+        [TestMethod]
+        public void GetAlbumsAsync_WithUsername_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetAlbumsAsync("Bob", 7);
+            endpoint.Received().GetAlbumsAsync("Bob", 7);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetAlbumsAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetAlbumsAsync();
+        }
+
+        [TestMethod]
+        public void GetAlbumsAsync_WithDefaultUsername_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetAlbumsAsync();
+            endpoint.Received().GetAlbumsAsync();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetAlbumsAsync_WithNullUsername_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetAlbumsAsync(null);
+        }
+
+        [TestMethod]
+        public void GetAlbumsAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var albums =
+                endpoint.ProcessEndpointResponse<IEnumerable<Album>>(
+                    AccountEndpointResponses.Imgur.GetAlbumsResponse);
+            
+            Assert.AreEqual(50, albums.Count());
+        }
     }
 }

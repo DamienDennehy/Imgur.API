@@ -55,7 +55,7 @@ namespace Imgur.API.Models.Impl
         /// </summary>
         [JsonProperty("blocked_users")]
         [JsonConverter(typeof (EnumerableConverter<BlockedUser>))]
-        public IEnumerable<IBlockedUser> BlockedUsers { get; set; }
+        public IEnumerable<IBlockedUser> BlockedUsers { get; set; } = new List<IBlockedUser>();
 
         /// <summary>
         ///     True if the user has opted to have mature images displayed in gallery list endpoints.

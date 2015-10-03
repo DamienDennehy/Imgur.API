@@ -77,16 +77,25 @@ namespace Imgur.API.Endpoints
         Task<IGalleryProfile> GetGalleryProfileAsync(string username = "me");
 
         /// <summary>
-        /// Checks to see if user has verified their email address.
+        ///     Checks to see if user has verified their email address.
         /// </summary>
         /// <returns></returns>
         Task<bool> VerifyEmailAsync();
 
         /// <summary>
-        /// Sends an email to the user to verify that their email is valid to upload to gallery. 
-        /// Must be logged in as the user to send.
+        ///     Sends an email to the user to verify that their email is valid to upload to gallery.
+        ///     Must be logged in as the user to send.
         /// </summary>
         /// <returns></returns>
         Task<bool> SendVerificationEmailAsync();
+
+        /// <summary>
+        ///     Get all the albums associated with the account.
+        ///     Must be logged in as the user to see secret and hidden albums.
+        /// </summary>
+        /// <param name="username">The user account. Default: me</param>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <returns></returns>
+        Task<IEnumerable<IAlbum>> GetAlbumsAsync(string username = "me", int? page = null);
     }
 }

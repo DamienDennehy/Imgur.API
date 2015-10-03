@@ -81,6 +81,6 @@ namespace Imgur.API.Models
         /// <summary>
         ///     All of the replies for this comment. If there are no replies to the comment then this is an empty set.
         /// </summary>
-        IEnumerable<IComment>[] Children { get; set; }
+        IEnumerable<IComment> Children { get; set; }
     }
 }

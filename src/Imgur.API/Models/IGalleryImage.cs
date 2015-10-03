@@ -113,7 +113,7 @@ namespace Imgur.API.Models
         /// <summary>
         ///     Number of comments on the gallery image.
         /// </summary>
-        int CommentCount { get; set; }
+        int? CommentCount { get; set; }
 
         /// <summary>
         ///     Up to 10 top level comments, sorted by "best".
@@ -149,12 +149,12 @@ namespace Imgur.API.Models
         /// <summary>
         ///     Upvotes for the image.
         /// </summary>
-        int Ups { get; set; }
+        int? Ups { get; set; }
 
         /// <summary>
         ///     Number of downvotes for the image.
         /// </summary>
-        int Downs { get; set; }
+        int? Downs { get; set; }
 
         /// <summary>
         ///     Imgur popularity score.

@@ -117,13 +117,15 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Number of comments on the gallery image.
         /// </summary>
-        public int CommentCount { get; set; }
+        [JsonProperty("comment_count")]
+        public int? CommentCount { get; set; }
 
         /// <summary>
         ///     Up to 10 top level comments, sorted by "best".
         /// </summary>
+        [JsonProperty("comment_preview")]
         [JsonConverter(typeof (EnumerableConverter<Comment>))]
-        public IEnumerable<IComment> CommentPreview { get; set; }
+        public IEnumerable<IComment> CommentPreview { get; set; } = new List<IComment>();
 
         /// <summary>
         ///     Topic of the gallery image.
@@ -133,7 +135,8 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Topic ID of the gallery image.
         /// </summary>
-        public int TopicId { get; set; }
+        [JsonProperty("topic_id")]
+        public int? TopicId { get; set; }
 
         /// <summary>
         ///     If the image has been categorized then this will contain the section the image belongs in. (funny, cats,
@@ -144,22 +147,24 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     The username of the account that uploaded it, or null.
         /// </summary>
+        [JsonProperty("account_url")]
         public string AccountUrl { get; set; }
 
         /// <summary>
         ///     The account ID for the uploader, or null.
         /// </summary>
+        [JsonProperty("account_id")]
         public string AccountId { get; set; }
 
         /// <summary>
         ///     Upvotes for the image.
         /// </summary>
-        public int Ups { get; set; }
+        public int? Ups { get; set; }
 
         /// <summary>
         ///     Number of downvotes for the image.
         /// </summary>
-        public int Downs { get; set; }
+        public int? Downs { get; set; }
 
         /// <summary>
         ///     Imgur popularity score.

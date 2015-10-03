@@ -23,6 +23,7 @@ namespace Imgur.API.Endpoints.Impl
         private const string GetGalleryProfileUrl = "account/{0}/gallery_profile";
         private const string AccountSettingsUrl = "account/{0}/settings";
         private const string VerifyEmailUrl = "account/{0}/verifyemail";
+        private const string GetAlbumsUrl = "ccount/{0}/albums/{1}";
 
         /// <summary>
         ///     Initializes a new instance of the ImageEndpoint class.
@@ -246,7 +247,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        /// Checks to see if user has verified their email address.
+        ///     Checks to see if user has verified their email address.
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
@@ -266,8 +267,8 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        /// Sends an email to the user to verify that their email is valid to upload to gallery. 
-        /// Must be logged in as the user to send.
+        ///     Sends an email to the user to verify that their email is valid to upload to gallery.
+        ///     Must be logged in as the user to send.
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
@@ -284,6 +285,33 @@ namespace Imgur.API.Endpoints.Impl
             endpointUrl = string.Format(endpointUrl, "me");
 
             return await MakeEndpointRequestAsync<bool>(HttpMethod.Post, endpointUrl);
+        }
+
+        /// <summary>
+        ///     Get all the albums associated with the account.
+        ///     Must be logged in as the user to see secret and hidden albums.
+        /// </summary>
+        /// <param name="username">The user account. Default: me</param>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <returns></returns>
+        public async Task<IEnumerable<IAlbum>> GetAlbumsAsync(string username = "me", int? page = null)
+        {
+            if (string.IsNullOrEmpty((username)))
+                throw new ArgumentNullException(nameof(username));
+
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAlbumsUrl);
+            endpointUrl = string.Format(endpointUrl, username, page);
+
+            return await MakeEndpointRequestAsync<IEnumerable<IAlbum>>(HttpMethod.Get, endpointUrl);
         }
     }
 }

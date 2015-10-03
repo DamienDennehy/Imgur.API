@@ -54,5 +54,16 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
 
             Assert.IsTrue(profile.Trophies.Any());
         }
+
+        [TestMethod]
+        public async void GetAlbumsAsync_WithValidReponse_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret);
+            var endpoint = new AccountEndpoint(client);
+
+            var albums = await endpoint.GetAlbumsAsync("sarah");
+
+            Assert.AreEqual(50, albums.Count());
+        }
     }
 }

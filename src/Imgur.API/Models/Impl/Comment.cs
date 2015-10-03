@@ -18,11 +18,13 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     The Id of the image that the comment is for.
         /// </summary>
+        [JsonProperty("image_id")]
         public string ImageId { get; set; }
 
         /// <summary>
         ///     The comment itself.
         /// </summary>
+        [JsonProperty("comment")]
         public string CommentText { get; set; }
 
         /// <summary>
@@ -33,16 +35,19 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     The account ID for the author.
         /// </summary>
+        [JsonProperty("author_id")]
         public int AuthorId { get; set; }
 
         /// <summary>
         ///     If this comment was done to an album.
         /// </summary>
+        [JsonProperty("on_album")]
         public bool OnAlbum { get; set; }
 
         /// <summary>
         ///     The ID of the album cover image, this is what should be displayed for album comments.
         /// </summary>
+        [JsonProperty("album_cover")]
         public string AlbumCover { get; set; }
 
         /// <summary>
@@ -68,6 +73,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     If this is a reply, this will be the value of the CommentId for the caption this a reply for.
         /// </summary>
+        [JsonProperty("parent_id")]
         public int? ParentId { get; set; }
 
         /// <summary>
@@ -84,6 +90,6 @@ namespace Imgur.API.Models.Impl
         ///     All of the replies for this comment. If there are no replies to the comment then this is an empty set.
         /// </summary>
         [JsonConverter(typeof (EnumerableConverter<Comment>))]
-        public IEnumerable<IComment>[] Children { get; set; }
+        public IEnumerable<IComment> Children { get; set; } = new List<IComment>();
     }
 }

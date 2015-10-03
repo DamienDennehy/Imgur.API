@@ -39,21 +39,25 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     The width, in pixels, of the album cover image.
         /// </summary>
-        public int CoverWidth { get; set; }
+        [JsonProperty("cover_width")]
+        public int? CoverWidth { get; set; }
 
         /// <summary>
         ///     The height, in pixels, of the album cover image.
         /// </summary>
-        public int CoverHeight { get; set; }
+        [JsonProperty("cover_height")]
+        public int? CoverHeight { get; set; }
 
         /// <summary>
         ///     The account username or null if it's anonymous.
         /// </summary>
+        [JsonProperty("account_url")]
         public string AccountUrl { get; set; }
 
         /// <summary>
         ///     The account ID of the account that uploaded it, or null.
         /// </summary>
+        [JsonProperty("account_id")]
         public int? AccountId { get; set; }
 
         /// <summary>
@@ -79,12 +83,12 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Upvotes for the image.
         /// </summary>
-        public int Ups { get; set; }
+        public int? Ups { get; set; }
 
         /// <summary>
         ///     Number of downvotes for the image.
         /// </summary>
-        public int Downs { get; set; }
+        public int? Downs { get; set; }
 
         /// <summary>
         ///     Imgur popularity score.
@@ -109,13 +113,15 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Number of comments on the gallery album.
         /// </summary>
-        public int CommentCount { get; set; }
+        [JsonProperty("comment_count")]
+        public int? CommentCount { get; set; }
 
         /// <summary>
         ///     Up to 10 top level comments, sorted by "best".
         /// </summary>
+        [JsonProperty("comment_preview")]
         [JsonConverter(typeof (EnumerableConverter<Comment>))]
-        public IEnumerable<IComment> CommentPreview { get; set; }
+        public IEnumerable<IComment> CommentPreview { get; set; } = new List<IComment>();
 
         /// <summary>
         ///     Topic of the gallery album.
@@ -125,17 +131,19 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Topic ID of the gallery album.
         /// </summary>
-        public int TopicId { get; set; }
+        [JsonProperty("topic_id")]
+        public int? TopicId { get; set; }
 
         /// <summary>
         ///     The total number of images in the album.
         /// </summary>
+        [JsonProperty("images_count")]
         public int ImageCount { get; set; }
 
         /// <summary>
         ///     An array of all the images in the album (only available when requesting the direct album).
         /// </summary>
         [JsonConverter(typeof (EnumerableConverter<Image>))]
-        public IEnumerable<IImage> Images { get; set; }
+        public IEnumerable<IImage> Images { get; set; } = new List<IImage>();
     }
 }

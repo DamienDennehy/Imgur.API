@@ -85,6 +85,7 @@
     <Compile Include="Models\Impl\BlockedUser.cs" />
     <Compile Include="Models\Impl\Comment.cs" />
     <Compile Include="Models\Impl\GalleryProfile.cs" />
+    <Compile Include="Models\Impl\Album.cs" />
     <Compile Include="Models\Impl\Image.cs" />
     <Compile Include="Models\Impl\ImgurError.cs" />
     <Compile Include="Models\Impl\Trophy.cs" />

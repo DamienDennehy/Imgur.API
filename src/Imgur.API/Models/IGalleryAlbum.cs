@@ -36,12 +36,12 @@ namespace Imgur.API.Models
         /// <summary>
         ///     The width, in pixels, of the album cover image.
         /// </summary>
-        int CoverWidth { get; set; }
+        int? CoverWidth { get; set; }
 
         /// <summary>
         ///     The height, in pixels, of the album cover image.
         /// </summary>
-        int CoverHeight { get; set; }
+        int? CoverHeight { get; set; }
 
         /// <summary>
         ///     The account username or null if it's anonymous.
@@ -76,12 +76,12 @@ namespace Imgur.API.Models
         /// <summary>
         ///     Upvotes for the image.
         /// </summary>
-        int Ups { get; set; }
+        int? Ups { get; set; }
 
         /// <summary>
         ///     Number of downvotes for the image.
         /// </summary>
-        int Downs { get; set; }
+        int? Downs { get; set; }
 
         /// <summary>
         ///     Imgur popularity score.
@@ -106,7 +106,7 @@ namespace Imgur.API.Models
         /// <summary>
         ///     Number of comments on the gallery album.
         /// </summary>
-        int CommentCount { get; set; }
+        int? CommentCount { get; set; }
 
         /// <summary>
         ///     Up to 10 top level comments, sorted by "best".
@@ -121,7 +121,7 @@ namespace Imgur.API.Models
         /// <summary>
         ///     Topic ID of the gallery album.
         /// </summary>
-        int TopicId { get; set; }
+        int? TopicId { get; set; }
 
         /// <summary>
         ///     The total number of images in the album.

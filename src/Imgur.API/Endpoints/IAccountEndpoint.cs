@@ -22,10 +22,10 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
-        /// <param name="sortOrder">Indicates the order that a list of items are sorted. Default: Newest.</param>
+        /// <param name="gallerySortOrder">Indicates the order that a list of items are sorted. Default: Newest.</param>
         /// <returns></returns>
         Task<IEnumerable<IGalleryItem>> GetAccountGalleryFavoritesAsync(string username = "me", int? page = null,
-            SortOrder? sortOrder = SortOrder.Newest);
+            GallerySortOrder? gallerySortOrder = GallerySortOrder.Newest);
 
         /// <summary>
         ///     Returns the users favorited images, only accessible if you're logged in as the user.
@@ -97,5 +97,46 @@ namespace Imgur.API.Endpoints
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <returns></returns>
         Task<IEnumerable<IAlbum>> GetAlbumsAsync(string username = "me", int? page = null);
+
+        /// <summary>
+        ///     Get additional information about an album, this works the same as the Album Endpoint.
+        /// </summary>
+        /// <param name="id">The album's id.</param>
+        /// <param name="username">The user account. Default: me</param>
+        /// <returns></returns>
+        Task<IAlbum> GetAlbumAsync(string id, string username = "me");
+
+        /// <summary>
+        ///     Return an array of all of the album IDs.
+        /// </summary>
+        /// <param name="username">The user account. Default: me</param>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <returns></returns>
+        Task<IEnumerable<string>> GetAlbumIdsAsync(string username = "me", int? page = null);
+
+        /// <summary>
+        ///     Return the total number of albums associated with the account.
+        /// </summary>
+        /// <param name="username">The user account. Default: me</param>
+        /// <returns></returns>
+        Task<int> GetAlbumCountAsync(string username = "me");
+
+        /// <summary>
+        /// Delete an Album with a given id.
+        /// </summary>
+        /// <param name="id">The album id.</param>
+        /// <param name="username">The user account. Default: me</param>
+        /// <returns></returns>
+        Task<bool> DeleteAlbumAsync(string id, string username = "me");
+
+
+        /// <summary>
+        /// Return the comments the user has created.
+        /// </summary>
+        /// <param name="username">The user account. Default: me</param>
+        /// <param name="commentSortOrder">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <returns></returns>
+        Task<IEnumerable<IComment>> GetCommentsAsync(string username = "me", CommentSortOrder commentSortOrder = CommentSortOrder.Newest, int? page = null);
     }
 }

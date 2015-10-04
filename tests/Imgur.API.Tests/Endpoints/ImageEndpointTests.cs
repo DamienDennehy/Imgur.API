@@ -83,6 +83,17 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
+        public void DeleteImageAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var deleted =
+                endpoint.ProcessEndpointResponse<bool>(
+                    ImageEndpointResponses.Imgur.DeleteAlbumResponse);
+
+            Assert.AreEqual(true, deleted);
+        }
+
+        [TestMethod]
         public void UpdateImageAsync_WithId_ReceivedIsTrue()
         {
             var endpoint = Substitute.For<IImageEndpoint>();

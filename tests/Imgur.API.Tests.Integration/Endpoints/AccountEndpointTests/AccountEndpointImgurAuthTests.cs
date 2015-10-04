@@ -56,7 +56,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
         }
 
         [TestMethod]
-        public async void GetAlbumsAsync_WithValidReponse_AreEqual()
+        public async Task GetAlbumsAsync_WithValidReponse_AreEqual()
         {
             var client = new ImgurClient(ClientId, ClientSecret);
             var endpoint = new AccountEndpoint(client);
@@ -64,6 +64,52 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
             var albums = await endpoint.GetAlbumsAsync("sarah");
 
             Assert.AreEqual(50, albums.Count());
+        }
+
+        [TestMethod]
+        public async Task GetAlbumAsync_WithValidReponse_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret);
+            var endpoint = new AccountEndpoint(client);
+
+            var album = await endpoint.GetAlbumAsync("SbU9Y", "sarah");
+
+            Assert.IsNotNull(album);
+        }
+
+        [TestMethod]
+        public async Task GetAlbumIdsAsync_WithValidReponse_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret);
+            var endpoint = new AccountEndpoint(client);
+
+            var albums = await endpoint.GetAlbumIdsAsync("sarah");
+
+            Assert.AreEqual(50, albums.Count());
+        }
+
+        [TestMethod]
+        public async Task GetAlbumCountAsync_WithValidReponse_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret);
+            var endpoint = new AccountEndpoint(client);
+
+            var albums = await endpoint.GetAlbumCountAsync("sarah");
+
+            Assert.IsTrue(albums > 100);
+        }
+
+        //TODO: Add DeleteAlbumAsync With Hash
+
+        [TestMethod]
+        public async Task GetCommentsAsync_WithValidReponse_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret);
+            var endpoint = new AccountEndpoint(client);
+
+            var comments = await endpoint.GetCommentsAsync("sarah", CommentSortOrder.Best);
+
+            Assert.AreEqual(50, comments.Count());
         }
     }
 }

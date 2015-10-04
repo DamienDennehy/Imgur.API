@@ -90,14 +90,58 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
         }
 
         [TestMethod]
-        public async void GetAlbumsAsync_WithValidReponse_IsTrue()
+        public async Task GetAlbumsAsync_WithValidReponse_IsTrue()
         {
             var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new AccountEndpoint(client);
 
             var albums = await endpoint.GetAlbumsAsync();
 
-            Assert.IsTrue(albums.Count() > 1);
+            Assert.IsTrue(albums.Any());
+        }
+
+        [TestMethod]
+        public async Task GetAlbumAsync_WithValidReponse_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var album = await endpoint.GetAlbumAsync("cuta6");
+
+            Assert.IsNotNull(album);
+        }
+
+        [TestMethod]
+        public async Task GetAlbumIdsAsync_WithValidReponse_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var albums = await endpoint.GetAlbumIdsAsync();
+
+            Assert.IsTrue(albums.Any());
+        }
+
+        [TestMethod]
+        public async Task GetAlbumCountAsync_WithValidReponse_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var albums = await endpoint.GetAlbumCountAsync();
+
+            Assert.IsTrue(albums >= 1);
+        }
+
+        [TestMethod]
+        public async Task GetCommentsAsync_WithValidReponse_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var comments = await endpoint.GetCommentsAsync(commentSortOrder: CommentSortOrder.Best);
+
+            Assert.IsTrue(comments.Count() >= 2);
         }
     }
 }

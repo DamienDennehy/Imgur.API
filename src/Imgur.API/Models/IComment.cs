@@ -46,12 +46,12 @@ namespace Imgur.API.Models
         /// <summary>
         ///     Number of upvotes for the comment.
         /// </summary>
-        int Ups { get; set; }
+        int? Ups { get; set; }
 
         /// <summary>
         ///     The number of downvotes for the comment.
         /// </summary>
-        int Downs { get; set; }
+        int? Downs { get; set; }
 
         /// <summary>
         ///     The number of upvotes - downvotes.

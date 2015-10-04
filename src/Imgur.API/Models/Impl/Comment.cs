@@ -53,12 +53,12 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Number of upvotes for the comment.
         /// </summary>
-        public int Ups { get; set; }
+        public int? Ups { get; set; }
 
         /// <summary>
         ///     The number of downvotes for the comment.
         /// </summary>
-        public int Downs { get; set; }
+        public int? Downs { get; set; }
 
         /// <summary>
         ///     The number of upvotes - downvotes.
@@ -68,6 +68,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Utc timestamp of creation, converted from epoch time.
         /// </summary>
+        [JsonConverter(typeof(EpochTimeConverter))]
         public DateTimeOffset DateTime { get; set; }
 
         /// <summary>

@@ -58,6 +58,7 @@
     <Compile Include="JsonConverters\EnumerableConverter.cs" />
     <Compile Include="JsonConverters\EpochTimeConverter.cs" />
     <Compile Include="Models\AlbumPrivacy.cs" />
+    <Compile Include="Models\CommentSortOrder.cs" />
     <Compile Include="Models\IAccount.cs" />
     <Compile Include="Models\IAccountSettings.cs" />
     <Compile Include="Models\IAlbum.cs" />
@@ -100,7 +101,7 @@
     <Compile Include="Models\ITopic.cs" />
     <Compile Include="Models\ITrophy.cs" />
     <Compile Include="Models\IVote.cs" />
-    <Compile Include="Models\SortOrder.cs" />
+    <Compile Include="Models\GallerySortOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

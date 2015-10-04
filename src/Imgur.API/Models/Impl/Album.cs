@@ -8,7 +8,7 @@ namespace Imgur.API.Models.Impl
     /// <summary>
     ///     The data for albums.
     /// </summary>
-    public class Album : IDataModel
+    public class Album : IAlbum
     {
         /// <summary>
         ///     The ID for the album.
@@ -28,7 +28,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Utc timestamp of when the album was inserted into the gallery, converted from epoch time.
         /// </summary>
-        [JsonConverter(typeof(EpochTimeConverter))]
+        [JsonConverter(typeof (EpochTimeConverter))]
         public DateTimeOffset DateTime { get; set; }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     An array of all the images in the album (only available when requesting the direct album).
         /// </summary>
-        [JsonConverter(typeof(EnumerableConverter<Image>))]
+        [JsonConverter(typeof (EnumerableConverter<Image>))]
         public IEnumerable<IImage> Images { get; set; } = new List<IImage>();
     }
 }

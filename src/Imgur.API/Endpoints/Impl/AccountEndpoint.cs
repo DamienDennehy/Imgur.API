@@ -26,9 +26,18 @@ namespace Imgur.API.Endpoints.Impl
         private const string GetAlbumsUrl = "account/{0}/albums/{1}";
         private const string GetAlbumUrl = "account/{0}/album/{1}";
         private const string GetAlbumIdsUrl = "account/{0}/albums/ids/{1}";
-        private const string GetAlbumsCountUrl = "account/{0}/albums/count";
+        private const string GetAlbumCountUrl = "account/{0}/albums/count";
         private const string DeleteAlbumUrl = "account/{0}/album/{1}";
         private const string GetCommentsUrl = "account/{0}/comments/{1}/{2}";
+        private const string GetCommentUrl = "account/{0}/comment/{1}";
+        private const string GetCommentIdsUrl = "account/{0}/comments/ids/{1}";
+        private const string GetCommentCountUrl = "account/{0}/comments/count";
+        private const string DeleteCommentUrl = "account/{0}/comment/{1}";
+        private const string GetImagesUrl = "account/{0}/images/{1}";
+        private const string GetImageUrl = "account/{0}/image/{1}";
+        private const string GetImageIdsUrl = "account/{0}/images/ids/{1}";
+        private const string GetImageCountUrl = "account/{0}/images/count";
+        private const string DeleteImageUrl = "account/{0}/image/{1}";
 
         /// <summary>
         ///     Initializes a new instance of the ImageEndpoint class.
@@ -51,7 +60,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IAccount> GetAccountAsync(string username = "me")
         {
-            if (string.IsNullOrEmpty((username)))
+            if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -80,7 +89,7 @@ namespace Imgur.API.Endpoints.Impl
             int? page = null,
             GallerySortOrder? gallerySortOrder = GallerySortOrder.Newest)
         {
-            if (string.IsNullOrEmpty((username)))
+            if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -128,7 +137,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IEnumerable<IGalleryItem>> GetAccountSubmissionsAsync(string username = "me", int? page = null)
         {
-            if (string.IsNullOrEmpty((username)))
+            if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -238,7 +247,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IGalleryProfile> GetGalleryProfileAsync(string username = "me")
         {
-            if (string.IsNullOrEmpty((username)))
+            if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -306,7 +315,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IEnumerable<IAlbum>> GetAlbumsAsync(string username = "me", int? page = null)
         {
-            if (string.IsNullOrEmpty((username)))
+            if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -332,10 +341,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IAlbum> GetAlbumAsync(string id, string username = "me")
         {
-            if (string.IsNullOrEmpty((id)))
+            if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id));
 
-            if (string.IsNullOrEmpty((username)))
+            if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -361,7 +370,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IEnumerable<string>> GetAlbumIdsAsync(string username = "me", int? page = null)
         {
-            if (string.IsNullOrEmpty((username)))
+            if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -386,37 +395,35 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<int> GetAlbumCountAsync(string username = "me")
         {
-            if (string.IsNullOrEmpty((username)))
+            if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAlbumsCountUrl);
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAlbumCountUrl);
             endpointUrl = string.Format(endpointUrl, username);
 
             return await MakeEndpointRequestAsync<int>(HttpMethod.Get, endpointUrl);
         }
 
         /// <summary>
-        /// Delete an Album with a given id.
+        ///     Delete an Album with a given id.
         /// </summary>
         /// <param name="id">The album id.</param>
-        /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<bool> DeleteAlbumAsync(string id, string username = "me")
+        public async Task<bool> DeleteAlbumAsync(string id)
         {
-            if (string.IsNullOrEmpty((id)))
+            if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id));
 
-            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-                && ApiClient.OAuth2Token == null)
+            if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), DeleteAlbumUrl);
@@ -426,7 +433,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        /// Return the comments the user has created.
+        ///     Return the comments the user has created.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="commentSortOrder">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
@@ -440,7 +447,7 @@ namespace Imgur.API.Endpoints.Impl
         public async Task<IEnumerable<IComment>> GetCommentsAsync(string username = "me",
             CommentSortOrder commentSortOrder = CommentSortOrder.Newest, int? page = null)
         {
-            if (string.IsNullOrEmpty((username)))
+            if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -453,5 +460,221 @@ namespace Imgur.API.Endpoints.Impl
             return await MakeEndpointRequestAsync<IEnumerable<Comment>>(HttpMethod.Get, endpointUrl);
         }
 
+        /// <summary>
+        ///     Return information about a specific comment.
+        /// </summary>
+        /// <param name="id">The comment id.</param>
+        /// <param name="username">The user account. Default: me</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <returns></returns>
+        public async Task<IComment> GetCommentAsync(string id, string username = "me")
+        {
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
+
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetCommentUrl);
+            endpointUrl = string.Format(endpointUrl, username, id);
+            var comment = await MakeEndpointRequestAsync<Comment>(HttpMethod.Get, endpointUrl);
+            return comment;
+        }
+
+        /// <summary>
+        ///     Return an array of all of the comment IDs.
+        /// </summary>
+        /// <param name="username">The user account. Default: me</param>
+        /// <param name="commentSortOrder">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <returns></returns>
+        public async Task<IEnumerable<string>> GetCommentIdsAsync(string username = "me",
+            CommentSortOrder commentSortOrder = CommentSortOrder.Newest, int? page = null)
+        {
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
+
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetCommentIdsUrl);
+            endpointUrl = string.Format(endpointUrl, username, commentSortOrder.ToString().ToLower(), page);
+
+            return await MakeEndpointRequestAsync<IEnumerable<string>>(HttpMethod.Get, endpointUrl);
+        }
+
+        /// <summary>
+        ///     Return a count of all of the comments associated with the account.
+        /// </summary>
+        /// <param name="username">The user account. Default: me</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <returns></returns>
+        public async Task<int> GetCommentCountAsync(string username = "me")
+        {
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
+
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetCommentCountUrl);
+            endpointUrl = string.Format(endpointUrl, username);
+
+            return await MakeEndpointRequestAsync<int>(HttpMethod.Get, endpointUrl);
+        }
+
+        /// <summary>
+        ///     Delete a comment. You are required to be logged in as the user whom created the comment.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <returns></returns>
+        public async Task<bool> DeleteCommentAsync(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), DeleteCommentUrl);
+            endpointUrl = string.Format(endpointUrl, "me", id);
+
+            return await MakeEndpointRequestAsync<bool>(HttpMethod.Delete, endpointUrl);
+        }
+
+        /// <summary>
+        ///     Return all of the images associated with the account.
+        ///     You can page through the images by setting the page, this defaults to 0.
+        /// </summary>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <returns></returns>
+        public async Task<IEnumerable<IImage>> GetImagesAsync(int? page = null)
+        {
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetImagesUrl);
+            endpointUrl = string.Format(endpointUrl, "me", page);
+
+            return await MakeEndpointRequestAsync<IEnumerable<Image>>(HttpMethod.Get, endpointUrl);
+        }
+
+        /// <summary>
+        ///     Return information about a specific image.
+        /// </summary>
+        /// <param name="id">The album's id.</param>
+        /// <param name="username">The user account. Default: me</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <returns></returns>
+        public async Task<IImage> GetImageAsync(string id, string username = "me")
+        {
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
+
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetImageUrl);
+            endpointUrl = string.Format(endpointUrl, username, id);
+            var image = await MakeEndpointRequestAsync<Image>(HttpMethod.Get, endpointUrl);
+            return image;
+        }
+
+        /// <summary>
+        ///     Returns an array of Image IDs that are associated with the account.
+        /// </summary>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <returns></returns>
+        public async Task<IEnumerable<string>> GetImageIdsAsync(int? page = null)
+        {
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetImageIdsUrl);
+            endpointUrl = string.Format(endpointUrl, "me", page);
+
+            return await MakeEndpointRequestAsync<IEnumerable<string>>(HttpMethod.Get, endpointUrl);
+        }
+
+        /// <summary>
+        ///     Returns the total number of images associated with the account.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <returns></returns>
+        public async Task<int> GetImageCountAsync()
+        {
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetImageCountUrl);
+            endpointUrl = string.Format(endpointUrl, "me");
+
+            return await MakeEndpointRequestAsync<int>(HttpMethod.Get, endpointUrl);
+        }
+
+        /// <summary>
+        /// Deletes an Image. This requires a delete hash rather than an ID.
+        /// </summary>
+        /// <param name="deleteHash"></param>
+        /// <returns></returns>
+        public async Task<bool> DeleteImageAsync(string deleteHash)
+        {
+            if (string.IsNullOrEmpty(deleteHash))
+                throw new ArgumentNullException(nameof(deleteHash));
+
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), DeleteImageUrl);
+            endpointUrl = string.Format(endpointUrl, "me", deleteHash);
+
+            return await MakeEndpointRequestAsync<bool>(HttpMethod.Delete, endpointUrl);
+        }
     }
 }

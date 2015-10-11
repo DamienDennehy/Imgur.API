@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints;
 using Imgur.API.Endpoints.Impl;
+using Imgur.API.Exceptions;
 using Imgur.API.Models.Impl;
 using Imgur.API.Tests.EndpointResponses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -210,18 +211,30 @@ namespace Imgur.API.Tests.Endpoints
         public void FavoriteImage_WithValidMashapeTrueResponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
-            var response = endpoint.ProcessEndpointResponse<ImgurError>(ImageEndpointResponses.Mashape.FavoriteImageResponseTrue);
 
-            Assert.AreEqual("f", response.Error);
+            try
+            {
+                endpoint.ProcessEndpointResponse<ImgurError>(ImageEndpointResponses.Mashape.FavoriteImageResponseTrue);
+            }
+            catch (ImgurException imgurException)
+            {
+                Assert.AreEqual("f", imgurException.Message);
+            }
         }
 
         [TestMethod]
         public void FavoriteImage_WithValidMashapeFalseResponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
-            var response = endpoint.ProcessEndpointResponse<ImgurError>(ImageEndpointResponses.Mashape.FavoriteImageResponseFalse);
 
-            Assert.AreEqual("u", response.Error);
+            try
+            {
+                endpoint.ProcessEndpointResponse<ImgurError>(ImageEndpointResponses.Mashape.FavoriteImageResponseFalse);
+            }
+            catch (ImgurException imgurException)
+            {
+                Assert.AreEqual("u", imgurException.Message);
+            }
         }
     }
 }

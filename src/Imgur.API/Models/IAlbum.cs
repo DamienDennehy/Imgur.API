@@ -36,12 +36,12 @@ namespace Imgur.API.Models
         /// <summary>
         ///     The width, in pixels, of the album cover image.
         /// </summary>
-        int CoverWidth { get; set; }
+        int? CoverWidth { get; set; }
 
         /// <summary>
         ///     The height, in pixels, of the album cover image.
         /// </summary>
-        int CoverHeight { get; set; }
+        int? CoverHeight { get; set; }
 
         /// <summary>
         ///     The account username or null if it's anonymous.

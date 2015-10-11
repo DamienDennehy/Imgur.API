@@ -409,6 +409,14 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
+        public void GetAlbumAsync_WithIdAndUsername_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetAlbumAsync("dfOdfL", "Bob");
+            endpoint.Received().GetAlbumAsync("dfOdfL", "Bob");
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task GetAlbumAsync_WithNullId_ThrowsArgumentNullException()
         {
@@ -416,7 +424,16 @@ namespace Imgur.API.Tests.Endpoints
             var endpoint = new AccountEndpoint(imgurAuth);
             await endpoint.GetAlbumAsync(null);
         }
-        
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetAlbumAsync_WithDefaultUsername_AndOAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetAlbumAsync("78878");
+        }
+
         [TestMethod]
         public void GetAlbumAsync_WithValidReponse_AreEqual()
         {
@@ -556,6 +573,18 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ImgurException))]
+        public void DeleteAlbumAsync_WithErrorReponse_ThrowsImgurError()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var deleted =
+                endpoint.ProcessEndpointResponse<bool>(
+                    AccountEndpointResponses.Imgur.DeleteAlbumErrorResponse);
+
+            Assert.AreEqual(true, deleted);
+        }
+
+        [TestMethod]
         public void GetCommentsAsync_WithUsername_ReceivedIsTrue()
         {
             var endpoint = Substitute.For<IAccountEndpoint>();
@@ -598,6 +627,350 @@ namespace Imgur.API.Tests.Endpoints
                     AccountEndpointResponses.Imgur.GetCommentsResponse);
 
             Assert.AreEqual(50, comments.Count());
+        }
+
+        [TestMethod]
+        public void GetCommentAsync_WithId_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetCommentAsync("dfOdfL");
+            endpoint.Received().GetCommentAsync("dfOdfL");
+        }
+
+        [TestMethod]
+        public void GetCommentAsync_WithIdAndUsername_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetCommentAsync("dfOdfL", "Bob");
+            endpoint.Received().GetCommentAsync("dfOdfL", "Bob");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetCommentAsync_WithNullId_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetCommentAsync(null);
+        }
+
+        [TestMethod]
+        public void GetCommentAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var comment =
+                endpoint.ProcessEndpointResponse<Comment>(
+                    AccountEndpointResponses.Imgur.GetCommentResponse);
+
+            Assert.IsNotNull(comment);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetCommentIdsAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetCommentIdsAsync();
+        }
+
+        [TestMethod]
+        public void GetCommentIdsAsync_WithDefaultUsername_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetCommentIdsAsync();
+            endpoint.Received().GetCommentIdsAsync();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetCommentIdsAsync_WithNullUsername_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetCommentIdsAsync(null);
+        }
+
+        [TestMethod]
+        public void GetCommentIdsAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var Comments =
+                endpoint.ProcessEndpointResponse<IEnumerable<string>>(
+                    AccountEndpointResponses.Imgur.GetCommentIdsResponse);
+
+            Assert.AreEqual(50, Comments.Count());
+        }
+
+        [TestMethod]
+        public void GetCommentCountAsync_WithUsername_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetCommentCountAsync("Bob");
+            endpoint.Received().GetCommentCountAsync("Bob");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetCommentCountAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetCommentCountAsync();
+        }
+
+        [TestMethod]
+        public void GetCommentCountAsync_WithDefaultUsername_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetCommentCountAsync();
+            endpoint.Received().GetCommentCountAsync();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetCommentCountAsync_WithNullUsername_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetCommentCountAsync(null);
+        }
+
+        [TestMethod]
+        public void GetCommentCountAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var count =
+                endpoint.ProcessEndpointResponse<int>(
+                    AccountEndpointResponses.Imgur.GetCommentCountResponse);
+
+            Assert.AreEqual(1500, count);
+        }
+
+        [TestMethod]
+        public void DeleteCommentAsync_WithId_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.DeleteCommentAsync("12345");
+            endpoint.Received().DeleteCommentAsync("12345");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task DeleteCommentAsync_WithNullId_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.DeleteCommentAsync(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task DeleteCommentAsync_WithOAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.DeleteCommentAsync("1234");
+        }
+
+        [TestMethod]
+        public void DeleteCommentAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var deleted =
+                endpoint.ProcessEndpointResponse<bool>(
+                    AccountEndpointResponses.Imgur.DeleteCommentResponse);
+
+            Assert.AreEqual(true, deleted);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ImgurException))]
+        public void DeleteCommentAsync_WithErrorReponse_ThrowsImgurError()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var deleted =
+                endpoint.ProcessEndpointResponse<bool>(
+                    AccountEndpointResponses.Imgur.DeleteCommentErrorResponse);
+
+            Assert.AreEqual(true, deleted);
+        }
+
+        [TestMethod]
+        public void GetImagesAsync_WithPage_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetImagesAsync(3);
+            endpoint.Received().GetImagesAsync(3);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetImagesAsync_OAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetImagesAsync();
+        }
+
+        [TestMethod]
+        public void GetImagesAsync_WithDefaultUsername_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetImagesAsync();
+            endpoint.Received().GetImagesAsync();
+        }
+
+        [TestMethod]
+        public void GetImagesAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var Images =
+                endpoint.ProcessEndpointResponse<IEnumerable<Image>>(
+                    AccountEndpointResponses.Imgur.GetImagesResponse);
+
+            Assert.AreEqual(2, Images.Count());
+        }
+
+        [TestMethod]
+        public void GetImageAsync_WithId_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetImageAsync("dfOdfL");
+            endpoint.Received().GetImageAsync("dfOdfL");
+        }
+
+        [TestMethod]
+        public void GetImageAsync_WithIdAndUsername_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetImageAsync("dfOdfL", "Bob");
+            endpoint.Received().GetImageAsync("dfOdfL", "Bob");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetImageAsync_WithNullId_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetImageAsync(null);
+        }
+
+        [TestMethod]
+        public void GetImageAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var Image =
+                endpoint.ProcessEndpointResponse<Image>(
+                    AccountEndpointResponses.Imgur.GetImageResponse);
+
+            Assert.IsNotNull(Image);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetImageIdsAsync_WithOAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetImageIdsAsync();
+        }
+
+        [TestMethod]
+        public void GetImageIdsAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var Images =
+                endpoint.ProcessEndpointResponse<IEnumerable<string>>(
+                    AccountEndpointResponses.Imgur.GetImageIdsResponse);
+
+            Assert.AreEqual(2, Images.Count());
+        }
+
+        [TestMethod]
+        public void GetImageCountAsync_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetImageCountAsync();
+            endpoint.Received().GetImageCountAsync();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetImageCountAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetImageCountAsync();
+        }
+
+        [TestMethod]
+        public void GetImageCountAsync_WithDefaultUsername_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetImageCountAsync();
+            endpoint.Received().GetImageCountAsync();
+        }
+
+        [TestMethod]
+        public void GetImageCountAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var count =
+                endpoint.ProcessEndpointResponse<int>(
+                    AccountEndpointResponses.Imgur.GetImageCountResponse);
+
+            Assert.AreEqual(2, count);
+        }
+
+        [TestMethod]
+        public void DeleteImageAsync_WithDeleteHash_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.DeleteImageAsync("jhjhkhjhsdfsfs");
+            endpoint.Received().DeleteImageAsync("jhjhkhjhsdfsfs");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task DeleteImageAsync_WithNullId_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.DeleteImageAsync(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task DeleteImageAsync_WithOAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.DeleteImageAsync("1234");
+        }
+
+        [TestMethod]
+        public void DeleteImageAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var deleted =
+                endpoint.ProcessEndpointResponse<bool>(
+                    AccountEndpointResponses.Imgur.DeleteImageResponse);
+
+            Assert.AreEqual(true, deleted);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ImgurException))]
+        public void DeleteImageAsync_WithErrorReponse_ThrowsImgurError()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var deleted =
+                endpoint.ProcessEndpointResponse<bool>(
+                    AccountEndpointResponses.Imgur.DeleteImageErrorResponse);
+
+            Assert.AreEqual(true, deleted);
         }
     }
 }

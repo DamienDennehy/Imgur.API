@@ -89,7 +89,7 @@ namespace Imgur.API.Endpoints.Impl
             if (httpMethod == null)
                 throw new ArgumentNullException(nameof(httpMethod));
 
-            if (string.IsNullOrEmpty((endpointUrl)))
+            if (string.IsNullOrEmpty(endpointUrl))
                 throw new ArgumentNullException(nameof(endpointUrl));
 
             using (var httpClient = GetHttpClient())
@@ -238,17 +238,17 @@ namespace Imgur.API.Endpoints.Impl
                 throw new MashapeException(maShapeError.Message);
             }
 
+            //If an error occurs, throw an exception
+            if (endpointStringResponse.Contains("{\"data\":{\"error\":"))
+            {
+                var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
+                throw new ImgurException(apiError.Data.Error);
+            }
+
             //If the type being requested is an oAuthToken
             //Deserialize it immediately and return
             if (typeof (T) == typeof (IOAuth2Token) || typeof (T) == typeof (OAuth2Token))
             {
-                //If an error occurs, throw an exception
-                if (endpointStringResponse.Contains("{\"data\":{\"error\":"))
-                {
-                    var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
-                    throw new ImgurException(apiError.Data.Error);
-                }
-
                 var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
                 return oAuth2Response;
             }

@@ -63,7 +63,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByCodeAsync(string code)
         {
-            if (string.IsNullOrEmpty((code)))
+            if (string.IsNullOrEmpty(code))
                 throw new ArgumentNullException(nameof(code));
 
             var parameters = new Dictionary<string, string>
@@ -92,7 +92,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="OverflowException"></exception>
         public async Task<IOAuth2Token> GetTokenByPinAsync(string pin)
         {
-            if (string.IsNullOrEmpty((pin)))
+            if (string.IsNullOrEmpty(pin))
                 throw new ArgumentNullException(nameof(pin));
 
             var parameters = new Dictionary<string, string>
@@ -128,7 +128,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken)
         {
-            if (string.IsNullOrEmpty((refreshToken)))
+            if (string.IsNullOrEmpty(refreshToken))
                 throw new ArgumentNullException(nameof(refreshToken));
 
             var parameters = new Dictionary<string, string>

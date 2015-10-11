@@ -133,15 +133,60 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
             Assert.IsTrue(albums >= 1);
         }
 
+        [ExpectedException(typeof(ImgurException))]
+        public async Task DeleteAlbumAsync_WithValidReponse_ThrowsImgurException()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var deleted = await endpoint.DeleteAlbumAsync("lzpoZ7a5IPrxvVe");
+
+            Assert.IsTrue(deleted);
+        }
+
         [TestMethod]
         public async Task GetCommentsAsync_WithValidReponse_AreEqual()
         {
             var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
             var endpoint = new AccountEndpoint(client);
 
-            var comments = await endpoint.GetCommentsAsync(commentSortOrder: CommentSortOrder.Best);
+            var comments = await endpoint.GetCommentsAsync();
 
             Assert.IsTrue(comments.Count() >= 2);
+        }
+
+        [TestMethod]
+        public async Task GetCommentIdsAsync_WithValidReponse_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var comments = await endpoint.GetCommentIdsAsync();
+
+            Assert.IsTrue(comments.Count() > 1);
+        }
+
+        [TestMethod]
+        public async Task GetCommentCountAsync_WithValidReponse_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var commentCount = await endpoint.GetCommentCountAsync();
+
+            Assert.IsTrue(commentCount > 1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ImgurException))]
+        public async Task DeleteCommentAsync_WithValidReponse_ThrowsImgurException()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var deleted = await endpoint.DeleteCommentAsync("487153732");
+
+            Assert.IsTrue(deleted);
         }
     }
 }

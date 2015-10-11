@@ -68,7 +68,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Utc timestamp of creation, converted from epoch time.
         /// </summary>
-        [JsonConverter(typeof(EpochTimeConverter))]
+        [JsonConverter(typeof (EpochTimeConverter))]
         public DateTimeOffset DateTime { get; set; }
 
         /// <summary>

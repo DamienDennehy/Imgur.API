@@ -40,13 +40,13 @@ namespace Imgur.API.Models.Impl
         ///     The width, in pixels, of the album cover image.
         /// </summary>
         [JsonProperty("cover_width")]
-        public int CoverWidth { get; set; }
+        public int? CoverWidth { get; set; }
 
         /// <summary>
         ///     The height, in pixels, of the album cover image.
         /// </summary>
         [JsonProperty("cover_height")]
-        public int CoverHeight { get; set; }
+        public int? CoverHeight { get; set; }
 
         /// <summary>
         ///     The account username or null if it's anonymous.

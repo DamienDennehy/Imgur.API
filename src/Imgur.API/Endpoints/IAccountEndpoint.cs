@@ -122,21 +122,88 @@ namespace Imgur.API.Endpoints
         Task<int> GetAlbumCountAsync(string username = "me");
 
         /// <summary>
-        /// Delete an Album with a given id.
+        ///     Delete an Album with a given id.
         /// </summary>
         /// <param name="id">The album id.</param>
-        /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Task<bool> DeleteAlbumAsync(string id, string username = "me");
-
+        Task<bool> DeleteAlbumAsync(string id);
 
         /// <summary>
-        /// Return the comments the user has created.
+        ///     Return the comments the user has created.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="commentSortOrder">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <returns></returns>
-        Task<IEnumerable<IComment>> GetCommentsAsync(string username = "me", CommentSortOrder commentSortOrder = CommentSortOrder.Newest, int? page = null);
+        Task<IEnumerable<IComment>> GetCommentsAsync(string username = "me",
+            CommentSortOrder commentSortOrder = CommentSortOrder.Newest, int? page = null);
+
+        /// <summary>
+        ///     Return information about a specific comment.
+        /// </summary>
+        /// <param name="id">The comment id.</param>
+        /// <param name="username">The user account. Default: me</param>
+        /// <returns></returns>
+        Task<IComment> GetCommentAsync(string id, string username = "me");
+
+        /// <summary>
+        ///     Return an array of all of the comment IDs.
+        /// </summary>
+        /// <param name="username">The user account. Default: me</param>
+        /// <param name="commentSortOrder">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <returns></returns>
+        Task<IEnumerable<string>> GetCommentIdsAsync(string username = "me",
+            CommentSortOrder commentSortOrder = CommentSortOrder.Newest, int? page = null);
+
+        /// <summary>
+        ///     Return a count of all of the comments associated with the account.
+        /// </summary>
+        /// <param name="username">The user account. Default: me</param>
+        /// <returns></returns>
+        Task<int> GetCommentCountAsync(string username = "me");
+
+        /// <summary>
+        ///     Delete a comment. You are required to be logged in as the user whom created the comment.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<bool> DeleteCommentAsync(string id);
+
+        /// <summary>
+        ///     Return all of the images associated with the account.
+        ///     You can page through the images by setting the page, this defaults to 0.
+        /// </summary>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <returns></returns>
+        Task<IEnumerable<IImage>> GetImagesAsync(int? page = null);
+
+        /// <summary>
+        ///     Return information about a specific image.
+        /// </summary>
+        /// <param name="id">The album's id.</param>
+        /// <param name="username">The user account. Default: me</param>
+        /// <returns></returns>
+        Task<IImage> GetImageAsync(string id, string username = "me");
+
+        /// <summary>
+        ///     Returns an array of Image IDs that are associated with the account.
+        /// </summary>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <returns></returns>
+        Task<IEnumerable<string>> GetImageIdsAsync(int? page = null);
+
+        /// <summary>
+        ///     Returns the total number of images associated with the account.
+        /// </summary>
+        /// <returns></returns>
+        Task<int> GetImageCountAsync();
+
+        /// <summary>
+        /// Deletes an Image. This requires a delete hash rather than an ID.
+        /// </summary>
+        /// <param name="deleteHash"></param>
+        /// <returns></returns>
+        Task<bool> DeleteImageAsync(string deleteHash);
     }
 }

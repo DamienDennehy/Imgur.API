@@ -42,7 +42,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IImage> GetImageAsync(string id)
         {
-            if (string.IsNullOrEmpty((id)))
+            if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id));
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetImageUrl);
@@ -114,7 +114,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IImage> UploadImageUrlAsync(string image, string album, string title, string description)
         {
-            if (string.IsNullOrEmpty((image)))
+            if (string.IsNullOrEmpty(image))
                 throw new ArgumentNullException(nameof(image));
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), UploadImageUrl);
@@ -154,7 +154,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> DeleteImageAsync(string id)
         {
-            if (string.IsNullOrEmpty((id)))
+            if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id));
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), DeleteImageUrl);
@@ -179,7 +179,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> UpdateImageAsync(string id, string title, string description)
         {
-            if (string.IsNullOrEmpty((id)))
+            if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id));
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), UpdateImageUrl);
@@ -210,7 +210,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> FavoriteImageAsync(string id)
         {
-            if (string.IsNullOrEmpty((id)))
+            if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id));
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), FavoriteImageUrl);
@@ -224,8 +224,18 @@ namespace Imgur.API.Endpoints.Impl
                 return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
             }
 
-            var mashapeResult = await MakeEndpointRequestAsync<ImgurError>(HttpMethod.Post, endpointUrl);
-            return mashapeResult.Error.Equals("f", StringComparison.OrdinalIgnoreCase);
+            var favorited = false;
+
+            try
+            {
+                await MakeEndpointRequestAsync<ImgurError>(HttpMethod.Post, endpointUrl);
+            }
+            catch (ImgurException imgurException)
+            {
+                favorited = imgurException.Message.Equals("f", StringComparison.OrdinalIgnoreCase);
+            }
+
+            return favorited;
         }
     }
 }

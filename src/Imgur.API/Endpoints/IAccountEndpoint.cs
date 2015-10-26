@@ -200,10 +200,17 @@ namespace Imgur.API.Endpoints
         Task<int> GetImageCountAsync();
 
         /// <summary>
-        /// Deletes an Image. This requires a delete hash rather than an ID.
+        ///     Deletes an Image. This requires a delete hash rather than an ID.
         /// </summary>
         /// <param name="deleteHash"></param>
         /// <returns></returns>
         Task<bool> DeleteImageAsync(string deleteHash);
+
+        /// <summary>
+        ///     Returns all of the notifications for the user.
+        /// </summary>
+        /// <param name="newNotifications">false for all notifications, true for only non-viewed notification. Default is true.</param>
+        /// <returns></returns>
+        Task<INotifications> GetNotificationsAsync(bool newNotifications = true);
     }
 }

@@ -188,5 +188,61 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
 
             Assert.IsTrue(deleted);
         }
+
+        [TestMethod]
+        public async Task GetImagesAsync_WithValidReponse_AreEqual()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var images = await endpoint.GetImagesAsync();
+
+            Assert.IsTrue(images.Count() >= 2);
+        }
+
+        [TestMethod]
+        public async Task GetImageIdsAsync_WithValidReponse_AreEqual()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var images = await endpoint.GetImageIdsAsync();
+
+            Assert.IsTrue(images.Count() > 1);
+        }
+
+        [TestMethod]
+        public async Task GetImageCountAsync_WithValidReponse_AreEqual()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var imageCount = await endpoint.GetImageCountAsync();
+
+            Assert.IsTrue(imageCount > 1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ImgurException))]
+        public async Task DeleteImageAsync_WithValidReponse_ThrowsImgurException()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var deleted = await endpoint.DeleteImageAsync("487153732");
+
+            Assert.IsTrue(deleted);
+        }
+
+        [TestMethod]
+        public async Task GetNotificationsAsync_WithValidReponse_AreEqual()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var endpoint = new AccountEndpoint(client);
+
+            var notifications = await endpoint.GetNotificationsAsync(false);
+
+            Assert.IsTrue(notifications.Messages.Any());
+        }
     }
 }

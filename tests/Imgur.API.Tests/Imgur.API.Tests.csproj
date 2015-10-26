@@ -69,13 +69,14 @@
     <Compile Include="EndpointResponses\GenericEndpointResponses.cs" />
     <Compile Include="EndpointResponses\ImageEndpointResponses.cs" />
     <Compile Include="Endpoints\AccountEndpointTests.cs" />
+    <Compile Include="Endpoints\EndpointTests.cs" />
     <Compile Include="Endpoints\ImageEndpointTests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />
     <Compile Include="Endpoints\RateLimitEndpointTests.cs" />
-    <Compile Include="Endpoints\EndpointTests.cs" />
-    <Compile Include="Helpers\ImageHelperTests.cs" />
     <Compile Include="JsonConverters\EnumerableConverterTests.cs" />
     <Compile Include="JsonConverters\EpochTimeConverterTests.cs" />
+    <Compile Include="JsonConverters\GalleryItemConverterTests.cs" />
+    <Compile Include="JsonConverters\NotificationConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

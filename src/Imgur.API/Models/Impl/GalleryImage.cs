@@ -8,7 +8,7 @@ namespace Imgur.API.Models.Impl
     /// <summary>
     ///     The data model formatted for gallery images.
     /// </summary>
-    public class GalleryImage : IGalleryItem
+    public class GalleryImage : GalleryItem, IGalleryImage
     {
         /// <summary>
         ///     The ID for the image.

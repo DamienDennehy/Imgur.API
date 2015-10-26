@@ -1,28 +1,33 @@
-﻿namespace Imgur.API.Models
+﻿using Imgur.API.JsonConverters;
+using Newtonsoft.Json;
+
+namespace Imgur.API.Models.Impl
 {
     /// <summary>
     ///     The base model for a notification.
     /// </summary>
-    public interface INotification : IDataModel
+    public class Notification : INotification
     {
         /// <summary>
         ///     The ID for the notification
         /// </summary>
-        int Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         ///     The Account ID for the notification
         /// </summary>
-        int AccountId { get; set; }
+        [JsonProperty("account_id")]
+        public int AccountId { get; set; }
 
         /// <summary>
         ///     Has the user viewed the notification yet?
         /// </summary>
-        bool Viewed { get; set; }
+        public bool Viewed { get; set; }
 
         /// <summary>
         ///     This can be any other model.
         /// </summary>
-        IDataModel Content { get; set; }
+        [JsonConverter(typeof (NotificationConverter))]
+        public IDataModel Content { get; set; }
     }
 }

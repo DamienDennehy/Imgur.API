@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.Contracts;
+using System.Security.Policy;
 
 namespace Imgur.API.Tests.EndpointResponses
 {
@@ -8,6 +9,12 @@ namespace Imgur.API.Tests.EndpointResponses
         {
             public const string GetAccountResponse =
                 "{\"data\":{\"id\":12456, \"url\":\"Bob\", \"bio\":null, \"reputation\":4343, \"created\":1229591601, \"pro_expiration\":false }, \"success\":true, \"status\":200 }";
+
+            public const string GetGalleryImage =
+                "{\"id\":\"l35eOVB\",\"title\":\"Someone is happy. New gadgets arrived to Ahmed from Microsoft\",\"description\":null,\"datetime\":1442694587,\"type\":\"image/jpeg\",\"animated\":false,\"width\":960,\"height\":720,\"size\":111952,\"views\":1056415,\"bandwidth\":118267772080,\"vote\":null,\"favorite\":true,\"nsfw\":null,\"section\":null,\"account_url\":\"YoSoyPablo1\",\"account_id\":null,\"comment_preview\":null,\"link\":\"http://i.imgur.com/l35eOVB.jpg\",\"comment_count\":null,\"ups\":3567,\"downs\":225,\"points\":3342,\"score\":null,\"is_album\":false}";
+
+            public const string GetGalleryAlbum =
+                "{\"id\":\"LqLmI\",\"title\":\"Game of Expectation and Reality\",\"description\":null,\"datetime\":1442681034,\"cover\":\"JsKDPBN\",\"cover_width\":500,\"cover_height\":240,\"account_url\":\"SpaceCowboy02\",\"account_id\":null,\"privacy\":null,\"layout\":null,\"views\":96803,\"link\":\"http://imgur.com/a/LqLmI\",\"ups\":4040,\"downs\":119,\"points\":3921,\"score\":null,\"is_album\":true,\"vote\":null,\"favorite\":true,\"nsfw\":null,\"section\":null,\"comment_count\":null,\"comment_preview\":null,\"topic\":null,\"topic_id\":null,\"images_count\":9}";
 
             public const string GetAccountGalleryFavoritesResponse =
                 "{\"data\":[{\"id\":\"LqLmI\",\"title\":\"Game of Expectation and Reality\",\"description\":null,\"datetime\":1442681034,\"cover\":\"JsKDPBN\",\"cover_width\":500,\"cover_height\":240,\"account_url\":\"SpaceCowboy02\",\"account_id\":null,\"privacy\":null,\"layout\":null,\"views\":96803,\"link\":\"http://imgur.com/a/LqLmI\",\"ups\":4040,\"downs\":119,\"points\":3921,\"score\":null,\"is_album\":true,\"vote\":null,\"favorite\":true,\"nsfw\":null,\"section\":null,\"comment_count\":null,\"comment_preview\":null,\"topic\":null,\"topic_id\":null,\"images_count\":9},{\"id\":\"l35eOVB\",\"title\":\"Someone is happy. New gadgets arrived to Ahmed from Microsoft\",\"description\":null,\"datetime\":1442694587,\"type\":\"image/jpeg\",\"animated\":false,\"width\":960,\"height\":720,\"size\":111952,\"views\":1056415,\"bandwidth\":118267772080,\"vote\":null,\"favorite\":true,\"nsfw\":null,\"section\":null,\"account_url\":\"YoSoyPablo1\",\"account_id\":null,\"comment_preview\":null,\"link\":\"http://i.imgur.com/l35eOVB.jpg\",\"comment_count\":null,\"ups\":3567,\"downs\":225,\"points\":3342,\"score\":null,\"is_album\":false}],\"success\":true,\"status\":200}";
@@ -86,6 +93,15 @@ namespace Imgur.API.Tests.EndpointResponses
 
             public const string DeleteImageResponse =
                 "{\"data\":true,\"success\":true,\"status\":200}";
+
+            public const string GetNotifications =
+                "{\"data\": {\"replies\": [{ \"id\": 4511, \"account_id\": 384077, \"viewed\": false, \"content\": {\"album_cover\": null,\"author\": \"jasdev\",\"author_id\": 3698510,\"children\": [],\"comment\": \"Reply test\",\"datetime\": 1406070774,\"deleted\": false,\"downs\": 0,\"id\": 3616,\"image_id\": \"VK9VqcM\",\"on_album\": false,\"parent_id\": 3615,\"points\": 1,\"ups\": 1,\"vote\": null }}],\"messages\": [{ \"id\": 4523, \"account_id\": 384077, \"viewed\": false, \"content\": {\"id\": \"620\",\"from\": \"jasdev\",\"account_id\": \"384077\",\"with_account\": \"3698510\",\"last_message\": \"wow. such message.\",\"message_num\": \"103\",\"datetime\": 1406935917 }}]},\"success\": true,\"status\": 200 }";
+
+            public const string GetMessageNotification =
+                "{\"id\":\"76767\",\"account_id\":\"89898\",\"with_account\":\"3434\",\"spam\":\"0\",\"message_num\":\"2\",\"last_message\":\"Test33\",\"from\":\"Bob\",\"datetime\":1444617103}";
+
+            public const string GetCommentNotification =
+                "{\"album_cover\": null,\"author\": \"jasdev\",\"author_id\": 3698510,\"children\": [],\"comment\": \"Reply test\",\"datetime\": 1406070774,\"deleted\": false,\"downs\": 0,\"id\": 3616,\"image_id\": \"VK9VqcM\",\"on_album\": false,\"parent_id\": 3615,\"points\": 1,\"ups\": 1,\"vote\": null }";
         }
 
         public class Mashape

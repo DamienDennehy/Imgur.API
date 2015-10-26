@@ -54,9 +54,10 @@
     <Compile Include="Endpoints\IRateLimitEndpoint.cs" />
     <Compile Include="Exceptions\MashapeException.cs" />
     <Compile Include="Exceptions\ImgurException.cs" />
-    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="JsonConverters\EnumerableConverter.cs" />
     <Compile Include="JsonConverters\EpochTimeConverter.cs" />
+    <Compile Include="JsonConverters\GalleryItemConverter.cs" />
+    <Compile Include="JsonConverters\NotificationConverter.cs" />
     <Compile Include="Models\AlbumPrivacy.cs" />
     <Compile Include="Models\CommentSortOrder.cs" />
     <Compile Include="Models\IAccount.cs" />
@@ -65,6 +66,9 @@
     <Compile Include="Models\IBasic.cs" />
     <Compile Include="Models\IBlockedUser.cs" />
     <Compile Include="Models\IComment.cs" />
+    <Compile Include="Models\Impl\Notifications.cs" />
+    <Compile Include="Models\Impl\Message.cs" />
+    <Compile Include="Models\IMessage.cs" />
     <Compile Include="Models\IConversation.cs" />
     <Compile Include="Models\ICustomGallery.cs" />
     <Compile Include="Models\IDataModel.cs" />
@@ -76,7 +80,6 @@
     <Compile Include="Models\IImgurError.cs" />
     <Compile Include="Models\IMashapeError.cs" />
     <Compile Include="Models\IMemeMetaData.cs" />
-    <Compile Include="Models\IMessage.cs" />
     <Compile Include="Models\Impl\Account.cs" />
     <Compile Include="Models\Impl\AccountSettings.cs" />
     <Compile Include="Models\Impl\Basic.cs" />
@@ -87,12 +90,15 @@
     <Compile Include="Models\Impl\Comment.cs" />
     <Compile Include="Models\Impl\GalleryProfile.cs" />
     <Compile Include="Models\Impl\Album.cs" />
+    <Compile Include="Models\Impl\Conversation.cs" />
     <Compile Include="Models\Impl\Image.cs" />
     <Compile Include="Models\Impl\ImgurError.cs" />
+    <Compile Include="Models\Impl\Notification.cs" />
     <Compile Include="Models\Impl\Trophy.cs" />
     <Compile Include="Models\Impl\RateLimit.cs" />
     <Compile Include="Models\Impl\MashapeError.cs" />
     <Compile Include="Models\Impl\OAuth2Token.cs" />
+    <Compile Include="Models\INotifications.cs" />
     <Compile Include="Models\INotification.cs" />
     <Compile Include="Models\IOAuth2Token.cs" />
     <Compile Include="Models\IRateLimit.cs" />

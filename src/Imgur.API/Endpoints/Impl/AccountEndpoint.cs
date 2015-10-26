@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
 using Imgur.API.Exceptions;
-using Imgur.API.Helpers;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 
@@ -38,6 +37,7 @@ namespace Imgur.API.Endpoints.Impl
         private const string GetImageIdsUrl = "account/{0}/images/ids/{1}";
         private const string GetImageCountUrl = "account/{0}/images/count";
         private const string DeleteImageUrl = "account/{0}/image/{1}";
+        private const string GetNotificationsUrl = "account/{0}/notifications?new={1}";
 
         /// <summary>
         ///     Initializes a new instance of the ImageEndpoint class.
@@ -98,9 +98,8 @@ namespace Imgur.API.Endpoints.Impl
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAccountGalleryFavoritesUrl);
             endpointUrl = string.Format(endpointUrl, username, page, gallerySortOrder.ToString().ToLower());
-            var favorites = await MakeEndpointRequestAsync<IEnumerable<object>>(HttpMethod.Get, endpointUrl);
-            var imageHelper = new ImageHelper();
-            return imageHelper.ConvertToGalleryItems(favorites);
+            var favorites = await MakeEndpointRequestAsync<IEnumerable<GalleryItem>>(HttpMethod.Get, endpointUrl);
+            return favorites;
         }
 
         /// <summary>
@@ -119,9 +118,8 @@ namespace Imgur.API.Endpoints.Impl
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAccountFavoritesUrl);
             endpointUrl = string.Format(endpointUrl, "me");
-            var favorites = await MakeEndpointRequestAsync<IEnumerable<object>>(HttpMethod.Get, endpointUrl);
-            var imageHelper = new ImageHelper();
-            return imageHelper.ConvertToGalleryItems(favorites);
+            var favorites = await MakeEndpointRequestAsync<IEnumerable<GalleryItem>>(HttpMethod.Get, endpointUrl);
+            return favorites;
         }
 
         /// <summary>
@@ -146,9 +144,8 @@ namespace Imgur.API.Endpoints.Impl
 
             var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAccountSubmissionsUrl);
             endpointUrl = string.Format(endpointUrl, username, page);
-            var submissions = await MakeEndpointRequestAsync<IEnumerable<object>>(HttpMethod.Get, endpointUrl);
-            var imageHelper = new ImageHelper();
-            return imageHelper.ConvertToGalleryItems(submissions);
+            var submissions = await MakeEndpointRequestAsync<IEnumerable<GalleryItem>>(HttpMethod.Get, endpointUrl);
+            return submissions;
         }
 
         /// <summary>
@@ -659,9 +656,14 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        /// Deletes an Image. This requires a delete hash rather than an ID.
+        ///     Deletes an Image. This requires a delete hash rather than an ID.
         /// </summary>
         /// <param name="deleteHash"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> DeleteImageAsync(string deleteHash)
         {
@@ -675,6 +677,27 @@ namespace Imgur.API.Endpoints.Impl
             endpointUrl = string.Format(endpointUrl, "me", deleteHash);
 
             return await MakeEndpointRequestAsync<bool>(HttpMethod.Delete, endpointUrl);
+        }
+
+        /// <summary>
+        ///     Returns all of the reply notifications for the user.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <param name="newNotifications">false for all notifications, true for only non-viewed notification. Default is true.</param>
+        /// <returns></returns>
+        public async Task<INotifications> GetNotificationsAsync(bool newNotifications = true)
+        {
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetNotificationsUrl);
+            endpointUrl = string.Format(endpointUrl, "me", newNotifications);
+
+            return await MakeEndpointRequestAsync<Notifications>(HttpMethod.Get, endpointUrl);
         }
     }
 }

@@ -3,7 +3,7 @@
     /// <summary>
     ///     Represents any gallery type.
     /// </summary>
-    public class GalleryItem : IGalleryItem
+    public abstract class GalleryItem : IGalleryItem
     {
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Imgur.API.Models
 {
@@ -118,7 +119,7 @@ namespace Imgur.API.Models
         /// <summary>
         ///     Up to 10 top level comments, sorted by "best".
         /// </summary>
-        IComment[] CommentPreview { get; set; }
+        IEnumerable<IComment> CommentPreview { get; set; }
 
         /// <summary>
         ///     Topic of the gallery image.
@@ -128,7 +129,7 @@ namespace Imgur.API.Models
         /// <summary>
         ///     Topic ID of the gallery image.
         /// </summary>
-        int TopicId { get; set; }
+        int? TopicId { get; set; }
 
         /// <summary>
         ///     If the image has been categorized then this will contain the section the image belongs in. (funny, cats,

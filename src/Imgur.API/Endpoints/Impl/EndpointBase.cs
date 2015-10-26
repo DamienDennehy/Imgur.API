@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
 using Imgur.API.Exceptions;
+using Imgur.API.JsonConverters;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Newtonsoft.Json;
@@ -264,8 +265,11 @@ namespace Imgur.API.Endpoints.Impl
                 throw new ImgurException(apiError.Data.Error);
             }
 
+            var converters = new JsonConverter[1];
+            converters[0] = new GalleryItemConverter();
+
             //Deserialize the actual response
-            var finalResponse = JsonConvert.DeserializeObject<Basic<T>>(endpointStringResponse);
+            var finalResponse = JsonConvert.DeserializeObject<Basic<T>>(endpointStringResponse, converters);
 
             return finalResponse.Data;
         }

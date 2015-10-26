@@ -6,7 +6,6 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Exceptions;
-using Imgur.API.Helpers;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Imgur.API.Tests.EndpointResponses;
@@ -18,8 +17,6 @@ namespace Imgur.API.Tests.Endpoints
     [TestClass]
     public class AccountEndpointTests
     {
-        private ImageHelper ImageHelper { get; } = new ImageHelper();
-
         [TestMethod]
         public void GetAccountAsync_WithUsername_ReceivedIsTrue()
         {
@@ -107,10 +104,10 @@ namespace Imgur.API.Tests.Endpoints
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
             var favorites =
-                endpoint.ProcessEndpointResponse<IEnumerable<object>>(
+                endpoint.ProcessEndpointResponse<IEnumerable<GalleryItem>>(
                     AccountEndpointResponses.Imgur.GetAccountGalleryFavoritesResponse);
 
-            Assert.AreEqual(favorites.Count(), ImageHelper.ConvertToGalleryItems(favorites).Count());
+            Assert.IsTrue(favorites.Any());
         }
 
         [TestMethod]
@@ -146,7 +143,7 @@ namespace Imgur.API.Tests.Endpoints
                 endpoint.ProcessEndpointResponse<IEnumerable<object>>(
                     AccountEndpointResponses.Imgur.GetAccountFavoritesResponse);
 
-            Assert.AreEqual(favorites.Count(), ImageHelper.ConvertToGalleryItems(favorites).Count());
+            Assert.IsTrue(favorites.Any());
         }
 
         [TestMethod]
@@ -188,10 +185,10 @@ namespace Imgur.API.Tests.Endpoints
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
             var submissions =
-                endpoint.ProcessEndpointResponse<IEnumerable<object>>(
+                endpoint.ProcessEndpointResponse<IEnumerable<GalleryItem>>(
                     AccountEndpointResponses.Imgur.GetAccountSubmissionsResponse);
 
-            Assert.AreEqual(submissions.Count(), ImageHelper.ConvertToGalleryItems(submissions).Count());
+            Assert.IsTrue(submissions.Any());
         }
 
         [TestMethod]
@@ -361,7 +358,6 @@ namespace Imgur.API.Tests.Endpoints
             endpoint.GetAlbumsAsync("Bob", 7);
             endpoint.Received().GetAlbumsAsync("Bob", 7);
         }
-
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -663,6 +659,21 @@ namespace Imgur.API.Tests.Endpoints
                     AccountEndpointResponses.Imgur.GetCommentResponse);
 
             Assert.IsNotNull(comment);
+            Assert.AreEqual("scabab", comment.Author);
+            Assert.AreEqual(487008510, comment.Id);
+            Assert.AreEqual(null, comment.AlbumCover);
+            Assert.AreEqual(4194299, comment.AuthorId);
+            Assert.AreEqual(0, comment.Children.Count());
+            Assert.AreEqual("gyroscope detectors measure inertia.. the stabilization is done entirely by brushless motors. there are stabilizers which actually use 1/2", comment.CommentText);
+            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1443969120), comment.DateTime);
+            Assert.AreEqual(false, comment.Deleted);
+            Assert.AreEqual(0, comment.Downs);
+            Assert.AreEqual("DMcOm2V", comment.ImageId);
+            Assert.AreEqual(false, comment.OnAlbum);
+            Assert.AreEqual(486983435, comment.ParentId);
+            Assert.AreEqual(24, comment.Points);
+            Assert.AreEqual(24, comment.Ups);
+            Assert.AreEqual(null, comment.Vote);
         }
 
         [TestMethod]
@@ -825,11 +836,11 @@ namespace Imgur.API.Tests.Endpoints
         public void GetImagesAsync_WithValidReponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
-            var Images =
+            var images =
                 endpoint.ProcessEndpointResponse<IEnumerable<Image>>(
                     AccountEndpointResponses.Imgur.GetImagesResponse);
 
-            Assert.AreEqual(2, Images.Count());
+            Assert.AreEqual(2, images.Count());
         }
 
         [TestMethod]
@@ -861,11 +872,35 @@ namespace Imgur.API.Tests.Endpoints
         public void GetImageAsync_WithValidReponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
-            var Image =
+            var image =
                 endpoint.ProcessEndpointResponse<Image>(
                     AccountEndpointResponses.Imgur.GetImageResponse);
 
-            Assert.IsNotNull(Image);
+            Assert.IsNotNull(image);
+            Assert.AreEqual("hbzm7Ge", image.Id);
+            Assert.AreEqual("For three days at Camp Imgur, the Imgur flag flew proudly over our humble redwood camp, greeting Imgurians each morning.", image.Title);
+            Assert.AreEqual(null, image.Description);
+            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1443651980), image.DateTime);
+            Assert.AreEqual("image/gif", image.Type);
+            Assert.AreEqual(true, image.Animated);
+            Assert.AreEqual(406, image.Width);
+            Assert.AreEqual(720, image.Height);
+            Assert.AreEqual(23386145, image.Size);
+            Assert.AreEqual(329881, image.Views);
+            Assert.AreEqual(7714644898745, image.Bandwidth);
+            Assert.AreEqual(null, image.DeleteHash);
+            Assert.AreEqual(null, image.Name);
+            Assert.AreEqual(null, image.Section);
+            Assert.AreEqual("http://i.imgur.com/hbzm7Geh.gif", image.Link);
+            Assert.AreEqual("http://i.imgur.com/hbzm7Ge.gifv", image.Gifv);
+            Assert.AreEqual("http://i.imgur.com/hbzm7Ge.mp4", image.Mp4);
+            Assert.AreEqual("http://i.imgur.com/hbzm7Ge.webm", image.Webm);
+            Assert.AreEqual(true, image.Looping);
+            Assert.AreEqual(false, image.Favorite);
+            Assert.AreEqual(null, image.Nsfw);
+            Assert.AreEqual(null, image.Vote);
+            Assert.AreEqual(null, image.AccountUrl);
+            Assert.AreEqual(null, image.AccountId);
         }
 
         [TestMethod]
@@ -881,11 +916,11 @@ namespace Imgur.API.Tests.Endpoints
         public void GetImageIdsAsync_WithValidReponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
-            var Images =
+            var images =
                 endpoint.ProcessEndpointResponse<IEnumerable<string>>(
                     AccountEndpointResponses.Imgur.GetImageIdsResponse);
 
-            Assert.AreEqual(2, Images.Count());
+            Assert.AreEqual(2, images.Count());
         }
 
         [TestMethod]
@@ -971,6 +1006,75 @@ namespace Imgur.API.Tests.Endpoints
                     AccountEndpointResponses.Imgur.DeleteImageErrorResponse);
 
             Assert.AreEqual(true, deleted);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetNotificationsAsync_WithOAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurAuth);
+            await endpoint.GetNotificationsAsync();
+        }
+
+        [TestMethod]
+        public void GetNotificationsAsync_WithAllNotifications_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IAccountEndpoint>();
+            endpoint.GetNotificationsAsync(false);
+            endpoint.Received().GetNotificationsAsync(false);
+        }
+        
+        [TestMethod]
+        public void GetNotificationsAsync_WithValidReponse_AreEqual()
+        {
+            var endpoint = Substitute.ForPartsOf<EndpointBase>();
+            var notifications =
+                endpoint.ProcessEndpointResponse<Notifications>(
+                    AccountEndpointResponses.Imgur.GetNotifications);
+
+            var messageNotification = notifications.Messages.FirstOrDefault();
+            var message = messageNotification.Content as IMessage;
+
+            Assert.IsNotNull(messageNotification);
+            Assert.IsNotNull(message);
+
+            Assert.AreEqual(4523, messageNotification.Id);
+            Assert.AreEqual(384077, messageNotification.AccountId);
+            Assert.AreEqual(false, messageNotification.Viewed);
+
+            Assert.AreEqual(384077, message.AccountId);
+            Assert.AreEqual(620, message.Id);
+            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1406935917), message.DateTime);
+            Assert.AreEqual("jasdev", message.From);
+            Assert.AreEqual("wow. such message.", message.LastMessage);
+            Assert.AreEqual(103, message.MessageNum);
+            Assert.AreEqual(3698510, message.WithAccountId);
+
+            var commentNotification = notifications.Replies.FirstOrDefault();
+            var comment = commentNotification.Content as IComment;
+
+            Assert.IsNotNull(commentNotification);
+            Assert.IsNotNull(comment);
+
+            Assert.AreEqual(4511, commentNotification.Id);
+            Assert.AreEqual(384077, commentNotification.AccountId);
+            Assert.AreEqual(false, commentNotification.Viewed);
+
+            Assert.AreEqual(3616, comment.Id);
+            Assert.AreEqual("vk9vqcm", comment.ImageId);
+            Assert.AreEqual("reply test", comment.CommentText);
+            Assert.AreEqual("jasdev", comment.Author);
+            Assert.AreEqual(3698510, comment.AuthorId);
+            Assert.AreEqual(false, comment.OnAlbum);
+            Assert.AreEqual(null, comment.AlbumCover);
+            Assert.AreEqual(1, comment.Ups);
+            Assert.AreEqual(0, comment.Downs);
+            Assert.AreEqual(1, comment.Points);
+            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1406070774), comment.DateTime);
+            Assert.AreEqual(3615, comment.ParentId);
+            Assert.AreEqual(false, comment.Deleted);
+            Assert.AreEqual(null, comment.Vote);
         }
     }
 }

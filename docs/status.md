@@ -1,4 +1,4 @@
-# Status (Sep 2015)
+# Status (Nov 2015)
 
 ##Completed
 
@@ -9,16 +9,16 @@
 
 ###Endpoints
 1. Image endpoint.
+2. Account endpoint.
 
 ##ToDo
 
 ###Endpoints
-1. Account endpoint.
-2. Album endpoint.
-3. Comment endpoint.
-4. Custom gallery endpoint.
-5. Gallery endpoint.
-6. Conversation endpoint.
-7. Notification endpoint.
-8. Memegen endpoint.
-9. Topic endpoint.
+1. Album endpoint.
+2. Comment endpoint.
+3. Custom gallery endpoint.
+4. Gallery endpoint.
+5. Conversation endpoint.
+6. Notification endpoint.
+7. Memegen endpoint.
+8. Topic endpoint.

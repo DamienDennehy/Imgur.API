@@ -30,6 +30,28 @@ namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
         }
 
         [TestMethod]
+        public async Task UploadImageStreamAsync_WithImage_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret);
+            var endpoint = new ImageEndpoint(client);
+            IImage image = null;
+
+            using (var fs = new FileStream("banana.gif", FileMode.Open))
+            {
+                image = await endpoint.UploadImageStreamAsync(fs, null, "binary test title!", "binary test desc!");
+            }
+
+            Assert.IsFalse(string.IsNullOrEmpty(image.Id));
+            Assert.IsFalse(string.IsNullOrEmpty(image.AccountId));
+            Assert.AreEqual("binary test title!", image.Title);
+            Assert.AreEqual("binary test desc!", image.Description);
+
+            await GetImageAsync_WithImage_AreEqual(image);
+            await UpdateImageAsync_WithImage_AreEqual(image);
+            await DeleteImageAsync_WithImage_IsTrue(image);
+        }
+
+        [TestMethod]
         public async Task UploadImageUrlAsync_WithImage_AreEqual()
         {
             var client = new ImgurClient(ClientId, ClientSecret);

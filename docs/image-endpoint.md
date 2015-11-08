@@ -13,16 +13,25 @@ Upload a new image using a binary file.
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
             var imageEndpoint = new ImageEndpoint(client);
             var localImage = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
-            var image = await imageEndpoint.UploadImageBinaryAsync(localImage,
-                null, "Awesome pic!", "Took me weeks to get this shot.");
+            var image = await imageEndpoint.UploadImageBinaryAsync(localImage);
+
+##UploadImageStreamAsync
+Upload a new image using a stream.
+
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+            var imageEndpoint = new ImageEndpoint(client);
+            IImage image = null;
+			using (var fs = new FileStream(@"D:\Image.jpg", FileMode.Open))
+            {
+                image = await endpoint.UploadImageStreamAsync(fs);
+            }
 
 ##UploadImageUrlAsync
 Upload a new image using a URL.
 
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
             var imageEndpoint = new ImageEndpoint(client);
-            var image = await imageEndpoint.UploadImageUrlAsync("http://i.imgur.com/kLq629A.jpg",
-                null, "Awesome pic!", "Took me weeks to get this shot.");
+            var image = await imageEndpoint.UploadImageUrlAsync("http://i.imgur.com/kLq629A.jpg");
 
 ##DeleteImageAsync
 Deletes an image. For an anonymous image, {id} must be the image's deletehash.
@@ -48,5 +57,3 @@ Favorite an image with the given ID. The user is required to be logged in to fav
             client.SetOAuth2Token(token);
             var imageEndpoint = new ImageEndpoint(client);
             var favorited = await imageEndpoint.FavoriteImageAsync("IMAGE_ID");
-
-More information on the image endpoint can be found at [http://api.imgur.com/endpoints/image](http://api.imgur.com/endpoints/image)

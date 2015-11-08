@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using Imgur.API.Models;
 
 namespace Imgur.API.Endpoints
@@ -14,6 +15,19 @@ namespace Imgur.API.Endpoints
         /// <param name="id">The image id.</param>
         /// <returns></returns>
         Task<IImage> GetImageAsync(string id);
+
+        /// <summary>
+        ///     Upload a new image using a stream.
+        /// </summary>
+        /// <param name="image">A stream.</param>
+        /// <param name="album">
+        ///     The id of the album you want to add the image to. For anonymous albums, {album} should be the
+        ///     deletehash that is returned at creation.
+        /// </param>
+        /// <param name="title">The title of the image.</param>
+        /// <param name="description">The description of the image.</param>
+        /// <returns></returns>
+        Task<IImage> UploadImageStreamAsync(Stream image, string album = null, string title = null, string description = null);
 
         /// <summary>
         ///     Upload a new image using a binary file.

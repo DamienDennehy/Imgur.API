@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -79,6 +80,51 @@ namespace Imgur.API.Endpoints.Impl
             {
                 content.Add(new StringContent("type"), "file");
                 content.Add(new ByteArrayContent(image), nameof(image));
+
+                if (!string.IsNullOrWhiteSpace(album))
+                    content.Add(new StringContent(album), nameof(album));
+
+                if (!string.IsNullOrWhiteSpace(title))
+                    content.Add(new StringContent(title), nameof(title));
+
+                if (!string.IsNullOrWhiteSpace(description))
+                    content.Add(new StringContent(description), nameof(description));
+
+                returnImage = await MakeEndpointRequestAsync<Image>(HttpMethod.Post, endpointUrl, content);
+            }
+
+            return returnImage;
+        }
+
+        /// <summary>
+        ///     Upload a new image using a stream.
+        /// </summary>
+        /// <param name="image">A stream.</param>
+        /// <param name="album">
+        ///     The id of the album you want to add the image to. For anonymous albums, {album} should be the
+        ///     deletehash that is returned at creation.
+        /// </param>
+        /// <param name="title">The title of the image.</param>
+        /// <param name="description">The description of the image.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        /// <returns></returns>
+        public async Task<IImage> UploadImageStreamAsync(Stream image, string album = null, string title = null, string description = null)
+        {
+            if (image == null)
+                throw new ArgumentNullException(nameof(image));
+
+            IImage returnImage;
+
+            var endpointUrl = string.Concat(GetEndpointBaseUrl(), UploadImageUrl);
+
+            using (var content = new MultipartFormDataContent(DateTime.UtcNow.Ticks.ToString()))
+            {
+                content.Add(new StringContent("type"), "file");
+                content.Add(new StreamContent(image), nameof(image));
 
                 if (!string.IsNullOrWhiteSpace(album))
                     content.Add(new StringContent(album), nameof(album));

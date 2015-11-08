@@ -13,7 +13,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
         [TestMethod]
         public async Task UploadImageBinaryAsync_WithImage_AreEqual()
         {
-            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey);
             var endpoint = new ImageEndpoint(client);
 
             var file = File.ReadAllBytes("banana.gif");
@@ -32,9 +32,31 @@ namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
         }
 
         [TestMethod]
+        public async Task UploadImageStreamAsync_WithImage_AreEqual()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey);
+            var endpoint = new ImageEndpoint(client);
+            IImage image = null;
+
+            using (var fs = new FileStream("banana.gif", FileMode.Open))
+            {
+                image = await endpoint.UploadImageStreamAsync(fs, null, "binary test title!", "binary test desc!");
+            }
+
+            Assert.IsFalse(string.IsNullOrEmpty(image.Id));
+            Assert.IsFalse(string.IsNullOrEmpty(image.AccountId));
+            Assert.AreEqual("binary test title!", image.Title);
+            Assert.AreEqual("binary test desc!", image.Description);
+
+            await GetImageAsync_WithImage_AreEqual(image);
+            await UpdateImageAsync_WithImage_AreEqual(image);
+            await DeleteImageAsync_WithImage_IsTrue(image);
+        }
+
+        [TestMethod]
         public async Task UploadImageUrlAsync_WithImage_AreEqual()
         {
-            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey);
             var endpoint = new ImageEndpoint(client);
 
             var image = await endpoint.UploadImageUrlAsync("http://i.imgur.com/Eg71tvs.gif", null, "url test title!", "url test desc!");
@@ -53,7 +75,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
 
         public async Task GetImageAsync_WithImage_AreEqual(IImage actualImage)
         {
-            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey);
             var endpoint = new ImageEndpoint(client);
             
             var expectedImage = await endpoint.GetImageAsync(actualImage.Id);
@@ -78,7 +100,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
 
         public async Task UpdateImageAsync_WithImage_AreEqual(IImage actualImage)
         {
-            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey);
             var endpoint = new ImageEndpoint(client);
 
             var expected = await endpoint.UpdateImageAsync(actualImage.Id, "Ti", "De");
@@ -88,7 +110,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
 
         public async Task FavoriteImageAsync_WithNotFavoritedImage_IsTrue(IImage actualImage)
         {
-            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey);
             var endpoint = new ImageEndpoint(client);
 
             var expected = await endpoint.FavoriteImageAsync(actualImage.Id);
@@ -98,7 +120,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
 
         public async Task UnfavoriteImageAsync_WithFavoritedImage_IsFalse(IImage actualImage)
         {
-            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey);
             var endpoint = new ImageEndpoint(client);
 
             var expected = await endpoint.FavoriteImageAsync(actualImage.Id);
@@ -108,7 +130,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
 
         public async Task DeleteImageAsync_WithImage_IsTrue(IImage actualImage)
         {
-            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey);
             var endpoint = new ImageEndpoint(client);
 
             var expected = await endpoint.DeleteImageAsync(actualImage.Id);

@@ -110,13 +110,6 @@ Return the total number of albums associated with the account.
 			var endpoint = new AccountEndpoint(client);
 			var count = await endpoint.GetAlbumCountAsync("sarah", 2);
 
-##GetAlbumCountAsync
-Return the total number of albums associated with the account.	
-			
-            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
-			var endpoint = new AccountEndpoint(client);
-			var count = await endpoint.GetAlbumCountAsync("sarah", 2);
-
 ##DeleteAlbumAsync
 Delete an Album with a given id.
 			
@@ -126,3 +119,24 @@ Delete an Album with a given id.
             client.SetOAuth2Token(token);
 			var endpoint = new AccountEndpoint(client);
 			var deleted = await endpoint.DeleteAlbumAsync("3pqWgc");
+
+##GetCommentsAsync
+Return the comments the user has created.
+			
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+			var endpoint = new AccountEndpoint(client);
+			var comments = await endpoint.GetCommentsAsync("sarah");
+
+##GetCommentAsync
+Return information about a specific comment. 
+
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+			var endpoint = new AccountEndpoint(client);
+			var comment = await endpoint.GetCommentAsync("507866157", "sarah");
+
+##GetCommentIdsAsync
+Return an array of all of the comment IDs.
+
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+			var endpoint = new AccountEndpoint(client);
+			var commentIds = await endpoint.GetCommentIdsAsync("sarah");

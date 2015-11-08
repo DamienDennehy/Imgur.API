@@ -29,7 +29,7 @@ namespace Imgur.API.Endpoints.Impl
         private const string DeleteAlbumUrl = "account/{0}/album/{1}";
         private const string GetCommentsUrl = "account/{0}/comments/{1}/{2}";
         private const string GetCommentUrl = "account/{0}/comment/{1}";
-        private const string GetCommentIdsUrl = "account/{0}/comments/ids/{1}";
+        private const string GetCommentIdsUrl = "account/{0}/comments/ids/{1}/{2}";
         private const string GetCommentCountUrl = "account/{0}/comments/count";
         private const string DeleteCommentUrl = "account/{0}/comment/{1}";
         private const string GetImagesUrl = "account/{0}/images/{1}";

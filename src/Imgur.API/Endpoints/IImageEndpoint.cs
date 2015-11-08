@@ -26,7 +26,7 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<IImage> UploadImageBinaryAsync(byte[] image, string album, string title, string description);
+        Task<IImage> UploadImageBinaryAsync(byte[] image, string album = null, string title = null, string description = null);
 
         /// <summary>
         ///     Upload a new image using a URL.
@@ -39,7 +39,7 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<IImage> UploadImageUrlAsync(string image, string album, string title, string description);
+        Task<IImage> UploadImageUrlAsync(string image, string album = null, string title = null, string description = null);
 
         /// <summary>
         ///     Deletes an image. For an anonymous image, {id} must be the image's deletehash.
@@ -58,7 +58,7 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<bool> UpdateImageAsync(string id, string title, string description);
+        Task<bool> UpdateImageAsync(string id, string title = null, string description = null);
 
         /// <summary>
         ///     Favorite an image with the given ID. The user is required to be logged in to favorite the image.

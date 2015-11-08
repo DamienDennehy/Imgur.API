@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -67,7 +66,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<IImage> UploadImageBinaryAsync(byte[] image, string album, string title, string description)
+        public async Task<IImage> UploadImageBinaryAsync(byte[] image, string album = null, string title = null, string description = null)
         {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
@@ -79,7 +78,7 @@ namespace Imgur.API.Endpoints.Impl
             using (var content = new MultipartFormDataContent(DateTime.UtcNow.Ticks.ToString()))
             {
                 content.Add(new StringContent("type"), "file");
-                content.Add(new StreamContent(new MemoryStream(image)), nameof(image));
+                content.Add(new ByteArrayContent(image), nameof(image));
 
                 if (!string.IsNullOrWhiteSpace(album))
                     content.Add(new StringContent(album), nameof(album));
@@ -112,7 +111,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<IImage> UploadImageUrlAsync(string image, string album, string title, string description)
+        public async Task<IImage> UploadImageUrlAsync(string image, string album = null, string title = null, string description = null)
         {
             if (string.IsNullOrEmpty(image))
                 throw new ArgumentNullException(nameof(image));
@@ -177,7 +176,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<bool> UpdateImageAsync(string id, string title, string description)
+        public async Task<bool> UpdateImageAsync(string id, string title = null, string description = null)
         {
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id));

@@ -1,9 +1,5 @@
 # Account Endpoint
 
-Source code samples below do not include exception handling for brevity.
-
-The following methods are available:
-
 ##GetAccountAsync
 Request your user information. 
 
@@ -140,3 +136,64 @@ Return an array of all of the comment IDs.
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
 			var endpoint = new AccountEndpoint(client);
 			var commentIds = await endpoint.GetCommentIdsAsync("sarah");
+
+##GetCommentCountAsync
+Return a count of all of the comments associated with the account.
+
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+			var endpoint = new AccountEndpoint(client);
+			var count = await endpoint.GetCommentCountAsync("sarah");
+
+##DeleteCommentAsync
+Delete a comment. You are required to be logged in as the user whom created the comment.
+
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+			var endpoint = new AccountEndpoint(client);
+			var deleted = await endpoint.DeleteCommentAsync("508165125");
+
+##GetImagesAsync
+Return all of the images associated with the account. You can page through the images by setting the page, this defaults to 0.
+
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+            var oAuth2Endpoint = new OAuth2Endpoint(client);
+            var token = await oAuth2Endpoint.GetTokenByRefreshTokenAsync("YOUR_REFRESH_TOKEN");
+            client.SetOAuth2Token(token);
+			var endpoint = new AccountEndpoint(client);
+			var images = await endpoint.GetImagesAsync();
+
+##GetImageAsync
+Return information about a specific image.
+
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+			var endpoint = new AccountEndpoint(client);
+			var image = await endpoint.GetImageAsync("bGLjYs8", "sarah");
+
+##GetImageIdsAsync
+Returns an array of Image IDs that are associated with the account.
+
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+            var oAuth2Endpoint = new OAuth2Endpoint(client);
+            var token = await oAuth2Endpoint.GetTokenByRefreshTokenAsync("YOUR_REFRESH_TOKEN");
+            client.SetOAuth2Token(token);
+			var endpoint = new AccountEndpoint(client);
+			var imageIds = await endpoint.GetImageIdsAsync();
+
+##GetImageCountAsync
+Returns the total number of images associated with the account.
+
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+            var oAuth2Endpoint = new OAuth2Endpoint(client);
+            var token = await oAuth2Endpoint.GetTokenByRefreshTokenAsync("YOUR_REFRESH_TOKEN");
+            client.SetOAuth2Token(token);
+			var endpoint = new AccountEndpoint(client);
+			var count = await endpoint.GetImageCountAsync();
+
+##DeleteImageAsync
+Deletes an Image. This requires a delete hash rather than an ID.
+
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+            var oAuth2Endpoint = new OAuth2Endpoint(client);
+            var token = await oAuth2Endpoint.GetTokenByRefreshTokenAsync("YOUR_REFRESH_TOKEN");
+            client.SetOAuth2Token(token);
+			var endpoint = new AccountEndpoint(client);
+			var deleted = await endpoint.DeleteImageAsync("dsfhhjyuYUYU");

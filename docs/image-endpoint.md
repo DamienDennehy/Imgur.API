@@ -1,9 +1,5 @@
 # Image Endpoint
 
-Source code samples below do not include exception handling for brevity.
-
-The following methods are available:
-
 ##GetImageAsync
 Get information about an image.
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints;
@@ -47,6 +48,24 @@ namespace Imgur.API.Tests.Endpoints
             var imgurAuth = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(imgurAuth);
             await endpoint.UploadImageBinaryAsync(null, null, null, null);
+        }
+
+        [TestMethod]
+        public void UploadImageStreamAsync_WithImage_ReceivedIsTrue()
+        {
+            var endpoint = Substitute.For<IImageEndpoint>();
+            var image = new byte[] { 0x20 };
+            endpoint.UploadImageStreamAsync(new MemoryStream(image), "1234", "t1234", "d1234");
+            endpoint.Received().UploadImageStreamAsync(new MemoryStream(image), "1234", "t1234", "d1234");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task UploadStreamBinaryAsync_WithNullImage_ThrowsArgumentNullException()
+        {
+            var imgurAuth = new ImgurClient("123", "1234");
+            var endpoint = new ImageEndpoint(imgurAuth);
+            await endpoint.UploadImageStreamAsync(null, null, null, null);
         }
 
         [TestMethod]

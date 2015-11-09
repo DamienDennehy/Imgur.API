@@ -8,8 +8,8 @@
 3. OAuth2 authentication.
 
 ###Endpoints
-1. Image endpoint.
-2. Account endpoint.
+1. Account endpoint.
+2. Image endpoint.
 
 ##ToDo
 

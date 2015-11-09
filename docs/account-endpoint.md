@@ -206,4 +206,4 @@ Returns all of the reply notifications for the user. Required to be logged in as
             var token = await oAuth2Endpoint.GetTokenByRefreshTokenAsync("YOUR_REFRESH_TOKEN");
             client.SetOAuth2Token(token);
 			var endpoint = new AccountEndpoint(client);
-			var notifications = await endpoint.GetNotificationsAsync("dsfhhjyuYUYU");
+			var notifications = await endpoint.GetNotificationsAsync(false);

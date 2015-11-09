@@ -55,8 +55,9 @@ namespace Imgur.API.Tests.Endpoints
         {
             var endpoint = Substitute.For<IImageEndpoint>();
             var image = new byte[] { 0x20 };
-            endpoint.UploadImageStreamAsync(new MemoryStream(image), "1234", "t1234", "d1234");
-            endpoint.Received().UploadImageStreamAsync(new MemoryStream(image), "1234", "t1234", "d1234");
+            var ms = new MemoryStream(image);
+            endpoint.UploadImageStreamAsync(ms, "1234", "t1234", "d1234");
+            endpoint.Received().UploadImageStreamAsync(ms, "1234", "t1234", "d1234");
         }
 
         [TestMethod]

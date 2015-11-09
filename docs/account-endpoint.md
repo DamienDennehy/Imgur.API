@@ -197,3 +197,13 @@ Deletes an Image. This requires a delete hash rather than an ID.
             client.SetOAuth2Token(token);
 			var endpoint = new AccountEndpoint(client);
 			var deleted = await endpoint.DeleteImageAsync("dsfhhjyuYUYU");
+
+##GetNotificationsAsync
+Returns all of the reply notifications for the user. Required to be logged in as that user.
+
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+            var oAuth2Endpoint = new OAuth2Endpoint(client);
+            var token = await oAuth2Endpoint.GetTokenByRefreshTokenAsync("YOUR_REFRESH_TOKEN");
+            client.SetOAuth2Token(token);
+			var endpoint = new AccountEndpoint(client);
+			var notifications = await endpoint.GetNotificationsAsync("dsfhhjyuYUYU");

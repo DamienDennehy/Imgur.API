@@ -74,7 +74,9 @@
     <None Include="App.config" />
     <None Include="README.md" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Endpoints\AlbumEndpointTests\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Banana.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

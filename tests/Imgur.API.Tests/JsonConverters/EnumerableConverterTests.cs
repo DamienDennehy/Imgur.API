@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using Imgur.API.JsonConverters;
-using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
-using NSubstitute;
 
 namespace Imgur.API.Tests.JsonConverters
 {

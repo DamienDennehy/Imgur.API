@@ -1,7 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-using System.Security.Policy;
-
-namespace Imgur.API.Tests.EndpointResponses
+﻿namespace Imgur.API.Tests.EndpointResponses
 {
     public class AccountEndpointResponses
     {

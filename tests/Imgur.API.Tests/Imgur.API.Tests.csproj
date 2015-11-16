@@ -70,6 +70,7 @@
     <Compile Include="EndpointResponses\GenericEndpointResponses.cs" />
     <Compile Include="EndpointResponses\ImageEndpointResponses.cs" />
     <Compile Include="Endpoints\AccountEndpointTests.cs" />
+    <Compile Include="Endpoints\AlbumEndpointTests.cs" />
     <Compile Include="Endpoints\EndpointTests.cs" />
     <Compile Include="Endpoints\ImageEndpointTests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />

@@ -27,7 +27,8 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<IImage> UploadImageStreamAsync(Stream image, string album = null, string title = null, string description = null);
+        Task<IImage> UploadImageStreamAsync(Stream image, string album = null, string title = null,
+            string description = null);
 
         /// <summary>
         ///     Upload a new image using a binary file.
@@ -40,7 +41,8 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<IImage> UploadImageBinaryAsync(byte[] image, string album = null, string title = null, string description = null);
+        Task<IImage> UploadImageBinaryAsync(byte[] image, string album = null, string title = null,
+            string description = null);
 
         /// <summary>
         ///     Upload a new image using a URL.
@@ -53,7 +55,8 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<IImage> UploadImageUrlAsync(string image, string album = null, string title = null, string description = null);
+        Task<IImage> UploadImageUrlAsync(string image, string album = null, string title = null,
+            string description = null);
 
         /// <summary>
         ///     Deletes an image. For an anonymous image, {id} must be the image's deletehash.

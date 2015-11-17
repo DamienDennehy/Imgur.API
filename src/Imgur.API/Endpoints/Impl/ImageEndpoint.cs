@@ -67,7 +67,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<IImage> UploadImageBinaryAsync(byte[] image, string album = null, string title = null, string description = null)
+        public async Task<IImage> UploadImageBinaryAsync(byte[] image, string album = null, string title = null,
+            string description = null)
         {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
@@ -112,7 +113,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<IImage> UploadImageStreamAsync(Stream image, string album = null, string title = null, string description = null)
+        public async Task<IImage> UploadImageStreamAsync(Stream image, string album = null, string title = null,
+            string description = null)
         {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
@@ -157,7 +159,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<IImage> UploadImageUrlAsync(string image, string album = null, string title = null, string description = null)
+        public async Task<IImage> UploadImageUrlAsync(string image, string album = null, string title = null,
+            string description = null)
         {
             if (string.IsNullOrEmpty(image))
                 throw new ArgumentNullException(nameof(image));

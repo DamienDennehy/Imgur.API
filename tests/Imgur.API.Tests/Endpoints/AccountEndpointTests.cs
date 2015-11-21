@@ -34,7 +34,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAccountAsync_WithNullUsername_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -43,7 +43,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAccountAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -81,7 +81,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAccountGalleryFavoritesAsync_WithNullUsername_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -90,7 +90,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAccountGalleryFavoritesAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException
             ()
         {
@@ -127,7 +127,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAccountFavoritesAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -155,7 +155,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAccountSubmissionsAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -172,7 +172,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAccountSubmissionsAsync_WithNullUsername_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -200,7 +200,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAccountSettingsAsync_OAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -229,7 +229,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task UpdateAccountSettings_OAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -242,7 +242,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
             var updated = endpoint.ProcessEndpointResponse<bool>(
-                    GenericEndpointResponses.Imgur.SuccessfulResponse);
+                GenericEndpointResponses.Imgur.SuccessfulResponse);
 
             Assert.IsTrue(updated);
         }
@@ -254,7 +254,7 @@ namespace Imgur.API.Tests.Endpoints
             endpoint.GetGalleryProfileAsync("Bob");
             endpoint.Received().GetGalleryProfileAsync("Bob");
         }
-        
+
         [TestMethod]
         public void GetGalleryProfileAsync_WithDefaultUsername_ReceivedIsTrue()
         {
@@ -264,7 +264,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetGalleryProfileAsync_WithNullUsername_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -273,7 +273,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetGalleryProfileAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -285,7 +285,9 @@ namespace Imgur.API.Tests.Endpoints
         public void GetGalleryProfileAsync_WithValidReponse_AreEqual()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
-            var profile = endpoint.ProcessEndpointResponse<GalleryProfile>(AccountEndpointResponses.Imgur.GetGalleryProfileResponse);
+            var profile =
+                endpoint.ProcessEndpointResponse<GalleryProfile>(
+                    AccountEndpointResponses.Imgur.GetGalleryProfileResponse);
 
             Assert.AreEqual(1470, profile.TotalGalleryComments);
             Assert.AreEqual(3068, profile.TotalGalleryFavorites);
@@ -304,7 +306,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task VerifyEmailAsync_OAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -313,16 +315,17 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [ExpectedException(typeof (ImgurException))]
         public void VerifyEmailAsync_UnauthorizedAccess_ThrowsImgurException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(imgurAuth);
-            var verified = endpoint.ProcessEndpointResponse<bool>(AccountEndpointResponses.Imgur.VerifyEmailErrorResponse);
+            var verified =
+                endpoint.ProcessEndpointResponse<bool>(AccountEndpointResponses.Imgur.VerifyEmailErrorResponse);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task SendVerificationEmailAsync_OAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -331,7 +334,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [ExpectedException(typeof (ImgurException))]
         public void SendVerificationEmailAsync_WithErrorResponse_AreEqual()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -360,7 +363,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAlbumsAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -377,7 +380,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAlbumsAsync_WithNullUsername_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -392,7 +395,7 @@ namespace Imgur.API.Tests.Endpoints
             var albums =
                 endpoint.ProcessEndpointResponse<IEnumerable<Album>>(
                     AccountEndpointResponses.Imgur.GetAlbumsResponse);
-            
+
             Assert.AreEqual(50, albums.Count());
         }
 
@@ -413,7 +416,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAlbumAsync_WithNullId_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -422,7 +425,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAlbumAsync_WithDefaultUsername_AndOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -450,7 +453,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAlbumIdsAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -467,7 +470,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAlbumIdsAsync_WithNullUsername_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -495,7 +498,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAlbumCountAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -512,7 +515,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAlbumCountAsync_WithNullUsername_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -540,7 +543,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task DeleteAlbumAsync_WithNullId_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -549,7 +552,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task DeleteAlbumAsync_WithOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -569,7 +572,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [ExpectedException(typeof (ImgurException))]
         public void DeleteAlbumAsync_WithErrorReponse_ThrowsImgurError()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
@@ -589,7 +592,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetCommentsAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -606,7 +609,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetCommentsAsync_WithNullUsername_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -642,7 +645,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetCommentAsync_WithNullId_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -664,7 +667,9 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual(null, comment.AlbumCover);
             Assert.AreEqual(4194299, comment.AuthorId);
             Assert.AreEqual(0, comment.Children.Count());
-            Assert.AreEqual("gyroscope detectors measure inertia.. the stabilization is done entirely by brushless motors. there are stabilizers which actually use 1/2", comment.CommentText);
+            Assert.AreEqual(
+                "gyroscope detectors measure inertia.. the stabilization is done entirely by brushless motors. there are stabilizers which actually use 1/2",
+                comment.CommentText);
             Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1443969120), comment.DateTime);
             Assert.AreEqual(false, comment.Deleted);
             Assert.AreEqual(0, comment.Downs);
@@ -677,7 +682,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetCommentIdsAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -694,7 +699,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetCommentIdsAsync_WithNullUsername_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -722,7 +727,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetCommentCountAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -739,7 +744,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetCommentCountAsync_WithNullUsername_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -767,7 +772,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task DeleteCommentAsync_WithNullId_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -776,7 +781,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task DeleteCommentAsync_WithOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -796,7 +801,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [ExpectedException(typeof (ImgurException))]
         public void DeleteCommentAsync_WithErrorReponse_ThrowsImgurError()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
@@ -816,7 +821,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetImagesAsync_OAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -860,7 +865,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetImageAsync_WithNullId_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -878,7 +883,9 @@ namespace Imgur.API.Tests.Endpoints
 
             Assert.IsNotNull(image);
             Assert.AreEqual("hbzm7Ge", image.Id);
-            Assert.AreEqual("For three days at Camp Imgur, the Imgur flag flew proudly over our humble redwood camp, greeting Imgurians each morning.", image.Title);
+            Assert.AreEqual(
+                "For three days at Camp Imgur, the Imgur flag flew proudly over our humble redwood camp, greeting Imgurians each morning.",
+                image.Title);
             Assert.AreEqual(null, image.Description);
             Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1443651980), image.DateTime);
             Assert.AreEqual("image/gif", image.Type);
@@ -904,7 +911,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetImageIdsAsync_WithOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -932,7 +939,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetImageCountAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -968,7 +975,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task DeleteImageAsync_WithNullId_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -977,7 +984,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task DeleteImageAsync_WithOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -997,7 +1004,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [ExpectedException(typeof (ImgurException))]
         public void DeleteImageAsync_WithErrorReponse_ThrowsImgurError()
         {
             var endpoint = Substitute.ForPartsOf<EndpointBase>();
@@ -1009,7 +1016,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetNotificationsAsync_WithOAuth2NotSet_ThrowsArgumentNullException()
         {
             var imgurAuth = new ImgurClient("123", "1234");
@@ -1024,7 +1031,7 @@ namespace Imgur.API.Tests.Endpoints
             endpoint.GetNotificationsAsync(false);
             endpoint.Received().GetNotificationsAsync(false);
         }
-        
+
         [TestMethod]
         public void GetNotificationsAsync_WithValidReponse_AreEqual()
         {

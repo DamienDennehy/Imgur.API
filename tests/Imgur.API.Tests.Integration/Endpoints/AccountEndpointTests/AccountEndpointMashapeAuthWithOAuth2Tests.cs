@@ -52,7 +52,10 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
             var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
             var endpoint = new AccountEndpoint(client);
 
-            var updated = await endpoint.UpdateAccountSettingsAsync(bio: "ImgurClient_" + DateTimeOffset.UtcNow.ToString(), publicImages: false, albumPrivacy: AlbumPrivacy.Hidden);
+            var updated =
+                await
+                    endpoint.UpdateAccountSettingsAsync("ImgurClient_" + DateTimeOffset.UtcNow, false,
+                        albumPrivacy: AlbumPrivacy.Hidden);
 
             Assert.IsTrue(updated);
         }
@@ -80,7 +83,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [ExpectedException(typeof (ImgurException))]
         public async Task SendVerificationEmailAsync_IsTrue()
         {
             var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
@@ -134,7 +137,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [ExpectedException(typeof (ImgurException))]
         public async Task DeleteAlbumAsync_WithValidReponse_ThrowsImgurException()
         {
             var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
@@ -177,7 +180,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [ExpectedException(typeof (ImgurException))]
         public async Task DeleteCommentAsync_WithValidReponse_ThrowsImgurException()
         {
             var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());
@@ -222,7 +225,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [ExpectedException(typeof (ImgurException))]
         public async Task DeleteImageAsync_WithValidReponse_ThrowsImgurException()
         {
             var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, await GetOAuth2Token());

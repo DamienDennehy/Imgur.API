@@ -44,10 +44,10 @@ namespace Imgur.API.Tests.JsonConverters
             reader.Read();
             var serializer = new JsonSerializer
             {
-                Converters = { converter }
+                Converters = {converter}
             };
 
-            var actual = (GalleryAlbum)converter.ReadJson(reader, typeof(GalleryItem), null, serializer);
+            var actual = (GalleryAlbum) converter.ReadJson(reader, typeof (GalleryItem), null, serializer);
             Assert.IsNotNull(actual);
 
             Assert.AreEqual(null, actual.AccountId);
@@ -57,7 +57,8 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.AreEqual("jskdpbn", actual.Cover);
             Assert.AreEqual(240, actual.CoverHeight);
             Assert.AreEqual(500, actual.CoverWidth);
-            Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 09, 19, 16, 43, 54, DateTimeKind.Utc)), actual.DateTime);
+            Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 09, 19, 16, 43, 54, DateTimeKind.Utc)),
+                actual.DateTime);
             Assert.AreEqual(null, actual.Description);
             Assert.AreEqual(119, actual.Downs);
             Assert.AreEqual(true, actual.Favorite);
@@ -85,10 +86,10 @@ namespace Imgur.API.Tests.JsonConverters
             reader.Read();
             var serializer = new JsonSerializer
             {
-                Converters = { converter }
+                Converters = {converter}
             };
 
-            var actual = (GalleryImage)converter.ReadJson(reader, typeof(GalleryItem), null, serializer);
+            var actual = (GalleryImage) converter.ReadJson(reader, typeof (GalleryItem), null, serializer);
             Assert.IsNotNull(actual);
 
             Assert.AreEqual(null, actual.AccountId);
@@ -97,7 +98,8 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.AreEqual(118267772080, actual.Bandwidth);
             Assert.AreEqual(null, actual.CommentCount);
             Assert.AreEqual(null, actual.CommentPreview);
-            Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 09, 19, 20, 29, 47, DateTimeKind.Utc)), actual.DateTime);
+            Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 09, 19, 20, 29, 47, DateTimeKind.Utc)),
+                actual.DateTime);
             Assert.AreEqual(null, actual.DeleteHash);
             Assert.AreEqual(null, actual.Description);
             Assert.AreEqual(225, actual.Downs);

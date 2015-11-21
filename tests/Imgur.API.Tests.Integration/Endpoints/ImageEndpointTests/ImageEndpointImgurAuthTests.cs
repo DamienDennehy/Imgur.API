@@ -56,8 +56,11 @@ namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
         {
             var client = new ImgurClient(ClientId, ClientSecret);
             var endpoint = new ImageEndpoint(client);
-            
-            var image = await endpoint.UploadImageUrlAsync("http://i.imgur.com/Eg71tvs.gif", null, "url test title!", "url test desc!");
+
+            var image =
+                await
+                    endpoint.UploadImageUrlAsync("http://i.imgur.com/Eg71tvs.gif", null, "url test title!",
+                        "url test desc!");
 
             Assert.IsFalse(string.IsNullOrEmpty(image.Id));
             Assert.IsFalse(string.IsNullOrEmpty(image.AccountId));
@@ -73,9 +76,9 @@ namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
         {
             var client = new ImgurClient(ClientId, ClientSecret);
             var endpoint = new ImageEndpoint(client);
-            
+
             var expectedImage = await endpoint.GetImageAsync(actualImage.Id);
-            
+
             Assert.AreEqual(actualImage.Id, expectedImage.Id);
             Assert.AreEqual(actualImage.Title, expectedImage.Title);
             Assert.AreEqual(actualImage.Description, expectedImage.Description);
@@ -103,7 +106,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
 
             Assert.IsTrue(expected);
         }
-        
+
         public async Task DeleteImageAsync_WithImage_IsTrue(IImage actualImage)
         {
             var client = new ImgurClient(ClientId, ClientSecret);

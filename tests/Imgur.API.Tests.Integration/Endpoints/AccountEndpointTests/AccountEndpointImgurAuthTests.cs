@@ -97,7 +97,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointTests
 
             Assert.IsTrue(albums > 100);
         }
-        
+
         [TestMethod]
         public async Task GetCommentsAsync_WithValidReponse_AreEqual()
         {

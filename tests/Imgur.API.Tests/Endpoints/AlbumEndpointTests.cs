@@ -1,6 +1,6 @@
 ﻿namespace Imgur.API.Tests.Endpoints
 {
-    class AlbumEndpointTests
+    internal class AlbumEndpointTests
     {
     }
 }

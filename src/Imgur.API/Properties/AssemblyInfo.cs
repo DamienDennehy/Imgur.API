@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Resources;
 using System.Runtime.CompilerServices;
 
 // General Information about an assembly is controlled through the following 
@@ -13,9 +14,10 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Damien Dennehy")]
 [assembly: AssemblyProduct("Imgur.API")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCopyright("Copyright © 2015-2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+[assembly: NeutralResourcesLanguage("en")]
 [assembly: InternalsVisibleTo("Imgur.API.Tests")]
 [assembly: InternalsVisibleTo("Imgur.API.Tests.Integration")]
 

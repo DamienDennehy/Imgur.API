@@ -8,11 +8,11 @@ namespace Imgur.API.Tests.Integration
 {
     public abstract class TestBase
     {
+        private IOAuth2Token _oAuth2Token;
         public string ClientId => ConfigurationManager.AppSettings["ClientId"];
         public string ClientSecret => ConfigurationManager.AppSettings["ClientSecret"];
         public string MashapeKey => ConfigurationManager.AppSettings["MashapeKey"];
         public string RefreshToken => ConfigurationManager.AppSettings["RefreshToken"];
-        private IOAuth2Token _oAuth2Token = null;
 
         public async Task<IOAuth2Token> GetOAuth2Token()
         {

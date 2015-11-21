@@ -222,7 +222,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [ExpectedException(typeof (ArgumentOutOfRangeException))]
         public void ProcessImgurEndpointResponse_WithInvalidResponse_ArgumentOutOfRangeException()
         {
             var imgurAuth = new ImgurClient("123", "1234");

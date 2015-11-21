@@ -44,7 +44,7 @@ namespace Imgur.API.Tests.JsonConverters
             reader.Read();
             var serializer = new JsonSerializer();
 
-            var actual = (Message)converter.ReadJson(reader, typeof(Message), null, serializer);
+            var actual = (Message) converter.ReadJson(reader, typeof (Message), null, serializer);
             Assert.IsNotNull(actual);
 
             Assert.AreEqual(76767, actual.Id);
@@ -53,7 +53,8 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.AreEqual(3434, actual.WithAccountId);
             Assert.AreEqual("test33", actual.LastMessage);
             Assert.AreEqual(2, actual.MessageNum);
-            Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 10, 12, 02, 31, 43, DateTimeKind.Utc)), actual.DateTime);
+            Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 10, 12, 02, 31, 43, DateTimeKind.Utc)),
+                actual.DateTime);
         }
 
         [TestMethod]
@@ -64,7 +65,7 @@ namespace Imgur.API.Tests.JsonConverters
             reader.Read();
             var serializer = new JsonSerializer();
 
-            var actual = (Comment)converter.ReadJson(reader, typeof(Comment), null, serializer);
+            var actual = (Comment) converter.ReadJson(reader, typeof (Comment), null, serializer);
             Assert.IsNotNull(actual);
 
             Assert.AreEqual(null, actual.AlbumCover);
@@ -72,7 +73,8 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.AreEqual(3698510, actual.AuthorId);
             Assert.AreEqual(0, actual.Children.Count());
             Assert.AreEqual("reply test", actual.CommentText);
-            Assert.AreEqual(new DateTimeOffset(new DateTime(2014, 07, 22, 23, 12, 54, DateTimeKind.Utc)), actual.DateTime);
+            Assert.AreEqual(new DateTimeOffset(new DateTime(2014, 07, 22, 23, 12, 54, DateTimeKind.Utc)),
+                actual.DateTime);
             Assert.AreEqual(false, actual.Deleted);
             Assert.AreEqual(0, actual.Downs);
             Assert.AreEqual("vk9vqcm", actual.ImageId);

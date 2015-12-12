@@ -1,4 +1,4 @@
-﻿namespace Imgur.API.Tests.EndpointResponses
+﻿namespace Imgur.API.Tests.FakeResponses
 {
     public class ImageEndpointResponses
     {
@@ -15,7 +15,7 @@
             public const string FavoriteImageResponseFalse =
                 "{\"data\":\"unfavorited\",\"success\":true,\"status\":200}";
 
-            public const string DeleteAlbumResponse = "{\"data\":true,\"success\":true,\"status\":200}";
+            public const string DeleteImageResponse = "{\"data\":true,\"success\":true,\"status\":200}";
         }
 
         public class Mashape

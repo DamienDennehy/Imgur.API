@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
-using Imgur.API.Models;
 using Newtonsoft.Json;
 
 namespace Imgur.API.JsonConverters
 {
     /// <summary>
-    ///     Converts IEnumerable interfaces to concrete class.
+    ///     Converts objects to concrete classes.
     /// </summary>
-    public class EnumerableConverter<T> : JsonConverter where T : IDataModel
+    public class TypeConverter<T> : JsonConverter
     {
         /// <summary>
         ///     Determines whether this instance can convert the specified object type.
@@ -18,7 +16,7 @@ namespace Imgur.API.JsonConverters
         /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
-            return typeof (IEnumerable<T>).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+            return typeof (T).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
         }
 
         /// <summary>
@@ -32,7 +30,7 @@ namespace Imgur.API.JsonConverters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            return serializer.Deserialize<IEnumerable<T>>(reader);
+            return serializer.Deserialize<T>(reader);
         }
 
         /// <summary>

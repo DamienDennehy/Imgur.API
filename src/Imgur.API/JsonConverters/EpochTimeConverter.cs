@@ -47,7 +47,15 @@ namespace Imgur.API.JsonConverters
         /// <param name="serializer"></param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            var dateTimeOffset = (DateTimeOffset) value;
+
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+            var timeSpan = dateTimeOffset - epoch;
+
+            var time = (long) timeSpan.TotalSeconds;
+
+            serializer.Serialize(writer, time);
         }
     }
 }

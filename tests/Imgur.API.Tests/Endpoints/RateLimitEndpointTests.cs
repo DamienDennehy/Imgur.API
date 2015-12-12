@@ -1,33 +1,39 @@
-﻿using Imgur.API.Authentication.Impl;
-using Imgur.API.Endpoints;
+﻿using System;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
-using Imgur.API.Models.Impl;
+using Imgur.API.Tests.FakeResponses;
+using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSubstitute;
 
 namespace Imgur.API.Tests.Endpoints
 {
     [TestClass]
     public class RateLimitEndpointTests
     {
-        private const string RateLimitResponse =
-            "{\"data\":{ \"UserLimit\":412, \"UserRemaining\":382, \"UserReset\":1439945895, \"ClientLimit\":10500, \"ClientRemaining\":9500 }, \"success\":true, \"status\":200 }";
-
         [TestMethod]
-        public void RateLimit_GetRateLimitAsync_ReceivedIsTrue()
+        public async Task GetRateLimitAsync_AreEqual()
         {
-            var endpoint = Substitute.For<IRateLimitEndpoint>();
-            endpoint.GetRateLimitAsync();
-            endpoint.Received().GetRateLimitAsync();
-        }
+            //Create a fake message handler
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(RateLimitEndpointResponses.RateLimitResponse)
+            };
 
-        [TestMethod]
-        public void RateLimit_ProcessEndpointResponse_AreEqual()
-        {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurAuth);
-            var rateLimit = endpoint.ProcessEndpointResponse<RateLimit>(RateLimitResponse);
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/credits"), fakeResponse);
 
+            //Create a HttpClient that will use the fake handler
+            var httpClient = new HttpClient(fakeHttpMessageHandler);
+
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new RateLimitEndpoint(imgurClient, httpClient);
+
+            var rateLimit = await endpoint.GetRateLimitAsync();
+
+            Assert.IsNotNull(rateLimit);
             Assert.AreEqual(412, rateLimit.UserLimit);
             Assert.AreEqual(382, rateLimit.UserRemaining);
             Assert.AreEqual(10500, rateLimit.ClientLimit);

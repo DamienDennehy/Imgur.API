@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
 using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
+using Imgur.API.RequestBuilders;
 
 namespace Imgur.API.Endpoints.Impl
 {
@@ -15,21 +14,26 @@ namespace Imgur.API.Endpoints.Impl
     /// </summary>
     public class OAuth2Endpoint : EndpointBase, IOAuth2Endpoint
     {
-        /// <summary>
-        ///     The OAuth2 Authorization Endpoint.
-        /// </summary>
-        private const string AuthorizationEndpoint = "https://api.imgur.com/oauth2/authorize";
+        internal string AuthorizationEndpointUrl { get; } = "https://api.imgur.com/oauth2/authorize";
 
-        /// <summary>
-        ///     The OAuth2 Token Endpoint.
-        /// </summary>
-        private const string TokenEndpoint = "https://api.imgur.com/oauth2/token";
+        internal string TokenEndpointUrl { get; } = "https://api.imgur.com/oauth2/token";
+
+        internal OAuth2RequestBuilder RequestBuilder { get; } = new OAuth2RequestBuilder();
 
         /// <summary>
         ///     Initializes a new instance of the OAuth2Endpoint class.
         /// </summary>
         /// <param name="apiClient"></param>
         public OAuth2Endpoint(IApiClient apiClient) : base(apiClient)
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the OAuth2Endpoint class.
+        /// </summary>
+        /// <param name="apiClient"></param>
+        /// <param name="httpClient"></param>
+        internal OAuth2Endpoint(IApiClient apiClient, HttpClient httpClient) : base(apiClient, httpClient)
         {
         }
 
@@ -44,9 +48,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public string GetAuthorizationUrl(OAuth2ResponseType oAuth2ResponseType, string state)
         {
-            var endpointUrl = AuthorizationEndpoint + "?client_id={0}&response_type={1}&state={2}";
-            endpointUrl = string.Format(endpointUrl, ApiClient.ClientId, oAuth2ResponseType, state);
-            return endpointUrl;
+            var url =  $"{AuthorizationEndpointUrl}?client_id={ApiClient.ClientId}&response_type={oAuth2ResponseType}&state={state}";
+            return url;
         }
 
         /// <summary>
@@ -56,7 +59,6 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="code">The code from the query string.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
@@ -66,16 +68,13 @@ namespace Imgur.API.Endpoints.Impl
             if (string.IsNullOrEmpty(code))
                 throw new ArgumentNullException(nameof(code));
 
-            var parameters = new Dictionary<string, string>
-            {
-                {"client_id", ApiClient.ClientId},
-                {"client_secret", ApiClient.ClientSecret},
-                {"grant_type", "authorization_code"},
-                {"code", code}
-            };
+            IOAuth2Token token;
 
-            var content = new FormUrlEncodedContent(parameters.ToArray());
-            var token = await MakeEndpointRequestAsync<OAuth2Token>(HttpMethod.Post, TokenEndpoint, content);
+            using (var request = RequestBuilder.GetTokenByCodeRequest(TokenEndpointUrl, code, ApiClient.ClientId, ApiClient.ClientSecret))
+            {
+                token = await SendRequestAsync<OAuth2Token>(request);
+            }
+
             return token;
         }
 
@@ -86,25 +85,18 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="pin">The PIN that the user is prompted to enter.</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         public async Task<IOAuth2Token> GetTokenByPinAsync(string pin)
         {
-            if (string.IsNullOrEmpty(pin))
-                throw new ArgumentNullException(nameof(pin));
+            IOAuth2Token token;
 
-            var parameters = new Dictionary<string, string>
+            using (var request = RequestBuilder.GetTokenByPinRequest(TokenEndpointUrl, pin, ApiClient.ClientId, ApiClient.ClientSecret))
             {
-                {"client_id", ApiClient.ClientId},
-                {"client_secret", ApiClient.ClientSecret},
-                {"grant_type", "pin"},
-                {"pin", pin}
-            };
+                token = await SendRequestAsync<OAuth2Token>(request);
+            }
 
-            var content = new FormUrlEncodedContent(parameters.ToArray());
-            var token = await MakeEndpointRequestAsync<OAuth2Token>(HttpMethod.Post, TokenEndpoint, content);
             return token;
         }
 
@@ -121,26 +113,19 @@ namespace Imgur.API.Endpoints.Impl
         ///     </para>
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken)
         {
-            if (string.IsNullOrEmpty(refreshToken))
-                throw new ArgumentNullException(nameof(refreshToken));
+            IOAuth2Token token;
 
-            var parameters = new Dictionary<string, string>
+            using (var request = RequestBuilder.GetTokenByRefreshTokenRequest(TokenEndpointUrl, refreshToken, ApiClient.ClientId, ApiClient.ClientSecret))
             {
-                {"client_id", ApiClient.ClientId},
-                {"client_secret", ApiClient.ClientSecret},
-                {"grant_type", "refresh_token"},
-                {"refresh_token", refreshToken}
-            };
+                token = await SendRequestAsync<OAuth2Token>(request);
+            }
 
-            var content = new FormUrlEncodedContent(parameters.ToArray());
-            var token = await MakeEndpointRequestAsync<OAuth2Token>(HttpMethod.Post, TokenEndpoint, content);
             return token;
         }
     }

@@ -8,7 +8,7 @@ using Imgur.API.Endpoints.Impl;
 using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
-using Imgur.API.Tests.EndpointResponses;
+using Imgur.API.Tests.Fakes.FakeResponses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 

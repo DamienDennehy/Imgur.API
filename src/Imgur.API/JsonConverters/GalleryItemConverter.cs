@@ -36,7 +36,7 @@ namespace Imgur.API.JsonConverters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            var jsonString = JObject.Load(reader).ToString().ToLower();
+            var jsonString = JObject.Load(reader).ToString();
 
             if (jsonString.Replace(" ", "").Contains("is_album\":true"))
             {

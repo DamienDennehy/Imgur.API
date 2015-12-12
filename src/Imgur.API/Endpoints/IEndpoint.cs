@@ -1,4 +1,5 @@
-﻿using Imgur.API.Authentication;
+﻿using System.Net.Http;
+using Imgur.API.Authentication;
 
 namespace Imgur.API.Endpoints
 {
@@ -11,6 +12,11 @@ namespace Imgur.API.Endpoints
         ///     Interface for all Api authentication types.
         /// </summary>
         IApiClient ApiClient { get; }
+
+        /// <summary>
+        ///     The class for sending HTTP requests and receiving HTTP responses from the service methods.
+        /// </summary>
+        HttpClient HttpClient { get; }
 
         /// <summary>
         ///     Gets the endpoint url based on the authentication type.

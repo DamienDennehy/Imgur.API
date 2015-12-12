@@ -1,5 +1,4 @@
 ﻿using System;
-using Imgur.API.Authentication;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,22 +9,6 @@ namespace Imgur.API.Tests.Authentication
     [TestClass]
     public class ImgurClientTests
     {
-        [TestMethod]
-        public void ClientId_Set_AreEqual()
-        {
-            var client = Substitute.For<IImgurClient>();
-            client.ClientId.Returns("AbcdE123");
-            Assert.AreEqual("AbcdE123", client.ClientId);
-        }
-
-        [TestMethod]
-        public void ClientSecret_Set_AreEqual()
-        {
-            var client = Substitute.For<IImgurClient>();
-            client.ClientSecret.Returns("Qwerty123");
-            Assert.AreEqual("Qwerty123", client.ClientSecret);
-        }
-
         [TestMethod]
         public void ClientId_SetByConstructor_AreEqual()
         {
@@ -57,11 +40,11 @@ namespace Imgur.API.Tests.Authentication
         }
 
         [TestMethod]
-        public void OAuth2Token_SetByConstructor_AreEqual()
+        public void OAuth2Token_SetByConstructor_AreSame()
         {
             var oAuth2Token = Substitute.For<IOAuth2Token>();
             var client = new ImgurClient("ClientId", "ClientSecret", oAuth2Token);
-            Assert.AreEqual(oAuth2Token, client.OAuth2Token);
+            Assert.AreSame(oAuth2Token, client.OAuth2Token);
         }
 
         [TestMethod]

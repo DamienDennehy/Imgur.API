@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using Imgur.API.Authentication;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,24 +10,6 @@ namespace Imgur.API.Tests.Authentication
     [TestClass]
     public class ApiClientTests
     {
-        [TestMethod]
-        public void IOAuth2Token_Set_NotNull()
-        {
-            var client = Substitute.For<IApiClient>();
-            var oAuthToken = Substitute.For<IOAuth2Token>();
-            client.OAuth2Token.Returns(oAuthToken);
-            Assert.IsNotNull(client.OAuth2Token);
-        }
-
-        [TestMethod]
-        public void IRateLimit_Set_NotNull()
-        {
-            var client = Substitute.For<IApiClient>();
-            var rateLimit = Substitute.For<IRateLimit>();
-            client.RateLimit.Returns(rateLimit);
-            Assert.IsNotNull(client.RateLimit);
-        }
-
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void ClientId_SetNullByConstructor_ThrowArgumentNullException()
@@ -101,22 +82,22 @@ namespace Imgur.API.Tests.Authentication
         }
 
         [TestMethod]
-        public void OAuth2Token_SetByConstructor_IsNotNull()
+        public void OAuth2Token_SetByConstructor_AreSame()
         {
             var oAuth2Token = Substitute.For<IOAuth2Token>();
             var client = Substitute.ForPartsOf<ApiClientBase>("ClientId", "ClientSecret", oAuth2Token);
-            Assert.IsNotNull(client.OAuth2Token);
+            Assert.AreSame(oAuth2Token, client.OAuth2Token);
         }
 
         [TestMethod]
-        public void OAuth2Token_SetBySetOAuth2Token_IsNotNull()
+        public void OAuth2Token_SetBySetOAuth2Token_AreSame()
         {
             var oAuth2Token = Substitute.For<IOAuth2Token>();
             var client = Substitute.ForPartsOf<ApiClientBase>("ClientId", "ClientSecret");
 
             Assert.IsNull(client.OAuth2Token);
             client.SetOAuth2Token(oAuth2Token);
-            Assert.IsNotNull(client.OAuth2Token);
+            Assert.AreSame(oAuth2Token, client.OAuth2Token);
         }
 
         [TestMethod]
@@ -127,7 +108,7 @@ namespace Imgur.API.Tests.Authentication
 
             Assert.IsNull(client.OAuth2Token);
             client.SetOAuth2Token(oAuth2Token);
-            Assert.IsNotNull(client.OAuth2Token);
+            Assert.AreSame(oAuth2Token, client.OAuth2Token);
             client.SetOAuth2Token(null);
             Assert.IsNull(client.OAuth2Token);
         }

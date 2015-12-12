@@ -8,6 +8,7 @@ using Imgur.API.Exceptions;
 using Imgur.API.JsonConverters;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
+using Imgur.API.RequestBuilders;
 using Newtonsoft.Json;
 
 namespace Imgur.API.Endpoints.Impl
@@ -20,7 +21,21 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Initializes a new instance of the EndpointBase class.
         /// </summary>
-        protected EndpointBase()
+        /// <param name="apiClient"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        protected EndpointBase(IApiClient apiClient)
+            : this(apiClient, new HttpClient())
+        {
+            if (apiClient == null)
+                throw new ArgumentNullException(nameof(apiClient));
+
+            ApiClient = apiClient;
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the EndpointBase class.
+        /// </summary>
+        protected internal EndpointBase()
         {
         }
 
@@ -28,14 +43,45 @@ namespace Imgur.API.Endpoints.Impl
         ///     Initializes a new instance of the EndpointBase class.
         /// </summary>
         /// <param name="apiClient"></param>
+        /// <param name="httpClient"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        protected EndpointBase(IApiClient apiClient)
+        protected internal EndpointBase(IApiClient apiClient, HttpClient httpClient)
         {
             if (apiClient == null)
                 throw new ArgumentNullException(nameof(apiClient));
 
+            if (httpClient == null)
+                throw new ArgumentNullException(nameof(httpClient));
+
+            httpClient.DefaultRequestHeaders.Remove("Authorization");
+            httpClient.DefaultRequestHeaders.Remove("X-Mashape-Key");
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+
+            //Add OAuth Authentication header
+            httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
+                "Authorization",
+                apiClient.OAuth2Token != null
+                    ? $"Bearer {apiClient.OAuth2Token.AccessToken}"
+                    : $"Client-ID {apiClient.ClientId}");
+
+            //Add Mashape Authentication header
+            var mashapeAuthentication = apiClient as IMashapeClient;
+            if (mashapeAuthentication != null)
+            {
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
+                    "X-Mashape-Key", mashapeAuthentication.MashapeKey);
+            }
+
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
             ApiClient = apiClient;
+            HttpClient = httpClient;
         }
+
+        /// <summary>
+        ///     The class for sending HTTP requests and receiving HTTP responses from the service methods.
+        /// </summary>
+        public virtual HttpClient HttpClient { get; }
 
         /// <summary>
         ///     Interface for all API authentication types.
@@ -69,92 +115,53 @@ namespace Imgur.API.Endpoints.Impl
                 throw new ArgumentNullException(nameof(apiClient));
 
             ApiClient = apiClient;
+
+            HttpClient.DefaultRequestHeaders.Remove("Authorization");
+            HttpClient.DefaultRequestHeaders.Remove("X-Mashape-Key");
+            HttpClient.DefaultRequestHeaders.Accept.Clear();
+
+            //Add OAuth Authentication header
+            HttpClient.DefaultRequestHeaders.TryAddWithoutValidation(
+                "Authorization",
+                apiClient.OAuth2Token != null
+                    ? $"Bearer {apiClient.OAuth2Token.AccessToken}"
+                    : $"Client-ID {apiClient.ClientId}");
+
+            //Add Mashape Authentication header
+            var mashapeAuthentication = apiClient as IMashapeClient;
+            if (mashapeAuthentication != null)
+            {
+                HttpClient.DefaultRequestHeaders.TryAddWithoutValidation(
+                    "X-Mashape-Key", mashapeAuthentication.MashapeKey);
+            }
+
+            HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         /// <summary>
-        ///     Make requests to the endpoint.
+        ///     Send requests to the service.
         /// </summary>
-        /// <param name="endpointUrl">The endpointUrl that should be called.</param>
-        /// <param name="httpMethod">The HttpMethod that should be used.</param>
-        /// <param name="content">The HttpContent that should be submitted.</param>
+        /// <param name="message">The HttpRequestMessage that should be sent.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        internal async Task<T> MakeEndpointRequestAsync<T>(HttpMethod httpMethod, string endpointUrl,
-            HttpContent content = null)
+        internal async Task<T> SendRequestAsync<T>(HttpRequestMessage message)
         {
-            if (httpMethod == null)
-                throw new ArgumentNullException(nameof(httpMethod));
+            if (message == null)
+                throw new ArgumentNullException(nameof(message));
 
-            if (string.IsNullOrEmpty(endpointUrl))
-                throw new ArgumentNullException(nameof(endpointUrl));
+            var httpResponse = await HttpClient.SendAsync(message);
 
-            using (var httpClient = GetHttpClient())
-            {
-                HttpResponseMessage httpResponse;
+            string stringResponse = null;
 
-                //Select the right method to use
-                if (httpMethod == HttpMethod.Get)
-                {
-                    httpResponse = await httpClient.GetAsync(endpointUrl);
-                }
-                else if (httpMethod == HttpMethod.Post)
-                {
-                    httpResponse = await httpClient.PostAsync(endpointUrl, content);
-                }
-                else if (httpMethod == HttpMethod.Put)
-                {
-                    httpResponse = await httpClient.PutAsync(endpointUrl, content);
-                }
-                else if (httpMethod == HttpMethod.Delete)
-                {
-                    httpResponse = await httpClient.DeleteAsync(endpointUrl);
-                }
-                else
-                {
-                    throw new ArgumentException("Invalid HttpMethod provided.", nameof(httpMethod));
-                }
+            if (httpResponse.Content != null)
+                stringResponse = await httpResponse.Content.ReadAsStringAsync();
 
-                UpdateRateLimit(httpResponse.Headers);
+            UpdateRateLimit(httpResponse.Headers);
 
-                //Get the string response
-                var stringResponse = await httpResponse.Content.ReadAsStringAsync();
-
-                return ProcessEndpointResponse<T>(stringResponse);
-            }
-        }
-
-        /// <summary>
-        ///     Gets a new HttpClient with DefaultRequestHeaders configured based
-        ///     on the current ApiClient set.
-        /// </summary>
-        /// <returns></returns>
-        internal virtual HttpClient GetHttpClient()
-        {
-            var httpClient = new HttpClient();
-
-            //Add OAuth Authentication header
-            httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                "Authorization",
-                ApiClient.OAuth2Token != null
-                    ? $"Bearer {ApiClient.OAuth2Token.AccessToken}"
-                    : $"Client-ID {ApiClient.ClientId}");
-
-            //Add Mashape Authentication header
-            var mashapeAuthentication = ApiClient as IMashapeClient;
-            if (mashapeAuthentication != null)
-            {
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                    "X-Mashape-Key", mashapeAuthentication.MashapeKey);
-            }
-
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            return httpClient;
+            return ProcessEndpointResponse<T>(stringResponse);
         }
 
         /// <summary>
@@ -215,7 +222,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <typeparam name="T">The expected output type, Image, bool, etc.</typeparam>
         /// <param name="endpointStringResponse">The string response from the endpoint.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <returns></returns>
@@ -223,13 +229,11 @@ namespace Imgur.API.Endpoints.Impl
         {
             //If no result is found, then we can't proceed
             if (string.IsNullOrWhiteSpace(endpointStringResponse))
-                throw new ArgumentNullException(nameof(endpointStringResponse),
-                    "The response from the endpoint is empty.");
+                throw new ImgurException("The response from the endpoint is empty.");
 
             //If the result isn't a json response, then we can't proceed
             if (endpointStringResponse.StartsWith("<"))
-                throw new ArgumentOutOfRangeException(nameof(endpointStringResponse), endpointStringResponse,
-                    "The response from the endpoint is invalid.");
+                throw new ImgurException("The response from the endpoint is invalid.");
 
             //If the authentication method is Mashape, then an error response
             //is different to that of Imgur's response.
@@ -248,7 +252,7 @@ namespace Imgur.API.Endpoints.Impl
 
             //If the type being requested is an oAuthToken
             //Deserialize it immediately and return
-            if (typeof (T) == typeof (IOAuth2Token) || typeof (T) == typeof (OAuth2Token))
+            if (typeof(T) == typeof(IOAuth2Token) || typeof(T) == typeof(OAuth2Token))
             {
                 var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
                 return oAuth2Response;

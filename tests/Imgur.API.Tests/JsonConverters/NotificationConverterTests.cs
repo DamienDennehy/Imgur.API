@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Imgur.API.JsonConverters;
 using Imgur.API.Models.Impl;
-using Imgur.API.Tests.EndpointResponses;
+using Imgur.API.Tests.FakeResponses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 

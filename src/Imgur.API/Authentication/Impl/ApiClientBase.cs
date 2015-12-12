@@ -12,7 +12,7 @@ namespace Imgur.API.Authentication.Impl
         /// <summary>
         ///     Initializes a new instance of the ApiClientBase class.
         /// </summary>
-        protected ApiClientBase()
+        protected internal ApiClientBase()
         {
         }
 

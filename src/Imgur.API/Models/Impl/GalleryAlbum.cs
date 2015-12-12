@@ -120,7 +120,7 @@ namespace Imgur.API.Models.Impl
         ///     Up to 10 top level comments, sorted by "best".
         /// </summary>
         [JsonProperty("comment_preview")]
-        [JsonConverter(typeof (EnumerableConverter<Comment>))]
+        [JsonConverter(typeof (TypeConverter<IEnumerable<Comment>>))]
         public IEnumerable<IComment> CommentPreview { get; set; } = new List<IComment>();
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     An array of all the images in the album (only available when requesting the direct album).
         /// </summary>
-        [JsonConverter(typeof (EnumerableConverter<Image>))]
+        [JsonConverter(typeof (TypeConverter<IEnumerable<Image>>))]
         public IEnumerable<IImage> Images { get; set; } = new List<IImage>();
     }
 }

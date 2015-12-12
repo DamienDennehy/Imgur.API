@@ -51,10 +51,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Endpoints\AccountEndpointTests\AccountEndpointImgurAuthTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointTests\AccountEndpointImgurAuthWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AccountEndpointTests\AccountEndpointMashapeAuthTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointTests\AccountEndpointMashapeAuthWithOAuth2Tests.cs" />
     <Compile Include="Endpoints\ImageEndpointTests\ImageEndpointImgurAuthTests.cs" />
     <Compile Include="Endpoints\ImageEndpointTests\ImageEndpointImgurAuthWithOAuth2Tests.cs" />
     <Compile Include="Endpoints\ImageEndpointTests\ImageEndpointMashapeAuthTests.cs" />
@@ -74,9 +70,7 @@
     <None Include="App.config" />
     <None Include="README.md" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Endpoints\AlbumEndpointTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Banana.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

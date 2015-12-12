@@ -1,4 +1,4 @@
-﻿namespace Imgur.API.Tests.EndpointResponses
+﻿namespace Imgur.API.Tests.FakeResponses
 {
     public class GenericEndpointResponses
     {

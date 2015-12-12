@@ -5,6 +5,7 @@ using Imgur.API.Authentication;
 using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
+using Imgur.API.RequestBuilders;
 
 namespace Imgur.API.Endpoints.Impl
 {
@@ -13,7 +14,7 @@ namespace Imgur.API.Endpoints.Impl
     /// </summary>
     public class RateLimitEndpoint : EndpointBase, IRateLimitEndpoint
     {
-        private const string RateLimitUrl = "credits";
+        internal RateLimitRequestBuilder RequestBuilder { get; } = new RateLimitRequestBuilder();
 
         /// <summary>
         ///     Initializes a new instance of the RateLimitEndpoint class.
@@ -24,18 +25,33 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
+        ///     Initializes a new instance of the RateLimitEndpoint class.
+        /// </summary>
+        /// <param name="apiClient"></param>
+        /// <param name="httpClient"></param>
+        internal RateLimitEndpoint(IApiClient apiClient, HttpClient httpClient) : base(apiClient, httpClient)
+        {
+        }
+
+        /// <summary>
         ///     Get RateLimit.
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="InvalidOperationException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IRateLimit> GetRateLimitAsync()
         {
-            var endpointUrl = string.Concat(GetEndpointBaseUrl(), RateLimitUrl);
-            var limit = await MakeEndpointRequestAsync<RateLimit>(HttpMethod.Get, endpointUrl);
+            IRateLimit limit;
+
+            var url = $"{GetEndpointBaseUrl()}credits";
+
+            using (var request = RequestBuilder.GetRateLimitRequest(url))
+            {
+                limit = await SendRequestAsync<RateLimit>(request);
+            }
+
             return limit;
         }
     }

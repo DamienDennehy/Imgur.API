@@ -90,7 +90,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     All of the replies for this comment. If there are no replies to the comment then this is an empty set.
         /// </summary>
-        [JsonConverter(typeof (EnumerableConverter<Comment>))]
+        [JsonConverter(typeof (TypeConverter<IEnumerable<Comment>>))]
         public IEnumerable<IComment> Children { get; set; } = new List<IComment>();
     }
 }

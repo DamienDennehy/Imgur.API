@@ -13,6 +13,62 @@ namespace Imgur.API.Tests.RequestBuilders
     public class ImageRequestBuilderTests
     {
         [TestMethod]
+        public void DeleteImageRequest_AreEqual()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new ImageEndpoint(imgurClient);
+
+            var url = $"{endpoint.GetEndpointBaseUrl()}image/1234Xyz9";
+            var request = endpoint.RequestBuilder.DeleteImageRequest(url, "1234Xyz9");
+
+            Assert.IsNotNull(request);
+            Assert.AreEqual("https://api.imgur.com/3/image/1234Xyz9", request.RequestUri.ToString());
+            Assert.AreEqual(HttpMethod.Delete, request.Method);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public void DeleteImageRequest_WithIdNull_ThrowsArgumentNullException()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new ImageEndpoint(imgurClient);
+            var url = $"{endpoint.GetEndpointBaseUrl()}/image/1234Xyz";
+            endpoint.RequestBuilder.DeleteImageRequest(url, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public void DeleteImageRequest_WithUrlNull_ThrowsArgumentNullException()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new ImageEndpoint(imgurClient);
+            endpoint.RequestBuilder.DeleteImageRequest(null, "1234Xyz9");
+        }
+
+        [TestMethod]
+        public void FavoriteImageRequest_AreEqual()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new ImageEndpoint(imgurClient);
+
+            var url = $"{endpoint.GetEndpointBaseUrl()}image/1234Xyz9/favorite";
+            var request = endpoint.RequestBuilder.FavoriteImageRequest(url);
+
+            Assert.IsNotNull(request);
+            Assert.AreEqual("https://api.imgur.com/3/image/1234Xyz9/favorite", request.RequestUri.ToString());
+            Assert.AreEqual(HttpMethod.Post, request.Method);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public void FavoriteImageRequest_WithUrlNull_ThrowsArgumentNullException()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new ImageEndpoint(imgurClient);
+            endpoint.RequestBuilder.FavoriteImageRequest(null);
+        }
+
+        [TestMethod]
         public void GetImageRequest_AreEqual()
         {
             var imgurClient = new ImgurClient("123", "1234");
@@ -28,6 +84,16 @@ namespace Imgur.API.Tests.RequestBuilders
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
+        public void GetImageRequest_WithIdNull_ThrowsArgumentNullException()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new ImageEndpoint(imgurClient);
+            var url = $"{endpoint.GetEndpointBaseUrl()}/image/1234Xyz";
+            endpoint.RequestBuilder.GetImageRequest(url, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void GetImageRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var imgurClient = new ImgurClient("123", "1234");
@@ -36,13 +102,30 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public void GetImageRequest_WithIdNull_ThrowsArgumentNullException()
+        public async Task UpdateImageRequest_AreEqual()
         {
             var imgurClient = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(imgurClient);
-            var url = $"{endpoint.GetEndpointBaseUrl()}/image/1234Xyz";
-            endpoint.RequestBuilder.GetImageRequest(url, null);
+
+            var url = $"{endpoint.GetEndpointBaseUrl()}image/1234Xyz9";
+            var request = endpoint.RequestBuilder.UpdateImageRequest(url, "TheTitle", "TheDescription");
+
+            Assert.IsNotNull(request);
+            Assert.AreEqual("https://api.imgur.com/3/image/1234Xyz9", request.RequestUri.ToString());
+            Assert.AreEqual(HttpMethod.Post, request.Method);
+
+            var expected = await request.Content.ReadAsStringAsync();
+
+            Assert.AreEqual("title=TheTitle&description=TheDescription", expected);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public void UpdateImageRequest_WithUrlNull_ThrowsArgumentNullException()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new ImageEndpoint(imgurClient);
+            endpoint.RequestBuilder.UpdateImageRequest(null, "1234Xyz9");
         }
 
         [TestMethod]
@@ -84,6 +167,16 @@ namespace Imgur.API.Tests.RequestBuilders
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
+        public void UploadImageBinary_WithImageNull_ThrowsArgumentNullException()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new ImageEndpoint(imgurClient);
+            var url = $"{endpoint.GetEndpointBaseUrl()}image";
+            endpoint.RequestBuilder.UploadImageBinaryRequest(url, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void UploadImageBinary_WithUrlNull_ThrowsArgumentNullException()
         {
             var imgurClient = new ImgurClient("123", "1234");
@@ -93,13 +186,43 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
+        public async Task UploadImageUrl_AreEqual()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new ImageEndpoint(imgurClient);
+            var url = $"{endpoint.GetEndpointBaseUrl()}image";
+
+            var request = endpoint.RequestBuilder.UploadImageUrlRequest(url, "http://i.imgur.com/hxsPLa7.jpg",
+                "TheAlbum", "TheTitle", "TheDescription");
+
+            Assert.IsNotNull(request);
+            Assert.AreEqual("https://api.imgur.com/3/image", request.RequestUri.ToString());
+            Assert.AreEqual(HttpMethod.Post, request.Method);
+
+            var expected = await request.Content.ReadAsStringAsync();
+
+            Assert.AreEqual(
+                "type=URL&image=http%3A%2F%2Fi.imgur.com%2FhxsPLa7.jpg&album=TheAlbum&title=TheTitle&description=TheDescription",
+                expected);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public void UploadImageBinary_WithImageNull_ThrowsArgumentNullException()
+        public void UploadImageUrl_WithImageNull_ThrowsArgumentNullException()
         {
             var imgurClient = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(imgurClient);
             var url = $"{endpoint.GetEndpointBaseUrl()}image";
             endpoint.RequestBuilder.UploadImageBinaryRequest(url, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public void UploadImageUrl_WithUrlNull_ThrowsArgumentNullException()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new ImageEndpoint(imgurClient);
+            endpoint.RequestBuilder.UploadImageBinaryRequest(null, null);
         }
 
         [TestMethod]
@@ -146,18 +269,6 @@ namespace Imgur.API.Tests.RequestBuilders
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public void UploadStreamBinary_WithUrlNull_ThrowsArgumentNullException()
-        {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(imgurClient);
-            using (var fs = new FileStream("banana.gif", FileMode.Open))
-            {
-                endpoint.RequestBuilder.UploadImageStreamRequest(null, fs);
-            }
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
         public void UploadStreamBinary_WithImageNull_ThrowsArgumentNullException()
         {
             var imgurClient = new ImgurClient("123", "1234");
@@ -170,126 +281,15 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
-        public async Task UploadImageUrl_AreEqual()
-        {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(imgurClient);
-            var url = $"{endpoint.GetEndpointBaseUrl()}image";
-
-            var request = endpoint.RequestBuilder.UploadImageUrlRequest(url, "http://i.imgur.com/hxsPLa7.jpg",
-                "TheAlbum", "TheTitle", "TheDescription");
-
-            Assert.IsNotNull(request);
-            Assert.AreEqual("https://api.imgur.com/3/image", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Post, request.Method);
-
-            var expected = await request.Content.ReadAsStringAsync();
-
-            Assert.AreEqual(
-                "type=URL&image=http%3A%2F%2Fi.imgur.com%2FhxsPLa7.jpg&album=TheAlbum&title=TheTitle&description=TheDescription",
-                expected);
-        }
-
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public void UploadImageUrl_WithUrlNull_ThrowsArgumentNullException()
+        public void UploadStreamBinary_WithUrlNull_ThrowsArgumentNullException()
         {
             var imgurClient = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(imgurClient);
-            endpoint.RequestBuilder.UploadImageBinaryRequest(null, null);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public void UploadImageUrl_WithImageNull_ThrowsArgumentNullException()
-        {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(imgurClient);
-            var url = $"{endpoint.GetEndpointBaseUrl()}image";
-            endpoint.RequestBuilder.UploadImageBinaryRequest(url, null);
-        }
-
-        [TestMethod]
-        public void DeleteImageRequest_AreEqual()
-        {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(imgurClient);
-
-            var url = $"{endpoint.GetEndpointBaseUrl()}image/1234Xyz9";
-            var request = endpoint.RequestBuilder.DeleteImageRequest(url, "1234Xyz9");
-
-            Assert.IsNotNull(request);
-            Assert.AreEqual("https://api.imgur.com/3/image/1234Xyz9", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Delete, request.Method);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public void DeleteImageRequest_WithUrlNull_ThrowsArgumentNullException()
-        {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(imgurClient);
-            endpoint.RequestBuilder.DeleteImageRequest(null, "1234Xyz9");
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public void DeleteImageRequest_WithIdNull_ThrowsArgumentNullException()
-        {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(imgurClient);
-            var url = $"{endpoint.GetEndpointBaseUrl()}/image/1234Xyz";
-            endpoint.RequestBuilder.DeleteImageRequest(url, null);
-        }
-
-        [TestMethod]
-        public async Task UpdateImageRequest_AreEqual()
-        {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(imgurClient);
-
-            var url = $"{endpoint.GetEndpointBaseUrl()}image/1234Xyz9";
-            var request = endpoint.RequestBuilder.UpdateImageRequest(url, "TheTitle", "TheDescription");
-
-            Assert.IsNotNull(request);
-            Assert.AreEqual("https://api.imgur.com/3/image/1234Xyz9", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Post, request.Method);
-
-            var expected = await request.Content.ReadAsStringAsync();
-
-            Assert.AreEqual("title=TheTitle&description=TheDescription", expected);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public void UpdateImageRequest_WithUrlNull_ThrowsArgumentNullException()
-        {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(imgurClient);
-            endpoint.RequestBuilder.UpdateImageRequest(null, "1234Xyz9");
-        }
-
-        [TestMethod]
-        public void FavoriteImageRequest_AreEqual()
-        {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(imgurClient);
-
-            var url = $"{endpoint.GetEndpointBaseUrl()}image/1234Xyz9/favorite";
-            var request = endpoint.RequestBuilder.FavoriteImageRequest(url);
-
-            Assert.IsNotNull(request);
-            Assert.AreEqual("https://api.imgur.com/3/image/1234Xyz9/favorite", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Post, request.Method);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public void FavoriteImageRequest_WithUrlNull_ThrowsArgumentNullException()
-        {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(imgurClient);
-            endpoint.RequestBuilder.FavoriteImageRequest(null);
+            using (var fs = new FileStream("banana.gif", FileMode.Open))
+            {
+                endpoint.RequestBuilder.UploadImageStreamRequest(null, fs);
+            }
         }
     }
 }

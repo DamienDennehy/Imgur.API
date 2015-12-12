@@ -70,7 +70,8 @@ namespace Imgur.API.RequestBuilders
         }
 
         /// <exception cref="ArgumentNullException"></exception>
-        internal HttpRequestMessage GetTokenByRefreshTokenRequest(string url, string refreshToken, string clientId, string clientSecret)
+        internal HttpRequestMessage GetTokenByRefreshTokenRequest(string url, string refreshToken, string clientId,
+            string clientSecret)
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));

@@ -13,6 +13,14 @@ namespace Imgur.API.Tests.JsonConverters
     public class GalleryItemConverterTests
     {
         [TestMethod]
+        public void GalleryItem_CanConvert_IsFalse()
+        {
+            var converter = new GalleryItemConverter();
+            var canConvert = converter.CanConvert(new Image().GetType());
+            Assert.IsFalse(canConvert);
+        }
+
+        [TestMethod]
         public void GalleryItem_CanConvertGalleryAlbum_IsTrue()
         {
             var converter = new GalleryItemConverter();
@@ -26,14 +34,6 @@ namespace Imgur.API.Tests.JsonConverters
             var converter = new GalleryItemConverter();
             var canConvert = converter.CanConvert(new GalleryImage().GetType());
             Assert.IsTrue(canConvert);
-        }
-
-        [TestMethod]
-        public void GalleryItem_CanConvert_IsFalse()
-        {
-            var converter = new GalleryItemConverter();
-            var canConvert = converter.CanConvert(new Image().GetType());
-            Assert.IsFalse(canConvert);
         }
 
         [TestMethod]

@@ -6,9 +6,9 @@
     public interface ITagVote
     {
         /// <summary>
-        ///     Number of upvotes.
+        ///     Author of the tag.
         /// </summary>
-        int Ups { get; set; }
+        string Author { get; set; }
 
         /// <summary>
         ///     Number of downvotes.
@@ -21,8 +21,8 @@
         string Name { get; set; }
 
         /// <summary>
-        ///     Author of the tag.
+        ///     Number of upvotes.
         /// </summary>
-        string Author { get; set; }
+        int Ups { get; set; }
     }
 }

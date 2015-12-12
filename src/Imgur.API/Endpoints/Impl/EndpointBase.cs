@@ -8,7 +8,6 @@ using Imgur.API.Exceptions;
 using Imgur.API.JsonConverters;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
-using Imgur.API.RequestBuilders;
 using Newtonsoft.Json;
 
 namespace Imgur.API.Endpoints.Impl
@@ -139,6 +138,68 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
+        ///     Parses the string response from the endpoint into an expected type T.
+        /// </summary>
+        /// <typeparam name="T">The expected output type, Image, bool, etc.</typeparam>
+        /// <param name="endpointStringResponse">The string response from the endpoint.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <returns></returns>
+        internal T ProcessEndpointResponse<T>(string endpointStringResponse)
+        {
+            //If no result is found, then we can't proceed
+            if (string.IsNullOrWhiteSpace(endpointStringResponse))
+                throw new ImgurException("The response from the endpoint is empty.");
+
+            //If the result isn't a json response, then we can't proceed
+            if (endpointStringResponse.StartsWith("<"))
+                throw new ImgurException("The response from the endpoint is invalid.");
+
+            //If the authentication method is Mashape, then an error response
+            //is different to that of Imgur's response.
+            if (ApiClient is IMashapeClient && endpointStringResponse.Contains("{\"message\":"))
+            {
+                var maShapeError = JsonConvert.DeserializeObject<MashapeError>(endpointStringResponse);
+                throw new MashapeException(maShapeError.Message);
+            }
+
+            //If an error occurs, throw an exception
+            if (endpointStringResponse.Contains("{\"data\":{\"error\":"))
+            {
+                var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
+                throw new ImgurException(apiError.Data.Error);
+            }
+
+            //If the type being requested is an oAuthToken
+            //Deserialize it immediately and return
+            if (typeof (T) == typeof (IOAuth2Token) || typeof (T) == typeof (OAuth2Token))
+            {
+                var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
+                return oAuth2Response;
+            }
+
+            //Deserialize the response into a generic Basic<object> type
+            var response = JsonConvert.DeserializeObject<Basic<object>>(endpointStringResponse);
+
+            //If the response was not a success, then the response type is Basic<ImgurError>
+            //and should be handled as such.
+            if (!response.Success)
+            {
+                var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
+                throw new ImgurException(apiError.Data.Error);
+            }
+
+            var converters = new JsonConverter[1];
+            converters[0] = new GalleryItemConverter();
+
+            //Deserialize the actual response
+            var finalResponse = JsonConvert.DeserializeObject<Basic<T>>(endpointStringResponse, converters);
+
+            return finalResponse.Data;
+        }
+
+        /// <summary>
         ///     Send requests to the service.
         /// </summary>
         /// <param name="message">The HttpRequestMessage that should be sent.</param>
@@ -214,68 +275,6 @@ namespace Imgur.API.Endpoints.Impl
                 ApiClient.RateLimit.UserRemaining = null;
                 ApiClient.RateLimit.UserReset = null;
             }
-        }
-
-        /// <summary>
-        ///     Parses the string response from the endpoint into an expected type T.
-        /// </summary>
-        /// <typeparam name="T">The expected output type, Image, bool, etc.</typeparam>
-        /// <param name="endpointStringResponse">The string response from the endpoint.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="MashapeException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <returns></returns>
-        internal T ProcessEndpointResponse<T>(string endpointStringResponse)
-        {
-            //If no result is found, then we can't proceed
-            if (string.IsNullOrWhiteSpace(endpointStringResponse))
-                throw new ImgurException("The response from the endpoint is empty.");
-
-            //If the result isn't a json response, then we can't proceed
-            if (endpointStringResponse.StartsWith("<"))
-                throw new ImgurException("The response from the endpoint is invalid.");
-
-            //If the authentication method is Mashape, then an error response
-            //is different to that of Imgur's response.
-            if (ApiClient is IMashapeClient && endpointStringResponse.Contains("{\"message\":"))
-            {
-                var maShapeError = JsonConvert.DeserializeObject<MashapeError>(endpointStringResponse);
-                throw new MashapeException(maShapeError.Message);
-            }
-
-            //If an error occurs, throw an exception
-            if (endpointStringResponse.Contains("{\"data\":{\"error\":"))
-            {
-                var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
-                throw new ImgurException(apiError.Data.Error);
-            }
-
-            //If the type being requested is an oAuthToken
-            //Deserialize it immediately and return
-            if (typeof(T) == typeof(IOAuth2Token) || typeof(T) == typeof(OAuth2Token))
-            {
-                var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
-                return oAuth2Response;
-            }
-
-            //Deserialize the response into a generic Basic<object> type
-            var response = JsonConvert.DeserializeObject<Basic<object>>(endpointStringResponse);
-
-            //If the response was not a success, then the response type is Basic<ImgurError>
-            //and should be handled as such.
-            if (!response.Success)
-            {
-                var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
-                throw new ImgurException(apiError.Data.Error);
-            }
-
-            var converters = new JsonConverter[1];
-            converters[0] = new GalleryItemConverter();
-
-            //Deserialize the actual response
-            var finalResponse = JsonConvert.DeserializeObject<Basic<T>>(endpointStringResponse, converters);
-
-            return finalResponse.Data;
         }
     }
 }

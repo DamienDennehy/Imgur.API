@@ -15,8 +15,6 @@ namespace Imgur.API.Endpoints.Impl
     /// </summary>
     public class ImageEndpoint : EndpointBase, IImageEndpoint
     {
-        internal ImageRequestBuilder RequestBuilder { get; } = new ImageRequestBuilder();
-
         /// <summary>
         ///     Initializes a new instance of the ImageEndpoint class.
         /// </summary>
@@ -34,6 +32,8 @@ namespace Imgur.API.Endpoints.Impl
         {
         }
 
+        internal ImageRequestBuilder RequestBuilder { get; } = new ImageRequestBuilder();
+
         /// <summary>
         ///     Get information about an image.
         /// </summary>
@@ -47,7 +47,7 @@ namespace Imgur.API.Endpoints.Impl
         {
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id));
-            
+
             var url = $"{GetEndpointBaseUrl()}image/{id}";
 
             using (var request = RequestBuilder.GetImageRequest(url, id))
@@ -77,7 +77,7 @@ namespace Imgur.API.Endpoints.Impl
         {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
-            
+
             var url = $"{GetEndpointBaseUrl()}image";
 
             using (var request = RequestBuilder.UploadImageBinaryRequest(url, image, album, title, description))
@@ -107,7 +107,7 @@ namespace Imgur.API.Endpoints.Impl
         {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
-            
+
             var url = $"{GetEndpointBaseUrl()}image";
 
             using (var request = RequestBuilder.UploadImageStreamRequest(url, image, album, title, description))
@@ -137,7 +137,7 @@ namespace Imgur.API.Endpoints.Impl
         {
             if (string.IsNullOrEmpty(image))
                 throw new ArgumentNullException(nameof(image));
-            
+
             var url = $"{GetEndpointBaseUrl()}image";
 
             using (var request = RequestBuilder.UploadImageUrlRequest(url, image, album, title, description))
@@ -163,7 +163,7 @@ namespace Imgur.API.Endpoints.Impl
                 throw new ArgumentNullException(nameof(id));
 
             var url = $"{GetEndpointBaseUrl()}image/{id}";
-     
+
             using (var request = RequestBuilder.DeleteImageRequest(url, id))
             {
                 var deleted = await SendRequestAsync<bool>(request);
@@ -190,7 +190,7 @@ namespace Imgur.API.Endpoints.Impl
                 throw new ArgumentNullException(nameof(id));
 
             var url = $"{GetEndpointBaseUrl()}image/{id}";
-       
+
             using (var request = RequestBuilder.UpdateImageRequest(url, id))
             {
                 var updated = await SendRequestAsync<bool>(request);
@@ -215,8 +215,8 @@ namespace Imgur.API.Endpoints.Impl
                 throw new ArgumentNullException(nameof(id));
 
             var url = $"{GetEndpointBaseUrl()}image/{id}/favorite";
-           
-            using (var request = RequestBuilder.UpdateImageRequest(url, id))
+
+            using (var request = RequestBuilder.FavoriteImageRequest(url))
             {
                 //The structure of the response of favoriting an image
                 //varies on if Imgur or Mashape Authentication is used
@@ -229,7 +229,7 @@ namespace Imgur.API.Endpoints.Impl
                 //If Mashape Authentication is used, the favorite is returned as an exception
                 try
                 {
-                    await SendRequestAsync<ImgurException>(request);
+                    await SendRequestAsync<string>(request);
                 }
                 catch (ImgurException imgurException)
                 {

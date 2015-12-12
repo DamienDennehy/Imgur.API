@@ -13,6 +13,20 @@ namespace Imgur.API.Tests.FakeTests
     public class FakeHttpMessageHandlerTests
     {
         [TestMethod]
+        public async Task HttpClient_GetAsync_ResponseContent_IsNull()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK) {Content = new StringContent("hello world")};
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/exists"), fakeResponse);
+
+            var httpClient = new HttpClient(fakeHttpMessageHandler);
+            var response = await httpClient.GetAsync("http://example.org/notfound");
+
+            Assert.IsNull(response.Content);
+        }
+
+        [TestMethod]
         public async Task HttpClient_GetAsync_ResponseContentAreEqual()
         {
             var fakeHttpMessageHandler = new FakeHttpMessageHandler();
@@ -44,20 +58,6 @@ namespace Imgur.API.Tests.FakeTests
             var stringResponse = await response.Content.ReadAsStringAsync();
 
             Assert.AreEqual("post response", stringResponse);
-        }
-
-        [TestMethod]
-        public async Task HttpClient_GetAsync_ResponseContent_IsNull()
-        {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
-            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK) {Content = new StringContent("hello world")};
-
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/exists"), fakeResponse);
-
-            var httpClient = new HttpClient(fakeHttpMessageHandler);
-            var response = await httpClient.GetAsync("http://example.org/notfound");
-
-            Assert.IsNull(response.Content);
         }
     }
 }

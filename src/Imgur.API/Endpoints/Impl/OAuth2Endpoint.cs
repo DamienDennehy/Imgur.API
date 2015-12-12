@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
+using Imgur.API.Enums;
 using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
@@ -14,12 +15,6 @@ namespace Imgur.API.Endpoints.Impl
     /// </summary>
     public class OAuth2Endpoint : EndpointBase, IOAuth2Endpoint
     {
-        internal string AuthorizationEndpointUrl { get; } = "https://api.imgur.com/oauth2/authorize";
-
-        internal string TokenEndpointUrl { get; } = "https://api.imgur.com/oauth2/token";
-
-        internal OAuth2RequestBuilder RequestBuilder { get; } = new OAuth2RequestBuilder();
-
         /// <summary>
         ///     Initializes a new instance of the OAuth2Endpoint class.
         /// </summary>
@@ -37,6 +32,12 @@ namespace Imgur.API.Endpoints.Impl
         {
         }
 
+        internal string AuthorizationEndpointUrl { get; } = "https://api.imgur.com/oauth2/authorize";
+
+        internal OAuth2RequestBuilder RequestBuilder { get; } = new OAuth2RequestBuilder();
+
+        internal string TokenEndpointUrl { get; } = "https://api.imgur.com/oauth2/token";
+
         /// <summary>
         ///     Creates an authorization url that can be used to authorize access to a user's account.
         /// </summary>
@@ -48,7 +49,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public string GetAuthorizationUrl(OAuth2ResponseType oAuth2ResponseType, string state)
         {
-            var url =  $"{AuthorizationEndpointUrl}?client_id={ApiClient.ClientId}&response_type={oAuth2ResponseType}&state={state}";
+            var url =
+                $"{AuthorizationEndpointUrl}?client_id={ApiClient.ClientId}&response_type={oAuth2ResponseType}&state={state}";
             return url;
         }
 
@@ -70,7 +72,9 @@ namespace Imgur.API.Endpoints.Impl
 
             IOAuth2Token token;
 
-            using (var request = RequestBuilder.GetTokenByCodeRequest(TokenEndpointUrl, code, ApiClient.ClientId, ApiClient.ClientSecret))
+            using (
+                var request = RequestBuilder.GetTokenByCodeRequest(TokenEndpointUrl, code, ApiClient.ClientId,
+                    ApiClient.ClientSecret))
             {
                 token = await SendRequestAsync<OAuth2Token>(request);
             }
@@ -92,7 +96,9 @@ namespace Imgur.API.Endpoints.Impl
         {
             IOAuth2Token token;
 
-            using (var request = RequestBuilder.GetTokenByPinRequest(TokenEndpointUrl, pin, ApiClient.ClientId, ApiClient.ClientSecret))
+            using (
+                var request = RequestBuilder.GetTokenByPinRequest(TokenEndpointUrl, pin, ApiClient.ClientId,
+                    ApiClient.ClientSecret))
             {
                 token = await SendRequestAsync<OAuth2Token>(request);
             }
@@ -121,7 +127,9 @@ namespace Imgur.API.Endpoints.Impl
         {
             IOAuth2Token token;
 
-            using (var request = RequestBuilder.GetTokenByRefreshTokenRequest(TokenEndpointUrl, refreshToken, ApiClient.ClientId, ApiClient.ClientSecret))
+            using (
+                var request = RequestBuilder.GetTokenByRefreshTokenRequest(TokenEndpointUrl, refreshToken,
+                    ApiClient.ClientId, ApiClient.ClientSecret))
             {
                 token = await SendRequestAsync<OAuth2Token>(request);
             }

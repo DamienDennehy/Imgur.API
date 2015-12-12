@@ -10,7 +10,7 @@ namespace Imgur.API.RequestBuilders
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
-            
+
             return new HttpRequestMessage(HttpMethod.Get, url);
         }
     }

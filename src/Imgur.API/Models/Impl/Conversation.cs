@@ -11,15 +11,21 @@ namespace Imgur.API.Models.Impl
     public class Conversation : IDataModel
     {
         /// <summary>
+        ///     Utc timestamp of last sent message, converted from epoch time.
+        /// </summary>
+        [JsonConverter(typeof (EpochTimeConverter))]
+        public DateTimeOffset DateTime { get; set; }
+
+        /// <summary>
+        ///     OPTIONAL: (only available when requesting a specific conversation).
+        ///     Flag to indicate whether you've reached the beginning of the thread.
+        /// </summary>
+        public bool? Done { get; set; }
+
+        /// <summary>
         ///     Conversation ID
         /// </summary>
         public int Id { get; set; }
-
-        /// <summary>
-        ///     Preview of the last message
-        /// </summary>
-        [JsonProperty("last_message_preview")]
-        public string LastMessagePreview { get; set; }
 
         /// <summary>
         ///     The last message
@@ -28,22 +34,10 @@ namespace Imgur.API.Models.Impl
         public string LastMessage { get; set; }
 
         /// <summary>
-        ///     Utc timestamp of last sent message, converted from epoch time.
+        ///     Preview of the last message
         /// </summary>
-        [JsonConverter(typeof (EpochTimeConverter))]
-        public DateTimeOffset DateTime { get; set; }
-
-        /// <summary>
-        ///     Account ID of the other user in conversation.
-        /// </summary>
-        [JsonProperty("with_account_id")]
-        public int WithAccountId { get; set; }
-
-        /// <summary>
-        ///     Account username of the other user in conversation.
-        /// </summary>
-        [JsonProperty("with_account")]
-        public string WithAccount { get; set; }
+        [JsonProperty("last_message_preview")]
+        public string LastMessagePreview { get; set; }
 
         /// <summary>
         ///     Total number of messages in the conversation.
@@ -59,15 +53,21 @@ namespace Imgur.API.Models.Impl
         public IEnumerable<IMessage> Messages { get; set; } = new List<IMessage>();
 
         /// <summary>
-        ///     OPTIONAL: (only available when requesting a specific conversation).
-        ///     Flag to indicate whether you've reached the beginning of the thread.
-        /// </summary>
-        public bool? Done { get; set; }
-
-        /// <summary>
         ///     OPTIONAL: (only available when requesting a specific conversation)
         ///     Number of the next page.
         /// </summary>
         public int? Page { get; set; }
+
+        /// <summary>
+        ///     Account username of the other user in conversation.
+        /// </summary>
+        [JsonProperty("with_account")]
+        public string WithAccount { get; set; }
+
+        /// <summary>
+        ///     Account ID of the other user in conversation.
+        /// </summary>
+        [JsonProperty("with_account_id")]
+        public int WithAccountId { get; set; }
     }
 }

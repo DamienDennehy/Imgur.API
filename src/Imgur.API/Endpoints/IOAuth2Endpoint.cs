@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Imgur.API.Authentication;
+using Imgur.API.Enums;
 using Imgur.API.Models;
 
 namespace Imgur.API.Endpoints
@@ -21,14 +21,6 @@ namespace Imgur.API.Endpoints
         string GetAuthorizationUrl(OAuth2ResponseType oAuth2ResponseType, string state);
 
         /// <summary>
-        ///     After the user authorizes, they will receive a PIN code that they copy into your app.
-        ///     Get the access token from the PIN.
-        /// </summary>
-        /// <param name="pin">The PIN that the user is prompted to enter.</param>
-        /// <returns></returns>
-        Task<IOAuth2Token> GetTokenByPinAsync(string pin);
-
-        /// <summary>
         ///     After the user authorizes, the pin is returned as a code to your application
         ///     via the redirect URL you specified during registration, in the form of a regular query string parameter.
         ///     <para>Keep in mind that you can use localhost as a redirect URL.</para>
@@ -36,6 +28,14 @@ namespace Imgur.API.Endpoints
         /// <param name="code">The code from the query string.</param>
         /// <returns></returns>
         Task<IOAuth2Token> GetTokenByCodeAsync(string code);
+
+        /// <summary>
+        ///     After the user authorizes, they will receive a PIN code that they copy into your app.
+        ///     Get the access token from the PIN.
+        /// </summary>
+        /// <param name="pin">The PIN that the user is prompted to enter.</param>
+        /// <returns></returns>
+        Task<IOAuth2Token> GetTokenByPinAsync(string pin);
 
         /// <summary>
         ///     If a user has authorized their account but you no longer have a valid access_token for them,

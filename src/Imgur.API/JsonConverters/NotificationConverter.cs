@@ -39,12 +39,12 @@ namespace Imgur.API.JsonConverters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            var jsonString = JObject.Load(reader).ToString().ToLower();
+            var jsonString = JObject.Load(reader).ToString();
 
-            if (jsonString.Contains("comment"))
+            if (jsonString.ToLower().Contains("comment"))
                 return JsonConvert.DeserializeObject<Comment>(jsonString);
 
-            if (jsonString.Contains("message_num"))
+            if (jsonString.ToLower().Contains("message_num"))
                 return JsonConvert.DeserializeObject<Message>(jsonString);
 
             throw new NotImplementedException("Unrecognized Notification type.");

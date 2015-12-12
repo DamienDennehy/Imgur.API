@@ -1,4 +1,4 @@
-﻿namespace Imgur.API.Authentication
+﻿namespace Imgur.API.Enums
 {
     /// <summary>
     ///     Determines if Imgur returns a Code, a PIN code, or an opaque Token.

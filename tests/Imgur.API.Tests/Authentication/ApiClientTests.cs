@@ -53,35 +53,6 @@ namespace Imgur.API.Tests.Authentication
         }
 
         [TestMethod]
-        public void RateLimit_SetByInitialization_IsNotNull()
-        {
-            var client = Substitute.ForPartsOf<ApiClientBase>();
-            Assert.IsNotNull(client.RateLimit);
-        }
-
-        [TestMethod]
-        public void RateLimit_SetByDefaultConstructor_IsNotNull()
-        {
-            var client = Substitute.ForPartsOf<ApiClientBase>();
-            Assert.IsNotNull(client.RateLimit);
-        }
-
-        [TestMethod]
-        public void RateLimit_SetByConstructor1_IsNotNull()
-        {
-            var client = Substitute.ForPartsOf<ApiClientBase>("ClientId", "ClientSecret");
-            Assert.IsNotNull(client.RateLimit);
-        }
-
-        [TestMethod]
-        public void RateLimit_SetByConstructor2_IsNotNull()
-        {
-            var oAuth2Token = Substitute.For<IOAuth2Token>();
-            var client = Substitute.ForPartsOf<ApiClientBase>("ClientId", "ClientSecret", oAuth2Token);
-            Assert.IsNotNull(client.RateLimit);
-        }
-
-        [TestMethod]
         public void OAuth2Token_SetByConstructor_AreSame()
         {
             var oAuth2Token = Substitute.For<IOAuth2Token>();
@@ -111,6 +82,35 @@ namespace Imgur.API.Tests.Authentication
             Assert.AreSame(oAuth2Token, client.OAuth2Token);
             client.SetOAuth2Token(null);
             Assert.IsNull(client.OAuth2Token);
+        }
+
+        [TestMethod]
+        public void RateLimit_SetByConstructor1_IsNotNull()
+        {
+            var client = Substitute.ForPartsOf<ApiClientBase>("ClientId", "ClientSecret");
+            Assert.IsNotNull(client.RateLimit);
+        }
+
+        [TestMethod]
+        public void RateLimit_SetByConstructor2_IsNotNull()
+        {
+            var oAuth2Token = Substitute.For<IOAuth2Token>();
+            var client = Substitute.ForPartsOf<ApiClientBase>("ClientId", "ClientSecret", oAuth2Token);
+            Assert.IsNotNull(client.RateLimit);
+        }
+
+        [TestMethod]
+        public void RateLimit_SetByDefaultConstructor_IsNotNull()
+        {
+            var client = Substitute.ForPartsOf<ApiClientBase>();
+            Assert.IsNotNull(client.RateLimit);
+        }
+
+        [TestMethod]
+        public void RateLimit_SetByInitialization_IsNotNull()
+        {
+            var client = Substitute.ForPartsOf<ApiClientBase>();
+            Assert.IsNotNull(client.RateLimit);
         }
     }
 }

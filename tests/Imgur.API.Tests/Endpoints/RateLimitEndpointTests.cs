@@ -16,7 +16,6 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetRateLimitAsync_AreEqual()
         {
-            //Create a fake message handler
             var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
@@ -25,7 +24,6 @@ namespace Imgur.API.Tests.Endpoints
 
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/credits"), fakeResponse);
 
-            //Create a HttpClient that will use the fake handler
             var httpClient = new HttpClient(fakeHttpMessageHandler);
 
             var imgurClient = new ImgurClient("123", "1234");

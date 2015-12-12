@@ -14,8 +14,6 @@ namespace Imgur.API.Endpoints.Impl
     /// </summary>
     public class RateLimitEndpoint : EndpointBase, IRateLimitEndpoint
     {
-        internal RateLimitRequestBuilder RequestBuilder { get; } = new RateLimitRequestBuilder();
-
         /// <summary>
         ///     Initializes a new instance of the RateLimitEndpoint class.
         /// </summary>
@@ -32,6 +30,8 @@ namespace Imgur.API.Endpoints.Impl
         internal RateLimitEndpoint(IApiClient apiClient, HttpClient httpClient) : base(apiClient, httpClient)
         {
         }
+
+        internal RateLimitRequestBuilder RequestBuilder { get; } = new RateLimitRequestBuilder();
 
         /// <summary>
         ///     Get RateLimit.

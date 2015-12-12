@@ -14,13 +14,13 @@ namespace Imgur.API.Models
         T Data { get; set; }
 
         /// <summary>
-        ///     Was the request successful.
-        /// </summary>
-        bool Success { get; set; }
-
-        /// <summary>
         ///     HTTP Status Code.
         /// </summary>
         HttpStatusCode Status { get; set; }
+
+        /// <summary>
+        ///     Was the request successful.
+        /// </summary>
+        bool Success { get; set; }
     }
 }

@@ -64,8 +64,14 @@
     <Compile Include="Authentication\ApiClientTests.cs" />
     <Compile Include="Authentication\ImgurClientTests.cs" />
     <Compile Include="Authentication\MashapeClientTests.cs" />
+    <Compile Include="Endpoints\AccountEndpointTests.cs" />
+    <Compile Include="Endpoints\AccountEndpointTests.Images.cs" />
+    <Compile Include="Endpoints\AccountEndpointTests.Comments.cs" />
+    <Compile Include="Endpoints\AccountEndpointTests.Albums.cs" />
     <Compile Include="Endpoints\ImageEndpointTests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />
+    <Compile Include="Fakes\FakeOAuth2TokenHandler.cs" />
+    <Compile Include="RequestBuilders\AccountRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\ImageRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\OAuth2RequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\RateLimitRequestBuilderTests.cs" />

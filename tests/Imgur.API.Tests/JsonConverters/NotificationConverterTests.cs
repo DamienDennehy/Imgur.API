@@ -21,14 +21,6 @@ namespace Imgur.API.Tests.JsonConverters
         }
 
         [TestMethod]
-        public void NotificationConverter_CanConvertMessage_IsTrue()
-        {
-            var converter = new NotificationConverter();
-            var canConvert = converter.CanConvert(new Message().GetType());
-            Assert.IsTrue(canConvert);
-        }
-
-        [TestMethod]
         public void NotificationConverter_CanConvertMessage_IsFalse()
         {
             var converter = new NotificationConverter();
@@ -37,24 +29,11 @@ namespace Imgur.API.Tests.JsonConverters
         }
 
         [TestMethod]
-        public void NotificationConverter_ReadJsonMessageNotification_AreEqual()
+        public void NotificationConverter_CanConvertMessage_IsTrue()
         {
             var converter = new NotificationConverter();
-            var reader = new JsonTextReader(new StringReader(AccountEndpointResponses.Imgur.GetMessageNotification));
-            reader.Read();
-            var serializer = new JsonSerializer();
-
-            var actual = (Message) converter.ReadJson(reader, typeof (Message), null, serializer);
-            Assert.IsNotNull(actual);
-
-            Assert.AreEqual(76767, actual.Id);
-            Assert.AreEqual("bob", actual.From);
-            Assert.AreEqual(89898, actual.AccountId);
-            Assert.AreEqual(3434, actual.WithAccountId);
-            Assert.AreEqual("test33", actual.LastMessage);
-            Assert.AreEqual(2, actual.MessageNum);
-            Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 10, 12, 02, 31, 43, DateTimeKind.Utc)),
-                actual.DateTime);
+            var canConvert = converter.CanConvert(new Message().GetType());
+            Assert.IsTrue(canConvert);
         }
 
         [TestMethod]
@@ -72,17 +51,38 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.AreEqual("jasdev", actual.Author);
             Assert.AreEqual(3698510, actual.AuthorId);
             Assert.AreEqual(0, actual.Children.Count());
-            Assert.AreEqual("reply test", actual.CommentText);
+            Assert.AreEqual("Reply test", actual.CommentText);
             Assert.AreEqual(new DateTimeOffset(new DateTime(2014, 07, 22, 23, 12, 54, DateTimeKind.Utc)),
                 actual.DateTime);
             Assert.AreEqual(false, actual.Deleted);
             Assert.AreEqual(0, actual.Downs);
-            Assert.AreEqual("vk9vqcm", actual.ImageId);
+            Assert.AreEqual("VK9VqcM", actual.ImageId);
             Assert.AreEqual(false, actual.OnAlbum);
             Assert.AreEqual(3615, actual.ParentId);
             Assert.AreEqual(1, actual.Points);
             Assert.AreEqual(1, actual.Ups);
             Assert.AreEqual(3616, actual.Id);
+        }
+
+        [TestMethod]
+        public void NotificationConverter_ReadJsonMessageNotification_AreEqual()
+        {
+            var converter = new NotificationConverter();
+            var reader = new JsonTextReader(new StringReader(AccountEndpointResponses.Imgur.GetMessageNotification));
+            reader.Read();
+            var serializer = new JsonSerializer();
+
+            var actual = (Message) converter.ReadJson(reader, typeof (Message), null, serializer);
+            Assert.IsNotNull(actual);
+
+            Assert.AreEqual(76767, actual.Id);
+            Assert.AreEqual("Bob", actual.From);
+            Assert.AreEqual(89898, actual.AccountId);
+            Assert.AreEqual(3434, actual.WithAccountId);
+            Assert.AreEqual("Test33", actual.LastMessage);
+            Assert.AreEqual(2, actual.MessageNum);
+            Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 10, 12, 02, 31, 43, DateTimeKind.Utc)),
+                actual.DateTime);
         }
     }
 }

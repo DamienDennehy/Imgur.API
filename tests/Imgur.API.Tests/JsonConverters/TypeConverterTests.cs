@@ -45,19 +45,19 @@ namespace Imgur.API.Tests.JsonConverters
         }
 
         [TestMethod]
-        public void TypeConverter_CanConvertString_IsFalse()
-        {
-            var converter = new TypeConverter<Image>();
-
-            Assert.IsFalse(converter.CanConvert(typeof (string)));
-        }
-
-        [TestMethod]
         public void TypeConverter_CanConvertInt_IsFalse()
         {
             var converter = new TypeConverter<Image>();
             var list = new List<int> {1, 2, 3};
             Assert.IsFalse(converter.CanConvert(list.GetType()));
+        }
+
+        [TestMethod]
+        public void TypeConverter_CanConvertString_IsFalse()
+        {
+            var converter = new TypeConverter<Image>();
+
+            Assert.IsFalse(converter.CanConvert(typeof (string)));
         }
     }
 }

@@ -79,11 +79,8 @@
     <Compile Include="FakeResponses\AccountEndpointResponses.Gallery.cs" />
     <Compile Include="Fakes\FakeOAuth2TokenHandler.cs" />
     <Compile Include="RequestBuilders\AccountRequestBuilderTests.cs" />
-    <Compile Include="RequestBuilders\CommentRequestBuilderTests.cs" />
-    <Compile Include="RequestBuilders\AlbumRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\ImageRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\OAuth2RequestBuilderTests.cs" />
-    <Compile Include="RequestBuilders\RateLimitRequestBuilderTests.cs" />
     <Compile Include="Endpoints\RateLimitEndpointTests.cs" />
     <Compile Include="FakeResponses\OAuth2EndpointResponses.cs" />
     <Compile Include="FakeResponses\RateLimitEndpointResponses.cs" />
@@ -100,6 +97,7 @@
     <Compile Include="JsonConverters\GalleryItemConverterTests.cs" />
     <Compile Include="JsonConverters\NotificationConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestBuilders\RequestBuilderBaseTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Imgur.API\Imgur.API.csproj">

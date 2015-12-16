@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Exceptions;
 using Imgur.API.Models;
@@ -30,11 +31,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/albums/{page}";
 
-            using (var request = AlbumRequestBuilder.GetAlbumsRequest(url))
+            using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var albums = await SendRequestAsync<IEnumerable<Album>>(request);
                 return albums;
@@ -61,11 +62,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/album/{id}";
 
-            using (var request = AlbumRequestBuilder.GetAlbumRequest(url))
+            using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var album = await SendRequestAsync<Album>(request);
                 return album;
@@ -89,11 +90,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/albums/ids/{page}";
 
-            using (var request = AlbumRequestBuilder.GetAlbumIdsRequest(url))
+            using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var albums = await SendRequestAsync<IEnumerable<string>>(request);
                 return albums;
@@ -116,11 +117,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/albums/count";
 
-            using (var request = AlbumRequestBuilder.GetAlbumCountRequest(url))
+            using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var count = await SendRequestAsync<int>(request);
                 return count;
@@ -147,11 +148,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/album/{id}";
 
-            using (var request = AlbumRequestBuilder.DeleteAlbumRequest(url))
+            using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
                 var deleted = await SendRequestAsync<bool>(request);
                 return deleted;

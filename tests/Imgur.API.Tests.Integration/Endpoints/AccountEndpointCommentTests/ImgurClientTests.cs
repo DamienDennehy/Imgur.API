@@ -11,17 +11,6 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointCommentTests
     public class ImgurClientTests : TestBase
     {
         [TestMethod]
-        public async Task GetCommentsAsync_AreEqual()
-        {
-            var client = new ImgurClient(ClientId, ClientSecret);
-            var endpoint = new AccountEndpoint(client);
-
-            var comments = await endpoint.GetCommentsAsync("sarah", CommentSortOrder.Best);
-
-            Assert.AreEqual(50, comments.Count());
-        }
-
-        [TestMethod]
         public async Task GetCommentAsync_AreEqual()
         {
             var client = new ImgurClient(ClientId, ClientSecret);
@@ -30,6 +19,17 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointCommentTests
             var comment = await endpoint.GetCommentAsync("300731088", "sarah");
 
             Assert.IsNotNull(comment);
+        }
+
+        [TestMethod]
+        public async Task GetCommentCountAsync_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret);
+            var endpoint = new AccountEndpoint(client);
+
+            var commentCount = await endpoint.GetCommentCountAsync("sarah");
+
+            Assert.IsTrue(commentCount > 100);
         }
 
         [TestMethod]
@@ -44,14 +44,14 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointCommentTests
         }
 
         [TestMethod]
-        public async Task GetCommentCountAsync_AreEqual()
+        public async Task GetCommentsAsync_AreEqual()
         {
             var client = new ImgurClient(ClientId, ClientSecret);
             var endpoint = new AccountEndpoint(client);
 
-            var commentCount = await endpoint.GetCommentCountAsync("sarah");
+            var comments = await endpoint.GetCommentsAsync("sarah", CommentSortOrder.Best);
 
-            Assert.IsTrue(commentCount > 100);
+            Assert.AreEqual(50, comments.Count());
         }
     }
 }

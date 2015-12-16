@@ -9,33 +9,6 @@ namespace Imgur.API.RequestBuilders
     internal class AccountRequestBuilder : RequestBuilderBase
     {
         /// <exception cref="ArgumentNullException"></exception>
-        internal HttpRequestMessage GetAccountRequest(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                throw new ArgumentNullException(nameof(url));
-
-            return new HttpRequestMessage(HttpMethod.Get, url);
-        }
-
-        /// <exception cref="ArgumentNullException"></exception>
-        internal HttpRequestMessage GetAccountSettingsRequest(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                throw new ArgumentNullException(nameof(url));
-
-            return new HttpRequestMessage(HttpMethod.Get, url);
-        }
-
-        /// <exception cref="ArgumentNullException"></exception>
-        internal HttpRequestMessage SendVerificationEmailRequest(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                throw new ArgumentNullException(nameof(url));
-
-            return new HttpRequestMessage(HttpMethod.Post, url);
-        }
-
-        /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
         internal HttpRequestMessage UpdateAccountSettingsRequest(
             string url,
@@ -83,15 +56,6 @@ namespace Imgur.API.RequestBuilders
             };
 
             return request;
-        }
-
-        /// <exception cref="ArgumentNullException"></exception>
-        internal HttpRequestMessage VerifyEmailRequest(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                throw new ArgumentNullException(nameof(url));
-
-            return new HttpRequestMessage(HttpMethod.Get, url);
         }
     }
 }

@@ -51,11 +51,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}";
 
-            using (var request = RequestBuilder.GetAccountRequest(url))
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var account = await SendRequestAsync<Account>(request);
                 return account;
@@ -73,11 +73,11 @@ namespace Imgur.API.Endpoints.Impl
         public async Task<IAccountSettings> GetAccountSettingsAsync()
         {
             if (ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/me/settings";
 
-            using (var request = RequestBuilder.GetAccountRequest(url))
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var settings = await SendRequestAsync<AccountSettings>(request);
                 return settings;
@@ -111,7 +111,7 @@ namespace Imgur.API.Endpoints.Impl
             bool? newsletterSubscribed = null)
         {
             if (ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/me/settings";
 
@@ -135,11 +135,11 @@ namespace Imgur.API.Endpoints.Impl
         public async Task<bool> VerifyEmailAsync()
         {
             if (ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/me/verifyemail";
 
-            using (var request = RequestBuilder.VerifyEmailRequest(url))
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var verified = await SendRequestAsync<bool>(request);
                 return verified;
@@ -158,11 +158,11 @@ namespace Imgur.API.Endpoints.Impl
         public async Task<bool> SendVerificationEmailAsync()
         {
             if (ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/me/verifyemail";
 
-            using (var request = RequestBuilder.SendVerificationEmailRequest(url))
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var verified = await SendRequestAsync<bool>(request);
                 return verified;

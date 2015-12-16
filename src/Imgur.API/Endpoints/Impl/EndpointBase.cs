@@ -17,6 +17,8 @@ namespace Imgur.API.Endpoints.Impl
     /// </summary>
     public abstract class EndpointBase : IEndpoint
     {
+        internal const string OAuth2RequiredExceptionMessage = "User authentication required.";
+
         /// <summary>
         ///     Initializes a new instance of the EndpointBase class.
         /// </summary>

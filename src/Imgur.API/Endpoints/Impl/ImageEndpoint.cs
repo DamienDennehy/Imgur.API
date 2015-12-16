@@ -50,7 +50,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"{GetEndpointBaseUrl()}image/{id}";
 
-            using (var request = RequestBuilder.GetImageRequest(url))
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var image = await SendRequestAsync<Image>(request);
                 return image;
@@ -164,7 +164,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"{GetEndpointBaseUrl()}image/{id}";
 
-            using (var request = RequestBuilder.DeleteImageRequest(url))
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
                 var deleted = await SendRequestAsync<bool>(request);
                 return deleted;
@@ -216,7 +216,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"{GetEndpointBaseUrl()}image/{id}/favorite";
 
-            using (var request = RequestBuilder.FavoriteImageRequest(url))
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {
                 //The structure of the response of favoriting an image
                 //varies on if Imgur or Mashape Authentication is used

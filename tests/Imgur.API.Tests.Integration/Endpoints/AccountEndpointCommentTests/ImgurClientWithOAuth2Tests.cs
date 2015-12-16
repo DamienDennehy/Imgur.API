@@ -11,25 +11,15 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointCommentTests
     public class ImgurClientWithOAuth2Tests : TestBase
     {
         [TestMethod]
-        public async Task GetCommentsAsync_AreEqual()
+        [ExpectedException(typeof (ImgurException))]
+        public async Task DeleteCommentAsync_WithValidReponse_ThrowsImgurException()
         {
             var client = new ImgurClient(ClientId, ClientSecret, OAuth2Token);
             var endpoint = new AccountEndpoint(client);
 
-            var comments = await endpoint.GetCommentsAsync();
+            var deleted = await endpoint.DeleteCommentAsync("487153732");
 
-            Assert.IsTrue(comments.Count() >= 2);
-        }
-
-        [TestMethod]
-        public async Task GetCommentIdsAsync_AreEqual()
-        {
-            var client = new ImgurClient(ClientId, ClientSecret, OAuth2Token);
-            var endpoint = new AccountEndpoint(client);
-
-            var comments = await endpoint.GetCommentIdsAsync();
-
-            Assert.IsTrue(comments.Count() > 1);
+            Assert.IsTrue(deleted);
         }
 
         [TestMethod]
@@ -44,15 +34,25 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointCommentTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
-        public async Task DeleteCommentAsync_WithValidReponse_ThrowsImgurException()
+        public async Task GetCommentIdsAsync_AreEqual()
         {
             var client = new ImgurClient(ClientId, ClientSecret, OAuth2Token);
             var endpoint = new AccountEndpoint(client);
 
-            var deleted = await endpoint.DeleteCommentAsync("487153732");
+            var comments = await endpoint.GetCommentIdsAsync();
 
-            Assert.IsTrue(deleted);
+            Assert.IsTrue(comments.Count() > 1);
+        }
+
+        [TestMethod]
+        public async Task GetCommentsAsync_AreEqual()
+        {
+            var client = new ImgurClient(ClientId, ClientSecret, OAuth2Token);
+            var endpoint = new AccountEndpoint(client);
+
+            var comments = await endpoint.GetCommentsAsync();
+
+            Assert.IsTrue(comments.Count() >= 2);
         }
     }
 }

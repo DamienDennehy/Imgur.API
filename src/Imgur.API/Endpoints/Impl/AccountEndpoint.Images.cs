@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Exceptions;
 using Imgur.API.Models;
@@ -30,11 +31,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/images/{page}";
 
-            using (var request = ImageRequestBuilder.GetImagesRequest(url))
+            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var images = await SendRequestAsync<IEnumerable<Image>>(request);
                 return images;
@@ -61,11 +62,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
-            
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
+
             var url = $"{GetEndpointBaseUrl()}account/{username}/image/{id}";
 
-            using (var request = ImageRequestBuilder.GetImageRequest(url))
+            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var image = await SendRequestAsync<Image>(request);
                 return image;
@@ -89,11 +90,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/images/ids/{page}";
 
-            using (var request = ImageRequestBuilder.GetImageIdsRequest(url))
+            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var images = await SendRequestAsync<IEnumerable<string>>(request);
                 return images;
@@ -115,11 +116,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/images/count";
 
-            using (var request = ImageRequestBuilder.GetImageCountRequest(url))
+            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var count = await SendRequestAsync<int>(request);
                 return count;
@@ -146,11 +147,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/image/{deleteHash}";
 
-            using (var request = ImageRequestBuilder.DeleteImageRequest(url))
+            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
                 var deleted = await SendRequestAsync<bool>(request);
                 return deleted;

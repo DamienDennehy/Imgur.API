@@ -9,62 +9,6 @@ namespace Imgur.API.RequestBuilders
     internal class ImageRequestBuilder : RequestBuilderBase
     {
         /// <exception cref="ArgumentNullException"></exception>
-        internal HttpRequestMessage GetImageCountRequest(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                throw new ArgumentNullException(nameof(url));
-
-            return new HttpRequestMessage(HttpMethod.Get, url);
-        }
-
-        /// <exception cref="ArgumentNullException"></exception>
-        internal HttpRequestMessage GetImageIdsRequest(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                throw new ArgumentNullException(nameof(url));
-
-            return new HttpRequestMessage(HttpMethod.Get, url);
-        }
-
-        /// <exception cref="ArgumentNullException"></exception>
-        internal HttpRequestMessage GetImagesRequest(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                throw new ArgumentNullException(nameof(url));
-
-            return new HttpRequestMessage(HttpMethod.Get, url);
-        }
-
-        /// <exception cref="ArgumentNullException"></exception>
-        internal HttpRequestMessage DeleteImageRequest(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                throw new ArgumentNullException(nameof(url));
-
-            return new HttpRequestMessage(HttpMethod.Delete, url);
-        }
-
-        /// <exception cref="ArgumentNullException"></exception>
-        internal HttpRequestMessage FavoriteImageRequest(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                throw new ArgumentNullException(nameof(url));
-
-            var request = new HttpRequestMessage(HttpMethod.Post, url);
-
-            return request;
-        }
-
-        /// <exception cref="ArgumentNullException"></exception>
-        internal HttpRequestMessage GetImageRequest(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                throw new ArgumentNullException(nameof(url));
-
-            return new HttpRequestMessage(HttpMethod.Get, url);
-        }
-
-        /// <exception cref="ArgumentNullException"></exception>
         internal HttpRequestMessage UpdateImageRequest(string url, string title = null, string description = null)
         {
             if (string.IsNullOrEmpty(url))

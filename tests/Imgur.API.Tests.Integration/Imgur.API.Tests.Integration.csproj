@@ -61,10 +61,16 @@
     <Compile Include="Endpoints\AccountEndpointCommentTests\ImgurClientWithOAuth2Tests.cs" />
     <Compile Include="Endpoints\AccountEndpointCommentTests\MashapeClientTests.cs" />
     <Compile Include="Endpoints\AccountEndpointCommentTests\MashapeClientWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\AccountEndpointGalleryTests\MashapeClientWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\AccountEndpointGalleryTests\MashapeClientTests.cs" />
+    <Compile Include="Endpoints\AccountEndpointGalleryTests\ImgurClientTests.cs" />
+    <Compile Include="Endpoints\AccountEndpointGalleryTests\ImgurClientWithOAuth2Tests.cs" />
     <Compile Include="Endpoints\AccountEndpointImageTests\MashapeClientWithOAuth2Tests.cs" />
     <Compile Include="Endpoints\AccountEndpointImageTests\MashapeClientTests.cs" />
     <Compile Include="Endpoints\AccountEndpointImageTests\ImgurClientTests.cs" />
     <Compile Include="Endpoints\AccountEndpointImageTests\ImgurClientWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\AccountEndpointNotificationTests\MashapeClientWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\AccountEndpointNotificationTests\ImgurClientWithOAuth2Tests.cs" />
     <Compile Include="Endpoints\AccountEndpointTests\ImgurClientTests.cs" />
     <Compile Include="Endpoints\AccountEndpointTests\ImgurClientWithOAuth2Tests.cs" />
     <Compile Include="Endpoints\AccountEndpointTests\MashapeClientTests.cs" />
@@ -88,10 +94,7 @@
     <None Include="App.config" />
     <None Include="README.md" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Endpoints\AccountEndpointGalleryTests\" />
-    <Folder Include="Endpoints\AccountEndpointNotificationTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Banana.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

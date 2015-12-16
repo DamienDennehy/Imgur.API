@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Enums;
 using Imgur.API.Exceptions;
@@ -32,11 +33,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/comments/{sort.ToString().ToLower()}/{page}";
 
-            using (var request = CommentRequestBuilder.GetCommentsRequest(url))
+            using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var comments = await SendRequestAsync<IEnumerable<Comment>>(request);
                 return comments;
@@ -63,11 +64,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/comment/{id}";
 
-            using (var request = CommentRequestBuilder.GetCommentRequest(url))
+            using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var comment = await SendRequestAsync<Comment>(request);
                 return comment;
@@ -93,11 +94,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/comments/ids/{sort.ToString().ToLower()}/{page}";
 
-            using (var request = CommentRequestBuilder.GetCommentIdsRequest(url))
+            using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var comments = await SendRequestAsync<IEnumerable<string>>(request);
                 return comments;
@@ -120,11 +121,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/comments/count";
 
-            using (var request = CommentRequestBuilder.GetCommentCountRequest(url))
+            using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var count = await SendRequestAsync<int>(request);
                 return count;
@@ -151,11 +152,11 @@ namespace Imgur.API.Endpoints.Impl
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
                 && ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"{GetEndpointBaseUrl()}account/{username}/comment/{id}";
 
-            using (var request = CommentRequestBuilder.DeleteCommentRequest(url))
+            using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
                 var deleted = await SendRequestAsync<bool>(request);
                 return deleted;

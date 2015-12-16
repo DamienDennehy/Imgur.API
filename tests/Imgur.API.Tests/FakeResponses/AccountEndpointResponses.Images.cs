@@ -13,12 +13,11 @@
 
         public const string GetImageCountResponse =
             "{\"data\":2,\"success\":true,\"status\":200}";
-        
+
         public const string DeleteImageResponse =
             "{\"data\":true,\"success\":true,\"status\":200}";
 
         public const string DeleteImageErrorResponse =
             "{\"data\":{\"error\":\"Unauthorized\",\"request\":\"/3/account/me/image/487153732\",\"method\":\"DELETE\"},\"success\":true,\"status\":200}";
-
     }
 }

@@ -78,7 +78,8 @@ namespace Imgur.API.Tests.Endpoints
             Assert.IsNotNull(comment);
             Assert.AreEqual(comment.Id, 487008510);
             Assert.AreEqual(comment.ImageId, "DMcOm2V");
-            Assert.AreEqual(comment.CommentText, "Gyroscope detectors measure inertia.. the stabilization is done entirely by brushless motors. There are stabilizers which actually use 1/2");
+            Assert.AreEqual(comment.CommentText,
+                "Gyroscope detectors measure inertia.. the stabilization is done entirely by brushless motors. There are stabilizers which actually use 1/2");
             Assert.AreEqual(comment.Author, "Scabab");
             Assert.AreEqual(comment.AuthorId, 4194299);
             Assert.AreEqual(comment.OnAlbum, false);
@@ -200,7 +201,8 @@ namespace Imgur.API.Tests.Endpoints
                 Content = new StringContent(AccountEndpointResponses.GetCommentsResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/bob/comments/worst/2"), fakeResponse);
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/bob/comments/worst/2"),
+                fakeResponse);
 
             var imgurClient = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));

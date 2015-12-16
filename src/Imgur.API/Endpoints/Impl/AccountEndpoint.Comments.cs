@@ -4,45 +4,43 @@ using System.Threading.Tasks;
 using Imgur.API.Enums;
 using Imgur.API.Exceptions;
 using Imgur.API.Models;
+using Imgur.API.Models.Impl;
+using Imgur.API.RequestBuilders;
 
 namespace Imgur.API.Endpoints.Impl
 {
     public partial class AccountEndpoint
     {
-        private const string GetCommentsUrl = "account/{0}/comments/{1}/{2}";
-        private const string GetCommentUrl = "account/{0}/comment/{1}";
-        private const string GetCommentIdsUrl = "account/{0}/comments/ids/{1}/{2}";
-        private const string GetCommentCountUrl = "account/{0}/comments/count";
-        private const string DeleteCommentUrl = "account/{0}/comment/{1}";
-
+        internal CommentRequestBuilder CommentRequestBuilder { get; } = new CommentRequestBuilder();
 
         /// <summary>
         ///     Return the comments the user has created.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="commentSortOrder">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
+        /// <param name="sort">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IEnumerable<IComment>> GetCommentsAsync(string username = "me",
-            CommentSortOrder commentSortOrder = CommentSortOrder.Newest, int? page = null)
+            CommentSortOrder sort = CommentSortOrder.Newest, int? page = null)
         {
-            throw new NotImplementedException();
-            //if (string.IsNullOrEmpty(username))
-            //    throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-            //    && ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetCommentsUrl);
-            //endpointUrl = string.Format(endpointUrl, username, commentSortOrder.ToString().ToLower(), page);
+            var url = $"{GetEndpointBaseUrl()}account/{username}/comments/{sort.ToString().ToLower()}/{page}";
 
-            //return await MakeEndpointRequestAsync<IEnumerable<Comment>>(HttpMethod.Get, endpointUrl);
+            using (var request = CommentRequestBuilder.GetCommentsRequest(url))
+            {
+                var comments = await SendRequestAsync<IEnumerable<Comment>>(request);
+                return comments;
+            }
         }
 
         /// <summary>
@@ -51,57 +49,59 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="id">The comment id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IComment> GetCommentAsync(string id, string username = "me")
         {
-            throw new NotImplementedException();
-            //if (string.IsNullOrEmpty(id))
-            //    throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
 
-            //if (string.IsNullOrEmpty(username))
-            //    throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-            //    && ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetCommentUrl);
-            //endpointUrl = string.Format(endpointUrl, username, id);
-            //var comment = await MakeEndpointRequestAsync<Comment>(HttpMethod.Get, endpointUrl);
-            //return comment;
+            var url = $"{GetEndpointBaseUrl()}account/{username}/comment/{id}";
+
+            using (var request = CommentRequestBuilder.GetCommentRequest(url))
+            {
+                var comment = await SendRequestAsync<Comment>(request);
+                return comment;
+            }
         }
 
         /// <summary>
         ///     Return an array of all of the comment IDs.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="commentSortOrder">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
+        /// <param name="sort">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IEnumerable<string>> GetCommentIdsAsync(string username = "me",
-            CommentSortOrder commentSortOrder = CommentSortOrder.Newest, int? page = null)
+            CommentSortOrder sort = CommentSortOrder.Newest, int? page = null)
         {
-            throw new NotImplementedException();
-            //if (string.IsNullOrEmpty(username))
-            //    throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-            //    && ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetCommentIdsUrl);
-            //endpointUrl = string.Format(endpointUrl, username, commentSortOrder.ToString().ToLower(), page);
+            var url = $"{GetEndpointBaseUrl()}account/{username}/comments/ids/{sort.ToString().ToLower()}/{page}";
 
-            //return await MakeEndpointRequestAsync<IEnumerable<string>>(HttpMethod.Get, endpointUrl);
+            using (var request = CommentRequestBuilder.GetCommentIdsRequest(url))
+            {
+                var comments = await SendRequestAsync<IEnumerable<string>>(request);
+                return comments;
+            }
         }
 
         /// <summary>
@@ -109,50 +109,57 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<int> GetCommentCountAsync(string username = "me")
         {
-            throw new NotImplementedException();
-            //if (string.IsNullOrEmpty(username))
-            //    throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-            //    && ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetCommentCountUrl);
-            //endpointUrl = string.Format(endpointUrl, username);
+            var url = $"{GetEndpointBaseUrl()}account/{username}/comments/count";
 
-            //return await MakeEndpointRequestAsync<int>(HttpMethod.Get, endpointUrl);
+            using (var request = CommentRequestBuilder.GetCommentCountRequest(url))
+            {
+                var count = await SendRequestAsync<int>(request);
+                return count;
+            }
         }
 
         /// <summary>
         ///     Delete a comment. You are required to be logged in as the user whom created the comment.
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="username"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<bool> DeleteCommentAsync(string id)
+        public async Task<bool> DeleteCommentAsync(string id, string username = "me")
         {
-            throw new NotImplementedException();
-            //if (string.IsNullOrEmpty(id))
-            //    throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
 
-            //if (ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), DeleteCommentUrl);
-            //endpointUrl = string.Format(endpointUrl, "me", id);
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //return await MakeEndpointRequestAsync<bool>(HttpMethod.Delete, endpointUrl);
+            var url = $"{GetEndpointBaseUrl()}account/{username}/comment/{id}";
+
+            using (var request = CommentRequestBuilder.DeleteCommentRequest(url))
+            {
+                var deleted = await SendRequestAsync<bool>(request);
+                return deleted;
+            }
         }
     }
 }

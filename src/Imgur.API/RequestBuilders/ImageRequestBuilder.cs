@@ -9,13 +9,37 @@ namespace Imgur.API.RequestBuilders
     internal class ImageRequestBuilder : RequestBuilderBase
     {
         /// <exception cref="ArgumentNullException"></exception>
-        internal HttpRequestMessage DeleteImageRequest(string url, string id)
+        internal HttpRequestMessage GetImageCountRequest(string url)
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            return new HttpRequestMessage(HttpMethod.Get, url);
+        }
+
+        /// <exception cref="ArgumentNullException"></exception>
+        internal HttpRequestMessage GetImageIdsRequest(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                throw new ArgumentNullException(nameof(url));
+
+            return new HttpRequestMessage(HttpMethod.Get, url);
+        }
+
+        /// <exception cref="ArgumentNullException"></exception>
+        internal HttpRequestMessage GetImagesRequest(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                throw new ArgumentNullException(nameof(url));
+
+            return new HttpRequestMessage(HttpMethod.Get, url);
+        }
+
+        /// <exception cref="ArgumentNullException"></exception>
+        internal HttpRequestMessage DeleteImageRequest(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                throw new ArgumentNullException(nameof(url));
 
             return new HttpRequestMessage(HttpMethod.Delete, url);
         }
@@ -32,13 +56,10 @@ namespace Imgur.API.RequestBuilders
         }
 
         /// <exception cref="ArgumentNullException"></exception>
-        internal HttpRequestMessage GetImageRequest(string url, string id)
+        internal HttpRequestMessage GetImageRequest(string url)
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
-
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
 
             return new HttpRequestMessage(HttpMethod.Get, url);
         }

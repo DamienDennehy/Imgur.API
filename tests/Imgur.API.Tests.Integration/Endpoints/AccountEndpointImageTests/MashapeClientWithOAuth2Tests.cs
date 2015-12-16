@@ -5,52 +5,63 @@ using Imgur.API.Endpoints.Impl;
 using Imgur.API.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointCommentTests
+namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointImageTests
 {
     [TestClass]
-    public class MashapeClientWithOAuth2Tests : TestBase
+    public class MashapeClientWithOAuth2Tests: TestBase
     {
         [TestMethod]
-        public async Task GetCommentsAsync_AreEqual()
+        public async Task GetImagesAsync_Any()
         {
             var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, OAuth2Token);
             var endpoint = new AccountEndpoint(client);
 
-            var comments = await endpoint.GetCommentsAsync();
+            var images = await endpoint.GetImagesAsync();
 
-            Assert.IsTrue(comments.Count() >= 2);
+            Assert.IsTrue(images.Any());
         }
 
         [TestMethod]
-        public async Task GetCommentIdsAsync_AreEqual()
+        public async Task GetImageAsync_IsNotNull()
         {
             var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, OAuth2Token);
             var endpoint = new AccountEndpoint(client);
 
-            var comments = await endpoint.GetCommentIdsAsync();
+            var image = await endpoint.GetImageAsync("BJRWQw5");
 
-            Assert.IsTrue(comments.Count() > 1);
+            Assert.IsNotNull(image);
         }
 
         [TestMethod]
-        public async Task GetCommentCountAsync_WithValidReponse_AreEqual()
+        public async Task GetImageIdsAsync_Any()
         {
             var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, OAuth2Token);
             var endpoint = new AccountEndpoint(client);
 
-            var commentCount = await endpoint.GetCommentCountAsync();
+            var images = await endpoint.GetImageIdsAsync();
 
-            Assert.IsTrue(commentCount > 1);
+            Assert.IsTrue(images.Count() > 1);
+        }
+
+        [TestMethod]
+        public async Task GetImageCountAsync_Any()
+        {
+            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, OAuth2Token);
+            var endpoint = new AccountEndpoint(client);
+
+            var imageCount = await endpoint.GetImageCountAsync();
+
+            Assert.IsTrue(imageCount > 1);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ImgurException))]
-        public async Task DeleteCommentAsync_WithValidReponse_ThrowsImgurException()
+        public async Task DeleteImageAsync_ThrowsImgurException()
         {
             var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, OAuth2Token);
             var endpoint = new AccountEndpoint(client);
 
-            var deleted = await endpoint.DeleteCommentAsync("487153732");
+            var deleted = await endpoint.DeleteImageAsync("ra06GZN", "sarah");
 
             Assert.IsTrue(deleted);
         }

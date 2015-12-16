@@ -10,7 +10,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointAlbumTests
     public class MashapeClientTests : TestBase
     {
         [TestMethod]
-        public async Task GetAlbumAsync_AreEqual()
+        public async Task GetAlbumAsync_IsNotNull()
         {
             var client = new MashapeClient(ClientId, ClientSecret, MashapeKey);
             var endpoint = new AccountEndpoint(client);
@@ -21,7 +21,7 @@ namespace Imgur.API.Tests.Integration.Endpoints.AccountEndpointAlbumTests
         }
 
         [TestMethod]
-        public async Task GetAlbumCountAsync_AreEqual()
+        public async Task GetAlbumCountAsync_GreaterThan100()
         {
             var client = new MashapeClient(ClientId, ClientSecret, MashapeKey);
             var endpoint = new AccountEndpoint(client);

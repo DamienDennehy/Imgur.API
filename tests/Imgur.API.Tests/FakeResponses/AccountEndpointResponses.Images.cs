@@ -1,10 +1,7 @@
 ﻿namespace Imgur.API.Tests.FakeResponses
 {
-    public class AccountEndpointImageResponses
+    public partial class AccountEndpointResponses
     {
-        public const string GetImagesErrorResponse =
-            "{\"data\":{\"error\":\"Unauthorized\",\"request\":\"/3/account/sarah/images/\",\"method\":\"GET\"},\"success\":false,\"status\":403}";
-
         public const string GetImagesResponse =
             "{\"data\":[{\"id\":\"BJRWQw5\",\"title\":\"url test title!\",\"description\":\"url test desc!\",\"datetime\":1443895079,\"type\":\"image/gif\",\"animated\":true,\"width\":419,\"height\":217,\"size\":381925,\"views\":4,\"bandwidth\":1527700,\"vote\":null,\"favorite\":false,\"nsfw\":null,\"section\":null,\"account_url\":\"imgurapidotnet\",\"account_id\":24562464,\"comment_preview\":null,\"deletehash\":\"v5j1alwofarZzaW\",\"name\":null,\"gifv\":\"http://i.imgur.com/BJRWQw5.gifv\",\"webm\":\"http://i.imgur.com/BJRWQw5.webm\",\"mp4\":\"http://i.imgur.com/BJRWQw5.mp4\",\"link\":\"http://i.imgur.com/BJRWQw5.gif\",\"looping\":true},{\"id\":\"tMW91OL\",\"title\":null,\"description\":null,\"datetime\":1443578033,\"type\":\"image/png\",\"animated\":false,\"width\":1360,\"height\":768,\"size\":927639,\"views\":4,\"bandwidth\":3710556,\"vote\":null,\"favorite\":false,\"nsfw\":null,\"section\":null,\"account_url\":\"imgurapidotnet\",\"account_id\":24562464,\"comment_preview\":null,\"deletehash\":\"w0hvndmtyBfjE6t\",\"name\":\"img_20150929_190056\",\"link\":\"http://i.imgur.com/tMW91OL.png\"}],\"success\":true,\"status\":200}";
 
@@ -16,11 +13,12 @@
 
         public const string GetImageCountResponse =
             "{\"data\":2,\"success\":true,\"status\":200}";
+        
+        public const string DeleteImageResponse =
+            "{\"data\":true,\"success\":true,\"status\":200}";
 
         public const string DeleteImageErrorResponse =
             "{\"data\":{\"error\":\"Unauthorized\",\"request\":\"/3/account/me/image/487153732\",\"method\":\"DELETE\"},\"success\":true,\"status\":200}";
 
-        public const string DeleteImageResponse =
-            "{\"data\":true,\"success\":true,\"status\":200}";
     }
 }

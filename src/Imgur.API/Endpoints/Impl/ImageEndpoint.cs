@@ -50,7 +50,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"{GetEndpointBaseUrl()}image/{id}";
 
-            using (var request = RequestBuilder.GetImageRequest(url, id))
+            using (var request = RequestBuilder.GetImageRequest(url))
             {
                 var image = await SendRequestAsync<Image>(request);
                 return image;
@@ -164,7 +164,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"{GetEndpointBaseUrl()}image/{id}";
 
-            using (var request = RequestBuilder.DeleteImageRequest(url, id))
+            using (var request = RequestBuilder.DeleteImageRequest(url))
             {
                 var deleted = await SendRequestAsync<bool>(request);
                 return deleted;

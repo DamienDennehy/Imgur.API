@@ -22,15 +22,17 @@ namespace Imgur.API.Endpoints
         ///     Delete a comment. You are required to be logged in as the user whom created the comment.
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="username"></param>
         /// <returns></returns>
-        Task<bool> DeleteCommentAsync(string id);
+        Task<bool> DeleteCommentAsync(string id, string username = "me");
 
         /// <summary>
         ///     Deletes an Image. This requires a delete hash rather than an ID.
         /// </summary>
         /// <param name="deleteHash"></param>
+        /// <param name="username"></param>
         /// <returns></returns>
-        Task<bool> DeleteImageAsync(string deleteHash);
+        Task<bool> DeleteImageAsync(string deleteHash, string username = "me");
 
         /// <summary>
         ///     Request standard user information.
@@ -121,21 +123,21 @@ namespace Imgur.API.Endpoints
         ///     Return an array of all of the comment IDs.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="commentSortOrder">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
+        /// <param name="sort">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <returns></returns>
         Task<IEnumerable<string>> GetCommentIdsAsync(string username = "me",
-            CommentSortOrder commentSortOrder = CommentSortOrder.Newest, int? page = null);
+            CommentSortOrder sort = CommentSortOrder.Newest, int? page = null);
 
         /// <summary>
         ///     Return the comments the user has created.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="commentSortOrder">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
+        /// <param name="sort">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <returns></returns>
         Task<IEnumerable<IComment>> GetCommentsAsync(string username = "me",
-            CommentSortOrder commentSortOrder = CommentSortOrder.Newest, int? page = null);
+            CommentSortOrder sort = CommentSortOrder.Newest, int? page = null);
 
         /// <summary>
         ///     The totals for a users gallery information.
@@ -147,7 +149,7 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Return information about a specific image.
         /// </summary>
-        /// <param name="id">The album's id.</param>
+        /// <param name="id">The images's id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
         Task<IImage> GetImageAsync(string id, string username = "me");
@@ -155,23 +157,26 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Returns the total number of images associated with the account.
         /// </summary>
+        /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Task<int> GetImageCountAsync();
+        Task<int> GetImageCountAsync(string username = "me");
 
         /// <summary>
         ///     Returns an array of Image IDs that are associated with the account.
         /// </summary>
+        /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <returns></returns>
-        Task<IEnumerable<string>> GetImageIdsAsync(int? page = null);
+        Task<IEnumerable<string>> GetImageIdsAsync(string username = "me", int? page = null);
 
         /// <summary>
         ///     Return all of the images associated with the account.
         ///     You can page through the images by setting the page, this defaults to 0.
         /// </summary>
+        /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <returns></returns>
-        Task<IEnumerable<IImage>> GetImagesAsync(int? page = null);
+        Task<IEnumerable<IImage>> GetImagesAsync(string username = "me", int? page = null);
 
         /// <summary>
         ///     Returns all of the notifications for the user.

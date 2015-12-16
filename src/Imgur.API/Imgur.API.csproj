@@ -115,6 +115,7 @@
     <Compile Include="Enums\GallerySortOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestBuilders\AccountRequestBuilder.cs" />
+    <Compile Include="RequestBuilders\CommentRequestBuilder.cs" />
     <Compile Include="RequestBuilders\AlbumRequestBuilder.cs" />
     <Compile Include="RequestBuilders\ImageRequestBuilder.cs" />
     <Compile Include="RequestBuilders\OAuth2RequestBuilder.cs" />

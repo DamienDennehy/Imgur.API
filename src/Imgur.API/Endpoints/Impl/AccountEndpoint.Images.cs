@@ -3,136 +3,158 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Imgur.API.Exceptions;
 using Imgur.API.Models;
+using Imgur.API.Models.Impl;
+using Imgur.API.RequestBuilders;
 
 namespace Imgur.API.Endpoints.Impl
 {
     public partial class AccountEndpoint
     {
-        private const string GetImagesUrl = "account/{0}/images/{1}";
-        private const string GetImageUrl = "account/{0}/image/{1}";
-        private const string GetImageIdsUrl = "account/{0}/images/ids/{1}";
-        private const string GetImageCountUrl = "account/{0}/images/count";
-        private const string DeleteImageUrl = "account/{0}/image/{1}";
+        internal ImageRequestBuilder ImageRequestBuilder { get; } = new ImageRequestBuilder();
 
         /// <summary>
         ///     Return all of the images associated with the account.
         ///     You can page through the images by setting the page, this defaults to 0.
         /// </summary>
+        /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<IEnumerable<IImage>> GetImagesAsync(int? page = null)
+        public async Task<IEnumerable<IImage>> GetImagesAsync(string username = "me", int? page = null)
         {
-            throw new NotImplementedException();
-            //if (ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetImagesUrl);
-            //endpointUrl = string.Format(endpointUrl, "me", page);
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //return await MakeEndpointRequestAsync<IEnumerable<Image>>(HttpMethod.Get, endpointUrl);
+            var url = $"{GetEndpointBaseUrl()}account/{username}/images/{page}";
+
+            using (var request = ImageRequestBuilder.GetImagesRequest(url))
+            {
+                var images = await SendRequestAsync<IEnumerable<Image>>(request);
+                return images;
+            }
         }
 
         /// <summary>
         ///     Return information about a specific image.
         /// </summary>
-        /// <param name="id">The album's id.</param>
+        /// <param name="id">The image's id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IImage> GetImageAsync(string id, string username = "me")
         {
-            throw new NotImplementedException();
-            //if (string.IsNullOrEmpty(id))
-            //    throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
 
-            //if (string.IsNullOrEmpty(username))
-            //    throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-            //    && ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            
+            var url = $"{GetEndpointBaseUrl()}account/{username}/image/{id}";
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetImageUrl);
-            //endpointUrl = string.Format(endpointUrl, username, id);
-            //var image = await MakeEndpointRequestAsync<Image>(HttpMethod.Get, endpointUrl);
-            //return image;
+            using (var request = ImageRequestBuilder.GetImageRequest(url))
+            {
+                var image = await SendRequestAsync<Image>(request);
+                return image;
+            }
         }
 
         /// <summary>
         ///     Returns an array of Image IDs that are associated with the account.
         /// </summary>
+        /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<IEnumerable<string>> GetImageIdsAsync(int? page = null)
+        public async Task<IEnumerable<string>> GetImageIdsAsync(string username = "me", int? page = null)
         {
-            throw new NotImplementedException();
-            //if (ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetImageIdsUrl);
-            //endpointUrl = string.Format(endpointUrl, "me", page);
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //return await MakeEndpointRequestAsync<IEnumerable<string>>(HttpMethod.Get, endpointUrl);
+            var url = $"{GetEndpointBaseUrl()}account/{username}/images/ids/{page}";
+
+            using (var request = ImageRequestBuilder.GetImageIdsRequest(url))
+            {
+                var images = await SendRequestAsync<IEnumerable<string>>(request);
+                return images;
+            }
         }
 
         /// <summary>
         ///     Returns the total number of images associated with the account.
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<int> GetImageCountAsync()
+        public async Task<int> GetImageCountAsync(string username = "me")
         {
-            throw new NotImplementedException();
-            //if (ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetImageCountUrl);
-            //endpointUrl = string.Format(endpointUrl, "me");
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //return await MakeEndpointRequestAsync<int>(HttpMethod.Get, endpointUrl);
+            var url = $"{GetEndpointBaseUrl()}account/{username}/images/count";
+
+            using (var request = ImageRequestBuilder.GetImageCountRequest(url))
+            {
+                var count = await SendRequestAsync<int>(request);
+                return count;
+            }
         }
 
         /// <summary>
         ///     Deletes an Image. This requires a delete hash rather than an ID.
         /// </summary>
         /// <param name="deleteHash"></param>
+        /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<bool> DeleteImageAsync(string deleteHash)
+        public async Task<bool> DeleteImageAsync(string deleteHash, string username = "me")
         {
-            throw new NotImplementedException();
-            //if (string.IsNullOrEmpty(deleteHash))
-            //    throw new ArgumentNullException(nameof(deleteHash));
+            if (string.IsNullOrEmpty(deleteHash))
+                throw new ArgumentNullException(nameof(deleteHash));
 
-            //if (ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), DeleteImageUrl);
-            //endpointUrl = string.Format(endpointUrl, "me", deleteHash);
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //return await MakeEndpointRequestAsync<bool>(HttpMethod.Delete, endpointUrl);
+            var url = $"{GetEndpointBaseUrl()}account/{username}/image/{deleteHash}";
+
+            using (var request = ImageRequestBuilder.DeleteImageRequest(url))
+            {
+                var deleted = await SendRequestAsync<bool>(request);
+                return deleted;
+            }
         }
     }
 }

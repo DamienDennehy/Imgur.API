@@ -14,8 +14,9 @@ namespace Imgur.API.Endpoints
         ///     Delete an Album with a given id.
         /// </summary>
         /// <param name="id">The album id.</param>
+        /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Task<bool> DeleteAlbumAsync(string id);
+        Task<bool> DeleteAlbumAsync(string id, string username = "me");
 
         /// <summary>
         ///     Delete a comment. You are required to be logged in as the user whom created the comment.

@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Imgur.API.Exceptions;
 using Imgur.API.Models;
+using Imgur.API.Models.Impl;
+using Imgur.API.RequestBuilders;
 
 namespace Imgur.API.Endpoints.Impl
 {
     public partial class AccountEndpoint
     {
-        private const string GetAlbumsUrl = "account/{0}/albums/{1}";
-        private const string GetAlbumUrl = "account/{0}/album/{1}";
-        private const string GetAlbumIdsUrl = "account/{0}/albums/ids/{1}";
-        private const string GetAlbumCountUrl = "account/{0}/albums/count";
-        private const string DeleteAlbumUrl = "account/{0}/album/{1}";
+        internal AlbumRequestBuilder AlbumRequestBuilder { get; } = new AlbumRequestBuilder();
 
         /// <summary>
         ///     Get all the albums associated with the account.
@@ -21,25 +19,26 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IEnumerable<IAlbum>> GetAlbumsAsync(string username = "me", int? page = null)
         {
-            throw new NotImplementedException();
-            //if (string.IsNullOrEmpty(username))
-            //    throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-            //    && ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAlbumsUrl);
-            //endpointUrl = string.Format(endpointUrl, username, page);
+            var url = $"{GetEndpointBaseUrl()}account/{username}/albums/{page}";
 
-            //return await MakeEndpointRequestAsync<IEnumerable<Album>>(HttpMethod.Get, endpointUrl);
+            using (var request = AlbumRequestBuilder.GetAlbumsRequest(url))
+            {
+                var albums = await SendRequestAsync<IEnumerable<Album>>(request);
+                return albums;
+            }
         }
 
         /// <summary>
@@ -48,28 +47,29 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="id">The album id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IAlbum> GetAlbumAsync(string id, string username = "me")
         {
-            throw new NotImplementedException();
-            //if (string.IsNullOrEmpty(id))
-            //    throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
 
-            //if (string.IsNullOrEmpty(username))
-            //    throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-            //    && ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAlbumUrl);
-            //endpointUrl = string.Format(endpointUrl, username, id);
-            //var album = await MakeEndpointRequestAsync<Album>(HttpMethod.Get, endpointUrl);
-            //return album;
+            var url = $"{GetEndpointBaseUrl()}account/{username}/album/{id}";
+
+            using (var request = AlbumRequestBuilder.GetAlbumRequest(url))
+            {
+                var album = await SendRequestAsync<Album>(request);
+                return album;
+            }
         }
 
         /// <summary>
@@ -78,25 +78,26 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IEnumerable<string>> GetAlbumIdsAsync(string username = "me", int? page = null)
         {
-            throw new NotImplementedException();
-            //if (string.IsNullOrEmpty(username))
-            //    throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-            //    && ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAlbumIdsUrl);
-            //endpointUrl = string.Format(endpointUrl, username, page);
+            var url = $"{GetEndpointBaseUrl()}account/{username}/albums/ids/{page}";
 
-            //return await MakeEndpointRequestAsync<IEnumerable<string>>(HttpMethod.Get, endpointUrl);
+            using (var request = AlbumRequestBuilder.GetAlbumIdsRequest(url))
+            {
+                var albums = await SendRequestAsync<IEnumerable<string>>(request);
+                return albums;
+            }
         }
 
         /// <summary>
@@ -104,50 +105,57 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<int> GetAlbumCountAsync(string username = "me")
         {
-            throw new NotImplementedException();
-            //if (string.IsNullOrEmpty(username))
-            //    throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-            //    && ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), GetAlbumCountUrl);
-            //endpointUrl = string.Format(endpointUrl, username);
+            var url = $"{GetEndpointBaseUrl()}account/{username}/albums/count";
 
-            //return await MakeEndpointRequestAsync<int>(HttpMethod.Get, endpointUrl);
+            using (var request = AlbumRequestBuilder.GetAlbumCountRequest(url))
+            {
+                var count = await SendRequestAsync<int>(request);
+                return count;
+            }
         }
 
         /// <summary>
         ///     Delete an Album with a given id.
         /// </summary>
         /// <param name="id">The album id.</param>
+        /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<bool> DeleteAlbumAsync(string id)
+        public async Task<bool> DeleteAlbumAsync(string id, string username = "me")
         {
-            throw new NotImplementedException();
-            //if (string.IsNullOrEmpty(id))
-            //    throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
 
-            //if (ApiClient.OAuth2Token == null)
-            //    throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
 
-            //var endpointUrl = string.Concat(GetEndpointBaseUrl(), DeleteAlbumUrl);
-            //endpointUrl = string.Format(endpointUrl, "me", id);
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token));
 
-            //return await MakeEndpointRequestAsync<bool>(HttpMethod.Delete, endpointUrl);
+            var url = $"{GetEndpointBaseUrl()}account/{username}/album/{id}";
+
+            using (var request = AlbumRequestBuilder.DeleteAlbumRequest(url))
+            {
+                var deleted = await SendRequestAsync<bool>(request);
+                return deleted;
+            }
         }
     }
 }

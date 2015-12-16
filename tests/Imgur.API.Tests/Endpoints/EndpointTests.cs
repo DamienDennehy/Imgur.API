@@ -19,8 +19,6 @@ namespace Imgur.API.Tests.Endpoints
     [TestClass]
     public class EndpointTests
     {
-        private const string ImgurSimpleSuccessfulResponse = "{\"data\":true,\"success\":true,\"status\":200}";
-
         [TestMethod]
         public void ApiClient_SetByConstructor1_AreEqual()
         {
@@ -153,7 +151,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var imgurClient = new ImgurClient("123", "1234");
             var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
-            var response = endpoint.ProcessEndpointResponse<bool>(ImgurSimpleSuccessfulResponse);
+            var response = endpoint.ProcessEndpointResponse<bool>(GenericEndpointResponses.SuccessfulResponse);
             Assert.IsTrue(response);
         }
 
@@ -188,8 +186,8 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (MashapeException))]
         public void ProcessMashapeEndpointResponse_WithoutAuthorization_ThrowMashapeException()
         {
-            var mashapeAuth = new MashapeClient("123", "567567", "1234");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(mashapeAuth);
+            var mashapeClient = new MashapeClient("123", "567567", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(mashapeClient);
             endpoint.ProcessEndpointResponse<RateLimit>(FakeErrors.MashapeErrorResponse);
         }
 
@@ -396,8 +394,8 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public void UpdateRateLimit_WithMashapeClientHeaders_AreEqual()
         {
-            var mashapeAuth = new MashapeClient("123", "1234", "jhjhjhjh");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(mashapeAuth);
+            var mashapeClient = new MashapeClient("123", "1234", "jhjhjhjh");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(mashapeClient);
             var response = Substitute.For<HttpResponseMessage>();
 
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Limit", "123");

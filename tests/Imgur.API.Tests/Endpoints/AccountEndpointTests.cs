@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
+using Imgur.API.Exceptions;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,7 +22,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.Imgur.GetAccountResponse)
+                Content = new StringContent(AccountEndpointResponses.GetAccountResponse)
             };
 
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/bob"), fakeResponse);
@@ -42,8 +43,8 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAccountAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurClient);
             await endpoint.GetAccountAsync();
         }
 
@@ -51,8 +52,8 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAccountAsync_WithNullUsername_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurClient);
             await endpoint.GetAccountAsync(null);
         }
 
@@ -62,7 +63,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.Imgur.GetAccountSettingsResponse)
+                Content = new StringContent(AccountEndpointResponses.GetAccountSettingsResponse)
             };
 
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/me/settings"), fakeResponse);
@@ -88,9 +89,137 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetAccountSettingsAsync_OAuth2NotSet_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurClient);
             await endpoint.GetAccountSettingsAsync();
+        }
+
+        [TestMethod]
+        public async Task SendVerificationEmail_IsTrue()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(AccountEndpointResponses.SendVerificationEmailResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/me/verifyemail"),
+                fakeResponse);
+
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+            var imgurClient = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
+            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var updated = await endpoint.SendVerificationEmailAsync();
+
+            Assert.IsTrue(updated);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public async Task SendVerificationEmail_OAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurClient);
+            await endpoint.SendVerificationEmailAsync();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ImgurException))]
+        public async Task SendVerificationEmailAsync_ThrowsImgurException()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.BadRequest)
+            {
+                Content = new StringContent(AccountEndpointResponses.SendVerificationEmailErrorResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/me/verifyemail"),
+                fakeResponse);
+
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+            var imgurClient = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
+            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var updated = await endpoint.SendVerificationEmailAsync();
+
+            Assert.IsTrue(updated);
+        }
+
+        [TestMethod]
+        public async Task UpdateAccountSettingsAsync_IsTrue()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(AccountEndpointResponses.UpdateAccountSettingsResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/me/settings"), fakeResponse);
+
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+            var imgurClient = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
+            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var updated = await endpoint.UpdateAccountSettingsAsync();
+
+            Assert.IsTrue(updated);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public async Task UpdateAccountSettingsAsync_OAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurClient);
+            await endpoint.UpdateAccountSettingsAsync();
+        }
+
+        [TestMethod]
+        public async Task VerifyEmailAsync_IsTrue()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(AccountEndpointResponses.VerifyEmailResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/me/verifyemail"),
+                fakeResponse);
+
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+            var imgurClient = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
+            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var updated = await endpoint.VerifyEmailAsync();
+
+            Assert.IsTrue(updated);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public async Task VerifyEmailAsync_OAuth2NotSet_ThrowsArgumentNullException()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurClient);
+            await endpoint.VerifyEmailAsync();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ImgurException))]
+        public async Task VerifyEmailAsync_ThrowsImgurException()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.BadRequest)
+            {
+                Content = new StringContent(AccountEndpointResponses.VerifyEmailErrorResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/me/verifyemail"),
+                fakeResponse);
+
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+            var imgurClient = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
+            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var updated = await endpoint.VerifyEmailAsync();
+
+            Assert.IsTrue(updated);
         }
     }
 }

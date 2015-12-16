@@ -40,7 +40,8 @@ namespace Imgur.API.Tests.JsonConverters
         public void NotificationConverter_ReadJsonCommentNotification_AreEqual()
         {
             var converter = new NotificationConverter();
-            var reader = new JsonTextReader(new StringReader(AccountEndpointResponses.Imgur.GetCommentNotification));
+            var reader =
+                new JsonTextReader(new StringReader(AccountEndpointNotificationResponses.GetCommentNotification));
             reader.Read();
             var serializer = new JsonSerializer();
 
@@ -68,7 +69,8 @@ namespace Imgur.API.Tests.JsonConverters
         public void NotificationConverter_ReadJsonMessageNotification_AreEqual()
         {
             var converter = new NotificationConverter();
-            var reader = new JsonTextReader(new StringReader(AccountEndpointResponses.Imgur.GetMessageNotification));
+            var reader =
+                new JsonTextReader(new StringReader(AccountEndpointNotificationResponses.GetMessageNotification));
             reader.Read();
             var serializer = new JsonSerializer();
 

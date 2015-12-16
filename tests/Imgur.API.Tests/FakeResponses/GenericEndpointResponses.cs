@@ -2,10 +2,7 @@
 {
     public class GenericEndpointResponses
     {
-        public class Imgur
-        {
-            public const string SuccessfulResponse =
-                "{\"data\":true,\"success\":true,\"status\":200}";
-        }
+        public const string SuccessfulResponse =
+            "{\"data\":true,\"success\":true,\"status\":200}";
     }
 }

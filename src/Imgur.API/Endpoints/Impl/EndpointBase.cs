@@ -64,11 +64,11 @@ namespace Imgur.API.Endpoints.Impl
                     : $"Client-ID {apiClient.ClientId}");
 
             //Add Mashape Authentication header
-            var mashapeAuthentication = apiClient as IMashapeClient;
-            if (mashapeAuthentication != null)
+            var mashapeClient = apiClient as IMashapeClient;
+            if (mashapeClient != null)
             {
                 httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                    "X-Mashape-Key", mashapeAuthentication.MashapeKey);
+                    "X-Mashape-Key", mashapeClient.MashapeKey);
             }
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -127,11 +127,11 @@ namespace Imgur.API.Endpoints.Impl
                     : $"Client-ID {apiClient.ClientId}");
 
             //Add Mashape Authentication header
-            var mashapeAuthentication = apiClient as IMashapeClient;
-            if (mashapeAuthentication != null)
+            var mashapeClient = apiClient as IMashapeClient;
+            if (mashapeClient != null)
             {
                 HttpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                    "X-Mashape-Key", mashapeAuthentication.MashapeKey);
+                    "X-Mashape-Key", mashapeClient.MashapeKey);
             }
 
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

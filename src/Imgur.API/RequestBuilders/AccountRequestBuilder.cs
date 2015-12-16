@@ -57,25 +57,25 @@ namespace Imgur.API.RequestBuilders
                 parameters.Add(nameof(bio), bio);
 
             if (publicImages != null)
-                parameters.Add("public_images", publicImages.Value.ToString());
+                parameters.Add("public_images", publicImages.Value.ToString().ToLower());
 
             if (messagingEnabled != null)
-                parameters.Add("messaging_enabled", messagingEnabled.Value.ToString());
+                parameters.Add("messaging_enabled", messagingEnabled.Value.ToString().ToLower());
 
             if (albumPrivacy != null)
-                parameters.Add("album_privacy", albumPrivacy.ToString());
+                parameters.Add("album_privacy", albumPrivacy.ToString().ToLower());
 
             if (acceptedGalleryTerms != null)
-                parameters.Add("accepted_gallery_terms", acceptedGalleryTerms.Value.ToString());
+                parameters.Add("accepted_gallery_terms", acceptedGalleryTerms.Value.ToString().ToLower());
 
             if (!string.IsNullOrWhiteSpace(username))
                 parameters.Add("username", username);
 
             if (showMature != null)
-                parameters.Add("show_mature", showMature.Value.ToString());
+                parameters.Add("show_mature", showMature.Value.ToString().ToLower());
 
             if (newsletterSubscribed != null)
-                parameters.Add("newsletter_subscribed", newsletterSubscribed.Value.ToString());
+                parameters.Add("newsletter_subscribed", newsletterSubscribed.Value.ToString().ToLower());
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)
             {

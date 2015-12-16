@@ -4,10 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Imgur.API.Tests.FakeTests
+namespace Imgur.API.Tests.Fakes
 {
     [TestClass]
     public class FakeHttpMessageHandlerTests

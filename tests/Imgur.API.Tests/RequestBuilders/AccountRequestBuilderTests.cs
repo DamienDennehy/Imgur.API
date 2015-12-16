@@ -58,6 +58,29 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
+        public void SendVerificationEmail_AreEqual()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurClient);
+
+            var url = $"{endpoint.GetEndpointBaseUrl()}account/me/verifyemail";
+            var request = endpoint.RequestBuilder.SendVerificationEmailRequest(url);
+
+            Assert.IsNotNull(request);
+            Assert.AreEqual("https://api.imgur.com/3/account/me/verifyemail", request.RequestUri.ToString());
+            Assert.AreEqual(HttpMethod.Post, request.Method);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public void SendVerificationEmail_WithUrlNull_ThrowsArgumentNullException()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(imgurClient);
+            endpoint.RequestBuilder.SendVerificationEmailRequest(null);
+        }
+
+        [TestMethod]
         public void SendVerificationEmailRequest_AreEqual()
         {
             var imgurClient = new ImgurClient("123", "1234");
@@ -93,7 +116,7 @@ namespace Imgur.API.Tests.RequestBuilders
 
             Assert.IsNotNull(request);
             var expected =
-                "bio=BioTest&public_images=True&messaging_enabled=True&album_privacy=Public&accepted_gallery_terms=True&username=Bob2&show_mature=True&newsletter_subscribed=True";
+                "bio=BioTest&public_images=true&messaging_enabled=true&album_privacy=public&accepted_gallery_terms=true&username=Bob2&show_mature=true&newsletter_subscribed=true";
 
             Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
             Assert.AreEqual("https://api.imgur.com/3/account/me/settings", request.RequestUri.ToString());

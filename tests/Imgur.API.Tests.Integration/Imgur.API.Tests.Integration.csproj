@@ -46,15 +46,25 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Endpoints\ImageEndpointTests\ImageEndpointImgurClientTests.cs" />
-    <Compile Include="Endpoints\ImageEndpointTests\ImageEndpointImgurClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\ImageEndpointTests\ImageEndpointMashapeClientTests.cs" />
-    <Compile Include="Endpoints\ImageEndpointTests\ImageEndpointMashapeClientWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\AccountEndpointAlbumTests\MashapeClientWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\AccountEndpointAlbumTests\MashapeClientTests.cs" />
+    <Compile Include="Endpoints\AccountEndpointAlbumTests\ImgurClientTests.cs" />
+    <Compile Include="Endpoints\AccountEndpointAlbumTests\ImgurClientWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\AccountEndpointTests\ImgurClientTests.cs" />
+    <Compile Include="Endpoints\AccountEndpointTests\MashapeClientWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\AccountEndpointTests\ImgurClientWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\AccountEndpointTests\MashapeClientTests.cs" />
+    <Compile Include="Endpoints\ImageEndpointTests\ImgurClientTests.cs" />
+    <Compile Include="Endpoints\ImageEndpointTests\ImgurClientWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\ImageEndpointTests\MashapeClientTests.cs" />
+    <Compile Include="Endpoints\ImageEndpointTests\MashapeClientWithOAuth2Tests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />
     <Compile Include="Endpoints\RateLimitEndpointTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,7 +80,12 @@
     <None Include="App.config" />
     <None Include="README.md" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Endpoints\AccountEndpointCommentTests\" />
+    <Folder Include="Endpoints\AccountEndpointGalleryTests\" />
+    <Folder Include="Endpoints\AccountEndpointImageTests\" />
+    <Folder Include="Endpoints\AccountEndpointNotificationTests\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Banana.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

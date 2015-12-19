@@ -8,5 +8,6 @@ pages:
 - 'Endpoints':
     - 'Account Endpoint': 'account-endpoint.md'
     - 'Image Endpoint': 'image-endpoint.md'
+    - 'Album Endpoint': 'album-endpoint.md'
 - 'FAQ': 'faq.md'
 - 'Release Notes': 'release-notes.md'

@@ -5,7 +5,7 @@ To access a user's account, the user must first authorize your application so th
 The simplest way to do this is to redirect to Imgur's authorization url.
 
     var client = new ImgurClient("YOUR_CLIENT", "YOUR_SECRET");
-    var endpoint = new OAuth2Endpoint(imgurClient);
+    var endpoint = new OAuth2Endpoint(client);
     var redirectUrl = endpoint.GetAuthorizationUrl(OAuth2ResponseType.Token, null);
 
 Once the user authorizes the application, the Imgur OAuth2 endpoint will redirect back to your application Redirect URL.

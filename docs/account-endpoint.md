@@ -32,7 +32,8 @@ Return the images a user has submitted to the gallery.
 Updates the account settings for a given user, the user must be logged in.
 
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH_TOKEN);
-            var updated = await endpoint.UpdateAccountSettingsAsync("Hello World!");			
+			var endpoint = new AccountEndpoint(client);
+            var updated = await endpoint.UpdateAccountSettingsAsync("BIO");			
 			
 ##GetGalleryProfileAsync
 Returns the totals for the gallery profile.
@@ -88,7 +89,7 @@ Delete an Album with a given id.
 			
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH_TOKEN);
 			var endpoint = new AccountEndpoint(client);
-			var deleted = await endpoint.DeleteAlbumAsync("3pqWgc", "USERNAME");
+			var deleted = await endpoint.DeleteAlbumAsync("ALBUM_ID", "USERNAME");
 
 ##GetCommentsAsync
 Return the comments the user has created.
@@ -102,7 +103,7 @@ Return information about a specific comment.
 
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
 			var endpoint = new AccountEndpoint(client);
-			var comment = await endpoint.GetCommentAsync("507866157", "USERNAME");
+			var comment = await endpoint.GetCommentAsync("COMMENT_ID", "USERNAME");
 
 ##GetCommentIdsAsync
 Return an array of all of the comment IDs.
@@ -123,7 +124,7 @@ Delete a comment. You are required to be logged in as the user whom created the 
 
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH_TOKEN);
 			var endpoint = new AccountEndpoint(client);
-			var deleted = await endpoint.DeleteCommentAsync("508165125", "USERNAME");
+			var deleted = await endpoint.DeleteCommentAsync("COMMENT_ID", "USERNAME");
 
 ##GetImagesAsync
 Return all of the images associated with the account. You can page through the images by setting the page, this defaults to 0.
@@ -158,7 +159,7 @@ Deletes an Image. This requires a delete hash rather than an ID.
 
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH_TOKEN);
 			var endpoint = new AccountEndpoint(client);
-			var deleted = await endpoint.DeleteImageAsync("dsfhhjyuYUYU", "USERNAME");
+			var deleted = await endpoint.DeleteImageAsync("DELETE_HASH", "USERNAME");
 
 ##GetNotificationsAsync
 Returns all of the reply notifications for the user. Required to be logged in as that user.

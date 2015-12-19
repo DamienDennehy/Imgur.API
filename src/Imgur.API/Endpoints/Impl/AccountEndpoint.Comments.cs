@@ -26,7 +26,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IEnumerable<IComment>> GetCommentsAsync(string username = "me",
-            CommentSortOrder sort = CommentSortOrder.Newest, int? page = null)
+            CommentSortOrder? sort = CommentSortOrder.Newest, int? page = null)
         {
             if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
@@ -35,7 +35,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/{username}/comments/{sort.ToString().ToLower()}/{page}";
+            var url = $"account/{username}/comments/{sort}/{page}".ToLower();
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -66,7 +66,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/{username}/comment/{id}";
+            var url = $"account/{username}/comment/{id}";
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -87,7 +87,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IEnumerable<string>> GetCommentIdsAsync(string username = "me",
-            CommentSortOrder sort = CommentSortOrder.Newest, int? page = null)
+            CommentSortOrder? sort = CommentSortOrder.Newest, int? page = null)
         {
             if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
@@ -96,7 +96,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/{username}/comments/ids/{sort.ToString().ToLower()}/{page}";
+            var url = $"account/{username}/comments/ids/{sort}/{page}".ToLower();
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -123,7 +123,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/{username}/comments/count";
+            var url = $"account/{username}/comments/count";
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -154,7 +154,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/{username}/comment/{id}";
+            var url = $"account/{username}/comment/{id}";
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {

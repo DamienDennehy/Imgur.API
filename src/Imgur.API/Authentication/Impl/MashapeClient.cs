@@ -44,6 +44,12 @@ namespace Imgur.API.Authentication.Impl
         }
 
         /// <summary>
+        ///     The Endpoint Url.
+        ///     https://imgur-apiv3.p.mashape.com/3/
+        /// </summary>
+        public override string EndpointUrl { get; } = "https://imgur-apiv3.p.mashape.com/3/";
+
+        /// <summary>
         ///     The Mashape Key.
         /// </summary>
         public virtual string MashapeKey { get; }

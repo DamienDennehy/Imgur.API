@@ -12,10 +12,10 @@ namespace Imgur.API.Tests.RequestBuilders
         [TestMethod]
         public void CreateRequest_AreEqual()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
 
-            var url = $"{endpoint.GetEndpointBaseUrl()}account/bob";
+            var url = $"{endpoint.ApiClient.EndpointUrl}account/bob";
             var request = endpoint.RequestBuilder.CreateRequest(HttpMethod.Get, url);
 
             Assert.IsNotNull(request);
@@ -27,8 +27,8 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void CreateRequest_WithHttpMethodNull_ThrowsArgumentNullException()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             endpoint.RequestBuilder.CreateRequest(null, null);
         }
 
@@ -36,8 +36,8 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void CreateRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             endpoint.RequestBuilder.CreateRequest(HttpMethod.Get, null);
         }
     }

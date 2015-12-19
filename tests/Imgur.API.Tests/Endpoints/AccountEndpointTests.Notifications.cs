@@ -25,8 +25,8 @@ namespace Imgur.API.Tests.Endpoints
                 new Uri("https://api.imgur.com/3/account/me/notifications?new=false"), fakeResponse);
 
             var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
-            var imgurClient = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var notifications = await endpoint.GetNotificationsAsync(false);
 
             Assert.IsNotNull(notifications);

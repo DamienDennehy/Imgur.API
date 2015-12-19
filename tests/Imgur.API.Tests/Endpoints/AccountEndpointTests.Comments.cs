@@ -26,8 +26,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/comment/yMgB7"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var deleted = await endpoint.DeleteCommentAsync("yMgB7", "sarah");
 
             Assert.IsTrue(deleted);
@@ -71,8 +71,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/comment/yMgB7"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var comment = await endpoint.GetCommentAsync("yMgB7", "sarah");
 
             Assert.IsNotNull(comment);
@@ -131,8 +131,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/comments/count"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var count = await endpoint.GetCommentCountAsync("sarah");
 
             Assert.AreEqual(count, 1500);
@@ -167,8 +167,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/bob/comments/ids/worst/2"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var comments = await endpoint.GetCommentIdsAsync("bob", CommentSortOrder.Worst, 2);
 
             Assert.AreEqual(50, comments.Count());
@@ -204,8 +204,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/bob/comments/worst/2"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var comments = await endpoint.GetCommentsAsync("bob", CommentSortOrder.Worst, 2);
 
             Assert.AreEqual(50, comments.Count());

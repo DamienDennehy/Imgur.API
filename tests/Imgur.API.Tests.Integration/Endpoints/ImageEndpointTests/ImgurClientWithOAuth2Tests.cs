@@ -115,6 +115,8 @@ namespace Imgur.API.Tests.Integration.Endpoints.ImageEndpointTests
 
             await GetImageAsync_WithImage_AreEqual(image);
             await UpdateImageAsync_WithImage_AreEqual(image);
+            await FavoriteImageAsync_WithNotFavoritedImage_IsTrue(image);
+            await UnfavoriteImageAsync_WithFavoritedImage_IsFalse(image);
             await DeleteImageAsync_WithImage_IsTrue(image);
         }
 

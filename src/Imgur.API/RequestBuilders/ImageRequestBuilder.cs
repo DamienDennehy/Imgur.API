@@ -16,10 +16,10 @@ namespace Imgur.API.RequestBuilders
 
             var parameters = new Dictionary<string, string>();
 
-            if (!string.IsNullOrWhiteSpace(title))
+            if (title != null)
                 parameters.Add(nameof(title), title);
 
-            if (!string.IsNullOrWhiteSpace(description))
+            if (description != null)
                 parameters.Add(nameof(description), description);
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)
@@ -42,19 +42,19 @@ namespace Imgur.API.RequestBuilders
 
             var request = new HttpRequestMessage(HttpMethod.Post, url);
 
-            var content = new MultipartFormDataContent(DateTime.UtcNow.Ticks.ToString())
+            var content = new MultipartFormDataContent($"{DateTime.UtcNow.Ticks}")
             {
                 {new StringContent("file"), "type"},
                 {new ByteArrayContent(image), nameof(image)}
             };
 
-            if (!string.IsNullOrWhiteSpace(album))
+            if (album != null)
                 content.Add(new StringContent(album), nameof(album));
 
-            if (!string.IsNullOrWhiteSpace(title))
+            if (title != null)
                 content.Add(new StringContent(title), nameof(title));
 
-            if (!string.IsNullOrWhiteSpace(description))
+            if (description != null)
                 content.Add(new StringContent(description), nameof(description));
 
             request.Content = content;
@@ -74,19 +74,19 @@ namespace Imgur.API.RequestBuilders
 
             var request = new HttpRequestMessage(HttpMethod.Post, url);
 
-            var content = new MultipartFormDataContent(DateTime.UtcNow.Ticks.ToString())
+            var content = new MultipartFormDataContent($"{DateTime.UtcNow.Ticks}")
             {
                 {new StringContent("file"), "type"},
                 {new StreamContent(image), nameof(image)}
             };
 
-            if (!string.IsNullOrWhiteSpace(album))
+            if (album != null)
                 content.Add(new StringContent(album), nameof(album));
 
-            if (!string.IsNullOrWhiteSpace(title))
+            if (title != null)
                 content.Add(new StringContent(title), nameof(title));
 
-            if (!string.IsNullOrWhiteSpace(description))
+            if (description != null)
                 content.Add(new StringContent(description), nameof(description));
 
             request.Content = content;
@@ -110,13 +110,13 @@ namespace Imgur.API.RequestBuilders
                 {"image", image}
             };
 
-            if (!string.IsNullOrWhiteSpace(album))
+            if (album != null)
                 parameters.Add(nameof(album), album);
 
-            if (!string.IsNullOrWhiteSpace(title))
+            if (title != null)
                 parameters.Add(nameof(title), title);
 
-            if (!string.IsNullOrWhiteSpace(description))
+            if (description != null)
                 parameters.Add(nameof(description), description);
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)

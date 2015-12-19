@@ -53,7 +53,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/{username}";
+            var url = $"account/{username}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -75,7 +75,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/me/settings";
+            var url = "account/me/settings";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -91,7 +91,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="publicImages">Set the users images to private or public by default.</param>
         /// <param name="messagingEnabled">Allows the user to enable / disable private messages.</param>
         /// <param name="albumPrivacy">Sets the default privacy level of albums the users creates.</param>
-        /// <param name="acceptedGalleryTerms"> The user agreement to the Imgur Gallery terms.</param>
+        /// <param name="acceptedGalleryTerms">The user agreement to the Imgur Gallery terms.</param>
         /// <param name="username">A valid Imgur username (between 4 and 63 alphanumeric characters).</param>
         /// <param name="showMature">Toggle display of mature images in gallery list endpoints.</param>
         /// <param name="newsletterSubscribed">Toggle subscription to email newsletter.</param>
@@ -113,7 +113,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/me/settings";
+            var url = "account/me/settings";
 
             using (
                 var request = RequestBuilder.UpdateAccountSettingsRequest(url, bio, publicImages, messagingEnabled,
@@ -137,7 +137,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/me/verifyemail";
+            var url = "account/me/verifyemail";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -160,7 +160,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/me/verifyemail";
+            var url = "account/me/verifyemail";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {

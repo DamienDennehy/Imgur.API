@@ -32,7 +32,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/{username}/gallery_profile";
+            var url = $"account/{username}/gallery_profile";
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -63,7 +63,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/{username}/gallery_favorites/{page}/{sort.ToString().ToLower()}";
+            var url = $"account/{username}/gallery_favorites/{page}/{sort}".ToLower();
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -85,7 +85,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/me/favorites";
+            var url = "account/me/favorites";
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -113,7 +113,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/me/submissions/{page}";
+            var url = $"account/me/submissions/{page}";
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {

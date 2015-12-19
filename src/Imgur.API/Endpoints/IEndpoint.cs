@@ -19,11 +19,6 @@ namespace Imgur.API.Endpoints
         HttpClient HttpClient { get; }
 
         /// <summary>
-        ///     Gets the endpoint url based on the authentication type.
-        /// </summary>
-        string GetEndpointBaseUrl();
-
-        /// <summary>
         ///     Switch from one client type to another.
         /// </summary>
         /// <param name="apiClient"></param>

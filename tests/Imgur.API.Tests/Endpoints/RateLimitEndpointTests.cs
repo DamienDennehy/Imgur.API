@@ -26,8 +26,8 @@ namespace Imgur.API.Tests.Endpoints
 
             var httpClient = new HttpClient(fakeHttpMessageHandler);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new RateLimitEndpoint(imgurClient, httpClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new RateLimitEndpoint(client, httpClient);
 
             var rateLimit = await endpoint.GetRateLimitAsync();
 

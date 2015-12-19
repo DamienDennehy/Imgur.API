@@ -33,7 +33,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/{username}/albums/{page}";
+            var url = $"account/{username}/albums/{page}";
 
             using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -64,7 +64,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/{username}/album/{id}";
+            var url = $"account/{username}/album/{id}";
 
             using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -92,7 +92,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/{username}/albums/ids/{page}";
+            var url = $"account/{username}/albums/ids/{page}";
 
             using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -119,7 +119,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/{username}/albums/count";
+            var url = $"account/{username}/albums/count";
 
             using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -150,7 +150,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"{GetEndpointBaseUrl()}account/{username}/album/{id}";
+            var url = $"account/{username}/album/{id}";
 
             using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {

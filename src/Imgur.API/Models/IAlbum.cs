@@ -72,7 +72,7 @@ namespace Imgur.API.Models
         /// <summary>
         ///     The view layout of the album.
         /// </summary>
-        string Layout { get; set; }
+        AlbumLayout Layout { get; set; }
 
         /// <summary>
         ///     The URL link to the album.

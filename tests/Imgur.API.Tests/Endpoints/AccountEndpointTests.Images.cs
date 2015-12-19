@@ -25,8 +25,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/image/hbzm7Ge"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var deleted = await endpoint.DeleteImageAsync("hbzm7Ge", "sarah");
 
             Assert.IsTrue(deleted);
@@ -70,8 +70,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/image/hbzm7Ge"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var image = await endpoint.GetImageAsync("hbzm7Ge", "sarah");
 
             Assert.IsNotNull(image);
@@ -137,8 +137,9 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/images/count"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var tokenHandler = new FakeOAuth2TokenHandler();
+            var client = new ImgurClient("123", "1234", tokenHandler.GetOAuth2TokenCodeResponse());
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var count = await endpoint.GetImageCountAsync("sarah");
 
             Assert.AreEqual(count, 2);
@@ -173,8 +174,9 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/images/ids/2"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var tokenHandler = new FakeOAuth2TokenHandler();
+            var client = new ImgurClient("123", "1234", tokenHandler.GetOAuth2TokenCodeResponse());
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var images = await endpoint.GetImageIdsAsync("sarah", 2);
 
             Assert.AreEqual(2, images.Count());
@@ -210,8 +212,9 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/images/2"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var tokenHandler = new FakeOAuth2TokenHandler();
+            var client = new ImgurClient("123", "1234", tokenHandler.GetOAuth2TokenCodeResponse());
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var images = await endpoint.GetImagesAsync("sarah", 2);
 
             Assert.AreEqual(2, images.Count());

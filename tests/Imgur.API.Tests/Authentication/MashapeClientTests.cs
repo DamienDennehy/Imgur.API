@@ -40,6 +40,13 @@ namespace Imgur.API.Tests.Authentication
         }
 
         [TestMethod]
+        public void EndpointUrl_IsImgurUrl()
+        {
+            var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey");
+            Assert.AreEqual("https://imgur-apiv3.p.mashape.com/3/", client.EndpointUrl);
+        }
+
+        [TestMethod]
         public void MashapeKey_SetByConstructor_AreEqual()
         {
             var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey");

@@ -41,12 +41,15 @@
     <Compile Include="Authentication\Impl\ApiClientBase.cs" />
     <Compile Include="Authentication\Impl\ImgurClient.cs" />
     <Compile Include="Authentication\Impl\MashapeClient.cs" />
+    <Compile Include="Endpoints\IAlbumEndpoint.cs" />
     <Compile Include="Endpoints\Impl\AccountEndpoint.Albums.cs" />
     <Compile Include="Endpoints\Impl\AccountEndpoint.Comments.cs" />
     <Compile Include="Endpoints\Impl\AccountEndpoint.cs" />
     <Compile Include="Endpoints\Impl\AccountEndpoint.Gallery.cs" />
     <Compile Include="Endpoints\Impl\AccountEndpoint.Notifications.cs" />
     <Compile Include="Endpoints\Impl\AccountEndpoint.Images.cs" />
+    <Compile Include="Endpoints\Impl\AlbumEndpoint.cs" />
+    <Compile Include="Enums\AlbumLayout.cs" />
     <Compile Include="Enums\OAuth2ResponseType.cs" />
     <Compile Include="Endpoints\IAccountEndpoint.cs" />
     <Compile Include="Endpoints\IEndpoint.cs" />

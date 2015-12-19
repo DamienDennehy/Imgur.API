@@ -54,18 +54,18 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public void HttpClient_SetByConstructor1_IsNotNull()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             Assert.IsNotNull(endpoint.HttpClient);
         }
 
         [TestMethod]
         public void HttpClient_SetByConstructor2_AreSame()
         {
-            var imgurClient = new ImgurClient("123", "1234");
+            var client = new ImgurClient("123", "1234");
             var httpCLient = new HttpClient();
 
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient, httpCLient);
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client, httpCLient);
 
             Assert.AreSame(httpCLient, endpoint.HttpClient);
         }
@@ -88,10 +88,28 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
+        public void HttpClientBaseAddress_WithImgurClient_IsImgurUrl()
+        {
+            var client = new ImgurClient("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
+
+            Assert.AreEqual(new Uri("https://api.imgur.com/3/"), endpoint.HttpClient.BaseAddress);
+        }
+
+        [TestMethod]
+        public void HttpClientBaseAddress_WithMashapeClient_IsMashapeUrl()
+        {
+            var client = new MashapeClient("123", "1234", "12345");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
+
+            Assert.AreEqual(new Uri("https://imgur-apiv3.p.mashape.com/3/"), endpoint.HttpClient.BaseAddress);
+        }
+
+        [TestMethod]
         public void HttpClientWithImgurClient_SetByConstructor_HeadersAreEqual()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             var authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
             var accept = endpoint.HttpClient.DefaultRequestHeaders.Accept.First();
             Assert.AreEqual("Client-ID 123", authHeader);
@@ -102,8 +120,8 @@ namespace Imgur.API.Tests.Endpoints
         public void HttpClientWithImgurClientAndOAuth2Token_SetByConstructor_HeadersAreEqual()
         {
             var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", 3600);
-            var imgurClient = new ImgurClient("123", "1234", oAuth2Token);
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
+            var client = new ImgurClient("123", "1234", oAuth2Token);
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             var authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
             var accept = endpoint.HttpClient.DefaultRequestHeaders.Accept.First();
             Assert.AreEqual("Bearer access_token", authHeader);
@@ -113,8 +131,8 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public void HttpClientWithMashapeClient_SetByConstructor_HeadersAreEqual()
         {
-            var imgurClient = new MashapeClient("123", "1234", "1234567");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
+            var client = new MashapeClient("123", "1234", "1234567");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             var authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
             var mashapeHeaders = endpoint.HttpClient.DefaultRequestHeaders.GetValues("X-Mashape-Key").First();
             var accept = endpoint.HttpClient.DefaultRequestHeaders.Accept.First();
@@ -127,8 +145,8 @@ namespace Imgur.API.Tests.Endpoints
         public void HttpClientWithMashapeClientAndOAuth2Token_SetByConstructor_HeadersAreEqual()
         {
             var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", 3600);
-            var imgurClient = new MashapeClient("123", "1234", "1234567", oAuth2Token);
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
+            var client = new MashapeClient("123", "1234", "1234567", oAuth2Token);
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             var authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
             var mashapeHeaders = endpoint.HttpClient.DefaultRequestHeaders.GetValues("X-Mashape-Key").First();
             var accept = endpoint.HttpClient.DefaultRequestHeaders.Accept.First();
@@ -141,16 +159,16 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ImgurException))]
         public void ProcessEndpointBaseResponse_WithNullValue_ThrowsImgurException()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             endpoint.ProcessEndpointResponse<bool>(null);
         }
 
         [TestMethod]
         public void ProcessEndpointResponse_WithSuccessfulResponse_AreEqual()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             var response = endpoint.ProcessEndpointResponse<bool>(GenericEndpointResponses.SuccessfulResponse);
             Assert.IsTrue(response);
         }
@@ -159,8 +177,8 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ImgurException))]
         public void ProcessImgurEndpointResponse_WithAuthorization_ThrowImgurException()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             endpoint.ProcessEndpointResponse<RateLimit>(FakeErrors.ImgurClientErrorResponse);
         }
 
@@ -168,8 +186,8 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ImgurException))]
         public void ProcessImgurEndpointResponse_WithExpectedCapacityError_ThrowImgurException()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             endpoint.ProcessEndpointResponse<RateLimit>(FakeErrors.ImgurCapacityErrorResponse);
         }
 
@@ -177,8 +195,8 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ImgurException))]
         public void ProcessImgurEndpointResponse_WithInvalidResponse_ThrowsImgurException()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             endpoint.ProcessEndpointResponse<RateLimit>("<html>");
         }
 
@@ -186,8 +204,8 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (MashapeException))]
         public void ProcessMashapeEndpointResponse_WithoutAuthorization_ThrowMashapeException()
         {
-            var mashapeClient = new MashapeClient("123", "567567", "1234");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(mashapeClient);
+            var client = new MashapeClient("123", "567567", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             endpoint.ProcessEndpointResponse<RateLimit>(FakeErrors.MashapeErrorResponse);
         }
 
@@ -300,7 +318,19 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void SwitchClient_SetImgurClientAndOAuth2TokenThenMashapeClient_HeadersAreEqual()
+        public void SwitchClient_SetMashapeClient_IsTrue()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var mashapeClient = new MashapeClient("123444", "567567", "12354564");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
+
+            Assert.IsTrue(endpoint.ApiClient is IImgurClient);
+            endpoint.SwitchClient(mashapeClient);
+            Assert.IsTrue(endpoint.ApiClient is IMashapeClient);
+        }
+
+        [TestMethod]
+        public void SwitchClient_SetMashapeClientAndOAuth2TokenThenImgurClient_HeadersAreEqual()
         {
             var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", 3600);
             var imgurClient = new ImgurClient("123", "1234", oAuth2Token);
@@ -321,7 +351,25 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void SwitchClient_SetImgurClientThenMashapeClient_HeadersAreEqual()
+        public void SwitchClient_SetMashapeClientThenImgurClient_BaseAddressAreEqual()
+        {
+            var imgurClient = new ImgurClient("123", "1234");
+            var mashapeClient = new MashapeClient("123444", "567567", "12354564");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(mashapeClient);
+
+            Assert.IsTrue(endpoint.ApiClient is IMashapeClient);
+
+            Assert.AreEqual(new Uri("https://imgur-apiv3.p.mashape.com/3/"), endpoint.HttpClient.BaseAddress);
+
+            endpoint.SwitchClient(imgurClient);
+
+            Assert.IsTrue(endpoint.ApiClient is IImgurClient);
+
+            Assert.AreEqual(new Uri("https://api.imgur.com/3/"), endpoint.HttpClient.BaseAddress);
+        }
+
+        [TestMethod]
+        public void SwitchClient_SetMashapeClientThenImgurClient_HeadersAreEqual()
         {
             var imgurClient = new ImgurClient("123", "1234");
             var mashapeClient = new MashapeClient("123444", "567567", "12354564");
@@ -347,18 +395,6 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        public void SwitchClient_SetMashapeClient_IsTrue()
-        {
-            var imgurClient = new ImgurClient("123", "1234");
-            var mashapeClient = new MashapeClient("123444", "567567", "12354564");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
-
-            Assert.IsTrue(endpoint.ApiClient is IImgurClient);
-            endpoint.SwitchClient(mashapeClient);
-            Assert.IsTrue(endpoint.ApiClient is IMashapeClient);
-        }
-
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void SwitchClient_SetNull_ThrowsArgumentNullException()
         {
@@ -369,8 +405,8 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public void UpdateRateLimit_WithImgurClientHeaders_AreEqual()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             var response = Substitute.For<HttpResponseMessage>();
 
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "123");
@@ -394,8 +430,8 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public void UpdateRateLimit_WithMashapeClientHeaders_AreEqual()
         {
-            var mashapeClient = new MashapeClient("123", "1234", "jhjhjhjh");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(mashapeClient);
+            var client = new MashapeClient("123", "1234", "jhjhjhjh");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             var response = Substitute.For<HttpResponseMessage>();
 
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Limit", "123");
@@ -417,8 +453,8 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ArgumentNullException))]
         public void UpdateRateLimit_WithNullHeaders_ThrowArgumentException()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = Substitute.ForPartsOf<EndpointBase>(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
 
             endpoint.UpdateRateLimit(null);
         }

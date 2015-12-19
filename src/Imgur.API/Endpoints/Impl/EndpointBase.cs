@@ -73,6 +73,7 @@ namespace Imgur.API.Endpoints.Impl
                     "X-Mashape-Key", mashapeClient.MashapeKey);
             }
 
+            httpClient.BaseAddress = new Uri(apiClient.EndpointUrl);
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             ApiClient = apiClient;
@@ -88,22 +89,6 @@ namespace Imgur.API.Endpoints.Impl
         ///     Interface for all API authentication types.
         /// </summary>
         public virtual IApiClient ApiClient { get; private set; }
-
-        /// <summary>
-        ///     The base Endpoint Url based on the current authentication set.
-        ///     https://api.imgur.com/3/ or https://imgur-apiv3.p.mashape.com/3/
-        /// </summary>
-        /// <exception cref="InvalidOperationException"></exception>
-        public virtual string GetEndpointBaseUrl()
-        {
-            if (ApiClient is IImgurClient)
-                return "https://api.imgur.com/3/";
-
-            if (ApiClient is IMashapeClient)
-                return "https://imgur-apiv3.p.mashape.com/3/";
-
-            throw new InvalidOperationException("ApiClient type not recognized.");
-        }
 
         /// <summary>
         ///     Switch from one client type to another.
@@ -136,6 +121,8 @@ namespace Imgur.API.Endpoints.Impl
                     "X-Mashape-Key", mashapeClient.MashapeKey);
             }
 
+            // ReSharper disable once ExceptionNotDocumented
+            HttpClient.BaseAddress = new Uri(apiClient.EndpointUrl);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 

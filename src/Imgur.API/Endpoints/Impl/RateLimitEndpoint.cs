@@ -45,7 +45,7 @@ namespace Imgur.API.Endpoints.Impl
         {
             IRateLimit limit;
 
-            var url = $"{GetEndpointBaseUrl()}credits";
+            var url = "credits";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {

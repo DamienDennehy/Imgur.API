@@ -26,29 +26,29 @@ namespace Imgur.API.RequestBuilders
 
             var parameters = new Dictionary<string, string>();
 
-            if (!string.IsNullOrWhiteSpace(bio))
-                parameters.Add(nameof(bio), bio);
-
             if (publicImages != null)
-                parameters.Add("public_images", publicImages.Value.ToString().ToLower());
+                parameters.Add("public_images", $"{publicImages}".ToLower());
 
             if (messagingEnabled != null)
-                parameters.Add("messaging_enabled", messagingEnabled.Value.ToString().ToLower());
+                parameters.Add("messaging_enabled", $"{messagingEnabled}".ToLower());
 
             if (albumPrivacy != null)
-                parameters.Add("album_privacy", albumPrivacy.ToString().ToLower());
+                parameters.Add("album_privacy", $"{albumPrivacy}".ToLower());
 
             if (acceptedGalleryTerms != null)
-                parameters.Add("accepted_gallery_terms", acceptedGalleryTerms.Value.ToString().ToLower());
-
-            if (!string.IsNullOrWhiteSpace(username))
-                parameters.Add("username", username);
+                parameters.Add("accepted_gallery_terms", $"{acceptedGalleryTerms}".ToLower());
 
             if (showMature != null)
-                parameters.Add("show_mature", showMature.Value.ToString().ToLower());
+                parameters.Add("show_mature", $"{showMature}".ToLower());
 
             if (newsletterSubscribed != null)
-                parameters.Add("newsletter_subscribed", newsletterSubscribed.Value.ToString().ToLower());
+                parameters.Add("newsletter_subscribed", $"{newsletterSubscribed}".ToLower());
+
+            if (!string.IsNullOrWhiteSpace(username))
+                parameters.Add(nameof(username), username);
+
+            if (!string.IsNullOrWhiteSpace(bio))
+                parameters.Add(nameof(bio), bio);
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)
             {

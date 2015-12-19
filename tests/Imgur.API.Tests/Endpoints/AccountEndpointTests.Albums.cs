@@ -26,8 +26,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/album/yMgB7"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var deleted = await endpoint.DeleteAlbumAsync("yMgB7", "sarah");
 
             Assert.IsTrue(deleted);
@@ -71,8 +71,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/album/yMgB7"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var album = await endpoint.GetAlbumAsync("yMgB7", "sarah");
 
             Assert.IsNotNull(album);
@@ -86,7 +86,7 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual(album.AccountUrl, "sarah");
             Assert.AreEqual(album.AccountId, 9571);
             Assert.AreEqual(album.Privacy, AlbumPrivacy.Public);
-            Assert.AreEqual(album.Layout, "blog");
+            Assert.AreEqual(album.Layout, AlbumLayout.Blog);
             Assert.AreEqual(album.Views, 413310);
             Assert.AreEqual(album.Link, "http://imgur.com/a/yMgB7");
             Assert.AreEqual(album.Favorite, false);
@@ -133,8 +133,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/albums/count"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var count = await endpoint.GetAlbumCountAsync("sarah");
 
             Assert.AreEqual(count, 105);
@@ -169,8 +169,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/bob/albums/ids/2"),
                 fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var albums = await endpoint.GetAlbumIdsAsync("bob", 2);
 
             Assert.AreEqual(50, albums.Count());
@@ -205,8 +205,8 @@ namespace Imgur.API.Tests.Endpoints
 
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/bob/albums/2"), fakeResponse);
 
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var albums = await endpoint.GetAlbumsAsync("bob", 2);
 
             Assert.AreEqual(50, albums.Count());

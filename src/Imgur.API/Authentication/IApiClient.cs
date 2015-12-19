@@ -18,6 +18,12 @@ namespace Imgur.API.Authentication
         string ClientSecret { get; }
 
         /// <summary>
+        ///     The Endpoint Url.
+        ///     https://api.imgur.com/3/ or https://imgur-apiv3.p.mashape.com/3/
+        /// </summary>
+        string EndpointUrl { get; }
+
+        /// <summary>
         ///     An OAuth2 Token used for actions against a user's account.
         /// </summary>
         IOAuth2Token OAuth2Token { get; }

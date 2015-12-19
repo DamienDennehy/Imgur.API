@@ -80,6 +80,12 @@ namespace Imgur.API.Authentication.Impl
         public virtual string ClientSecret { get; }
 
         /// <summary>
+        ///     The Endpoint Url.
+        ///     https://api.imgur.com/3/ or https://imgur-apiv3.p.mashape.com/3/
+        /// </summary>
+        public abstract string EndpointUrl { get; }
+
+        /// <summary>
         ///     Remaining credits for the application and user.
         /// </summary>
         public virtual IRateLimit RateLimit { get; } = new RateLimit();

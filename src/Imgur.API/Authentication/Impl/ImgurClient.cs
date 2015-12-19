@@ -27,5 +27,11 @@ namespace Imgur.API.Authentication.Impl
             : base(clientId, clientSecret, oAuth2Token)
         {
         }
+
+        /// <summary>
+        ///     The Endpoint Url.
+        ///     https://api.imgur.com/3/
+        /// </summary>
+        public override string EndpointUrl { get; } = "https://api.imgur.com/3/";
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Imgur.API.Enums;
 using Imgur.API.JsonConverters;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Imgur.API.Models.Impl
 {
@@ -64,12 +65,14 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     The privacy level of the album, you can only view public if not logged in as album owner.
         /// </summary>
+        [JsonConverter(typeof (StringEnumConverter))]
         public AlbumPrivacy Privacy { get; set; }
 
         /// <summary>
         ///     The view layout of the album.
         /// </summary>
-        public string Layout { get; set; }
+        [JsonConverter(typeof (StringEnumConverter))]
+        public AlbumLayout Layout { get; set; }
 
         /// <summary>
         ///     The number of album views.

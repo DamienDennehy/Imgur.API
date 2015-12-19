@@ -14,17 +14,17 @@ namespace Imgur.API.Tests.RequestBuilders
         [TestMethod]
         public async Task UpdateAccountSettingsRequest_AreEqual()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
 
-            var url = $"{endpoint.GetEndpointBaseUrl()}account/me/settings";
+            var url = $"{endpoint.ApiClient.EndpointUrl}account/me/settings";
             var request = endpoint.RequestBuilder.UpdateAccountSettingsRequest(
                 url, "BioTest", true, true, AlbumPrivacy.Public,
                 true, "Bob2", true, true);
 
             Assert.IsNotNull(request);
             var expected =
-                "bio=BioTest&public_images=true&messaging_enabled=true&album_privacy=public&accepted_gallery_terms=true&username=Bob2&show_mature=true&newsletter_subscribed=true";
+                "public_images=true&messaging_enabled=true&album_privacy=public&accepted_gallery_terms=true&show_mature=true&newsletter_subscribed=true&username=Bob2&bio=BioTest";
 
             Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
             Assert.AreEqual("https://api.imgur.com/3/account/me/settings", request.RequestUri.ToString());
@@ -35,8 +35,8 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void UpdateAccountSettingsRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var imgurClient = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurClient);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             endpoint.RequestBuilder.UpdateAccountSettingsRequest(null);
         }
     }

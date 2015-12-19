@@ -40,6 +40,13 @@ namespace Imgur.API.Tests.Authentication
         }
 
         [TestMethod]
+        public void EndpointUrl_IsImgurUrl()
+        {
+            var client = new ImgurClient("ClientId", "ClientSecret");
+            Assert.AreEqual("https://api.imgur.com/3/", client.EndpointUrl);
+        }
+
+        [TestMethod]
         public void OAuth2Token_SetByConstructor_AreSame()
         {
             var oAuth2Token = Substitute.For<IOAuth2Token>();

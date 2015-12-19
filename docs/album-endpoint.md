@@ -12,7 +12,7 @@ Return all of the images in the album.
 
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
 			var endpoint = new AlbumEndpoint(client);
-			var albums = await endpoint.GetAlbumImagesAsync("ALBUM_ID");
+			var images = await endpoint.GetAlbumImagesAsync("ALBUM_ID");
 
 ##GetAlbumImageAsync
 Get information about an image in an album.

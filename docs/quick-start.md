@@ -17,7 +17,7 @@ Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https:/
         var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
         var endpoint = new ImageEndpoint(client);
         var file = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
-        var image = await endpoint.UploadImageBinaryAsync(file, "Xyzio5P", "Awesome pic!", "Took me weeks to get this shot.");
+        var image = await endpoint.UploadImageBinaryAsync(file, "ALBUM_ID", "ALBUM_TITLE", "ALBUM_DESCRIPTION");
 		Debug.Write("Image uploaded. Image Url: " + image.Link);
     }
     catch (ImgurException imgurEx)
@@ -33,7 +33,7 @@ Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https:/
         var client = new MashapeClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", "YOUR_MASHAPE_KEY");
         var endpoint = new ImageEndpoint(client);
         var file = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
-        var image = await endpoint.UploadImageBinaryAsync(file, null, "Awesome pic!", "Took me weeks to get this shot.");
+        var image = await endpoint.UploadImageBinaryAsync(file, "ALBUM_ID", "ALBUM_TITLE", "ALBUM_DESCRIPTION");
 		Debug.Write("Image uploaded. Image Url: " + image.Link);
     }
     catch (MashapeException mashapeEx)
@@ -57,7 +57,7 @@ Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https:/
         client.SetOAuth2Token(token);
         var endpoint = new ImageEndpoint(imgurAuth);
         var file = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
-        var image = await endpoint.UploadImageBinaryAsync(file, null, "Awesome pic!", "Took me weeks to get this shot.");
+        var image = await endpoint.UploadImageBinaryAsync(file, "ALBUM_ID", "ALBUM_TITLE", "ALBUM_DESCRIPTION");
 		Debug.Write("Image uploaded. Image Url: " + image.Link);
     }
     catch (ImgurException imgurEx)

@@ -162,7 +162,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = "account/me/verifyemail";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {
                 var verified = await SendRequestAsync<bool>(request);
                 return verified;

@@ -113,7 +113,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"account/me/submissions/{page}";
+            var url = $"account/{username}/submissions/{page}";
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {

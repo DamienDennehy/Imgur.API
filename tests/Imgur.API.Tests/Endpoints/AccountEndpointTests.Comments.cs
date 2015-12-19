@@ -90,7 +90,7 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual(comment.DateTime, new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1443969120));
             Assert.AreEqual(comment.ParentId, 486983435);
             Assert.AreEqual(comment.Deleted, false);
-            Assert.AreEqual(comment.Vote, null);
+            Assert.AreEqual(comment.Vote, Vote.Down);
         }
 
         [ExpectedException(typeof (ArgumentNullException))]

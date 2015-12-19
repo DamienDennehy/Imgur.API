@@ -60,6 +60,8 @@
     <Compile Include="Endpoints\Impl\RateLimitEndpoint.cs" />
     <Compile Include="Endpoints\IOAuth2Endpoint.cs" />
     <Compile Include="Endpoints\IRateLimitEndpoint.cs" />
+    <Compile Include="Enums\ReportComment.cs" />
+    <Compile Include="Enums\Vote.cs" />
     <Compile Include="Exceptions\MashapeException.cs" />
     <Compile Include="Exceptions\ImgurException.cs" />
     <Compile Include="JsonConverters\EpochTimeConverter.cs" />

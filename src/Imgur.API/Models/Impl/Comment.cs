@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Imgur.API.Enums;
 using Imgur.API.JsonConverters;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Imgur.API.Models.Impl
 {
@@ -85,7 +87,8 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     The current user's vote on the comment. null if not signed in or if the user hasn't voted on it.
         /// </summary>
-        public string Vote { get; set; }
+        [JsonConverter(typeof (StringEnumConverter))]
+        public Vote? Vote { get; set; }
 
         /// <summary>
         ///     All of the replies for this comment. If there are no replies to the comment then this is an empty set.

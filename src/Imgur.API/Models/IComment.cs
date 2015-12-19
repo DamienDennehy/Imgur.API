@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Imgur.API.Enums;
 
 namespace Imgur.API.Models
 {
@@ -81,6 +82,6 @@ namespace Imgur.API.Models
         /// <summary>
         ///     The current user's vote on the comment. null if not signed in or if the user hasn't voted on it.
         /// </summary>
-        string Vote { get; set; }
+        Vote? Vote { get; set; }
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="FakeResponses\AccountEndpointResponses.Comments.cs" />
     <Compile Include="FakeResponses\AccountEndpointResponses.Notifications.cs" />
     <Compile Include="FakeResponses\AccountEndpointResponses.Gallery.cs" />
+    <Compile Include="FakeResponses\CommentEndpointResponses.cs" />
     <Compile Include="Fakes\FakeOAuth2TokenHandler.cs" />
     <Compile Include="RequestBuilders\AccountRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\AlbumRequestBuilderTests.cs" />

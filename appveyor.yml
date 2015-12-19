@@ -22,7 +22,7 @@ artifacts:
   path: artifacts\*.nupkg
 deploy:
 - provider: NuGet
-  server: https://www.myget.org/F/imgur-api/api/v2
+  server: https://www.myget.org/F/damiendennehy/api/v2/package
   api_key:
     secure: VKpWEiDhfRypjFf7MgnSlOJBdzQ1sOT87+aUCzjpj0wAFE8pOLJxcbXPR/6qqVBU
-  symbol_server: https://nuget.symbolsource.org/MyGet/imgur-api
+  symbol_server: https://nuget.symbolsource.org/MyGet/damiendennehy

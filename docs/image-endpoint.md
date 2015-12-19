@@ -52,6 +52,6 @@ For an anonymous image, the deletehash that is returned at creation must be used
 ##FavoriteImageAsync
 Favorite an image with the given ID. The user is required to be logged in to favorite the image.
 
-            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH_TOKEN);
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH2_TOKEN);
             var endpoint = new ImageEndpoint(client);
             var favorited = await endpoint.FavoriteImageAsync("IMAGE_ID");

@@ -47,7 +47,7 @@ For anonymous albums, the deletehash that is returned at creation must be used.
 ##FavoriteAlbumAsync
 Favorite an album with a given ID. The user is required to be logged in to favorite the album.
 
-            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+            var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH2_TOKEN);
 			var endpoint = new AlbumEndpoint(client);
 			var favorited = await endpoint.FavoriteAlbumAsync("ALBUM_ID");
 

@@ -3,14 +3,21 @@
 ## Issues
 Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https://github.com/DamienDennehy/Imgur.API/issues)
 
-## Upload image anonymously with Imgur Api authentication.
+## Latest Release
+### Version 3.2.0 (2015-12-25)
+* Album endpoint added.
+* Fixed case sensitivity issue for Gallery methods of the AccountEndpoint.
+* Significant rewrite of Account and Image endpoints for additional unit test coverage.
+
+## Quick Start
+### Upload image anonymously with Imgur Api authentication.
 
     try
     {
         var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
-        var imageEndpoint = new ImageEndpoint(client);
-        var localImage = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
-        var image = await imageEndpoint.UploadImageBinaryAsync(localImage, null, "Awesome pic!", "Took me weeks to get this shot.");
+        var endpoint = new ImageEndpoint(client);
+        var file = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
+        var image = await endpoint.UploadImageBinaryAsync(file, "Xyzio5P", "Awesome pic!", "Took me weeks to get this shot.");
 		Debug.Write("Image uploaded. Image Url: " + image.Link);
     }
     catch (ImgurException imgurEx)
@@ -19,14 +26,14 @@ Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https:/
         Debug.Write(imgurEx.Message);
     }
 
-## Upload image anonymously using Mashape Api authentication.
+### Upload image anonymously using Mashape Api authentication.
 
     try
     {
         var client = new MashapeClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", "YOUR_MASHAPE_KEY");
-        var imageEndpoint = new ImageEndpoint(client);
-        var localImage = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
-        var image = await imageEndpoint.UploadImageBinaryAsync(localImage, null, "Awesome pic!", "Took me weeks to get this shot.");
+        var endpoint = new ImageEndpoint(client);
+        var file = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
+        var image = await endpoint.UploadImageBinaryAsync(file, null, "Awesome pic!", "Took me weeks to get this shot.");
 		Debug.Write("Image uploaded. Image Url: " + image.Link);
     }
     catch (MashapeException mashapeEx)
@@ -40,7 +47,7 @@ Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https:/
         Debug.Write(imgurEx.Message);
     }
 	
-## Upload image using an Imgur account with Imgur Api authentication.
+### Upload image using an Imgur account with Imgur Api authentication.
 
     try
     {
@@ -48,9 +55,9 @@ Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https:/
         var oAuth2Endpoint = new OAuth2Endpoint(client);
         var token = await oAuth2Endpoint.GetTokenByRefreshTokenAsync("YOUR_REFRESH_TOKEN");
         client.SetOAuth2Token(token);
-        var imageEndpoint = new ImageEndpoint(imgurAuth);
-        var localImage = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
-        var image = await imageEndpoint.UploadImageBinaryAsync(localImage, null, "Awesome pic!", "Took me weeks to get this shot.");
+        var endpoint = new ImageEndpoint(imgurAuth);
+        var file = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
+        var image = await endpoint.UploadImageBinaryAsync(file, null, "Awesome pic!", "Took me weeks to get this shot.");
 		Debug.Write("Image uploaded. Image Url: " + image.Link);
     }
     catch (ImgurException imgurEx)

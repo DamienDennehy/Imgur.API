@@ -1,4 +1,4 @@
-version: 3.1.0-build{build}
+version: 3.2.0-build{build}
 environment:
   VisualStudioVersion: 14.0
 install:

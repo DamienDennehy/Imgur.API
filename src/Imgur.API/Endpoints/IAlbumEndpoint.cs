@@ -8,7 +8,7 @@ namespace Imgur.API.Endpoints
     /// <summary>
     ///     Album related actions.
     /// </summary>
-    public interface IAlbumEndpoint
+    public interface IAlbumEndpoint : IEndpoint
     {
         /// <summary>
         ///     Takes parameter, ids[], as an array of ids to add to the album. For anonymous albums, {album} should be the

@@ -36,7 +36,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Initializes a new instance of the EndpointBase class.
         /// </summary>
-        protected internal EndpointBase()
+        internal EndpointBase()
         {
         }
 
@@ -46,7 +46,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="apiClient"></param>
         /// <param name="httpClient"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        protected internal EndpointBase(IApiClient apiClient, HttpClient httpClient)
+        internal EndpointBase(IApiClient apiClient, HttpClient httpClient)
         {
             if (apiClient == null)
                 throw new ArgumentNullException(nameof(apiClient));
@@ -73,6 +73,7 @@ namespace Imgur.API.Endpoints.Impl
                     "X-Mashape-Key", mashapeClient.MashapeKey);
             }
 
+            // ReSharper disable once ExceptionNotDocumented
             httpClient.BaseAddress = new Uri(apiClient.EndpointUrl);
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -135,7 +136,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <returns></returns>
-        internal T ProcessEndpointResponse<T>(string endpointStringResponse)
+        internal virtual T ProcessEndpointResponse<T>(string endpointStringResponse)
         {
             //If no result is found, then we can't proceed
             if (string.IsNullOrWhiteSpace(endpointStringResponse))
@@ -197,7 +198,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        internal async Task<T> SendRequestAsync<T>(HttpRequestMessage message)
+        internal virtual async Task<T> SendRequestAsync<T>(HttpRequestMessage message)
         {
             if (message == null)
                 throw new ArgumentNullException(nameof(message));

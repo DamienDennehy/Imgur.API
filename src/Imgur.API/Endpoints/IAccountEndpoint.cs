@@ -8,7 +8,7 @@ namespace Imgur.API.Endpoints
     /// <summary>
     ///     Account related actions.
     /// </summary>
-    public interface IAccountEndpoint
+    public interface IAccountEndpoint : IEndpoint
     {
         /// <summary>
         ///     Delete an Album with a given id.

@@ -12,8 +12,8 @@ Upload a new image using a binary file.
 
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
             var endpoint = new ImageEndpoint(client);
-            var localImage = System.IO.File.ReadAllBytes(@"IMAGE_LOCATION");
-            var image = await endpoint.UploadImageBinaryAsync(localImage);
+            var file = System.IO.File.ReadAllBytes(@"IMAGE_LOCATION");
+            var image = await endpoint.UploadImageBinaryAsync(file);
 
 ##UploadImageStreamAsync
 Upload a new image using a stream.

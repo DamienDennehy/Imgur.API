@@ -1,9 +1,9 @@
 ﻿namespace Imgur.API.Enums
 {
     /// <summary>
-    ///     A reason why a comment is inappropriate.
+    ///     A reason why content is inappropriate.
     /// </summary>
-    public enum ReportComment
+    public enum ReportReason
     {
         /// <summary>
         ///     Doesn't belong on Imgur.

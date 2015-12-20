@@ -4,7 +4,7 @@
 Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https://github.com/DamienDennehy/Imgur.API/issues)
 
 ## Latest Release
-### Version 3.2.0 (2015-12-25)
+### Version 3.2.0 (2015-12-21)
 * Album endpoint added.
 * Fixed case sensitivity issue for Gallery methods of the AccountEndpoint.
 * Significant rewrite of Account and Image endpoints for additional unit test coverage.

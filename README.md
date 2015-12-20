@@ -7,4 +7,4 @@ Supports Imgur's free and Mashape's commercial API endpoints.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/mc9e8obnwqync0ub?svg=true)](https://ci.appveyor.com/project/DamienDennehy/imgur-api)
 
-[![Documentation Status](https://readthedocs.org/projects/imgurapi/badge/?version=latest)](https://readthedocs.org/projects/imgurapi/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/imgurapi/badge/?version=latest)](http://imgurapi.readthedocs.org/en/latest/)

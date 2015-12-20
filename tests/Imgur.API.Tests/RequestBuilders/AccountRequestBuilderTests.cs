@@ -2,8 +2,8 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
-using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
+using Imgur.API.RequestBuilders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.RequestBuilders
@@ -15,10 +15,10 @@ namespace Imgur.API.Tests.RequestBuilders
         public async Task UpdateAccountSettingsRequest_AreEqual()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(client);
+            var requestBuilder = new AccountRequestBuilder();
 
-            var url = $"{endpoint.ApiClient.EndpointUrl}account/me/settings";
-            var request = endpoint.RequestBuilder.UpdateAccountSettingsRequest(
+            var url = $"{client.EndpointUrl}account/me/settings";
+            var request = requestBuilder.UpdateAccountSettingsRequest(
                 url, "BioTest", true, true, AlbumPrivacy.Public,
                 true, "Bob2", true, true);
 
@@ -35,9 +35,8 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void UpdateAccountSettingsRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(client);
-            endpoint.RequestBuilder.UpdateAccountSettingsRequest(null);
+            var requestBuilder = new AccountRequestBuilder();
+            requestBuilder.UpdateAccountSettingsRequest(null);
         }
     }
 }

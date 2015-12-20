@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
-using Imgur.API.Endpoints.Impl;
+using Imgur.API.RequestBuilders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.RequestBuilders
@@ -16,10 +16,10 @@ namespace Imgur.API.Tests.RequestBuilders
         public async Task UpdateImageRequest_AreEqual()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(client);
+            var requestBuilder = new ImageRequestBuilder();
 
-            var url = $"{endpoint.ApiClient.EndpointUrl}image/1234Xyz9";
-            var request = endpoint.RequestBuilder.UpdateImageRequest(url, "TheTitle", "TheDescription");
+            var url = $"{client.EndpointUrl}image/1234Xyz9";
+            var request = requestBuilder.UpdateImageRequest(url, "TheTitle", "TheDescription");
 
             Assert.IsNotNull(request);
             Assert.AreEqual("https://api.imgur.com/3/image/1234Xyz9", request.RequestUri.ToString());
@@ -34,20 +34,19 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void UpdateImageRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(client);
-            endpoint.RequestBuilder.UpdateImageRequest(null, "1234Xyz9");
+            var requestBuilder = new ImageRequestBuilder();
+            requestBuilder.UpdateImageRequest(null, "1234Xyz9");
         }
 
         [TestMethod]
         public async Task UploadImageBinaryRequest_AreEqual()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(client);
-            var url = $"{endpoint.ApiClient.EndpointUrl}image";
+            var requestBuilder = new ImageRequestBuilder();
+            var url = $"{client.EndpointUrl}image";
 
             var image = File.ReadAllBytes("banana.gif");
-            var request = endpoint.RequestBuilder.UploadImageBinaryRequest(url, image, "TheAlbum", "TheTitle",
+            var request = requestBuilder.UploadImageBinaryRequest(url, image, "TheAlbum", "TheTitle",
                 "TheDescription");
 
             Assert.IsNotNull(request);
@@ -81,29 +80,28 @@ namespace Imgur.API.Tests.RequestBuilders
         public void UploadImageBinaryRequest_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(client);
-            var url = $"{endpoint.ApiClient.EndpointUrl}image";
-            endpoint.RequestBuilder.UploadImageBinaryRequest(url, null);
+            var requestBuilder = new ImageRequestBuilder();
+            var url = $"{client.EndpointUrl}image";
+            requestBuilder.UploadImageBinaryRequest(url, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void UploadImageBinaryRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(client);
+            var requestBuilder = new ImageRequestBuilder();
             var image = File.ReadAllBytes("banana.gif");
-            endpoint.RequestBuilder.UploadImageBinaryRequest(null, image);
+            requestBuilder.UploadImageBinaryRequest(null, image);
         }
 
         [TestMethod]
         public async Task UploadImageUrlRequest_AreEqual()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(client);
-            var url = $"{endpoint.ApiClient.EndpointUrl}image";
+            var requestBuilder = new ImageRequestBuilder();
+            var url = $"{client.EndpointUrl}image";
 
-            var request = endpoint.RequestBuilder.UploadImageUrlRequest(url, "http://i.imgur.com/hxsPLa7.jpg",
+            var request = requestBuilder.UploadImageUrlRequest(url, "http://i.imgur.com/hxsPLa7.jpg",
                 "TheAlbum", "TheTitle", "TheDescription");
 
             Assert.IsNotNull(request);
@@ -122,31 +120,30 @@ namespace Imgur.API.Tests.RequestBuilders
         public void UploadImageUrlRequest_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(client);
-            var url = $"{endpoint.ApiClient.EndpointUrl}image";
-            endpoint.RequestBuilder.UploadImageBinaryRequest(url, null);
+            var requestBuilder = new ImageRequestBuilder();
+            var url = $"{client.EndpointUrl}image";
+            requestBuilder.UploadImageBinaryRequest(url, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void UploadImageUrlRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(client);
-            endpoint.RequestBuilder.UploadImageBinaryRequest(null, null);
+            var requestBuilder = new ImageRequestBuilder();
+            requestBuilder.UploadImageBinaryRequest(null, null);
         }
 
         [TestMethod]
         public async Task UploadStreamBinaryRequest_AreEqual()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(client);
-            var url = $"{endpoint.ApiClient.EndpointUrl}image";
+            var requestBuilder = new ImageRequestBuilder();
+            var url = $"{client.EndpointUrl}image";
 
             using (var fs = new FileStream("banana.gif", FileMode.Open))
             {
                 var imageLength = fs.Length;
-                var request = endpoint.RequestBuilder.UploadImageStreamRequest(url, fs, "TheAlbum", "TheTitle",
+                var request = requestBuilder.UploadImageStreamRequest(url, fs, "TheAlbum", "TheTitle",
                     "TheDescription");
 
                 Assert.IsNotNull(request);
@@ -183,11 +180,11 @@ namespace Imgur.API.Tests.RequestBuilders
         public void UploadStreamBinaryRequest_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(client);
-            var url = $"{endpoint.ApiClient.EndpointUrl}image";
+            var requestBuilder = new ImageRequestBuilder();
+            var url = $"{client.EndpointUrl}image";
             using (var fs = new FileStream("banana.gif", FileMode.Open))
             {
-                endpoint.RequestBuilder.UploadImageStreamRequest(url, null);
+                requestBuilder.UploadImageStreamRequest(url, null);
             }
         }
 
@@ -195,11 +192,10 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void UploadStreamBinaryRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new ImageEndpoint(client);
+            var requestBuilder = new ImageRequestBuilder();
             using (var fs = new FileStream("banana.gif", FileMode.Open))
             {
-                endpoint.RequestBuilder.UploadImageStreamRequest(null, fs);
+                requestBuilder.UploadImageStreamRequest(null, fs);
             }
         }
     }

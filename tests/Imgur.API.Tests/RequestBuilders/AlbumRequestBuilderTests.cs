@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
-using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
+using Imgur.API.RequestBuilders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.RequestBuilders
@@ -16,12 +16,12 @@ namespace Imgur.API.Tests.RequestBuilders
         public async Task AddAlbumImagesRequest_AreEqual()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
+            var requestBuilder = new AlbumRequestBuilder();
 
-            var url = $"{endpoint.ApiClient.EndpointUrl}album/AbcdeF/add";
+            var url = $"{client.EndpointUrl}album/AbcdeF/add";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
-            var request = endpoint.RequestBuilder.AddAlbumImagesRequest(url, ids);
+            var request = requestBuilder.AddAlbumImagesRequest(url, ids);
             var expected = "ids=Abc%2CDEF%2CXyZ";
 
             Assert.IsNotNull(request);
@@ -35,30 +35,29 @@ namespace Imgur.API.Tests.RequestBuilders
         public void AddAlbumImagesRequest_WithIdsNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
-            var url = $"{endpoint.ApiClient.EndpointUrl}album/AbcdeF/add";
-            endpoint.RequestBuilder.AddAlbumImagesRequest(url, null);
+            var requestBuilder = new AlbumRequestBuilder();
+            var url = $"{client.EndpointUrl}album/AbcdeF/add";
+            requestBuilder.AddAlbumImagesRequest(url, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void AddAlbumImagesRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
-            endpoint.RequestBuilder.AddAlbumImagesRequest(null, null);
+            var requestBuilder = new AlbumRequestBuilder();
+            requestBuilder.AddAlbumImagesRequest(null, null);
         }
 
         [TestMethod]
         public async Task CreateAlbumRequest_AreEqual()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
+            var requestBuilder = new AlbumRequestBuilder();
 
-            var url = $"{endpoint.ApiClient.EndpointUrl}album/AbcdeF";
+            var url = $"{client.EndpointUrl}album/AbcdeF";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
-            var request = endpoint.RequestBuilder.CreateAlbumRequest(
+            var request = requestBuilder.CreateAlbumRequest(
                 url, "TheTitle", "TheDescription",
                 AlbumPrivacy.Hidden, AlbumLayout.Horizontal,
                 "io9XpoO", ids);
@@ -76,21 +75,20 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void CreateAlbumRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
-            endpoint.RequestBuilder.CreateAlbumRequest(null);
+            var requestBuilder = new AlbumRequestBuilder();
+            requestBuilder.CreateAlbumRequest(null);
         }
 
         [TestMethod]
         public void RemoveAlbumImagesRequest_AreEqual()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
+            var requestBuilder = new AlbumRequestBuilder();
 
-            var url = $"{endpoint.ApiClient.EndpointUrl}album/AbcdeF/remove_images";
+            var url = $"{client.EndpointUrl}album/AbcdeF/remove_images";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
-            var request = endpoint.RequestBuilder.RemoveAlbumImagesRequest(url, ids);
+            var request = requestBuilder.RemoveAlbumImagesRequest(url, ids);
             var expected = "ids=Abc%2CDEF%2CXyZ";
 
             Assert.IsNotNull(request);
@@ -104,30 +102,29 @@ namespace Imgur.API.Tests.RequestBuilders
         public void RemoveAlbumImagesRequest_WithIdsNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
-            var url = $"{endpoint.ApiClient.EndpointUrl}album/AbcdeF/remove_images";
-            endpoint.RequestBuilder.RemoveAlbumImagesRequest(url, null);
+            var requestBuilder = new AlbumRequestBuilder();
+            var url = $"{client.EndpointUrl}album/AbcdeF/remove_images";
+            requestBuilder.RemoveAlbumImagesRequest(url, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void RemoveAlbumImagesRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
-            endpoint.RequestBuilder.RemoveAlbumImagesRequest(null, null);
+            var requestBuilder = new AlbumRequestBuilder();
+            requestBuilder.RemoveAlbumImagesRequest(null, null);
         }
 
         [TestMethod]
         public async Task SetAlbumImagesRequest_AreEqual()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
+            var requestBuilder = new AlbumRequestBuilder();
 
-            var url = $"{endpoint.ApiClient.EndpointUrl}album/AbcdeF";
+            var url = $"{client.EndpointUrl}album/AbcdeF";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
-            var request = endpoint.RequestBuilder.SetAlbumImagesRequest(url, ids);
+            var request = requestBuilder.SetAlbumImagesRequest(url, ids);
             var expected = "ids=Abc%2CDEF%2CXyZ";
 
             Assert.IsNotNull(request);
@@ -141,30 +138,29 @@ namespace Imgur.API.Tests.RequestBuilders
         public void SetAlbumImagesRequest_WithIdsNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
-            var url = $"{endpoint.ApiClient.EndpointUrl}album/AbcdeF";
-            endpoint.RequestBuilder.SetAlbumImagesRequest(url, null);
+            var requestBuilder = new AlbumRequestBuilder();
+            var url = $"{client.EndpointUrl}album/AbcdeF";
+            requestBuilder.SetAlbumImagesRequest(url, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void SetAlbumImagesRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
-            endpoint.RequestBuilder.SetAlbumImagesRequest(null, null);
+            var requestBuilder = new AlbumRequestBuilder();
+            requestBuilder.SetAlbumImagesRequest(null, null);
         }
 
         [TestMethod]
         public async Task UpdateAlbumRequest_AreEqual()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
+            var requestBuilder = new AlbumRequestBuilder();
 
-            var url = $"{endpoint.ApiClient.EndpointUrl}album/AbcdeF";
+            var url = $"{client.EndpointUrl}album/AbcdeF";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
-            var request = endpoint.RequestBuilder.UpdateAlbumRequest(
+            var request = requestBuilder.UpdateAlbumRequest(
                 url, "TheTitle", "TheDescription",
                 AlbumPrivacy.Hidden, AlbumLayout.Horizontal,
                 "io9XpoO", ids);
@@ -182,9 +178,8 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void UpdateAlbumRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
-            endpoint.RequestBuilder.UpdateAlbumRequest(null);
+            var requestBuilder = new AlbumRequestBuilder();
+            requestBuilder.UpdateAlbumRequest(null);
         }
     }
 }

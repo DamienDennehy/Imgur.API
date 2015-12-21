@@ -45,7 +45,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<IComment> CreateCommentAsync(string comment, string imageId, string parentId)
+        public async Task<IComment> CreateCommentAsync(string comment, string imageId, string parentId = null)
         {
             if (string.IsNullOrEmpty(comment))
                 throw new ArgumentNullException(nameof(comment));
@@ -139,9 +139,6 @@ namespace Imgur.API.Endpoints.Impl
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id));
 
-            if (ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
-
             var url = $"comment/{id}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
@@ -164,9 +161,6 @@ namespace Imgur.API.Endpoints.Impl
         {
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id));
-
-            if (ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"comment/{id}/replies";
 

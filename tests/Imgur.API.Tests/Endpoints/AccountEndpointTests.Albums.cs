@@ -89,23 +89,23 @@ namespace Imgur.API.Tests.Endpoints
             var album = await endpoint.GetAlbumAsync("yMgB7", "sarah");
 
             Assert.IsNotNull(album);
-            Assert.AreEqual(album.Id, "yMgB7");
-            Assert.AreEqual(album.Title, "Day 2 at Camp Imgur");
-            Assert.AreEqual(album.Description, null);
-            Assert.AreEqual(album.DateTime, new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1439066984));
-            Assert.AreEqual(album.Cover, "BOdd9Qd");
-            Assert.AreEqual(album.CoverWidth, 5184);
-            Assert.AreEqual(album.CoverHeight, 3456);
-            Assert.AreEqual(album.AccountUrl, "sarah");
-            Assert.AreEqual(album.AccountId, 9571);
-            Assert.AreEqual(album.Privacy, AlbumPrivacy.Public);
-            Assert.AreEqual(album.Layout, AlbumLayout.Blog);
-            Assert.AreEqual(album.Views, 413310);
-            Assert.AreEqual(album.Link, "http://imgur.com/a/yMgB7");
-            Assert.AreEqual(album.Favorite, false);
-            Assert.AreEqual(album.Nsfw, false);
-            Assert.AreEqual(album.Section, "pics");
-            Assert.AreEqual(album.ImagesCount, 6);
+            Assert.AreEqual("yMgB7", album.Id);
+            Assert.AreEqual("Day 2 at Camp Imgur", album.Title);
+            Assert.AreEqual(null, album.Description);
+            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1439066984), album.DateTime);
+            Assert.AreEqual("BOdd9Qd", album.Cover);
+            Assert.AreEqual(5184, album.CoverWidth);
+            Assert.AreEqual(3456, album.CoverHeight);
+            Assert.AreEqual("sarah", album.AccountUrl);
+            Assert.AreEqual(9571, album.AccountId);
+            Assert.AreEqual(AlbumPrivacy.Public, album.Privacy);
+            Assert.AreEqual(AlbumLayout.Blog, album.Layout);
+            Assert.AreEqual(413310, album.Views);
+            Assert.AreEqual("http://imgur.com/a/yMgB7", album.Link);
+            Assert.AreEqual(false, album.Favorite);
+            Assert.AreEqual(false, album.Nsfw);
+            Assert.AreEqual("pics", album.Section);
+            Assert.AreEqual(6, album.ImagesCount);
         }
 
         [ExpectedException(typeof (ArgumentNullException))]

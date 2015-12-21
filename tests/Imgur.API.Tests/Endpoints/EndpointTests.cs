@@ -119,7 +119,7 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public void HttpClientWithImgurClientAndOAuth2Token_SetByConstructor_HeadersAreEqual()
         {
-            var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", 3600);
+            var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", "bob", 2419200);
             var client = new ImgurClient("123", "1234", oAuth2Token);
             var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             var authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
@@ -144,7 +144,7 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public void HttpClientWithMashapeClientAndOAuth2Token_SetByConstructor_HeadersAreEqual()
         {
-            var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", 3600);
+            var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", "bob", 2419200);
             var client = new MashapeClient("123", "1234", "1234567", oAuth2Token);
             var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
             var authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
@@ -332,7 +332,7 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public void SwitchClient_SetMashapeClientAndOAuth2TokenThenImgurClient_HeadersAreEqual()
         {
-            var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", 3600);
+            var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", "bob", 2419200);
             var client = new ImgurClient("123", "1234", oAuth2Token);
             var mashapeClient = new MashapeClient("123444", "567567", "12354564");
             var endpoint = Substitute.ForPartsOf<EndpointBase>(mashapeClient);

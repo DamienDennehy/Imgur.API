@@ -70,6 +70,11 @@ namespace Imgur.API.Models
         int? ParentId { get; set; }
 
         /// <summary>
+        ///     The platform the comment was made on (Android, Desktop etc).
+        /// </summary>
+        string Platform { get; set; }
+
+        /// <summary>
         ///     The number of upvotes - downvotes.
         /// </summary>
         float Points { get; set; }

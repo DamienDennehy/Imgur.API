@@ -214,24 +214,24 @@ namespace Imgur.API.Tests.Endpoints
             var album = await endpoint.GetAlbumAsync("5F5Cy");
 
             Assert.IsNotNull(album);
-            Assert.AreEqual(album.Id, "5F5Cy");
-            Assert.AreEqual(album.Title, null);
-            Assert.AreEqual(album.Description, null);
-            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1446591779), album.DateTime);
-            Assert.AreEqual(album.Cover, "79MH23L");
-            Assert.AreEqual(album.CoverWidth, 609);
-            Assert.AreEqual(album.CoverHeight, 738);
-            Assert.AreEqual(album.AccountUrl, "sarah");
-            Assert.AreEqual(album.AccountId, 9571);
-            Assert.AreEqual(album.Privacy, AlbumPrivacy.Public);
-            Assert.AreEqual(album.Layout, AlbumLayout.Blog);
-            Assert.AreEqual(album.Views, 4);
-            Assert.AreEqual(album.Link, "http://imgur.com/a/5F5Cy");
-            Assert.AreEqual(album.Favorite, false);
-            Assert.AreEqual(album.Nsfw, null);
-            Assert.AreEqual(album.Section, null);
-            Assert.AreEqual(album.ImagesCount, 3);
-            Assert.AreEqual(album.Images.Count(), 3);
+            Assert.AreEqual("5F5Cy", album.Id);
+            Assert.AreEqual(null, album.Title);
+            Assert.AreEqual(null, album.Description);
+            Assert.AreEqual(album.DateTime, new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1446591779));
+            Assert.AreEqual("79MH23L", album.Cover);
+            Assert.AreEqual(609, album.CoverWidth);
+            Assert.AreEqual(738, album.CoverHeight);
+            Assert.AreEqual("sarah", album.AccountUrl);
+            Assert.AreEqual(9571, album.AccountId);
+            Assert.AreEqual(AlbumPrivacy.Public, album.Privacy);
+            Assert.AreEqual(AlbumLayout.Blog, album.Layout);
+            Assert.AreEqual(4, album.Views);
+            Assert.AreEqual("http://imgur.com/a/5F5Cy", album.Link);
+            Assert.AreEqual(false, album.Favorite);
+            Assert.AreEqual(null, album.Nsfw);
+            Assert.AreEqual(null, album.Section);
+            Assert.AreEqual(3, album.ImagesCount);
+            Assert.AreEqual(3, album.Images.Count());
         }
 
         [TestMethod]
@@ -261,24 +261,24 @@ namespace Imgur.API.Tests.Endpoints
 
             Assert.IsNotNull(image);
 
-            Assert.AreEqual(image.Id, "79MH23L");
-            Assert.AreEqual(image.Title, null);
-            Assert.AreEqual(image.Description, null);
-            Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 11, 3, 23, 03, 03, DateTimeKind.Utc)), image.DateTime);
-            Assert.AreEqual(image.Type, "image/png");
-            Assert.AreEqual(image.Animated, false);
-            Assert.AreEqual(image.Width, 609);
-            Assert.AreEqual(image.Height, 738);
-            Assert.AreEqual(image.Size, 451530);
-            Assert.AreEqual(image.Views, 2849);
-            Assert.AreEqual(image.Bandwidth, 1286408970);
-            Assert.AreEqual(image.Vote, null);
-            Assert.AreEqual(image.Favorite, false);
-            Assert.AreEqual(image.Nsfw, null);
-            Assert.AreEqual(image.Section, null);
-            Assert.AreEqual(image.AccountUrl, null);
-            Assert.AreEqual(image.AccountId, null);
-            Assert.AreEqual(image.Link, "http://i.imgur.com/79MH23L.png");
+            Assert.AreEqual("79MH23L", image.Id);
+            Assert.AreEqual(null, image.Title);
+            Assert.AreEqual(null, image.Description);
+            Assert.AreEqual(image.DateTime, new DateTimeOffset(new DateTime(2015, 11, 3, 23, 03, 03, DateTimeKind.Utc)));
+            Assert.AreEqual("image/png", image.Type);
+            Assert.AreEqual(false, image.Animated);
+            Assert.AreEqual(609, image.Width);
+            Assert.AreEqual(738, image.Height);
+            Assert.AreEqual(451530, image.Size);
+            Assert.AreEqual(2849, image.Views);
+            Assert.AreEqual(1286408970, image.Bandwidth);
+            Assert.AreEqual(null, image.Vote);
+            Assert.AreEqual(false, image.Favorite);
+            Assert.AreEqual(null, image.Nsfw);
+            Assert.AreEqual(null, image.Section);
+            Assert.AreEqual(null, image.AccountUrl);
+            Assert.AreEqual(null, image.AccountId);
+            Assert.AreEqual("http://i.imgur.com/79MH23L.png", image.Link);
         }
 
         [TestMethod]

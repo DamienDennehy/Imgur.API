@@ -172,26 +172,26 @@ namespace Imgur.API.Tests.Endpoints
 
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/comment/539556821"), fakeResponse);
 
-            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
+            var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var comment = await endpoint.GetCommentAsync("539556821");
 
             Assert.IsNotNull(comment);
-            Assert.AreEqual(comment.Id, 539556821);
-            Assert.AreEqual(comment.ImageId, "n6gcXdY");
-            Assert.AreEqual(comment.CommentText, "It's called smirking. Lots of people do it.");
-            Assert.AreEqual(comment.Author, "WomanWiththeTattooedHands");
-            Assert.AreEqual(comment.AuthorId, 499505);
-            Assert.AreEqual(comment.OnAlbum, false);
-            Assert.AreEqual(comment.AlbumCover, null);
-            Assert.AreEqual(comment.Ups, 379);
-            Assert.AreEqual(comment.Downs, 16);
-            Assert.AreEqual(comment.Points, 363);
+            Assert.AreEqual(539556821, comment.Id);
+            Assert.AreEqual("n6gcXdY", comment.ImageId);
+            Assert.AreEqual("It's called smirking. Lots of people do it.", comment.CommentText);
+            Assert.AreEqual("WomanWiththeTattooedHands", comment.Author);
+            Assert.AreEqual(499505, comment.AuthorId);
+            Assert.AreEqual(false, comment.OnAlbum);
+            Assert.AreEqual(null, comment.AlbumCover);
+            Assert.AreEqual(379, comment.Ups);
+            Assert.AreEqual(16, comment.Downs);
+            Assert.AreEqual(363, comment.Points);
             Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1450526522), comment.DateTime);
-            Assert.AreEqual(comment.ParentId, 0);
-            Assert.AreEqual(comment.Deleted, false);
-            Assert.AreEqual(comment.Vote, null);
+            Assert.AreEqual(0, comment.ParentId);
+            Assert.AreEqual("iphone", comment.Platform);
+            Assert.AreEqual(false, comment.Deleted);
+            Assert.AreEqual(null, comment.Vote);
         }
 
         [TestMethod]
@@ -215,8 +215,7 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/comment/539556821/replies"),
                 fakeResponse);
 
-            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
+            var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var comments = await endpoint.GetRepliesAsync("539556821");
 

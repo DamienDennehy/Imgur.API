@@ -63,6 +63,11 @@ namespace Imgur.API.Models.Impl
         public int? Downs { get; set; }
 
         /// <summary>
+        ///     The platform the comment was made on (Android, Desktop etc).
+        /// </summary>
+        public string Platform { get; set; }
+
+        /// <summary>
         ///     The number of upvotes - downvotes.
         /// </summary>
         public float Points { get; set; }

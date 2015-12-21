@@ -18,12 +18,17 @@ namespace Imgur.API.Models
         string AccountId { get; }
 
         /// <summary>
-        ///     The DateTimeOffset when the token expires. Usually one hour from when the token was created.
+        ///     The user's Username.
+        /// </summary>
+        string AccountUsername { get; }
+
+        /// <summary>
+        ///     The DateTimeOffset when the token expires. Usually one month from when the token was created.
         /// </summary>
         DateTimeOffset ExpiresAt { get; }
 
         /// <summary>
-        ///     The time in seconds when the token expires. Usually one hour from when the token was created.
+        ///     The time in seconds when the token expires. Usually one month from when the token was created.
         /// </summary>
         int ExpiresIn { get; }
 

@@ -16,7 +16,7 @@ namespace Imgur.API.Endpoints
         /// <param name="imageId">The ID of the image in the gallery that you wish to comment on.</param>
         /// <param name="parentId">The ID of the parent comment, this is an alternative method to create a reply.</param>
         /// <returns></returns>
-        Task<IComment> CreateCommentAsync(string comment, string imageId, string parentId);
+        Task<IComment> CreateCommentAsync(string comment, string imageId, string parentId = null);
 
         /// <summary>
         ///     Create a reply for the given comment, returns the ID of the comment.

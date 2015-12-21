@@ -88,28 +88,29 @@ namespace Imgur.API.Tests.Endpoints
             var image = await endpoint.GetImageAsync("hbzm7Ge", "sarah");
 
             Assert.IsNotNull(image);
-            Assert.AreEqual(image.Title,
-                "For three days at Camp Imgur, the Imgur flag flew proudly over our humble redwood camp, greeting Imgurians each morning.");
-            Assert.AreEqual(image.Description, null);
-            Assert.AreEqual(image.DateTime, new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1443651980));
-            Assert.AreEqual(image.Type, "image/gif");
-            Assert.AreEqual(image.Animated, true);
-            Assert.AreEqual(image.Width, 406);
-            Assert.AreEqual(image.Height, 720);
-            Assert.AreEqual(image.Size, 23386145);
-            Assert.AreEqual(image.Views, 329881);
-            Assert.AreEqual(image.Bandwidth, 7714644898745);
-            Assert.AreEqual(image.Vote, null);
-            Assert.AreEqual(image.Favorite, false);
-            Assert.AreEqual(image.Nsfw, null);
-            Assert.AreEqual(image.Section, null);
-            Assert.AreEqual(image.AccountUrl, null);
-            Assert.AreEqual(image.AccountId, null);
-            Assert.AreEqual(image.Gifv, "http://i.imgur.com/hbzm7Ge.gifv");
-            Assert.AreEqual(image.Webm, "http://i.imgur.com/hbzm7Ge.webm");
-            Assert.AreEqual(image.Mp4, "http://i.imgur.com/hbzm7Ge.mp4");
-            Assert.AreEqual(image.Link, "http://i.imgur.com/hbzm7Geh.gif");
-            Assert.AreEqual(image.Looping, true);
+            Assert.AreEqual(
+                "For three days at Camp Imgur, the Imgur flag flew proudly over our humble redwood camp, greeting Imgurians each morning.",
+                image.Title);
+            Assert.AreEqual(null, image.Description);
+            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1443651980), image.DateTime);
+            Assert.AreEqual("image/gif", image.Type);
+            Assert.AreEqual(true, image.Animated);
+            Assert.AreEqual(406, image.Width);
+            Assert.AreEqual(720, image.Height);
+            Assert.AreEqual(23386145, image.Size);
+            Assert.AreEqual(329881, image.Views);
+            Assert.AreEqual(7714644898745, image.Bandwidth);
+            Assert.AreEqual(null, image.Vote);
+            Assert.AreEqual(false, image.Favorite);
+            Assert.AreEqual(null, image.Nsfw);
+            Assert.AreEqual(null, image.Section);
+            Assert.AreEqual(null, image.AccountUrl);
+            Assert.AreEqual(null, image.AccountId);
+            Assert.AreEqual("http://i.imgur.com/hbzm7Ge.gifv", image.Gifv);
+            Assert.AreEqual("http://i.imgur.com/hbzm7Ge.webm", image.Webm);
+            Assert.AreEqual("http://i.imgur.com/hbzm7Ge.mp4", image.Mp4);
+            Assert.AreEqual("http://i.imgur.com/hbzm7Geh.gif", image.Link);
+            Assert.AreEqual(true, image.Looping);
         }
 
         [ExpectedException(typeof (ArgumentNullException))]

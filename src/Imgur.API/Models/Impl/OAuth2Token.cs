@@ -15,13 +15,16 @@ namespace Imgur.API.Models.Impl
         /// <param name="refreshToken">The refresh token.</param>
         /// <param name="tokenType">The type of token, typically "Bearer".</param>
         /// <param name="accountId">The account id.</param>
-        /// <param name="expiresIn">The time in seconds when the token expires. Usually one hour from the request.</param>
-        public OAuth2Token(string accessToken, string refreshToken, string tokenType, string accountId, int expiresIn)
+        /// <param name="accountUsername">The account username.</param>
+        /// <param name="expiresIn">The time in seconds when the token expires. Usually one month from the request.</param>
+        public OAuth2Token(string accessToken, string refreshToken, string tokenType, string accountId,
+            string accountUsername, int expiresIn)
         {
             AccessToken = accessToken;
             RefreshToken = refreshToken;
             TokenType = tokenType;
             AccountId = accountId;
+            AccountUsername = accountUsername;
             ExpiresIn = expiresIn;
         }
 
@@ -50,13 +53,19 @@ namespace Imgur.API.Models.Impl
         public virtual string AccountId { get; }
 
         /// <summary>
-        ///     The time in seconds when the token expires. Usually one hour from the request.
+        ///     The user's Account Username.
+        /// </summary>
+        [JsonProperty("account_username")]
+        public virtual string AccountUsername { get; }
+
+        /// <summary>
+        ///     The time in seconds when the token expires. Usually one month from the request.
         /// </summary>
         [JsonProperty("expires_in")]
         public virtual int ExpiresIn { get; }
 
         /// <summary>
-        ///     The DateTimeOffset when the token expires. Usually one hour from the request.
+        ///     The DateTimeOffset when the token expires. Usually one month from the request.
         /// </summary>
         public virtual DateTimeOffset ExpiresAt => DateTimeOffset.UtcNow.AddSeconds(ExpiresIn);
     }

@@ -49,10 +49,11 @@ namespace Imgur.API.Tests.Endpoints
             var token = await endpoint.GetTokenByCodeAsync("12345");
 
             Assert.AreEqual("CodeResponse", token.AccessToken);
-            Assert.AreEqual("45344", token.AccountId);
             Assert.AreEqual("2132d34234jkljj84ce0c16fjkljfsdfdc70", token.RefreshToken);
             Assert.AreEqual("bearer", token.TokenType);
-            Assert.AreEqual(3600, token.ExpiresIn);
+            Assert.AreEqual(2419200, token.ExpiresIn);
+            Assert.AreEqual("Bob", token.AccountUsername);
+            Assert.AreEqual("45344", token.AccountId);
         }
 
         [TestMethod]
@@ -97,10 +98,11 @@ namespace Imgur.API.Tests.Endpoints
             var token = await endpoint.GetTokenByPinAsync("4839");
 
             Assert.AreEqual("PinResponse", token.AccessToken);
-            Assert.AreEqual("45344", token.AccountId);
             Assert.AreEqual("2132d34234jkljj84ce0c16fjkljfsdfdc70", token.RefreshToken);
             Assert.AreEqual("bearer", token.TokenType);
-            Assert.AreEqual(3600, token.ExpiresIn);
+            Assert.AreEqual(2419200, token.ExpiresIn);
+            Assert.AreEqual("Bob", token.AccountUsername);
+            Assert.AreEqual("45344", token.AccountId);
         }
 
         [TestMethod]
@@ -128,10 +130,11 @@ namespace Imgur.API.Tests.Endpoints
             var token = await endpoint.GetTokenByRefreshTokenAsync("xhjhjhj");
 
             Assert.AreEqual("RefreshTokenResponse", token.AccessToken);
-            Assert.AreEqual("45344", token.AccountId);
             Assert.AreEqual("2132d34234jkljj84ce0c16fjkljfsdfdc70", token.RefreshToken);
             Assert.AreEqual("bearer", token.TokenType);
-            Assert.AreEqual(3600, token.ExpiresIn);
+            Assert.AreEqual(2419200, token.ExpiresIn);
+            Assert.AreEqual("Bob", token.AccountUsername);
+            Assert.AreEqual("45344", token.AccountId);
         }
 
         [TestMethod]

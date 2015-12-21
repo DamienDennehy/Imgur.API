@@ -89,21 +89,23 @@ namespace Imgur.API.Tests.Endpoints
             var comment = await endpoint.GetCommentAsync("yMgB7", "sarah");
 
             Assert.IsNotNull(comment);
-            Assert.AreEqual(comment.Id, 487008510);
-            Assert.AreEqual(comment.ImageId, "DMcOm2V");
-            Assert.AreEqual(comment.CommentText,
-                "Gyroscope detectors measure inertia.. the stabilization is done entirely by brushless motors. There are stabilizers which actually use 1/2");
-            Assert.AreEqual(comment.Author, "Scabab");
-            Assert.AreEqual(comment.AuthorId, 4194299);
-            Assert.AreEqual(comment.OnAlbum, false);
-            Assert.AreEqual(comment.AlbumCover, null);
-            Assert.AreEqual(comment.Ups, 24);
-            Assert.AreEqual(comment.Downs, 0);
-            Assert.AreEqual(comment.Points, 24);
-            Assert.AreEqual(comment.DateTime, new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1443969120));
-            Assert.AreEqual(comment.ParentId, 486983435);
-            Assert.AreEqual(comment.Deleted, false);
-            Assert.AreEqual(comment.Vote, Vote.Down);
+            Assert.AreEqual(487008510, comment.Id);
+            Assert.AreEqual("DMcOm2V", comment.ImageId);
+            Assert.AreEqual(
+                "Gyroscope detectors measure inertia.. the stabilization is done entirely by brushless motors. There are stabilizers which actually use 1/2",
+                comment.CommentText);
+            Assert.AreEqual("Scabab", comment.Author);
+            Assert.AreEqual(4194299, comment.AuthorId);
+            Assert.AreEqual(false, comment.OnAlbum);
+            Assert.AreEqual(null, comment.AlbumCover);
+            Assert.AreEqual(24, comment.Ups);
+            Assert.AreEqual(0, comment.Downs);
+            Assert.AreEqual(24, comment.Points);
+            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1443969120), comment.DateTime);
+            Assert.AreEqual(486983435, comment.ParentId);
+            Assert.AreEqual(false, comment.Deleted);
+            Assert.AreEqual(Vote.Down, comment.Vote);
+            Assert.AreEqual(comment.Platform, "desktop");
         }
 
         [ExpectedException(typeof (ArgumentNullException))]

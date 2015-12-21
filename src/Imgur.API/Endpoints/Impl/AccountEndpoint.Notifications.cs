@@ -11,6 +11,7 @@ namespace Imgur.API.Endpoints.Impl
     {
         /// <summary>
         ///     Returns all of the reply notifications for the user.
+        ///     OAuth authentication required.
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>

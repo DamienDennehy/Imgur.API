@@ -18,7 +18,7 @@ namespace Imgur.API.Endpoints
         Task<bool> DeleteImageAsync(string id);
 
         /// <summary>
-        ///     Favorite an image with the given ID. The user is required to be logged in to favorite the image.
+        ///     Favorite an image with the given ID. OAuth authentication required.
         /// </summary>
         /// <param name="id">The image id.</param>
         /// <returns></returns>

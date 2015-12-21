@@ -43,7 +43,7 @@ namespace Imgur.API.Endpoints
         Task<bool> DeleteAlbumAsync(string album);
 
         /// <summary>
-        ///     Favorite an album with a given Id. The user is required to be logged in to favorite the album.
+        ///     Favorite an album with a given Id. OAuth authentication required.
         /// </summary>
         /// <param name="id">The album id.</param>
         /// <returns></returns>

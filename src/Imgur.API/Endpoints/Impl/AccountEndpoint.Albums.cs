@@ -129,7 +129,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Delete an Album with a given id.
+        ///     Delete an Album with a given id. OAuth authentication required.
         /// </summary>
         /// <param name="id">The album id.</param>
         /// <param name="username">The user account. Default: me</param>

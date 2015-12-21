@@ -74,7 +74,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Returns the users favorited images, only accessible if you're logged in as the user.
+        ///     Returns the users favorited images. OAuth authentication required.
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>

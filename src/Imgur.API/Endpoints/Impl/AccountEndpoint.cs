@@ -63,7 +63,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Returns the account settings, only accessible if you're logged in as the user.
+        ///     Returns the account settings. OAuth authentication required.
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
@@ -85,7 +85,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Updates the account settings for a given user, the user must be logged in.
+        ///     Updates the account settings for a given user. OAuth authentication required.
         /// </summary>
         /// <param name="bio">The biography of the user, is displayed in the gallery profile page.</param>
         /// <param name="publicImages">Set the users images to private or public by default.</param>
@@ -125,7 +125,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Checks to see if user has verified their email address.
+        ///     Checks to see if user has verified their email address. OAuth authentication required.
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
@@ -148,7 +148,7 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     Sends an email to the user to verify that their email is valid to upload to gallery.
-        ///     Must be logged in as the user to send.
+        ///     OAuth authentication required.
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>

@@ -199,7 +199,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Favorite an image with the given ID. The user is required to be logged in to favorite the image.
+        ///     Favorite an image with the given ID. OAuth authentication required.
         /// </summary>
         /// <param name="id">The image id.</param>
         /// <exception cref="ArgumentNullException"></exception>

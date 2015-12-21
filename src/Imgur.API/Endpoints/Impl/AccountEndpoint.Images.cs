@@ -16,6 +16,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Return all of the images associated with the account.
         ///     You can page through the images by setting the page, this defaults to 0.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
@@ -74,6 +75,7 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     Returns an array of Image IDs that are associated with the account.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
@@ -101,6 +103,7 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     Returns the total number of images associated with the account.
+        ///     OAuth authentication required.
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
@@ -126,6 +129,7 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     Deletes an Image. You are required to be logged in as the user whom created the image.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="id">The image id.</param>
         /// <param name="username">The user account. Default: me</param>

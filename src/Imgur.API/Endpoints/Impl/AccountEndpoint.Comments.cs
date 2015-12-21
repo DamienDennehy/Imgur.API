@@ -135,7 +135,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Delete a comment. You are required to be logged in as the user whom created the comment.
+        ///     Delete a comment. OAuth authentication required.
         /// </summary>
         /// <param name="id">The comment id.</param>
         /// <param name="username">The user account. Default: me</param>

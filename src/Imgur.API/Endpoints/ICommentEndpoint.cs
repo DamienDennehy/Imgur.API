@@ -11,6 +11,7 @@ namespace Imgur.API.Endpoints
     {
         /// <summary>
         ///     Creates a new comment, returns the ID of the comment.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="comment">The comment text, this is what will be displayed.</param>
         /// <param name="imageId">The ID of the image in the gallery that you wish to comment on.</param>
@@ -20,6 +21,7 @@ namespace Imgur.API.Endpoints
 
         /// <summary>
         ///     Create a reply for the given comment, returns the ID of the comment.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="comment">The comment text, this is what will be displayed.</param>
         /// <param name="imageId">The ID of the image in the gallery that you wish to comment on.</param>
@@ -29,6 +31,7 @@ namespace Imgur.API.Endpoints
 
         /// <summary>
         ///     Delete a comment by the given id.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="id">The comment id.</param>
         /// <returns></returns>
@@ -50,6 +53,7 @@ namespace Imgur.API.Endpoints
 
         /// <summary>
         ///     Report a comment for being inappropriate.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="id">The comment id.</param>
         /// <param name="reason">The reason why the comment is inappropriate.</param>
@@ -58,6 +62,7 @@ namespace Imgur.API.Endpoints
 
         /// <summary>
         ///     Vote on a comment.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="id">The comment id.</param>
         /// <param name="vote">The vote.</param>

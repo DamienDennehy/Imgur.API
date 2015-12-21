@@ -11,7 +11,7 @@ namespace Imgur.API.Endpoints
     public interface IAccountEndpoint : IEndpoint
     {
         /// <summary>
-        ///     Delete an Album with a given id.
+        ///     Delete an Album with a given id. OAuth authentication required.
         /// </summary>
         /// <param name="id">The album id.</param>
         /// <param name="username">The user account. Default: me</param>
@@ -19,7 +19,7 @@ namespace Imgur.API.Endpoints
         Task<bool> DeleteAlbumAsync(string id, string username = "me");
 
         /// <summary>
-        ///     Delete a comment. You are required to be logged in as the user whom created the comment.
+        ///     Delete a comment. OAuth authentication required.
         /// </summary>
         /// <param name="id">The comment id.</param>
         /// <param name="username">The user account. Default: me</param>
@@ -27,7 +27,7 @@ namespace Imgur.API.Endpoints
         Task<bool> DeleteCommentAsync(string id, string username = "me");
 
         /// <summary>
-        ///     Deletes an Image. This requires a delete hash rather than an ID.
+        ///     Deletes an Image. OAuth authentication required.
         /// </summary>
         /// <param name="id">The image id.</param>
         /// <param name="username">The user account. Default: me</param>
@@ -156,13 +156,14 @@ namespace Imgur.API.Endpoints
 
         /// <summary>
         ///     Returns the total number of images associated with the account.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
         Task<int> GetImageCountAsync(string username = "me");
 
         /// <summary>
-        ///     Returns an array of Image IDs that are associated with the account.
+        ///     Returns an array of Image IDs that are associated with the account. OAuth authentication required.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
@@ -172,6 +173,7 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Return all of the images associated with the account.
         ///     You can page through the images by setting the page, this defaults to 0.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
@@ -180,6 +182,7 @@ namespace Imgur.API.Endpoints
 
         /// <summary>
         ///     Returns all of the notifications for the user.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="newNotifications">false for all notifications, true for only non-viewed notification. Default is true.</param>
         /// <returns></returns>
@@ -187,13 +190,14 @@ namespace Imgur.API.Endpoints
 
         /// <summary>
         ///     Sends an email to the user to verify that their email is valid to upload to gallery.
-        ///     Must be logged in as the user to send.
+        ///     OAuth authentication required.
         /// </summary>
         /// <returns></returns>
         Task<bool> SendVerificationEmailAsync();
 
         /// <summary>
         ///     Updates the account settings for a given user, the user must be logged in.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="bio">The biography of the user, is displayed in the gallery profile page.</param>
         /// <param name="publicImages">Set the users images to private or public by default.</param>
@@ -216,6 +220,7 @@ namespace Imgur.API.Endpoints
 
         /// <summary>
         ///     Checks to see if user has verified their email address.
+        ///     OAuth authentication required.
         /// </summary>
         /// <returns></returns>
         Task<bool> VerifyEmailAsync();

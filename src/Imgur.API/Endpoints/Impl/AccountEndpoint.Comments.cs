@@ -35,7 +35,8 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"account/{username}/comments/{sort}/{page}".ToLower();
+            var sortValue = $"{sort ?? CommentSortOrder.Newest}".ToLower();
+            var url = $"account/{username}/comments/{sortValue}/{page}";
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -96,7 +97,8 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"account/{username}/comments/ids/{sort}/{page}".ToLower();
+            var sortValue = $"{sort ?? CommentSortOrder.Newest}".ToLower();
+            var url = $"account/{username}/comments/ids/{sortValue}/{page}";
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -135,8 +137,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Delete a comment. You are required to be logged in as the user whom created the comment.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="username"></param>
+        /// <param name="id">The comment id.</param>
+        /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
@@ -150,8 +152,7 @@ namespace Imgur.API.Endpoints.Impl
             if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
 
-            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-                && ApiClient.OAuth2Token == null)
+            if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"account/{username}/comment/{id}";

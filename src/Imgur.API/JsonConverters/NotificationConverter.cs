@@ -16,7 +16,7 @@ namespace Imgur.API.JsonConverters
         /// <summary>
         ///     Determines whether this instance can convert the specified object type.
         /// </summary>
-        /// <param name="objectType"></param>
+        /// <param name="objectType">Type of the object.</param>
         /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
@@ -32,10 +32,10 @@ namespace Imgur.API.JsonConverters
         /// <summary>
         ///     Reads the JSON representation of the object.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="objectType"></param>
-        /// <param name="existingValue"></param>
-        /// <param name="serializer"></param>
+        /// <param name="reader">The Newtonsoft.Json.JsonReader to read from.</param>
+        /// <param name="objectType">Type of the object.</param>
+        /// <param name="existingValue">The existing value of object being read.</param>
+        /// <param name="serializer">The calling serializer.</param>
         /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
@@ -54,9 +54,9 @@ namespace Imgur.API.JsonConverters
         /// <summary>
         ///     Writes the JSON representation of the object.
         /// </summary>
-        /// <param name="writer"></param>
-        /// <param name="value"></param>
-        /// <param name="serializer"></param>
+        /// <param name="writer">The Newtonsoft.Json.JsonWriter to write to.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="serializer">The calling serializer.</param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();

@@ -35,10 +35,10 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetAccountFavoritesAsync_WithOAuth2NotSet_ThrowsArgumentNullException()
+        public async Task GetAccountFavoritesAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetAccountFavoritesAsync();
         }
 
@@ -64,20 +64,20 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetAccountGalleryFavoritesAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException
+        public async Task GetAccountGalleryFavoritesAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException
             ()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetAccountGalleryFavoritesAsync();
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetAccountGalleryFavoritesAsync_WithNullUsername_ThrowsArgumentNullException()
+        public async Task GetAccountGalleryFavoritesAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetAccountGalleryFavoritesAsync(null);
         }
 
@@ -103,19 +103,19 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetAccountSubmissionsAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        public async Task GetAccountSubmissionsAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetAccountSubmissionsAsync();
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetAccountSubmissionsAsync_WithNullUsername_ThrowsArgumentNullException()
+        public async Task GetAccountSubmissionsAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetAccountSubmissionsAsync(null);
         }
 
@@ -141,19 +141,19 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetGalleryProfileAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        public async Task GetGalleryProfileAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetGalleryProfileAsync();
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetGalleryProfileAsync_WithNullUsername_ThrowsArgumentNullException()
+        public async Task GetGalleryProfileAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetGalleryProfileAsync(null);
         }
     }

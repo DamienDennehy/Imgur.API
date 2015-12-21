@@ -36,7 +36,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task AddAlbumImagesAsync_WithNullAlbum_ThrowsArgumentNullException()
+        public async Task AddAlbumImagesAsync_WithAlbumNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
@@ -45,7 +45,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task AddAlbumImagesAsync_WithNullIds_ThrowsArgumentNullException()
+        public async Task AddAlbumImagesAsync_WithIdNulls_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
@@ -92,11 +92,21 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task DeleteAlbumAsync_WithNullAlbum_ThrowsArgumentNullException()
+        public async Task DeleteAlbumAsync_WithAlbumNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
             await endpoint.DeleteAlbumAsync(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public async Task FavoriteAlbumAsync_WithIdNull_ThrowsArgumentNullException()
+        {
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+            var client = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
+            var endpoint = new AlbumEndpoint(client);
+            await endpoint.FavoriteAlbumAsync(null);
         }
 
         [TestMethod]
@@ -111,7 +121,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/album/zVpyzhW/favorite"),
                 fakeResponse);
 
-            var client = new ImgurClient("123", "1234");
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+            var client = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
             var endpoint = new AlbumEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW");
 
@@ -130,7 +141,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/album/zVpyzhW/favorite"),
                 fakeResponse);
 
-            var client = new ImgurClient("123", "1234");
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+            var client = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
             var endpoint = new AlbumEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW");
 
@@ -149,7 +161,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(
                 new Uri("https://imgur-apiv3.p.mashape.com/3/album/zVpyzhW/favorite"), fakeResponse);
 
-            var client = new MashapeClient("123", "1234", "xyz");
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+            var client = new MashapeClient("123", "1234", "xyz", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
             var endpoint = new AlbumEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW");
 
@@ -168,7 +181,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(
                 new Uri("https://imgur-apiv3.p.mashape.com/3/album/zVpyzhW/favorite"), fakeResponse);
 
-            var client = new MashapeClient("123", "1234", "xyz");
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+            var client = new MashapeClient("123", "1234", "xyz", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
             var endpoint = new AlbumEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW");
 
@@ -177,11 +191,11 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task FavoriteAlbumAsync_WithNullId_ThrowsArgumentNullException()
+        public async Task FavoriteImageAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client);
-            await endpoint.FavoriteAlbumAsync(null);
+            var endpoint = new ImageEndpoint(client);
+            await endpoint.FavoriteImageAsync("zVpyzhW");
         }
 
         [TestMethod]
@@ -222,7 +236,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetAlbumAsync_WithNullId_ThrowsArgumentNullException()
+        public async Task GetAlbumAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
@@ -269,7 +283,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetAlbumImageAsync_WithNullId_ThrowsArgumentNullException()
+        public async Task GetAlbumImageAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
@@ -278,7 +292,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetAlbumImageAsync_WithNullImage_ThrowsArgumentNullException()
+        public async Task GetAlbumImageAsync_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
@@ -305,7 +319,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetAlbumImagesAsync_WithNullId_ThrowsArgumentNullException()
+        public async Task GetAlbumImagesAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
@@ -333,7 +347,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task RemoveAlbumImagesAsync_WithNullAlbum_ThrowsArgumentNullException()
+        public async Task RemoveAlbumImagesAsync_WithAlbumNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
@@ -342,7 +356,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task RemoveAlbumImagesAsync_WithNullIds_ThrowsArgumentNullException()
+        public async Task RemoveAlbumImagesAsync_WithIdNulls_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
@@ -369,7 +383,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task SetAlbumImagesAsync_WithNullAlbum_ThrowsArgumentNullException()
+        public async Task SetAlbumImagesAsync_WithAlbumNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
@@ -378,7 +392,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task SetAlbumImagesAsync_WithNullIds_ThrowsArgumentNullException()
+        public async Task SetAlbumImagesAsync_WithIdNulls_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
@@ -405,7 +419,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task UpdateAlbumAsync_WithNullId_ThrowsArgumentNullException()
+        public async Task UpdateAlbumAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);

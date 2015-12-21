@@ -125,28 +125,27 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Deletes an Image. This requires a delete hash rather than an ID.
+        ///     Deletes an Image. You are required to be logged in as the user whom created the image.
         /// </summary>
-        /// <param name="deleteHash"></param>
+        /// <param name="id">The image id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
-        public async Task<bool> DeleteImageAsync(string deleteHash, string username = "me")
+        public async Task<bool> DeleteImageAsync(string id, string username = "me")
         {
-            if (string.IsNullOrEmpty(deleteHash))
-                throw new ArgumentNullException(nameof(deleteHash));
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
 
             if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
 
-            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-                && ApiClient.OAuth2Token == null)
+            if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"account/{username}/image/{deleteHash}";
+            var url = $"account/{username}/image/{id}";
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {

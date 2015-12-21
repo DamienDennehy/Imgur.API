@@ -35,11 +35,20 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task DeleteImageAsync_WithNullId_ThrowsArgumentNullException()
+        public async Task DeleteImageAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
             await endpoint.DeleteImageAsync(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public async Task FavoriteImageAsync_WithIdNull_ThrowsArgumentNullException()
+        {
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new ImageEndpoint(client);
+            await endpoint.FavoriteImageAsync(null);
         }
 
         [TestMethod]
@@ -54,7 +63,9 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/image/zVpyzhW/favorite"),
                 fakeResponse);
 
-            var client = new ImgurClient("123", "1234");
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+
+            var client = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
             var endpoint = new ImageEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var favorited = await endpoint.FavoriteImageAsync("zVpyzhW");
 
@@ -73,7 +84,9 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/image/zVpyzhW/favorite"),
                 fakeResponse);
 
-            var client = new ImgurClient("123", "1234");
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+
+            var client = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
             var endpoint = new ImageEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var favorited = await endpoint.FavoriteImageAsync("zVpyzhW");
 
@@ -92,7 +105,9 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(
                 new Uri("https://imgur-apiv3.p.mashape.com/3/image/zVpyzhW/favorite"), fakeResponse);
 
-            var client = new MashapeClient("123", "1234", "xyz");
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+
+            var client = new MashapeClient("123", "1234", "xyz", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
             var endpoint = new ImageEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var favorited = await endpoint.FavoriteImageAsync("zVpyzhW");
 
@@ -111,7 +126,9 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(
                 new Uri("https://imgur-apiv3.p.mashape.com/3/image/zVpyzhW/favorite"), fakeResponse);
 
-            var client = new MashapeClient("123", "1234", "xyz");
+            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
+
+            var client = new MashapeClient("123", "1234", "xyz", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
             var endpoint = new ImageEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var favorited = await endpoint.FavoriteImageAsync("zVpyzhW");
 
@@ -120,11 +137,11 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task FavoriteImageAsync_WithNullId_ThrowsArgumentNullException()
+        public async Task FavoriteImageAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
-            await endpoint.FavoriteImageAsync(null);
+            await endpoint.FavoriteImageAsync("zVpyzhW");
         }
 
         [TestMethod]
@@ -169,7 +186,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetImageAsync_WithNullId_ThrowsArgumentNullException()
+        public async Task GetImageAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
@@ -196,7 +213,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task UpdateImageAsync_WithNullId_ThrowsArgumentNullException()
+        public async Task UpdateImageAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
@@ -247,7 +264,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task UploadImageBinaryAsync_WithNullImage_ThrowsArgumentNullException()
+        public async Task UploadImageBinaryAsync_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
@@ -345,7 +362,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task UploadImageUrlAsync_WithNullUrl_ThrowsArgumentNullException()
+        public async Task UploadImageUrlAsync_WithUrlNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
@@ -354,7 +371,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task UploadStreamBinaryAsync_WithNullImage_ThrowsArgumentNullException()
+        public async Task UploadStreamBinaryAsync_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);

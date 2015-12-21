@@ -41,7 +41,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetAccountAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        public async Task GetAccountAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
@@ -50,7 +50,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetAccountAsync_WithNullUsername_ThrowsArgumentNullException()
+        public async Task GetAccountAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
@@ -87,7 +87,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetAccountSettingsAsync_OAuth2NotSet_ThrowsArgumentNullException()
+        public async Task GetAccountSettingsAsync_OAuth2Null_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
@@ -116,7 +116,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task SendVerificationEmail_OAuth2NotSet_ThrowsArgumentNullException()
+        public async Task SendVerificationEmail_OAuth2Null_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
@@ -165,7 +165,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task UpdateAccountSettingsAsync_OAuth2NotSet_ThrowsArgumentNullException()
+        public async Task UpdateAccountSettingsAsync_OAuth2Null_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
@@ -194,7 +194,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task VerifyEmailAsync_OAuth2NotSet_ThrowsArgumentNullException()
+        public async Task VerifyEmailAsync_OAuth2Null_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);

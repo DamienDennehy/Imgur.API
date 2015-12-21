@@ -14,14 +14,14 @@ namespace Imgur.API.Endpoints
         IApiClient ApiClient { get; }
 
         /// <summary>
-        ///     The class for sending HTTP requests and receiving HTTP responses from the service methods.
+        ///     The class for sending HTTP requests and receiving HTTP responses from the endpoint methods.
         /// </summary>
         HttpClient HttpClient { get; }
 
         /// <summary>
         ///     Switch from one client type to another.
         /// </summary>
-        /// <param name="apiClient"></param>
+        /// <param name="apiClient">The type of client that will be used for authentication.</param>
         void SwitchClient(IApiClient apiClient);
     }
 }

@@ -23,7 +23,8 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"account/me/notifications?new={newNotifications}".ToLower();
+            var newNotificationsValue = $"{newNotifications}".ToLower();
+            var url = $"account/me/notifications?new={newNotificationsValue}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {

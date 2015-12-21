@@ -1,13 +1,13 @@
 site_name: Imgur.API
 pages:
 - 'Introduction': 'index.md'
-- 'Status': 'status.md'
 - 'Quick Start': 'quick-start.md'
 - 'Authentication': 'authentication.md'
 - 'OAuth2': 'oauth2.md'
 - 'Endpoints':
     - 'Account Endpoint': 'account-endpoint.md'
-    - 'Image Endpoint': 'image-endpoint.md'
     - 'Album Endpoint': 'album-endpoint.md'
-- 'FAQ': 'faq.md'
+    - 'Image Endpoint': 'image-endpoint.md'
+- 'Status': 'status.md'
 - 'Release Notes': 'release-notes.md'
+- 'FAQ': 'faq.md'

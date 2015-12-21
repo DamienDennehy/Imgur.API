@@ -146,8 +146,7 @@ namespace Imgur.API.Endpoints.Impl
             if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
 
-            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-                && ApiClient.OAuth2Token == null)
+            if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"account/{username}/album/{id}";

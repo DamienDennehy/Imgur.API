@@ -18,7 +18,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Initializes a new instance of the AccountEndpoint class.
         /// </summary>
-        /// <param name="apiClient"></param>
+        /// <param name="apiClient">The type of client that will be used for authentication.</param>
         public AccountEndpoint(IApiClient apiClient) : base(apiClient)
         {
         }
@@ -26,8 +26,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Initializes a new instance of the AccountEndpoint class.
         /// </summary>
-        /// <param name="apiClient"></param>
-        /// <param name="httpClient"></param>
+        /// <param name="apiClient">The type of client that will be used for authentication.</param>
+        /// <param name="httpClient"> The class for sending HTTP requests and receiving HTTP responses from the endpoint methods.</param>
         internal AccountEndpoint(IApiClient apiClient, HttpClient httpClient) : base(apiClient, httpClient)
         {
         }

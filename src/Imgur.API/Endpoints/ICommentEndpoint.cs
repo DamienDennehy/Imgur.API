@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Imgur.API.Enums;
 using Imgur.API.Models;
 
@@ -47,7 +46,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="id">The comment id.</param>
         /// <returns></returns>
-        Task<IEnumerable<IComment>> GetRepliesAsync(string id);
+        Task<IComment> GetRepliesAsync(string id);
 
         /// <summary>
         ///     Report a comment for being inappropriate.

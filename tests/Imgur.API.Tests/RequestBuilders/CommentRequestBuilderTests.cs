@@ -117,5 +117,20 @@ namespace Imgur.API.Tests.RequestBuilders
             Assert.AreEqual("https://api.imgur.com/3/comment/XysioD/report", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Post, request.Method);
         }
+
+        [TestMethod]
+        public void VoteCommentRequest_AreEqual()
+        {
+            var client = new ImgurClient("123", "1234");
+            var requestBuilder = new CommentRequestBuilder();
+
+            var url = $"{client.EndpointUrl}comment/XysioD/vote/up";
+            var request = requestBuilder.CreateRequest(HttpMethod.Post, url);
+
+            Assert.IsNotNull(request);
+
+            Assert.AreEqual("https://api.imgur.com/3/comment/XysioD/vote/up", request.RequestUri.ToString());
+            Assert.AreEqual(HttpMethod.Post, request.Method);
+        }
     }
 }

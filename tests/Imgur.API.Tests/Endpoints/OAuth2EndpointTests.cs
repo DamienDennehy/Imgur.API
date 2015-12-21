@@ -74,7 +74,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetTokenByCodeAsync_WithNull_ThrowsArgumentNullException()
+        public async Task GetTokenByCodeAsync_WithCodeNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new OAuth2Endpoint(client);
@@ -105,7 +105,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetTokenByPinAsync_WithNull_ThrowsArgumentNullException()
+        public async Task GetTokenByPinAsync_WithPinNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new OAuth2Endpoint(client);
@@ -136,7 +136,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetTokenByRefreshTokenAsync_WithNull_ThrowsArgumentNullException()
+        public async Task GetTokenByRefreshTokenAsync_WithTokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new OAuth2Endpoint(client);

@@ -26,7 +26,8 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/comment/yMgB7"),
                 fakeResponse);
 
-            var client = new ImgurClient("123", "1234");
+            var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
+            var client = new ImgurClient("123", "1234", fakeOAuth2TokenHandler.GetOAuth2TokenCodeResponse());
             var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var deleted = await endpoint.DeleteCommentAsync("yMgB7", "sarah");
 
@@ -34,28 +35,40 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task DeleteCommentAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        public async Task DeleteCommentAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
+            var client = new ImgurClient("123", "1234", fakeOAuth2TokenHandler.GetOAuth2TokenCodeResponse());
+            var endpoint = new AccountEndpoint(client);
             await endpoint.DeleteCommentAsync("yMgB7", null);
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task DeleteCommentAsync_WithNullId_ThrowsArgumentNullException()
+        public async Task DeleteCommentAsync_WithIdNull_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
+            var client = new ImgurClient("123", "1234", fakeOAuth2TokenHandler.GetOAuth2TokenCodeResponse());
+            var endpoint = new AccountEndpoint(client);
             await endpoint.DeleteCommentAsync(null, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task DeleteCommentAsync_WithNullUsername_ThrowsArgumentNullException()
+        public async Task DeleteCommentAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
+            await endpoint.DeleteCommentAsync("yMgB7", "sarah");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public async Task DeleteCommentAsync_WithUsernameNull_ThrowsArgumentNullException()
+        {
+            var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
+            var client = new ImgurClient("123", "1234", fakeOAuth2TokenHandler.GetOAuth2TokenCodeResponse());
+            var endpoint = new AccountEndpoint(client);
             await endpoint.DeleteCommentAsync("yMgB7", null);
         }
 
@@ -94,28 +107,28 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetCommentAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        public async Task GetCommentAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetCommentAsync("yMgB7", null);
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetCommentAsync_WithNullId_ThrowsArgumentNullException()
+        public async Task GetCommentAsync_WithIdNull_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetCommentAsync(null, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetCommentAsync_WithNullUsername_ThrowsArgumentNullException()
+        public async Task GetCommentAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetCommentAsync("yMgB7", null);
         }
 
@@ -139,19 +152,19 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetCommentCountAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        public async Task GetCommentCountAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetCommentCountAsync();
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetCommentCountAsync_WithNullUsername_ThrowsArgumentNullException()
+        public async Task GetCommentCountAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetCommentCountAsync(null);
         }
 
@@ -176,19 +189,19 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetCommentIdsAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        public async Task GetCommentIdsAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetCommentIdsAsync();
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetCommentIdsAsync_WithNullUsername_ThrowsArgumentNullException()
+        public async Task GetCommentIdsAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetCommentIdsAsync(null);
         }
 
@@ -213,19 +226,19 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetCommentsAsync_WithDefaultUsernameAndOAuth2NotSet_ThrowsArgumentNullException()
+        public async Task GetCommentsAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetCommentsAsync();
         }
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetCommentsAsync_WithNullUsername_ThrowsArgumentNullException()
+        public async Task GetCommentsAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetCommentsAsync(null);
         }
     }

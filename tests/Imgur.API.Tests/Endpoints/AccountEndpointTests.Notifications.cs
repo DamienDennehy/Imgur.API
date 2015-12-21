@@ -36,10 +36,10 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetNotificationsAsync_OAuth2NotSet_ThrowsArgumentNullException()
+        public async Task GetNotificationsAsync_OAuth2Null_ThrowsArgumentNullException()
         {
-            var imgurAuth = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(imgurAuth);
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
             await endpoint.GetNotificationsAsync();
         }
     }

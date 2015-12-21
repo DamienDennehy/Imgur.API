@@ -63,7 +63,8 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"account/{username}/gallery_favorites/{page}/{sort}".ToLower();
+            var sortValue = $"{sort ?? GallerySortOrder.Newest}".ToLower();
+            var url = $"account/{username}/gallery_favorites/{page}/{sortValue}";
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {

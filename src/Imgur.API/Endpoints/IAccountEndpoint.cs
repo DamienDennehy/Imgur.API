@@ -21,18 +21,18 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Delete a comment. You are required to be logged in as the user whom created the comment.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="username"></param>
+        /// <param name="id">The comment id.</param>
+        /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
         Task<bool> DeleteCommentAsync(string id, string username = "me");
 
         /// <summary>
         ///     Deletes an Image. This requires a delete hash rather than an ID.
         /// </summary>
-        /// <param name="deleteHash"></param>
-        /// <param name="username"></param>
+        /// <param name="id">The image id.</param>
+        /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Task<bool> DeleteImageAsync(string deleteHash, string username = "me");
+        Task<bool> DeleteImageAsync(string id, string username = "me");
 
         /// <summary>
         ///     Request standard user information.

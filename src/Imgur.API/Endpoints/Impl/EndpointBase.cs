@@ -17,12 +17,12 @@ namespace Imgur.API.Endpoints.Impl
     /// </summary>
     public abstract class EndpointBase : IEndpoint
     {
-        internal const string OAuth2RequiredExceptionMessage = "User authentication required.";
+        internal const string OAuth2RequiredExceptionMessage = "OAuth authentication required.";
 
         /// <summary>
         ///     Initializes a new instance of the EndpointBase class.
         /// </summary>
-        /// <param name="apiClient"></param>
+        /// <param name="apiClient">The type of client that will be used for authentication.</param>
         /// <exception cref="ArgumentNullException"></exception>
         protected EndpointBase(IApiClient apiClient)
             : this(apiClient, new HttpClient())
@@ -43,8 +43,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Initializes a new instance of the EndpointBase class.
         /// </summary>
-        /// <param name="apiClient"></param>
-        /// <param name="httpClient"></param>
+        /// <param name="apiClient">The type of client that will be used for authentication.</param>
+        /// <param name="httpClient"> The class for sending HTTP requests and receiving HTTP responses from the endpoint methods.</param>
         /// <exception cref="ArgumentNullException"></exception>
         protected internal EndpointBase(IApiClient apiClient, HttpClient httpClient)
         {
@@ -82,7 +82,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     The class for sending HTTP requests and receiving HTTP responses from the service methods.
+        ///     The class for sending HTTP requests and receiving HTTP responses from the endpoint methods.
         /// </summary>
         public virtual HttpClient HttpClient { get; }
 
@@ -94,7 +94,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Switch from one client type to another.
         /// </summary>
-        /// <param name="apiClient"></param>
+        /// <param name="apiClient">The type of client that will be used for authentication.</param>
         /// <exception cref="ArgumentNullException"></exception>
         public virtual void SwitchClient(IApiClient apiClient)
         {
@@ -219,7 +219,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Updates the ApiClient's RateLimit
         ///     with the values from the last response from the Api.
         /// </summary>
-        /// <param name="headers"></param>
+        /// <param name="headers">The response headers from the last request to the endpoint.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="OverflowException"></exception>

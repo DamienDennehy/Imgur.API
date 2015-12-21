@@ -50,6 +50,7 @@
     <Compile Include="Endpoints\Impl\AccountEndpoint.Notifications.cs" />
     <Compile Include="Endpoints\Impl\AccountEndpoint.Images.cs" />
     <Compile Include="Endpoints\Impl\AlbumEndpoint.cs" />
+    <Compile Include="Endpoints\Impl\CommentEndpoint.cs" />
     <Compile Include="Enums\AlbumLayout.cs" />
     <Compile Include="Enums\OAuth2ResponseType.cs" />
     <Compile Include="Endpoints\IAccountEndpoint.cs" />

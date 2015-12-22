@@ -13,12 +13,12 @@ namespace Imgur.API.Models
         string AccessToken { get; }
 
         /// <summary>
-        ///     The user's AccountId.
+        ///     The user's account id.
         /// </summary>
         string AccountId { get; }
 
         /// <summary>
-        ///     The user's Username.
+        ///     The user's account username.
         /// </summary>
         string AccountUsername { get; }
 

@@ -47,13 +47,13 @@ namespace Imgur.API.Models.Impl
         public virtual string TokenType { get; }
 
         /// <summary>
-        ///     The user's AccountId.
+        ///     The user's account id.
         /// </summary>
         [JsonProperty("account_id")]
         public virtual string AccountId { get; }
 
         /// <summary>
-        ///     The user's Account Username.
+        ///     The user's account username.
         /// </summary>
         [JsonProperty("account_username")]
         public virtual string AccountUsername { get; }

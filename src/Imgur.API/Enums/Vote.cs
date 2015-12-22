@@ -13,6 +13,11 @@
         /// <summary>
         ///     Vote Down.
         /// </summary>
-        Down
+        Down,
+
+        /// <summary>
+        ///     Veto the last vote.
+        /// </summary>
+        Veto
     }
 }

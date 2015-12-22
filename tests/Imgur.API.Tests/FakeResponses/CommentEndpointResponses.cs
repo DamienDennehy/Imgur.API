@@ -3,7 +3,7 @@
     public class CommentEndpointResponses
     {
         public const string GetCommentResponse =
-            "{\"data\":{\"id\":539556821,\"image_id\":\"n6gcXdY\",\"comment\":\"It's called smirking. Lots of people do it.\",\"author\":\"WomanWiththeTattooedHands\",\"author_id\":499505,\"on_album\":false,\"album_cover\":null,\"ups\":379,\"downs\":16,\"points\":363,\"datetime\":1450526522,\"parent_id\":0,\"deleted\":false,\"vote\":null,\"platform\":\"iphone\",\"children\":[]},\"success\":true,\"status\":200}";
+            "{\"data\":{\"id\":539556821,\"image_id\":\"n6gcXdY\",\"comment\":\"It's called smirking. Lots of people do it.\",\"author\":\"WomanWiththeTattooedHands\",\"author_id\":499505,\"on_album\":false,\"album_cover\":null,\"ups\":379,\"downs\":16,\"points\":363,\"datetime\":1450526522,\"parent_id\":0,\"deleted\":false,\"vote\":\"veto\",\"platform\":\"iphone\",\"children\":[]},\"success\":true,\"status\":200}";
 
         public const string CreateCommentResponse =
             "{\"data\":{\"id\":539710677},\"success\":true,\"status\":200}";

@@ -32,8 +32,6 @@ namespace Imgur.API.Tests.Endpoints
             var rateLimit = await endpoint.GetRateLimitAsync();
 
             Assert.IsNotNull(rateLimit);
-            Assert.AreEqual(412, rateLimit.UserLimit);
-            Assert.AreEqual(382, rateLimit.UserRemaining);
             Assert.AreEqual(10500, rateLimit.ClientLimit);
             Assert.AreEqual(9500, rateLimit.ClientRemaining);
         }

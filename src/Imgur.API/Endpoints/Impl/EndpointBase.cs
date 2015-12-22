@@ -163,7 +163,7 @@ namespace Imgur.API.Endpoints.Impl
 
             //If the type being requested is an oAuthToken
             //Deserialize it immediately and return
-            if (typeof (T) == typeof (IOAuth2Token) || typeof (T) == typeof (OAuth2Token))
+            if (typeof(T) == typeof(IOAuth2Token) || typeof(T) == typeof(OAuth2Token))
             {
                 var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
                 return oAuth2Response;
@@ -233,19 +233,9 @@ namespace Imgur.API.Endpoints.Impl
             {
                 var clientLimit = headers.GetValues("X-RateLimit-ClientLimit").FirstOrDefault();
                 var clientRemaining = headers.GetValues("X-RateLimit-ClientRemaining").FirstOrDefault();
-                var userLimit = headers.GetValues("X-RateLimit-UserLimit").FirstOrDefault();
-                var userRemaining = headers.GetValues("X-RateLimit-UserRemaining").FirstOrDefault();
-                var userReset = headers.GetValues("X-RateLimit-UserReset").FirstOrDefault();
-
+                
                 ApiClient.RateLimit.ClientLimit = Convert.ToInt32(clientLimit);
                 ApiClient.RateLimit.ClientRemaining = Convert.ToInt32(clientRemaining);
-                ApiClient.RateLimit.UserLimit = Convert.ToInt32(userLimit);
-                ApiClient.RateLimit.UserRemaining = Convert.ToInt32(userRemaining);
-                ApiClient.RateLimit.UserReset =
-                    new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Convert.ToInt64(userReset));
-
-                ApiClient.RateLimit.MashapeUploadsLimit = null;
-                ApiClient.RateLimit.MashapeUploadsRemaining = null;
             }
 
             if (ApiClient is IMashapeClient
@@ -253,17 +243,9 @@ namespace Imgur.API.Endpoints.Impl
             {
                 var requestsLimit = headers.GetValues("X-RateLimit-Requests-Limit").FirstOrDefault();
                 var requestsRemaining = headers.GetValues("X-RateLimit-Requests-Remaining").FirstOrDefault();
-                var uploadsLimit = headers.GetValues("X-RateLimit-Uploads-Limit").FirstOrDefault();
-                var uploadsRemaining = headers.GetValues("X-RateLimit-Uploads-Remaining").FirstOrDefault();
 
                 ApiClient.RateLimit.ClientLimit = Convert.ToInt32(requestsLimit);
                 ApiClient.RateLimit.ClientRemaining = Convert.ToInt32(requestsRemaining);
-                ApiClient.RateLimit.MashapeUploadsLimit = Convert.ToInt32(uploadsLimit);
-                ApiClient.RateLimit.MashapeUploadsRemaining = Convert.ToInt32(uploadsRemaining);
-
-                ApiClient.RateLimit.UserLimit = null;
-                ApiClient.RateLimit.UserRemaining = null;
-                ApiClient.RateLimit.UserReset = null;
             }
         }
     }

@@ -421,20 +421,10 @@ namespace Imgur.API.Tests.Endpoints
 
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "123");
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientRemaining", "345");
-            response.Headers.TryAddWithoutValidation("X-RateLimit-UserLimit", "312");
-            response.Headers.TryAddWithoutValidation("X-RateLimit-UserRemaining", "445");
-            response.Headers.TryAddWithoutValidation("X-RateLimit-UserReset", "1440263353");
             endpoint.UpdateRateLimit(response.Headers);
-
-            Assert.IsNull(endpoint.ApiClient.RateLimit.MashapeUploadsLimit);
-            Assert.IsNull(endpoint.ApiClient.RateLimit.MashapeUploadsRemaining);
+            
             Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
             Assert.AreEqual(345, endpoint.ApiClient.RateLimit.ClientRemaining);
-            Assert.AreEqual(312, endpoint.ApiClient.RateLimit.UserLimit);
-            Assert.AreEqual(445, endpoint.ApiClient.RateLimit.UserRemaining);
-
-            var userReset = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1440263353);
-            Assert.AreEqual(userReset, endpoint.ApiClient.RateLimit.UserReset);
         }
 
         [TestMethod]
@@ -446,17 +436,10 @@ namespace Imgur.API.Tests.Endpoints
 
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Limit", "123");
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Remaining", "345");
-            response.Headers.TryAddWithoutValidation("X-RateLimit-Uploads-Limit", "312");
-            response.Headers.TryAddWithoutValidation("X-RateLimit-Uploads-Remaining", "445");
             endpoint.UpdateRateLimit(response.Headers);
-
-            Assert.IsNull(endpoint.ApiClient.RateLimit.UserLimit);
-            Assert.IsNull(endpoint.ApiClient.RateLimit.UserRemaining);
-            Assert.IsNull(endpoint.ApiClient.RateLimit.UserReset);
+            
             Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
             Assert.AreEqual(345, endpoint.ApiClient.RateLimit.ClientRemaining);
-            Assert.AreEqual(312, endpoint.ApiClient.RateLimit.MashapeUploadsLimit);
-            Assert.AreEqual(445, endpoint.ApiClient.RateLimit.MashapeUploadsRemaining);
         }
     }
 }

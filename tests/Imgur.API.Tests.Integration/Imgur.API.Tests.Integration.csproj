@@ -53,36 +53,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Endpoints\AccountEndpointAlbumTests\ImgurClientTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointAlbumTests\ImgurClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AccountEndpointAlbumTests\MashapeClientTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointAlbumTests\MashapeClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AccountEndpointCommentTests\ImgurClientTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointCommentTests\ImgurClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AccountEndpointCommentTests\MashapeClientTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointCommentTests\MashapeClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AccountEndpointGalleryTests\ImgurClientTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointGalleryTests\ImgurClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AccountEndpointGalleryTests\MashapeClientTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointGalleryTests\MashapeClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AccountEndpointImageTests\ImgurClientTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointImageTests\ImgurClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AccountEndpointImageTests\MashapeClientTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointImageTests\MashapeClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AccountEndpointNotificationTests\ImgurClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AccountEndpointNotificationTests\MashapeClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AccountEndpointTests\ImgurClientTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointTests\ImgurClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AccountEndpointTests\MashapeClientTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointTests\MashapeClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AlbumEndpointTests\ImgurClientTests.cs" />
-    <Compile Include="Endpoints\AlbumEndpointTests\MashapeClientTests.cs" />
-    <Compile Include="Endpoints\AlbumEndpointTests\MashapeClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\AlbumEndpointTests\ImgurClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\ImageEndpointTests\ImgurClientTests.cs" />
-    <Compile Include="Endpoints\ImageEndpointTests\ImgurClientWithOAuth2Tests.cs" />
-    <Compile Include="Endpoints\ImageEndpointTests\MashapeClientTests.cs" />
-    <Compile Include="Endpoints\ImageEndpointTests\MashapeClientWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\CommentEndpointTests\MashapeClientWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\CommentEndpointTests\ImgurClientWithOAuth2Tests.cs" />
+    <Compile Include="Endpoints\CommentEndpointTests\MashapeClientTests.cs" />
+    <Compile Include="Endpoints\CommentEndpointTests\ImgurClientTests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />
     <Compile Include="Endpoints\RateLimitEndpointTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

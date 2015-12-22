@@ -191,7 +191,7 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual(0, comment.ParentId);
             Assert.AreEqual("iphone", comment.Platform);
             Assert.AreEqual(false, comment.Deleted);
-            Assert.AreEqual(null, comment.Vote);
+            Assert.AreEqual(Vote.Veto, comment.Vote);
         }
 
         [TestMethod]

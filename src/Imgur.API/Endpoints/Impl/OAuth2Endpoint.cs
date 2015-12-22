@@ -47,7 +47,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     the response.
         /// </param>
         /// <returns></returns>
-        public string GetAuthorizationUrl(OAuth2ResponseType oAuth2ResponseType, string state)
+        public string GetAuthorizationUrl(OAuth2ResponseType oAuth2ResponseType, string state = null)
         {
             var url =
                 $"{AuthorizationEndpointUrl}?client_id={ApiClient.ClientId}&response_type={oAuth2ResponseType}&state={state}";
@@ -57,7 +57,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     After the user authorizes, the pin is returned as a code to your application
         ///     via the redirect URL you specified during registration, in the form of a regular query string parameter.
-        ///     <para>Keep in mind that you can use localhost as a redirect URL.</para>
         /// </summary>
         /// <param name="code">The code from the query string.</param>
         /// <exception cref="ArgumentNullException"></exception>
@@ -84,7 +83,6 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     After the user authorizes, they will receive a PIN code that they copy into your app.
-        ///     Get the access token from the PIN.
         /// </summary>
         /// <param name="pin">The PIN that the user is prompted to enter.</param>
         /// <returns></returns>

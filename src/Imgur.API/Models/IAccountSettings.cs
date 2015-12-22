@@ -4,7 +4,7 @@ using Imgur.API.Enums;
 namespace Imgur.API.Models
 {
     /// <summary>
-    ///     The account settings, only accessible if you're logged in as the user.
+    ///     The account settings.
     /// </summary>
     public interface IAccountSettings : IDataModel
     {

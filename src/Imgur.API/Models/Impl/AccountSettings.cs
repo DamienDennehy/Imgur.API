@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Imgur.API.Models.Impl
 {
     /// <summary>
-    ///     The account settings, only accessible if you're logged in as the user.
+    ///     The account settings.
     /// </summary>
     public class AccountSettings : IAccountSettings
     {

@@ -1,7 +1,7 @@
 ﻿namespace Imgur.API.Models.Impl
 {
     /// <summary>
-    ///     Remaining credits for the application and user.
+    ///     Remaining credits for the application.
     /// </summary>
     public class RateLimit : IRateLimit
     {

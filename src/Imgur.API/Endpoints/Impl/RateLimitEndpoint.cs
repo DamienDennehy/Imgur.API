@@ -34,7 +34,7 @@ namespace Imgur.API.Endpoints.Impl
         internal RateLimitRequestBuilder RequestBuilder { get; } = new RateLimitRequestBuilder();
 
         /// <summary>
-        ///     Get RateLimit.
+        ///     Gets remaining credits for the application.
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="MashapeException"></exception>

@@ -203,7 +203,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Vote on a comment. 
+        ///     Vote on a comment.
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="id">The comment id.</param>

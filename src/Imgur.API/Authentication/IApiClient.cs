@@ -29,7 +29,7 @@ namespace Imgur.API.Authentication
         IOAuth2Token OAuth2Token { get; }
 
         /// <summary>
-        ///     Remaining credits for the application and user.
+        ///     Remaining credits for the application.
         /// </summary>
         IRateLimit RateLimit { get; }
 

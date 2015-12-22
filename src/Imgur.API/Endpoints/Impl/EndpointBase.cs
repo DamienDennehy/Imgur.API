@@ -163,7 +163,7 @@ namespace Imgur.API.Endpoints.Impl
 
             //If the type being requested is an oAuthToken
             //Deserialize it immediately and return
-            if (typeof(T) == typeof(IOAuth2Token) || typeof(T) == typeof(OAuth2Token))
+            if (typeof (T) == typeof (IOAuth2Token) || typeof (T) == typeof (OAuth2Token))
             {
                 var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
                 return oAuth2Response;
@@ -233,7 +233,7 @@ namespace Imgur.API.Endpoints.Impl
             {
                 var clientLimit = headers.GetValues("X-RateLimit-ClientLimit").FirstOrDefault();
                 var clientRemaining = headers.GetValues("X-RateLimit-ClientRemaining").FirstOrDefault();
-                
+
                 ApiClient.RateLimit.ClientLimit = Convert.ToInt32(clientLimit);
                 ApiClient.RateLimit.ClientRemaining = Convert.ToInt32(clientRemaining);
             }

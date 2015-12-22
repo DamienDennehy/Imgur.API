@@ -11,14 +11,14 @@
 1. Account endpoint.
 2. Image endpoint.
 3. Album endpoint.
+4. Comment endpoint.
 
 ##ToDo
 
 ###Endpoints
-1. Comment endpoint.
-2. Custom gallery endpoint.
-3. Conversation endpoint.
-4. Notification endpoint.
-5. Memegen endpoint.
-6. Topic endpoint.
-7. Gallery endpoint.
+1. Custom gallery endpoint.
+2. Conversation endpoint.
+3. Notification endpoint.
+4. Memegen endpoint.
+5. Topic endpoint.
+6. Gallery endpoint.

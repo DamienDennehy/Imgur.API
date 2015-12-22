@@ -6,36 +6,38 @@ The simplest way to do this is to redirect to Imgur's authorization url.
 
     var client = new ImgurClient("YOUR_CLIENT", "YOUR_SECRET");
     var endpoint = new OAuth2Endpoint(client);
-    var redirectUrl = endpoint.GetAuthorizationUrl(OAuth2ResponseType.Token, null);
+    var redirectUrl = endpoint.GetAuthorizationUrl(OAuth2ResponseType.Token);
 
-Once the user authorizes the application, the Imgur OAuth2 endpoint will redirect back to your application Redirect URL.
-The Redirect URL will contain several values that should be saved.
+Once the user authorizes the application, Imgur will then redirect back to your application's Redirect URL.
+The Redirect URL will contain several values that should be parsed and stored by your application.
 
 *   access_token - The user's access token for this session.
 *   refresh_token - The user's refresh token which should be used to refresh the access_token when it expires.
-*   expires_in - The time in seconds when the user's access token expires. Default is 3600.
 *   token_type - The type of token that should be used for authorization.
-*   account_username - The account username that is now authorized.
-*   account_id - The account id that is now authorized.
+*   account_id - The user's account id.
+*   account_username - The user's account username.
+*   expires_in - The time in seconds when the user's access token expires. Default is one month - 2419200.
 
 ## Creating an OAuth2 token from the Redirect URL.
 Using the Redirect URL values, an OAuth2 Token can be created.
 
-    var token = new OAuth2Token("ACCESS_TOKEN", "REFRESH_TOKEN", "TOKEN_TYPE", "ACCOUNT_ID", 3600);
+    var token = new OAuth2Token("ACCESS_TOKEN", "REFRESH_TOKEN", "TOKEN_TYPE", "ACCOUNT_ID", "ACCOUNT_USERNAME", EXPIRES_IN);
+	
+The token should be stored by your application. This will save your application from constructing a new token on each endpoint request.
 
 ## Getting an OAuth2 token from the Refresh Token.
 If the access token has expired but you still have the refresh token, you can request a new OAuth2 token.
 
     var token = endpoint.GetTokenByRefreshTokenAsync("YOUR_REFRESH_TOKEN");
 
-## Setting the OAuth2 token.
-Setting the OAuth2 token can be done in two ways. 
+## Using the OAuth2 token.
+Using the OAuth2 token can be done in two ways. 
 
-You may set it in the client's constructor:
+You may use it in the client's constructor:
 
     var client = new ImgurClient("YOUR_CLIENT", "YOUR_SECRET", token);
 	
-You may also set it explicitly using the client:
+You may also switch or set the token explicitly using the client's SetOAuth2Token method:
 
 	var client = new ImgurClient("YOUR_CLIENT", "YOUR_SECRET");
     client.SetOAuth2Token(token);

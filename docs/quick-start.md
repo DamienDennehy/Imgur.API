@@ -51,10 +51,7 @@ Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https:/
 
     try
     {
-        var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
-        var oAuth2Endpoint = new OAuth2Endpoint(client);
-        var token = await oAuth2Endpoint.GetTokenByRefreshTokenAsync("YOUR_REFRESH_TOKEN");
-        client.SetOAuth2Token(token);
+        var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH2_TOKEN);
         var endpoint = new ImageEndpoint(client);
         var file = System.IO.File.ReadAllBytes(@"D:\Image.jpg");
         var image = await endpoint.UploadImageBinaryAsync(file, "ALBUM_ID", "ALBUM_TITLE", "ALBUM_DESCRIPTION");

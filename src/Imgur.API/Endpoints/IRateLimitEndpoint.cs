@@ -9,7 +9,7 @@ namespace Imgur.API.Endpoints
     public interface IRateLimitEndpoint : IEndpoint
     {
         /// <summary>
-        ///     Get RateLimit.
+        ///     Gets remaining credits for the application.
         /// </summary>
         /// <returns></returns>
         Task<IRateLimit> GetRateLimitAsync();

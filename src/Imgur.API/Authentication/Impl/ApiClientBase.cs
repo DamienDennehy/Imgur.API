@@ -86,7 +86,7 @@ namespace Imgur.API.Authentication.Impl
         public abstract string EndpointUrl { get; }
 
         /// <summary>
-        ///     Remaining credits for the application and user.
+        ///     Remaining credits for the application.
         /// </summary>
         public virtual IRateLimit RateLimit { get; } = new RateLimit();
 

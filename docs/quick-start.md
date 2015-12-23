@@ -4,10 +4,13 @@
 Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https://github.com/DamienDennehy/Imgur.API/issues)
 
 ## Latest Release
-### Version 3.2.0 (2015-12-21)
-* Album endpoint added.
-* Fixed case sensitivity issue for Gallery methods of the AccountEndpoint.
-* Significant rewrite of Account and Image endpoints for additional unit test coverage.
+### Version 3.3.0 (2015-12-23)
+* Added CommentEndpoint.
+* Added AccountUsername to OAuth2Token.
+* Added Veto option to Vote enum.
+* Replaced Vote string with Vote enum on Image, GalleryImage and GalleryAlbum models.
+* Replaced Layout string with AlbumLayout enum on GalleryAlbum.
+* Fix for ImgurException not being thrown when Imgur doesn't return a response.
 
 ## Quick Start
 ### Upload image anonymously with Imgur Api authentication.

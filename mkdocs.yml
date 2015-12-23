@@ -7,6 +7,7 @@ pages:
 - 'Endpoints':
     - 'Account Endpoint': 'account-endpoint.md'
     - 'Album Endpoint': 'album-endpoint.md'
+    - 'Comment Endpoint': 'comment-endpoint.md'
     - 'Image Endpoint': 'image-endpoint.md'
     - 'OAuth2 Endpoint': 'oauth2-endpoint.md'
     - 'Rate Limit Endpoint': 'rate-limit-endpoint.md'

@@ -1,4 +1,4 @@
-version: 3.2.0-build{build}
+version: 3.3.0-build{build}
 environment:
   VisualStudioVersion: 14.0
 install:
@@ -7,9 +7,9 @@ install:
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
-  assembly_version: 3.2.0
-  assembly_file_version: 3.2.0.{build}
-  assembly_informational_version: '3.2.0-build{build}'
+  assembly_version: 3.3.0
+  assembly_file_version: 3.3.0.{build}
+  assembly_informational_version: '3.3.0-build{build}'
 build:
   project: Imgur.API.sln
   publish_nuget: true

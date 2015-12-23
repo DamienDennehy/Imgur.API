@@ -128,36 +128,36 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Parses the string response from the endpoint into an expected type T.
+        ///     Parses the string stringResponse from the endpoint into an expected type T.
         /// </summary>
         /// <typeparam name="T">The expected output type, Image, bool, etc.</typeparam>
-        /// <param name="endpointStringResponse">The string response from the endpoint.</param>
+        /// <param name="stringResponse">The string response from the endpoint.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <returns></returns>
-        internal virtual T ProcessEndpointResponse<T>(string endpointStringResponse)
+        internal virtual T ProcessEndpointResponse<T>(string stringResponse)
         {
             //If no result is found, then we can't proceed
-            if (string.IsNullOrWhiteSpace(endpointStringResponse))
+            if (string.IsNullOrWhiteSpace(stringResponse))
                 throw new ImgurException("The response from the endpoint is empty.");
 
             //If the result isn't a json response, then we can't proceed
-            if (endpointStringResponse.StartsWith("<"))
+            if (stringResponse.StartsWith("<"))
                 throw new ImgurException("The response from the endpoint is invalid.");
 
             //If the authentication method is Mashape, then an error response
-            //is different to that of Imgur's response.
-            if (ApiClient is IMashapeClient && endpointStringResponse.Contains("{\"message\":"))
+            //is different to that of Imgur's stringResponse.
+            if (ApiClient is IMashapeClient && stringResponse.Contains("{\"message\":"))
             {
-                var maShapeError = JsonConvert.DeserializeObject<MashapeError>(endpointStringResponse);
+                var maShapeError = JsonConvert.DeserializeObject<MashapeError>(stringResponse);
                 throw new MashapeException(maShapeError.Message);
             }
 
             //If an error occurs, throw an exception
-            if (endpointStringResponse.Contains("{\"data\":{\"error\":"))
+            if (stringResponse.Contains("{\"data\":{\"error\":"))
             {
-                var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
+                var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(stringResponse);
                 throw new ImgurException(apiError.Data.Error);
             }
 
@@ -165,26 +165,26 @@ namespace Imgur.API.Endpoints.Impl
             //Deserialize it immediately and return
             if (typeof (T) == typeof (IOAuth2Token) || typeof (T) == typeof (OAuth2Token))
             {
-                var oAuth2Response = JsonConvert.DeserializeObject<T>(endpointStringResponse);
+                var oAuth2Response = JsonConvert.DeserializeObject<T>(stringResponse);
                 return oAuth2Response;
             }
 
-            //Deserialize the response into a generic Basic<object> type
-            var response = JsonConvert.DeserializeObject<Basic<object>>(endpointStringResponse);
+            //Deserialize the stringResponse into a generic Basic<object> type
+            var basicResponse = JsonConvert.DeserializeObject<Basic<object>>(stringResponse);
 
-            //If the response was not a success, then the response type is Basic<ImgurError>
+            //If the request was not a success, then the basicResponse type is Basic<ImgurError>
             //and should be handled as such.
-            if (!response.Success)
+            if (!basicResponse.Success)
             {
-                var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(endpointStringResponse);
+                var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(stringResponse);
                 throw new ImgurException(apiError.Data.Error);
             }
 
             var converters = new JsonConverter[1];
             converters[0] = new GalleryItemConverter();
 
-            //Deserialize the actual response
-            var finalResponse = JsonConvert.DeserializeObject<Basic<T>>(endpointStringResponse, converters);
+            //Deserialize the stringResponse to the correct Type
+            var finalResponse = JsonConvert.DeserializeObject<Basic<T>>(stringResponse, converters);
 
             return finalResponse.Data;
         }
@@ -205,21 +205,28 @@ namespace Imgur.API.Endpoints.Impl
 
             var httpResponse = await HttpClient.SendAsync(message);
 
+            UpdateRateLimit(httpResponse.Headers);
+
             string stringResponse = null;
 
             if (httpResponse.Content != null)
                 stringResponse = await httpResponse.Content.ReadAsStringAsync();
 
-            UpdateRateLimit(httpResponse.Headers);
+            //On rare occasions Imgur will not return any response (example: Too Many Requests StatusCode 429).
+            //In this case, if the reason phrase is not null then we should throw an ImgurException.
+            if (string.IsNullOrWhiteSpace(stringResponse) 
+                && !httpResponse.IsSuccessStatusCode
+                && !string.IsNullOrWhiteSpace(httpResponse.ReasonPhrase))
+                throw new ImgurException(httpResponse.ReasonPhrase);
 
             return ProcessEndpointResponse<T>(stringResponse);
         }
 
         /// <summary>
         ///     Updates the ApiClient's RateLimit
-        ///     with the values from the last response from the Api.
+        ///     with the values from the last stringResponse from the Api.
         /// </summary>
-        /// <param name="headers">The response headers from the last request to the endpoint.</param>
+        /// <param name="headers">The stringResponse headers from the last request to the endpoint.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="OverflowException"></exception>

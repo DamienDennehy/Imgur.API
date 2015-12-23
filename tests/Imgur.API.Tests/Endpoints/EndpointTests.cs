@@ -211,7 +211,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ImgurException))]
-        public async Task SendRequestAsync_WithInvalidUrl_IsNull()
+        public async Task SendRequestAsync_WithInvalidUrl__ThrowsImgurException()
         {
             var constructorObjects = new object[2];
             constructorObjects[0] = new ImgurClient("123", "1234");
@@ -280,7 +280,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ImgurException))]
-        public async Task SendRequestAsync_WithUnauthorizedErrorMessage_AreEqual()
+        public async Task SendRequestAsync_WithUnauthorizedErrorMessage__ThrowsImgurException()
         {
             var constructorObjects = new object[2];
             constructorObjects[0] = new ImgurClient("123", "1234");
@@ -290,6 +290,30 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(FakeErrors.ImgurClientErrorResponse)
             };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
+
+            var httpClient = new HttpClient(fakeHttpMessageHandler);
+
+            //Inject the fake HttpClient when declaring a new service instance
+            constructorObjects[1] = httpClient;
+
+            var service = Substitute.ForPartsOf<EndpointBase>(constructorObjects);
+            var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test");
+            var image = await service.SendRequestAsync<Image>(request);
+
+            Assert.IsNull(image);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ImgurException))]
+        public async Task SendRequestAsync_WithResponseNull_ThrowsImgurException()
+        {
+            var constructorObjects = new object[2];
+            constructorObjects[0] = new ImgurClient("123", "1234");
+
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
 
             fakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
 

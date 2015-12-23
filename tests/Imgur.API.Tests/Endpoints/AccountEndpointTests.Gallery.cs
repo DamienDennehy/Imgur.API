@@ -57,7 +57,8 @@ namespace Imgur.API.Tests.Endpoints
             var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
             var client = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
             var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
-            var favorites = await endpoint.GetAccountGalleryFavoritesAsync(page: 2, sort: GallerySortOrder.Oldest);
+            var favorites =
+                await endpoint.GetAccountGalleryFavoritesAsync(page: 2, sort: AccountGallerySortOrder.Oldest);
 
             Assert.IsTrue(favorites.Any());
         }

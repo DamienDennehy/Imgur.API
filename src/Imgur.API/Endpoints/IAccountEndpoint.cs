@@ -56,7 +56,7 @@ namespace Imgur.API.Endpoints
         /// <param name="sort">Indicates the order that a list of items are sorted. Default: Newest.</param>
         /// <returns></returns>
         Task<IEnumerable<IGalleryItem>> GetAccountGalleryFavoritesAsync(string username = "me", int? page = null,
-            GallerySortOrder? sort = GallerySortOrder.Newest);
+            AccountGallerySortOrder? sort = AccountGallerySortOrder.Newest);
 
         /// <summary>
         ///     Returns the account settings. OAuth authentication required.

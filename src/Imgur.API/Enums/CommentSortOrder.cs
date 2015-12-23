@@ -1,27 +1,27 @@
 ﻿namespace Imgur.API.Enums
 {
     /// <summary>
-    ///     Indicates the order that a list of items are sorted.
+    ///     Indicates the order that the comments should be sorted by.
     /// </summary>
     public enum CommentSortOrder
     {
         /// <summary>
-        ///     Sort the list by the newest item first.
+        ///     Sort the comments by the newest comments first.
         /// </summary>
         Newest,
 
         /// <summary>
-        ///     Sort the list by the oldest item first.
+        ///     Sort the comments by the oldest comments first.
         /// </summary>
         Oldest,
 
         /// <summary>
-        ///     Sort the list by the best rated item first.
+        ///     Sort the comments by the best rated comments first.
         /// </summary>
         Best,
 
         /// <summary>
-        ///     Sort the list by the worst rated item first.
+        ///     Sort the comments by the worst rated comments first.
         /// </summary>
         Worst
     }

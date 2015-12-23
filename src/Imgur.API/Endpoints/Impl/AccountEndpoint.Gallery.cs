@@ -54,7 +54,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IEnumerable<IGalleryItem>> GetAccountGalleryFavoritesAsync(string username = "me",
             int? page = null,
-            GallerySortOrder? sort = GallerySortOrder.Newest)
+            AccountGallerySortOrder? sort = AccountGallerySortOrder.Newest)
         {
             if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
@@ -63,7 +63,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var sortValue = $"{sort ?? GallerySortOrder.Newest}".ToLower();
+            var sortValue = $"{sort ?? AccountGallerySortOrder.Newest}".ToLower();
             var url = $"account/{username}/gallery_favorites/{page}/{sortValue}";
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))

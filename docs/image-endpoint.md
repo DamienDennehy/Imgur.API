@@ -43,7 +43,7 @@ Upload a new image using a stream.
 
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
             var endpoint = new ImageEndpoint(client);
-            IImage image = null;
+            IImage image;
 			using (var fs = new FileStream(@"IMAGE_LOCATION", FileMode.Open))
             {
                 image = await endpoint.UploadImageStreamAsync(fs);

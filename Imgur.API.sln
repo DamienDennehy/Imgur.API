@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imgur.API", "src\Imgur.API\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imgur.API.Tests", "tests\Imgur.API.Tests\Imgur.API.Tests.csproj", "{89CD4834-79D5-4649-86F6-0E466A01E7D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imgur.API.Tests.Integration", "tests\Imgur.API.Tests.Integration\Imgur.API.Tests.Integration.csproj", "{F63F60F0-2779-499F-B622-82F436EB2855}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

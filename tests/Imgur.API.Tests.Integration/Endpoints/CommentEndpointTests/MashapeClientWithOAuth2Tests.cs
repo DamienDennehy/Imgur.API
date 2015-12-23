@@ -94,16 +94,17 @@ namespace Imgur.API.Tests.Integration.Endpoints.CommentEndpointTests
             Assert.IsTrue(comment.Vote == Vote.Down);
         }
 
-        [TestMethod]
-        public async Task ReportCommentAsync_IsTrue()
-        {
-            var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, OAuth2Token);
-            var endpoint = new CommentEndpoint(client);
+        //Running the ReportComment method may cause your account to be banned?
+        //[TestMethod]
+        //public async Task ReportCommentAsync_IsTrue()
+        //{
+        //    var client = new MashapeClient(ClientId, ClientSecret, MashapeKey, OAuth2Token);
+        //    var endpoint = new CommentEndpoint(client);
 
-            var comment = await endpoint.CreateCommentAsync("Create Comment", "BJRWQw5");
-            var reported = await endpoint.ReportCommentAsync(comment.Id.ToString(), ReportReason.DoesNotBelong);
+        //    var comment = await endpoint.CreateCommentAsync("Create Comment", "BJRWQw5");
+        //    var reported = await endpoint.ReportCommentAsync(comment.Id.ToString(), ReportReason.DoesNotBelong);
 
-            Assert.IsTrue(reported);
-        }
+        //    Assert.IsTrue(reported);
+        //}
     }
 }

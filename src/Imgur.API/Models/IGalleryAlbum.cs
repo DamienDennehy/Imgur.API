@@ -82,7 +82,7 @@ namespace Imgur.API.Models
         /// <summary>
         ///     The view layout of the album.
         /// </summary>
-        string Layout { get; set; }
+        AlbumLayout? Layout { get; set; }
 
         /// <summary>
         ///     The URL link to the album.
@@ -132,6 +132,6 @@ namespace Imgur.API.Models
         /// <summary>
         ///     The current user's vote on the album. null if not signed in or if the user hasn't voted on it.
         /// </summary>
-        string Vote { get; set; }
+        Vote? Vote { get; set; }
     }
 }

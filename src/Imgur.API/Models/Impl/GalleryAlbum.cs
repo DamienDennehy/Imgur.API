@@ -69,7 +69,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     The view layout of the album.
         /// </summary>
-        public string Layout { get; set; }
+        public AlbumLayout? Layout { get; set; }
 
         /// <summary>
         ///     The number of album views.
@@ -99,7 +99,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     The current user's vote on the album. null if not signed in or if the user hasn't voted on it.
         /// </summary>
-        public string Vote { get; set; }
+        public Vote? Vote { get; set; }
 
         /// <summary>
         ///     Indicates if the current user favorited the image. Defaults to false if not signed in.

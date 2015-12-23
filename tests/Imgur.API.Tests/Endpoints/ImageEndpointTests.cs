@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
+using Imgur.API.Enums;
 using Imgur.API.Models;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
@@ -171,7 +172,7 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual(26270273, image.Size);
             Assert.AreEqual(1583864, image.Views);
             Assert.AreEqual(41608539674872, image.Bandwidth);
-            Assert.AreEqual(null, image.Vote);
+            Assert.AreEqual(Vote.Up, image.Vote);
             Assert.AreEqual(false, image.Favorite);
             Assert.AreEqual(false, image.Nsfw);
             Assert.AreEqual("Eyebleach", image.Section);

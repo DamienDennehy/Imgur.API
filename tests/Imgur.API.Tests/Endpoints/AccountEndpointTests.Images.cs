@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -192,6 +193,8 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", tokenHandler.GetOAuth2TokenCodeResponse());
             var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var images = await endpoint.GetImageIdsAsync("sarah", 2);
+
+            var images2 = images as ICollection;
 
             Assert.AreEqual(2, images.Count());
         }

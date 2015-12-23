@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Imgur.API.Enums;
 using Imgur.API.JsonConverters;
 using Imgur.API.Models.Impl;
 using Imgur.API.Tests.FakeResponses;
@@ -65,7 +66,7 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.AreEqual("LqLmI", actual.Id);
             Assert.AreEqual(9, actual.ImageCount);
             Assert.AreEqual(0, actual.Images.Count());
-            Assert.AreEqual(null, actual.Layout);
+            Assert.AreEqual(AlbumLayout.Blog, actual.Layout);
             Assert.AreEqual("http://imgur.com/a/LqLmI", actual.Link);
             Assert.AreEqual(null, actual.Nsfw);
             Assert.AreEqual(null, actual.Privacy);
@@ -75,7 +76,7 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.AreEqual(null, actual.TopicId);
             Assert.AreEqual(4040, actual.Ups);
             Assert.AreEqual(96803, actual.Views);
-            Assert.AreEqual(null, actual.Vote);
+            Assert.AreEqual(Vote.Down, actual.Vote);
         }
 
         [TestMethod]
@@ -119,7 +120,7 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.AreEqual("image/jpeg", actual.Type);
             Assert.AreEqual(3567, actual.Ups);
             Assert.AreEqual(1056415, actual.Views);
-            Assert.AreEqual(null, actual.Vote);
+            Assert.AreEqual(Vote.Up, actual.Vote);
             Assert.AreEqual(null, actual.Webm);
             Assert.AreEqual(960, actual.Width);
         }

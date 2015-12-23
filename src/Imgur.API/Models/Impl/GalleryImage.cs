@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Imgur.API.Enums;
 using Imgur.API.JsonConverters;
 using Newtonsoft.Json;
 
@@ -102,7 +103,7 @@ namespace Imgur.API.Models.Impl
         ///     The current user's vote on the album. null if not signed in, if the user hasn't voted on it, or if not submitted to
         ///     the gallery.
         /// </summary>
-        public string Vote { get; set; }
+        public Vote? Vote { get; set; }
 
         /// <summary>
         ///     Indicates if the current user favorited the image. Defaults to false if not signed in.

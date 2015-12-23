@@ -1,4 +1,5 @@
 ﻿using System;
+using Imgur.API.Enums;
 using Imgur.API.JsonConverters;
 using Newtonsoft.Json;
 
@@ -122,7 +123,7 @@ namespace Imgur.API.Models.Impl
         ///     The current user's vote on the album. null if not signed in, if the user hasn't voted on it, or if not submitted to
         ///     the gallery.
         /// </summary>
-        public virtual string Vote { get; set; }
+        public virtual Vote? Vote { get; set; }
 
         /// <summary>
         ///     The username of the account that uploaded it, or null.

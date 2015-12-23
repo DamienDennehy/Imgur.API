@@ -214,7 +214,7 @@ namespace Imgur.API.Endpoints.Impl
 
             //On rare occasions Imgur will not return any response (example: Too Many Requests StatusCode 429).
             //In this case, if the reason phrase is not null then we should throw an ImgurException.
-            if (string.IsNullOrWhiteSpace(stringResponse) 
+            if (string.IsNullOrWhiteSpace(stringResponse)
                 && !httpResponse.IsSuccessStatusCode
                 && !string.IsNullOrWhiteSpace(httpResponse.ReasonPhrase))
                 throw new ImgurException(httpResponse.ReasonPhrase);
@@ -224,9 +224,9 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     Updates the ApiClient's RateLimit
-        ///     with the values from the last stringResponse from the Api.
+        ///     with the values from the last response from the Api.
         /// </summary>
-        /// <param name="headers">The stringResponse headers from the last request to the endpoint.</param>
+        /// <param name="headers">The headers from the last request to the endpoint.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="OverflowException"></exception>

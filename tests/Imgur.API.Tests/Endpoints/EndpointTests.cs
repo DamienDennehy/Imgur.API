@@ -280,16 +280,13 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ImgurException))]
-        public async Task SendRequestAsync_WithUnauthorizedErrorMessage__ThrowsImgurException()
+        public async Task SendRequestAsync_WithResponseNull_ThrowsImgurException()
         {
             var constructorObjects = new object[2];
             constructorObjects[0] = new ImgurClient("123", "1234");
 
             var fakeHttpMessageHandler = new FakeHttpMessageHandler();
-            var fakeResponse = new HttpResponseMessage(HttpStatusCode.Unauthorized)
-            {
-                Content = new StringContent(FakeErrors.ImgurClientErrorResponse)
-            };
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
 
             fakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
 
@@ -306,14 +303,17 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
-        public async Task SendRequestAsync_WithResponseNull_ThrowsImgurException()
+        [ExpectedException(typeof (ImgurException))]
+        public async Task SendRequestAsync_WithUnauthorizedErrorMessage__ThrowsImgurException()
         {
             var constructorObjects = new object[2];
             constructorObjects[0] = new ImgurClient("123", "1234");
 
             var fakeHttpMessageHandler = new FakeHttpMessageHandler();
-            var fakeResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.Unauthorized)
+            {
+                Content = new StringContent(FakeErrors.ImgurClientErrorResponse)
+            };
 
             fakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
 
@@ -446,7 +446,7 @@ namespace Imgur.API.Tests.Endpoints
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "123");
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientRemaining", "345");
             endpoint.UpdateRateLimit(response.Headers);
-            
+
             Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
             Assert.AreEqual(345, endpoint.ApiClient.RateLimit.ClientRemaining);
         }
@@ -461,7 +461,7 @@ namespace Imgur.API.Tests.Endpoints
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Limit", "123");
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Remaining", "345");
             endpoint.UpdateRateLimit(response.Headers);
-            
+
             Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
             Assert.AreEqual(345, endpoint.ApiClient.RateLimit.ClientRemaining);
         }

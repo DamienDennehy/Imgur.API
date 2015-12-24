@@ -45,7 +45,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> AddAlbumImagesAsync(string album, IEnumerable<string> ids)
         {
@@ -75,7 +74,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="ids">The image ids that you want to be included in the album.</param>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IAlbum> CreateAlbumAsync(string title = null, string description = null,
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null, string cover = null,
@@ -99,7 +97,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> DeleteAlbumAsync(string album)
         {
@@ -122,7 +119,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> FavoriteAlbumAsync(string id)
         {
@@ -165,7 +161,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IAlbum> GetAlbumAsync(string id)
         {
@@ -189,7 +184,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IImage> GetAlbumImageAsync(string id, string image)
         {
@@ -215,7 +209,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IEnumerable<IImage>> GetAlbumImagesAsync(string id)
         {
@@ -240,7 +233,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> RemoveAlbumImagesAsync(string album, IEnumerable<string> ids)
         {
@@ -268,7 +260,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> SetAlbumImagesAsync(string album, IEnumerable<string> ids)
         {
@@ -301,7 +292,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> UpdateAlbumAsync(string album, string title = null, string description = null,
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null, string cover = null,

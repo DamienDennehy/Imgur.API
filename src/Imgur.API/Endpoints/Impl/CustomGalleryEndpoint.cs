@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Imgur.API.Authentication;
 using Imgur.API.Enums;
+using Imgur.API.Exceptions;
 using Imgur.API.Models;
+using Imgur.API.Models.Impl;
+using Imgur.API.RequestBuilders;
 
 namespace Imgur.API.Endpoints.Impl
 {
@@ -12,14 +17,48 @@ namespace Imgur.API.Endpoints.Impl
     public class CustomGalleryEndpoint : EndpointBase, ICustomGalleryEndpoint
     {
         /// <summary>
+        ///     Initializes a new instance of the CustomGalleryEndpoint class.
+        /// </summary>
+        /// <param name="apiClient">The type of client that will be used for authentication.</param>
+        public CustomGalleryEndpoint(IApiClient apiClient) : base(apiClient)
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the CustomGalleryEndpoint class.
+        /// </summary>
+        /// <param name="apiClient">The type of client that will be used for authentication.</param>
+        /// <param name="httpClient"> The class for sending HTTP requests and receiving HTTP responses from the endpoint methods.</param>
+        internal CustomGalleryEndpoint(IApiClient apiClient, HttpClient httpClient) : base(apiClient, httpClient)
+        {
+        }
+
+        internal CustomGalleryRequestBuilder RequestBuilder { get; } = new CustomGalleryRequestBuilder();
+
+        /// <summary>
         ///     Add tags to a user's custom gallery.
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="tags">The tags that should be added.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
         /// <returns></returns>
-        public Task<bool> AddCustomGalleryTagsAsync(IEnumerable<string> tags)
+        public async Task<bool> AddCustomGalleryTagsAsync(IEnumerable<string> tags)
         {
-            throw new NotImplementedException();
+            if (tags == null)
+                throw new ArgumentNullException(nameof(tags));
+
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
+
+            var url = "g/custom/add_tags";
+
+            using (var request = RequestBuilder.AddCustomGalleryTagsRequest(url, tags))
+            {
+                var added = await SendRequestAsync<bool>(request);
+                return added;
+            }
         }
 
         /// <summary>
@@ -27,10 +66,25 @@ namespace Imgur.API.Endpoints.Impl
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="tag">The tag that should be filtered out.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
         /// <returns></returns>
-        public Task<bool> AddFilteredOutGalleryTagAsync(string tag)
+        public async Task<bool> AddFilteredOutGalleryTagAsync(string tag)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(tag))
+                throw new ArgumentNullException(nameof(tag));
+
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
+
+            var url = "g/custom/block_tag";
+
+            using (var request = RequestBuilder.AddFilteredOutGalleryTagRequest(url, tag))
+            {
+                var added = await SendRequestAsync<bool>(request);
+                return added;
+            }
         }
 
         /// <summary>
@@ -40,11 +94,32 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="sort">The order that the gallery should be sorted by.</param>
         /// <param name="window">The time period that should be used in filtering requests.</param>
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
         /// <returns></returns>
-        public Task<ICustomGallery> GetCustomGalleryAsync(CustomGallerySortOrder sort = CustomGallerySortOrder.Viral, Window window = Window.Week,
+        public async Task<ICustomGallery> GetCustomGalleryAsync(
+            CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, Window? window = Window.Week,
             int? page = null)
         {
-            throw new NotImplementedException();
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
+
+            if (sort == null)
+                sort = CustomGallerySortOrder.Viral;
+
+            if (window == null)
+                window = Window.Week;
+
+            var sortValue = $"{sort}".ToLower();
+            var windowValue = $"{window}".ToLower();
+            var url = $"g/custom/{sortValue}/{windowValue}/{page}";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            {
+                var gallery = await SendRequestAsync<CustomGallery>(request);
+                return gallery;
+            }
         }
 
         /// <summary>
@@ -66,7 +141,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="window">The time period that should be used in filtering requests.</param>
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
         /// <returns></returns>
-        public Task<ICustomGallery> GetFilteredOutGalleryAsync(CustomGallerySortOrder sort = CustomGallerySortOrder.Viral, Window window = Window.Week,
+        public Task<ICustomGallery> GetFilteredOutGalleryAsync(
+            CustomGallerySortOrder sort = CustomGallerySortOrder.Viral, Window window = Window.Week,
             int? page = null)
         {
             throw new NotImplementedException();
@@ -77,10 +153,25 @@ namespace Imgur.API.Endpoints.Impl
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="tags">The tags that should be removed.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
         /// <returns></returns>
-        public Task<bool> RemoveCustomGalleryTagsAsync(IEnumerable<string> tags)
+        public async Task<bool> RemoveCustomGalleryTagsAsync(IEnumerable<string> tags)
         {
-            throw new NotImplementedException();
+            if (tags == null)
+                throw new ArgumentNullException(nameof(tags));
+
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
+
+            var url = "g/custom/remove_tags";
+
+            using (var request = RequestBuilder.AddCustomGalleryTagsRequest(url, tags))
+            {
+                var removed = await SendRequestAsync<bool>(request);
+                return removed;
+            }
         }
 
         /// <summary>
@@ -88,10 +179,25 @@ namespace Imgur.API.Endpoints.Impl
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="tag">The tag that should be removed.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
         /// <returns></returns>
-        public Task<bool> RemoveFilteredOutGalleryTagAsync(string tag)
+        public async Task<bool> RemoveFilteredOutGalleryTagAsync(string tag)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(tag))
+                throw new ArgumentNullException(nameof(tag));
+
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
+
+            var url = "g/custom/unblock_tag";
+
+            using (var request = RequestBuilder.RemoveFilteredOutGalleryTagRequest(url, tag))
+            {
+                var removed = await SendRequestAsync<bool>(request);
+                return removed;
+            }
         }
     }
 }

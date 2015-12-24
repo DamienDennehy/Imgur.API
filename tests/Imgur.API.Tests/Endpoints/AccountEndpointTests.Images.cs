@@ -27,7 +27,7 @@ namespace Imgur.API.Tests.Endpoints
                 fakeResponse);
 
             var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2TokenHandler.GetOAuth2TokenCodeResponse());
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
             var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var deleted = await endpoint.DeleteImageAsync("hbzm7Ge", "sarah");
 
@@ -38,7 +38,7 @@ namespace Imgur.API.Tests.Endpoints
         public async Task DeleteImageAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
             var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2TokenHandler.GetOAuth2TokenCodeResponse());
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
             var endpoint = new AccountEndpoint(client);
             await endpoint.DeleteImageAsync("hbzm7Ge", null);
         }
@@ -48,7 +48,7 @@ namespace Imgur.API.Tests.Endpoints
         public async Task DeleteImageAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2TokenHandler.GetOAuth2TokenCodeResponse());
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
             var endpoint = new AccountEndpoint(client);
             await endpoint.DeleteImageAsync(null, null);
         }
@@ -67,7 +67,7 @@ namespace Imgur.API.Tests.Endpoints
         public async Task DeleteImageAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
             var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2TokenHandler.GetOAuth2TokenCodeResponse());
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
             var endpoint = new AccountEndpoint(client);
             await endpoint.DeleteImageAsync("hbzm7Ge", null);
         }

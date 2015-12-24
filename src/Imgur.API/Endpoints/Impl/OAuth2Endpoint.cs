@@ -62,7 +62,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByCodeAsync(string code)
         {
@@ -89,7 +88,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         public async Task<IOAuth2Token> GetTokenByPinAsync(string pin)
         {
             IOAuth2Token token;
@@ -119,7 +117,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken)
         {

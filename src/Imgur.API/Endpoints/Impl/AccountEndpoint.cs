@@ -42,7 +42,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IAccount> GetAccountAsync(string username = "me")
         {
@@ -68,7 +67,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IAccountSettings> GetAccountSettingsAsync()
         {
@@ -98,7 +96,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> UpdateAccountSettingsAsync(
             string bio = null,
@@ -130,7 +127,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> VerifyEmailAsync()
         {
@@ -153,7 +149,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> SendVerificationEmailAsync()
         {

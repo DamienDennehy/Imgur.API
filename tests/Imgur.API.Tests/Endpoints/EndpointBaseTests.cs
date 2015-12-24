@@ -445,6 +445,39 @@ namespace Imgur.API.Tests.Endpoints
 
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "123");
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientRemaining", "345");
+
+            endpoint.UpdateRateLimit(response.Headers);
+
+            Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.AreEqual(345, endpoint.ApiClient.RateLimit.ClientRemaining);
+
+            response.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "122");
+            response.Headers.TryAddWithoutValidation("X-RateLimit-ClientRemaining", "344");
+
+            endpoint.UpdateRateLimit(response.Headers);
+
+            Assert.AreEqual(122, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.AreEqual(344, endpoint.ApiClient.RateLimit.ClientRemaining);
+        }
+
+        [TestMethod]
+        public void UpdateRateLimit_WithImgurClientHeadersRemoved_AreEqual()
+        {
+            var client = new ImgurClient("123", "1234");
+            var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
+            var response = Substitute.For<HttpResponseMessage>();
+
+            response.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "123");
+            response.Headers.TryAddWithoutValidation("X-RateLimit-ClientRemaining", "345");
+
+            endpoint.UpdateRateLimit(response.Headers);
+
+            Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.AreEqual(345, endpoint.ApiClient.RateLimit.ClientRemaining);
+
+            response.Headers.Remove("X-RateLimit-ClientLimit");
+            response.Headers.Remove("X-RateLimit-ClientRemaining");
+
             endpoint.UpdateRateLimit(response.Headers);
 
             Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
@@ -460,10 +493,19 @@ namespace Imgur.API.Tests.Endpoints
 
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Limit", "123");
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Remaining", "345");
+
             endpoint.UpdateRateLimit(response.Headers);
 
             Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
             Assert.AreEqual(345, endpoint.ApiClient.RateLimit.ClientRemaining);
+
+            response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Limit", "122");
+            response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Remaining", "344");
+
+            endpoint.UpdateRateLimit(response.Headers);
+
+            Assert.AreEqual(122, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.AreEqual(344, endpoint.ApiClient.RateLimit.ClientRemaining);
         }
     }
 }

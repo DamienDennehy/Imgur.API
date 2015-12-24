@@ -44,7 +44,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IComment> CreateCommentAsync(string comment, string imageId, string parentId = null)
         {
@@ -76,7 +75,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IComment> CreateReplyAsync(string comment, string imageId, string commentId)
         {
@@ -109,7 +107,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> DeleteCommentAsync(string id)
         {
@@ -135,7 +132,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IComment> GetCommentAsync(string id)
         {
@@ -158,7 +154,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IComment> GetRepliesAsync(string id)
         {
@@ -183,7 +178,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> ReportCommentAsync(string id, ReportReason reason)
         {
@@ -211,7 +205,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> VoteCommentAsync(string id, Vote vote)
         {

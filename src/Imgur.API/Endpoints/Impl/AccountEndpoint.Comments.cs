@@ -23,7 +23,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IEnumerable<IComment>> GetCommentsAsync(string username = "me",
             CommentSortOrder? sort = CommentSortOrder.Newest, int? page = null)
@@ -53,7 +52,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IComment> GetCommentAsync(string id, string username = "me")
         {
@@ -85,7 +83,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IEnumerable<string>> GetCommentIdsAsync(string username = "me",
             CommentSortOrder? sort = CommentSortOrder.Newest, int? page = null)
@@ -114,7 +111,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<int> GetCommentCountAsync(string username = "me")
         {
@@ -142,7 +138,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<bool> DeleteCommentAsync(string id, string username = "me")
         {

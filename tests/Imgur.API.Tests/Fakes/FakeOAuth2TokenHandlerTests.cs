@@ -9,7 +9,7 @@ namespace Imgur.API.Tests.Fakes
         public void GetOAuth2TokenCodeResponse_AreEqual()
         {
             var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
-            var token = fakeOAuth2TokenHandler.GetOAuth2TokenCodeResponse();
+            var token = new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse();
 
             Assert.IsNotNull(token);
             Assert.AreEqual("CodeResponse", token.AccessToken);

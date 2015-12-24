@@ -82,9 +82,7 @@ namespace Imgur.API.RequestBuilders
                 {nameof(tag), tag}
             };
 
-            url = $"{url}?{new FormUrlEncodedContent(parameters.ToArray()).ReadAsStringAsync().Result}";
-
-            var request = new HttpRequestMessage(HttpMethod.Delete, url)
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = new FormUrlEncodedContent(parameters.ToArray())
             };

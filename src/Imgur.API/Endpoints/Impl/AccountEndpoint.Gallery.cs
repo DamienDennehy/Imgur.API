@@ -21,7 +21,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IGalleryProfile> GetGalleryProfileAsync(string username = "me")
         {
@@ -50,7 +49,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IEnumerable<IGalleryItem>> GetAccountGalleryFavoritesAsync(string username = "me",
             int? page = null,
@@ -68,7 +66,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var favorites = await SendRequestAsync<IEnumerable<IGalleryItem>>(request);
+                var favorites = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
                 return favorites;
             }
         }
@@ -79,7 +77,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IEnumerable<IGalleryItem>> GetAccountFavoritesAsync()
         {
@@ -90,7 +87,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var favorites = await SendRequestAsync<IEnumerable<IGalleryItem>>(request);
+                var favorites = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
                 return favorites;
             }
         }
@@ -103,7 +100,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IEnumerable<IGalleryItem>> GetAccountSubmissionsAsync(string username = "me", int? page = null)
         {
@@ -118,7 +114,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var submissions = await SendRequestAsync<IEnumerable<IGalleryItem>>(request);
+                var submissions = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
                 return submissions;
             }
         }

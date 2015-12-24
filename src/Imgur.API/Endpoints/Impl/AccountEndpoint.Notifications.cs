@@ -16,7 +16,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <param name="newNotifications">false for all notifications, true for only non-viewed notification. Default is true.</param>
         /// <returns></returns>
         public async Task<INotifications> GetNotificationsAsync(bool newNotifications = true)

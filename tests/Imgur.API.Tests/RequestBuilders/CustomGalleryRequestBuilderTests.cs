@@ -128,11 +128,11 @@ namespace Imgur.API.Tests.RequestBuilders
             var tag = "Cats";
 
             var request = requestBuilder.RemoveFilteredOutGalleryTagRequest(url, tag);
-            var expected = "https://api.imgur.com/3/g/unblock_tag?tag=Cats";
+            var expected = "https://api.imgur.com/3/g/unblock_tag";
 
             Assert.IsNotNull(request);
             Assert.AreEqual(expected, request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Delete, request.Method);
+            Assert.AreEqual(HttpMethod.Post, request.Method);
         }
 
         [TestMethod]

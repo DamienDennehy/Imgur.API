@@ -45,7 +45,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task AddAlbumImagesAsync_WithIdNulls_ThrowsArgumentNullException()
+        public async Task AddAlbumImagesAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
@@ -356,7 +356,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task RemoveAlbumImagesAsync_WithIdNulls_ThrowsArgumentNullException()
+        public async Task RemoveAlbumImagesAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
@@ -392,7 +392,7 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task SetAlbumImagesAsync_WithIdNulls_ThrowsArgumentNullException()
+        public async Task SetAlbumImagesAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);

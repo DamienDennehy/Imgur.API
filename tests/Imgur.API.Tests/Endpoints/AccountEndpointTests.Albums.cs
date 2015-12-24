@@ -26,8 +26,7 @@ namespace Imgur.API.Tests.Endpoints
             fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/album/yMgB7"),
                 fakeResponse);
 
-            var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2TokenHandler.GetOAuth2TokenCodeResponse());
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
             var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
             var deleted = await endpoint.DeleteAlbumAsync("yMgB7", "sarah");
 
@@ -37,8 +36,7 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ArgumentNullException))]
         public async Task DeleteAlbumAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
-            var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2TokenHandler.GetOAuth2TokenCodeResponse());
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
             var endpoint = new AccountEndpoint(client);
             await endpoint.DeleteAlbumAsync("yMgB7", null);
         }
@@ -47,8 +45,7 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ArgumentNullException))]
         public async Task DeleteAlbumAsync_WithIdNull_ThrowsArgumentNullException()
         {
-            var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2TokenHandler.GetOAuth2TokenCodeResponse());
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
             var endpoint = new AccountEndpoint(client);
             await endpoint.DeleteAlbumAsync(null, null);
         }
@@ -66,8 +63,7 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ArgumentNullException))]
         public async Task DeleteAlbumAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
-            var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2TokenHandler.GetOAuth2TokenCodeResponse());
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
             var endpoint = new AccountEndpoint(client);
             await endpoint.DeleteAlbumAsync("yMgB7", null);
         }

@@ -39,7 +39,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="ImgurException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         public async Task<IRateLimit> GetRateLimitAsync()
         {

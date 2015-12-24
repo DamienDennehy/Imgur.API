@@ -196,7 +196,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="MashapeException"></exception>
         /// <exception cref="ImgurException"></exception>
-        /// <exception cref="OverflowException"></exception>
         /// <returns></returns>
         internal virtual async Task<T> SendRequestAsync<T>(HttpRequestMessage message)
         {
@@ -228,32 +227,40 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="headers">The headers from the last request to the endpoint.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="FormatException"></exception>
-        /// <exception cref="OverflowException"></exception>
         internal virtual void UpdateRateLimit(HttpResponseHeaders headers)
         {
             if (headers == null)
                 throw new ArgumentNullException(nameof(headers));
 
+            var clientLimitHeader = string.Empty;
+            var clientRemainingHeader = string.Empty;
+
             if (ApiClient is IImgurClient
                 && headers.Any(x => x.Key.Equals("X-RateLimit-ClientLimit")))
             {
-                var clientLimit = headers.GetValues("X-RateLimit-ClientLimit").FirstOrDefault();
-                var clientRemaining = headers.GetValues("X-RateLimit-ClientRemaining").FirstOrDefault();
-
-                ApiClient.RateLimit.ClientLimit = Convert.ToInt32(clientLimit);
-                ApiClient.RateLimit.ClientRemaining = Convert.ToInt32(clientRemaining);
+                clientLimitHeader = headers.GetValues("X-RateLimit-ClientLimit").FirstOrDefault();
+                clientRemainingHeader = headers.GetValues("X-RateLimit-ClientRemaining").FirstOrDefault();
             }
 
             if (ApiClient is IMashapeClient
                 && headers.Any(x => x.Key.Equals("X-RateLimit-Requests-Limit")))
             {
-                var requestsLimit = headers.GetValues("X-RateLimit-Requests-Limit").FirstOrDefault();
-                var requestsRemaining = headers.GetValues("X-RateLimit-Requests-Remaining").FirstOrDefault();
-
-                ApiClient.RateLimit.ClientLimit = Convert.ToInt32(requestsLimit);
-                ApiClient.RateLimit.ClientRemaining = Convert.ToInt32(requestsRemaining);
+                clientLimitHeader = headers.GetValues("X-RateLimit-Requests-Limit").FirstOrDefault();
+                clientRemainingHeader = headers.GetValues("X-RateLimit-Requests-Remaining").FirstOrDefault();
             }
+
+            int clientLimit;
+            int clientRemaining;
+
+            //If the values can't be parsed use the previous value
+            if (!int.TryParse(clientLimitHeader, out clientLimit))
+                clientLimit = ApiClient.RateLimit.ClientLimit;
+
+            if (!int.TryParse(clientRemainingHeader, out clientRemaining))
+                clientRemaining = ApiClient.RateLimit.ClientRemaining;
+
+            ApiClient.RateLimit.ClientLimit = clientLimit;
+            ApiClient.RateLimit.ClientRemaining = clientRemaining;
         }
     }
 }

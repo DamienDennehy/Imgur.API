@@ -219,7 +219,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = "g/custom/remove_tags";
 
-            using (var request = RequestBuilder.AddCustomGalleryTagsRequest(url, tags))
+            using (var request = RequestBuilder.RemoveCustomGalleryTagsRequest(url, tags))
             {
                 var removed = await SendRequestAsync<bool>(request);
                 return removed;

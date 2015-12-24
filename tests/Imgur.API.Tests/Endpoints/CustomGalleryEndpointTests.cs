@@ -62,7 +62,7 @@ namespace Imgur.API.Tests.Endpoints
                 Content = new StringContent(CustomGalleryEndpointResponses.AddFilteredOutGalleryTagResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/block_tag"), fakeResponse);
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/block_tag"), fakeResponse);
 
             var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
             var endpoint = new CustomGalleryEndpoint(client, new HttpClient(fakeHttpMessageHandler));
@@ -387,7 +387,7 @@ namespace Imgur.API.Tests.Endpoints
                 Content = new StringContent(CustomGalleryEndpointResponses.RemoveFilteredOutGalleryTagResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/unblock_tag"), fakeResponse);
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/unblock_tag"), fakeResponse);
 
             var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
             var endpoint = new CustomGalleryEndpoint(client, new HttpClient(fakeHttpMessageHandler));

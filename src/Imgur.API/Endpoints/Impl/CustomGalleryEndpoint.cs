@@ -83,7 +83,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = "g/custom/block_tag";
+            var url = "g/block_tag";
 
             using (var request = RequestBuilder.AddFilteredOutGalleryTagRequest(url, tag))
             {
@@ -246,7 +246,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = "g/custom/unblock_tag";
+            var url = "g/unblock_tag";
 
             using (var request = RequestBuilder.RemoveFilteredOutGalleryTagRequest(url, tag))
             {

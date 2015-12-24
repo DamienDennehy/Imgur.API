@@ -350,7 +350,7 @@ namespace Imgur.API.Tests.Endpoints
                 Content = new StringContent(CustomGalleryEndpointResponses.RemoveCustomGalleryTagsResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/remove_tags"), fakeResponse);
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/remove_tags?tags=Cats%2CDogs"), fakeResponse);
 
             var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
             var endpoint = new CustomGalleryEndpoint(client, new HttpClient(fakeHttpMessageHandler));

@@ -127,10 +127,25 @@ namespace Imgur.API.Endpoints.Impl
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="id">The gallery item id.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
         /// <returns></returns>
-        public Task<IGalleryItem> GetCustomGalleryItemAsync(string id)
+        public async Task<IGalleryItem> GetCustomGalleryItemAsync(string id)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
+
+            var url = $"g/custom/{id}";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            {
+                var galleryItem = await SendRequestAsync<GalleryItem>(request);
+                return galleryItem;
+            }
         }
 
         /// <summary>
@@ -140,12 +155,32 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="sort">The order that the gallery should be sorted by.</param>
         /// <param name="window">The time period that should be used in filtering requests.</param>
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="MashapeException"></exception>
         /// <returns></returns>
-        public Task<ICustomGallery> GetFilteredOutGalleryAsync(
-            CustomGallerySortOrder sort = CustomGallerySortOrder.Viral, Window window = Window.Week,
+        public async Task<ICustomGallery> GetFilteredOutGalleryAsync(
+            CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, Window? window = Window.Week,
             int? page = null)
         {
-            throw new NotImplementedException();
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
+
+            if (sort == null)
+                sort = CustomGallerySortOrder.Viral;
+
+            if (window == null)
+                window = Window.Week;
+
+            var sortValue = $"{sort}".ToLower();
+            var windowValue = $"{window}".ToLower();
+            var url = $"g/filtered/{sortValue}/{windowValue}/{page}";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            {
+                var gallery = await SendRequestAsync<CustomGallery>(request);
+                return gallery;
+            }
         }
 
         /// <summary>

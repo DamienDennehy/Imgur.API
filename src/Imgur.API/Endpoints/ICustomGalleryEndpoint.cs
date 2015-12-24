@@ -53,8 +53,8 @@ namespace Imgur.API.Endpoints
         /// <param name="window">The time period that should be used in filtering requests.</param>
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
         /// <returns></returns>
-        Task<ICustomGallery> GetFilteredOutGalleryAsync(CustomGallerySortOrder sort = CustomGallerySortOrder.Viral,
-            Window window = Window.Week, int? page = null);
+        Task<ICustomGallery> GetFilteredOutGalleryAsync(CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral,
+            Window? window = Window.Week, int? page = null);
 
         /// <summary>
         ///     Remove tags from a custom gallery.

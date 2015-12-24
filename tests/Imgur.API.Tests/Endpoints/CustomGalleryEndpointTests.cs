@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
+using Imgur.API.Models;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -155,6 +156,189 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual(60, gallery.Items.Count());
             Assert.AreEqual("http://imgur.com/custom", gallery.Link);
             Assert.AreEqual(2, gallery.Tags.Count());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetCustomGalleryAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/top/month/1"), fakeResponse);
+
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, Window.Month, 1);
+
+            Assert.IsNotNull(gallery);
+        }
+
+        [TestMethod]
+        public async Task GetFilteredOutGalleryAsync_DefaultParameters_IsNotNull()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/filtered/viral/week/"), fakeResponse);
+
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var gallery = await endpoint.GetFilteredOutGalleryAsync();
+
+            Assert.IsNotNull(gallery);
+            Assert.AreEqual("imgurapidotnet", gallery.AccountUrl);
+            Assert.AreEqual(60, gallery.ItemCount);
+            Assert.AreEqual(60, gallery.Items.Count());
+            Assert.AreEqual("https://imgur.com/filtered", gallery.Link);
+            Assert.AreEqual(2, gallery.Tags.Count());
+        }
+
+        [TestMethod]
+        public async Task GetFilteredOutGalleryAsync_TopMonth_IsNotNull()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/filtered/top/month/"), fakeResponse);
+
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, Window.Month);
+
+            Assert.IsNotNull(gallery);
+            Assert.AreEqual("imgurapidotnet", gallery.AccountUrl);
+            Assert.AreEqual(60, gallery.ItemCount);
+            Assert.AreEqual(60, gallery.Items.Count());
+            Assert.AreEqual("https://imgur.com/filtered", gallery.Link);
+            Assert.AreEqual(2, gallery.Tags.Count());
+        }
+
+        [TestMethod]
+        public async Task GetFilteredOutGalleryAsync_TopMonth1_IsNotNull()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/filtered/top/month/1"), fakeResponse);
+
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, Window.Month, 1);
+
+            Assert.IsNotNull(gallery);
+            Assert.AreEqual("imgurapidotnet", gallery.AccountUrl);
+            Assert.AreEqual(60, gallery.ItemCount);
+            Assert.AreEqual(60, gallery.Items.Count());
+            Assert.AreEqual("https://imgur.com/filtered", gallery.Link);
+            Assert.AreEqual(2, gallery.Tags.Count());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetFilteredOutGalleryAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/top/month/1"), fakeResponse);
+
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, Window.Month, 1);
+
+            Assert.IsNotNull(gallery);
+        }
+
+        [TestMethod]
+        public async Task GetCustomGalleryItemAsync_WithImage_AreEqual()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryImageResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/AbcDef"), fakeResponse);
+
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var galleryItem = await endpoint.GetCustomGalleryItemAsync("AbcDef");
+
+            Assert.IsNotNull(galleryItem);
+            Assert.IsTrue(galleryItem is IGalleryImage);
+        }
+
+        [TestMethod]
+        public async Task GetCustomGalleryItemAsync_WithAlbum_AreEqual()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryAlbumResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/AbcDef"), fakeResponse);
+
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var galleryItem = await endpoint.GetCustomGalleryItemAsync("AbcDef");
+
+            Assert.IsNotNull(galleryItem);
+            Assert.IsTrue(galleryItem is IGalleryAlbum);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetCustomGalleryItemAsync_WithIdNull_ThrowsArgumentNullException()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryImageResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/AbcDef"), fakeResponse);
+
+            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var galleryItem = await endpoint.GetCustomGalleryItemAsync(null);
+
+            Assert.IsNotNull(galleryItem);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task GetCustomGalleryItemAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
+        {
+            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryImageResponse)
+            };
+
+            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/AbcDef"), fakeResponse);
+
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var galleryItem = await endpoint.GetCustomGalleryItemAsync("AbcDef");
+
+            Assert.IsNotNull(galleryItem);
         }
 
         [TestMethod]

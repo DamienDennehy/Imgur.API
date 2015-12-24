@@ -5,7 +5,10 @@ namespace Imgur.API.RequestBuilders
 {
     internal abstract class RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage CreateRequest(HttpMethod httpMethod, string url)
         {
             if (httpMethod == null)

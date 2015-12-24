@@ -8,7 +8,10 @@ namespace Imgur.API.RequestBuilders
 {
     internal class CustomGalleryRequestBuilder : RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage AddCustomGalleryTagsRequest(string url, IEnumerable<string> tags)
         {
             if (string.IsNullOrEmpty(url))
@@ -30,7 +33,10 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage AddFilteredOutGalleryTagRequest(string url, string tag)
         {
             if (string.IsNullOrEmpty(url))
@@ -52,7 +58,10 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage RemoveCustomGalleryTagsRequest(string url, IEnumerable<string> tags)
         {
             if (string.IsNullOrEmpty(url))
@@ -68,7 +77,10 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage RemoveFilteredOutGalleryTagRequest(string url, string tag)
         {
             if (string.IsNullOrEmpty(url))

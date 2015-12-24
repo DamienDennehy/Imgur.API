@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
 using Imgur.API.Enums;
-using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Imgur.API.RequestBuilders;
@@ -42,9 +41,12 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="album">The id or deletehash of the album.</param>
         /// <param name="ids">The image ids that you want to be added to the album.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> AddAlbumImagesAsync(string album, IEnumerable<string> ids)
         {
@@ -72,8 +74,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="layout">Sets the layout to display the album.</param>
         /// <param name="cover">The Id of an image that you want to be the cover of the album.</param>
         /// <param name="ids">The image ids that you want to be included in the album.</param>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IAlbum> CreateAlbumAsync(string title = null, string description = null,
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null, string cover = null,
@@ -94,9 +96,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     albums, {album} should be the deletehash that is returned at creation.
         /// </summary>
         /// <param name="album">The id or deletehash of the album.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> DeleteAlbumAsync(string album)
         {
@@ -116,9 +121,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     Favorite an album with a given Id. OAuth authentication required.
         /// </summary>
         /// <param name="id">The album id.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> FavoriteAlbumAsync(string id)
         {
@@ -158,9 +166,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     Get information about a specific album.
         /// </summary>
         /// <param name="id">The album id.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IAlbum> GetAlbumAsync(string id)
         {
@@ -181,9 +192,12 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="id">The album id.</param>
         /// <param name="image">The image id.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IImage> GetAlbumImageAsync(string id, string image)
         {
@@ -206,9 +220,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     Return all of the images in the album.
         /// </summary>
         /// <param name="id">The album id.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IEnumerable<IImage>> GetAlbumImagesAsync(string id)
         {
@@ -230,9 +247,12 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="album">The id or deletehash of the album.</param>
         /// <param name="ids">The image ids that you want to be removed from the album.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> RemoveAlbumImagesAsync(string album, IEnumerable<string> ids)
         {
@@ -257,9 +277,12 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="album">The id or deletehash of the album.</param>
         /// <param name="ids">The image ids that you want to be added to the album.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> SetAlbumImagesAsync(string album, IEnumerable<string> ids)
         {
@@ -289,9 +312,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="layout">Sets the layout to display the album.</param>
         /// <param name="cover">The Id of an image that you want to be the cover of the album.</param>
         /// <param name="ids">The image ids that you want to be included in the album.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> UpdateAlbumAsync(string album, string title = null, string description = null,
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null, string cover = null,

@@ -7,7 +7,10 @@ namespace Imgur.API.RequestBuilders
 {
     internal class OAuth2RequestBuilder : RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage GetTokenByCodeRequest(string url, string code, string clientId, string clientSecret)
         {
             if (string.IsNullOrEmpty(url))
@@ -38,7 +41,10 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage GetTokenByPinRequest(string url, string pin, string clientId, string clientSecret)
         {
             if (string.IsNullOrEmpty(url))
@@ -69,7 +75,10 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage GetTokenByRefreshTokenRequest(string url, string refreshToken, string clientId,
             string clientSecret)
         {

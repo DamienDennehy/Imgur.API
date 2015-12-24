@@ -8,7 +8,10 @@ namespace Imgur.API.RequestBuilders
 {
     internal class CommentRequestBuilder : RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage CreateCommentRequest(string url, string comment, string imageId, string parentId)
         {
             if (string.IsNullOrEmpty(url))
@@ -37,7 +40,10 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage CreateReplyRequest(string url, string comment, string imageId)
         {
             if (string.IsNullOrEmpty(url))

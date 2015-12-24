@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
-using Imgur.API.Exceptions;
 using Imgur.API.JsonConverters;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
@@ -23,7 +22,10 @@ namespace Imgur.API.Endpoints.Impl
         ///     Initializes a new instance of the EndpointBase class.
         /// </summary>
         /// <param name="apiClient">The type of client that will be used for authentication.</param>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         protected EndpointBase(IApiClient apiClient)
             : this(apiClient, new HttpClient())
         {
@@ -45,7 +47,10 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="apiClient">The type of client that will be used for authentication.</param>
         /// <param name="httpClient"> The class for sending HTTP requests and receiving HTTP responses from the endpoint methods.</param>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         protected internal EndpointBase(IApiClient apiClient, HttpClient httpClient)
         {
             if (apiClient == null)
@@ -95,7 +100,10 @@ namespace Imgur.API.Endpoints.Impl
         ///     Switch from one client type to another.
         /// </summary>
         /// <param name="apiClient">The type of client that will be used for authentication.</param>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         public virtual void SwitchClient(IApiClient apiClient)
         {
             if (apiClient == null)
@@ -132,9 +140,12 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <typeparam name="T">The expected output type, Image, bool, etc.</typeparam>
         /// <param name="stringResponse">The string response from the endpoint.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="MashapeException"></exception>
-        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <returns></returns>
         internal virtual T ProcessEndpointResponse<T>(string stringResponse)
         {
@@ -193,9 +204,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     Send requests to the service.
         /// </summary>
         /// <param name="message">The HttpRequestMessage that should be sent.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="MashapeException"></exception>
-        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <returns></returns>
         internal virtual async Task<T> SendRequestAsync<T>(HttpRequestMessage message)
         {
@@ -226,7 +240,10 @@ namespace Imgur.API.Endpoints.Impl
         ///     with the values from the last response from the Api.
         /// </summary>
         /// <param name="headers">The headers from the last request to the endpoint.</param>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal virtual void UpdateRateLimit(HttpResponseHeaders headers)
         {
             if (headers == null)

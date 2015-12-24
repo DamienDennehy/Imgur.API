@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Imgur.API.Authentication;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
-using Imgur.API.Exceptions;
 using Imgur.API.Models.Impl;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;

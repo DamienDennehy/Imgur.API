@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
 using Imgur.API.Enums;
-using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Imgur.API.RequestBuilders;
@@ -59,9 +58,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     via the redirect URL you specified during registration, in the form of a regular query string parameter.
         /// </summary>
         /// <param name="code">The code from the query string.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByCodeAsync(string code)
         {
@@ -85,9 +87,12 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="pin">The PIN that the user is prompted to enter.</param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         public async Task<IOAuth2Token> GetTokenByPinAsync(string pin)
         {
             IOAuth2Token token;
@@ -114,9 +119,12 @@ namespace Imgur.API.Endpoints.Impl
         ///         for their login information again.
         ///     </para>
         /// </summary>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken)
         {

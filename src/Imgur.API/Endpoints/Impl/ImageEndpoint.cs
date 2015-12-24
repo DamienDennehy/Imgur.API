@@ -3,7 +3,6 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
-using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Imgur.API.RequestBuilders;
@@ -38,9 +37,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     Get information about an image.
         /// </summary>
         /// <param name="id">The image id.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IImage> GetImageAsync(string id)
         {
@@ -66,9 +68,12 @@ namespace Imgur.API.Endpoints.Impl
         /// </param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IImage> UploadImageBinaryAsync(byte[] image, string album = null, string title = null,
             string description = null)
@@ -95,9 +100,12 @@ namespace Imgur.API.Endpoints.Impl
         /// </param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IImage> UploadImageStreamAsync(Stream image, string album = null, string title = null,
             string description = null)
@@ -124,9 +132,12 @@ namespace Imgur.API.Endpoints.Impl
         /// </param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IImage> UploadImageUrlAsync(string image, string album = null, string title = null,
             string description = null)
@@ -148,9 +159,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     If the image belongs to your account then passing the ID of the image is sufficient.
         /// </summary>
         /// <param name="id">The image id.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> DeleteImageAsync(string id)
         {
@@ -174,9 +188,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="id">The image id.</param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> UpdateImageAsync(string id, string title = null, string description = null)
         {
@@ -196,10 +213,13 @@ namespace Imgur.API.Endpoints.Impl
         ///     Favorite an image with the given ID. OAuth authentication required.
         /// </summary>
         /// <param name="id">The image id.</param>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> FavoriteImageAsync(string id)
         {

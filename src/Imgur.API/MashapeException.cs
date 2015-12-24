@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Imgur.API.Exceptions
+namespace Imgur.API
 {
     /// <summary>
     ///     The exception that is thrown when an error is found in a response from a Mashape endpoint.

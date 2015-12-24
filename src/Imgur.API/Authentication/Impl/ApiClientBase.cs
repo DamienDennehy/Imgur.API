@@ -21,7 +21,10 @@ namespace Imgur.API.Authentication.Impl
         /// </summary>
         /// <param name="clientId">The Imgur app's ClientId. </param>
         /// <param name="clientSecret">The Imgur app's ClientSecret.</param>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         protected ApiClientBase(string clientId, string clientSecret)
         {
             if (string.IsNullOrWhiteSpace(clientId))
@@ -40,7 +43,10 @@ namespace Imgur.API.Authentication.Impl
         /// <param name="clientId">The Imgur app's ClientId. </param>
         /// <param name="clientSecret">The Imgur app's ClientSecret.</param>
         /// <param name="oAuth2Token">OAuth2 credentials.</param>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         protected ApiClientBase(string clientId, string clientSecret, IOAuth2Token oAuth2Token)
         {
             if (string.IsNullOrWhiteSpace(clientId))
@@ -99,7 +105,10 @@ namespace Imgur.API.Authentication.Impl
         ///     Sets the oAuth2Token to be used.
         /// </summary>
         /// <param name="oAuth2Token">See <see cref="IOAuth2Token" />.</param>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         public virtual void SetOAuth2Token(IOAuth2Token oAuth2Token)
         {
             if (oAuth2Token == null)

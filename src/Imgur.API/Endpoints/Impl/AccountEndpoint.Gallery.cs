@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Enums;
-using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Imgur.API.RequestBuilders;
@@ -18,9 +17,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     The totals for a users gallery information.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IGalleryProfile> GetGalleryProfileAsync(string username = "me")
         {
@@ -46,9 +48,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
         /// <param name="sort">The order that the account gallery should be sorted by. Default: Newest.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IEnumerable<IGalleryItem>> GetAccountGalleryFavoritesAsync(string username = "me",
             int? page = null,
@@ -74,9 +79,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Returns the users favorited images. OAuth authentication required.
         /// </summary>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IEnumerable<IGalleryItem>> GetAccountFavoritesAsync()
         {
@@ -97,9 +105,12 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IEnumerable<IGalleryItem>> GetAccountSubmissionsAsync(string username = "me", int? page = null)
         {

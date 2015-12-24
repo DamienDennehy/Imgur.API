@@ -8,7 +8,10 @@ namespace Imgur.API.RequestBuilders
 {
     internal class ImageRequestBuilder : RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage UpdateImageRequest(string url, string title = null, string description = null)
         {
             if (string.IsNullOrEmpty(url))
@@ -30,7 +33,10 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage UploadImageBinaryRequest(string url, byte[] image, string album = null,
             string title = null, string description = null)
         {
@@ -62,7 +68,10 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage UploadImageStreamRequest(string url, Stream image, string album = null,
             string title = null, string description = null)
         {
@@ -94,7 +103,10 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage UploadImageUrlRequest(string url, string image, string album = null,
             string title = null, string description = null)
         {

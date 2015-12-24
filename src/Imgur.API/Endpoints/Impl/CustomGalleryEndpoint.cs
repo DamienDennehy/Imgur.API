@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
 using Imgur.API.Enums;
-using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Imgur.API.RequestBuilders;
@@ -40,9 +39,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="tags">The tags that should be added.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> AddCustomGalleryTagsAsync(IEnumerable<string> tags)
         {
@@ -66,9 +68,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="tag">The tag that should be filtered out.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> AddFilteredOutGalleryTagAsync(string tag)
         {
@@ -94,9 +99,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="sort">The order that the gallery should be sorted by.</param>
         /// <param name="window">The time period that should be used in filtering requests.</param>
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<ICustomGallery> GetCustomGalleryAsync(
             CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, Window? window = Window.Week,
@@ -127,9 +135,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="id">The gallery item id.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IGalleryItem> GetCustomGalleryItemAsync(string id)
         {
@@ -155,9 +166,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="sort">The order that the gallery should be sorted by.</param>
         /// <param name="window">The time period that should be used in filtering requests.</param>
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<ICustomGallery> GetFilteredOutGalleryAsync(
             CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, Window? window = Window.Week,
@@ -188,9 +202,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="tags">The tags that should be removed.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> RemoveCustomGalleryTagsAsync(IEnumerable<string> tags)
         {
@@ -214,9 +231,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="tag">The tag that should be removed.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> RemoveFilteredOutGalleryTagAsync(string tag)
         {

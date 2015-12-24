@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
 using Imgur.API.Enums;
-using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Imgur.API.RequestBuilders;
@@ -39,9 +38,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     If you need the username for the account that is logged in, it is returned in the request for an access token.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IAccount> GetAccountAsync(string username = "me")
         {
@@ -64,9 +66,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Returns the account settings. OAuth authentication required.
         /// </summary>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IAccountSettings> GetAccountSettingsAsync()
         {
@@ -93,9 +98,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="username">A valid Imgur username (between 4 and 63 alphanumeric characters).</param>
         /// <param name="showMature">Toggle display of mature images in gallery list endpoints.</param>
         /// <param name="newsletterSubscribed">Toggle subscription to email newsletter.</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> UpdateAccountSettingsAsync(
             string bio = null,
@@ -124,9 +132,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Checks to see if user has verified their email address. OAuth authentication required.
         /// </summary>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> VerifyEmailAsync()
         {
@@ -146,9 +157,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     Sends an email to the user to verify that their email is valid to upload to gallery.
         ///     OAuth authentication required.
         /// </summary>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<bool> SendVerificationEmailAsync()
         {

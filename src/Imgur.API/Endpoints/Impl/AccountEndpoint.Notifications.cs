@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 
@@ -13,9 +12,12 @@ namespace Imgur.API.Endpoints.Impl
         ///     Returns all of the reply notifications for the user.
         ///     OAuth authentication required.
         /// </summary>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ImgurException"></exception>
-        /// <exception cref="MashapeException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <param name="newNotifications">false for all notifications, true for only non-viewed notification. Default is true.</param>
         /// <returns></returns>
         public async Task<INotifications> GetNotificationsAsync(bool newNotifications = true)

@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
-using Imgur.API.Exceptions;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Imgur.API.RequestBuilders;
@@ -36,9 +35,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Gets remaining credits for the application.
         /// </summary>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="MashapeException"></exception>
-        /// <exception cref="ImgurException"></exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <returns></returns>
         public async Task<IRateLimit> GetRateLimitAsync()
         {

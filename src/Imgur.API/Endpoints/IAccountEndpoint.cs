@@ -53,7 +53,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
-        /// <param name="sort">Indicates the order that a list of items are sorted. Default: Newest.</param>
+        /// <param name="sort">The order that the account gallery should be sorted by. Default: Newest.</param>
         /// <returns></returns>
         Task<IEnumerable<IGalleryItem>> GetAccountGalleryFavoritesAsync(string username = "me", int? page = null,
             AccountGallerySortOrder? sort = AccountGallerySortOrder.Newest);
@@ -123,7 +123,7 @@ namespace Imgur.API.Endpoints
         ///     Return an array of all of the comment IDs.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="sort">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
+        /// <param name="sort">The order that the comments should be sorted by. Defaults to 'newest'.</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <returns></returns>
         Task<IEnumerable<string>> GetCommentIdsAsync(string username = "me",
@@ -133,7 +133,7 @@ namespace Imgur.API.Endpoints
         ///     Return the comments the user has created.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="sort">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
+        /// <param name="sort">The order that the comments should be sorted by. Defaults to 'newest'.</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <returns></returns>
         Task<IEnumerable<IComment>> GetCommentsAsync(string username = "me",

@@ -18,7 +18,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Return the comments the user has created.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="sort">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
+        /// <param name="sort">The order that the comments should be sorted by. Defaults to 'newest'.</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
@@ -80,7 +80,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Return an array of all of the comment IDs.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="sort">'best', 'worst', 'oldest', or 'newest'. Defaults to 'newest'.</param>
+        /// <param name="sort">The order that the comments should be sorted by. Defaults to 'newest'.</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>

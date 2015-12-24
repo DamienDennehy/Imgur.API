@@ -46,7 +46,7 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
-        /// <param name="sort">Indicates the order that a list of items are sorted. Default: Newest.</param>
+        /// <param name="sort">The order that the account gallery should be sorted by. Default: Newest.</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ImgurException"></exception>
         /// <exception cref="MashapeException"></exception>

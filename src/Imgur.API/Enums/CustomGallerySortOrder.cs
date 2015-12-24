@@ -1,7 +1,7 @@
 ﻿namespace Imgur.API.Enums
 {
     /// <summary>
-    ///     Indicates the order that the gallery should be sorted by.
+    ///     The order that the gallery should be sorted by.
     /// </summary>
     public enum CustomGallerySortOrder
     {

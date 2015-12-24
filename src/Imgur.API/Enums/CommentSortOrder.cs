@@ -1,7 +1,7 @@
 ﻿namespace Imgur.API.Enums
 {
     /// <summary>
-    ///     Indicates the order that the comments should be sorted by.
+    ///     The order that the comments should be sorted by.
     /// </summary>
     public enum CommentSortOrder
     {

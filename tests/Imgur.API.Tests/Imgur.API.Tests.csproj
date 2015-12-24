@@ -72,6 +72,7 @@
     <Compile Include="Endpoints\AccountEndpointTests.Albums.cs" />
     <Compile Include="Endpoints\AlbumEndpointTests.cs" />
     <Compile Include="Endpoints\CommentEndpointTests.cs" />
+    <Compile Include="Endpoints\CustomGalleryEndpointTests.cs" />
     <Compile Include="Endpoints\ImageEndpointTests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />
     <Compile Include="FakeResponses\AccountEndpointResponses.Albums.cs" />

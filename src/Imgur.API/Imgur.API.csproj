@@ -52,6 +52,7 @@
     <Compile Include="Endpoints\Impl\AccountEndpoint.Images.cs" />
     <Compile Include="Endpoints\Impl\AlbumEndpoint.cs" />
     <Compile Include="Endpoints\Impl\CommentEndpoint.cs" />
+    <Compile Include="Endpoints\Impl\CustomGalleryEndpoint.cs" />
     <Compile Include="Enums\AlbumLayout.cs" />
     <Compile Include="Enums\CustomGallerySortOrder.cs" />
     <Compile Include="Enums\OAuth2ResponseType.cs" />

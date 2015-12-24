@@ -89,11 +89,10 @@ namespace Imgur.API.Tests.RequestBuilders
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
             var request = requestBuilder.RemoveAlbumImagesRequest(url, ids);
-            var expected = "ids=Abc%2CDEF%2CXyZ";
+            var expected = "https://api.imgur.com/3/album/AbcdeF/remove_images?ids=Abc%2CDEF%2CXyZ";
 
             Assert.IsNotNull(request);
-            Assert.AreEqual("https://api.imgur.com/3/album/AbcdeF/remove_images?" + expected,
-                request.RequestUri.ToString());
+            Assert.AreEqual(expected, request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Delete, request.Method);
         }
 

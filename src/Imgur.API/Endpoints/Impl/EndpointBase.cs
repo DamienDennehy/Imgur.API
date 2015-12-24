@@ -212,12 +212,12 @@ namespace Imgur.API.Endpoints.Impl
             if (httpResponse.Content != null)
                 stringResponse = await httpResponse.Content.ReadAsStringAsync();
 
-            //On rare occasions Imgur will not return any response (example: Too Many Requests StatusCode 429).
+            //On rare occasions Imgur will not return any response (example: 429 Too Many Requests).
             //In this case, if the reason phrase is not null then we should throw an ImgurException.
             if (string.IsNullOrWhiteSpace(stringResponse)
                 && !httpResponse.IsSuccessStatusCode
                 && !string.IsNullOrWhiteSpace(httpResponse.ReasonPhrase))
-                throw new ImgurException(httpResponse.ReasonPhrase);
+                throw new ImgurException($"{(int) httpResponse.StatusCode} {httpResponse.ReasonPhrase}");
 
             return ProcessEndpointResponse<T>(stringResponse);
         }

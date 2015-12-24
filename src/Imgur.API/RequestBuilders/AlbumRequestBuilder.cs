@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using Imgur.API.Enums;
 
@@ -76,12 +77,7 @@ namespace Imgur.API.RequestBuilders
             if (ids == null)
                 throw new ArgumentNullException(nameof(ids));
 
-            var parameters = new Dictionary<string, string>
-            {
-                {nameof(ids), string.Join(",", ids)}
-            };
-
-            url = $"{url}?{new FormUrlEncodedContent(parameters.ToArray()).ReadAsStringAsync().Result}";
+            url = $"{url}?ids={WebUtility.UrlEncode(string.Join(",", ids))}";
 
             var request = new HttpRequestMessage(HttpMethod.Delete, url);
 

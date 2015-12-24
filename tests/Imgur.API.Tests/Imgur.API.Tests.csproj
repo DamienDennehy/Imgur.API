@@ -86,6 +86,7 @@
     <Compile Include="RequestBuilders\AccountRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\AlbumRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\CommentRequestBuilderTests.cs" />
+    <Compile Include="RequestBuilders\CustomGalleryRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\ImageRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\OAuth2RequestBuilderTests.cs" />
     <Compile Include="Endpoints\RateLimitEndpointTests.cs" />

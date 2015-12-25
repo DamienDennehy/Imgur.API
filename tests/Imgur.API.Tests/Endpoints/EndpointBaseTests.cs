@@ -212,18 +212,16 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ImgurException))]
         public async Task SendRequestAsync_WithInvalidUrl__ThrowsImgurException()
         {
-            var constructorObjects = new object[2];
-            constructorObjects[0] = new ImgurClient("123", "1234");
-
+            var fakeUrl = "http://example.org/test";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent("hello world")
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
-
-            var httpClient = new HttpClient(FakeHttpMessageHandler);
-
+            
+            var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
+            
+            var constructorObjects = new object[2];
+            constructorObjects[0] = new ImgurClient("123", "1234");
             //Inject the fake HttpClient when declaring a new endpoint
             constructorObjects[1] = httpClient;
 
@@ -241,15 +239,14 @@ namespace Imgur.API.Tests.Endpoints
         {
             var constructorObjects = new object[2];
             constructorObjects[0] = new ImgurClient("123", "1234");
-
+            
+            var fakeUrl = "http://example.org/test";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(ImageEndpointResponses.Imgur.GetImageResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
-
-            var httpClient = new HttpClient(FakeHttpMessageHandler);
+            
+            var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
 
             //Inject the fake HttpClient when declaring a new endpoint
             constructorObjects[1] = httpClient;
@@ -279,16 +276,13 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ImgurException))]
         public async Task SendRequestAsync_WithResponseNull_ThrowsImgurException()
         {
-            var constructorObjects = new object[2];
-            constructorObjects[0] = new ImgurClient("123", "1234");
-
+            var fakeUrl = "http://example.org/test";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
-
-            var httpClient = new HttpClient(FakeHttpMessageHandler);
+            var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
 
             //Inject the fake HttpClient when declaring a new service instance
+            var constructorObjects = new object[2];
+            constructorObjects[0] = new ImgurClient("123", "1234");
             constructorObjects[1] = httpClient;
 
             var service = Substitute.ForPartsOf<EndpointBase>(constructorObjects);
@@ -302,19 +296,17 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ImgurException))]
         public async Task SendRequestAsync_WithUnauthorizedErrorMessage__ThrowsImgurException()
         {
-            var constructorObjects = new object[2];
-            constructorObjects[0] = new ImgurClient("123", "1234");
-
+            var fakeUrl = "http://example.org/test";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.Unauthorized)
             {
                 Content = new StringContent(FakeErrors.ImgurClientErrorResponse)
             };
 
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
-
-            var httpClient = new HttpClient(FakeHttpMessageHandler);
+            var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
 
             //Inject the fake HttpClient when declaring a new service instance
+            var constructorObjects = new object[2];
+            constructorObjects[0] = new ImgurClient("123", "1234");
             constructorObjects[1] = httpClient;
 
             var service = Substitute.ForPartsOf<EndpointBase>(constructorObjects);

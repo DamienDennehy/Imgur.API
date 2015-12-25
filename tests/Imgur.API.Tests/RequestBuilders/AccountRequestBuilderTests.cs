@@ -17,9 +17,9 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AccountRequestBuilder();
 
-            var url = $"{client.EndpointUrl}account/me/settings";
+            var fakeUrl =  $"{client.EndpointUrl}account/me/settings";
             var request = requestBuilder.UpdateAccountSettingsRequest(
-                url, "BioTest", true, true, AlbumPrivacy.Public,
+                fakeUrl, "BioTest", true, true, AlbumPrivacy.Public,
                 true, "Bob2", true, true);
 
             Assert.IsNotNull(request);

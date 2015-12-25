@@ -17,16 +17,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task BlockSenderAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/conversations/block/Bob";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(ConversationEndpointResponses.BlockSenderResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/conversations/block/Bob"),
-                fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new ConversationEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new ConversationEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var created = await endpoint.BlockSenderAsync("Bob");
 
             Assert.IsTrue(created);
@@ -53,15 +51,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task CreateConversationAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/conversations/Bob";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(ConversationEndpointResponses.CreateConversationResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/conversations/Bob"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new ConversationEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new ConversationEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var created = await endpoint.CreateConversationAsync("Bob", "Hello World!");
 
             Assert.IsTrue(created);
@@ -97,15 +94,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task DeleteConversationAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/conversations/Bob";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(ConversationEndpointResponses.DeleteConversationResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/conversations/Bob"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new ConversationEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new ConversationEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var deleted = await endpoint.DeleteConversationAsync("Bob");
 
             Assert.IsTrue(deleted);
@@ -132,16 +128,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetConversationAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/conversations/1234/1/0";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(ConversationEndpointResponses.GetConversationResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/conversations/1234/1/0"),
-                fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new ConversationEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new ConversationEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var conversation = await endpoint.GetConversationAsync("1234");
 
             Assert.IsNotNull(conversation);
@@ -163,7 +157,7 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetConversationAsync_WithIdNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new ConversationEndpoint(client);
             await endpoint.GetConversationAsync(null);
         }
@@ -180,15 +174,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetConversationsAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/conversations";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(ConversationEndpointResponses.GetConversationsResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/conversations"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new ConversationEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new ConversationEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var conversations = await endpoint.GetConversationsAsync();
 
             Assert.IsNotNull(conversations);
@@ -207,16 +200,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task ReportSenderAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/conversations/report/Bob";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(ConversationEndpointResponses.ReportSenderResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/conversations/report/Bob"),
-                fakeResponse);
-
+        
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new ConversationEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new ConversationEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var created = await endpoint.ReportSenderAsync("Bob");
 
             Assert.IsTrue(created);

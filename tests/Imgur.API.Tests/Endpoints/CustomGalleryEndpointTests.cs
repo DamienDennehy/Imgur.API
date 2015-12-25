@@ -20,31 +20,30 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task AddCustomGalleryTagsAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/custom/add_tags";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.AddCustomGalleryTagsResponse)
             };
 
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/add_tags"), fakeResponse);
-
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
-            var added = await endpoint.AddCustomGalleryTagsAsync(new List<string> {"Cats", "Dogs"});
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
+            var added = await endpoint.AddCustomGalleryTagsAsync(new List<string> { "Cats", "Dogs" });
 
             Assert.IsTrue(added);
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task AddCustomGalleryTagsAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client);
-            await endpoint.AddCustomGalleryTagsAsync(new List<string> {"Cats", "Dogs"});
+            await endpoint.AddCustomGalleryTagsAsync(new List<string> { "Cats", "Dogs" });
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task AddCustomGalleryTagsAsync_WithTagsNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
@@ -55,22 +54,21 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task AddFilteredOutGalleryTagAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/block_tag";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.AddFilteredOutGalleryTagResponse)
             };
 
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/block_tag"), fakeResponse);
-
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var added = await endpoint.AddFilteredOutGalleryTagAsync("Cat");
 
             Assert.IsTrue(added);
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task AddFilteredOutGalleryTagAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
@@ -79,7 +77,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task AddFilteredOutGalleryTagAsync_WithTagsNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
@@ -90,15 +88,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetCustomGalleryAsync_DefaultParameters_IsNotNull()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/custom/viral/week/";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryResponse)
             };
 
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/viral/week/"), fakeResponse);
-
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var gallery = await endpoint.GetCustomGalleryAsync();
 
             Assert.IsNotNull(gallery);
@@ -112,15 +109,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetCustomGalleryAsync_TopMonth_IsNotNull()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/custom/top/month/";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryResponse)
             };
 
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/top/month/"), fakeResponse);
-
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, Window.Month);
 
             Assert.IsNotNull(gallery);
@@ -134,15 +130,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetCustomGalleryAsync_TopMonth1_IsNotNull()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/custom/top/month/1";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryResponse)
             };
 
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/top/month/1"), fakeResponse);
-
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, Window.Month, 1);
 
             Assert.IsNotNull(gallery);
@@ -154,18 +149,17 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task GetCustomGalleryAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/custom/top/month/1";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryResponse)
             };
 
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/top/month/1"), fakeResponse);
-
             var client = new ImgurClient("123", "1234");
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, Window.Month, 1);
 
             Assert.IsNotNull(gallery);
@@ -174,15 +168,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetCustomGalleryItemAsync_WithAlbum_AreEqual()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/custom/AbcDef";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryAlbumResponse)
             };
 
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/AbcDef"), fakeResponse);
-
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var galleryItem = await endpoint.GetCustomGalleryItemAsync("AbcDef");
 
             Assert.IsNotNull(galleryItem);
@@ -190,18 +183,17 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task GetCustomGalleryItemAsync_WithIdNull_ThrowsArgumentNullException()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/custom/AbcDef";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryImageResponse)
             };
 
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/AbcDef"), fakeResponse);
-
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var galleryItem = await endpoint.GetCustomGalleryItemAsync(null);
 
             Assert.IsNotNull(galleryItem);
@@ -210,15 +202,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetCustomGalleryItemAsync_WithImage_AreEqual()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/custom/AbcDef";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryImageResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/AbcDef"), fakeResponse);
-
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var galleryItem = await endpoint.GetCustomGalleryItemAsync("AbcDef");
 
             Assert.IsNotNull(galleryItem);
@@ -226,18 +217,17 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task GetCustomGalleryItemAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/custom/AbcDef";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryImageResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/AbcDef"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var galleryItem = await endpoint.GetCustomGalleryItemAsync("AbcDef");
 
             Assert.IsNotNull(galleryItem);
@@ -246,16 +236,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetFilteredOutGalleryAsync_DefaultParameters_IsNotNull()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/filtered/viral/week/";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/filtered/viral/week/"),
-                fakeResponse);
-
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var gallery = await endpoint.GetFilteredOutGalleryAsync();
 
             Assert.IsNotNull(gallery);
@@ -269,16 +257,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetFilteredOutGalleryAsync_TopMonth_IsNotNull()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/filtered/top/month/";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/filtered/top/month/"),
-                fakeResponse);
-
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, Window.Month);
 
             Assert.IsNotNull(gallery);
@@ -292,16 +278,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetFilteredOutGalleryAsync_TopMonth1_IsNotNull()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/filtered/top/month/1";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/filtered/top/month/1"),
-                fakeResponse);
-
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, Window.Month, 1);
 
             Assert.IsNotNull(gallery);
@@ -313,18 +297,17 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task GetFilteredOutGalleryAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/custom/top/month/1";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/custom/top/month/1"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, Window.Month, 1);
 
             Assert.IsNotNull(gallery);
@@ -333,32 +316,30 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task RemoveCustomGalleryTagsAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/custom/remove_tags?tags=Cats%2CDogs";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.RemoveCustomGalleryTagsResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(
-                new Uri("https://api.imgur.com/3/g/custom/remove_tags?tags=Cats%2CDogs"), fakeResponse);
-
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
-            var added = await endpoint.RemoveCustomGalleryTagsAsync(new List<string> {"Cats", "Dogs"});
+            
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
+            var added = await endpoint.RemoveCustomGalleryTagsAsync(new List<string> { "Cats", "Dogs" });
 
             Assert.IsTrue(added);
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task RemoveCustomGalleryTagsAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client);
-            await endpoint.RemoveCustomGalleryTagsAsync(new List<string> {"Cats", "Dogs"});
+            await endpoint.RemoveCustomGalleryTagsAsync(new List<string> { "Cats", "Dogs" });
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task RemoveCustomGalleryTagsAsync_WithTagsNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
@@ -370,22 +351,21 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task RemoveFilteredOutGalleryTagAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/g/unblock_tag";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CustomGalleryEndpointResponses.RemoveFilteredOutGalleryTagResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/g/unblock_tag"), fakeResponse);
-
-            var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new CustomGalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var added = await endpoint.RemoveFilteredOutGalleryTagAsync("Cat");
 
             Assert.IsTrue(added);
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task RemoveFilteredOutGalleryTagAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
@@ -394,7 +374,7 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public async Task RemoveFilteredOutGalleryTagAsync_WithTagsNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");

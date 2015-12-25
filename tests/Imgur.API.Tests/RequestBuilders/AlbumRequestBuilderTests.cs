@@ -18,10 +18,10 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
 
-            var url = $"{client.EndpointUrl}album/AbcdeF/add";
+            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF/add";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
-            var request = requestBuilder.AddAlbumImagesRequest(url, ids);
+            var request = requestBuilder.AddAlbumImagesRequest(fakeUrl, ids);
             var expected = "ids=Abc%2CDEF%2CXyZ";
 
             Assert.IsNotNull(request);
@@ -36,8 +36,8 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
-            var url = $"{client.EndpointUrl}album/AbcdeF/add";
-            requestBuilder.AddAlbumImagesRequest(url, null);
+            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF/add";
+            requestBuilder.AddAlbumImagesRequest(fakeUrl, null);
         }
 
         [TestMethod]
@@ -54,11 +54,11 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
 
-            var url = $"{client.EndpointUrl}album/AbcdeF";
+            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
             var request = requestBuilder.CreateAlbumRequest(
-                url, "TheTitle", "TheDescription",
+                fakeUrl, "TheTitle", "TheDescription",
                 AlbumPrivacy.Hidden, AlbumLayout.Horizontal,
                 "io9XpoO", ids);
 
@@ -85,10 +85,10 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
 
-            var url = $"{client.EndpointUrl}album/AbcdeF/remove_images";
+            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF/remove_images";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
-            var request = requestBuilder.RemoveAlbumImagesRequest(url, ids);
+            var request = requestBuilder.RemoveAlbumImagesRequest(fakeUrl, ids);
             var expected = "https://api.imgur.com/3/album/AbcdeF/remove_images?ids=Abc%2CDEF%2CXyZ";
 
             Assert.IsNotNull(request);
@@ -102,8 +102,8 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
-            var url = $"{client.EndpointUrl}album/AbcdeF/remove_images";
-            requestBuilder.RemoveAlbumImagesRequest(url, null);
+            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF/remove_images";
+            requestBuilder.RemoveAlbumImagesRequest(fakeUrl, null);
         }
 
         [TestMethod]
@@ -120,10 +120,10 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
 
-            var url = $"{client.EndpointUrl}album/AbcdeF";
+            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
-            var request = requestBuilder.SetAlbumImagesRequest(url, ids);
+            var request = requestBuilder.SetAlbumImagesRequest(fakeUrl, ids);
             var expected = "ids=Abc%2CDEF%2CXyZ";
 
             Assert.IsNotNull(request);
@@ -138,8 +138,8 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
-            var url = $"{client.EndpointUrl}album/AbcdeF";
-            requestBuilder.SetAlbumImagesRequest(url, null);
+            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF";
+            requestBuilder.SetAlbumImagesRequest(fakeUrl, null);
         }
 
         [TestMethod]
@@ -156,11 +156,11 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
 
-            var url = $"{client.EndpointUrl}album/AbcdeF";
+            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
             var request = requestBuilder.UpdateAlbumRequest(
-                url, "TheTitle", "TheDescription",
+                fakeUrl, "TheTitle", "TheDescription",
                 AlbumPrivacy.Hidden, AlbumLayout.Horizontal,
                 "io9XpoO", ids);
 

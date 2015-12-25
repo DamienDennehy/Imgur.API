@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Tests.FakeResponses;
+using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.Endpoints
@@ -14,16 +15,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetNotificationsAsync_IsNotNull()
         {
+            var fakeUrl = "https://api.imgur.com/3/account/me/notifications?new=false";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetNotifications)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(
-                new Uri("https://api.imgur.com/3/account/me/notifications?new=false"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var notifications = await endpoint.GetNotificationsAsync(false);
 
             Assert.IsNotNull(notifications);

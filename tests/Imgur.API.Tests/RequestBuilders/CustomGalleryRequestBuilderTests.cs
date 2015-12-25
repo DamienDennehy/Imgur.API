@@ -17,10 +17,10 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
 
-            var url = $"{client.EndpointUrl}g/custom/add_tags";
+            var fakeUrl =  $"{client.EndpointUrl}g/custom/add_tags";
             var tags = new List<string> {"Cats", "Dogs", "Seals"};
 
-            var request = requestBuilder.AddCustomGalleryTagsRequest(url, tags);
+            var request = requestBuilder.AddCustomGalleryTagsRequest(fakeUrl, tags);
             var expected = "tags=Cats%2CDogs%2CSeals";
 
             Assert.IsNotNull(request);
@@ -35,8 +35,8 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
-            var url = $"{client.EndpointUrl}g/custom/add_tags";
-            requestBuilder.AddCustomGalleryTagsRequest(url, null);
+            var fakeUrl =  $"{client.EndpointUrl}g/custom/add_tags";
+            requestBuilder.AddCustomGalleryTagsRequest(fakeUrl, null);
         }
 
         [TestMethod]
@@ -53,10 +53,10 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
 
-            var url = $"{client.EndpointUrl}g/block_tag";
+            var fakeUrl =  $"{client.EndpointUrl}g/block_tag";
             var tag = "Cats";
 
-            var request = requestBuilder.AddFilteredOutGalleryTagRequest(url, tag);
+            var request = requestBuilder.AddFilteredOutGalleryTagRequest(fakeUrl, tag);
             var expected = "tag=Cats";
 
             Assert.IsNotNull(request);
@@ -71,8 +71,8 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
-            var url = $"{client.EndpointUrl}g/block_tag";
-            requestBuilder.AddFilteredOutGalleryTagRequest(url, null);
+            var fakeUrl =  $"{client.EndpointUrl}g/block_tag";
+            requestBuilder.AddFilteredOutGalleryTagRequest(fakeUrl, null);
         }
 
         [TestMethod]
@@ -89,10 +89,10 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
 
-            var url = $"{client.EndpointUrl}g/custom/remove_tags";
+            var fakeUrl =  $"{client.EndpointUrl}g/custom/remove_tags";
             var tags = new List<string> {"Cats", "Dogs", "Seals"};
 
-            var request = requestBuilder.RemoveCustomGalleryTagsRequest(url, tags);
+            var request = requestBuilder.RemoveCustomGalleryTagsRequest(fakeUrl, tags);
             var expected = "https://api.imgur.com/3/g/custom/remove_tags?tags=Cats%2CDogs%2CSeals";
 
             Assert.IsNotNull(request);
@@ -106,8 +106,8 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
-            var url = $"{client.EndpointUrl}g/custom/remove_tags";
-            requestBuilder.RemoveCustomGalleryTagsRequest(url, null);
+            var fakeUrl =  $"{client.EndpointUrl}g/custom/remove_tags";
+            requestBuilder.RemoveCustomGalleryTagsRequest(fakeUrl, null);
         }
 
         [TestMethod]
@@ -124,10 +124,10 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
 
-            var url = $"{client.EndpointUrl}g/unblock_tag";
+            var fakeUrl =  $"{client.EndpointUrl}g/unblock_tag";
             var tag = "Cats";
 
-            var request = requestBuilder.RemoveFilteredOutGalleryTagRequest(url, tag);
+            var request = requestBuilder.RemoveFilteredOutGalleryTagRequest(fakeUrl, tag);
             var expected = "https://api.imgur.com/3/g/unblock_tag";
 
             Assert.IsNotNull(request);
@@ -141,8 +141,8 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
-            var url = $"{client.EndpointUrl}g/unblock_tag";
-            requestBuilder.RemoveFilteredOutGalleryTagRequest(url, null);
+            var fakeUrl =  $"{client.EndpointUrl}g/unblock_tag";
+            requestBuilder.RemoveFilteredOutGalleryTagRequest(fakeUrl, null);
         }
 
         [TestMethod]

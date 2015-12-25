@@ -7,6 +7,7 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
+using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.Endpoints
@@ -17,15 +18,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task CreateCommentAsync_AreEqual()
         {
+            var fakeUrl = "https://api.imgur.com/3/comment";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CommentEndpointResponses.CreateCommentResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/comment"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new CommentEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var comment = await endpoint.CreateCommentAsync("Hello World!", "xyz", "Abc");
 
             Assert.IsNotNull(comment);
@@ -62,15 +62,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task CreateReplyAsync_AreEqual()
         {
+            var fakeUrl = "https://api.imgur.com/3/comment/BNMxDs";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CommentEndpointResponses.CreateReplyResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/comment/BNMxDs"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new CommentEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var comment = await endpoint.CreateReplyAsync("Hello World!", "xyz", "BNMxDs");
 
             Assert.IsNotNull(comment);
@@ -116,15 +115,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task DeleteCommentAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/comment/12x5454";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CommentEndpointResponses.DeleteCommentResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/comment/12x5454"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new CommentEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var deleted = await endpoint.DeleteCommentAsync("12x5454");
 
             Assert.IsTrue(deleted);
@@ -151,15 +149,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetCommentAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/comment/539556821";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CommentEndpointResponses.GetCommentResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/comment/539556821"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new CommentEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var comment = await endpoint.GetCommentAsync("539556821");
 
             Assert.IsNotNull(comment);
@@ -192,16 +189,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetRepliesAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/comment/539556821/replies";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CommentEndpointResponses.GetCommentReplies)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/comment/539556821/replies"),
-                fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new CommentEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var comments = await endpoint.GetRepliesAsync("539556821");
 
             Assert.IsTrue(comments.Children.Count() == 7);
@@ -218,16 +213,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task ReportCommentAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/comment/539556821/report";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CommentEndpointResponses.ReportCommentResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/comment/539556821/report"),
-                fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new CommentEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var reported = await endpoint.ReportCommentAsync("539556821", ReportReason.MatureContentNotMarked);
 
             Assert.IsTrue(reported);
@@ -252,16 +245,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task VoteCommentAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/comment/539556821/vote/down";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(CommentEndpointResponses.VoteCommentResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/comment/539556821/vote/down"),
-                fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new CommentEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var reported = await endpoint.VoteCommentAsync("539556821", Vote.Down);
 
             Assert.IsTrue(reported);

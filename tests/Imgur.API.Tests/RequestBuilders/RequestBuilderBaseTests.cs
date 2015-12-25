@@ -15,8 +15,8 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AccountRequestBuilder();
 
-            var url = $"{client.EndpointUrl}account/bob";
-            var request = requestBuilder.CreateRequest(HttpMethod.Get, url);
+            var fakeUrl =  $"{client.EndpointUrl}account/bob";
+            var request = requestBuilder.CreateRequest(HttpMethod.Get, fakeUrl);
 
             Assert.IsNotNull(request);
             Assert.AreEqual("https://api.imgur.com/3/account/bob", request.RequestUri.ToString());

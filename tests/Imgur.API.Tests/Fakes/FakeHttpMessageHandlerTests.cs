@@ -14,11 +14,10 @@ namespace Imgur.API.Tests.Fakes
         [TestMethod]
         public async Task HttpClient_GetAsync_ResponseContent_IsNull()
         {
+            var fakeUrl = "http://example.org/exists";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK) {Content = new StringContent("hello world")};
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/exists"), fakeResponse);
-
-            var httpClient = new HttpClient(FakeHttpMessageHandler);
+            
+            var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
             var httpResponse = await httpClient.GetAsync("http://example.org/notfound");
 
             Assert.IsNull(httpResponse.Content);
@@ -27,11 +26,10 @@ namespace Imgur.API.Tests.Fakes
         [TestMethod]
         public async Task HttpClient_GetAsync_ResponseContentAreEqual()
         {
+            var fakeUrl = "http://example.org/test";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK) {Content = new StringContent("get response")};
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
-
-            var httpClient = new HttpClient(FakeHttpMessageHandler);
+            
+            var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
             var httpResponse = await httpClient.GetAsync("http://example.org/test");
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
 
@@ -41,11 +39,10 @@ namespace Imgur.API.Tests.Fakes
         [TestMethod]
         public async Task HttpClient_PostAsync_ResponseContentAreEqual()
         {
+            var fakeUrl = "http://example.org/test";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK) {Content = new StringContent("post response")};
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
-
-            var httpClient = new HttpClient(FakeHttpMessageHandler);
+            
+            var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
             var parameters = new Dictionary<string, string> {{"Name", "bob"}};
 
             var content = new FormUrlEncodedContent(parameters.ToArray());

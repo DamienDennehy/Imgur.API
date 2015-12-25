@@ -9,8 +9,6 @@ namespace Imgur.API.Tests
 {
     public abstract class TestBase
     {
-        public FakeHttpMessageHandler FakeHttpMessageHandler => new FakeHttpMessageHandler();
-
         public IOAuth2Token FakeOAuth2Token
             =>
                 Substitute.For<EndpointBase>()

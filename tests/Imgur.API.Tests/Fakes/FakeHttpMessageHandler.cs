@@ -15,15 +15,19 @@ namespace Imgur.API.Tests.Fakes
         private readonly Dictionary<string, HttpResponseMessage> _fakeResponses =
             new Dictionary<string, HttpResponseMessage>();
 
-        /// <summary>
-        ///     Add a fake response with a corresponding uri.
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="response"></param>
-        public void AddFakeResponse(Uri uri, HttpResponseMessage response)
+        public FakeHttpMessageHandler()
         {
-            var key = uri.ToString();
-            _fakeResponses.Add(key, response);
+            
+        }
+
+        public FakeHttpMessageHandler(string url, HttpResponseMessage response)
+        {
+            _fakeResponses.Add(url, response);
+        }
+
+        public void AddFakeResponse(string url, HttpResponseMessage response)
+        {
+            _fakeResponses.Add(url, response);
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,

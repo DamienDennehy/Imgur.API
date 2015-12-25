@@ -18,8 +18,8 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
 
-            var url = $"{client.EndpointUrl}image/1234Xyz9";
-            var request = requestBuilder.UpdateImageRequest(url, "TheTitle", "TheDescription");
+            var fakeUrl =  $"{client.EndpointUrl}image/1234Xyz9";
+            var request = requestBuilder.UpdateImageRequest(fakeUrl, "TheTitle", "TheDescription");
 
             Assert.IsNotNull(request);
             Assert.AreEqual("https://api.imgur.com/3/image/1234Xyz9", request.RequestUri.ToString());
@@ -43,10 +43,10 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
-            var url = $"{client.EndpointUrl}image";
+            var fakeUrl =  $"{client.EndpointUrl}image";
 
             var image = File.ReadAllBytes("banana.gif");
-            var request = requestBuilder.UploadImageBinaryRequest(url, image, "TheAlbum", "TheTitle",
+            var request = requestBuilder.UploadImageBinaryRequest(fakeUrl, image, "TheAlbum", "TheTitle",
                 "TheDescription");
 
             Assert.IsNotNull(request);
@@ -81,8 +81,8 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
-            var url = $"{client.EndpointUrl}image";
-            requestBuilder.UploadImageBinaryRequest(url, null);
+            var fakeUrl =  $"{client.EndpointUrl}image";
+            requestBuilder.UploadImageBinaryRequest(fakeUrl, null);
         }
 
         [TestMethod]
@@ -99,9 +99,9 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
-            var url = $"{client.EndpointUrl}image";
+            var fakeUrl =  $"{client.EndpointUrl}image";
 
-            var request = requestBuilder.UploadImageUrlRequest(url, "http://i.imgur.com/hxsPLa7.jpg",
+            var request = requestBuilder.UploadImageUrlRequest(fakeUrl, "http://i.imgur.com/hxsPLa7.jpg",
                 "TheAlbum", "TheTitle", "TheDescription");
 
             Assert.IsNotNull(request);
@@ -121,8 +121,8 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
-            var url = $"{client.EndpointUrl}image";
-            requestBuilder.UploadImageBinaryRequest(url, null);
+            var fakeUrl =  $"{client.EndpointUrl}image";
+            requestBuilder.UploadImageBinaryRequest(fakeUrl, null);
         }
 
         [TestMethod]
@@ -138,12 +138,12 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
-            var url = $"{client.EndpointUrl}image";
+            var fakeUrl =  $"{client.EndpointUrl}image";
 
             using (var fs = new FileStream("banana.gif", FileMode.Open))
             {
                 var imageLength = fs.Length;
-                var request = requestBuilder.UploadImageStreamRequest(url, fs, "TheAlbum", "TheTitle",
+                var request = requestBuilder.UploadImageStreamRequest(fakeUrl, fs, "TheAlbum", "TheTitle",
                     "TheDescription");
 
                 Assert.IsNotNull(request);
@@ -181,10 +181,10 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
-            var url = $"{client.EndpointUrl}image";
+            var fakeUrl =  $"{client.EndpointUrl}image";
             using (var fs = new FileStream("banana.gif", FileMode.Open))
             {
-                requestBuilder.UploadImageStreamRequest(url, null);
+                requestBuilder.UploadImageStreamRequest(fakeUrl, null);
             }
         }
 

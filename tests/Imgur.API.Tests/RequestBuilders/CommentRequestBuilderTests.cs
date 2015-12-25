@@ -17,8 +17,8 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CommentRequestBuilder();
 
-            var url = $"{client.EndpointUrl}comment/XysioD";
-            var request = requestBuilder.CreateCommentRequest(url, "Hello World!", "xYxAbcD", "ABCdef");
+            var fakeUrl =  $"{client.EndpointUrl}comment/XysioD";
+            var request = requestBuilder.CreateCommentRequest(fakeUrl, "Hello World!", "xYxAbcD", "ABCdef");
 
             Assert.IsNotNull(request);
             var expected = "image_id=xYxAbcD&comment=Hello+World%21&parent_id=ABCdef";
@@ -34,8 +34,8 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CommentRequestBuilder();
-            var url = $"{client.EndpointUrl}comment";
-            requestBuilder.CreateCommentRequest(url, null, "xYxAbcD", "ABCdef");
+            var fakeUrl =  $"{client.EndpointUrl}comment";
+            requestBuilder.CreateCommentRequest(fakeUrl, null, "xYxAbcD", "ABCdef");
         }
 
         [TestMethod]
@@ -44,8 +44,8 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CommentRequestBuilder();
-            var url = $"{client.EndpointUrl}comment";
-            requestBuilder.CreateCommentRequest(url, "Hello World", null, "ABCdef");
+            var fakeUrl =  $"{client.EndpointUrl}comment";
+            requestBuilder.CreateCommentRequest(fakeUrl, "Hello World", null, "ABCdef");
         }
 
         [TestMethod]
@@ -62,8 +62,8 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CommentRequestBuilder();
 
-            var url = $"{client.EndpointUrl}comment";
-            var request = requestBuilder.CreateReplyRequest(url, "Hello World!", "xYxAbcD");
+            var fakeUrl =  $"{client.EndpointUrl}comment";
+            var request = requestBuilder.CreateReplyRequest(fakeUrl, "Hello World!", "xYxAbcD");
 
             Assert.IsNotNull(request);
             var expected = "image_id=xYxAbcD&comment=Hello+World%21";
@@ -79,8 +79,8 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CommentRequestBuilder();
-            var url = $"{client.EndpointUrl}comment";
-            requestBuilder.CreateReplyRequest(url, null, "xYxAbcD");
+            var fakeUrl =  $"{client.EndpointUrl}comment";
+            requestBuilder.CreateReplyRequest(fakeUrl, null, "xYxAbcD");
         }
 
         [TestMethod]
@@ -89,8 +89,8 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CommentRequestBuilder();
-            var url = $"{client.EndpointUrl}comment";
-            requestBuilder.CreateReplyRequest(url, "Hello World", null);
+            var fakeUrl =  $"{client.EndpointUrl}comment";
+            requestBuilder.CreateReplyRequest(fakeUrl, "Hello World", null);
         }
 
         [TestMethod]
@@ -107,8 +107,8 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CommentRequestBuilder();
 
-            var url = $"{client.EndpointUrl}comment/XysioD/report";
-            var request = requestBuilder.ReportCommentRequest(url, ReportReason.Abusive);
+            var fakeUrl =  $"{client.EndpointUrl}comment/XysioD/report";
+            var request = requestBuilder.ReportCommentRequest(fakeUrl, ReportReason.Abusive);
 
             Assert.IsNotNull(request);
             var expected = "reason=3";
@@ -124,8 +124,8 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CommentRequestBuilder();
 
-            var url = $"{client.EndpointUrl}comment/XysioD/vote/up";
-            var request = requestBuilder.CreateRequest(HttpMethod.Post, url);
+            var fakeUrl =  $"{client.EndpointUrl}comment/XysioD/vote/up";
+            var request = requestBuilder.CreateRequest(HttpMethod.Post, fakeUrl);
 
             Assert.IsNotNull(request);
 

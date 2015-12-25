@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Tests.FakeResponses;
+using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.Endpoints
@@ -15,14 +16,13 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetRateLimitAsync_AreEqual()
         {
+            var fakeUrl = "https://api.imgur.com/3/credits";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(RateLimitEndpointResponses.RateLimitResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/credits"), fakeResponse);
-
-            var httpClient = new HttpClient(FakeHttpMessageHandler);
+            
+            var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new RateLimitEndpoint(client, httpClient);

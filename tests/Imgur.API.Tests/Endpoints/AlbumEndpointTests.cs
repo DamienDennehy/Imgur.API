@@ -8,6 +8,7 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
+using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.Endpoints
@@ -23,10 +24,10 @@ namespace Imgur.API.Tests.Endpoints
                 Content = new StringContent(AlbumEndpointResponses.Imgur.AddAlbumImagesResponse)
             };
 
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/album/12x5454/add"), fakeResponse);
-
+            var fakeUrl =  "https://api.imgur.com/3/album/12x5454/add";
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
+
             var updated = await endpoint.AddAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"});
 
             Assert.IsTrue(updated);
@@ -57,11 +58,10 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AlbumEndpointResponses.Imgur.CreateAlbumResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/album"), fakeResponse);
-
+            
+            var fakeUrl =  "https://api.imgur.com/3/album";
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var album = await endpoint.CreateAlbumAsync();
 
             Assert.IsNotNull(album);
@@ -76,11 +76,10 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AlbumEndpointResponses.Imgur.DeleteAlbumResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/album/12x5454"), fakeResponse);
-
+            
+            var fakeUrl =  "https://api.imgur.com/3/album/12x5454";
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var deleted = await endpoint.DeleteAlbumAsync("12x5454");
 
             Assert.IsTrue(deleted);
@@ -107,16 +106,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task FavoriteAlbumAsync_WithImgurClient_IsFalse()
         {
+            var fakeUrl = "https://api.imgur.com/3/album/zVpyzhW/favorite";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AlbumEndpointResponses.Imgur.FavoriteAlbumResponseFalse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/album/zVpyzhW/favorite"),
-                fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new AlbumEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW");
 
             Assert.IsFalse(favorited);
@@ -125,16 +122,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task FavoriteAlbumAsync_WithImgurClient_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/album/zVpyzhW/favorite";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AlbumEndpointResponses.Imgur.FavoriteAlbumResponseTrue)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/album/zVpyzhW/favorite"),
-                fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new AlbumEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW");
 
             Assert.IsTrue(favorited);
@@ -143,16 +138,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task FavoriteAlbumAsync_WithMashapeClient_IsFalse()
         {
+            var fakeUrl = "https://imgur-apiv3.p.mashape.com/3/album/zVpyzhW/favorite";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AlbumEndpointResponses.Mashape.FavoriteAlbumResponseFalse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(
-                new Uri("https://imgur-apiv3.p.mashape.com/3/album/zVpyzhW/favorite"), fakeResponse);
-
+            
             var client = new MashapeClient("123", "1234", "xyz", FakeOAuth2Token);
-            var endpoint = new AlbumEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW");
 
             Assert.IsFalse(favorited);
@@ -161,16 +154,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task FavoriteAlbumAsync_WithMashapeClient_IsTrue()
         {
+            var fakeUrl = "https://imgur-apiv3.p.mashape.com/3/album/zVpyzhW/favorite";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AlbumEndpointResponses.Mashape.FavoriteAlbumResponseTrue)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(
-                new Uri("https://imgur-apiv3.p.mashape.com/3/album/zVpyzhW/favorite"), fakeResponse);
-
+            
             var client = new MashapeClient("123", "1234", "xyz", FakeOAuth2Token);
-            var endpoint = new AlbumEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW");
 
             Assert.IsTrue(favorited);
@@ -188,15 +179,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetAlbumAsync_AreEqual()
         {
+            var fakeUrl = "https://api.imgur.com/3/album/5F5Cy";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AlbumEndpointResponses.Imgur.GetAlbumResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/album/5F5Cy"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var album = await endpoint.GetAlbumAsync("5F5Cy");
 
             Assert.IsNotNull(album);
@@ -232,16 +222,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetAlbumImageAsync_AreEqual()
         {
+            var fakeUrl = "https://api.imgur.com/3/album/5F5Cy/image/79MH23L";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AlbumEndpointResponses.Imgur.GetAlbumImageResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/album/5F5Cy/image/79MH23L"),
-                fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var image = await endpoint.GetAlbumImageAsync("5F5Cy", "79MH23L");
 
             Assert.IsNotNull(image);
@@ -287,15 +275,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetAlbumImagesAsync_ImageCountIsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/album/5F5Cy/images";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AlbumEndpointResponses.Imgur.GetAlbumImagesResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/album/5F5Cy/images"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var images = await endpoint.GetAlbumImagesAsync("5F5Cy");
 
             Assert.IsTrue(images.Count() == 3);
@@ -313,16 +300,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task RemoveAlbumImagesAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/album/12x5454/remove_images?ids=AbcDef%2CIrcDef";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AlbumEndpointResponses.Imgur.RemoveAlbumImagesResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(
-                new Uri("https://api.imgur.com/3/album/12x5454/remove_images?ids=AbcDef%2CIrcDef"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var updated = await endpoint.RemoveAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"});
 
             Assert.IsTrue(updated);
@@ -349,15 +334,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task SetAlbumImagesAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/album/12x5454";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AlbumEndpointResponses.Imgur.SetAlbumImagesResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/album/12x5454"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var updated = await endpoint.SetAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"});
 
             Assert.IsTrue(updated);
@@ -384,15 +368,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task UpdateAlbumAsync_IsTrue()
         {
+            var fakeUrl = "https://api.imgur.com/3/album/12x5454";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AlbumEndpointResponses.Imgur.UpdateAlbumResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/album/12x5454"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AlbumEndpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var updated = await endpoint.UpdateAlbumAsync("12x5454");
 
             Assert.IsTrue(updated);

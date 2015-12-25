@@ -6,6 +6,7 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
+using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.Endpoints
@@ -34,15 +35,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetTokenByCodeAsync_AreEqual()
         {
+            var fakeUrl = "https://api.imgur.com/oauth2/token";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(OAuth2EndpointResponses.OAuth2TokenCodeResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/oauth2/token"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new OAuth2Endpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new OAuth2Endpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var token = await endpoint.GetTokenByCodeAsync("12345");
 
             Assert.AreEqual("CodeResponse", token.AccessToken);
@@ -57,15 +57,14 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ImgurException))]
         public async Task GetTokenByCodeAsync_ThrowsImgurException()
         {
+            var fakeUrl = "https://api.imgur.com/oauth2/token";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.BadRequest)
             {
                 Content = new StringContent(OAuth2EndpointResponses.OAuth2TokenResponseError)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/oauth2/token"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new OAuth2Endpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new OAuth2Endpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             await endpoint.GetTokenByCodeAsync("12345");
         }
 
@@ -81,15 +80,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetTokenByPinAsync_AreEqual()
         {
+            var fakeUrl = "https://api.imgur.com/oauth2/token";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(OAuth2EndpointResponses.OAuth2TokenPinResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/oauth2/token"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new OAuth2Endpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new OAuth2Endpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var token = await endpoint.GetTokenByPinAsync("4839");
 
             Assert.AreEqual("PinResponse", token.AccessToken);
@@ -112,15 +110,14 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetTokenByRefreshTokenAsync_AreEqual()
         {
+            var fakeUrl = "https://api.imgur.com/oauth2/token";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(OAuth2EndpointResponses.OAuth2TokenRefreshTokenResponse)
             };
-
-            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/oauth2/token"), fakeResponse);
-
+            
             var client = new ImgurClient("123", "1234");
-            var endpoint = new OAuth2Endpoint(client, new HttpClient(FakeHttpMessageHandler));
+            var endpoint = new OAuth2Endpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var token = await endpoint.GetTokenByRefreshTokenAsync("xhjhjhj");
 
             Assert.AreEqual("RefreshTokenResponse", token.AccessToken);

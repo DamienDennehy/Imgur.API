@@ -3,13 +3,12 @@
 namespace Imgur.API.Tests.Fakes
 {
     [TestClass]
-    public class FakeOAuth2TokenHandlerTests
+    public class FakeOAuth2TokenHandlerTests : TestBase
     {
         [TestMethod]
         public void GetOAuth2TokenCodeResponse_AreEqual()
         {
-            var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
-            var token = new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse();
+            var token = FakeOAuth2Token;
 
             Assert.IsNotNull(token);
             Assert.AreEqual("CodeResponse", token.AccessToken);

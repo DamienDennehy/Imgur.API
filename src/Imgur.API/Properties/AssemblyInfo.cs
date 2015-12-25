@@ -19,7 +19,6 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
 [assembly: InternalsVisibleTo("Imgur.API.Tests")]
-[assembly: InternalsVisibleTo("Imgur.API.Tests.Integration")]
 
 // Version information for an assembly consists of the following four values:
 //

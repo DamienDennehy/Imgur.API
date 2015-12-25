@@ -81,12 +81,14 @@
     <Compile Include="FakeResponses\AccountEndpointResponses.Notifications.cs" />
     <Compile Include="FakeResponses\AccountEndpointResponses.Gallery.cs" />
     <Compile Include="FakeResponses\CommentEndpointResponses.cs" />
+    <Compile Include="FakeResponses\ConversationEndpointResponses.cs" />
     <Compile Include="FakeResponses\CustomGalleryEndpointResponses.cs" />
     <Compile Include="Fakes\FakeOAuth2TokenHandler.cs" />
     <Compile Include="Fakes\FakeOAuth2TokenHandlerTests.cs" />
     <Compile Include="RequestBuilders\AccountRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\AlbumRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\CommentRequestBuilderTests.cs" />
+    <Compile Include="RequestBuilders\ConversationRequestBuilder.cs" />
     <Compile Include="RequestBuilders\CustomGalleryRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\ImageRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\OAuth2RequestBuilderTests.cs" />

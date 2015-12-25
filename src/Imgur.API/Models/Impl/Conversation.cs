@@ -8,7 +8,7 @@ namespace Imgur.API.Models.Impl
     /// <summary>
     ///     The base model for a conversation.
     /// </summary>
-    public class Conversation : IDataModel
+    public class Conversation : IConversation
     {
         /// <summary>
         ///     Utc timestamp of last sent message, converted from epoch time.

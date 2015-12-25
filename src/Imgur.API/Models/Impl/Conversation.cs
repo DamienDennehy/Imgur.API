@@ -28,12 +28,6 @@ namespace Imgur.API.Models.Impl
         public int Id { get; set; }
 
         /// <summary>
-        ///     The last message
-        /// </summary>
-        [JsonProperty("last_message")]
-        public string LastMessage { get; set; }
-
-        /// <summary>
         ///     Preview of the last message
         /// </summary>
         [JsonProperty("last_message_preview")]

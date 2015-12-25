@@ -143,7 +143,6 @@ namespace Imgur.API.Tests.Endpoints
                 conversation.DateTime);
             Assert.AreEqual(false, conversation.Done);
             Assert.AreEqual(34361981, conversation.Id);
-            Assert.AreEqual(null, conversation.LastMessage);
             Assert.AreEqual("Test 2", conversation.LastMessagePreview);
             Assert.AreEqual(3, conversation.Messages.Count());
             Assert.AreEqual(3, conversation.MessageCount);

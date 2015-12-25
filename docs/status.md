@@ -1,4 +1,4 @@
-# Status (As of Dec 2015)
+# Status (Dec 2015)
 
 ##Completed
 
@@ -9,9 +9,9 @@
 
 ###Endpoints
 * Account endpoint.
-* Image endpoint.
 * Album endpoint.
 * Comment endpoint.
+* Image endpoint.
 * OAuth2 endpoint.
 * Rate Limit endpoint.
 

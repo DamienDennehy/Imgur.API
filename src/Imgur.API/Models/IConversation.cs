@@ -25,11 +25,6 @@ namespace Imgur.API.Models
         int Id { get; set; }
 
         /// <summary>
-        ///     The last message
-        /// </summary>
-        string LastMessage { get; set; }
-
-        /// <summary>
         ///     Preview of the last message
         /// </summary>
         string LastMessagePreview { get; set; }

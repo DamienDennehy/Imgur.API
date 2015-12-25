@@ -17,17 +17,16 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task DeleteAlbumAsync_IsNotNull()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.DeleteAlbumResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/album/yMgB7"),
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/album/yMgB7"),
                 fakeResponse);
 
             var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var deleted = await endpoint.DeleteAlbumAsync("yMgB7", "sarah");
 
             Assert.IsTrue(deleted);
@@ -71,17 +70,16 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetAlbumAsync_IsNotNull()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetAlbumResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/album/yMgB7"),
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/album/yMgB7"),
                 fakeResponse);
 
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var album = await endpoint.GetAlbumAsync("yMgB7", "sarah");
 
             Assert.IsNotNull(album);
@@ -133,17 +131,16 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetAlbumCountAsync_IsNotNull()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetAlbumCountResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/albums/count"),
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/albums/count"),
                 fakeResponse);
 
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var count = await endpoint.GetAlbumCountAsync("sarah");
 
             Assert.AreEqual(count, 105);
@@ -169,17 +166,16 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetAlbumIdsAsync_AreEqual()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetAlbumIdsResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/bob/albums/ids/2"),
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/bob/albums/ids/2"),
                 fakeResponse);
 
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var albums = await endpoint.GetAlbumIdsAsync("bob", 2);
 
             Assert.AreEqual(50, albums.Count());
@@ -206,16 +202,15 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetAlbumsAsync_AreEqual()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetAlbumsResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/bob/albums/2"), fakeResponse);
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/bob/albums/2"), fakeResponse);
 
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var albums = await endpoint.GetAlbumsAsync("bob", 2);
 
             Assert.AreEqual(50, albums.Count());

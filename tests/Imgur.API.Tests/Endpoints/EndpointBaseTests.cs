@@ -16,7 +16,7 @@ using NSubstitute;
 namespace Imgur.API.Tests.Endpoints
 {
     [TestClass]
-    public class EndpointTests
+    public class EndpointTests : TestBase
     {
         [TestMethod]
         public void ApiClient_SetByConstructor1_AreEqual()
@@ -215,15 +215,14 @@ namespace Imgur.API.Tests.Endpoints
             var constructorObjects = new object[2];
             constructorObjects[0] = new ImgurClient("123", "1234");
 
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent("hello world")
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
 
-            var httpClient = new HttpClient(fakeHttpMessageHandler);
+            var httpClient = new HttpClient(FakeHttpMessageHandler);
 
             //Inject the fake HttpClient when declaring a new endpoint
             constructorObjects[1] = httpClient;
@@ -243,15 +242,14 @@ namespace Imgur.API.Tests.Endpoints
             var constructorObjects = new object[2];
             constructorObjects[0] = new ImgurClient("123", "1234");
 
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(ImageEndpointResponses.Imgur.GetImageResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
 
-            var httpClient = new HttpClient(fakeHttpMessageHandler);
+            var httpClient = new HttpClient(FakeHttpMessageHandler);
 
             //Inject the fake HttpClient when declaring a new endpoint
             constructorObjects[1] = httpClient;
@@ -284,12 +282,11 @@ namespace Imgur.API.Tests.Endpoints
             var constructorObjects = new object[2];
             constructorObjects[0] = new ImgurClient("123", "1234");
 
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
 
-            var httpClient = new HttpClient(fakeHttpMessageHandler);
+            var httpClient = new HttpClient(FakeHttpMessageHandler);
 
             //Inject the fake HttpClient when declaring a new service instance
             constructorObjects[1] = httpClient;
@@ -308,15 +305,14 @@ namespace Imgur.API.Tests.Endpoints
             var constructorObjects = new object[2];
             constructorObjects[0] = new ImgurClient("123", "1234");
 
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.Unauthorized)
             {
                 Content = new StringContent(FakeErrors.ImgurClientErrorResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("http://example.org/test"), fakeResponse);
 
-            var httpClient = new HttpClient(fakeHttpMessageHandler);
+            var httpClient = new HttpClient(FakeHttpMessageHandler);
 
             //Inject the fake HttpClient when declaring a new service instance
             constructorObjects[1] = httpClient;

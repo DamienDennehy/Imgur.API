@@ -7,7 +7,6 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
-using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.Endpoints
@@ -17,17 +16,15 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetAccountFavoritesAsync_Any()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetAccountFavoritesResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/me/favorites"), fakeResponse);
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/me/favorites"), fakeResponse);
 
-            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var favorites = await endpoint.GetAccountFavoritesAsync();
 
             Assert.IsTrue(favorites.Any());
@@ -45,18 +42,16 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetAccountGalleryFavoritesAsync_Any()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetAccountGalleryFavoritesResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(
+            FakeHttpMessageHandler.AddFakeResponse(
                 new Uri("https://api.imgur.com/3/account/me/gallery_favorites/2/oldest"), fakeResponse);
 
-            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var favorites =
                 await endpoint.GetAccountGalleryFavoritesAsync(page: 2, sort: AccountGallerySortOrder.Oldest);
 
@@ -85,18 +80,16 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetAccountSubmissionsAsync_Any()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetAccountSubmissionsResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/me/submissions/2"),
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/me/submissions/2"),
                 fakeResponse);
 
-            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var submissions = await endpoint.GetAccountSubmissionsAsync(page: 2);
 
             Assert.IsTrue(submissions.Any());
@@ -123,18 +116,16 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetGalleryProfileAsync_IsNotNull()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetGalleryProfileResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/me/gallery_profile"),
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/me/gallery_profile"),
                 fakeResponse);
 
-            var fakeOAuth2Handler = new FakeOAuth2TokenHandler();
-            var client = new ImgurClient("123", "1234", fakeOAuth2Handler.GetOAuth2TokenCodeResponse());
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var profile = await endpoint.GetGalleryProfileAsync();
 
             Assert.IsNotNull(profile);

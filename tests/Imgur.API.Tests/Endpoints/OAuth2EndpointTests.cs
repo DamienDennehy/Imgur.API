@@ -6,13 +6,12 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
-using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.Endpoints
 {
     [TestClass]
-    public class OAuth2EndpointTests
+    public class OAuth2EndpointTests : TestBase
     {
         [TestMethod]
         public void GetAuthorizationUrl_SetState_AreEqual()
@@ -35,16 +34,15 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetTokenByCodeAsync_AreEqual()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(OAuth2EndpointResponses.OAuth2TokenCodeResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/oauth2/token"), fakeResponse);
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/oauth2/token"), fakeResponse);
 
             var client = new ImgurClient("123", "1234");
-            var endpoint = new OAuth2Endpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new OAuth2Endpoint(client, new HttpClient(FakeHttpMessageHandler));
             var token = await endpoint.GetTokenByCodeAsync("12345");
 
             Assert.AreEqual("CodeResponse", token.AccessToken);
@@ -59,16 +57,15 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ImgurException))]
         public async Task GetTokenByCodeAsync_ThrowsImgurException()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.BadRequest)
             {
                 Content = new StringContent(OAuth2EndpointResponses.OAuth2TokenResponseError)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/oauth2/token"), fakeResponse);
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/oauth2/token"), fakeResponse);
 
             var client = new ImgurClient("123", "1234");
-            var endpoint = new OAuth2Endpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new OAuth2Endpoint(client, new HttpClient(FakeHttpMessageHandler));
             await endpoint.GetTokenByCodeAsync("12345");
         }
 
@@ -84,16 +81,15 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetTokenByPinAsync_AreEqual()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(OAuth2EndpointResponses.OAuth2TokenPinResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/oauth2/token"), fakeResponse);
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/oauth2/token"), fakeResponse);
 
             var client = new ImgurClient("123", "1234");
-            var endpoint = new OAuth2Endpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new OAuth2Endpoint(client, new HttpClient(FakeHttpMessageHandler));
             var token = await endpoint.GetTokenByPinAsync("4839");
 
             Assert.AreEqual("PinResponse", token.AccessToken);
@@ -116,16 +112,15 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetTokenByRefreshTokenAsync_AreEqual()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(OAuth2EndpointResponses.OAuth2TokenRefreshTokenResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/oauth2/token"), fakeResponse);
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/oauth2/token"), fakeResponse);
 
             var client = new ImgurClient("123", "1234");
-            var endpoint = new OAuth2Endpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new OAuth2Endpoint(client, new HttpClient(FakeHttpMessageHandler));
             var token = await endpoint.GetTokenByRefreshTokenAsync("xhjhjhj");
 
             Assert.AreEqual("RefreshTokenResponse", token.AccessToken);

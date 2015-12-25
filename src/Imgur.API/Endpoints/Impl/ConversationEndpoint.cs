@@ -194,7 +194,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"conversations/block/{username}";
+            var url = $"conversations/report/{username}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {

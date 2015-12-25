@@ -17,18 +17,17 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task DeleteImageAsync_IsNotNull()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.DeleteImageResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/image/hbzm7Ge"),
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/image/hbzm7Ge"),
                 fakeResponse);
 
             var fakeOAuth2TokenHandler = new FakeOAuth2TokenHandler();
             var client = new ImgurClient("123", "1234", new FakeOAuth2TokenHandler().GetOAuth2TokenCodeResponse());
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var deleted = await endpoint.DeleteImageAsync("hbzm7Ge", "sarah");
 
             Assert.IsTrue(deleted);
@@ -75,17 +74,16 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetImageAsync_IsNotNull()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetImageResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/image/hbzm7Ge"),
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/image/hbzm7Ge"),
                 fakeResponse);
 
             var client = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var image = await endpoint.GetImageAsync("hbzm7Ge", "sarah");
 
             Assert.IsNotNull(image);
@@ -143,18 +141,17 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetImageCountAsync_IsNotNull()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetImageCountResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/images/count"),
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/images/count"),
                 fakeResponse);
 
             var tokenHandler = new FakeOAuth2TokenHandler();
             var client = new ImgurClient("123", "1234", tokenHandler.GetOAuth2TokenCodeResponse());
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var count = await endpoint.GetImageCountAsync("sarah");
 
             Assert.AreEqual(count, 2);
@@ -180,18 +177,17 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetImageIdsAsync_AreEqual()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetImageIdsResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/images/ids/2"),
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/images/ids/2"),
                 fakeResponse);
 
             var tokenHandler = new FakeOAuth2TokenHandler();
             var client = new ImgurClient("123", "1234", tokenHandler.GetOAuth2TokenCodeResponse());
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var images = await endpoint.GetImageIdsAsync("sarah", 2);
 
             var images2 = images as ICollection;
@@ -220,18 +216,17 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task GetImagesAsync_AreEqual()
         {
-            var fakeHttpMessageHandler = new FakeHttpMessageHandler();
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetImagesResponse)
             };
 
-            fakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/images/2"),
+            FakeHttpMessageHandler.AddFakeResponse(new Uri("https://api.imgur.com/3/account/sarah/images/2"),
                 fakeResponse);
 
             var tokenHandler = new FakeOAuth2TokenHandler();
             var client = new ImgurClient("123", "1234", tokenHandler.GetOAuth2TokenCodeResponse());
-            var endpoint = new AccountEndpoint(client, new HttpClient(fakeHttpMessageHandler));
+            var endpoint = new AccountEndpoint(client, new HttpClient(FakeHttpMessageHandler));
             var images = await endpoint.GetImagesAsync("sarah", 2);
 
             Assert.AreEqual(2, images.Count());

@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.Endpoints
 {
-    public partial class AccountEndpointTests : TestBase
+    public partial class AccountEndpointTests
     {
         [TestMethod]
         public async Task GetNotificationsAsync_IsNotNull()

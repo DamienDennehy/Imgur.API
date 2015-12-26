@@ -75,6 +75,7 @@
     <Compile Include="Endpoints\ConversationEndpointTests.cs" />
     <Compile Include="Endpoints\CustomGalleryEndpointTests.cs" />
     <Compile Include="Endpoints\ImageEndpointTests.cs" />
+    <Compile Include="Endpoints\NotificationEndpointTests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />
     <Compile Include="FakeResponses\AccountEndpointResponses.Albums.cs" />
     <Compile Include="FakeResponses\AccountEndpointResponses.Images.cs" />
@@ -84,10 +85,14 @@
     <Compile Include="FakeResponses\CommentEndpointResponses.cs" />
     <Compile Include="FakeResponses\ConversationEndpointResponses.cs" />
     <Compile Include="FakeResponses\CustomGalleryEndpointResponses.cs" />
+    <Compile Include="FakeResponses\TopicResponses.cs" />
+    <Compile Include="FakeResponses\MemeGenResponses.cs" />
+    <Compile Include="FakeResponses\NotificationEndpointResponses.cs" />
     <Compile Include="Fakes\FakeOAuth2TokenHandler.cs" />
     <Compile Include="Fakes\FakeOAuth2TokenHandlerTests.cs" />
     <Compile Include="JsonConverters\NotificationConverterTests.cs" />
     <Compile Include="RequestBuilders\AccountRequestBuilderTests.cs" />
+    <Compile Include="RequestBuilders\NotificationRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\AlbumRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\CommentRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\ConversationRequestBuilder.cs" />

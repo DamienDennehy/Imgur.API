@@ -4,7 +4,7 @@
 Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https://github.com/DamienDennehy/Imgur.API/issues)
 
 ## Latest Release
-## Version 3.4.0 (2015-12-26)
+### Version 3.4.0 (2015-12-26)
 * Added Custom Gallery endpoint.
 * Added Conversation endpoint.
 * Added Notification endpoint.

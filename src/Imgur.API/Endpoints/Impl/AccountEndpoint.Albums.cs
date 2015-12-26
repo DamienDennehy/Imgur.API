@@ -77,7 +77,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Return an array of all of the album IDs.
+        ///     Return a list of all of the album IDs.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
@@ -107,7 +107,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Return an array of all of the album IDs.
+        ///     Return a list of all of the album IDs.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException">

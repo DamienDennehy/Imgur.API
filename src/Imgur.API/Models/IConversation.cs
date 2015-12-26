@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Imgur.API.Models
 {
     /// <summary>
-    ///     The base model for a conversation.
+    ///     A conversation.
     /// </summary>
     public interface IConversation : IDataModel
     {

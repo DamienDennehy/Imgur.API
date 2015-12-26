@@ -35,7 +35,7 @@ namespace Imgur.API.Endpoints.Impl
         internal AlbumRequestBuilder RequestBuilder { get; } = new AlbumRequestBuilder();
 
         /// <summary>
-        ///     Takes parameter, ids[], as an array of ids to add to the album. For anonymous albums, {album} should be the
+        ///     Takes a list of ids to add to the album. For anonymous albums, {album} should be the
         ///     deletehash
         ///     that is returned at creation.
         /// </summary>
@@ -242,7 +242,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Takes parameter, ids[], as an array of ids and removes from the album. For anonymous albums, {album} should be the
+        ///     Takes a list of ids and removes from the album. For anonymous albums, {album} should be the
         ///     deletehash that is returned at creation.
         /// </summary>
         /// <param name="album">The id or deletehash of the album.</param>

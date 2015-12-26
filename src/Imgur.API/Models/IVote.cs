@@ -1,7 +1,7 @@
 ﻿namespace Imgur.API.Models
 {
     /// <summary>
-    ///     The base model for a vote.
+    ///     A vote.
     /// </summary>
     public interface IVote
     {

@@ -88,7 +88,7 @@ namespace Imgur.API.Endpoints
         Task<int> GetAlbumCountAsync(string username = "me");
 
         /// <summary>
-        ///     Return an array of all of the album IDs.
+        ///     Return a list of all of the album IDs.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
@@ -120,7 +120,7 @@ namespace Imgur.API.Endpoints
         Task<int> GetCommentCountAsync(string username = "me");
 
         /// <summary>
-        ///     Return an array of all of the comment IDs.
+        ///     Return a list of all of the comment IDs.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="sort">The order that the comments should be sorted by. Defaults to 'newest'.</param>
@@ -163,7 +163,7 @@ namespace Imgur.API.Endpoints
         Task<int> GetImageCountAsync(string username = "me");
 
         /// <summary>
-        ///     Returns an array of Image IDs that are associated with the account. OAuth authentication required.
+        ///     Returns a list of Image IDs that are associated with the account. OAuth authentication required.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>

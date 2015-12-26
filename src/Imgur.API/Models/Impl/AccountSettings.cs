@@ -52,7 +52,7 @@ namespace Imgur.API.Models.Impl
         public bool MessagingEnabled { get; set; }
 
         /// <summary>
-        ///     An array of users that have been blocked from messaging.
+        ///     A list of users that have been blocked from messaging.
         /// </summary>
         [JsonProperty("blocked_users")]
         [JsonConverter(typeof (TypeConverter<IEnumerable<BlockedUser>>))]

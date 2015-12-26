@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 namespace Imgur.API.Models.Impl
 {
     /// <summary>
-    ///     Represents an images comment.
+    ///     An image's comment.
     /// </summary>
     public class Comment : IComment
     {

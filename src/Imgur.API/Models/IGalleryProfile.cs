@@ -23,7 +23,7 @@ namespace Imgur.API.Models
         int TotalGallerySubmissions { get; set; }
 
         /// <summary>
-        ///     An array of trophies that the user has.
+        ///     A list of trophies that the user has.
         /// </summary>
         IEnumerable<ITrophy> Trophies { get; set; }
     }

@@ -77,7 +77,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Returns an array of Image IDs that are associated with the account.
+        ///     Returns a list of Image IDs that are associated with the account.
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>

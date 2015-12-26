@@ -80,7 +80,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Return an array of all of the comment IDs.
+        ///     Return a list of all of the comment IDs.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="sort">The order that the comments should be sorted by. Defaults to 'newest'.</param>

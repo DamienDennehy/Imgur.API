@@ -1,7 +1,7 @@
 ﻿namespace Imgur.API.Models
 {
     /// <summary>
-    ///     The base model for a tag vote.
+    ///     A tag vote.
     /// </summary>
     public interface ITagVote
     {

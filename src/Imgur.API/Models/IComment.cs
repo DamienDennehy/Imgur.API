@@ -5,7 +5,7 @@ using Imgur.API.Enums;
 namespace Imgur.API.Models
 {
     /// <summary>
-    ///     Represents an images comment.
+    ///     An image's comment.
     /// </summary>
     public interface IComment : IDataModel
     {

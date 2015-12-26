@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Imgur.API.Models.Impl
 {
     /// <summary>
-    ///     Represents a user's custom or filtered gallery.
+    ///     A user's custom or filtered gallery.
     /// </summary>
     public class CustomGallery : ICustomGallery
     {

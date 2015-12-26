@@ -1,7 +1,9 @@
-﻿namespace Imgur.API.Models
+﻿using System.Collections.Generic;
+
+namespace Imgur.API.Models
 {
     /// <summary>
-    ///     The base model for a tag.
+    ///     A tag.
     /// </summary>
     public interface ITag
     {
@@ -13,12 +15,12 @@
         /// <summary>
         ///     OPTIONAL, boolean representing whether or not the user is following the tag in their custom gallery.
         /// </summary>
-        bool Following { get; set; }
+        bool? Following { get; set; }
 
         /// <summary>
-        ///     An array of all the gallery items in the custom gallery
+        ///     A list of all the gallery items in the custom gallery
         /// </summary>
-        IGalleryItem[] Items { get; set; }
+        IEnumerable<IGalleryItem> Items { get; set; }
 
         /// <summary>
         ///     Name of the tag.

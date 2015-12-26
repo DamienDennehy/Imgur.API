@@ -11,7 +11,7 @@ namespace Imgur.API.Endpoints
     public interface IAlbumEndpoint : IEndpoint
     {
         /// <summary>
-        ///     Takes parameter, ids[], as an array of ids to add to the album. For anonymous albums, {album} should be the
+        ///     Takes a list of ids to add to the album. For anonymous albums, {album} should be the
         ///     deletehash
         ///     that is returned at creation.
         /// </summary>
@@ -72,7 +72,7 @@ namespace Imgur.API.Endpoints
         Task<IEnumerable<IImage>> GetAlbumImagesAsync(string id);
 
         /// <summary>
-        ///     Takes parameter, ids[], as an array of ids and removes from the album. For anonymous albums, {album} should be the
+        ///     Takes a list of ids and removes from the album. For anonymous albums, {album} should be the
         ///     deletehash that is returned at creation.
         /// </summary>
         /// <param name="album">The id or deletehash of the album.</param>

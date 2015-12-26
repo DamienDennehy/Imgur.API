@@ -4,7 +4,7 @@ using Imgur.API.Enums;
 namespace Imgur.API.Models
 {
     /// <summary>
-    ///     The base model for an image.
+    ///     An image.
     /// </summary>
     public interface IImage : IDataModel
     {

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Imgur.API.Models.Impl
 {
     /// <summary>
-    ///     The base model for a notification.
+    ///     A notification.
     /// </summary>
     public class Notification : INotification
     {

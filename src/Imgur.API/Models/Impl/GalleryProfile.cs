@@ -28,7 +28,7 @@ namespace Imgur.API.Models.Impl
         public int TotalGallerySubmissions { get; set; }
 
         /// <summary>
-        ///     An array of trophies that the user has.
+        ///     A list of trophies that the user has.
         /// </summary>
         [JsonConverter(typeof (TypeConverter<IEnumerable<Trophy>>))]
         public IEnumerable<ITrophy> Trophies { get; set; } = new List<ITrophy>();

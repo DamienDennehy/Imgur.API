@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Imgur.API.Models.Impl
 {
     /// <summary>
-    ///     The base model for an image.
+    ///     An image.
     /// </summary>
     public class Image : IImage
     {

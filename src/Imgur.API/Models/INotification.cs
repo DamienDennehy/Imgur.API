@@ -1,7 +1,7 @@
 ﻿namespace Imgur.API.Models
 {
     /// <summary>
-    ///     The base model for a notification.
+    ///     A notification.
     /// </summary>
     public interface INotification : IDataModel
     {

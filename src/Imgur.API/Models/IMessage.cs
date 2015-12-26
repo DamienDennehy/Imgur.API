@@ -3,7 +3,7 @@
 namespace Imgur.API.Models
 {
     /// <summary>
-    ///     The base model for a message.
+    ///     A message from another user.
     /// </summary>
     public interface IMessage : IDataModel
     {

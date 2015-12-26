@@ -1,7 +1,7 @@
 ﻿namespace Imgur.API.Models
 {
     /// <summary>
-    ///     The base model for a topic.
+    ///     A topic.
     /// </summary>
     public interface ITopic
     {

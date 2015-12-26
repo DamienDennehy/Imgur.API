@@ -24,7 +24,7 @@ namespace Imgur.API.Models
         AlbumPrivacy AlbumPrivacy { get; set; }
 
         /// <summary>
-        ///     An array of users that have been blocked from messaging.
+        ///     A list of users that have been blocked from messaging.
         /// </summary>
         IEnumerable<IBlockedUser> BlockedUsers { get; set; }
 

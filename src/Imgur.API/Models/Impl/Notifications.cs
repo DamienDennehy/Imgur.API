@@ -5,18 +5,18 @@ using Newtonsoft.Json;
 namespace Imgur.API.Models.Impl
 {
     /// <summary>
-    ///     The base model for notifications.
+    ///     Account notifications.
     /// </summary>
     public class Notifications : INotifications
     {
         /// <summary>
-        ///     An array of message notifications.
+        ///     A list of message notifications.
         /// </summary>
         [JsonConverter(typeof (TypeConverter<IEnumerable<Notification>>))]
         public IEnumerable<INotification> Messages { get; set; }
 
         /// <summary>
-        ///     An array of comment notifications.
+        ///     A list of comment notifications.
         /// </summary>
         [JsonConverter(typeof (TypeConverter<IEnumerable<Notification>>))]
         public IEnumerable<INotification> Replies { get; set; }

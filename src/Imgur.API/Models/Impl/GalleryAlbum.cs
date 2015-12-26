@@ -142,7 +142,7 @@ namespace Imgur.API.Models.Impl
         public int ImageCount { get; set; }
 
         /// <summary>
-        ///     An array of all the images in the album (only available when requesting the direct album).
+        ///     A list of all the images in the album (only available when requesting the direct album).
         /// </summary>
         [JsonConverter(typeof (TypeConverter<IEnumerable<Image>>))]
         public IEnumerable<IImage> Images { get; set; } = new List<IImage>();

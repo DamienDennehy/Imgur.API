@@ -3,7 +3,7 @@
 namespace Imgur.API.Models
 {
     /// <summary>
-    ///     Represents a user's custom or filtered gallery.
+    ///     A user's custom or filtered gallery.
     /// </summary>
     public interface ICustomGallery : IDataModel
     {

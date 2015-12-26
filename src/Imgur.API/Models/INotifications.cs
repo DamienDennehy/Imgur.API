@@ -3,17 +3,17 @@
 namespace Imgur.API.Models
 {
     /// <summary>
-    ///     The base model for notifications.
+    ///     Account notifications.
     /// </summary>
     public interface INotifications : IDataModel
     {
         /// <summary>
-        ///     An array of message notifications.
+        ///     A list of message notifications.
         /// </summary>
         IEnumerable<INotification> Messages { get; set; }
 
         /// <summary>
-        ///     An array of comment notifications.
+        ///     A list of comment notifications.
         /// </summary>
         IEnumerable<INotification> Replies { get; set; }
     }

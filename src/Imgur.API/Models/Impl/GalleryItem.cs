@@ -1,7 +1,7 @@
 ﻿namespace Imgur.API.Models.Impl
 {
     /// <summary>
-    ///     Represents any gallery type.
+    ///     Any gallery type such as GalleryImage or GalleryAlbum.
     /// </summary>
     public class GalleryItem : IGalleryItem
     {

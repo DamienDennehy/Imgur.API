@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Imgur.API.Models.Impl
 {
     /// <summary>
-    ///     The base model for a message from account notifications.
+    ///     A message from another user.
     /// </summary>
     public class Message : IMessage
     {

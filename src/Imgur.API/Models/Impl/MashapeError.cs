@@ -1,7 +1,7 @@
 ﻿namespace Imgur.API.Models.Impl
 {
     /// <summary>
-    ///     Represents errors returned after a Mashape Endpoint request.
+    ///     An error returned after an Endpoint request.
     /// </summary>
     public class MashapeError : IMashapeError
     {

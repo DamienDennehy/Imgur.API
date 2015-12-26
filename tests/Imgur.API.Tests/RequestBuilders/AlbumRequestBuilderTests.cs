@@ -18,7 +18,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
 
-            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF/add";
+            var fakeUrl = $"{client.EndpointUrl}album/AbcdeF/add";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
             var request = requestBuilder.AddAlbumImagesRequest(fakeUrl, ids);
@@ -36,7 +36,7 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
-            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF/add";
+            var fakeUrl = $"{client.EndpointUrl}album/AbcdeF/add";
             requestBuilder.AddAlbumImagesRequest(fakeUrl, null);
         }
 
@@ -54,7 +54,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
 
-            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF";
+            var fakeUrl = $"{client.EndpointUrl}album/AbcdeF";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
             var request = requestBuilder.CreateAlbumRequest(
@@ -85,7 +85,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
 
-            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF/remove_images";
+            var fakeUrl = $"{client.EndpointUrl}album/AbcdeF/remove_images";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
             var request = requestBuilder.RemoveAlbumImagesRequest(fakeUrl, ids);
@@ -102,7 +102,7 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
-            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF/remove_images";
+            var fakeUrl = $"{client.EndpointUrl}album/AbcdeF/remove_images";
             requestBuilder.RemoveAlbumImagesRequest(fakeUrl, null);
         }
 
@@ -120,7 +120,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
 
-            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF";
+            var fakeUrl = $"{client.EndpointUrl}album/AbcdeF";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
             var request = requestBuilder.SetAlbumImagesRequest(fakeUrl, ids);
@@ -138,7 +138,7 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
-            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF";
+            var fakeUrl = $"{client.EndpointUrl}album/AbcdeF";
             requestBuilder.SetAlbumImagesRequest(fakeUrl, null);
         }
 
@@ -156,7 +156,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AlbumRequestBuilder();
 
-            var fakeUrl =  $"{client.EndpointUrl}album/AbcdeF";
+            var fakeUrl = $"{client.EndpointUrl}album/AbcdeF";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
             var request = requestBuilder.UpdateAlbumRequest(

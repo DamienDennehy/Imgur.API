@@ -83,8 +83,12 @@
     <Compile Include="Models\IAlbum.cs" />
     <Compile Include="Models\IBasic.cs" />
     <Compile Include="Models\IBlockedUser.cs" />
+    <Compile Include="Models\ICommentNotification.cs" />
     <Compile Include="Models\IComment.cs" />
+    <Compile Include="Models\IMessageNotification.cs" />
+    <Compile Include="Models\Impl\CommentNotification.cs" />
     <Compile Include="Models\Impl\CustomGallery.cs" />
+    <Compile Include="Models\Impl\MessageNotification.cs" />
     <Compile Include="Models\Impl\Notifications.cs" />
     <Compile Include="Models\Impl\Message.cs" />
     <Compile Include="Models\IMessage.cs" />

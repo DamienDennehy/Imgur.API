@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -16,7 +15,7 @@ namespace Imgur.API.Tests.Fakes
         {
             var fakeUrl = "http://example.org/exists";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK) {Content = new StringContent("hello world")};
-            
+
             var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
             var httpResponse = await httpClient.GetAsync("http://example.org/notfound");
 
@@ -28,7 +27,7 @@ namespace Imgur.API.Tests.Fakes
         {
             var fakeUrl = "http://example.org/test";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK) {Content = new StringContent("get response")};
-            
+
             var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
             var httpResponse = await httpClient.GetAsync("http://example.org/test");
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
@@ -41,7 +40,7 @@ namespace Imgur.API.Tests.Fakes
         {
             var fakeUrl = "http://example.org/test";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK) {Content = new StringContent("post response")};
-            
+
             var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
             var parameters = new Dictionary<string, string> {{"Name", "bob"}};
 

@@ -3,43 +3,43 @@
 namespace Imgur.API.Models
 {
     /// <summary>
-    ///     The base model for a message from account notifications.
+    ///     The base model for a message.
     /// </summary>
     public interface IMessage : IDataModel
     {
         /// <summary>
-        ///     Account ID of the user in conversation.
+        ///     The account ID of the person receiving the message.
         /// </summary>
         int AccountId { get; set; }
 
         /// <summary>
-        ///     Utc timestamp of last sent message, converted from epoch time.
+        ///     Text of the message.
+        /// </summary>
+        string Body { get; set; }
+
+        /// <summary>
+        ///     ID for the overall conversation.
+        /// </summary>
+        int ConversationId { get; set; }
+
+        /// <summary>
+        ///     Time message was sent, epoch time.
         /// </summary>
         DateTimeOffset DateTime { get; set; }
 
         /// <summary>
-        ///     The username of the other user in conversation.
+        ///     Account username of person sending the message.
         /// </summary>
         string From { get; set; }
 
         /// <summary>
-        ///     Conversation ID
+        ///     The ID for the message.
         /// </summary>
         int Id { get; set; }
 
         /// <summary>
-        ///     The last message
+        ///     The account ID of the person who sent the message.
         /// </summary>
-        string LastMessage { get; set; }
-
-        /// <summary>
-        ///     Total number of messages in the conversation.
-        /// </summary>
-        int MessageNum { get; set; }
-
-        /// <summary>
-        ///     Account ID of the other user in conversation.
-        /// </summary>
-        int WithAccountId { get; set; }
+        int SenderId { get; set; }
     }
 }

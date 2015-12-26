@@ -23,7 +23,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.GetAccountResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var account = await endpoint.GetAccountAsync("bob");
@@ -62,7 +62,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.GetAccountSettingsResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var accountSettings = await endpoint.GetAccountSettingsAsync();
@@ -96,7 +96,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.SendVerificationEmailResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var updated = await endpoint.SendVerificationEmailAsync();
@@ -122,7 +122,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.SendVerificationEmailErrorResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var updated = await endpoint.SendVerificationEmailAsync();
@@ -138,7 +138,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.UpdateAccountSettingsResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var updated = await endpoint.UpdateAccountSettingsAsync();
@@ -163,7 +163,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.VerifyEmailResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var updated = await endpoint.VerifyEmailAsync();
@@ -189,7 +189,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.VerifyEmailErrorResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var updated = await endpoint.VerifyEmailAsync();

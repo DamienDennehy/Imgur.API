@@ -20,10 +20,10 @@ namespace Imgur.API.JsonConverters
         /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
-            if (typeof (IMessage).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo()))
+            if (typeof (IMessageNotification).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo()))
                 return true;
 
-            if (typeof (IComment).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo()))
+            if (typeof (ICommentNotification).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo()))
                 return true;
 
             return false;
@@ -43,10 +43,10 @@ namespace Imgur.API.JsonConverters
             var jsonString = JObject.Load(reader).ToString();
 
             if (CultureInfo.CurrentCulture.CompareInfo.IndexOf(jsonString, "comment", CompareOptions.IgnoreCase) > 0)
-                return JsonConvert.DeserializeObject<Comment>(jsonString);
+                return JsonConvert.DeserializeObject<CommentNotification>(jsonString);
 
             if (CultureInfo.CurrentCulture.CompareInfo.IndexOf(jsonString, "message_num", CompareOptions.IgnoreCase) > 0)
-                return JsonConvert.DeserializeObject<Message>(jsonString);
+                return JsonConvert.DeserializeObject<MessageNotification>(jsonString);
 
             throw new NotImplementedException("Unrecognized Notification type.");
         }

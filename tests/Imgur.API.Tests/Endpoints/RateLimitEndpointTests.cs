@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
@@ -21,7 +20,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(RateLimitEndpointResponses.RateLimitResponse)
             };
-            
+
             var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
 
             var client = new ImgurClient("123", "1234");

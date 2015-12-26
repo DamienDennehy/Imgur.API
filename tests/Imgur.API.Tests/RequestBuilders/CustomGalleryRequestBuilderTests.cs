@@ -17,7 +17,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
 
-            var fakeUrl =  $"{client.EndpointUrl}g/custom/add_tags";
+            var fakeUrl = $"{client.EndpointUrl}g/custom/add_tags";
             var tags = new List<string> {"Cats", "Dogs", "Seals"};
 
             var request = requestBuilder.AddCustomGalleryTagsRequest(fakeUrl, tags);
@@ -35,7 +35,7 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
-            var fakeUrl =  $"{client.EndpointUrl}g/custom/add_tags";
+            var fakeUrl = $"{client.EndpointUrl}g/custom/add_tags";
             requestBuilder.AddCustomGalleryTagsRequest(fakeUrl, null);
         }
 
@@ -53,7 +53,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
 
-            var fakeUrl =  $"{client.EndpointUrl}g/block_tag";
+            var fakeUrl = $"{client.EndpointUrl}g/block_tag";
             var tag = "Cats";
 
             var request = requestBuilder.AddFilteredOutGalleryTagRequest(fakeUrl, tag);
@@ -71,7 +71,7 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
-            var fakeUrl =  $"{client.EndpointUrl}g/block_tag";
+            var fakeUrl = $"{client.EndpointUrl}g/block_tag";
             requestBuilder.AddFilteredOutGalleryTagRequest(fakeUrl, null);
         }
 
@@ -89,7 +89,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
 
-            var fakeUrl =  $"{client.EndpointUrl}g/custom/remove_tags";
+            var fakeUrl = $"{client.EndpointUrl}g/custom/remove_tags";
             var tags = new List<string> {"Cats", "Dogs", "Seals"};
 
             var request = requestBuilder.RemoveCustomGalleryTagsRequest(fakeUrl, tags);
@@ -106,7 +106,7 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
-            var fakeUrl =  $"{client.EndpointUrl}g/custom/remove_tags";
+            var fakeUrl = $"{client.EndpointUrl}g/custom/remove_tags";
             requestBuilder.RemoveCustomGalleryTagsRequest(fakeUrl, null);
         }
 
@@ -124,7 +124,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
 
-            var fakeUrl =  $"{client.EndpointUrl}g/unblock_tag";
+            var fakeUrl = $"{client.EndpointUrl}g/unblock_tag";
             var tag = "Cats";
 
             var request = requestBuilder.RemoveFilteredOutGalleryTagRequest(fakeUrl, tag);
@@ -141,7 +141,7 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
-            var fakeUrl =  $"{client.EndpointUrl}g/unblock_tag";
+            var fakeUrl = $"{client.EndpointUrl}g/unblock_tag";
             requestBuilder.RemoveFilteredOutGalleryTagRequest(fakeUrl, null);
         }
 

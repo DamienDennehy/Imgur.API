@@ -10,44 +10,42 @@ namespace Imgur.API.Models.Impl
     public class Message : IMessage
     {
         /// <summary>
-        ///     Conversation ID
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
-        ///     Account ID of the user in conversation.
+        ///     The account ID of the person receiving the message.
         /// </summary>
         [JsonProperty("account_id")]
         public int AccountId { get; set; }
 
         /// <summary>
-        ///     Account ID of the other user in conversation.
+        ///     Text of the message.
         /// </summary>
-        [JsonProperty("with_account")]
-        public int WithAccountId { get; set; }
+        public string Body { get; set; }
 
         /// <summary>
-        ///     Total number of messages in the conversation.
+        ///     ID for the overall conversation.
         /// </summary>
-        [JsonProperty("message_num")]
-        public int MessageNum { get; set; }
+        [JsonProperty("conversation_id")]
+        public int ConversationId { get; set; }
 
         /// <summary>
-        ///     The last message
+        ///     Time message was sent, epoch time.
         /// </summary>
-        [JsonProperty("last_message")]
-        public string LastMessage { get; set; }
+        [JsonConverter(typeof (EpochTimeConverter))]
+        public DateTimeOffset DateTime { get; set; }
 
         /// <summary>
-        ///     The username of the other user in conversation.
+        ///     Account username of person sending the message.
         /// </summary>
         public string From { get; set; }
 
         /// <summary>
-        ///     Utc timestamp of last sent message, converted from epoch time.
+        ///     The ID for the message.
         /// </summary>
-        [JsonProperty("datetime")]
-        [JsonConverter(typeof (EpochTimeConverter))]
-        public DateTimeOffset DateTime { get; set; }
+        public int Id { get; set; }
+
+        /// <summary>
+        ///     The account ID of the person who sent the message.
+        /// </summary>
+        [JsonProperty("sender_id")]
+        public int SenderId { get; set; }
     }
 }

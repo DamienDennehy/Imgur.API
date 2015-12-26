@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.Endpoints
 {
-    public partial class AccountEndpointTests: TestBase
+    public partial class AccountEndpointTests : TestBase
     {
         [TestMethod]
         public async Task DeleteAlbumAsync_IsNotNull()
@@ -22,7 +22,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.DeleteAlbumResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var deleted = await endpoint.DeleteAlbumAsync("yMgB7", "sarah");
@@ -73,7 +73,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.GetAlbumResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var album = await endpoint.GetAlbumAsync("yMgB7", "sarah");
@@ -132,7 +132,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.GetAlbumCountResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var count = await endpoint.GetAlbumCountAsync("sarah");
@@ -165,7 +165,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.GetAlbumIdsResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var albums = await endpoint.GetAlbumIdsAsync("bob", 2);
@@ -199,7 +199,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.GetAlbumsResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var albums = await endpoint.GetAlbumsAsync("bob", 2);

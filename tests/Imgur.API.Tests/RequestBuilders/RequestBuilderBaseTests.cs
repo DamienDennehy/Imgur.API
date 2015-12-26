@@ -15,7 +15,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AccountRequestBuilder();
 
-            var fakeUrl =  $"{client.EndpointUrl}account/bob";
+            var fakeUrl = $"{client.EndpointUrl}account/bob";
             var request = requestBuilder.CreateRequest(HttpMethod.Get, fakeUrl);
 
             Assert.IsNotNull(request);

@@ -24,7 +24,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(ImageEndpointResponses.Imgur.DeleteImageResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var deleted = await endpoint.DeleteImageAsync("123xyj");
@@ -58,7 +58,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(ImageEndpointResponses.Imgur.FavoriteImageResponseFalse)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var favorited = await endpoint.FavoriteImageAsync("zVpyzhW");
@@ -74,7 +74,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(ImageEndpointResponses.Imgur.FavoriteImageResponseTrue)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var favorited = await endpoint.FavoriteImageAsync("zVpyzhW");
@@ -90,7 +90,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(ImageEndpointResponses.Mashape.FavoriteImageResponseFalse)
             };
-            
+
             var client = new MashapeClient("123", "1234", "xyz", FakeOAuth2Token);
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var favorited = await endpoint.FavoriteImageAsync("zVpyzhW");
@@ -131,7 +131,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(ImageEndpointResponses.Imgur.GetImageResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var image = await endpoint.GetImageAsync("zVpyzhW");
@@ -178,7 +178,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(ImageEndpointResponses.Imgur.UpdateImageResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var updated = await endpoint.UpdateImageAsync("123xyj");
@@ -203,7 +203,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(ImageEndpointResponses.Imgur.UploadImageResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var image = await endpoint.UploadImageBinaryAsync(File.ReadAllBytes("banana.gif"));
@@ -252,7 +252,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(ImageEndpointResponses.Imgur.UploadImageResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             IImage image;
@@ -297,7 +297,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(ImageEndpointResponses.Imgur.UploadImageResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var image = await endpoint.UploadImageUrlAsync("http://i.imgur.com/kiNOcUl.gif");

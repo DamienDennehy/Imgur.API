@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -17,7 +16,6 @@ namespace Imgur.API.Tests.Fakes
 
         public FakeHttpMessageHandler()
         {
-            
         }
 
         public FakeHttpMessageHandler(string url, HttpResponseMessage response)

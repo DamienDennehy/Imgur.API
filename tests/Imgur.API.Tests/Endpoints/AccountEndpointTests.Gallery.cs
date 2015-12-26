@@ -22,7 +22,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.GetAccountFavoritesResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var favorites = await endpoint.GetAccountFavoritesAsync();
@@ -47,7 +47,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.GetAccountGalleryFavoritesResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var favorites =
@@ -83,7 +83,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.GetAccountSubmissionsResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var submissions = await endpoint.GetAccountSubmissionsAsync(page: 2);
@@ -117,7 +117,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.GetGalleryProfileResponse)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var profile = await endpoint.GetGalleryProfileAsync();

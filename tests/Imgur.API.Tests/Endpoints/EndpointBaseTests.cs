@@ -217,9 +217,9 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent("hello world")
             };
-            
+
             var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
-            
+
             var constructorObjects = new object[2];
             constructorObjects[0] = new ImgurClient("123", "1234");
             //Inject the fake HttpClient when declaring a new endpoint
@@ -239,13 +239,13 @@ namespace Imgur.API.Tests.Endpoints
         {
             var constructorObjects = new object[2];
             constructorObjects[0] = new ImgurClient("123", "1234");
-            
+
             var fakeUrl = "http://example.org/test";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(ImageEndpointResponses.Imgur.GetImageResponse)
             };
-            
+
             var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
 
             //Inject the fake HttpClient when declaring a new endpoint

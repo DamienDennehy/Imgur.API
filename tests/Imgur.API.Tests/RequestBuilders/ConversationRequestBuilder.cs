@@ -16,7 +16,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ConversationRequestBuilder();
 
-            var fakeUrl =  $"{client.EndpointUrl}conversations/Bob";
+            var fakeUrl = $"{client.EndpointUrl}conversations/Bob";
 
             var request = requestBuilder.CreateMessageRequest(fakeUrl, "Hello World!");
 

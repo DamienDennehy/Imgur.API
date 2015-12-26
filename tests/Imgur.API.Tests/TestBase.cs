@@ -2,7 +2,6 @@
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Imgur.API.Tests.FakeResponses;
-using Imgur.API.Tests.Fakes;
 using NSubstitute;
 
 namespace Imgur.API.Tests

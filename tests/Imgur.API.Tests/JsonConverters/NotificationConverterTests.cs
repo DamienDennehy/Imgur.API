@@ -13,15 +13,15 @@ namespace Imgur.API.Tests.JsonConverters
     public class NotificationConverterTests
     {
         [TestMethod]
-        public void NotificationConverter_CanConvertComment_IsTrue()
+        public void NotificationConverter_CanConvertCommentNotification_IsTrue()
         {
             var converter = new NotificationConverter();
-            var canConvert = converter.CanConvert(new Comment().GetType());
+            var canConvert = converter.CanConvert(new CommentNotification().GetType());
             Assert.IsTrue(canConvert);
         }
 
         [TestMethod]
-        public void NotificationConverter_CanConvertMessage_IsFalse()
+        public void NotificationConverter_CanConvertMessageNotification_IsFalse()
         {
             var converter = new NotificationConverter();
             var canConvert = converter.CanConvert(new Image().GetType());
@@ -29,10 +29,10 @@ namespace Imgur.API.Tests.JsonConverters
         }
 
         [TestMethod]
-        public void NotificationConverter_CanConvertMessage_IsTrue()
+        public void NotificationConverter_CanConvertMessageNotification_IsTrue()
         {
             var converter = new NotificationConverter();
-            var canConvert = converter.CanConvert(new Message().GetType());
+            var canConvert = converter.CanConvert(new MessageNotification().GetType());
             Assert.IsTrue(canConvert);
         }
 
@@ -45,7 +45,8 @@ namespace Imgur.API.Tests.JsonConverters
             reader.Read();
             var serializer = new JsonSerializer();
 
-            var actual = (Comment) converter.ReadJson(reader, typeof (Comment), null, serializer);
+            var actual =
+                (CommentNotification) converter.ReadJson(reader, typeof (CommentNotification), null, serializer);
             Assert.IsNotNull(actual);
 
             Assert.AreEqual(null, actual.AlbumCover);
@@ -74,13 +75,14 @@ namespace Imgur.API.Tests.JsonConverters
             reader.Read();
             var serializer = new JsonSerializer();
 
-            var actual = (Message) converter.ReadJson(reader, typeof (Message), null, serializer);
+            var actual =
+                (MessageNotification) converter.ReadJson(reader, typeof (MessageNotification), null, serializer);
             Assert.IsNotNull(actual);
 
             Assert.AreEqual(76767, actual.Id);
             Assert.AreEqual("Bob", actual.From);
             Assert.AreEqual(89898, actual.AccountId);
-            Assert.AreEqual(3434, actual.WithAccountId);
+            Assert.AreEqual(3434, actual.WithAccount);
             Assert.AreEqual("Test33", actual.LastMessage);
             Assert.AreEqual(2, actual.MessageNum);
             Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 10, 12, 02, 31, 43, DateTimeKind.Utc)),

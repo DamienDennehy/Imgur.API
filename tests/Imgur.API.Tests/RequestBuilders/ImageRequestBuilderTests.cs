@@ -18,7 +18,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
 
-            var fakeUrl =  $"{client.EndpointUrl}image/1234Xyz9";
+            var fakeUrl = $"{client.EndpointUrl}image/1234Xyz9";
             var request = requestBuilder.UpdateImageRequest(fakeUrl, "TheTitle", "TheDescription");
 
             Assert.IsNotNull(request);
@@ -43,7 +43,7 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
-            var fakeUrl =  $"{client.EndpointUrl}image";
+            var fakeUrl = $"{client.EndpointUrl}image";
 
             var image = File.ReadAllBytes("banana.gif");
             var request = requestBuilder.UploadImageBinaryRequest(fakeUrl, image, "TheAlbum", "TheTitle",
@@ -81,7 +81,7 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
-            var fakeUrl =  $"{client.EndpointUrl}image";
+            var fakeUrl = $"{client.EndpointUrl}image";
             requestBuilder.UploadImageBinaryRequest(fakeUrl, null);
         }
 
@@ -99,7 +99,7 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
-            var fakeUrl =  $"{client.EndpointUrl}image";
+            var fakeUrl = $"{client.EndpointUrl}image";
 
             var request = requestBuilder.UploadImageUrlRequest(fakeUrl, "http://i.imgur.com/hxsPLa7.jpg",
                 "TheAlbum", "TheTitle", "TheDescription");
@@ -121,7 +121,7 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
-            var fakeUrl =  $"{client.EndpointUrl}image";
+            var fakeUrl = $"{client.EndpointUrl}image";
             requestBuilder.UploadImageBinaryRequest(fakeUrl, null);
         }
 
@@ -138,7 +138,7 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
-            var fakeUrl =  $"{client.EndpointUrl}image";
+            var fakeUrl = $"{client.EndpointUrl}image";
 
             using (var fs = new FileStream("banana.gif", FileMode.Open))
             {
@@ -181,7 +181,7 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
-            var fakeUrl =  $"{client.EndpointUrl}image";
+            var fakeUrl = $"{client.EndpointUrl}image";
             using (var fs = new FileStream("banana.gif", FileMode.Open))
             {
                 requestBuilder.UploadImageStreamRequest(fakeUrl, null);

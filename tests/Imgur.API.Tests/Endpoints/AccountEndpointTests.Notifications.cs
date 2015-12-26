@@ -20,7 +20,7 @@ namespace Imgur.API.Tests.Endpoints
             {
                 Content = new StringContent(AccountEndpointResponses.GetNotifications)
             };
-            
+
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var notifications = await endpoint.GetNotificationsAsync(false);

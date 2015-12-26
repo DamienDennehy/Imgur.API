@@ -11,16 +11,16 @@
 * Account endpoint.
 * Album endpoint.
 * Comment endpoint.
+* Conversation endpoint.
+* Custom Gallery endpoint.
 * Image endpoint.
+* Notification endpoint.
 * OAuth2 endpoint.
 * Rate Limit endpoint.
 
 ##ToDo
 
 ###Endpoints
-* Custom Gallery endpoint.
-* Conversation endpoint.
-* Notification endpoint.
 * Memegen endpoint.
 * Topic endpoint.
 * Gallery endpoint.

@@ -1,5 +1,13 @@
 # Release Notes
 
+## Version 3.4.0 (2015-12-26)
+* Added Custom Gallery endpoint.
+* Added Conversation endpoint.
+* Added Notification endpoint.
+* Updated UpdateRateLimit method to prevent OverflowExceptions.
+* Updated comments on all exceptions thrown.
+* Moved exceptions to base namespace.
+
 ## Version 3.3.0 (2015-12-23)
 * Added CommentEndpoint.
 * Added AccountUsername to OAuth2Token.

@@ -115,7 +115,7 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task MarkNotificationViewedAsync_IsTrue()
         {
-            var fakeUrl = "https://api.imgur.com/3/notification/12345";
+            var fakeUrl = "https://api.imgur.com/3/notification";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(NotificationEndpointResponses.MarkNotificationViewed)

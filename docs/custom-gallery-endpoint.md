@@ -12,7 +12,7 @@ Add tags to filter out. OAuth authentication required.
 
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH2_TOKEN);
             var endpoint = new CustomGalleryEndpoint(client);
-			var removed = await endpoint.RemoveCustomGalleryTagsAsync(new List<string> { "A_TAG", "ANOTHER_TAG" });
+			var removed = await endpoint.AddFilteredOutGalleryTagAsync("A_TAG");
 			
 ##GetCustomGalleryAsync
 View images for current user's custom gallery. OAuth authentication required.

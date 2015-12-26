@@ -19,7 +19,7 @@ Delete a conversation by the given id. OAuth authentication required.
 
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH2_TOKEN);
             var endpoint = new ConversationEndpoint(client);
-			var created = await endpoint.DeleteConversationAsync("CONVERSATION_ID");
+			var deleted = await endpoint.DeleteConversationAsync("CONVERSATION_ID");
 
 ##GetConversationAsync
 Get information about a specific conversation. Includes messages.
@@ -33,7 +33,7 @@ Get list of all conversations for the logged in user.
 
             var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH2_TOKEN);
             var endpoint = new ConversationEndpoint(client);
-			var conversation = await endpoint.GetConversationsAsync();
+			var conversations = await endpoint.GetConversationsAsync();
 
 ##ReportSenderAsync
 Report a user for sending messages that are against the Terms of Service.

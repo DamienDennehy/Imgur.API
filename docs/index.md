@@ -8,5 +8,3 @@ Supports Imgur's free and Mashape's commercial API endpoints.
 [![Build](https://img.shields.io/appveyor/ci/damiendennehy/imgur-api.svg)](https://ci.appveyor.com/project/DamienDennehy/imgur-api)
 
 [![NuGet](https://img.shields.io/nuget/dt/Imgur.API.svg)](https://www.nuget.org/packages/Imgur.API/)
-
-

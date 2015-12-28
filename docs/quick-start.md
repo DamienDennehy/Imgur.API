@@ -15,19 +15,22 @@ Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https:/
 ## Quick Start
 ### Upload image anonymously
 
-	try
-	{
-		var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
-		var endpoint = new ImageEndpoint(client);
-		IImage image;
-		using (var fs = new FileStream(@"IMAGE_LOCATION", FileMode.Open))
+		public async Task UploadImage()
 		{
-			image = await endpoint.UploadImageStreamAsync(fs);
+			try
+			{
+				var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
+				var endpoint = new ImageEndpoint(client);
+				IImage image;
+				using (var fs = new FileStream(@"IMAGE_LOCATION", FileMode.Open))
+				{
+					image = await endpoint.UploadImageStreamAsync(fs);
+				}
+				Debug.Write("Image uploaded. Image Url: " + image.Link);
+			}
+			catch (ImgurException imgurEx)
+			{
+				Debug.Write("An error occurred uploading an image to Imgur.");
+				Debug.Write(imgurEx.Message);
+			}
 		}
-		Debug.Write("Image uploaded. Image Url: " + image.Link);
-	}
-	catch (ImgurException imgurEx)
-	{
-		Debug.Write("An error occurred uploading an image to Imgur.");
-		Debug.Write(imgurEx.Message);
-	}

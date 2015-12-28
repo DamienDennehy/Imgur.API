@@ -57,7 +57,15 @@
     <Compile Include="Endpoints\Impl\CustomGalleryEndpoint.cs" />
     <Compile Include="Endpoints\Impl\NotificationEndpoint.cs" />
     <Compile Include="Endpoints\INotificationEndpoint.cs" />
+    <Compile Include="Endpoints\IMemeGenEndpoint.cs" />
+    <Compile Include="Endpoints\ITopicEndpoint.cs" />
     <Compile Include="Enums\AlbumLayout.cs" />
+    <Compile Include="Enums\FileType.cs" />
+    <Compile Include="Enums\ImageSize.cs" />
+    <Compile Include="Enums\GalleryTagSortOrder.cs" />
+    <Compile Include="Enums\SubredditGallerySortOrder.cs" />
+    <Compile Include="Enums\MemesGallerySortOrder.cs" />
+    <Compile Include="Enums\GallerySortOrder.cs" />
     <Compile Include="Enums\CustomGallerySortOrder.cs" />
     <Compile Include="Enums\OAuth2ResponseType.cs" />
     <Compile Include="Endpoints\IAccountEndpoint.cs" />
@@ -70,6 +78,7 @@
     <Compile Include="Endpoints\IOAuth2Endpoint.cs" />
     <Compile Include="Endpoints\IRateLimitEndpoint.cs" />
     <Compile Include="Enums\ReportReason.cs" />
+    <Compile Include="Enums\Section.cs" />
     <Compile Include="Enums\Vote.cs" />
     <Compile Include="Enums\Window.cs" />
     <Compile Include="MashapeException.cs" />

@@ -35,18 +35,6 @@ namespace Imgur.API.Models.Impl
         public virtual string AccessToken { get; }
 
         /// <summary>
-        ///     The user's refresh token.
-        /// </summary>
-        [JsonProperty("refresh_token")]
-        public virtual string RefreshToken { get; }
-
-        /// <summary>
-        ///     The type of token that was requested, usually "bearer".
-        /// </summary>
-        [JsonProperty("token_type")]
-        public virtual string TokenType { get; }
-
-        /// <summary>
         ///     The user's account id.
         /// </summary>
         [JsonProperty("account_id")]
@@ -59,14 +47,26 @@ namespace Imgur.API.Models.Impl
         public virtual string AccountUsername { get; }
 
         /// <summary>
+        ///     The DateTimeOffset when the token expires. Usually one month from the request.
+        /// </summary>
+        public virtual DateTimeOffset ExpiresAt => DateTimeOffset.UtcNow.AddSeconds(ExpiresIn);
+
+        /// <summary>
         ///     The time in seconds when the token expires. Usually one month from the request.
         /// </summary>
         [JsonProperty("expires_in")]
         public virtual int ExpiresIn { get; }
 
         /// <summary>
-        ///     The DateTimeOffset when the token expires. Usually one month from the request.
+        ///     The user's refresh token.
         /// </summary>
-        public virtual DateTimeOffset ExpiresAt => DateTimeOffset.UtcNow.AddSeconds(ExpiresIn);
+        [JsonProperty("refresh_token")]
+        public virtual string RefreshToken { get; }
+
+        /// <summary>
+        ///     The type of token that was requested, usually "bearer".
+        /// </summary>
+        [JsonProperty("token_type")]
+        public virtual string TokenType { get; }
     }
 }

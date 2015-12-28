@@ -34,6 +34,78 @@ namespace Imgur.API.Endpoints.Impl
         internal ImageRequestBuilder RequestBuilder { get; } = new ImageRequestBuilder();
 
         /// <summary>
+        ///     Deletes an image. For an anonymous image, {id} must be the image's deletehash.
+        ///     If the image belongs to your account then passing the ID of the image is sufficient.
+        /// </summary>
+        /// <param name="id">The image id.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <returns></returns>
+        public async Task<bool> DeleteImageAsync(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+
+            var url = $"image/{id}";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
+            {
+                var deleted = await SendRequestAsync<bool>(request);
+                return deleted;
+            }
+        }
+
+        /// <summary>
+        ///     Favorite an image with the given ID. OAuth authentication required.
+        /// </summary>
+        /// <param name="id">The image id.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <returns></returns>
+        public async Task<bool> FavoriteImageAsync(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
+
+            var url = $"image/{id}/favorite";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
+            {
+                //The structure of the response of favoriting an image
+                //varies on if Imgur or Mashape Authentication is used
+                if (ApiClient is IImgurClient)
+                {
+                    var imgurResult = await SendRequestAsync<string>(request);
+                    return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
+                }
+
+                //If Mashape Authentication is used, the favorite is returned as an exception
+                try
+                {
+                    await SendRequestAsync<string>(request);
+                }
+                catch (ImgurException imgurException)
+                {
+                    return imgurException.Message.Equals("f", StringComparison.OrdinalIgnoreCase);
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         ///     Get information about an image.
         /// </summary>
         /// <param name="id">The image id.</param>
@@ -55,6 +127,35 @@ namespace Imgur.API.Endpoints.Impl
             {
                 var image = await SendRequestAsync<Image>(request);
                 return image;
+            }
+        }
+
+        /// <summary>
+        ///     Updates the title or description of an image.
+        ///     You can only update an image you own and is associated with your account.
+        ///     For an anonymous image, {id} must be the image's deletehash.
+        /// </summary>
+        /// <param name="id">The image id.</param>
+        /// <param name="title">The title of the image.</param>
+        /// <param name="description">The description of the image.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <returns></returns>
+        public async Task<bool> UpdateImageAsync(string id, string title = null, string description = null)
+        {
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+
+            var url = $"image/{id}";
+
+            using (var request = RequestBuilder.UpdateImageRequest(url, title, description))
+            {
+                var updated = await SendRequestAsync<bool>(request);
+                return updated;
             }
         }
 
@@ -152,107 +253,6 @@ namespace Imgur.API.Endpoints.Impl
                 var returnImage = await SendRequestAsync<Image>(request);
                 return returnImage;
             }
-        }
-
-        /// <summary>
-        ///     Deletes an image. For an anonymous image, {id} must be the image's deletehash.
-        ///     If the image belongs to your account then passing the ID of the image is sufficient.
-        /// </summary>
-        /// <param name="id">The image id.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
-        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
-        /// <returns></returns>
-        public async Task<bool> DeleteImageAsync(string id)
-        {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
-
-            var url = $"image/{id}";
-
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
-            {
-                var deleted = await SendRequestAsync<bool>(request);
-                return deleted;
-            }
-        }
-
-        /// <summary>
-        ///     Updates the title or description of an image.
-        ///     You can only update an image you own and is associated with your account.
-        ///     For an anonymous image, {id} must be the image's deletehash.
-        /// </summary>
-        /// <param name="id">The image id.</param>
-        /// <param name="title">The title of the image.</param>
-        /// <param name="description">The description of the image.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
-        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
-        /// <returns></returns>
-        public async Task<bool> UpdateImageAsync(string id, string title = null, string description = null)
-        {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
-
-            var url = $"image/{id}";
-
-            using (var request = RequestBuilder.UpdateImageRequest(url, title, description))
-            {
-                var updated = await SendRequestAsync<bool>(request);
-                return updated;
-            }
-        }
-
-        /// <summary>
-        ///     Favorite an image with the given ID. OAuth authentication required.
-        /// </summary>
-        /// <param name="id">The image id.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
-        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
-        /// <returns></returns>
-        public async Task<bool> FavoriteImageAsync(string id)
-        {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
-
-            if (ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
-
-            var url = $"image/{id}/favorite";
-
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
-            {
-                //The structure of the response of favoriting an image
-                //varies on if Imgur or Mashape Authentication is used
-                if (ApiClient is IImgurClient)
-                {
-                    var imgurResult = await SendRequestAsync<string>(request);
-                    return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
-                }
-
-                //If Mashape Authentication is used, the favorite is returned as an exception
-                try
-                {
-                    await SendRequestAsync<string>(request);
-                }
-                catch (ImgurException imgurException)
-                {
-                    return imgurException.Message.Equals("f", StringComparison.OrdinalIgnoreCase);
-                }
-            }
-
-            return false;
         }
     }
 }

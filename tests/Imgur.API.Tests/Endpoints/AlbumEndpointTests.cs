@@ -249,7 +249,6 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual(false, image.Favorite);
             Assert.AreEqual(null, image.Nsfw);
             Assert.AreEqual(null, image.Section);
-            Assert.AreEqual(null, image.AccountId);
             Assert.AreEqual("http://i.imgur.com/79MH23L.png", image.Link);
         }
 

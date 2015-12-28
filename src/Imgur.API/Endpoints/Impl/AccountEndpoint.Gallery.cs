@@ -14,9 +14,8 @@ namespace Imgur.API.Endpoints.Impl
         internal GalleryRequestBuilder GalleryRequestBuilder { get; } = new GalleryRequestBuilder();
 
         /// <summary>
-        ///     The totals for a users gallery information.
+        ///     Returns the users favorited images. OAuth authentication required.
         /// </summary>
-        /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -24,21 +23,17 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IGalleryProfile> GetGalleryProfileAsync(string username = "me")
+        public async Task<IEnumerable<IGalleryItem>> GetAccountFavoritesAsync()
         {
-            if (string.IsNullOrEmpty(username))
-                throw new ArgumentNullException(nameof(username));
-
-            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-                && ApiClient.OAuth2Token == null)
+            if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"account/{username}/gallery_profile";
+            var url = "account/me/favorites";
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var profile = await SendRequestAsync<GalleryProfile>(request);
-                return profile;
+                var favorites = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
+                return favorites;
             }
         }
 
@@ -77,30 +72,6 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Returns the users favorited images. OAuth authentication required.
-        /// </summary>
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
-        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
-        /// <returns></returns>
-        public async Task<IEnumerable<IGalleryItem>> GetAccountFavoritesAsync()
-        {
-            if (ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
-
-            var url = "account/me/favorites";
-
-            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
-            {
-                var favorites = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
-                return favorites;
-            }
-        }
-
-        /// <summary>
         ///     Return the images a user has submitted to the gallery.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
@@ -127,6 +98,35 @@ namespace Imgur.API.Endpoints.Impl
             {
                 var submissions = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
                 return submissions;
+            }
+        }
+
+        /// <summary>
+        ///     The totals for a users gallery information.
+        /// </summary>
+        /// <param name="username">The user account. Default: me</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <returns></returns>
+        public async Task<IGalleryProfile> GetGalleryProfileAsync(string username = "me")
+        {
+            if (string.IsNullOrEmpty(username))
+                throw new ArgumentNullException(nameof(username));
+
+            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
+                && ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
+
+            var url = $"account/{username}/gallery_profile";
+
+            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            {
+                var profile = await SendRequestAsync<GalleryProfile>(request);
+                return profile;
             }
         }
     }

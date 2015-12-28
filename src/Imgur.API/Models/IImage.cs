@@ -9,11 +9,6 @@ namespace Imgur.API.Models
     public interface IImage : IDataModel
     {
         /// <summary>
-        ///     The account ID for the uploader, or null.
-        /// </summary>
-        string AccountId { get; set; }
-
-        /// <summary>
         ///     Is the image animated.
         /// </summary>
         bool Animated { get; set; }
@@ -107,7 +102,7 @@ namespace Imgur.API.Models
         string Type { get; set; }
 
         /// <summary>
-        ///     The size of the image in bytes.
+        ///     The number of image views.
         /// </summary>
         int Views { get; set; }
 

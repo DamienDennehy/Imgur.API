@@ -66,13 +66,13 @@ namespace Imgur.API.Authentication.Impl
 
             if (oAuth2Token.TokenType == null)
                 throw new ArgumentNullException(nameof(oAuth2Token.TokenType));
-            
+
             if (oAuth2Token.AccountId == null)
                 throw new ArgumentNullException(nameof(oAuth2Token.AccountId));
 
             if (oAuth2Token.AccountUsername == null)
                 throw new ArgumentNullException(nameof(oAuth2Token.AccountUsername));
-            
+
             ClientId = clientId;
             ClientSecret = clientSecret;
             OAuth2Token = oAuth2Token;
@@ -95,14 +95,14 @@ namespace Imgur.API.Authentication.Impl
         public abstract string EndpointUrl { get; }
 
         /// <summary>
-        ///     Remaining credits for the application.
-        /// </summary>
-        public virtual IRateLimit RateLimit { get; } = new RateLimit();
-
-        /// <summary>
         ///     An OAuth2 Token used for actions against a user's account.
         /// </summary>
         public virtual IOAuth2Token OAuth2Token { get; private set; }
+
+        /// <summary>
+        ///     Remaining credits for the application.
+        /// </summary>
+        public virtual IRateLimit RateLimit { get; } = new RateLimit();
 
         /// <summary>
         ///     Sets the oAuth2Token to be used.
@@ -122,13 +122,13 @@ namespace Imgur.API.Authentication.Impl
 
             if (oAuth2Token.AccessToken == null)
                 throw new ArgumentNullException(nameof(oAuth2Token.AccessToken));
-            
+
             if (oAuth2Token.RefreshToken == null)
                 throw new ArgumentNullException(nameof(oAuth2Token.RefreshToken));
 
             if (oAuth2Token.TokenType == null)
                 throw new ArgumentNullException(nameof(oAuth2Token.TokenType));
-            
+
             if (oAuth2Token.AccountId == null)
                 throw new ArgumentNullException(nameof(oAuth2Token.AccountId));
 

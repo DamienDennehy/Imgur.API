@@ -14,13 +14,13 @@ namespace Imgur.API.Models.Impl
         public virtual T Data { get; set; }
 
         /// <summary>
-        ///     Was the request successful.
-        /// </summary>
-        public virtual bool Success { get; set; }
-
-        /// <summary>
         ///     HTTP Status Code.
         /// </summary>
         public virtual HttpStatusCode Status { get; set; }
+
+        /// <summary>
+        ///     Was the request successful.
+        /// </summary>
+        public virtual bool Success { get; set; }
     }
 }

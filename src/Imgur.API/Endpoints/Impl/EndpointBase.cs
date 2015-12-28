@@ -87,14 +87,14 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     The class for sending HTTP requests and receiving HTTP responses from the endpoint methods.
-        /// </summary>
-        public virtual HttpClient HttpClient { get; }
-
-        /// <summary>
         ///     Interface for all API authentication types.
         /// </summary>
         public virtual IApiClient ApiClient { get; private set; }
+
+        /// <summary>
+        ///     The class for sending HTTP requests and receiving HTTP responses from the endpoint methods.
+        /// </summary>
+        public virtual HttpClient HttpClient { get; }
 
         /// <summary>
         ///     Switch from one client type to another.

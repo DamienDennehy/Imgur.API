@@ -14,13 +14,13 @@ namespace Imgur.API.Models.Impl
         public string Error { get; set; }
 
         /// <summary>
-        ///     The request Uri that the error came from.
-        /// </summary>
-        public string Request { get; set; }
-
-        /// <summary>
         ///     The HttpMethod that was used to send the request.
         /// </summary>
         public string Method { get; set; }
+
+        /// <summary>
+        ///     The request Uri that the error came from.
+        /// </summary>
+        public string Request { get; set; }
     }
 }

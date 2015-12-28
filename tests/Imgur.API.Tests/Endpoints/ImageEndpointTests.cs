@@ -152,7 +152,6 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual(false, image.Favorite);
             Assert.AreEqual(false, image.Nsfw);
             Assert.AreEqual("Eyebleach", image.Section);
-            Assert.AreEqual("23095506", image.AccountId);
             Assert.AreEqual("http://i.imgur.com/zVpyzhW.gifv", image.Gifv);
             Assert.AreEqual("http://i.imgur.com/zVpyzhW.webm", image.Webm);
             Assert.AreEqual("http://i.imgur.com/zVpyzhW.mp4", image.Mp4);
@@ -208,7 +207,6 @@ namespace Imgur.API.Tests.Endpoints
             var image = await endpoint.UploadImageBinaryAsync(File.ReadAllBytes("banana.gif"));
 
             Assert.IsNotNull(image);
-            Assert.AreEqual("24234234", image.AccountId);
             Assert.AreEqual(true, image.Animated);
             Assert.AreEqual(0, image.Bandwidth);
             Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 8, 23, 23, 43, 31, DateTimeKind.Utc)), image.DateTime);
@@ -261,7 +259,6 @@ namespace Imgur.API.Tests.Endpoints
             }
 
             Assert.IsNotNull(image);
-            Assert.AreEqual("24234234", image.AccountId);
             Assert.AreEqual(true, image.Animated);
             Assert.AreEqual(0, image.Bandwidth);
             Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 8, 23, 23, 43, 31, DateTimeKind.Utc)), image.DateTime);
@@ -300,7 +297,6 @@ namespace Imgur.API.Tests.Endpoints
             var image = await endpoint.UploadImageUrlAsync("http://i.imgur.com/kiNOcUl.gif");
 
             Assert.IsNotNull(image);
-            Assert.AreEqual("24234234", image.AccountId);
             Assert.AreEqual(true, image.Animated);
             Assert.AreEqual(0, image.Bandwidth);
             Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 8, 23, 23, 43, 31, DateTimeKind.Utc)), image.DateTime);

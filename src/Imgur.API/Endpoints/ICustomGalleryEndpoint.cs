@@ -32,7 +32,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="sort">The order that the gallery should be sorted by. Default: Viral</param>
         /// <param name="window">The time period that should be used in filtering requests. Default: Week</param>
-        /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
+        /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
         Task<ICustomGallery> GetCustomGalleryAsync(CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral,
             Window? window = Window.Week, int? page = null);
@@ -51,7 +51,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="sort">The order that the gallery should be sorted by. Default: Viral</param>
         /// <param name="window">The time period that should be used in filtering requests. Default: Week</param>
-        /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
+        /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
         Task<ICustomGallery> GetFilteredOutGalleryAsync(CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral,
             Window? window = Window.Week, int? page = null);

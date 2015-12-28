@@ -104,7 +104,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Return the images a user has submitted to the gallery.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
+        /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.

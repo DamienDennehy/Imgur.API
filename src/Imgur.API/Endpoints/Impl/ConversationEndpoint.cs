@@ -125,7 +125,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Get information about a specific conversation. Includes messages.
         /// </summary>
         /// <param name="id">The conversation id.</param>
-        /// <param name="page">Page of message thread. Starting at 1 for the most recent 25 messages and counting upwards.</param>
+        /// <param name="page">Page of message thread. Starting at 1 for the most recent 25 messages and counting upwards. Default: null</param>
         /// <param name="offset">Additional offset in current page.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a

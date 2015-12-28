@@ -68,7 +68,7 @@ namespace Imgur.API.Endpoints
         ///     Return the images a user has submitted to the gallery.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
+        /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
         Task<IEnumerable<IGalleryItem>> GetAccountSubmissionsAsync(string username = "me", int? page = null);
 
@@ -91,7 +91,7 @@ namespace Imgur.API.Endpoints
         ///     Return a list of all of the album IDs.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
         Task<IEnumerable<string>> GetAlbumIdsAsync(string username = "me", int? page = null);
 
@@ -100,7 +100,7 @@ namespace Imgur.API.Endpoints
         ///     Must be logged in as the user to see secret and hidden albums.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
         Task<IEnumerable<IAlbum>> GetAlbumsAsync(string username = "me", int? page = null);
 
@@ -134,7 +134,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <param name="sort">The order that the comments should be sorted by. Default: Newest</param>
-        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
         Task<IEnumerable<IComment>> GetCommentsAsync(string username = "me",
             CommentSortOrder? sort = CommentSortOrder.Newest, int? page = null);
@@ -166,7 +166,7 @@ namespace Imgur.API.Endpoints
         ///     Returns a list of Image IDs that are associated with the account. OAuth authentication required.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
         Task<IEnumerable<string>> GetImageIdsAsync(string username = "me", int? page = null);
 
@@ -176,7 +176,7 @@ namespace Imgur.API.Endpoints
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
         Task<IEnumerable<IImage>> GetImagesAsync(string username = "me", int? page = null);
 

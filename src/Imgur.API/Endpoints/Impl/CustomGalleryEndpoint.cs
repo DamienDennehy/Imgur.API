@@ -98,7 +98,7 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="sort">The order that the gallery should be sorted by. Default: Viral</param>
         /// <param name="window">The time period that should be used in filtering requests. Default: Week</param>
-        /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
+        /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -165,7 +165,7 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="sort">The order that the gallery should be sorted by. Default: Viral</param>
         /// <param name="window">The time period that should be used in filtering requests. Default: Week</param>
-        /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null.</param>
+        /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.

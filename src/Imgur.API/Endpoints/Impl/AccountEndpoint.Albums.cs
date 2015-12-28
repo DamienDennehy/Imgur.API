@@ -17,7 +17,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Must be logged in as the user to see secret and hidden albums.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -80,7 +80,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Return a list of all of the album IDs.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
-        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
+        /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.

@@ -39,7 +39,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Indicates if the current user favorited the image. Defaults to false if not signed in.
         /// </summary>
-        public virtual bool Favorite { get; set; }
+        public virtual bool? Favorite { get; set; }
 
         /// <summary>
         ///     OPTIONAL, The .gifv link. Only available if the image is animated and type is 'image/gif'.

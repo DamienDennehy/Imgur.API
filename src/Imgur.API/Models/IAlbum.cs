@@ -52,7 +52,7 @@ namespace Imgur.API.Models
         /// <summary>
         ///     Indicates if the current user favorited the image. Defaults to false if not signed in.
         /// </summary>
-        bool Favorite { get; set; }
+        bool? Favorite { get; set; }
 
         /// <summary>
         ///     The ID for the album.
@@ -72,7 +72,7 @@ namespace Imgur.API.Models
         /// <summary>
         ///     The view layout of the album.
         /// </summary>
-        AlbumLayout Layout { get; set; }
+        AlbumLayout? Layout { get; set; }
 
         /// <summary>
         ///     The URL link to the album.
@@ -92,7 +92,7 @@ namespace Imgur.API.Models
         /// <summary>
         ///     The privacy level of the album, you can only view public if not logged in as album owner.
         /// </summary>
-        AlbumPrivacy Privacy { get; set; }
+        AlbumPrivacy? Privacy { get; set; }
 
         /// <summary>
         ///     If the image has been categorized then this will contain the section the image belongs in. (funny, cats,

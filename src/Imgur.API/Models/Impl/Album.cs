@@ -58,9 +58,9 @@ namespace Imgur.API.Models.Impl
         public string Description { get; set; }
 
         /// <summary>
-        ///     Indicates if the current user favorited the image. Defaults to false if not signed in.
+        ///     Indicates if the current user favorited the album. Defaults to false if not signed in.
         /// </summary>
-        public bool Favorite { get; set; }
+        public bool? Favorite { get; set; }
 
         /// <summary>
         ///     The ID for the album.
@@ -83,7 +83,7 @@ namespace Imgur.API.Models.Impl
         ///     The view layout of the album.
         /// </summary>
         [JsonConverter(typeof (StringEnumConverter))]
-        public AlbumLayout Layout { get; set; }
+        public AlbumLayout? Layout { get; set; }
 
         /// <summary>
         ///     The URL link to the album.
@@ -104,7 +104,7 @@ namespace Imgur.API.Models.Impl
         ///     The privacy level of the album, you can only view public if not logged in as album owner.
         /// </summary>
         [JsonConverter(typeof (StringEnumConverter))]
-        public AlbumPrivacy Privacy { get; set; }
+        public AlbumPrivacy? Privacy { get; set; }
 
         /// <summary>
         ///     If the image has been categorized then this will contain the section the image belongs in. (funny, cats,

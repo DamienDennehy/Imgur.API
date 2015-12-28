@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Imgur.API.Enums;
 using Imgur.API.JsonConverters;
 using Newtonsoft.Json;
@@ -15,52 +14,13 @@ namespace Imgur.API.Models.Impl
         ///     The account ID for the uploader, or null.
         /// </summary>
         [JsonProperty("account_id")]
-        public string AccountId { get; set; }
+        public int? AccountId { get; set; }
 
         /// <summary>
         ///     The username of the account that uploaded it, or null.
         /// </summary>
         [JsonProperty("account_url")]
         public string AccountUrl { get; set; }
-
-        /// <summary>
-        ///     Number of comments on the gallery image.
-        /// </summary>
-        [JsonProperty("comment_count")]
-        public int? CommentCount { get; set; }
-
-        /// <summary>
-        ///     Up to 10 top level comments, sorted by "best".
-        /// </summary>
-        [JsonProperty("comment_preview")]
-        [JsonConverter(typeof (TypeConverter<IEnumerable<Comment>>))]
-        public IEnumerable<IComment> CommentPreview { get; set; } = new List<IComment>();
-
-        /// <summary>
-        ///     Number of downvotes for the image.
-        /// </summary>
-        public int? Downs { get; set; }
-
-        /// <summary>
-        ///     Imgur popularity score.
-        /// </summary>
-        public int? Score { get; set; }
-
-        /// <summary>
-        ///     Topic of the gallery image.
-        /// </summary>
-        public string Topic { get; set; }
-
-        /// <summary>
-        ///     Topic ID of the gallery image.
-        /// </summary>
-        [JsonProperty("topic_id")]
-        public int? TopicId { get; set; }
-
-        /// <summary>
-        ///     Upvotes for the image.
-        /// </summary>
-        public int? Ups { get; set; }
 
         /// <summary>
         ///     Is the image animated.
@@ -91,7 +51,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Indicates if the current user favorited the image. Defaults to false if not signed in.
         /// </summary>
-        public bool Favorite { get; set; }
+        public bool? Favorite { get; set; }
 
         /// <summary>
         ///     OPTIONAL, The .gifv link. Only available if the image is animated and type is 'image/gif'.

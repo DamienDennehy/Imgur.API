@@ -64,7 +64,7 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.AreEqual(119, actual.Downs);
             Assert.AreEqual(true, actual.Favorite);
             Assert.AreEqual("LqLmI", actual.Id);
-            Assert.AreEqual(9, actual.ImageCount);
+            Assert.AreEqual(9, actual.ImagesCount);
             Assert.AreEqual(0, actual.Images.Count());
             Assert.AreEqual(AlbumLayout.Blog, actual.Layout);
             Assert.AreEqual("http://imgur.com/a/LqLmI", actual.Link);

@@ -35,6 +35,7 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     Block the user from sending messages to the user that is logged in.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="username">The sender that should be blocked.</param>
         /// <exception cref="ArgumentNullException">
@@ -62,7 +63,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Create a new message.
+        ///     Create a new message. OAuth authentication required.
         /// </summary>
         /// <param name="recipient">The recipient username, this person will receive the message.</param>
         /// <param name="body">The message itself, similar to the body of an email.</param>
@@ -94,7 +95,7 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Delete a conversation by the given id.
+        ///     Delete a conversation by the given id. OAuth authentication required.
         /// </summary>
         /// <param name="id">The conversation id.</param>
         /// <exception cref="ArgumentNullException">
@@ -123,6 +124,7 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     Get information about a specific conversation. Includes messages.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="id">The conversation id.</param>
         /// <param name="page">
@@ -156,6 +158,7 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     Get list of all conversations for the logged in user.
+        ///     OAuth authentication required.
         /// </summary>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
@@ -180,6 +183,7 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     Report a user for sending messages that are against the Terms of Service.
+        ///     OAuth authentication required.
         /// </summary>
         /// <param name="username">The sender that should be reported.</param>
         /// <exception cref="ArgumentNullException">

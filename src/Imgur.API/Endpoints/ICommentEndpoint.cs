@@ -25,9 +25,9 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="comment">The comment text, this is what will be displayed.</param>
         /// <param name="imageId">The ID of the image in the gallery that you wish to comment on.</param>
-        /// <param name="commentId">The comment id that you are replying to.</param>
+        /// <param name="parentId">The comment id that you are replying to.</param>
         /// <returns></returns>
-        Task<IComment> CreateReplyAsync(string comment, string imageId, string commentId);
+        Task<IComment> CreateReplyAsync(string comment, string imageId, string parentId);
 
         /// <summary>
         ///     Delete a comment by the given id.

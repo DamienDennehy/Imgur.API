@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http.Headers;
 using Imgur.API.JsonConverters;
 using Newtonsoft.Json;
 
@@ -13,12 +14,12 @@ namespace Imgur.API.Models.Impl
         ///     A list of message notifications.
         /// </summary>
         [JsonConverter(typeof (TypeConverter<IEnumerable<Notification>>))]
-        public IEnumerable<INotification> Messages { get; set; }
+        public IEnumerable<INotification> Messages { get; set; } = new List<INotification>();
 
         /// <summary>
         ///     A list of comment notifications.
         /// </summary>
         [JsonConverter(typeof (TypeConverter<IEnumerable<Notification>>))]
-        public IEnumerable<INotification> Replies { get; set; }
+        public IEnumerable<INotification> Replies { get; set; } = new List<INotification>();
     }
 }

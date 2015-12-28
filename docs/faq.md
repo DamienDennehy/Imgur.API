@@ -21,9 +21,9 @@ You should catch this exception if you suspect your application will have proxy 
 
 ## Why isn't the Memes Metadata supported?
 It was removed from the official Imgur API, but Imgur didn't remove it from their own documentation. 
-https://groups.google.com/forum/#!msg/imgur/BEyZryAhGi0/yfOFyixuPy4J
+[https://groups.google.com/forum/#!msg/imgur/BEyZryAhGi0/yfOFyixuPy4J](https://groups.google.com/forum/#!msg/imgur/BEyZryAhGi0/yfOFyixuPy4J)
 
 ## Why isn't the Reddit comments key supported for Reddit images?
 It doesn't appear to be available currently in the official Imgur API.  
-https://groups.google.com/forum/#!topic/imgur/DWJw19wny3A
-https://market.mashape.com/imgur/imgur-9/support/48
+[https://groups.google.com/forum/#!topic/imgur/DWJw19wny3Ahttps://groups.google.com/forum/#!topic/imgur/DWJw19wny3A
+[https://market.mashape.com/imgur/imgur-9/support/48](https://market.mashape.com/imgur/imgur-9/support/48)

@@ -113,7 +113,6 @@
     <Compile Include="Models\IImage.cs" />
     <Compile Include="Models\IImgurError.cs" />
     <Compile Include="Models\IMashapeError.cs" />
-    <Compile Include="Models\IMemeMetaData.cs" />
     <Compile Include="Models\Impl\Account.cs" />
     <Compile Include="Models\Impl\AccountSettings.cs" />
     <Compile Include="Models\Impl\Basic.cs" />

@@ -10,7 +10,7 @@ namespace Imgur.API.Endpoints
     public interface IMemeGenEndpoint
     {
         /// <summary>
-        /// Get the list of default memes.
+        ///     Get the list of default memes.
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<IImage>> GetDefaultMemesAsync();

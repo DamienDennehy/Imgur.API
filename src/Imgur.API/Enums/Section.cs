@@ -6,17 +6,17 @@
     public enum Section
     {
         /// <summary>
-        /// The Hot section.
+        ///     The Hot section.
         /// </summary>
         Hot,
 
         /// <summary>
-        /// The Top section.
+        ///     The Top section.
         /// </summary>
         Top,
 
         /// <summary>
-        /// The User section.
+        ///     The User section.
         /// </summary>
         User
     }

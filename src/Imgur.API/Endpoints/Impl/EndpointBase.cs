@@ -158,21 +158,21 @@ namespace Imgur.API.Endpoints.Impl
                 throw new ImgurException("The response from the endpoint is invalid.");
 
             //If the authentication method is Mashape, then an error response
-            //is different to that of Imgur's stringResponse.
-            if (ApiClient is IMashapeClient && stringResponse.Contains("{\"message\":"))
+            //is different to that of Imgur's error response.
+            if (ApiClient is IMashapeClient && stringResponse.StartsWith("{\"message\":"))
             {
                 var maShapeError = JsonConvert.DeserializeObject<MashapeError>(stringResponse);
                 throw new MashapeException(maShapeError.Message);
             }
 
             //If an error occurs, throw an exception
-            if (stringResponse.Contains("{\"data\":{\"error\":"))
+            if (stringResponse.StartsWith("{\"data\":{\"error\":"))
             {
                 var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(stringResponse);
                 throw new ImgurException(apiError.Data.Error);
             }
 
-            //If the type being requested is an oAuthToken
+            //If the type being requested is an OAuth2Token
             //Deserialize it immediately and return
             if (typeof (T) == typeof (IOAuth2Token) || typeof (T) == typeof (OAuth2Token))
             {
@@ -180,7 +180,7 @@ namespace Imgur.API.Endpoints.Impl
                 return oAuth2Response;
             }
 
-            //Deserialize the stringResponse into a generic Basic<object> type
+            //Deserialize the response into a generic Basic<object> type
             var basicResponse = JsonConvert.DeserializeObject<Basic<object>>(stringResponse);
 
             //If the request was not a success, then the basicResponse type is Basic<ImgurError>
@@ -194,7 +194,7 @@ namespace Imgur.API.Endpoints.Impl
             var converters = new JsonConverter[1];
             converters[0] = new GalleryItemConverter();
 
-            //Deserialize the stringResponse to the correct Type
+            //Deserialize the response to the correct Type
             var finalResponse = JsonConvert.DeserializeObject<Basic<T>>(stringResponse, converters);
 
             return finalResponse.Data;

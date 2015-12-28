@@ -21,9 +21,11 @@ The Redirect URL will contain several values that should be parsed and stored by
 ## Creating an OAuth2 token from the Redirect URL.
 Using the Redirect URL values, an OAuth2 Token can be created.
 
-		var token = new OAuth2Token("ACCESS_TOKEN", "REFRESH_TOKEN", "TOKEN_TYPE", "ACCOUNT_ID", "ACCOUNT_USERNAME", EXPIRES_IN);
+		var token = new OAuth2Token("ACCESS_TOKEN", "REFRESH_TOKEN", "TOKEN_TYPE", 
+									"ACCOUNT_ID", "ACCOUNT_USERNAME", EXPIRES_IN);
 	
-The token should be stored by your application. This will save your application from constructing a new token on each endpoint request.
+The token should be stored by your application. 
+This will save your application from constructing a new token on each endpoint request.
 
 ## Getting an OAuth2 token from the Refresh Token.
 If the access token has expired but you still have the refresh token, you can request a new OAuth2 token.

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Imgur.API.Enums
+﻿namespace Imgur.API.Enums
 {
     /// <summary>
     ///     The order that the gallery should be sorted by.
@@ -23,7 +21,7 @@ namespace Imgur.API.Enums
         Top,
 
         /// <summary>
-        /// Sort the gallery by the rising items.
+        ///     Sort the gallery by the rising items.
         /// </summary>
         Rising
     }

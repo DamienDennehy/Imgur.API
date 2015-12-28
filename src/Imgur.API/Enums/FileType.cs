@@ -1,32 +1,32 @@
 ﻿namespace Imgur.API.Enums
 {
     /// <summary>
-    /// Searchable file types.
+    ///     Searchable file types.
     /// </summary>
     public enum FileType
     {
         /// <summary>
-        /// Jpg.
+        ///     Jpg.
         /// </summary>
         Jpg,
 
         /// <summary>
-        /// Png.
+        ///     Png.
         /// </summary>
         Png,
 
         /// <summary>
-        /// Gif (non-animated).
+        ///     Gif (non-animated).
         /// </summary>
         Gif,
 
         /// <summary>
-        /// Gif (animated).
+        ///     Gif (animated).
         /// </summary>
         Anigif,
 
         /// <summary>
-        /// Album.
+        ///     Album.
         /// </summary>
         Album
     }

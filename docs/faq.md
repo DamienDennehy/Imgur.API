@@ -18,3 +18,12 @@ Set the DefaultWebProxy credentials before any API endpoints are used.
 A System.Net.Http.HttpRequestException exception is thrown when a proxy is required and the current credentials are not valid.
 
 You should catch this exception if you suspect your application will have proxy issues.
+
+## Why isn't the Memes Metadata supported?
+It was removed from the official Imgur API, but Imgur didn't remove it from their own documentation. 
+https://groups.google.com/forum/#!msg/imgur/BEyZryAhGi0/yfOFyixuPy4J
+
+## Why isn't the Reddit comments key supported for Reddit images?
+It doesn't appear to be available currently in the official Imgur API.  
+https://groups.google.com/forum/#!topic/imgur/DWJw19wny3A
+https://market.mashape.com/imgur/imgur-9/support/48

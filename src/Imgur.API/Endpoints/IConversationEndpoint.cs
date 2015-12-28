@@ -32,7 +32,10 @@ namespace Imgur.API.Endpoints
         ///     Get information about a specific conversation. Includes messages.
         /// </summary>
         /// <param name="id">The conversation id.</param>
-        /// <param name="page">Page of message thread. Starting at 1 for the most recent 25 messages and counting upwards. Default: null</param>
+        /// <param name="page">
+        ///     Page of message thread. Starting at 1 for the most recent 25 messages and counting upwards. Default:
+        ///     null
+        /// </param>
         /// <param name="offset">Additional offset in current page.</param>
         Task<IConversation> GetConversationAsync(string id, int? page = null, int? offset = null);
 

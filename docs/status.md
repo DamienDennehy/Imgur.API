@@ -24,3 +24,6 @@
 * Memegen endpoint.
 * Topic endpoint.
 * Gallery endpoint.
+
+##External References
+* Imgur's official API change log: https://api.imgur.com/changelog

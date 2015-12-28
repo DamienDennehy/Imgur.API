@@ -14,11 +14,6 @@ namespace Imgur.API.Models
         string AccountId { get; set; }
 
         /// <summary>
-        ///     The username of the account that uploaded it, or null.
-        /// </summary>
-        string AccountUrl { get; set; }
-
-        /// <summary>
         ///     Is the image animated.
         /// </summary>
         bool Animated { get; set; }

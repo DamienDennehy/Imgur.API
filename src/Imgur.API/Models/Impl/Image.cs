@@ -126,12 +126,6 @@ namespace Imgur.API.Models.Impl
         public virtual Vote? Vote { get; set; }
 
         /// <summary>
-        ///     The username of the account that uploaded it, or null.
-        /// </summary>
-        [JsonProperty("account_url")]
-        public virtual string AccountUrl { get; set; }
-
-        /// <summary>
         ///     The account ID for the uploader, or null.
         /// </summary>
         [JsonProperty("account_id")]

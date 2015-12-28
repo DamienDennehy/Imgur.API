@@ -94,7 +94,6 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual(false, image.Favorite);
             Assert.AreEqual(null, image.Nsfw);
             Assert.AreEqual(null, image.Section);
-            Assert.AreEqual(null, image.AccountUrl);
             Assert.AreEqual(null, image.AccountId);
             Assert.AreEqual("http://i.imgur.com/hbzm7Ge.gifv", image.Gifv);
             Assert.AreEqual("http://i.imgur.com/hbzm7Ge.webm", image.Webm);

@@ -61,6 +61,14 @@
     <Compile Include="Endpoints\Impl\ConversationEndpoint.cs" />
     <Compile Include="Endpoints\Impl\CustomGalleryEndpoint.cs" />
     <Compile Include="Endpoints\Impl\EndpointBase.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Albums.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Comments.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Images.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Memes.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Subreddits.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Tags.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Votes.cs" />
     <Compile Include="Endpoints\Impl\ImageEndpoint.cs" />
     <Compile Include="Endpoints\Impl\MemeGenEndpoint.cs" />
     <Compile Include="Endpoints\Impl\NotificationEndpoint.cs" />

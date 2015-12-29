@@ -50,7 +50,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> AddAlbumImagesAsync(string albumId, IEnumerable<string> imageIds)
         {
-            if (string.IsNullOrEmpty(albumId))
+            if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));
 
             if (imageIds == null)
@@ -105,7 +105,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> DeleteAlbumAsync(string albumId)
         {
-            if (string.IsNullOrEmpty(albumId))
+            if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));
 
             var url = $"album/{albumId}";
@@ -130,7 +130,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> FavoriteAlbumAsync(string albumId)
         {
-            if (string.IsNullOrEmpty(albumId))
+            if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));
 
             if (ApiClient.OAuth2Token == null)
@@ -175,7 +175,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IAlbum> GetAlbumAsync(string albumId)
         {
-            if (string.IsNullOrEmpty(albumId))
+            if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));
 
             var url = $"album/{albumId}";
@@ -201,10 +201,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IImage> GetAlbumImageAsync(string imageId, string albumId)
         {
-            if (string.IsNullOrEmpty(imageId))
+            if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
 
-            if (string.IsNullOrEmpty(albumId))
+            if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));
 
             var url = $"album/{albumId}/image/{imageId}";
@@ -229,7 +229,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IEnumerable<IImage>> GetAlbumImagesAsync(string albumId)
         {
-            if (string.IsNullOrEmpty(albumId))
+            if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));
 
             var url = $"album/{albumId}/images";
@@ -256,7 +256,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> RemoveAlbumImagesAsync(string albumId, IEnumerable<string> imageIds)
         {
-            if (string.IsNullOrEmpty(albumId))
+            if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));
 
             if (imageIds == null)
@@ -286,7 +286,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> SetAlbumImagesAsync(string albumId, IEnumerable<string> imageIds)
         {
-            if (string.IsNullOrEmpty(albumId))
+            if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));
 
             if (imageIds == null)
@@ -323,7 +323,7 @@ namespace Imgur.API.Endpoints.Impl
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null, string coverId = null,
             IEnumerable<string> imageIds = null)
         {
-            if (string.IsNullOrEmpty(albumId))
+            if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));
 
             var url = $"album/{albumId}";

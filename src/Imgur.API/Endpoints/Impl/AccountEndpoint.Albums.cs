@@ -26,10 +26,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> DeleteAlbumAsync(string albumId, string username = "me")
         {
-            if (string.IsNullOrEmpty(albumId))
+            if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));
 
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (ApiClient.OAuth2Token == null)
@@ -58,10 +58,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IAlbum> GetAlbumAsync(string albumId, string username = "me")
         {
-            if (string.IsNullOrEmpty(albumId))
+            if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));
 
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -90,7 +90,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<int> GetAlbumCountAsync(string username = "me")
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -120,7 +120,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IEnumerable<string>> GetAlbumIdsAsync(string username = "me", int? page = null)
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -151,7 +151,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IEnumerable<IAlbum>> GetAlbumsAsync(string username = "me", int? page = null)
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)

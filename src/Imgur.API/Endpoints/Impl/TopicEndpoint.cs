@@ -68,10 +68,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IGalleryItem> GetGalleryTopicItemAsync(string galleryItemId, string topicId)
         {
-            if (string.IsNullOrEmpty(galleryItemId))
+            if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
 
-            if (string.IsNullOrEmpty(topicId))
+            if (string.IsNullOrWhiteSpace(topicId))
                 throw new ArgumentNullException(nameof(topicId));
 
             var url = $"topics/{topicId.Replace(" ", "_")}/{galleryItemId}";
@@ -103,7 +103,7 @@ namespace Imgur.API.Endpoints.Impl
         public async Task<IEnumerable<IGalleryItem>> GetGalleryTopicItemsAsync(string topicId,
             CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, Window? window = Window.Week, int? page = null)
         {
-            if (string.IsNullOrEmpty(topicId))
+            if (string.IsNullOrWhiteSpace(topicId))
                 throw new ArgumentNullException(nameof(topicId));
 
             sort = sort ?? CustomGallerySortOrder.Viral;

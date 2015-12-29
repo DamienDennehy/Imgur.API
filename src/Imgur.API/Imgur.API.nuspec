@@ -6,7 +6,7 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>https://github.com/DamienDennehy/Imgur.API/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/DamienDennehy/Imgur.API</projectUrl>
+    <projectUrl>http://imgurapi.readthedocs.org/en/latest/</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/DamienDennehy/Imgur.API/master/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>

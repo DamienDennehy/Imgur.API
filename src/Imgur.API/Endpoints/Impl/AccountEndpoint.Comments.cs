@@ -27,10 +27,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> DeleteCommentAsync(string commentId, string username = "me")
         {
-            if (string.IsNullOrEmpty(commentId))
+            if (string.IsNullOrWhiteSpace(commentId))
                 throw new ArgumentNullException(nameof(commentId));
 
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (ApiClient.OAuth2Token == null)
@@ -59,10 +59,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IComment> GetCommentAsync(string commentId, string username = "me")
         {
-            if (string.IsNullOrEmpty(commentId))
+            if (string.IsNullOrWhiteSpace(commentId))
                 throw new ArgumentNullException(nameof(commentId));
 
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -91,7 +91,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<int> GetCommentCountAsync(string username = "me")
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -123,7 +123,7 @@ namespace Imgur.API.Endpoints.Impl
         public async Task<IEnumerable<string>> GetCommentIdsAsync(string username = "me",
             CommentSortOrder? sort = CommentSortOrder.Newest, int? page = null)
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -158,7 +158,7 @@ namespace Imgur.API.Endpoints.Impl
         public async Task<IEnumerable<IComment>> GetCommentsAsync(string username = "me",
             CommentSortOrder? sort = CommentSortOrder.Newest, int? page = null)
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)

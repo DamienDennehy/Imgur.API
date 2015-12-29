@@ -47,7 +47,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IAccount> GetAccountAsync(string username = "me")
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)

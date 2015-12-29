@@ -14,7 +14,7 @@ namespace Imgur.API.RequestBuilders
         /// </exception>
         internal HttpRequestMessage UpdateImageRequest(string url, string title = null, string description = null)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             var parameters = new Dictionary<string, string>();
@@ -40,7 +40,7 @@ namespace Imgur.API.RequestBuilders
         internal HttpRequestMessage UploadImageBinaryRequest(string url, byte[] image, string albumId = null,
             string title = null, string description = null)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             if (image == null)
@@ -75,7 +75,7 @@ namespace Imgur.API.RequestBuilders
         internal HttpRequestMessage UploadImageStreamRequest(string url, Stream image, string albumId = null,
             string title = null, string description = null)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             if (image == null)
@@ -110,10 +110,10 @@ namespace Imgur.API.RequestBuilders
         internal HttpRequestMessage UploadImageUrlRequest(string url, string imageUrl, string albumId = null,
             string title = null, string description = null)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (string.IsNullOrEmpty(imageUrl))
+            if (string.IsNullOrWhiteSpace(imageUrl))
                 throw new ArgumentNullException(nameof(imageUrl));
 
             var parameters = new Dictionary<string, string>

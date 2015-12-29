@@ -67,7 +67,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IOAuth2Token> GetTokenByCodeAsync(string code)
         {
-            if (string.IsNullOrEmpty(code))
+            if (string.IsNullOrWhiteSpace(code))
                 throw new ArgumentNullException(nameof(code));
 
             IOAuth2Token token;

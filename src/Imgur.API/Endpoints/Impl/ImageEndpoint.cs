@@ -47,7 +47,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> DeleteImageAsync(string imageId)
         {
-            if (string.IsNullOrEmpty(imageId))
+            if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
 
             var url = $"image/{imageId}";
@@ -72,7 +72,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> FavoriteImageAsync(string imageId)
         {
-            if (string.IsNullOrEmpty(imageId))
+            if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
 
             if (ApiClient.OAuth2Token == null)
@@ -117,7 +117,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IImage> GetImageAsync(string imageId)
         {
-            if (string.IsNullOrEmpty(imageId))
+            if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
 
             var url = $"image/{imageId}";
@@ -146,7 +146,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> UpdateImageAsync(string imageId, string title = null, string description = null)
         {
-            if (string.IsNullOrEmpty(imageId))
+            if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
 
             var url = $"image/{imageId}";
@@ -242,7 +242,7 @@ namespace Imgur.API.Endpoints.Impl
         public async Task<IImage> UploadImageUrlAsync(string image, string albumId = null, string title = null,
             string description = null)
         {
-            if (string.IsNullOrEmpty(image))
+            if (string.IsNullOrWhiteSpace(image))
                 throw new ArgumentNullException(nameof(image));
 
             var url = "image";

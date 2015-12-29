@@ -14,7 +14,7 @@ namespace Imgur.API.RequestBuilders
         /// </exception>
         internal HttpRequestMessage AddCustomGalleryTagsRequest(string url, IEnumerable<string> tags)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             if (tags == null)
@@ -39,10 +39,10 @@ namespace Imgur.API.RequestBuilders
         /// </exception>
         internal HttpRequestMessage AddFilteredOutGalleryTagRequest(string url, string tag)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (string.IsNullOrEmpty(tag))
+            if (string.IsNullOrWhiteSpace(tag))
                 throw new ArgumentNullException(nameof(tag));
 
             var parameters = new Dictionary<string, string>
@@ -64,7 +64,7 @@ namespace Imgur.API.RequestBuilders
         /// </exception>
         internal HttpRequestMessage RemoveCustomGalleryTagsRequest(string url, IEnumerable<string> tags)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             if (tags == null)
@@ -83,10 +83,10 @@ namespace Imgur.API.RequestBuilders
         /// </exception>
         internal HttpRequestMessage RemoveFilteredOutGalleryTagRequest(string url, string tag)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (string.IsNullOrEmpty(tag))
+            if (string.IsNullOrWhiteSpace(tag))
                 throw new ArgumentNullException(nameof(tag));
 
             var parameters = new Dictionary<string, string>

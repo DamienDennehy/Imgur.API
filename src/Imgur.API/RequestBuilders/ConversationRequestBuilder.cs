@@ -13,10 +13,10 @@ namespace Imgur.API.RequestBuilders
         /// </exception>
         internal HttpRequestMessage CreateMessageRequest(string url, string body)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (string.IsNullOrEmpty(body))
+            if (string.IsNullOrWhiteSpace(body))
                 throw new ArgumentNullException(nameof(body));
 
             var parameters = new Dictionary<string, string>

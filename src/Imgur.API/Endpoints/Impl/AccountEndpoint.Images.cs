@@ -27,10 +27,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> DeleteImageAsync(string imageId, string username = "me")
         {
-            if (string.IsNullOrEmpty(imageId))
+            if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
 
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (ApiClient.OAuth2Token == null)
@@ -59,10 +59,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IImage> GetImageAsync(string imageId, string username = "me")
         {
-            if (string.IsNullOrEmpty(imageId))
+            if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
 
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
@@ -91,7 +91,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<int> GetImageCountAsync(string username = "me")
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (ApiClient.OAuth2Token == null)
@@ -121,7 +121,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IEnumerable<string>> GetImageIdsAsync(string username = "me", int? page = null)
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (ApiClient.OAuth2Token == null)
@@ -152,7 +152,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IEnumerable<IImage>> GetImagesAsync(string username = "me", int? page = null)
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (ApiClient.OAuth2Token == null)

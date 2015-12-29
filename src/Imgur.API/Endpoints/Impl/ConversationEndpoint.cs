@@ -47,7 +47,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> BlockSenderAsync(string username)
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (ApiClient.OAuth2Token == null)
@@ -76,10 +76,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> CreateConversationAsync(string recipient, string body)
         {
-            if (string.IsNullOrEmpty(recipient))
+            if (string.IsNullOrWhiteSpace(recipient))
                 throw new ArgumentNullException(nameof(recipient));
 
-            if (string.IsNullOrEmpty(body))
+            if (string.IsNullOrWhiteSpace(body))
                 throw new ArgumentNullException(nameof(body));
 
             if (ApiClient.OAuth2Token == null)
@@ -107,7 +107,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> DeleteConversationAsync(string conversationId)
         {
-            if (string.IsNullOrEmpty(conversationId))
+            if (string.IsNullOrWhiteSpace(conversationId))
                 throw new ArgumentNullException(nameof(conversationId));
 
             if (ApiClient.OAuth2Token == null)
@@ -142,7 +142,7 @@ namespace Imgur.API.Endpoints.Impl
         public async Task<IConversation> GetConversationAsync(string conversationId, int? page = null,
             int? offset = null)
         {
-            if (string.IsNullOrEmpty(conversationId))
+            if (string.IsNullOrWhiteSpace(conversationId))
                 throw new ArgumentNullException(nameof(conversationId));
 
             if (ApiClient.OAuth2Token == null)
@@ -196,7 +196,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> ReportSenderAsync(string username)
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
             if (ApiClient.OAuth2Token == null)

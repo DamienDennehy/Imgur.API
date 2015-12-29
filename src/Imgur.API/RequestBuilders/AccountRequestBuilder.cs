@@ -23,7 +23,7 @@ namespace Imgur.API.RequestBuilders
             bool? showMature = null,
             bool? newsletterSubscribed = null)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             var parameters = new Dictionary<string, string>();
@@ -46,11 +46,11 @@ namespace Imgur.API.RequestBuilders
             if (newsletterSubscribed != null)
                 parameters.Add("newsletter_subscribed", $"{newsletterSubscribed}".ToLower());
 
+            if (bio != null)
+                parameters.Add(nameof(bio), bio);
+
             if (!string.IsNullOrWhiteSpace(username))
                 parameters.Add(nameof(username), username);
-
-            if (!string.IsNullOrWhiteSpace(bio))
-                parameters.Add(nameof(bio), bio);
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)
             {

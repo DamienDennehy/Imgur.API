@@ -15,7 +15,7 @@ namespace Imgur.API.RequestBuilders
         /// </exception>
         internal HttpRequestMessage AddAlbumImagesRequest(string url, IEnumerable<string> imageIds)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             if (imageIds == null)
@@ -43,7 +43,7 @@ namespace Imgur.API.RequestBuilders
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null,
             string coverId = null, IEnumerable<string> imageIds = null)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             var parameters = new Dictionary<string, string>();
@@ -80,7 +80,7 @@ namespace Imgur.API.RequestBuilders
         /// </exception>
         internal HttpRequestMessage RemoveAlbumImagesRequest(string url, IEnumerable<string> imageIds)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             if (imageIds == null)
@@ -99,7 +99,7 @@ namespace Imgur.API.RequestBuilders
         /// </exception>
         internal HttpRequestMessage SetAlbumImagesRequest(string url, IEnumerable<string> imageIds)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             if (imageIds == null)
@@ -127,7 +127,7 @@ namespace Imgur.API.RequestBuilders
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null,
             string coverId = null, IEnumerable<string> ids = null)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             var parameters = new Dictionary<string, string>();

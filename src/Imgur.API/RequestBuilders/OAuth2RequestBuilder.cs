@@ -13,16 +13,16 @@ namespace Imgur.API.RequestBuilders
         /// </exception>
         internal HttpRequestMessage GetTokenByCodeRequest(string url, string code, string clientId, string clientSecret)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (string.IsNullOrEmpty(code))
+            if (string.IsNullOrWhiteSpace(code))
                 throw new ArgumentNullException(nameof(code));
 
-            if (string.IsNullOrEmpty(clientId))
+            if (string.IsNullOrWhiteSpace(clientId))
                 throw new ArgumentNullException(nameof(clientId));
 
-            if (string.IsNullOrEmpty(clientSecret))
+            if (string.IsNullOrWhiteSpace(clientSecret))
                 throw new ArgumentNullException(nameof(clientSecret));
 
             var parameters = new Dictionary<string, string>
@@ -47,16 +47,16 @@ namespace Imgur.API.RequestBuilders
         /// </exception>
         internal HttpRequestMessage GetTokenByPinRequest(string url, string pin, string clientId, string clientSecret)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (string.IsNullOrEmpty(pin))
+            if (string.IsNullOrWhiteSpace(pin))
                 throw new ArgumentNullException(nameof(pin));
 
-            if (string.IsNullOrEmpty(clientId))
+            if (string.IsNullOrWhiteSpace(clientId))
                 throw new ArgumentNullException(nameof(clientId));
 
-            if (string.IsNullOrEmpty(clientSecret))
+            if (string.IsNullOrWhiteSpace(clientSecret))
                 throw new ArgumentNullException(nameof(clientSecret));
 
             var parameters = new Dictionary<string, string>
@@ -82,16 +82,16 @@ namespace Imgur.API.RequestBuilders
         internal HttpRequestMessage GetTokenByRefreshTokenRequest(string url, string refreshToken, string clientId,
             string clientSecret)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (string.IsNullOrEmpty(refreshToken))
+            if (string.IsNullOrWhiteSpace(refreshToken))
                 throw new ArgumentNullException(nameof(refreshToken));
 
-            if (string.IsNullOrEmpty(clientId))
+            if (string.IsNullOrWhiteSpace(clientId))
                 throw new ArgumentNullException(nameof(clientId));
 
-            if (string.IsNullOrEmpty(clientSecret))
+            if (string.IsNullOrWhiteSpace(clientSecret))
                 throw new ArgumentNullException(nameof(clientSecret));
 
             var parameters = new Dictionary<string, string>

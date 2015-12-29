@@ -65,16 +65,16 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     The number of comments on an item.
         /// </summary>
-        /// <param name="itemId">The item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<int> GetGalleryItemCommentCountAsync(string itemId);
+        Task<int> GetGalleryItemCommentCountAsync(string galleryItemId);
 
         /// <summary>
         ///     List all of the IDs for the comments on an item.
         /// </summary>
-        /// <param name="itemId">The item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<IEnumerable<string>> GetGalleryItemCommentIdsAsync(string itemId);
+        Task<IEnumerable<string>> GetGalleryItemCommentIdsAsync(string galleryItemId);
 
         /// <summary>
         ///     Get all comments for a gallery item.
@@ -165,7 +165,7 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Share an Album or Image to the Gallery. OAuth authentication required.
         /// </summary>
-        /// <param name="itemId">The item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="title">The title of the image. This is required.</param>
         /// <param name="topic">The topic name.</param>
         /// <param name="bypassTerms">
@@ -174,15 +174,16 @@ namespace Imgur.API.Endpoints
         /// </param>
         /// <param name="mature">If the post is mature, set this value to true.</param>
         /// <returns></returns>
-        Task<bool> PublishToGalleryAsync(string itemId, string title, string topic = null, bool? bypassTerms = null,
+        Task<bool> PublishToGalleryAsync(string galleryItemId, string title, string topic = null,
+            bool? bypassTerms = null,
             bool? mature = null);
 
         /// <summary>
         ///     Remove an image from the gallery. OAuth authentication required.
         /// </summary>
-        /// <param name="itemId">The item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<bool> RemoveFromGalleryAsync(string itemId);
+        Task<bool> RemoveFromGalleryAsync(string galleryItemId);
 
         /// <summary>
         ///     Report an item in the gallery.

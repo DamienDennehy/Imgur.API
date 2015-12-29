@@ -15,13 +15,13 @@ namespace Imgur.API.RequestBuilders
         internal HttpRequestMessage CreateCommentRequest(string url, string comment, string galleryItemId,
             string parentId)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (string.IsNullOrEmpty(comment))
+            if (string.IsNullOrWhiteSpace(comment))
                 throw new ArgumentNullException(nameof(comment));
 
-            if (string.IsNullOrEmpty(galleryItemId))
+            if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
 
             var parameters = new Dictionary<string, string>
@@ -47,13 +47,13 @@ namespace Imgur.API.RequestBuilders
         /// </exception>
         internal HttpRequestMessage CreateReplyRequest(string url, string comment, string galleryItemId)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (string.IsNullOrEmpty(comment))
+            if (string.IsNullOrWhiteSpace(comment))
                 throw new ArgumentNullException(nameof(comment));
 
-            if (string.IsNullOrEmpty(galleryItemId))
+            if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
 
             var parameters = new Dictionary<string, string>

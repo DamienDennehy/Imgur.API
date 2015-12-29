@@ -49,10 +49,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IComment> CreateCommentAsync(string comment, string galleryItemId, string parentId = null)
         {
-            if (string.IsNullOrEmpty(comment))
+            if (string.IsNullOrWhiteSpace(comment))
                 throw new ArgumentNullException(nameof(comment));
 
-            if (string.IsNullOrEmpty(galleryItemId))
+            if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
 
             if (ApiClient.OAuth2Token == null)
@@ -83,13 +83,13 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IComment> CreateReplyAsync(string comment, string galleryItemId, string parentId)
         {
-            if (string.IsNullOrEmpty(comment))
+            if (string.IsNullOrWhiteSpace(comment))
                 throw new ArgumentNullException(nameof(comment));
 
-            if (string.IsNullOrEmpty(galleryItemId))
+            if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
 
-            if (string.IsNullOrEmpty(parentId))
+            if (string.IsNullOrWhiteSpace(parentId))
                 throw new ArgumentNullException(nameof(parentId));
 
             if (ApiClient.OAuth2Token == null)
@@ -118,7 +118,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> DeleteCommentAsync(string commentId)
         {
-            if (string.IsNullOrEmpty(commentId))
+            if (string.IsNullOrWhiteSpace(commentId))
                 throw new ArgumentNullException(nameof(commentId));
 
             if (ApiClient.OAuth2Token == null)
@@ -146,7 +146,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IComment> GetCommentAsync(string commentId)
         {
-            if (string.IsNullOrEmpty(commentId))
+            if (string.IsNullOrWhiteSpace(commentId))
                 throw new ArgumentNullException(nameof(commentId));
 
             var url = $"comment/{commentId}";
@@ -171,7 +171,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IComment> GetRepliesAsync(string commentId)
         {
-            if (string.IsNullOrEmpty(commentId))
+            if (string.IsNullOrWhiteSpace(commentId))
                 throw new ArgumentNullException(nameof(commentId));
 
             var url = $"comment/{commentId}/replies";
@@ -198,7 +198,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> ReportCommentAsync(string commentId, ReportReason reason)
         {
-            if (string.IsNullOrEmpty(commentId))
+            if (string.IsNullOrWhiteSpace(commentId))
                 throw new ArgumentNullException(nameof(commentId));
 
             if (ApiClient.OAuth2Token == null)
@@ -228,7 +228,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> VoteCommentAsync(string commentId, Vote vote)
         {
-            if (string.IsNullOrEmpty(commentId))
+            if (string.IsNullOrWhiteSpace(commentId))
                 throw new ArgumentNullException(nameof(commentId));
 
             if (ApiClient.OAuth2Token == null)

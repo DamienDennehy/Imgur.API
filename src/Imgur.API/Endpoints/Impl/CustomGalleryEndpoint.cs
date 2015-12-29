@@ -77,7 +77,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> AddFilteredOutGalleryTagAsync(string tag)
         {
-            if (string.IsNullOrEmpty(tag))
+            if (string.IsNullOrWhiteSpace(tag))
                 throw new ArgumentNullException(nameof(tag));
 
             if (ApiClient.OAuth2Token == null)
@@ -141,7 +141,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IGalleryItem> GetCustomGalleryItemAsync(string galleryItemId)
         {
-            if (string.IsNullOrEmpty(galleryItemId))
+            if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
 
             if (ApiClient.OAuth2Token == null)
@@ -234,7 +234,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<bool> RemoveFilteredOutGalleryTagAsync(string tag)
         {
-            if (string.IsNullOrEmpty(tag))
+            if (string.IsNullOrWhiteSpace(tag))
                 throw new ArgumentNullException(nameof(tag));
 
             if (ApiClient.OAuth2Token == null)

@@ -14,7 +14,7 @@ namespace Imgur.API.RequestBuilders
             if (httpMethod == null)
                 throw new ArgumentNullException(nameof(httpMethod));
 
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             return new HttpRequestMessage(httpMethod, url);

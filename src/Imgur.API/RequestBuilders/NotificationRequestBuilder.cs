@@ -13,7 +13,7 @@ namespace Imgur.API.RequestBuilders
         /// </exception>
         internal HttpRequestMessage MarkNotificationsViewedRequest(string url, IEnumerable<string> notificationIds)
         {
-            if (string.IsNullOrEmpty(url))
+            if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             if (notificationIds == null)

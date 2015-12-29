@@ -226,7 +226,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> VoteCommentAsync(string commentId, Vote vote)
+        public async Task<bool> VoteCommentAsync(string commentId, VoteOption vote)
         {
             if (string.IsNullOrWhiteSpace(commentId))
                 throw new ArgumentNullException(nameof(commentId));

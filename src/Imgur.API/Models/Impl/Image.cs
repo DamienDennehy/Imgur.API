@@ -113,7 +113,7 @@ namespace Imgur.API.Models.Impl
         ///     The current user's vote on the album. null if not signed in, if the user hasn't voted on it, or if not submitted to
         ///     the gallery.
         /// </summary>
-        public virtual Vote? Vote { get; set; }
+        public virtual VoteOption? Vote { get; set; }
 
         /// <summary>
         ///     OPTIONAL, The direct link to the .webm. Only available if the image is animated and type is 'image/gif'.

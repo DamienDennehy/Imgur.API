@@ -76,7 +76,7 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.AreEqual(null, actual.TopicId);
             Assert.AreEqual(4040, actual.Ups);
             Assert.AreEqual(96803, actual.Views);
-            Assert.AreEqual(Vote.Down, actual.Vote);
+            Assert.AreEqual(VoteOption.Down, actual.Vote);
         }
 
         [TestMethod]
@@ -120,7 +120,7 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.AreEqual("image/jpeg", actual.Type);
             Assert.AreEqual(3567, actual.Ups);
             Assert.AreEqual(1056415, actual.Views);
-            Assert.AreEqual(Vote.Up, actual.Vote);
+            Assert.AreEqual(VoteOption.Up, actual.Vote);
             Assert.AreEqual(null, actual.Webm);
             Assert.AreEqual(960, actual.Width);
         }

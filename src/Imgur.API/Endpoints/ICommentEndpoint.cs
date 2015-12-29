@@ -67,6 +67,6 @@ namespace Imgur.API.Endpoints
         /// <param name="commentId">The comment id.</param>
         /// <param name="vote">The vote.</param>
         /// <returns></returns>
-        Task<bool> VoteCommentAsync(string commentId, Vote vote);
+        Task<bool> VoteCommentAsync(string commentId, VoteOption vote);
     }
 }

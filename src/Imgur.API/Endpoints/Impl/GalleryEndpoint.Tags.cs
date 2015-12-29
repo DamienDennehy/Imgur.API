@@ -52,7 +52,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="vote">The vote.</param>
         /// <returns></returns>
-        public async Task<bool> VoteGalleryTagAsync(string tag, string galleryItemId, Vote vote)
+        public async Task<bool> VoteGalleryTagAsync(string tag, string galleryItemId, VoteOption vote)
         {
             throw new NotImplementedException();
         }

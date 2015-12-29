@@ -122,6 +122,6 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     The current user's vote on the album. null if not signed in or if the user hasn't voted on it.
         /// </summary>
-        public Vote? Vote { get; set; }
+        public VoteOption? Vote { get; set; }
     }
 }

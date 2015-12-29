@@ -3,7 +3,7 @@
     /// <summary>
     ///     Options for voting on content.
     /// </summary>
-    public enum Vote
+    public enum VoteOption
     {
         /// <summary>
         ///     Vote Up.

@@ -87,6 +87,6 @@ namespace Imgur.API.Models
         /// <summary>
         ///     The current user's vote on the comment. null if not signed in or if the user hasn't voted on it.
         /// </summary>
-        Vote? Vote { get; set; }
+        VoteOption? Vote { get; set; }
     }
 }

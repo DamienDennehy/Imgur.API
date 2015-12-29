@@ -90,7 +90,7 @@
     <Compile Include="Enums\OAuth2ResponseType.cs" />
     <Compile Include="Enums\ReportReason.cs" />
     <Compile Include="Enums\Section.cs" />
-    <Compile Include="Enums\Vote.cs" />
+    <Compile Include="Enums\VoteOption.cs" />
     <Compile Include="Enums\Window.cs" />
     <Compile Include="JsonConverters\EpochTimeConverter.cs" />
     <Compile Include="JsonConverters\GalleryItemConverter.cs" />

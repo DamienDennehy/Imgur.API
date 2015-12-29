@@ -99,6 +99,6 @@ namespace Imgur.API.Models.Impl
         ///     The current user's vote on the comment. null if not signed in or if the user hasn't voted on it.
         /// </summary>
         [JsonConverter(typeof (StringEnumConverter))]
-        public Vote? Vote { get; set; }
+        public VoteOption? Vote { get; set; }
     }
 }

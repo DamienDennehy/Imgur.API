@@ -11,17 +11,17 @@ namespace Imgur.API.RequestBuilders
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        internal HttpRequestMessage MarkNotificationsViewedRequest(string url, IEnumerable<string> ids)
+        internal HttpRequestMessage MarkNotificationsViewedRequest(string url, IEnumerable<string> notificationIds)
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (ids == null)
-                throw new ArgumentNullException(nameof(ids));
+            if (notificationIds == null)
+                throw new ArgumentNullException(nameof(notificationIds));
 
             var parameters = new Dictionary<string, string>
             {
-                {nameof(ids), string.Join(",", ids)}
+                {"ids", string.Join(",", notificationIds)}
             };
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)

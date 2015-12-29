@@ -13,26 +13,26 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Delete an Album with a given id. OAuth authentication required.
         /// </summary>
-        /// <param name="id">The album id.</param>
+        /// <param name="albumId">The album id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Task<bool> DeleteAlbumAsync(string id, string username = "me");
+        Task<bool> DeleteAlbumAsync(string albumId, string username = "me");
 
         /// <summary>
         ///     Delete a comment. OAuth authentication required.
         /// </summary>
-        /// <param name="id">The comment id.</param>
+        /// <param name="commentId">The comment id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Task<bool> DeleteCommentAsync(string id, string username = "me");
+        Task<bool> DeleteCommentAsync(string commentId, string username = "me");
 
         /// <summary>
         ///     Deletes an Image. OAuth authentication required.
         /// </summary>
-        /// <param name="id">The image id.</param>
+        /// <param name="imageId">The image id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Task<bool> DeleteImageAsync(string id, string username = "me");
+        Task<bool> DeleteImageAsync(string imageId, string username = "me");
 
         /// <summary>
         ///     Request standard user information.
@@ -75,10 +75,10 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Get additional information about an album, this works the same as the Album Endpoint.
         /// </summary>
-        /// <param name="id">The album's id.</param>
+        /// <param name="albumId">The album's id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Task<IAlbum> GetAlbumAsync(string id, string username = "me");
+        Task<IAlbum> GetAlbumAsync(string albumId, string username = "me");
 
         /// <summary>
         ///     Return the total number of albums associated with the account.
@@ -107,10 +107,10 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Return information about a specific comment.
         /// </summary>
-        /// <param name="id">The comment id.</param>
+        /// <param name="commentId">The comment id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Task<IComment> GetCommentAsync(string id, string username = "me");
+        Task<IComment> GetCommentAsync(string commentId, string username = "me");
 
         /// <summary>
         ///     Return a count of all of the comments associated with the account.
@@ -149,10 +149,10 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Return information about a specific image.
         /// </summary>
-        /// <param name="id">The images's id.</param>
+        /// <param name="imageId">The images's id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Task<IImage> GetImageAsync(string id, string username = "me");
+        Task<IImage> GetImageAsync(string imageId, string username = "me");
 
         /// <summary>
         ///     Returns the total number of images associated with the account.

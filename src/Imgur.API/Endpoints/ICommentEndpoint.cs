@@ -33,40 +33,40 @@ namespace Imgur.API.Endpoints
         ///     Delete a comment by the given id.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The comment id.</param>
+        /// <param name="commentId">The comment id.</param>
         /// <returns></returns>
-        Task<bool> DeleteCommentAsync(string id);
+        Task<bool> DeleteCommentAsync(string commentId);
 
         /// <summary>
         ///     Get information about a specific comment.
         /// </summary>
-        /// <param name="id">The comment id.</param>
+        /// <param name="commentId">The comment id.</param>
         /// <returns></returns>
-        Task<IComment> GetCommentAsync(string id);
+        Task<IComment> GetCommentAsync(string commentId);
 
         /// <summary>
         ///     Get the comment with all of the replies for the comment.
         /// </summary>
-        /// <param name="id">The comment id.</param>
+        /// <param name="commentId">The comment id.</param>
         /// <returns></returns>
-        Task<IComment> GetRepliesAsync(string id);
+        Task<IComment> GetRepliesAsync(string commentId);
 
         /// <summary>
         ///     Report a comment for being inappropriate.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The comment id.</param>
+        /// <param name="commentId">The comment id.</param>
         /// <param name="reason">The reason why the comment is inappropriate.</param>
         /// <returns></returns>
-        Task<bool> ReportCommentAsync(string id, ReportReason reason);
+        Task<bool> ReportCommentAsync(string commentId, ReportReason reason);
 
         /// <summary>
         ///     Vote on a comment.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The comment id.</param>
+        /// <param name="commentId">The comment id.</param>
         /// <param name="vote">The vote.</param>
         /// <returns></returns>
-        Task<bool> VoteCommentAsync(string id, Vote vote);
+        Task<bool> VoteCommentAsync(string commentId, Vote vote);
     }
 }

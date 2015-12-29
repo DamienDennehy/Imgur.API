@@ -13,17 +13,17 @@ namespace Imgur.API.RequestBuilders
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        internal HttpRequestMessage AddAlbumImagesRequest(string url, IEnumerable<string> ids)
+        internal HttpRequestMessage AddAlbumImagesRequest(string url, IEnumerable<string> imageIds)
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (ids == null)
-                throw new ArgumentNullException(nameof(ids));
+            if (imageIds == null)
+                throw new ArgumentNullException(nameof(imageIds));
 
             var parameters = new Dictionary<string, string>
             {
-                {nameof(ids), string.Join(",", ids)}
+                {"ids", string.Join(",", imageIds)}
             };
 
             var request = new HttpRequestMessage(HttpMethod.Put, url)
@@ -41,7 +41,7 @@ namespace Imgur.API.RequestBuilders
         internal HttpRequestMessage CreateAlbumRequest(string url,
             string title = null, string description = null,
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null,
-            string cover = null, IEnumerable<string> ids = null)
+            string coverId = null, IEnumerable<string> imageIds = null)
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
@@ -54,8 +54,8 @@ namespace Imgur.API.RequestBuilders
             if (layout != null)
                 parameters.Add(nameof(layout), $"{layout}".ToLower());
 
-            if (cover != null)
-                parameters.Add(nameof(cover), cover);
+            if (coverId != null)
+                parameters.Add("cover", coverId);
 
             if (title != null)
                 parameters.Add(nameof(title), title);
@@ -63,8 +63,8 @@ namespace Imgur.API.RequestBuilders
             if (description != null)
                 parameters.Add(nameof(description), description);
 
-            if (ids != null)
-                parameters.Add(nameof(ids), string.Join(",", ids));
+            if (imageIds != null)
+                parameters.Add("ids", string.Join(",", imageIds));
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
@@ -78,15 +78,15 @@ namespace Imgur.API.RequestBuilders
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        internal HttpRequestMessage RemoveAlbumImagesRequest(string url, IEnumerable<string> ids)
+        internal HttpRequestMessage RemoveAlbumImagesRequest(string url, IEnumerable<string> imageIds)
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (ids == null)
-                throw new ArgumentNullException(nameof(ids));
+            if (imageIds == null)
+                throw new ArgumentNullException(nameof(imageIds));
 
-            url = $"{url}?ids={WebUtility.UrlEncode(string.Join(",", ids))}";
+            url = $"{url}?ids={WebUtility.UrlEncode(string.Join(",", imageIds))}";
 
             var request = new HttpRequestMessage(HttpMethod.Delete, url);
 
@@ -97,17 +97,17 @@ namespace Imgur.API.RequestBuilders
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        internal HttpRequestMessage SetAlbumImagesRequest(string url, IEnumerable<string> ids)
+        internal HttpRequestMessage SetAlbumImagesRequest(string url, IEnumerable<string> imageIds)
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (ids == null)
-                throw new ArgumentNullException(nameof(ids));
+            if (imageIds == null)
+                throw new ArgumentNullException(nameof(imageIds));
 
             var parameters = new Dictionary<string, string>
             {
-                {nameof(ids), string.Join(",", ids)}
+                {"ids", string.Join(",", imageIds)}
             };
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)
@@ -125,7 +125,7 @@ namespace Imgur.API.RequestBuilders
         internal HttpRequestMessage UpdateAlbumRequest(string url,
             string title = null, string description = null,
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null,
-            string cover = null, IEnumerable<string> ids = null)
+            string coverId = null, IEnumerable<string> ids = null)
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
@@ -138,8 +138,8 @@ namespace Imgur.API.RequestBuilders
             if (layout != null)
                 parameters.Add(nameof(layout), $"{layout}".ToLower());
 
-            if (cover != null)
-                parameters.Add(nameof(cover), cover);
+            if (coverId != null)
+                parameters.Add("cover", coverId);
 
             if (title != null)
                 parameters.Add(nameof(title), title);

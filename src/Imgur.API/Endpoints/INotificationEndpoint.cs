@@ -13,9 +13,9 @@ namespace Imgur.API.Endpoints
         ///     Returns the data about a specific notification.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The notification id.</param>
+        /// <param name="notificationId">The notification id.</param>
         /// <returns></returns>
-        Task<INotification> GetNotificationAsync(string id);
+        Task<INotification> GetNotificationAsync(string notificationId);
 
         /// <summary>
         ///     Returns all of the notifications for the user.
@@ -37,8 +37,8 @@ namespace Imgur.API.Endpoints
         ///     Marks a notification as viewed.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The notification id.</param>
+        /// <param name="notificationId">The notification id.</param>
         /// <returns></returns>
-        Task<bool> MarkNotificationViewedAsync(string id);
+        Task<bool> MarkNotificationViewedAsync(string notificationId);
     }
 }

@@ -37,7 +37,7 @@ namespace Imgur.API.RequestBuilders
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        internal HttpRequestMessage UploadImageBinaryRequest(string url, byte[] image, string album = null,
+        internal HttpRequestMessage UploadImageBinaryRequest(string url, byte[] image, string albumId = null,
             string title = null, string description = null)
         {
             if (string.IsNullOrEmpty(url))
@@ -54,8 +54,8 @@ namespace Imgur.API.RequestBuilders
                 {new ByteArrayContent(image), nameof(image)}
             };
 
-            if (album != null)
-                content.Add(new StringContent(album), nameof(album));
+            if (!string.IsNullOrWhiteSpace(albumId))
+                content.Add(new StringContent(albumId), nameof(albumId));
 
             if (title != null)
                 content.Add(new StringContent(title), nameof(title));
@@ -72,7 +72,7 @@ namespace Imgur.API.RequestBuilders
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        internal HttpRequestMessage UploadImageStreamRequest(string url, Stream image, string album = null,
+        internal HttpRequestMessage UploadImageStreamRequest(string url, Stream image, string albumId = null,
             string title = null, string description = null)
         {
             if (string.IsNullOrEmpty(url))
@@ -89,8 +89,8 @@ namespace Imgur.API.RequestBuilders
                 {new StreamContent(image), nameof(image)}
             };
 
-            if (album != null)
-                content.Add(new StringContent(album), nameof(album));
+            if (!string.IsNullOrWhiteSpace(albumId))
+                content.Add(new StringContent(albumId), nameof(albumId));
 
             if (title != null)
                 content.Add(new StringContent(title), nameof(title));
@@ -107,23 +107,23 @@ namespace Imgur.API.RequestBuilders
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        internal HttpRequestMessage UploadImageUrlRequest(string url, string image, string album = null,
+        internal HttpRequestMessage UploadImageUrlRequest(string url, string imageUrl, string albumId = null,
             string title = null, string description = null)
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
 
-            if (string.IsNullOrEmpty(image))
-                throw new ArgumentNullException(nameof(image));
+            if (string.IsNullOrEmpty(imageUrl))
+                throw new ArgumentNullException(nameof(imageUrl));
 
             var parameters = new Dictionary<string, string>
             {
                 {"type", "URL"},
-                {"image", image}
+                {"image", imageUrl}
             };
 
-            if (album != null)
-                parameters.Add(nameof(album), album);
+            if (!string.IsNullOrWhiteSpace(albumId))
+                parameters.Add("album", albumId);
 
             if (title != null)
                 parameters.Add(nameof(title), title);

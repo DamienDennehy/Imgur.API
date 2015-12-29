@@ -37,7 +37,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Returns the data about a specific notification.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The notification id.</param>
+        /// <param name="notificationId">The notification id.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -45,15 +45,15 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<INotification> GetNotificationAsync(string id)
+        public async Task<INotification> GetNotificationAsync(string notificationId)
         {
-            if (string.IsNullOrWhiteSpace(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrWhiteSpace(notificationId))
+                throw new ArgumentNullException(nameof(notificationId));
 
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"notification/{id}";
+            var url = $"notification/{notificationId}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -122,7 +122,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Marks a notification as viewed.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The notification id.</param>
+        /// <param name="notificationId">The notification id.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -130,15 +130,15 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> MarkNotificationViewedAsync(string id)
+        public async Task<bool> MarkNotificationViewedAsync(string notificationId)
         {
-            if (string.IsNullOrWhiteSpace(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrWhiteSpace(notificationId))
+                throw new ArgumentNullException(nameof(notificationId));
 
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"notification/{id}";
+            var url = $"notification/{notificationId}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {

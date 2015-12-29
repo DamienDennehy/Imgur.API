@@ -41,9 +41,9 @@ namespace Imgur.API.Endpoints
         ///     View a single item in a user's custom gallery.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The gallery item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<IGalleryItem> GetCustomGalleryItemAsync(string id);
+        Task<IGalleryItem> GetCustomGalleryItemAsync(string galleryItemId);
 
         /// <summary>
         ///     Retrieve user's filtered out gallery.

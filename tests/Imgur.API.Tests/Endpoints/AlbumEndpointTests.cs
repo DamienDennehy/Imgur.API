@@ -230,7 +230,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var image = await endpoint.GetAlbumImageAsync("5F5Cy", "79MH23L");
+            var image = await endpoint.GetAlbumImageAsync("79MH23L", "5F5Cy");
 
             Assert.IsNotNull(image);
 

@@ -97,7 +97,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Delete a conversation by the given id. OAuth authentication required.
         /// </summary>
-        /// <param name="id">The conversation id.</param>
+        /// <param name="conversationId">The conversation id.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -105,15 +105,15 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> DeleteConversationAsync(string id)
+        public async Task<bool> DeleteConversationAsync(string conversationId)
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(conversationId))
+                throw new ArgumentNullException(nameof(conversationId));
 
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"conversations/{id}";
+            var url = $"conversations/{conversationId}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
@@ -126,7 +126,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Get information about a specific conversation. Includes messages.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The conversation id.</param>
+        /// <param name="conversationId">The conversation id.</param>
         /// <param name="page">
         ///     Page of message thread. Starting at 1 for the most recent 25 messages and counting upwards. Default:
         ///     null
@@ -139,15 +139,16 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IConversation> GetConversationAsync(string id, int? page = null, int? offset = null)
+        public async Task<IConversation> GetConversationAsync(string conversationId, int? page = null,
+            int? offset = null)
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(conversationId))
+                throw new ArgumentNullException(nameof(conversationId));
 
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"conversations/{id}/{page ?? 1}/{offset ?? 0}";
+            var url = $"conversations/{conversationId}/{page ?? 1}/{offset ?? 0}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {

@@ -16,7 +16,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Deletes an Image. You are required to be logged in as the user whom created the image.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The image id.</param>
+        /// <param name="imageId">The image id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
@@ -25,10 +25,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> DeleteImageAsync(string id, string username = "me")
+        public async Task<bool> DeleteImageAsync(string imageId, string username = "me")
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(imageId))
+                throw new ArgumentNullException(nameof(imageId));
 
             if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
@@ -36,7 +36,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"account/{username}/image/{id}";
+            var url = $"account/{username}/image/{imageId}";
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
@@ -48,7 +48,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Return information about a specific image.
         /// </summary>
-        /// <param name="id">The image's id.</param>
+        /// <param name="imageId">The image's id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
@@ -57,10 +57,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IImage> GetImageAsync(string id, string username = "me")
+        public async Task<IImage> GetImageAsync(string imageId, string username = "me")
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(imageId))
+                throw new ArgumentNullException(nameof(imageId));
 
             if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
@@ -69,7 +69,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"account/{username}/image/{id}";
+            var url = $"account/{username}/image/{imageId}";
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {

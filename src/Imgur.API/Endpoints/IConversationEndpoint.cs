@@ -10,7 +10,7 @@ namespace Imgur.API.Endpoints
     public interface IConversationEndpoint
     {
         /// <summary>
-        ///     Block the user from sending messages to the user that is logged in. 
+        ///     Block the user from sending messages to the user that is logged in.
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="username">The sender that should be blocked.</param>
@@ -26,20 +26,20 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Delete a conversation by the given id. OAuth authentication required.
         /// </summary>
-        /// <param name="id">The conversation id.</param>
-        Task<bool> DeleteConversationAsync(string id);
+        /// <param name="conversationId">The conversation id.</param>
+        Task<bool> DeleteConversationAsync(string conversationId);
 
         /// <summary>
         ///     Get information about a specific conversation. Includes messages.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The conversation id.</param>
+        /// <param name="conversationId">The conversation id.</param>
         /// <param name="page">
         ///     Page of message thread. Starting at 1 for the most recent 25 messages and counting upwards. Default:
         ///     null
         /// </param>
         /// <param name="offset">Additional offset in current page.</param>
-        Task<IConversation> GetConversationAsync(string id, int? page = null, int? offset = null);
+        Task<IConversation> GetConversationAsync(string conversationId, int? page = null, int? offset = null);
 
         /// <summary>
         ///     Get list of all conversations for the logged in user.

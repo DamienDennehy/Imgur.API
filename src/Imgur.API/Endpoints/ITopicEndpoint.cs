@@ -19,18 +19,18 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     View a single item in a gallery topic.
         /// </summary>
-        /// <param name="id">The gallery item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="topicId">
         ///     The ID or URL-formatted name of the topic. If using a topic's name, replace its spaces with
         ///     underscores (Mother's_Day).
         /// </param>
         /// <returns></returns>
-        Task<IGalleryItem> GetGalleryTopicItemAsync(string id, string topicId);
+        Task<IGalleryItem> GetGalleryTopicItemAsync(string galleryItemId, string topicId);
 
         /// <summary>
         ///     View gallery items for a topic.
         /// </summary>
-        /// <param name="id">
+        /// <param name="topicId">
         ///     The ID or URL-formatted name of the topic. If using a topic's name, replace its spaces with
         ///     underscores (Mother's_Day).
         /// </param>
@@ -38,7 +38,7 @@ namespace Imgur.API.Endpoints
         /// <param name="window">The time period that should be used in filtering requests. Default: Week</param>
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
-        Task<IEnumerable<IGalleryItem>> GetGalleryTopicItemsAsync(string id,
+        Task<IEnumerable<IGalleryItem>> GetGalleryTopicItemsAsync(string topicId,
             CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, Window? window = Window.Week, int? page = null);
     }
 }

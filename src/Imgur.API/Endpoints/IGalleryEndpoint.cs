@@ -14,25 +14,25 @@ namespace Imgur.API.Endpoints
         ///     Create a comment for an item. OAuth authentication required.
         /// </summary>
         /// <param name="comment">The text of the comment.</param>
-        /// <param name="itemId">The gallery item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<bool> CreateGalleryItemCommentAsync(string comment, string itemId);
+        Task<bool> CreateGalleryItemCommentAsync(string comment, string galleryItemId);
 
         /// <summary>
         ///     Reply to a comment that has been created for an item. OAuth authentication required.
         /// </summary>
         /// <param name="comment">The text of the comment.</param>
-        /// <param name="itemId">The gallery item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="parentId">The comment id that you are replying to.</param>
         /// <returns></returns>
-        Task<bool> CreateGalleryItemCommentReplyAsync(string comment, string itemId, string parentId);
+        Task<bool> CreateGalleryItemCommentReplyAsync(string comment, string galleryItemId, string parentId);
 
         /// <summary>
         ///     Get additional information about an album in the gallery.
         /// </summary>
-        /// <param name="itemId">The gallery item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<IGalleryAlbum> GetGalleryAlbumAsync(string itemId);
+        Task<IGalleryAlbum> GetGalleryAlbumAsync(string galleryItemId);
 
         /// <summary>
         ///     Returns the images in the gallery.
@@ -50,17 +50,17 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Get additional information about an image in the gallery.
         /// </summary>
-        /// <param name="itemId">The gallery item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<IGalleryImage> GetGalleryImageAsync(string itemId);
+        Task<IGalleryImage> GetGalleryImageAsync(string galleryItemId);
 
         /// <summary>
         ///     Get information about a specific comment.
         /// </summary>
         /// <param name="commentId">The comment id.</param>
-        /// <param name="itemId">The gallery item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<IComment> GetGalleryItemCommentAsync(string commentId, string itemId);
+        Task<IComment> GetGalleryItemCommentAsync(string commentId, string galleryItemId);
 
         /// <summary>
         ///     The number of comments on an item.
@@ -79,25 +79,25 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Get all comments for a gallery item.
         /// </summary>
-        /// <param name="itemId">The gallery item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="sort">The order that comments should be sorted by.</param>
         /// <returns></returns>
-        Task<IEnumerable<IComment>> GetGalleryItemCommentsAsync(string itemId,
+        Task<IEnumerable<IComment>> GetGalleryItemCommentsAsync(string galleryItemId,
             CommentSortOrder? sort = CommentSortOrder.Best);
 
         /// <summary>
         ///     View tags for a gallery item.
         /// </summary>
-        /// <param name="itemId">The gallery item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<IEnumerable<ITagVote>> GetGalleryItemTagsAsync(string itemId);
+        Task<IEnumerable<ITagVote>> GetGalleryItemTagsAsync(string galleryItemId);
 
         /// <summary>
         ///     Get the vote information about an image.
         /// </summary>
-        /// <param name="itemId">The gallery item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<IVote> GetGalleryItemVotesAsync(string itemId);
+        Task<IVote> GetGalleryItemVotesAsync(string galleryItemId);
 
         /// <summary>
         ///     View images for a gallery tag.
@@ -187,10 +187,10 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Report an item in the gallery.
         /// </summary>
-        /// <param name="itemId">The gallery item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="reason">A reason why content is inappropriate.</param>
         /// <returns></returns>
-        Task<bool> ReportGalleryItemAsync(string itemId, ReportReason reason);
+        Task<bool> ReportGalleryItemAsync(string galleryItemId, ReportReason reason);
 
         /// <summary>
         ///     Search the gallery with a given query string.
@@ -227,18 +227,18 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Vote for an item. Send the same value again to undo a vote.
         /// </summary>
-        /// <param name="itemId">The gallery item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="vote">The vote.</param>
         /// <returns></returns>
-        Task<bool> VoteGalleryItemAsync(string itemId, Vote vote);
+        Task<bool> VoteGalleryItemAsync(string galleryItemId, Vote vote);
 
         /// <summary>
         ///     Vote for a tag. Send the same value again to undo a vote. OAuth authentication required.
         /// </summary>
         /// <param name="tag">Name of the tag (implicitly created, if doesn't exist).</param>
-        /// <param name="itemId">The gallery item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="vote">The vote.</param>
         /// <returns></returns>
-        Task<bool> VoteGalleryTagAsync(string tag, string itemId, Vote vote);
+        Task<bool> VoteGalleryTagAsync(string tag, string galleryItemId, Vote vote);
     }
 }

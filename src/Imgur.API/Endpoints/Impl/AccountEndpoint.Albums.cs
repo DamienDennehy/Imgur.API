@@ -15,7 +15,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Delete an Album with a given id. OAuth authentication required.
         /// </summary>
-        /// <param name="id">The album id.</param>
+        /// <param name="albumId">The album id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
@@ -24,10 +24,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> DeleteAlbumAsync(string id, string username = "me")
+        public async Task<bool> DeleteAlbumAsync(string albumId, string username = "me")
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(albumId))
+                throw new ArgumentNullException(nameof(albumId));
 
             if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
@@ -35,7 +35,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"account/{username}/album/{id}";
+            var url = $"account/{username}/album/{albumId}";
 
             using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
@@ -47,7 +47,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Get additional information about an album, this works the same as the Album Endpoint.
         /// </summary>
-        /// <param name="id">The album id.</param>
+        /// <param name="albumId">The album id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
@@ -56,10 +56,10 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IAlbum> GetAlbumAsync(string id, string username = "me")
+        public async Task<IAlbum> GetAlbumAsync(string albumId, string username = "me")
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(albumId))
+                throw new ArgumentNullException(nameof(albumId));
 
             if (string.IsNullOrEmpty(username))
                 throw new ArgumentNullException(nameof(username));
@@ -68,7 +68,7 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"account/{username}/album/{id}";
+            var url = $"account/{username}/album/{albumId}";
 
             using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {

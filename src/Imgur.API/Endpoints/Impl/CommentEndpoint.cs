@@ -108,7 +108,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Delete a comment by the given id.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The comment id.</param>
+        /// <param name="commentId">The comment id.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -116,15 +116,15 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> DeleteCommentAsync(string id)
+        public async Task<bool> DeleteCommentAsync(string commentId)
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(commentId))
+                throw new ArgumentNullException(nameof(commentId));
 
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"comment/{id}";
+            var url = $"comment/{commentId}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
@@ -136,7 +136,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Get information about a specific comment.
         /// </summary>
-        /// <param name="id">The comment id.</param>
+        /// <param name="commentId">The comment id.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -144,12 +144,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IComment> GetCommentAsync(string id)
+        public async Task<IComment> GetCommentAsync(string commentId)
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(commentId))
+                throw new ArgumentNullException(nameof(commentId));
 
-            var url = $"comment/{id}";
+            var url = $"comment/{commentId}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -161,7 +161,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Get the comment with all of the replies for the comment.
         /// </summary>
-        /// <param name="id">The comment id.</param>
+        /// <param name="commentId">The comment id.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -169,12 +169,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IComment> GetRepliesAsync(string id)
+        public async Task<IComment> GetRepliesAsync(string commentId)
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(commentId))
+                throw new ArgumentNullException(nameof(commentId));
 
-            var url = $"comment/{id}/replies";
+            var url = $"comment/{commentId}/replies";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -187,7 +187,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Report a comment for being inappropriate.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The comment id.</param>
+        /// <param name="commentId">The comment id.</param>
         /// <param name="reason">The reason why the comment is inappropriate.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
@@ -196,15 +196,15 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> ReportCommentAsync(string id, ReportReason reason)
+        public async Task<bool> ReportCommentAsync(string commentId, ReportReason reason)
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(commentId))
+                throw new ArgumentNullException(nameof(commentId));
 
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"comment/{id}/report";
+            var url = $"comment/{commentId}/report";
 
             using (var request = RequestBuilder.ReportCommentRequest(url, reason))
             {
@@ -217,7 +217,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Vote on a comment.
         ///     OAuth authentication required.
         /// </summary>
-        /// <param name="id">The comment id.</param>
+        /// <param name="commentId">The comment id.</param>
         /// <param name="vote">The vote.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
@@ -226,16 +226,16 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> VoteCommentAsync(string id, Vote vote)
+        public async Task<bool> VoteCommentAsync(string commentId, Vote vote)
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(commentId))
+                throw new ArgumentNullException(nameof(commentId));
 
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var voteValue = $"{vote}".ToLower();
-            var url = $"comment/{id}/vote/{voteValue}";
+            var url = $"comment/{commentId}/vote/{voteValue}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {

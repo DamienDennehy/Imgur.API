@@ -35,12 +35,12 @@ namespace Imgur.API.Endpoints.Impl
         internal AlbumRequestBuilder RequestBuilder { get; } = new AlbumRequestBuilder();
 
         /// <summary>
-        ///     Takes a list of ids to add to the album. For anonymous albums, {album} should be the
+        ///     Takes a list of imageIds to add to the album. For anonymous albums, {albumId} should be the
         ///     deletehash
         ///     that is returned at creation.
         /// </summary>
-        /// <param name="album">The id or deletehash of the album.</param>
-        /// <param name="ids">The image ids that you want to be added to the album.</param>
+        /// <param name="albumId">The id or deletehash of the album.</param>
+        /// <param name="imageIds">The imageIds that you want to be added to the album.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -48,17 +48,17 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> AddAlbumImagesAsync(string album, IEnumerable<string> ids)
+        public async Task<bool> AddAlbumImagesAsync(string albumId, IEnumerable<string> imageIds)
         {
-            if (string.IsNullOrEmpty(album))
-                throw new ArgumentNullException(nameof(album));
+            if (string.IsNullOrEmpty(albumId))
+                throw new ArgumentNullException(nameof(albumId));
 
-            if (ids == null)
-                throw new ArgumentNullException(nameof(ids));
+            if (imageIds == null)
+                throw new ArgumentNullException(nameof(imageIds));
 
-            var url = $"album/{album}/add";
+            var url = $"album/{albumId}/add";
 
-            using (var request = RequestBuilder.AddAlbumImagesRequest(url, ids))
+            using (var request = RequestBuilder.AddAlbumImagesRequest(url, imageIds))
             {
                 var added = await SendRequestAsync<bool>(request);
                 return added;
@@ -72,19 +72,19 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="description">The description of the album.</param>
         /// <param name="privacy">Sets the privacy level of the album.</param>
         /// <param name="layout">Sets the layout to display the album.</param>
-        /// <param name="cover">The Id of an image that you want to be the cover of the album.</param>
-        /// <param name="ids">The image ids that you want to be included in the album.</param>
+        /// <param name="coverId">The Id of an image that you want to be the cover of the album.</param>
+        /// <param name="imageIds">The imageIds that you want to be included in the album.</param>
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IAlbum> CreateAlbumAsync(string title = null, string description = null,
-            AlbumPrivacy? privacy = null, AlbumLayout? layout = null, string cover = null,
-            IEnumerable<string> ids = null)
+            AlbumPrivacy? privacy = null, AlbumLayout? layout = null, string coverId = null,
+            IEnumerable<string> imageIds = null)
         {
             var url = "album";
 
-            using (var request = RequestBuilder.CreateAlbumRequest(url, title, description, privacy, layout, cover, ids)
-                )
+            using (var request = RequestBuilder.CreateAlbumRequest(url, title, description,
+                privacy, layout, coverId, imageIds))
             {
                 var album = await SendRequestAsync<Album>(request);
                 return album;
@@ -93,9 +93,9 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     Delete an album with a given Id. You are required to be logged in as the user to delete the album. For anonymous
-        ///     albums, {album} should be the deletehash that is returned at creation.
+        ///     albums, {albumId} should be the deletehash that is returned at creation.
         /// </summary>
-        /// <param name="album">The id or deletehash of the album.</param>
+        /// <param name="albumId">The id or deletehash of the album.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -103,12 +103,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> DeleteAlbumAsync(string album)
+        public async Task<bool> DeleteAlbumAsync(string albumId)
         {
-            if (string.IsNullOrEmpty(album))
-                throw new ArgumentNullException(nameof(album));
+            if (string.IsNullOrEmpty(albumId))
+                throw new ArgumentNullException(nameof(albumId));
 
-            var url = $"album/{album}";
+            var url = $"album/{albumId}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
@@ -120,7 +120,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Favorite an album with a given Id. OAuth authentication required.
         /// </summary>
-        /// <param name="id">The album id.</param>
+        /// <param name="albumId">The album id.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -128,15 +128,15 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> FavoriteAlbumAsync(string id)
+        public async Task<bool> FavoriteAlbumAsync(string albumId)
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(albumId))
+                throw new ArgumentNullException(nameof(albumId));
 
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"album/{id}/favorite";
+            var url = $"album/{albumId}/favorite";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {
@@ -165,7 +165,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Get information about a specific album.
         /// </summary>
-        /// <param name="id">The album id.</param>
+        /// <param name="albumId">The album id.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -173,12 +173,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IAlbum> GetAlbumAsync(string id)
+        public async Task<IAlbum> GetAlbumAsync(string albumId)
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(albumId))
+                throw new ArgumentNullException(nameof(albumId));
 
-            var url = $"album/{id}";
+            var url = $"album/{albumId}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -190,8 +190,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Get information about an image in an album.
         /// </summary>
-        /// <param name="id">The album id.</param>
-        /// <param name="image">The image id.</param>
+        /// <param name="imageId">The image id.</param>
+        /// <param name="albumId">The album id.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -199,15 +199,15 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IImage> GetAlbumImageAsync(string id, string image)
+        public async Task<IImage> GetAlbumImageAsync(string imageId, string albumId)
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(imageId))
+                throw new ArgumentNullException(nameof(imageId));
 
-            if (string.IsNullOrEmpty(image))
-                throw new ArgumentNullException(nameof(image));
+            if (string.IsNullOrEmpty(albumId))
+                throw new ArgumentNullException(nameof(albumId));
 
-            var url = $"album/{id}/image/{image}";
+            var url = $"album/{albumId}/image/{imageId}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -219,7 +219,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Return all of the images in the album.
         /// </summary>
-        /// <param name="id">The album id.</param>
+        /// <param name="albumId">The album id.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -227,12 +227,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IEnumerable<IImage>> GetAlbumImagesAsync(string id)
+        public async Task<IEnumerable<IImage>> GetAlbumImagesAsync(string albumId)
         {
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(albumId))
+                throw new ArgumentNullException(nameof(albumId));
 
-            var url = $"album/{id}/images";
+            var url = $"album/{albumId}/images";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
@@ -242,11 +242,11 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Takes a list of ids and removes from the album. For anonymous albums, {album} should be the
+        ///     Takes a list of imageIds and removes from the album. For anonymous albums, {albumId} should be the
         ///     deletehash that is returned at creation.
         /// </summary>
-        /// <param name="album">The id or deletehash of the album.</param>
-        /// <param name="ids">The image ids that you want to be removed from the album.</param>
+        /// <param name="albumId">The id or deletehash of the album.</param>
+        /// <param name="imageIds">The imageIds that you want to be removed from the album.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -254,17 +254,17 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> RemoveAlbumImagesAsync(string album, IEnumerable<string> ids)
+        public async Task<bool> RemoveAlbumImagesAsync(string albumId, IEnumerable<string> imageIds)
         {
-            if (string.IsNullOrEmpty(album))
-                throw new ArgumentNullException(nameof(album));
+            if (string.IsNullOrEmpty(albumId))
+                throw new ArgumentNullException(nameof(albumId));
 
-            if (ids == null)
-                throw new ArgumentNullException(nameof(ids));
+            if (imageIds == null)
+                throw new ArgumentNullException(nameof(imageIds));
 
-            var url = $"album/{album}/remove_images";
+            var url = $"album/{albumId}/remove_images";
 
-            using (var request = RequestBuilder.RemoveAlbumImagesRequest(url, ids))
+            using (var request = RequestBuilder.RemoveAlbumImagesRequest(url, imageIds))
             {
                 var removed = await SendRequestAsync<bool>(request);
                 return removed;
@@ -273,10 +273,10 @@ namespace Imgur.API.Endpoints.Impl
 
         /// <summary>
         ///     Sets the images for an album, removes all other images and only uses the images in this request. For anonymous
-        ///     albums, {album} should be the deletehash that is returned at creation.
+        ///     albums, {albumId} should be the deletehash that is returned at creation.
         /// </summary>
-        /// <param name="album">The id or deletehash of the album.</param>
-        /// <param name="ids">The image ids that you want to be added to the album.</param>
+        /// <param name="albumId">The id or deletehash of the album.</param>
+        /// <param name="imageIds">The imageIds that you want to be added to the album.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -284,17 +284,17 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> SetAlbumImagesAsync(string album, IEnumerable<string> ids)
+        public async Task<bool> SetAlbumImagesAsync(string albumId, IEnumerable<string> imageIds)
         {
-            if (string.IsNullOrEmpty(album))
-                throw new ArgumentNullException(nameof(album));
+            if (string.IsNullOrEmpty(albumId))
+                throw new ArgumentNullException(nameof(albumId));
 
-            if (ids == null)
-                throw new ArgumentNullException(nameof(ids));
+            if (imageIds == null)
+                throw new ArgumentNullException(nameof(imageIds));
 
-            var url = $"album/{album}";
+            var url = $"album/{albumId}";
 
-            using (var request = RequestBuilder.SetAlbumImagesRequest(url, ids))
+            using (var request = RequestBuilder.SetAlbumImagesRequest(url, imageIds))
             {
                 var set = await SendRequestAsync<bool>(request);
                 return set;
@@ -302,16 +302,16 @@ namespace Imgur.API.Endpoints.Impl
         }
 
         /// <summary>
-        ///     Update the information of an album. For anonymous albums, {album} should be the deletehash that is returned at
+        ///     Update the information of an album. For anonymous albums, {albumId} should be the deletehash that is returned at
         ///     creation.
         /// </summary>
-        /// <param name="album">The id or deletehash of the album.</param>
+        /// <param name="albumId">The id or deletehash of the album.</param>
         /// <param name="title">The title of the album.</param>
         /// <param name="description">The description of the album.</param>
         /// <param name="privacy">Sets the privacy level of the album.</param>
         /// <param name="layout">Sets the layout to display the album.</param>
-        /// <param name="cover">The Id of an image that you want to be the cover of the album.</param>
-        /// <param name="ids">The image ids that you want to be included in the album.</param>
+        /// <param name="coverId">The Id of an image that you want to be the cover of the album.</param>
+        /// <param name="imageIds">The imageIds that you want to be included in the album.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -319,17 +319,17 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> UpdateAlbumAsync(string album, string title = null, string description = null,
-            AlbumPrivacy? privacy = null, AlbumLayout? layout = null, string cover = null,
-            IEnumerable<string> ids = null)
+        public async Task<bool> UpdateAlbumAsync(string albumId, string title = null, string description = null,
+            AlbumPrivacy? privacy = null, AlbumLayout? layout = null, string coverId = null,
+            IEnumerable<string> imageIds = null)
         {
-            if (string.IsNullOrEmpty(album))
-                throw new ArgumentNullException(nameof(album));
+            if (string.IsNullOrEmpty(albumId))
+                throw new ArgumentNullException(nameof(albumId));
 
-            var url = $"album/{album}";
+            var url = $"album/{albumId}";
 
-            using (var request = RequestBuilder.UpdateAlbumRequest(url, title, description, privacy, layout, cover, ids)
-                )
+            using (var request = RequestBuilder.UpdateAlbumRequest(url, title, description,
+                privacy, layout, coverId, imageIds))
             {
                 var updated = await SendRequestAsync<bool>(request);
                 return updated;

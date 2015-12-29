@@ -7,7 +7,7 @@ For anonymous albums, the deletehash that is returned at creation must be used.
 		var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
 		var endpoint = new AlbumEndpoint(client);
 		var added = await endpoint.AddAlbumImagesAsync("ALBUM_ID_OR_DELETE_HASH", 
-							new List<string> {"ALBUM_ID", "ALBUM_ID", "ALBUM_ID"});
+							new List<string> {"IMAGE_ID", "IMAGE_ID", "IMAGE_ID"});
 
 ##CreateAlbumAsync
 Create a new album.
@@ -43,7 +43,7 @@ Get information about an image in an album.
 
 		var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
 		var endpoint = new AlbumEndpoint(client);
-		var image = await endpoint.GetAlbumImageAsync("ALBUM_ID", "IMAGE_ID");
+		var image = await endpoint.GetAlbumImageAsync("IMAGE_ID", "ALBUM_ID");
 
 ##GetAlbumImagesAsync
 Return all of the images in the album.
@@ -59,7 +59,7 @@ For anonymous albums, the deletehash that is returned at creation must be used.
 		var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
 		var endpoint = new AlbumEndpoint(client);
 		var added = await endpoint.RemoveAlbumImagesAsync("ALBUM_ID_OR_DELETE_HASH", 
-							new List<string> {"ALBUM_ID", "ALBUM_ID", "ALBUM_ID"});
+							new List<string> {"IMAGE_ID", "IMAGE_ID", "IMAGE_ID"});
 
 ##SetAlbumImagesAsync
 Sets the images for an album, removes all other images and only uses the images in this request. 
@@ -68,7 +68,7 @@ For anonymous albums, the deletehash that is returned at creation must be used.
 		var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
 		var endpoint = new AlbumEndpoint(client);
 		var set = await endpoint.SetAlbumImagesAsync("ALBUM_ID_OR_DELETE_HASH", 
-							new List<string> {"ALBUM_ID", "ALBUM_ID", "ALBUM_ID"});
+							new List<string> {"IMAGE_ID", "IMAGE_ID", "IMAGE_ID"});
 
 ##UpdateAlbumAsync
 Update the information of an album.

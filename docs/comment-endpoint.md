@@ -5,14 +5,14 @@ Creates a new comment, returns the ID of the comment. OAuth authentication requi
 
 		var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH2_TOKEN);
 		var endpoint = new CommentEndpoint(client);
-		var comment = await endpoint.CreateCommentAsync("YOUR_COMMENT", "IMAGE_ID");
+		var comment = await endpoint.CreateCommentAsync("YOUR_COMMENT", "GALLERY_ITEM_ID");
 
 ##CreateReplyAsync
 Create a reply for the given comment, returns the ID of the comment. OAuth authentication required.
 
 		var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH2_TOKEN);
 		var endpoint = new CommentEndpoint(client);
-		var comment = await endpoint.CreateReplyAsync(YOUR_COMMENT, "IMAGE_ID", "PARENT_ID");
+		var comment = await endpoint.CreateReplyAsync(YOUR_COMMENT, "GALLERY_ITEM_ID", "PARENT_ID");
 
 ##DeleteCommentAsync
 Delete a comment by the given id. OAuth authentication required.

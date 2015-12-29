@@ -26,7 +26,7 @@ View a single item in a user's custom gallery. OAuth authentication required.
  
 		var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET", YOUR_OAUTH2_TOKEN);
 		var endpoint = new CustomGalleryEndpoint(client);
-		var item = await endpoint.GetCustomGalleryItemAsync("ITEM_ID");
+		var item = await endpoint.GetCustomGalleryItemAsync("GALLERY_ITEM_ID");
 			
 ##GetFilteredOutGalleryAsync
 Retrieve user's filtered out gallery. OAuth authentication required.

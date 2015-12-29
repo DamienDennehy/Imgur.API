@@ -55,7 +55,7 @@ namespace Imgur.API.RequestBuilders
             };
 
             if (!string.IsNullOrWhiteSpace(albumId))
-                content.Add(new StringContent(albumId), nameof(albumId));
+                content.Add(new StringContent(albumId), "album");
 
             if (title != null)
                 content.Add(new StringContent(title), nameof(title));
@@ -90,7 +90,7 @@ namespace Imgur.API.RequestBuilders
             };
 
             if (!string.IsNullOrWhiteSpace(albumId))
-                content.Add(new StringContent(albumId), nameof(albumId));
+                content.Add(new StringContent(albumId), "album");
 
             if (title != null)
                 content.Add(new StringContent(title), nameof(title));

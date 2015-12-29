@@ -121,7 +121,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, Window.Month);
+            var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month);
 
             Assert.IsNotNull(gallery);
             Assert.AreEqual("imgurapidotnet", gallery.AccountUrl);
@@ -143,7 +143,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, Window.Month, 1);
+            var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month, 1);
 
             Assert.IsNotNull(gallery);
             Assert.AreEqual("imgurapidotnet", gallery.AccountUrl);
@@ -166,7 +166,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, Window.Month, 1);
+            var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month, 1);
 
             Assert.IsNotNull(gallery);
         }
@@ -277,7 +277,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, Window.Month);
+            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month);
 
             Assert.IsNotNull(gallery);
             Assert.AreEqual("imgurapidotnet", gallery.AccountUrl);
@@ -299,7 +299,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, Window.Month, 1);
+            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month, 1);
 
             Assert.IsNotNull(gallery);
             Assert.AreEqual("imgurapidotnet", gallery.AccountUrl);
@@ -322,7 +322,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, Window.Month, 1);
+            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month, 1);
 
             Assert.IsNotNull(gallery);
         }

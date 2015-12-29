@@ -27,7 +27,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="window">The time period that should be used in filtering requests. Default: Week</param>
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
-        public async Task<ITag> GetGalleryTagAsync(string tag, GalleryTagSortOrder? sort, Window? window,
+        public async Task<ITag> GetGalleryTagAsync(string tag, GalleryTagSortOrder? sort, TimeWindow? window,
             int? page = null)
         {
             throw new NotImplementedException();

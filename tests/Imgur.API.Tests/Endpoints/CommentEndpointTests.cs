@@ -174,7 +174,7 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual(0, comment.ParentId);
             Assert.AreEqual("iphone", comment.Platform);
             Assert.AreEqual(false, comment.Deleted);
-            Assert.AreEqual(Vote.Veto, comment.Vote);
+            Assert.AreEqual(VoteOption.Veto, comment.Vote);
         }
 
         [TestMethod]
@@ -253,7 +253,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var reported = await endpoint.VoteCommentAsync("539556821", Vote.Down);
+            var reported = await endpoint.VoteCommentAsync("539556821", VoteOption.Down);
 
             Assert.IsTrue(reported);
         }
@@ -263,7 +263,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.VoteCommentAsync(null, Vote.Down);
+            await endpoint.VoteCommentAsync(null, VoteOption.Down);
         }
 
         [ExpectedException(typeof (ArgumentNullException))]
@@ -271,7 +271,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client);
-            await endpoint.VoteCommentAsync("539556821", Vote.Down);
+            await endpoint.VoteCommentAsync("539556821", VoteOption.Down);
         }
     }
 }

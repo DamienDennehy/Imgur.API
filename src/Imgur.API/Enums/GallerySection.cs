@@ -3,7 +3,7 @@
     /// <summary>
     ///     The gallery section.
     /// </summary>
-    public enum Section
+    public enum GallerySection
     {
         /// <summary>
         ///     The Hot section.

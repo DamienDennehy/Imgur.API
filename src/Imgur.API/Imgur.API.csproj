@@ -80,7 +80,7 @@
     <Compile Include="Endpoints\IRateLimitEndpoint.cs" />
     <Compile Include="Endpoints\ITopicEndpoint.cs" />
     <Compile Include="Enums\AlbumLayout.cs" />
-    <Compile Include="Enums\FileType.cs" />
+    <Compile Include="Enums\ImageFileType.cs" />
     <Compile Include="Enums\ImageSize.cs" />
     <Compile Include="Enums\GalleryTagSortOrder.cs" />
     <Compile Include="Enums\SubredditGallerySortOrder.cs" />
@@ -89,9 +89,9 @@
     <Compile Include="Enums\CustomGallerySortOrder.cs" />
     <Compile Include="Enums\OAuth2ResponseType.cs" />
     <Compile Include="Enums\ReportReason.cs" />
-    <Compile Include="Enums\Section.cs" />
+    <Compile Include="Enums\GallerySection.cs" />
     <Compile Include="Enums\VoteOption.cs" />
-    <Compile Include="Enums\Window.cs" />
+    <Compile Include="Enums\TimeWindow.cs" />
     <Compile Include="JsonConverters\EpochTimeConverter.cs" />
     <Compile Include="JsonConverters\GalleryItemConverter.cs" />
     <Compile Include="JsonConverters\NotificationConverter.cs" />

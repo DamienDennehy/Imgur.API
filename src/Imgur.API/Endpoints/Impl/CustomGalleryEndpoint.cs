@@ -107,14 +107,14 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<ICustomGallery> GetCustomGalleryAsync(
-            CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, Window? window = Window.Week,
+            CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, TimeWindow? window = TimeWindow.Week,
             int? page = null)
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             sort = sort ?? CustomGallerySortOrder.Viral;
-            window = window ?? Window.Week;
+            window = window ?? TimeWindow.Week;
 
             var sortValue = $"{sort}".ToLower();
             var windowValue = $"{window}".ToLower();
@@ -171,14 +171,14 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<ICustomGallery> GetFilteredOutGalleryAsync(
-            CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, Window? window = Window.Week,
+            CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, TimeWindow? window = TimeWindow.Week,
             int? page = null)
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             sort = sort ?? CustomGallerySortOrder.Viral;
-            window = window ?? Window.Week;
+            window = window ?? TimeWindow.Week;
 
             var sortValue = $"{sort}".ToLower();
             var windowValue = $"{window}".ToLower();

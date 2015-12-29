@@ -77,7 +77,8 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new TopicEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var items =
-                await endpoint.GetGalleryTopicItemsAsync("Current Events", CustomGallerySortOrder.Top, Window.Day, 3);
+                await
+                    endpoint.GetGalleryTopicItemsAsync("Current Events", CustomGallerySortOrder.Top, TimeWindow.Day, 3);
 
             Assert.IsTrue(items.Any());
         }

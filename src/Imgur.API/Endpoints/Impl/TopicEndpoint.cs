@@ -101,13 +101,14 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IEnumerable<IGalleryItem>> GetGalleryTopicItemsAsync(string topicId,
-            CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, Window? window = Window.Week, int? page = null)
+            CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, TimeWindow? window = TimeWindow.Week,
+            int? page = null)
         {
             if (string.IsNullOrWhiteSpace(topicId))
                 throw new ArgumentNullException(nameof(topicId));
 
             sort = sort ?? CustomGallerySortOrder.Viral;
-            window = window ?? Window.Week;
+            window = window ?? TimeWindow.Week;
 
             var sortValue = $"{sort}".ToLower();
             var windowValue = $"{window}".ToLower();

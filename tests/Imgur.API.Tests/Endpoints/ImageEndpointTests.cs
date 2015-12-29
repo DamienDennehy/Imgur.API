@@ -148,7 +148,7 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual(26270273, image.Size);
             Assert.AreEqual(1583864, image.Views);
             Assert.AreEqual(41608539674872, image.Bandwidth);
-            Assert.AreEqual(Vote.Up, image.Vote);
+            Assert.AreEqual(VoteOption.Up, image.Vote);
             Assert.AreEqual(false, image.Favorite);
             Assert.AreEqual(false, image.Nsfw);
             Assert.AreEqual("Eyebleach", image.Section);

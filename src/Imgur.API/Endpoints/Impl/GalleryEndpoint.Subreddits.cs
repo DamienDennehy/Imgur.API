@@ -17,7 +17,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
         public async Task<IEnumerable<IGalleryItem>> GetSubredditGalleriesAsync(string subreddit,
-            SubredditGallerySortOrder? sort, Window? window, int? page = null)
+            SubredditGallerySortOrder? sort, TimeWindow? window, int? page = null)
         {
             throw new NotImplementedException();
         }

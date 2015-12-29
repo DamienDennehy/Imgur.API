@@ -20,8 +20,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="page">The data paging number. Default: null</param>
         /// <param name="showViral">Show or hide viral images from the 'user' section. Default: true</param>
         /// <returns></returns>
-        public async Task<IEnumerable<IGalleryItem>> GetGalleryAsync(Section? section = Section.Hot,
-            GallerySortOrder? sort = GallerySortOrder.Viral, Window? window = Window.Day, int? page = null,
+        public async Task<IEnumerable<IGalleryItem>> GetGalleryAsync(GallerySection? section = GallerySection.Hot,
+            GallerySortOrder? sort = GallerySortOrder.Viral, TimeWindow? window = TimeWindow.Day, int? page = null,
             bool? showViral = true)
         {
             throw new NotImplementedException();
@@ -92,8 +92,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public async Task<IEnumerable<IGalleryItem>> SearchGalleryAdvancedAsync(string allWords = null,
             string anyWords = null, string exactWords = null,
-            string excludeWords = null, FileType? fileType = null, ImageSize? imageSize = null,
-            GallerySortOrder? sort = GallerySortOrder.Time, Window? window = Window.All, int? page = null)
+            string excludeWords = null, ImageFileType? fileType = null, ImageSize? imageSize = null,
+            GallerySortOrder? sort = GallerySortOrder.Time, TimeWindow? window = TimeWindow.All, int? page = null)
         {
             throw new NotImplementedException();
         }
@@ -111,7 +111,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
         public async Task<IEnumerable<IGalleryItem>> SearchGalleryAsync(string query, GallerySortOrder? sort,
-            Window? window, int? page = null)
+            TimeWindow? window, int? page = null)
         {
             throw new NotImplementedException();
         }

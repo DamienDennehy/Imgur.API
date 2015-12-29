@@ -24,7 +24,7 @@ namespace Imgur.API.Tests.RequestBuilders
 
             Assert.IsNotNull(request);
             var expected =
-                "public_images=true&messaging_enabled=true&album_privacy=public&accepted_gallery_terms=true&show_mature=true&newsletter_subscribed=true&username=Bob2&bio=BioTest";
+                "public_images=true&messaging_enabled=true&album_privacy=public&accepted_gallery_terms=true&show_mature=true&newsletter_subscribed=true&bio=BioTest&username=Bob2";
 
             Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
             Assert.AreEqual("https://api.imgur.com/3/account/me/settings", request.RequestUri.ToString());

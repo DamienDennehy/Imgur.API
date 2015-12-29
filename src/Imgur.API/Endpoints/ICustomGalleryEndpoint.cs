@@ -35,7 +35,7 @@ namespace Imgur.API.Endpoints
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
         Task<ICustomGallery> GetCustomGalleryAsync(CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral,
-            Window? window = Window.Week, int? page = null);
+            TimeWindow? window = TimeWindow.Week, int? page = null);
 
         /// <summary>
         ///     View a single item in a user's custom gallery.
@@ -54,7 +54,7 @@ namespace Imgur.API.Endpoints
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
         Task<ICustomGallery> GetFilteredOutGalleryAsync(CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral,
-            Window? window = Window.Week, int? page = null);
+            TimeWindow? window = TimeWindow.Week, int? page = null);
 
         /// <summary>
         ///     Remove tags from a custom gallery.

@@ -3,7 +3,7 @@
     /// <summary>
     ///     The time period that should be used in filtering requests.
     /// </summary>
-    public enum Window
+    public enum TimeWindow
     {
         /// <summary>
         ///     Include the last day only in the request.

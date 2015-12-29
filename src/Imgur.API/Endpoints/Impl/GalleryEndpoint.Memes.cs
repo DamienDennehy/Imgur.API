@@ -15,7 +15,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="window">The time period that should be used in filtering requests. Default: Day</param>
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
-        public async Task<IEnumerable<IGalleryItem>> GetMemesSubGalleryAsync(MemesGallerySortOrder? sort, Window? window,
+        public async Task<IEnumerable<IGalleryItem>> GetMemesSubGalleryAsync(MemesGallerySortOrder? sort,
+            TimeWindow? window,
             int? page = null)
         {
             throw new NotImplementedException();

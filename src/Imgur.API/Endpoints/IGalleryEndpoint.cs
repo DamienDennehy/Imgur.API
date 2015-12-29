@@ -43,8 +43,8 @@ namespace Imgur.API.Endpoints
         /// <param name="page">The data paging number. Default: null</param>
         /// <param name="showViral">Show or hide viral images from the 'user' section. Default: true</param>
         /// <returns></returns>
-        Task<IEnumerable<IGalleryItem>> GetGalleryAsync(Section? section = Section.Hot,
-            GallerySortOrder? sort = GallerySortOrder.Viral, Window? window = Window.Day, int? page = null,
+        Task<IEnumerable<IGalleryItem>> GetGalleryAsync(GallerySection? section = GallerySection.Hot,
+            GallerySortOrder? sort = GallerySortOrder.Viral, TimeWindow? window = TimeWindow.Day, int? page = null,
             bool? showViral = true);
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Imgur.API.Endpoints
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
         Task<ITag> GetGalleryTagAsync(string tag, GalleryTagSortOrder? sort = GalleryTagSortOrder.Viral,
-            Window? window = Window.Week, int? page = null);
+            TimeWindow? window = TimeWindow.Week, int? page = null);
 
         /// <summary>
         ///     View a single image in a gallery tag.
@@ -126,7 +126,8 @@ namespace Imgur.API.Endpoints
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
         Task<IEnumerable<IGalleryItem>> GetMemesSubGalleryAsync(
-            MemesGallerySortOrder? sort = MemesGallerySortOrder.Viral, Window? window = Window.Day, int? page = null);
+            MemesGallerySortOrder? sort = MemesGallerySortOrder.Viral, TimeWindow? window = TimeWindow.Day,
+            int? page = null);
 
         /// <summary>
         ///     View a single image in the memes gallery.
@@ -151,7 +152,7 @@ namespace Imgur.API.Endpoints
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
         Task<IEnumerable<IGalleryItem>> GetSubredditGalleriesAsync(string subreddit,
-            SubredditGallerySortOrder? sort = SubredditGallerySortOrder.Time, Window? window = Window.Week,
+            SubredditGallerySortOrder? sort = SubredditGallerySortOrder.Time, TimeWindow? window = TimeWindow.Week,
             int? page = null);
 
         /// <summary>
@@ -207,8 +208,9 @@ namespace Imgur.API.Endpoints
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
         Task<IEnumerable<IGalleryItem>> SearchGalleryAdvancedAsync(string allWords = null, string anyWords = null,
-            string exactWords = null, string excludeWords = null, FileType? fileType = null, ImageSize? imageSize = null,
-            GallerySortOrder? sort = GallerySortOrder.Time, Window? window = Window.All, int? page = null);
+            string exactWords = null, string excludeWords = null, ImageFileType? fileType = null,
+            ImageSize? imageSize = null,
+            GallerySortOrder? sort = GallerySortOrder.Time, TimeWindow? window = TimeWindow.All, int? page = null);
 
         /// <summary>
         ///     Search the gallery with a given query string.
@@ -223,7 +225,7 @@ namespace Imgur.API.Endpoints
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
         Task<IEnumerable<IGalleryItem>> SearchGalleryAsync(string query, GallerySortOrder? sort = GallerySortOrder.Time,
-            Window? window = Window.All, int? page = null);
+            TimeWindow? window = TimeWindow.All, int? page = null);
 
         /// <summary>
         ///     Vote for an item. Send the same value again to undo a vote.

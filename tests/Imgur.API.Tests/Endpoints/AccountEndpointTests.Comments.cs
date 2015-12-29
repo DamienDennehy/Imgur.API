@@ -94,7 +94,7 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1443969120), comment.DateTime);
             Assert.AreEqual(486983435, comment.ParentId);
             Assert.AreEqual(false, comment.Deleted);
-            Assert.AreEqual(Vote.Down, comment.Vote);
+            Assert.AreEqual(VoteOption.Down, comment.Vote);
             Assert.AreEqual(comment.Platform, "desktop");
         }
 

@@ -3,7 +3,7 @@
     /// <summary>
     ///     Searchable file types.
     /// </summary>
-    public enum FileType
+    public enum ImageFileType
     {
         /// <summary>
         ///     Jpg.

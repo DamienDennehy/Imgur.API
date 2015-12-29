@@ -39,6 +39,7 @@ namespace Imgur.API.Endpoints
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
         Task<IEnumerable<IGalleryItem>> GetGalleryTopicItemsAsync(string topicId,
-            CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, Window? window = Window.Week, int? page = null);
+            CustomGallerySortOrder? sort = CustomGallerySortOrder.Viral, TimeWindow? window = TimeWindow.Week,
+            int? page = null);
     }
 }

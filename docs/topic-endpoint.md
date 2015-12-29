@@ -1,7 +1,7 @@
 # Topic Endpoint
 
 ##GetDefaultTopicsAsync
-Get the list of default memes.
+Get the list of default topics.
 
 		var client = new ImgurClient("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
 		var endpoint = new TopicEndpoint(client);

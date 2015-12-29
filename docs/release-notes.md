@@ -1,5 +1,12 @@
 # Release Notes
 
+## Version 3.5.0 (2015-12-29)
+* Added MemeGen endpoint.
+* Added Topic endpoint.
+* Refactored inheritance on Image > GalleryImage and Album > GalleryAlbum.
+* Removed AccountId and AccountUrl from Image model as no longer supported by official Imgur API.
+* Removed MemeMetaData model as no longer supported by official Imgur API.
+
 ## Version 3.4.0 (2015-12-26)
 * Added Custom Gallery endpoint.
 * Added Conversation endpoint.

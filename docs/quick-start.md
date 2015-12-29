@@ -4,13 +4,12 @@
 Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https://github.com/DamienDennehy/Imgur.API/issues)
 
 ## Latest Release
-### Version 3.4.0 (2015-12-26)
-* Added Custom Gallery endpoint.
-* Added Conversation endpoint.
-* Added Notification endpoint.
-* Updated UpdateRateLimit method to prevent OverflowExceptions.
-* Updated comments on all exceptions thrown.
-* Moved exceptions to base namespace.
+### Version 3.5.0 (2015-12-29)
+* Added MemeGen endpoint.
+* Added Topic endpoint.
+* Refactored inheritance on Image > GalleryImage and Album > GalleryAlbum.
+* Removed AccountId and AccountUrl from Image model as no longer supported by official Imgur API.
+* Removed MemeMetaData model as no longer supported by official Imgur API.
 
 ## Quick Start
 ### Upload image anonymously

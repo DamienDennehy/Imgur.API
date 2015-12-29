@@ -14,15 +14,15 @@
 * Conversation endpoint.
 * Custom Gallery endpoint.
 * Image endpoint.
+* Memegen endpoint.
 * Notification endpoint.
 * OAuth2 endpoint.
 * Rate Limit endpoint.
+* Topic endpoint.
 
 ##ToDo
 
 ###Endpoints
-* Memegen endpoint.
-* Topic endpoint.
 * Gallery endpoint.
 
 ##External References

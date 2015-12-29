@@ -26,4 +26,4 @@
 * Gallery endpoint.
 
 ##External References
-* Imgur's official API change log: https://api.imgur.com/changelog
+* Imgur's official API change log: [https://api.imgur.com/changelog](https://api.imgur.com/changelog)

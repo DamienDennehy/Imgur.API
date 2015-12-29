@@ -12,7 +12,6 @@ namespace Imgur.API.RequestBuilders
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        /// <exception cref="ArgumentException"></exception>
         internal HttpRequestMessage UpdateAccountSettingsRequest(
             string url,
             string bio = null,

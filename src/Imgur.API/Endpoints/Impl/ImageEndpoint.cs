@@ -67,7 +67,6 @@ namespace Imgur.API.Endpoints.Impl
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>

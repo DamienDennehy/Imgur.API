@@ -25,5 +25,5 @@ It was removed from the official Imgur API, but Imgur didn't remove it from thei
 
 ## Why isn't the Reddit comments key supported for Reddit images?
 It doesn't appear to be available currently in the official Imgur API.  
-[https://groups.google.com/forum/#!topic/imgur/DWJw19wny3Ahttps://groups.google.com/forum/#!topic/imgur/DWJw19wny3A
+[https://groups.google.com/forum/#!topic/imgur/DWJw19wny3A](https://groups.google.com/forum/#!topic/imgur/DWJw19wny3A)
 [https://market.mashape.com/imgur/imgur-9/support/48](https://market.mashape.com/imgur/imgur-9/support/48)

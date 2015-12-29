@@ -62,6 +62,7 @@
     <Compile Include="Endpoints\Impl\CustomGalleryEndpoint.cs" />
     <Compile Include="Endpoints\Impl\EndpointBase.cs" />
     <Compile Include="Endpoints\Impl\ImageEndpoint.cs" />
+    <Compile Include="Endpoints\Impl\MemeGenEndpoint.cs" />
     <Compile Include="Endpoints\Impl\NotificationEndpoint.cs" />
     <Compile Include="Endpoints\Impl\OAuth2Endpoint.cs" />
     <Compile Include="Endpoints\Impl\RateLimitEndpoint.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="RequestBuilders\AlbumRequestBuilder.cs" />
     <Compile Include="RequestBuilders\ConversationRequestBuilder.cs" />
     <Compile Include="RequestBuilders\CustomGalleryRequestBuilder.cs" />
+    <Compile Include="RequestBuilders\MemeGenRequestBuilder.cs" />
     <Compile Include="RequestBuilders\GalleryRequestBuilder.cs" />
     <Compile Include="RequestBuilders\ImageRequestBuilder.cs" />
     <Compile Include="RequestBuilders\NotificationRequestBuilder.cs" />

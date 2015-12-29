@@ -66,6 +66,7 @@
     <Compile Include="Endpoints\Impl\NotificationEndpoint.cs" />
     <Compile Include="Endpoints\Impl\OAuth2Endpoint.cs" />
     <Compile Include="Endpoints\Impl\RateLimitEndpoint.cs" />
+    <Compile Include="Endpoints\Impl\TopicEndpoint.cs" />
     <Compile Include="Endpoints\INotificationEndpoint.cs" />
     <Compile Include="Endpoints\IOAuth2Endpoint.cs" />
     <Compile Include="Endpoints\IRateLimitEndpoint.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Models\IMessageNotification.cs" />
     <Compile Include="Models\Impl\CommentNotification.cs" />
     <Compile Include="Models\Impl\CustomGallery.cs" />
+    <Compile Include="Models\Impl\Topic.cs" />
     <Compile Include="Models\Impl\MessageNotification.cs" />
     <Compile Include="Models\Impl\Notifications.cs" />
     <Compile Include="Models\Impl\Message.cs" />
@@ -149,6 +151,7 @@
     <Compile Include="RequestBuilders\AlbumRequestBuilder.cs" />
     <Compile Include="RequestBuilders\ConversationRequestBuilder.cs" />
     <Compile Include="RequestBuilders\CustomGalleryRequestBuilder.cs" />
+    <Compile Include="RequestBuilders\TopicRequestBuilder.cs" />
     <Compile Include="RequestBuilders\MemeGenRequestBuilder.cs" />
     <Compile Include="RequestBuilders\GalleryRequestBuilder.cs" />
     <Compile Include="RequestBuilders\ImageRequestBuilder.cs" />

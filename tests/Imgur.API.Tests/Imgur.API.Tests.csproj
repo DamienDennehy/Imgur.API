@@ -78,6 +78,7 @@
     <Compile Include="Endpoints\MemeGenEndpointTests.cs" />
     <Compile Include="Endpoints\NotificationEndpointTests.cs" />
     <Compile Include="Endpoints\OAuth2EndpointTests.cs" />
+    <Compile Include="Endpoints\TopicEndpointTests.cs" />
     <Compile Include="FakeResponses\AccountEndpointResponses.Albums.cs" />
     <Compile Include="FakeResponses\AccountEndpointResponses.Images.cs" />
     <Compile Include="FakeResponses\AccountEndpointResponses.Comments.cs" />
@@ -88,7 +89,7 @@
     <Compile Include="FakeResponses\CustomGalleryEndpointResponses.cs" />
     <Compile Include="FakeResponses\GalleryEndpointResponses.Memes.cs" />
     <Compile Include="FakeResponses\GalleryEndpointResponses.cs" />
-    <Compile Include="FakeResponses\TopicResponses.cs" />
+    <Compile Include="FakeResponses\TopicEndpointResponses.cs" />
     <Compile Include="FakeResponses\MemeGenEndpointResponses.cs" />
     <Compile Include="FakeResponses\NotificationEndpointResponses.cs" />
     <Compile Include="Fakes\FakeOAuth2TokenHandler.cs" />

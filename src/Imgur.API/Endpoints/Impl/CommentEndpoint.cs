@@ -38,7 +38,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="comment">The comment text, this is what will be displayed.</param>
-        /// <param name="imageId">The ID of the image in the gallery that you wish to comment on.</param>
+        /// <param name="galleryItemId">The ID of the item in the gallery that you wish to comment on.</param>
         /// <param name="parentId">The ID of the parent comment, this is an alternative method to create a reply.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
@@ -47,20 +47,20 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IComment> CreateCommentAsync(string comment, string imageId, string parentId = null)
+        public async Task<IComment> CreateCommentAsync(string comment, string galleryItemId, string parentId = null)
         {
             if (string.IsNullOrEmpty(comment))
                 throw new ArgumentNullException(nameof(comment));
 
-            if (string.IsNullOrEmpty(imageId))
-                throw new ArgumentNullException(nameof(imageId));
+            if (string.IsNullOrEmpty(galleryItemId))
+                throw new ArgumentNullException(nameof(galleryItemId));
 
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = "comment";
 
-            using (var request = RequestBuilder.CreateCommentRequest(url, comment, imageId, parentId))
+            using (var request = RequestBuilder.CreateCommentRequest(url, comment, galleryItemId, parentId))
             {
                 var returnComment = await SendRequestAsync<Comment>(request);
                 return returnComment;
@@ -72,7 +72,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="comment">The comment text, this is what will be displayed.</param>
-        /// <param name="imageId">The ID of the image in the gallery that you wish to comment on.</param>
+        /// <param name="galleryItemId">The ID of the item in the gallery that you wish to comment on.</param>
         /// <param name="parentId">The comment id that you are replying to.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
@@ -81,13 +81,13 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IComment> CreateReplyAsync(string comment, string imageId, string parentId)
+        public async Task<IComment> CreateReplyAsync(string comment, string galleryItemId, string parentId)
         {
             if (string.IsNullOrEmpty(comment))
                 throw new ArgumentNullException(nameof(comment));
 
-            if (string.IsNullOrEmpty(imageId))
-                throw new ArgumentNullException(nameof(imageId));
+            if (string.IsNullOrEmpty(galleryItemId))
+                throw new ArgumentNullException(nameof(galleryItemId));
 
             if (string.IsNullOrEmpty(parentId))
                 throw new ArgumentNullException(nameof(parentId));
@@ -97,7 +97,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"comment/{parentId}";
 
-            using (var request = RequestBuilder.CreateReplyRequest(url, comment, imageId))
+            using (var request = RequestBuilder.CreateReplyRequest(url, comment, galleryItemId))
             {
                 var returnComment = await SendRequestAsync<Comment>(request);
                 return returnComment;

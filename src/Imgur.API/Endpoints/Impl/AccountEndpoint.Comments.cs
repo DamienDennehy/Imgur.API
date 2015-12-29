@@ -130,7 +130,9 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var sortValue = $"{sort ?? CommentSortOrder.Newest}".ToLower();
+            sort = sort ?? CommentSortOrder.Newest;
+
+            var sortValue = $"{sort}".ToLower();
             var url = $"account/{username}/comments/ids/{sortValue}/{page}";
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
@@ -163,7 +165,9 @@ namespace Imgur.API.Endpoints.Impl
                 && ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var sortValue = $"{sort ?? CommentSortOrder.Newest}".ToLower();
+            sort = sort ?? CommentSortOrder.Newest;
+
+            var sortValue = $"{sort}".ToLower();
             var url = $"account/{username}/comments/{sortValue}/{page}";
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))

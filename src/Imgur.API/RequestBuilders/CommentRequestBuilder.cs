@@ -12,7 +12,8 @@ namespace Imgur.API.RequestBuilders
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        internal HttpRequestMessage CreateCommentRequest(string url, string comment, string imageId, string parentId)
+        internal HttpRequestMessage CreateCommentRequest(string url, string comment, string galleryItemId,
+            string parentId)
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
@@ -20,12 +21,12 @@ namespace Imgur.API.RequestBuilders
             if (string.IsNullOrEmpty(comment))
                 throw new ArgumentNullException(nameof(comment));
 
-            if (string.IsNullOrEmpty(imageId))
-                throw new ArgumentNullException(nameof(imageId));
+            if (string.IsNullOrEmpty(galleryItemId))
+                throw new ArgumentNullException(nameof(galleryItemId));
 
             var parameters = new Dictionary<string, string>
             {
-                {"image_id", imageId},
+                {"image_id", galleryItemId},
                 {"comment", comment}
             };
 
@@ -44,7 +45,7 @@ namespace Imgur.API.RequestBuilders
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        internal HttpRequestMessage CreateReplyRequest(string url, string comment, string imageId)
+        internal HttpRequestMessage CreateReplyRequest(string url, string comment, string galleryItemId)
         {
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentNullException(nameof(url));
@@ -52,12 +53,12 @@ namespace Imgur.API.RequestBuilders
             if (string.IsNullOrEmpty(comment))
                 throw new ArgumentNullException(nameof(comment));
 
-            if (string.IsNullOrEmpty(imageId))
-                throw new ArgumentNullException(nameof(imageId));
+            if (string.IsNullOrEmpty(galleryItemId))
+                throw new ArgumentNullException(nameof(galleryItemId));
 
             var parameters = new Dictionary<string, string>
             {
-                {"image_id", imageId},
+                {"image_id", galleryItemId},
                 {"comment", comment}
             };
 

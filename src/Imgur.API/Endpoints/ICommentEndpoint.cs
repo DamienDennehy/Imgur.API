@@ -14,20 +14,20 @@ namespace Imgur.API.Endpoints
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="comment">The comment text, this is what will be displayed.</param>
-        /// <param name="imageId">The ID of the image in the gallery that you wish to comment on.</param>
+        /// <param name="galleryItemId">The ID of the item in the gallery that you wish to comment on.</param>
         /// <param name="parentId">The ID of the parent comment, this is an alternative method to create a reply.</param>
         /// <returns></returns>
-        Task<IComment> CreateCommentAsync(string comment, string imageId, string parentId = null);
+        Task<IComment> CreateCommentAsync(string comment, string galleryItemId, string parentId = null);
 
         /// <summary>
         ///     Create a reply for the given comment, returns the ID of the comment.
         ///     OAuth authentication required.
         /// </summary>
         /// <param name="comment">The comment text, this is what will be displayed.</param>
-        /// <param name="imageId">The ID of the image in the gallery that you wish to comment on.</param>
+        /// <param name="galleryItemId">The ID of the item in the gallery that you wish to comment on.</param>
         /// <param name="parentId">The comment id that you are replying to.</param>
         /// <returns></returns>
-        Task<IComment> CreateReplyAsync(string comment, string imageId, string parentId);
+        Task<IComment> CreateReplyAsync(string comment, string galleryItemId, string parentId);
 
         /// <summary>
         ///     Delete a comment by the given id.

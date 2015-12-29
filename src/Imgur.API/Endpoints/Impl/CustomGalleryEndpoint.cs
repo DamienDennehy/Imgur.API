@@ -113,11 +113,8 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            if (sort == null)
-                sort = CustomGallerySortOrder.Viral;
-
-            if (window == null)
-                window = Window.Week;
+            sort = sort ?? CustomGallerySortOrder.Viral;
+            window = window ?? Window.Week;
 
             var sortValue = $"{sort}".ToLower();
             var windowValue = $"{window}".ToLower();
@@ -180,11 +177,8 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            if (sort == null)
-                sort = CustomGallerySortOrder.Viral;
-
-            if (window == null)
-                window = Window.Week;
+            sort = sort ?? CustomGallerySortOrder.Viral;
+            window = window ?? Window.Week;
 
             var sortValue = $"{sort}".ToLower();
             var windowValue = $"{window}".ToLower();

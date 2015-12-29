@@ -14,7 +14,7 @@ namespace Imgur.API.Endpoints
         ///     Get the list of default topics.
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<IGalleryItem>> GetDefaultTopicsAsync();
+        Task<IEnumerable<ITopic>> GetDefaultTopicsAsync();
 
         /// <summary>
         ///     View a single item in a gallery topic.

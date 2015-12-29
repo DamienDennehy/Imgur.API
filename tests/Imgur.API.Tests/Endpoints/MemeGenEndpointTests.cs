@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Imgur.API.Tests.Endpoints
 {
     [TestClass]
-    public class MemeGenEndpointTests
+    public class MemeGenEndpointTests : TestBase
     {
         [TestMethod]
         public async Task GetDefaultMemesAsync_IsTrue()

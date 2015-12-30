@@ -57,6 +57,41 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
+        public async Task CreateGalleryItemCommentRequest_AreEqual()
+        {
+            var client = new ImgurClient("123", "1234");
+            var requestBuilder = new CommentRequestBuilder();
+
+            var fakeUrl = $"{client.EndpointUrl}gallery/XysioD/comment";
+            var request = requestBuilder.CreateGalleryItemCommentRequest(fakeUrl, "Hello World!");
+
+            Assert.IsNotNull(request);
+            var expected = "comment=Hello+World%21";
+
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual("https://api.imgur.com/3/gallery/XysioD/comment", request.RequestUri.ToString());
+            Assert.AreEqual(HttpMethod.Post, request.Method);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public void CreateGalleryItemCommentRequest_WithCommentNull_ThrowsArgumentNullException()
+        {
+            var client = new ImgurClient("123", "1234");
+            var requestBuilder = new CommentRequestBuilder();
+            var fakeUrl = $"{client.EndpointUrl}comment";
+            requestBuilder.CreateGalleryItemCommentRequest(fakeUrl, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentNullException))]
+        public void CreateGalleryItemCommentRequest_WithUrlNull_ThrowsArgumentNullException()
+        {
+            var requestBuilder = new CommentRequestBuilder();
+            requestBuilder.CreateGalleryItemCommentRequest(null, "Hello World!");
+        }
+
+        [TestMethod]
         public async Task CreateReplyRequest_AreEqual()
         {
             var client = new ImgurClient("123", "1234");

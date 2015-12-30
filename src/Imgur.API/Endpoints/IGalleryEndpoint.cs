@@ -16,7 +16,7 @@ namespace Imgur.API.Endpoints
         /// <param name="comment">The text of the comment.</param>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<bool> CreateGalleryItemCommentAsync(string comment, string galleryItemId);
+        Task<IComment> CreateGalleryItemCommentAsync(string comment, string galleryItemId);
 
         /// <summary>
         ///     Reply to a comment that has been created for an item. OAuth authentication required.
@@ -25,7 +25,7 @@ namespace Imgur.API.Endpoints
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="parentId">The comment id that you are replying to.</param>
         /// <returns></returns>
-        Task<bool> CreateGalleryItemCommentReplyAsync(string comment, string galleryItemId, string parentId);
+        Task<IComment> CreateGalleryItemCommentReplyAsync(string comment, string galleryItemId, string parentId);
 
         /// <summary>
         ///     Get additional information about an album in the gallery.
@@ -74,7 +74,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<IEnumerable<string>> GetGalleryItemCommentIdsAsync(string galleryItemId);
+        Task<IEnumerable<int>> GetGalleryItemCommentIdsAsync(string galleryItemId);
 
         /// <summary>
         ///     Get all comments for a gallery item.

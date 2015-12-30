@@ -75,6 +75,8 @@
     <Compile Include="Endpoints\CommentEndpointTests.cs" />
     <Compile Include="Endpoints\ConversationEndpointTests.cs" />
     <Compile Include="Endpoints\CustomGalleryEndpointTests.cs" />
+    <Compile Include="Endpoints\GalleryEndpointTests.cs" />
+    <Compile Include="Endpoints\GalleryEndpointTests.Comments.cs" />
     <Compile Include="Endpoints\GalleryEndpointTests.Albums.cs" />
     <Compile Include="Endpoints\ImageEndpointTests.cs" />
     <Compile Include="Endpoints\MemeGenEndpointTests.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="FakeResponses\CommentEndpointResponses.cs" />
     <Compile Include="FakeResponses\ConversationEndpointResponses.cs" />
     <Compile Include="FakeResponses\CustomGalleryEndpointResponses.cs" />
+    <Compile Include="FakeResponses\GalleryEndpointResponses.Comments.cs" />
     <Compile Include="FakeResponses\GalleryEndpointResponses.Albums.cs" />
     <Compile Include="FakeResponses\GalleryEndpointResponses.Memes.cs" />
     <Compile Include="FakeResponses\GalleryEndpointResponses.cs" />

@@ -126,7 +126,7 @@ namespace Imgur.API.Endpoints
         /// <param name="sort">The order that the comments should be sorted by. Default: Newest</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <returns></returns>
-        Task<IEnumerable<string>> GetCommentIdsAsync(string username = "me",
+        Task<IEnumerable<int>> GetCommentIdsAsync(string username = "me",
             CommentSortOrder? sort = CommentSortOrder.Newest, int? page = null);
 
         /// <summary>

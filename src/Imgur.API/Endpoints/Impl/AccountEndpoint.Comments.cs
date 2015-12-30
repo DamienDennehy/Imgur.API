@@ -120,7 +120,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IEnumerable<string>> GetCommentIdsAsync(string username = "me",
+        public async Task<IEnumerable<int>> GetCommentIdsAsync(string username = "me",
             CommentSortOrder? sort = CommentSortOrder.Newest, int? page = null)
         {
             if (string.IsNullOrWhiteSpace(username))
@@ -137,7 +137,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var comments = await SendRequestAsync<IEnumerable<string>>(request);
+                var comments = await SendRequestAsync<IEnumerable<int>>(request);
                 return comments;
             }
         }

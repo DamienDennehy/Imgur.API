@@ -12,8 +12,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Imgur.API.Tests.Endpoints
 {
-    [TestClass]
-    public class GalleryEndpointTests
+    public partial class GalleryEndpointTests
     {
         [TestMethod]
         public async Task GetAlbumAsync_IsNotNull()

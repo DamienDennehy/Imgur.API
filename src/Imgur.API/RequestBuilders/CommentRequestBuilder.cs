@@ -45,6 +45,31 @@ namespace Imgur.API.RequestBuilders
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
+        internal HttpRequestMessage CreateGalleryItemCommentRequest(string url, string comment)
+        {
+            if (string.IsNullOrWhiteSpace(url))
+                throw new ArgumentNullException(nameof(url));
+
+            if (string.IsNullOrWhiteSpace(comment))
+                throw new ArgumentNullException(nameof(comment));
+
+            var parameters = new Dictionary<string, string>
+            {
+                {"comment", comment}
+            };
+
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
+            {
+                Content = new FormUrlEncodedContent(parameters.ToArray())
+            };
+
+            return request;
+        }
+
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
         internal HttpRequestMessage CreateReplyRequest(string url, string comment, string galleryItemId)
         {
             if (string.IsNullOrWhiteSpace(url))

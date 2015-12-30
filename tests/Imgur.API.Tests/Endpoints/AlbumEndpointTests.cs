@@ -21,7 +21,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AlbumEndpointResponses.Imgur.AddAlbumImagesResponse)
+                Content = new StringContent(AlbumEndpointResponses.Imgur.AddAlbumImagesAsync)
             };
 
             var fakeUrl = "https://api.imgur.com/3/album/12x5454/add";
@@ -56,7 +56,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AlbumEndpointResponses.Imgur.CreateAlbumResponse)
+                Content = new StringContent(AlbumEndpointResponses.Imgur.CreateAlbumAsync)
             };
 
             var fakeUrl = "https://api.imgur.com/3/album";
@@ -74,7 +74,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AlbumEndpointResponses.Imgur.DeleteAlbumResponse)
+                Content = new StringContent(AlbumEndpointResponses.Imgur.DeleteAlbumAsync)
             };
 
             var fakeUrl = "https://api.imgur.com/3/album/12x5454";
@@ -182,7 +182,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/album/5F5Cy";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AlbumEndpointResponses.Imgur.GetAlbumResponse)
+                Content = new StringContent(AlbumEndpointResponses.Imgur.GetAlbumAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -225,7 +225,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/album/5F5Cy/image/79MH23L";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AlbumEndpointResponses.Imgur.GetAlbumImageResponse)
+                Content = new StringContent(AlbumEndpointResponses.Imgur.GetAlbumImageAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -276,7 +276,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/album/5F5Cy/images";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AlbumEndpointResponses.Imgur.GetAlbumImagesResponse)
+                Content = new StringContent(AlbumEndpointResponses.Imgur.GetAlbumImagesAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -301,7 +301,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/album/12x5454/remove_images?ids=AbcDef%2CIrcDef";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AlbumEndpointResponses.Imgur.RemoveAlbumImagesResponse)
+                Content = new StringContent(AlbumEndpointResponses.Imgur.RemoveAlbumImagesAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -335,7 +335,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/album/12x5454";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AlbumEndpointResponses.Imgur.SetAlbumImagesResponse)
+                Content = new StringContent(AlbumEndpointResponses.Imgur.SetAlbumImagesAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -369,7 +369,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/album/12x5454";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AlbumEndpointResponses.Imgur.UpdateAlbumResponse)
+                Content = new StringContent(AlbumEndpointResponses.Imgur.UpdateAlbumAsync)
             };
 
             var client = new ImgurClient("123", "1234");

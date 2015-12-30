@@ -20,7 +20,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/me/favorites";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetAccountFavoritesResponse)
+                Content = new StringContent(AccountEndpointResponses.GetAccountFavoritesAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -45,7 +45,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/me/gallery_favorites/2/oldest";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetAccountGalleryFavoritesResponse)
+                Content = new StringContent(AccountEndpointResponses.GetAccountGalleryFavoritesAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -81,7 +81,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/me/submissions/2";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetAccountSubmissionsResponse)
+                Content = new StringContent(AccountEndpointResponses.GetAccountSubmissionsAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -115,7 +115,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/me/gallery_profile";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetGalleryProfileResponse)
+                Content = new StringContent(AccountEndpointResponses.GetGalleryProfileAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);

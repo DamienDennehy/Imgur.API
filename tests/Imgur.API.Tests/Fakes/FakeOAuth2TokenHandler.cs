@@ -10,7 +10,7 @@ namespace Imgur.API.Tests.Fakes
         public OAuth2Token GetOAuth2TokenCodeResponse()
         {
             var endpoint = Substitute.For<EndpointBase>();
-            return endpoint.ProcessEndpointResponse<OAuth2Token>(OAuth2EndpointResponses.OAuth2TokenCodeResponse);
+            return endpoint.ProcessEndpointResponse<OAuth2Token>(OAuth2EndpointResponses.GetTokenByRefreshTokenAsync);
         }
     }
 }

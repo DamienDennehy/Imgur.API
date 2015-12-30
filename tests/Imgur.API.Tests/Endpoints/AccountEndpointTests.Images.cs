@@ -19,7 +19,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/sarah/image/hbzm7Ge";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.DeleteImageResponse)
+                Content = new StringContent(AccountEndpointResponses.DeleteImageAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -70,7 +70,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/sarah/image/hbzm7Ge";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetImageResponse)
+                Content = new StringContent(AccountEndpointResponses.GetImageAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -133,7 +133,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/sarah/images/count";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetImageCountResponse)
+                Content = new StringContent(AccountEndpointResponses.GetImageCountAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -166,7 +166,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/sarah/images/ids/2";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetImageIdsResponse)
+                Content = new StringContent(AccountEndpointResponses.GetImageIdsAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -199,7 +199,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetImagesResponse)
+                Content = new StringContent(AccountEndpointResponses.GetImagesAsync)
             };
 
             var fakeUrl = "https://api.imgur.com/3/account/sarah/images/2";

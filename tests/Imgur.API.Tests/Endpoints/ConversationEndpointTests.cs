@@ -20,7 +20,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/conversations/block/Bob";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ConversationEndpointResponses.BlockSenderResponse)
+                Content = new StringContent(ConversationEndpointResponses.BlockSenderAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -55,7 +55,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/conversations/Bob";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ConversationEndpointResponses.CreateConversationResponse)
+                Content = new StringContent(ConversationEndpointResponses.CreateConversationAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -99,7 +99,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/conversations/Bob";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ConversationEndpointResponses.DeleteConversationResponse)
+                Content = new StringContent(ConversationEndpointResponses.DeleteConversationAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -134,7 +134,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/conversations/1234/1/0";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ConversationEndpointResponses.GetConversationResponse)
+                Content = new StringContent(ConversationEndpointResponses.GetConversationAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -180,7 +180,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/conversations";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ConversationEndpointResponses.GetConversationsResponse)
+                Content = new StringContent(ConversationEndpointResponses.GetConversationsAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -207,7 +207,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/conversations/report/Bob";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ConversationEndpointResponses.ReportSenderResponse)
+                Content = new StringContent(ConversationEndpointResponses.ReportSenderAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);

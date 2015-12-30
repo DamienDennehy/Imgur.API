@@ -18,7 +18,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/credits";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(RateLimitEndpointResponses.RateLimitResponse)
+                Content = new StringContent(RateLimitEndpointResponses.GetRateLimitAsync)
             };
 
             var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));

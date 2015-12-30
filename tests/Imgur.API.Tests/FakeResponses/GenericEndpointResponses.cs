@@ -2,7 +2,7 @@
 {
     public class GenericEndpointResponses
     {
-        public const string SuccessfulResponse =
+        public const string SuccessfulAsyncResponse =
             "{\"data\":true,\"success\":true,\"status\":200}";
     }
 }

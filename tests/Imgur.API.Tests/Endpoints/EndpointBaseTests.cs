@@ -168,7 +168,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
-            var response = endpoint.ProcessEndpointResponse<bool>(GenericEndpointResponses.SuccessfulResponse);
+            var response = endpoint.ProcessEndpointResponse<bool>(GenericEndpointResponses.SuccessfulAsyncResponse);
             Assert.IsTrue(response);
         }
 
@@ -178,7 +178,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
-            endpoint.ProcessEndpointResponse<RateLimit>(FakeErrors.ImgurClientErrorResponse);
+            endpoint.ProcessEndpointResponse<RateLimit>(FakeErrors.ImgurClientErrorAsync);
         }
 
         [TestMethod]
@@ -187,7 +187,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
-            endpoint.ProcessEndpointResponse<RateLimit>(FakeErrors.ImgurCapacityErrorResponse);
+            endpoint.ProcessEndpointResponse<RateLimit>(FakeErrors.ImgurCapacityErrorAsync);
         }
 
         [TestMethod]
@@ -205,7 +205,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new MashapeClient("123", "567567", "1234");
             var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
-            endpoint.ProcessEndpointResponse<RateLimit>(FakeErrors.MashapeErrorResponse);
+            endpoint.ProcessEndpointResponse<RateLimit>(FakeErrors.MashapeErrorAsync);
         }
 
         [TestMethod]
@@ -243,7 +243,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "http://example.org/test";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ImageEndpointResponses.Imgur.GetImageResponse)
+                Content = new StringContent(ImageEndpointResponses.Imgur.GetImageAsync)
             };
 
             var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
@@ -299,7 +299,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "http://example.org/test";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.Unauthorized)
             {
-                Content = new StringContent(FakeErrors.ImgurClientErrorResponse)
+                Content = new StringContent(FakeErrors.ImgurClientErrorAsync)
             };
 
             var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));

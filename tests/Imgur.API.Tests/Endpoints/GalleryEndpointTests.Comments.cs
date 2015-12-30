@@ -20,7 +20,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/gallery/dO484/comment";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(GalleryEndpointResponses.CreateGalleryItemCommentResponse)
+                Content = new StringContent(GalleryEndpointResponses.CreateGalleryItemCommentAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -64,7 +64,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/gallery/dO484/comment/1234890";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(GalleryEndpointResponses.CreateGalleryItemCommentReplyResponse)
+                Content = new StringContent(GalleryEndpointResponses.CreateGalleryItemCommentReplyAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -117,7 +117,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/gallery/Mxd8cg0/comment/548357773";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(GalleryEndpointResponses.GetGalleryItemCommentResponse)
+                Content = new StringContent(GalleryEndpointResponses.GetGalleryItemCommentAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -166,7 +166,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/gallery/Mxd8cg0/comments/count";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(GalleryEndpointResponses.GetGalleryItemCommentCountResponse)
+                Content = new StringContent(GalleryEndpointResponses.GetGalleryItemCommentCountAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -191,7 +191,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/gallery/Mxd8cg0/comments/ids";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(GalleryEndpointResponses.GetGalleryItemCommentIdsResponse)
+                Content = new StringContent(GalleryEndpointResponses.GetGalleryItemCommentIdsAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -216,7 +216,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/gallery/Mxd8cg0/comments/oldest";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(GalleryEndpointResponses.GetGalleryItemCommentsResponse)
+                Content = new StringContent(GalleryEndpointResponses.GetGalleryItemCommentsAsync)
             };
 
             var client = new ImgurClient("123", "1234");

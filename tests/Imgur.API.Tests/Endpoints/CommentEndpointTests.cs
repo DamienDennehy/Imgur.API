@@ -21,7 +21,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/comment";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CommentEndpointResponses.CreateCommentResponse)
+                Content = new StringContent(CommentEndpointResponses.CreateCommentAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -65,7 +65,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/comment/BNMxDs";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CommentEndpointResponses.CreateReplyResponse)
+                Content = new StringContent(CommentEndpointResponses.CreateReplyAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -118,7 +118,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/comment/12x5454";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CommentEndpointResponses.DeleteCommentResponse)
+                Content = new StringContent(CommentEndpointResponses.DeleteCommentAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -152,7 +152,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/comment/539556821";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CommentEndpointResponses.GetCommentResponse)
+                Content = new StringContent(CommentEndpointResponses.GetCommentAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -216,7 +216,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/comment/539556821/report";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CommentEndpointResponses.ReportCommentResponse)
+                Content = new StringContent(CommentEndpointResponses.ReportCommentAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -248,7 +248,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/comment/539556821/vote/down";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CommentEndpointResponses.VoteCommentResponse)
+                Content = new StringContent(CommentEndpointResponses.VoteCommentAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);

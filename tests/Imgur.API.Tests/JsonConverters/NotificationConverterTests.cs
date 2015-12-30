@@ -41,7 +41,7 @@ namespace Imgur.API.Tests.JsonConverters
         {
             var converter = new NotificationConverter();
             var reader =
-                new JsonTextReader(new StringReader(AccountEndpointResponses.GetCommentNotification));
+                new JsonTextReader(new StringReader(AccountEndpointResponses.GetCommentNotificationAsync));
             reader.Read();
             var serializer = new JsonSerializer();
 
@@ -71,7 +71,7 @@ namespace Imgur.API.Tests.JsonConverters
         {
             var converter = new NotificationConverter();
             var reader =
-                new JsonTextReader(new StringReader(AccountEndpointResponses.GetMessageNotification));
+                new JsonTextReader(new StringReader(AccountEndpointResponses.GetMessageNotificationAsync));
             reader.Read();
             var serializer = new JsonSerializer();
 

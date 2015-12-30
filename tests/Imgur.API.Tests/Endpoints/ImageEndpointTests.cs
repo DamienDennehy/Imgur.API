@@ -22,7 +22,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/image/123xyj";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ImageEndpointResponses.Imgur.DeleteImageResponse)
+                Content = new StringContent(ImageEndpointResponses.Imgur.DeleteImageAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -56,7 +56,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/image/zVpyzhW/favorite";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ImageEndpointResponses.Imgur.FavoriteImageResponseFalse)
+                Content = new StringContent(ImageEndpointResponses.Imgur.FavoriteImageAsyncFalse)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -72,7 +72,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/image/zVpyzhW/favorite";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ImageEndpointResponses.Imgur.FavoriteImageResponseTrue)
+                Content = new StringContent(ImageEndpointResponses.Imgur.FavoriteImageAsyncTrue)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -129,7 +129,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/image/zVpyzhW";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ImageEndpointResponses.Imgur.GetImageResponse)
+                Content = new StringContent(ImageEndpointResponses.Imgur.GetImageAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -174,7 +174,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/image/123xyj";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ImageEndpointResponses.Imgur.UpdateImageResponse)
+                Content = new StringContent(ImageEndpointResponses.Imgur.UpdateImageAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -199,7 +199,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/image";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ImageEndpointResponses.Imgur.UploadImageResponse)
+                Content = new StringContent(ImageEndpointResponses.Imgur.UploadImageAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -246,7 +246,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/image";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ImageEndpointResponses.Imgur.UploadImageResponse)
+                Content = new StringContent(ImageEndpointResponses.Imgur.UploadImageAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -289,7 +289,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/image";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(ImageEndpointResponses.Imgur.UploadImageResponse)
+                Content = new StringContent(ImageEndpointResponses.Imgur.UploadImageAsync)
             };
 
             var client = new ImgurClient("123", "1234");

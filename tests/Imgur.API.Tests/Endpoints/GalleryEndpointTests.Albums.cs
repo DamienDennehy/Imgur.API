@@ -20,7 +20,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/gallery/album/dO484";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(GalleryEndpointResponses.GetGalleryAlbumResponse)
+                Content = new StringContent(GalleryEndpointResponses.GetGalleryAlbumAsync)
             };
 
             var client = new ImgurClient("123", "1234");

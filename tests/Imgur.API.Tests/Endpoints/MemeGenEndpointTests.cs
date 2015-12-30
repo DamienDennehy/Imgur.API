@@ -19,7 +19,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/memegen/defaults";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(MemeGenEndpointResponses.GetDefaultMemesResponse)
+                Content = new StringContent(MemeGenEndpointResponses.GetDefaultMemesAsync)
             };
 
             var client = new ImgurClient("123", "1234");

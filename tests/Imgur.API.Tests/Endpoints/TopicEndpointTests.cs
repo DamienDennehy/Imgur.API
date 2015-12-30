@@ -21,7 +21,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/topics/defaults";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(TopicEndpointResponses.GetDefaultTopicsResponse)
+                Content = new StringContent(TopicEndpointResponses.GetDefaultTopicsAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -37,7 +37,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/topics/Current_Events/xyZ";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(TopicEndpointResponses.GetGalleryTopicItemResponse)
+                Content = new StringContent(TopicEndpointResponses.GetGalleryTopicItemAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -71,7 +71,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/topics/Current_Events/top/day/3";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(TopicEndpointResponses.GetGalleryTopicItemsResponse)
+                Content = new StringContent(TopicEndpointResponses.GetGalleryTopicItemsAsync)
             };
 
             var client = new ImgurClient("123", "1234");

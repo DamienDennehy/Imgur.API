@@ -18,7 +18,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/me/notifications?new=false";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetNotifications)
+                Content = new StringContent(AccountEndpointResponses.GetNotificationsAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);

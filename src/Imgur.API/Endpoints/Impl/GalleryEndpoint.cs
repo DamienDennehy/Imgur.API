@@ -52,9 +52,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Returns a random set of gallery images.
         /// </summary>
-        /// <param name="page">	A page of random gallery images, from 0-50. Pages are regenerated every hour.</param>
+        /// <param name="page">A page of random gallery images, from 0-50. Pages are regenerated every hour.</param>
         /// <returns></returns>
-        public async Task<IEnumerable<IGalleryItem>> GetRandomGalleryItemsAsync(int? page = null)
+        public async Task<IEnumerable<IGalleryItem>> GetRandomGalleryAsync(int? page = null)
         {
             throw new NotImplementedException();
         }

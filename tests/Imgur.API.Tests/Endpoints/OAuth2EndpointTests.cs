@@ -38,7 +38,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/oauth2/token";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(OAuth2EndpointResponses.OAuth2TokenCodeResponse)
+                Content = new StringContent(OAuth2EndpointResponses.GetTokenByCodeAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -83,7 +83,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/oauth2/token";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(OAuth2EndpointResponses.OAuth2TokenPinResponse)
+                Content = new StringContent(OAuth2EndpointResponses.GetTokenByPinAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -113,7 +113,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/oauth2/token";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(OAuth2EndpointResponses.OAuth2TokenRefreshTokenResponse)
+                Content = new StringContent(OAuth2EndpointResponses.GetTokenByRefreshTokenAsync)
             };
 
             var client = new ImgurClient("123", "1234");

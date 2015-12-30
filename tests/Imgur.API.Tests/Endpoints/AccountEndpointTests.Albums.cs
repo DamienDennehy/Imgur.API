@@ -20,7 +20,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/sarah/album/yMgB7";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.DeleteAlbumResponse)
+                Content = new StringContent(AccountEndpointResponses.DeleteAlbumAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -71,7 +71,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/sarah/album/yMgB7";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetAlbumResponse)
+                Content = new StringContent(AccountEndpointResponses.GetAlbumAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -130,7 +130,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/sarah/albums/count";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetAlbumCountResponse)
+                Content = new StringContent(AccountEndpointResponses.GetAlbumCountAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -163,7 +163,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/bob/albums/ids/2";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetAlbumIdsResponse)
+                Content = new StringContent(AccountEndpointResponses.GetAlbumIdsAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -197,7 +197,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/bob/albums/2";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetAlbumsResponse)
+                Content = new StringContent(AccountEndpointResponses.GetAlbumsAsync)
             };
 
             var client = new ImgurClient("123", "1234");

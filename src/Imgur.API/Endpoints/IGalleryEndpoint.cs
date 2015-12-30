@@ -30,9 +30,9 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Get additional information about an album in the gallery.
         /// </summary>
-        /// <param name="galleryAlbumId">The album id.</param>
+        /// <param name="albumId">The album id.</param>
         /// <returns></returns>
-        Task<IGalleryAlbum> GetGalleryAlbumAsync(string galleryAlbumId);
+        Task<IGalleryAlbum> GetGalleryAlbumAsync(string albumId);
 
         /// <summary>
         ///     Returns the images in the gallery.
@@ -50,9 +50,9 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Get additional information about an image in the gallery.
         /// </summary>
-        /// <param name="galleryItemId">The gallery item id.</param>
+        /// <param name="imageId">The gallery item id.</param>
         /// <returns></returns>
-        Task<IGalleryImage> GetGalleryImageAsync(string galleryItemId);
+        Task<IGalleryImage> GetGalleryImageAsync(string imageId);
 
         /// <summary>
         ///     Get information about a specific comment.
@@ -139,9 +139,9 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Returns a random set of gallery images.
         /// </summary>
-        /// <param name="page">	A page of random gallery images, from 0-50. Pages are regenerated every hour.</param>
+        /// <param name="page">A page of random gallery images, from 0-50. Pages are regenerated every hour.</param>
         /// <returns></returns>
-        Task<IEnumerable<IGalleryItem>> GetRandomGalleryItemsAsync(int? page = null);
+        Task<IEnumerable<IGalleryItem>> GetRandomGalleryAsync(int? page = null);
 
         /// <summary>
         ///     View gallery images for a subreddit.

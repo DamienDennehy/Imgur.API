@@ -20,7 +20,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/sarah/comment/yMgB7";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.DeleteCommentResponse)
+                Content = new StringContent(AccountEndpointResponses.DeleteCommentAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -71,7 +71,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/sarah/comment/yMgB7";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetCommentResponse)
+                Content = new StringContent(AccountEndpointResponses.GetCommentAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -130,7 +130,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/sarah/comments/count";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetCommentCountResponse)
+                Content = new StringContent(AccountEndpointResponses.GetCommentCountAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -163,7 +163,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/bob/comments/ids/worst/2";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetCommentIdsResponse)
+                Content = new StringContent(AccountEndpointResponses.GetCommentIdsAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -197,7 +197,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/account/bob/comments/worst/2";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(AccountEndpointResponses.GetCommentsResponse)
+                Content = new StringContent(AccountEndpointResponses.GetCommentsAsync)
             };
 
             var client = new ImgurClient("123", "1234");

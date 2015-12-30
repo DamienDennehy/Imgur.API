@@ -20,7 +20,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/notification/12345";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(NotificationEndpointResponses.GetNotificationResponse)
+                Content = new StringContent(NotificationEndpointResponses.GetNotificationAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -55,7 +55,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/notification?new=false";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(NotificationEndpointResponses.GetNotificationsResponse)
+                Content = new StringContent(NotificationEndpointResponses.GetNotificationsAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -83,7 +83,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/notification/12345";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(NotificationEndpointResponses.MarkNotificationViewed)
+                Content = new StringContent(NotificationEndpointResponses.MarkNotificationViewedAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -118,7 +118,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/notification";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(NotificationEndpointResponses.MarkNotificationViewed)
+                Content = new StringContent(NotificationEndpointResponses.MarkNotificationViewedAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);

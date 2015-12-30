@@ -23,7 +23,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/custom/add_tags";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.AddCustomGalleryTagsResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.AddCustomGalleryTagsAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -58,7 +58,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/block_tag";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.AddFilteredOutGalleryTagResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.AddFilteredOutGalleryTagAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -93,7 +93,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/custom/viral/week/";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -115,7 +115,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/custom/top/month/";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -137,7 +137,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/custom/top/month/1";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -160,7 +160,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/custom/top/month/1";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -177,7 +177,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/custom/AbcDef";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryAlbumResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryAlbumAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -196,7 +196,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/custom/AbcDef";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryImageResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryImageAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -213,7 +213,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/custom/AbcDef";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryImageResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryImageAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -232,7 +232,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/custom/AbcDef";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryImageResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.GetCustomGalleryImageAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -249,7 +249,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/filtered/viral/week/";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -271,7 +271,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/filtered/top/month/";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -293,7 +293,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/filtered/top/month/1";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -316,7 +316,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/custom/top/month/1";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.GetFilteredOutGalleryAsync)
             };
 
             var client = new ImgurClient("123", "1234");
@@ -333,7 +333,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/custom/remove_tags?tags=Cats%2CDogs";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.RemoveCustomGalleryTagsResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.RemoveCustomGalleryTagsAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
@@ -369,7 +369,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/g/unblock_tag";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(CustomGalleryEndpointResponses.RemoveFilteredOutGalleryTagResponse)
+                Content = new StringContent(CustomGalleryEndpointResponses.RemoveFilteredOutGalleryTagAsync)
             };
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);

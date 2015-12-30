@@ -41,7 +41,7 @@ namespace Imgur.API.Tests.JsonConverters
         public void GalleryItemConverter_ReadJsonGalleryAlbum_AreEqual()
         {
             var converter = new GalleryItemConverter();
-            var reader = new JsonTextReader(new StringReader(AccountEndpointResponses.GetGalleryAlbum));
+            var reader = new JsonTextReader(new StringReader(AccountEndpointResponses.GetGalleryAlbumAsync));
             reader.Read();
             var serializer = new JsonSerializer
             {
@@ -83,7 +83,7 @@ namespace Imgur.API.Tests.JsonConverters
         public void GalleryItemConverter_ReadJsonGalleryImage_AreEqual()
         {
             var converter = new GalleryItemConverter();
-            var reader = new JsonTextReader(new StringReader(AccountEndpointResponses.GetGalleryImage));
+            var reader = new JsonTextReader(new StringReader(AccountEndpointResponses.GetGalleryImageAsync));
             reader.Read();
             var serializer = new JsonSerializer
             {

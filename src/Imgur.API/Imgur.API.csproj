@@ -25,6 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Imgur.API.XML</DocumentationFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -121,6 +122,8 @@
     <Compile Include="Models\IMessageNotification.cs" />
     <Compile Include="Models\Impl\CommentNotification.cs" />
     <Compile Include="Models\Impl\CustomGallery.cs" />
+    <Compile Include="Models\Impl\Tag.cs" />
+    <Compile Include="Models\Impl\TagVote.cs" />
     <Compile Include="Models\Impl\Topic.cs" />
     <Compile Include="Models\Impl\MessageNotification.cs" />
     <Compile Include="Models\Impl\Notifications.cs" />
@@ -144,6 +147,7 @@
     <Compile Include="Models\Impl\MashapeError.cs" />
     <Compile Include="Models\Impl\OAuth2Token.cs" />
     <Compile Include="Enums\AccountGallerySortOrder.cs" />
+    <Compile Include="Models\Impl\Vote.cs" />
     <Compile Include="Models\INotification.cs" />
     <Compile Include="Models\INotifications.cs" />
     <Compile Include="Models\IOAuth2Token.cs" />

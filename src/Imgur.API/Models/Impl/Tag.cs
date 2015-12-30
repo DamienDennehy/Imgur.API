@@ -22,7 +22,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     A list of all the gallery items in the custom gallery
         /// </summary>
-        [JsonConverter(typeof(TypeConverter<IEnumerable<GalleryItem>>))]
+        [JsonConverter(typeof (TypeConverter<IEnumerable<GalleryItem>>))]
         public IEnumerable<IGalleryItem> Items { get; set; }
 
         /// <summary>

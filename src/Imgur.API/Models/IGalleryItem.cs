@@ -23,6 +23,11 @@ namespace Imgur.API.Models
         int? Downs { get; set; }
 
         /// <summary>
+        ///     Upvotes minus downvotes.
+        /// </summary>
+        int? Points { get; set; }
+
+        /// <summary>
         ///     Imgur popularity score.
         /// </summary>
         int? Score { get; set; }

@@ -30,9 +30,9 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Get additional information about an album in the gallery.
         /// </summary>
-        /// <param name="galleryItemId">The gallery item id.</param>
+        /// <param name="galleryAlbumId">The album id.</param>
         /// <returns></returns>
-        Task<IGalleryAlbum> GetGalleryAlbumAsync(string galleryItemId);
+        Task<IGalleryAlbum> GetGalleryAlbumAsync(string galleryAlbumId);
 
         /// <summary>
         ///     Returns the images in the gallery.

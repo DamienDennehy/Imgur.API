@@ -3,7 +3,7 @@
     /// <summary>
     ///     A vote.
     /// </summary>
-    public class Vote: IVote
+    public class Vote : IVote
     {
         /// <summary>
         ///     The number of downvotes.

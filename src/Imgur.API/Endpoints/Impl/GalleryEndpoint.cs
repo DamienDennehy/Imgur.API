@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Imgur.API.Authentication;
 using Imgur.API.Enums;
 using Imgur.API.Models;
+using Imgur.API.RequestBuilders;
 
 namespace Imgur.API.Endpoints.Impl
 {
@@ -11,6 +14,25 @@ namespace Imgur.API.Endpoints.Impl
     /// </summary>
     public partial class GalleryEndpoint : EndpointBase, IGalleryEndpoint
     {
+        /// <summary>
+        ///     Initializes a new instance of the GalleryEndpoint class.
+        /// </summary>
+        /// <param name="apiClient">The type of client that will be used for authentication.</param>
+        public GalleryEndpoint(IApiClient apiClient) : base(apiClient)
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the GalleryEndpoint class.
+        /// </summary>
+        /// <param name="apiClient">The type of client that will be used for authentication.</param>
+        /// <param name="httpClient"> The class for sending HTTP requests and receiving HTTP responses from the endpoint methods.</param>
+        internal GalleryEndpoint(IApiClient apiClient, HttpClient httpClient) : base(apiClient, httpClient)
+        {
+        }
+
+        internal GalleryRequestBuilder RequestBuilder { get; } = new GalleryRequestBuilder();
+
         /// <summary>
         ///     Returns the images in the gallery.
         /// </summary>

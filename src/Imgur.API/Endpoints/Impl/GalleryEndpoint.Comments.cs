@@ -45,7 +45,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     The number of comments on an item.
         /// </summary>
-        /// <param name="galleryItemId">The galler item id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
         public async Task<int> GetGalleryItemCommentCountAsync(string galleryItemId)
         {

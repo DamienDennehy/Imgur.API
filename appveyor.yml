@@ -1,23 +1,17 @@
 version: 3.6.0-build{build}
-environment:
-  VisualStudioVersion: 14.0
-install:
-- set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
-- nuget restore
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
   assembly_version: 3.6.0
   assembly_file_version: 3.6.0.{build}
-  assembly_informational_version: '3.6.0-build{build}'
+  assembly_informational_version: 3.6.0-build{build}
+before_build:
+- cmd: nuget restore
 build:
-  project: Imgur.API.sln
   publish_nuget: true
   publish_nuget_symbols: true
   include_nuget_references: true
   verbosity: minimal
-test:
-  assemblies: '**\*.tests.dll'
 artifacts:
   path: artifacts\*.nupkg
 deploy:

@@ -60,7 +60,7 @@ namespace Imgur.API.Tests.Endpoints
                 Content = new StringContent(GalleryEndpointResponses.GetRandomGalleryAsync)
             };
 
-            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var gallery = await endpoint.GetRandomGalleryAsync();
@@ -77,7 +77,7 @@ namespace Imgur.API.Tests.Endpoints
                 Content = new StringContent(GalleryEndpointResponses.GetRandomGalleryAsync)
             };
 
-            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var gallery = await endpoint.GetRandomGalleryAsync(8);
@@ -188,7 +188,7 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ArgumentNullException))]
         public async Task SearchGalleryAdvancedAsync_WithQueriesNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
             await endpoint.SearchGalleryAdvancedAsync();
         }
@@ -214,7 +214,7 @@ namespace Imgur.API.Tests.Endpoints
         [ExpectedException(typeof (ArgumentNullException))]
         public async Task SearchGalleryAsync_WithQueryNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
             await endpoint.SearchGalleryAsync(null);
         }

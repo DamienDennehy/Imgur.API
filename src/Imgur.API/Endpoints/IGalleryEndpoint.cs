@@ -151,7 +151,7 @@ namespace Imgur.API.Endpoints
         /// <param name="window">The time period that should be used in filtering requests. Default: Week</param>
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
-        Task<IEnumerable<IGalleryItem>> GetSubredditGalleriesAsync(string subreddit,
+        Task<IEnumerable<IGalleryItem>> GetSubredditGalleryAsync(string subreddit,
             SubredditGallerySortOrder? sort = SubredditGallerySortOrder.Time, TimeWindow? window = TimeWindow.Week,
             int? page = null);
 

@@ -90,7 +90,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<IEnumerable<ITagVote>> GetGalleryItemTagsAsync(string galleryItemId);
+        Task<ITagVotes> GetGalleryItemTagsAsync(string galleryItemId);
 
         /// <summary>
         ///     Get the vote information about an image.
@@ -113,10 +113,10 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     View a single image in a gallery tag.
         /// </summary>
-        /// <param name="imageId">The image id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="tag">The name of the tag.</param>
         /// <returns></returns>
-        Task<IGalleryImage> GetGalleryTagImageAsync(string imageId, string tag);
+        Task<IGalleryItem> GetGalleryTagImageAsync(string galleryItemId, string tag);
 
         /// <summary>
         ///     View images for memes subgallery.
@@ -239,10 +239,10 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Vote for a tag. Send the same value again to undo a vote. OAuth authentication required.
         /// </summary>
-        /// <param name="tag">Name of the tag (implicitly created, if doesn't exist).</param>
         /// <param name="galleryItemId">The gallery item id.</param>
+        /// <param name="tag">Name of the tag (implicitly created, if doesn't exist).</param>
         /// <param name="vote">The vote.</param>
         /// <returns></returns>
-        Task<bool> VoteGalleryTagAsync(string tag, string galleryItemId, VoteOption vote);
+        Task<bool> VoteGalleryTagAsync(string galleryItemId, string tag, VoteOption vote);
     }
 }

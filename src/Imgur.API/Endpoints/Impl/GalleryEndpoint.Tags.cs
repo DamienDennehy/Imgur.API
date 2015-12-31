@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Enums;
 using Imgur.API.Models;
+using Imgur.API.Models.Impl;
 
 namespace Imgur.API.Endpoints.Impl
 {
@@ -12,10 +13,25 @@ namespace Imgur.API.Endpoints.Impl
         ///     View tags for a gallery item.
         /// </summary>
         /// <param name="galleryItemId">The gallery item id.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IEnumerable<ITagVote>> GetGalleryItemTagsAsync(string galleryItemId)
+        public async Task<ITagVotes> GetGalleryItemTagsAsync(string galleryItemId)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(galleryItemId))
+                throw new ArgumentNullException(nameof(galleryItemId));
+
+            var url = $"gallery/{galleryItemId}/tags";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            {
+                var tagVotes = await SendRequestAsync<TagVotes>(request);
+                return tagVotes;
+            }
         }
 
 
@@ -26,35 +42,95 @@ namespace Imgur.API.Endpoints.Impl
         /// <param name="sort">The order that the images in the gallery tag should be sorted by. Default: Viral</param>
         /// <param name="window">The time period that should be used in filtering requests. Default: Week</param>
         /// <param name="page">The data paging number. Default: null</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<ITag> GetGalleryTagAsync(string tag, GalleryTagSortOrder? sort, TimeWindow? window,
-            int? page = null)
+        public async Task<ITag> GetGalleryTagAsync(string tag, GalleryTagSortOrder? sort = GalleryTagSortOrder.Viral,
+            TimeWindow? window = TimeWindow.Week, int? page = null)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(tag))
+                throw new ArgumentNullException(nameof(tag));
+
+            sort = sort ?? GalleryTagSortOrder.Viral;
+            window = window ?? TimeWindow.Week;
+
+            var sortValue = $"{sort}".ToLower();
+            var windowValue = $"{window}".ToLower();
+
+            var url = $"gallery/t/{tag}/{sortValue}/{windowValue}/{page}";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            {
+                var returnTag = await SendRequestAsync<Tag>(request);
+                return returnTag;
+            }
         }
 
         /// <summary>
-        ///     View a single image in a gallery tag.
+        ///     View a single item in a gallery tag.
         /// </summary>
-        /// <param name="imageId">The image id.</param>
+        /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="tag">The name of the tag.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IGalleryImage> GetGalleryTagImageAsync(string imageId, string tag)
+        public async Task<IGalleryItem> GetGalleryTagImageAsync(string galleryItemId, string tag)
         {
-            throw new NotImplementedException();
-        }
+            if (string.IsNullOrWhiteSpace(galleryItemId))
+                throw new ArgumentNullException(nameof(galleryItemId));
 
+            if (string.IsNullOrWhiteSpace(tag))
+                throw new ArgumentNullException(nameof(tag));
+
+            var url = $"gallery/t/{tag}/{galleryItemId}";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            {
+                var image = await SendRequestAsync<GalleryImage>(request);
+                return image;
+            }
+        }
 
         /// <summary>
         ///     Vote for a tag. Send the same value again to undo a vote. OAuth authentication required.
         /// </summary>
-        /// <param name="tag">Name of the tag (implicitly created, if doesn't exist).</param>
         /// <param name="galleryItemId">The gallery item id.</param>
+        /// <param name="tag">Name of the tag (implicitly created, if doesn't exist).</param>
         /// <param name="vote">The vote.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> VoteGalleryTagAsync(string tag, string galleryItemId, VoteOption vote)
+        public async Task<bool> VoteGalleryTagAsync(string galleryItemId, string tag, VoteOption vote)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(galleryItemId))
+                throw new ArgumentNullException(nameof(galleryItemId));
+
+            if (string.IsNullOrWhiteSpace(tag))
+                throw new ArgumentNullException(nameof(tag));
+
+            if (ApiClient.OAuth2Token == null)
+                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
+
+            var voteValue = $"{vote}".ToLower();
+            var url = $"gallery/{galleryItemId}/vote/tag/{tag}/{voteValue}";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
+            {
+                var voted = await SendRequestAsync<bool>(request);
+                return voted;
+            }
         }
     }
 }

@@ -122,6 +122,7 @@
     <Compile Include="Models\IMessageNotification.cs" />
     <Compile Include="Models\Impl\CommentNotification.cs" />
     <Compile Include="Models\Impl\CustomGallery.cs" />
+    <Compile Include="Models\Impl\TagVotes.cs" />
     <Compile Include="Models\Impl\Tag.cs" />
     <Compile Include="Models\Impl\TagVote.cs" />
     <Compile Include="Models\Impl\Topic.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Models\IOAuth2Token.cs" />
     <Compile Include="Models\IRateLimit.cs" />
     <Compile Include="Models\ITag.cs" />
+    <Compile Include="Models\ITagVotes.cs" />
     <Compile Include="Models\ITagVote.cs" />
     <Compile Include="Models\ITopic.cs" />
     <Compile Include="Models\ITrophy.cs" />

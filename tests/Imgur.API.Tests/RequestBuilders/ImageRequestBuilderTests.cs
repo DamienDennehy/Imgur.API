@@ -130,7 +130,7 @@ namespace Imgur.API.Tests.RequestBuilders
         public void UploadImageUrlRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new ImageRequestBuilder();
-            requestBuilder.UploadImageBinaryRequest(null, null);
+            requestBuilder.UploadImageBinaryRequest(null, new byte[9]);
         }
 
         [TestMethod]

@@ -18,7 +18,7 @@
         /// <summary>
         ///     Whether it is an ephemeral (e.g. current events) topic.
         /// </summary>
-        string Ephemeral { get; set; }
+        bool Ephemeral { get; set; }
 
         /// <summary>
         ///     ID of the topic.

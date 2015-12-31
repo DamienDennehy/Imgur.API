@@ -50,7 +50,7 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Get additional information about an image in the gallery.
         /// </summary>
-        /// <param name="imageId">The gallery item id.</param>
+        /// <param name="imageId">The image id.</param>
         /// <returns></returns>
         Task<IGalleryImage> GetGalleryImageAsync(string imageId);
 
@@ -187,7 +187,7 @@ namespace Imgur.API.Endpoints
         Task<bool> RemoveFromGalleryAsync(string galleryItemId);
 
         /// <summary>
-        ///     Report an item in the gallery.
+        ///     Report an item in the gallery. OAuth authentication required.
         /// </summary>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="reason">A reason why content is inappropriate.</param>
@@ -197,19 +197,20 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     Search the gallery with a given query string.
         /// </summary>
-        /// <param name="allWords">Search for all of these words (and).</param>
-        /// <param name="anyWords">Search for any of these words (or).</param>
-        /// <param name="exactWords">Search for exactly this word or phrase.</param>
-        /// <param name="excludeWords">Exclude results matching this.</param>
+        /// <param name="qAll">Search for all of these words (and).</param>
+        /// <param name="qAny">Search for any of these words (or).</param>
+        /// <param name="qExactly">Search for exactly this word or phrase.</param>
+        /// <param name="qNot">Exclude results matching this word or phrase.</param>
         /// <param name="fileType">Show results for a specific file type.</param>
         /// <param name="imageSize">Show results for a specific image size.</param>
         /// <param name="sort">The order that the gallery should be sorted by. Default: Time</param>
         /// <param name="window">The time period that should be used in filtering requests. Default: Day</param>
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
-        Task<IEnumerable<IGalleryItem>> SearchGalleryAdvancedAsync(string allWords = null, string anyWords = null,
-            string exactWords = null, string excludeWords = null, ImageFileType? fileType = null,
-            ImageSize? imageSize = null,
+        Task<IEnumerable<IGalleryItem>> SearchGalleryAdvancedAsync(
+            string qAll = null, string qAny = null,
+            string qExactly = null, string qNot = null,
+            ImageFileType? fileType = null, ImageSize? imageSize = null,
             GallerySortOrder? sort = GallerySortOrder.Time, TimeWindow? window = TimeWindow.All, int? page = null);
 
         /// <summary>
@@ -224,8 +225,8 @@ namespace Imgur.API.Endpoints
         /// <param name="window">The time period that should be used in filtering requests. Default: Day</param>
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
-        Task<IEnumerable<IGalleryItem>> SearchGalleryAsync(string query, GallerySortOrder? sort = GallerySortOrder.Time,
-            TimeWindow? window = TimeWindow.All, int? page = null);
+        Task<IEnumerable<IGalleryItem>> SearchGalleryAsync(string query,
+            GallerySortOrder? sort = GallerySortOrder.Time, TimeWindow? window = TimeWindow.All, int? page = null);
 
         /// <summary>
         ///     Vote for an item. Send the same value again to undo a vote.

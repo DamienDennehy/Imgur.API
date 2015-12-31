@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using Imgur.API.Enums;
 
 namespace Imgur.API.RequestBuilders
 {
@@ -85,21 +84,6 @@ namespace Imgur.API.RequestBuilders
             {
                 {"image_id", galleryItemId},
                 {"comment", comment}
-            };
-
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = new FormUrlEncodedContent(parameters.ToArray())
-            };
-
-            return request;
-        }
-
-        internal HttpRequestMessage ReportCommentRequest(string url, ReportReason reason)
-        {
-            var parameters = new Dictionary<string, string>
-            {
-                {"reason", ((int) reason).ToString()}
             };
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)

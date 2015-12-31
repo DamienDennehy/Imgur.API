@@ -44,7 +44,7 @@ namespace Imgur.API.Tests.RequestBuilders
         public void MarkNotificationsViewedRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new NotificationRequestBuilder();
-            requestBuilder.MarkNotificationsViewedRequest(null, null);
+            requestBuilder.MarkNotificationsViewedRequest(null, new List<string>());
         }
     }
 }

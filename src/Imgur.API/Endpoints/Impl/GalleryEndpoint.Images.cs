@@ -9,9 +9,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Get additional information about an image in the gallery.
         /// </summary>
-        /// <param name="galleryItemId">The gallery item id.</param>
+        /// <param name="imageId">The image id.</param>
         /// <returns></returns>
-        public async Task<IGalleryImage> GetGalleryImageAsync(string galleryItemId)
+        public async Task<IGalleryImage> GetGalleryImageAsync(string imageId)
         {
             throw new NotImplementedException();
         }

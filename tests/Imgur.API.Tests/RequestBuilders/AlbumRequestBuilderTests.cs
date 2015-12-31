@@ -45,7 +45,7 @@ namespace Imgur.API.Tests.RequestBuilders
         public void AddAlbumImagesRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new AlbumRequestBuilder();
-            requestBuilder.AddAlbumImagesRequest(null, null);
+            requestBuilder.AddAlbumImagesRequest(null, new List<string>());
         }
 
         [TestMethod]
@@ -111,7 +111,7 @@ namespace Imgur.API.Tests.RequestBuilders
         public void RemoveAlbumImagesRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new AlbumRequestBuilder();
-            requestBuilder.RemoveAlbumImagesRequest(null, null);
+            requestBuilder.RemoveAlbumImagesRequest(null, new List<string>());
         }
 
         [TestMethod]
@@ -147,7 +147,7 @@ namespace Imgur.API.Tests.RequestBuilders
         public void SetAlbumImagesRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new AlbumRequestBuilder();
-            requestBuilder.SetAlbumImagesRequest(null, null);
+            requestBuilder.SetAlbumImagesRequest(null, new List<string>());
         }
 
         [TestMethod]

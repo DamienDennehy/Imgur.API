@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
-using Imgur.API.Enums;
 using Imgur.API.RequestBuilders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -134,23 +133,6 @@ namespace Imgur.API.Tests.RequestBuilders
         {
             var requestBuilder = new CommentRequestBuilder();
             requestBuilder.CreateReplyRequest(null, "Hello World!", "xYxAbcD");
-        }
-
-        [TestMethod]
-        public async Task ReportCommentRequest_AreEqual()
-        {
-            var client = new ImgurClient("123", "1234");
-            var requestBuilder = new CommentRequestBuilder();
-
-            var fakeUrl = $"{client.EndpointUrl}comment/XysioD/report";
-            var request = requestBuilder.ReportCommentRequest(fakeUrl, ReportReason.Abusive);
-
-            Assert.IsNotNull(request);
-            var expected = "reason=3";
-
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
-            Assert.AreEqual("https://api.imgur.com/3/comment/XysioD/report", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Post, request.Method);
         }
 
         [TestMethod]

@@ -44,7 +44,7 @@ namespace Imgur.API.Tests.RequestBuilders
         public void AddCustomGalleryTagsRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new CustomGalleryRequestBuilder();
-            requestBuilder.AddCustomGalleryTagsRequest(null, null);
+            requestBuilder.AddCustomGalleryTagsRequest(null, new List<string>());
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace Imgur.API.Tests.RequestBuilders
         public void AddFilteredOutGalleryTagRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new CustomGalleryRequestBuilder();
-            requestBuilder.AddFilteredOutGalleryTagRequest(null, null);
+            requestBuilder.AddFilteredOutGalleryTagRequest(null, "test");
         }
 
         [TestMethod]
@@ -115,7 +115,7 @@ namespace Imgur.API.Tests.RequestBuilders
         public void RemoveCustomGalleryTagsRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new CustomGalleryRequestBuilder();
-            requestBuilder.RemoveCustomGalleryTagsRequest(null, null);
+            requestBuilder.RemoveCustomGalleryTagsRequest(null, new List<string>());
         }
 
         [TestMethod]
@@ -150,7 +150,7 @@ namespace Imgur.API.Tests.RequestBuilders
         public void RemoveFilteredOutGalleryTagRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new CustomGalleryRequestBuilder();
-            requestBuilder.RemoveFilteredOutGalleryTagRequest(null, null);
+            requestBuilder.RemoveFilteredOutGalleryTagRequest(null, "test");
         }
     }
 }

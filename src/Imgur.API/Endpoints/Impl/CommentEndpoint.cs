@@ -206,7 +206,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"comment/{commentId}/report";
 
-            using (var request = RequestBuilder.ReportCommentRequest(url, reason))
+            using (var request = RequestBuilder.ReportItemRequest(url, reason))
             {
                 var reported = await SendRequestAsync<bool?>(request);
                 return reported ?? true;

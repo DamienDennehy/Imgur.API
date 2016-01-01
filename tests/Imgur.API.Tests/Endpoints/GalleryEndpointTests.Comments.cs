@@ -9,6 +9,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 // ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
@@ -29,7 +30,7 @@ namespace Imgur.API.Tests.Endpoints
             var comment = await endpoint.CreateGalleryItemCommentAsync("Hello World!", "dO484").ConfigureAwait(false);
 
             Assert.IsNotNull(comment);
-            Assert.AreEqual(548357773, comment.Id);
+            Assert.AreEqual(548357773, comment);
         }
 
         [TestMethod]
@@ -70,10 +71,13 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new GalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var comment = await endpoint.CreateGalleryItemCommentReplyAsync("Hello World!", "dO484", "1234890").ConfigureAwait(false);
+            var comment =
+                await
+                    endpoint.CreateGalleryItemCommentReplyAsync("Hello World!", "dO484", "1234890")
+                        .ConfigureAwait(false);
 
             Assert.IsNotNull(comment);
-            Assert.AreEqual(548358985, comment.Id);
+            Assert.AreEqual(548358985, comment);
         }
 
         [TestMethod]
@@ -222,7 +226,8 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var comments = await endpoint.GetGalleryItemCommentsAsync("Mxd8cg0", CommentSortOrder.Oldest).ConfigureAwait(false);
+            var comments =
+                await endpoint.GetGalleryItemCommentsAsync("Mxd8cg0", CommentSortOrder.Oldest).ConfigureAwait(false);
 
             Assert.AreEqual(12, comments.Count());
         }

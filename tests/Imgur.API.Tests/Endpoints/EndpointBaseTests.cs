@@ -12,6 +12,7 @@ using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+
 // ReSharper disable ExceptionNotDocumented
 // ReSharper disable ThrowingSystemException
 

@@ -47,7 +47,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IComment> CreateCommentAsync(string comment, string galleryItemId, string parentId = null)
+        public async Task<int> CreateCommentAsync(string comment, string galleryItemId, string parentId = null)
         {
             if (string.IsNullOrWhiteSpace(comment))
                 throw new ArgumentNullException(nameof(comment));
@@ -63,7 +63,7 @@ namespace Imgur.API.Endpoints.Impl
             using (var request = RequestBuilder.CreateCommentRequest(url, comment, galleryItemId, parentId))
             {
                 var returnComment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
-                return returnComment;
+                return returnComment.Id;
             }
         }
 
@@ -81,7 +81,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IComment> CreateReplyAsync(string comment, string galleryItemId, string parentId)
+        public async Task<int> CreateReplyAsync(string comment, string galleryItemId, string parentId)
         {
             if (string.IsNullOrWhiteSpace(comment))
                 throw new ArgumentNullException(nameof(comment));
@@ -100,7 +100,7 @@ namespace Imgur.API.Endpoints.Impl
             using (var request = RequestBuilder.CreateReplyRequest(url, comment, galleryItemId))
             {
                 var returnComment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
-                return returnComment;
+                return returnComment.Id;
             }
         }
 

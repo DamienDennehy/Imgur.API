@@ -4,6 +4,7 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+
 // ReSharper disable ExceptionNotDocumented
 // ReSharper disable ThrowingSystemException
 

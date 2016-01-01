@@ -9,6 +9,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 // ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
@@ -52,7 +53,9 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var favorites =
-                await endpoint.GetAccountGalleryFavoritesAsync(page: 2, sort: AccountGallerySortOrder.Oldest).ConfigureAwait(false);
+                await
+                    endpoint.GetAccountGalleryFavoritesAsync(page: 2, sort: AccountGallerySortOrder.Oldest)
+                        .ConfigureAwait(false);
 
             Assert.IsTrue(favorites.Any());
         }

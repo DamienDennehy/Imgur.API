@@ -10,6 +10,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 // ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
@@ -29,7 +30,9 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
 
-            var updated = await endpoint.AddAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"}).ConfigureAwait(false);
+            var updated =
+                await
+                    endpoint.AddAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"}).ConfigureAwait(false);
 
             Assert.IsTrue(updated);
         }
@@ -307,7 +310,10 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var updated = await endpoint.RemoveAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"}).ConfigureAwait(false);
+            var updated =
+                await
+                    endpoint.RemoveAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"})
+                        .ConfigureAwait(false);
 
             Assert.IsTrue(updated);
         }
@@ -341,7 +347,9 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var updated = await endpoint.SetAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"}).ConfigureAwait(false);
+            var updated =
+                await
+                    endpoint.SetAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"}).ConfigureAwait(false);
 
             Assert.IsTrue(updated);
         }

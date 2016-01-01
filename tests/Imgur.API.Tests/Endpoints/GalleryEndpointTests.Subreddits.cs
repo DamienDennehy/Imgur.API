@@ -9,6 +9,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 // ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
@@ -54,7 +55,9 @@ namespace Imgur.API.Tests.Endpoints
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var gallery =
-                await endpoint.GetSubredditGalleryAsync("pics", SubredditGallerySortOrder.Time, TimeWindow.Week, 7).ConfigureAwait(false);
+                await
+                    endpoint.GetSubredditGalleryAsync("pics", SubredditGallerySortOrder.Time, TimeWindow.Week, 7)
+                        .ConfigureAwait(false);
 
             Assert.IsTrue(gallery.Any());
         }

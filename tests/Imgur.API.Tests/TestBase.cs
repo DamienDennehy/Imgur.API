@@ -3,6 +3,7 @@ using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Imgur.API.Tests.FakeResponses;
 using NSubstitute;
+
 // ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests

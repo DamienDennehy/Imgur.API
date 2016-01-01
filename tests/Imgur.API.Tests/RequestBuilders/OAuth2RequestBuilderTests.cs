@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Imgur.API.Authentication.Impl;
 using Imgur.API.RequestBuilders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

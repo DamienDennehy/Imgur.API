@@ -25,7 +25,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IComment> CreateGalleryItemCommentAsync(string comment, string galleryItemId)
+        public async Task<int> CreateGalleryItemCommentAsync(string comment, string galleryItemId)
         {
             if (string.IsNullOrWhiteSpace(comment))
                 throw new ArgumentNullException(nameof(comment));
@@ -41,7 +41,7 @@ namespace Imgur.API.Endpoints.Impl
             using (var request = CommentRequestBuilder.CreateGalleryItemCommentRequest(url, comment))
             {
                 var returnComment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
-                return returnComment;
+                return returnComment.Id;
             }
         }
 
@@ -58,7 +58,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IComment> CreateGalleryItemCommentReplyAsync(string comment, string galleryItemId,
+        public async Task<int> CreateGalleryItemCommentReplyAsync(string comment, string galleryItemId,
             string parentId)
         {
             if (string.IsNullOrWhiteSpace(comment))
@@ -78,7 +78,7 @@ namespace Imgur.API.Endpoints.Impl
             using (var request = CommentRequestBuilder.CreateGalleryItemCommentRequest(url, comment))
             {
                 var returnComment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
-                return returnComment;
+                return returnComment.Id;
             }
         }
 

@@ -35,7 +35,10 @@ namespace Imgur.API.Tests.Fakes
             if (_fakeResponses.ContainsKey(key))
                 return _fakeResponses[key];
 
-            return await Task.FromResult(new HttpResponseMessage(HttpStatusCode.NotFound) {RequestMessage = request}).ConfigureAwait(false);
+            return
+                await
+                    Task.FromResult(new HttpResponseMessage(HttpStatusCode.NotFound) {RequestMessage = request})
+                        .ConfigureAwait(false);
         }
     }
 }

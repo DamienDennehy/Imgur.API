@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.RequestBuilders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 // ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.RequestBuilders
@@ -32,7 +33,7 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void UpdateImageRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new ImageRequestBuilder();
@@ -54,14 +55,14 @@ namespace Imgur.API.Tests.RequestBuilders
             Assert.AreEqual("https://api.imgur.com/3/image", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Post, request.Method);
 
-            var content = (MultipartFormDataContent)request.Content;
+            var content = (MultipartFormDataContent) request.Content;
             var imageContent =
-                (ByteArrayContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
-            var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
-            var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
-            var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
+                (ByteArrayContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
+            var album = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
+            var type = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+            var title = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
             var description =
-                (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
+                (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
             Assert.IsNotNull(imageContent);
             Assert.IsNotNull(type);
@@ -77,7 +78,7 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void UploadImageBinaryRequest_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
@@ -87,7 +88,7 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void UploadImageBinaryRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new ImageRequestBuilder();
@@ -117,7 +118,7 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void UploadImageUrlRequest_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
@@ -127,7 +128,7 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void UploadImageUrlRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new ImageRequestBuilder();
@@ -151,14 +152,14 @@ namespace Imgur.API.Tests.RequestBuilders
                 Assert.AreEqual("https://api.imgur.com/3/image", request.RequestUri.ToString());
                 Assert.AreEqual(HttpMethod.Post, request.Method);
 
-                var content = (MultipartFormDataContent)request.Content;
+                var content = (MultipartFormDataContent) request.Content;
                 var imageContent =
-                    (StreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
-                var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
-                var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
-                var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
+                    (StreamContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
+                var album = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
+                var type = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+                var title = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
                 var description =
-                    (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
+                    (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
                 Assert.IsNotNull(imageContent);
                 Assert.IsNotNull(type);
@@ -177,7 +178,7 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void UploadStreamBinaryRequest_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
@@ -187,7 +188,7 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof (ArgumentNullException))]
         public void UploadStreamBinaryRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new ImageRequestBuilder();

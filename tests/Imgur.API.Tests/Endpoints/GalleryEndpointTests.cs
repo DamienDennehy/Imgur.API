@@ -9,6 +9,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 // ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
@@ -180,7 +181,8 @@ namespace Imgur.API.Tests.Endpoints
             var galleries =
                 await
                     endpoint.SearchGalleryAdvancedAsync("star wars", "luke han leia", "Obi-Wan", "Kirk",
-                        ImageFileType.Anigif, ImageSize.Lrg, GallerySortOrder.Top, TimeWindow.Week, 2).ConfigureAwait(false);
+                        ImageFileType.Anigif, ImageSize.Lrg, GallerySortOrder.Top, TimeWindow.Week, 2)
+                        .ConfigureAwait(false);
 
             Assert.IsTrue(galleries.Any());
         }
@@ -206,7 +208,10 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var galleries = await endpoint.SearchGalleryAsync("star wars", GallerySortOrder.Top, TimeWindow.Week, 2).ConfigureAwait(false);
+            var galleries =
+                await
+                    endpoint.SearchGalleryAsync("star wars", GallerySortOrder.Top, TimeWindow.Week, 2)
+                        .ConfigureAwait(false);
 
             Assert.IsTrue(galleries.Any());
         }

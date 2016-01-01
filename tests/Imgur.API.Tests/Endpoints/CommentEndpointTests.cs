@@ -9,6 +9,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 // ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
@@ -30,7 +31,7 @@ namespace Imgur.API.Tests.Endpoints
             var comment = await endpoint.CreateCommentAsync("Hello World!", "xyz", "Abc").ConfigureAwait(false);
 
             Assert.IsNotNull(comment);
-            Assert.AreEqual(539710677, comment.Id);
+            Assert.AreEqual(539710677, comment);
         }
 
         [TestMethod]
@@ -74,7 +75,7 @@ namespace Imgur.API.Tests.Endpoints
             var comment = await endpoint.CreateReplyAsync("Hello World!", "xyz", "BNMxDs").ConfigureAwait(false);
 
             Assert.IsNotNull(comment);
-            Assert.AreEqual(539717441, comment.Id);
+            Assert.AreEqual(539717441, comment);
         }
 
         [TestMethod]
@@ -222,7 +223,9 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var reported = await endpoint.ReportCommentAsync("539556821", ReportReason.MatureContentNotMarked).ConfigureAwait(false);
+            var reported =
+                await
+                    endpoint.ReportCommentAsync("539556821", ReportReason.MatureContentNotMarked).ConfigureAwait(false);
 
             Assert.IsTrue(reported);
         }

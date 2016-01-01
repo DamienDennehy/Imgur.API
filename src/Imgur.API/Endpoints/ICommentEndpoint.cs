@@ -17,7 +17,7 @@ namespace Imgur.API.Endpoints
         /// <param name="galleryItemId">The ID of the item in the gallery that you wish to comment on.</param>
         /// <param name="parentId">The ID of the parent comment, this is an alternative method to create a reply.</param>
         /// <returns></returns>
-        Task<IComment> CreateCommentAsync(string comment, string galleryItemId, string parentId = null);
+        Task<int> CreateCommentAsync(string comment, string galleryItemId, string parentId = null);
 
         /// <summary>
         ///     Create a reply for the given comment, returns the ID of the comment.
@@ -27,7 +27,7 @@ namespace Imgur.API.Endpoints
         /// <param name="galleryItemId">The ID of the item in the gallery that you wish to comment on.</param>
         /// <param name="parentId">The comment id that you are replying to.</param>
         /// <returns></returns>
-        Task<IComment> CreateReplyAsync(string comment, string galleryItemId, string parentId);
+        Task<int> CreateReplyAsync(string comment, string galleryItemId, string parentId);
 
         /// <summary>
         ///     Delete a comment by the given id.

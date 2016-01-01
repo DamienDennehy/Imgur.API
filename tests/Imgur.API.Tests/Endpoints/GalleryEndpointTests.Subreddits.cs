@@ -48,7 +48,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/gallery/r/pics/time/week/7";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(GalleryEndpointResponses.GetMemesSubGalleryAsync)
+                Content = new StringContent(GalleryEndpointResponses.GetSubredditGalleryAsync)
             };
 
             var client = new ImgurClient("123", "1234");

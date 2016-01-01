@@ -24,7 +24,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IEnumerable<IGalleryItem>> GetSubredditGalleryAsync(string subreddit,
+        public async Task<IEnumerable<IGalleryImage>> GetSubredditGalleryAsync(string subreddit,
             SubredditGallerySortOrder? sort = SubredditGallerySortOrder.Time, TimeWindow? window = TimeWindow.Week,
             int? page = null)
         {
@@ -41,7 +41,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var gallery = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
+                var gallery = await SendRequestAsync<IEnumerable<GalleryImage>>(request).ConfigureAwait(false);
                 return gallery;
             }
         }

@@ -67,7 +67,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var gallery = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
+                var gallery = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return gallery;
             }
         }
@@ -89,7 +89,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var gallery = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
+                var gallery = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return gallery;
             }
         }
@@ -129,7 +129,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.PublishToGalleryRequest(url, title, topic, bypassTerms, mature))
             {
-                var published = await SendRequestAsync<bool>(request);
+                var published = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return published;
             }
         }
@@ -157,7 +157,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
-                var removed = await SendRequestAsync<bool>(request);
+                var removed = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return removed;
             }
         }
@@ -186,7 +186,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.ReportItemRequest(url, reason))
             {
-                var reported = await SendRequestAsync<bool>(request);
+                var reported = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return reported;
             }
         }
@@ -236,7 +236,7 @@ namespace Imgur.API.Endpoints.Impl
                 var request = RequestBuilder.SearchGalleryAdvancedRequest(url, qAll, qAny, qExactly, qNot, fileType,
                     imageSize))
             {
-                var searchResults = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
+                var searchResults = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return searchResults;
             }
         }
@@ -276,7 +276,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.SearchGalleryRequest(url, query))
             {
-                var searchResults = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
+                var searchResults = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return searchResults;
             }
         }

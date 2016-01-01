@@ -23,7 +23,7 @@ namespace Imgur.API.Tests.RequestBuilders
             Assert.IsNotNull(request);
             var expected = "title=Hello+World%21&topic=Funny&terms=true&mature=true";
 
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/gallery/XysioD", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Post, request.Method);
         }
@@ -48,7 +48,7 @@ namespace Imgur.API.Tests.RequestBuilders
             Assert.IsNotNull(request);
             var expected = "title=Hello+World%21";
 
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/gallery/XysioD", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Post, request.Method);
         }
@@ -75,7 +75,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var expected =
                 "q_all=star+wars&q_any=luke+han+leia&q_exactly=Obi-Wan&q_not=Kirk&q_type=anigif&q_size_px=lrg";
 
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/gallery/search", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Get, request.Method);
         }
@@ -108,7 +108,7 @@ namespace Imgur.API.Tests.RequestBuilders
             Assert.IsNotNull(request);
             var expected = "q=star+wars";
 
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/gallery/search", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Get, request.Method);
         }

@@ -57,7 +57,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var notification = await SendRequestAsync<Notification>(request);
+                var notification = await SendRequestAsync<Notification>(request).ConfigureAwait(false);
                 return notification;
             }
         }
@@ -84,7 +84,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var notifications = await SendRequestAsync<Notifications>(request);
+                var notifications = await SendRequestAsync<Notifications>(request).ConfigureAwait(false);
                 return notifications;
             }
         }
@@ -113,7 +113,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.MarkNotificationsViewedRequest(url, ids))
             {
-                var viewed = await SendRequestAsync<bool>(request);
+                var viewed = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return viewed;
             }
         }
@@ -142,7 +142,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {
-                var viewed = await SendRequestAsync<bool>(request);
+                var viewed = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return viewed;
             }
         }

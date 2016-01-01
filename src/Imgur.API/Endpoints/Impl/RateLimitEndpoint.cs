@@ -50,7 +50,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                limit = await SendRequestAsync<RateLimit>(request);
+                limit = await SendRequestAsync<RateLimit>(request).ConfigureAwait(false);
             }
 
             return limit;

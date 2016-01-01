@@ -24,7 +24,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var expected = "tags=Cats%2CDogs%2CSeals";
 
             Assert.IsNotNull(request);
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/g/custom/add_tags", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Put, request.Method);
         }
@@ -60,7 +60,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var expected = "tag=Cats";
 
             Assert.IsNotNull(request);
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/g/block_tag", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Post, request.Method);
         }

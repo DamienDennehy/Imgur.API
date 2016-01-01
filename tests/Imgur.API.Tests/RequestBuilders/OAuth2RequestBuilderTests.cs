@@ -39,7 +39,7 @@ namespace Imgur.API.Tests.RequestBuilders
             Assert.AreEqual(HttpMethod.Post, request.Method);
             Assert.IsNotNull(request.Content);
 
-            var expected = await request.Content.ReadAsStringAsync();
+            var expected = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             Assert.AreEqual("client_id=123&client_secret=1234&grant_type=authorization_code&code=123code", expected);
         }
@@ -48,7 +48,6 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetTokenByCodeRequest_WithEndpointUrlNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
             var requestBuilder = new OAuth2RequestBuilder();
             requestBuilder.GetTokenByCodeRequest(null, "123code", "clientId", "clientSecret");
         }
@@ -57,7 +56,6 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetTokenByCodeRequest_WithTokenNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
             var requestBuilder = new OAuth2RequestBuilder();
             requestBuilder.GetTokenByCodeRequest("url", null, "clientId", "clientSecret");
         }
@@ -66,7 +64,6 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetTokenByPinRequest_WithClientIdNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
             var requestBuilder = new OAuth2RequestBuilder();
             requestBuilder.GetTokenByPinRequest("url", "123", null, "clientSecret");
         }
@@ -75,7 +72,6 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetTokenByPinRequest_WithClientSecretNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
             var requestBuilder = new OAuth2RequestBuilder();
             requestBuilder.GetTokenByPinRequest("url", "123", "clientId", null);
         }
@@ -84,7 +80,6 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetTokenByPinRequest_WithEndpointUrlNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
             var requestBuilder = new OAuth2RequestBuilder();
             requestBuilder.GetTokenByPinRequest(null, "123", "clientId", "clientSecret");
         }
@@ -102,7 +97,7 @@ namespace Imgur.API.Tests.RequestBuilders
             Assert.AreEqual(HttpMethod.Post, request.Method);
             Assert.IsNotNull(request.Content);
 
-            var expected = await request.Content.ReadAsStringAsync();
+            var expected = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             Assert.AreEqual("client_id=123&client_secret=1234&grant_type=pin&pin=4899", expected);
         }
@@ -111,7 +106,6 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetTokenByPinRequest_WithPinNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
             var requestBuilder = new OAuth2RequestBuilder();
             requestBuilder.GetTokenByPinRequest("url", null, "clientId", "clientSecret");
         }
@@ -120,7 +114,6 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetTokenByRefreshTokenRequest_WithClientIdNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
             var requestBuilder = new OAuth2RequestBuilder();
             requestBuilder.GetTokenByRefreshTokenRequest("url", "ABChjfhjhjdhfjksdfsdfsdfs", null, "clientSecret");
         }
@@ -129,7 +122,6 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetTokenByRefreshTokenRequest_WithClientSecretNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
             var requestBuilder = new OAuth2RequestBuilder();
             requestBuilder.GetTokenByRefreshTokenRequest("url", "ABChjfhjhjdhfjksdfsdfsdfs", "clientId", null);
         }
@@ -155,7 +147,7 @@ namespace Imgur.API.Tests.RequestBuilders
             Assert.AreEqual(HttpMethod.Post, request.Method);
             Assert.IsNotNull(request.Content);
 
-            var expected = await request.Content.ReadAsStringAsync();
+            var expected = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             Assert.AreEqual(
                 "client_id=123&client_secret=1234&grant_type=refresh_token&refresh_token=ABChjfhjhjdhfjksdfsdfsdfs",
@@ -166,7 +158,6 @@ namespace Imgur.API.Tests.RequestBuilders
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetTokenByRefreshTokenRequest_WithTokenNull_ThrowsArgumentNullException()
         {
-            var client = new ImgurClient("123", "1234");
             var requestBuilder = new OAuth2RequestBuilder();
             requestBuilder.GetTokenByRefreshTokenRequest("url", null, "clientId", "clientSecret");
         }

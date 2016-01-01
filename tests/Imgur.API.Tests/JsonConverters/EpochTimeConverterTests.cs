@@ -4,6 +4,7 @@ using System.Text;
 using Imgur.API.JsonConverters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.JsonConverters
 {

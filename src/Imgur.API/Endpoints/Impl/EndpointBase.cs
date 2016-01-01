@@ -216,14 +216,14 @@ namespace Imgur.API.Endpoints.Impl
             if (message == null)
                 throw new ArgumentNullException(nameof(message));
 
-            var httpResponse = await HttpClient.SendAsync(message);
+            var httpResponse = await HttpClient.SendAsync(message).ConfigureAwait(false);
 
             UpdateRateLimit(httpResponse.Headers);
 
             string stringResponse = null;
 
             if (httpResponse.Content != null)
-                stringResponse = await httpResponse.Content.ReadAsStringAsync();
+                stringResponse = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             //On rare occasions Imgur will not return any response (example: 429 Too Many Requests).
             //In this case, if the reason phrase is not null then we should throw an ImgurException.

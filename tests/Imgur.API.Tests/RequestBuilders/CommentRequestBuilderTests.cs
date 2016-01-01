@@ -22,7 +22,7 @@ namespace Imgur.API.Tests.RequestBuilders
             Assert.IsNotNull(request);
             var expected = "image_id=xYxAbcD&comment=Hello+World%21&parent_id=ABCdef";
 
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/comment/XysioD", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Post, request.Method);
         }
@@ -67,7 +67,7 @@ namespace Imgur.API.Tests.RequestBuilders
             Assert.IsNotNull(request);
             var expected = "comment=Hello+World%21";
 
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/gallery/XysioD/comment", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Post, request.Method);
         }
@@ -102,7 +102,7 @@ namespace Imgur.API.Tests.RequestBuilders
             Assert.IsNotNull(request);
             var expected = "image_id=xYxAbcD&comment=Hello+World%21";
 
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/comment", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Post, request.Method);
         }

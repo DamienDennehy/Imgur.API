@@ -9,6 +9,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -25,7 +26,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var favorites = await endpoint.GetAccountFavoritesAsync();
+            var favorites = await endpoint.GetAccountFavoritesAsync().ConfigureAwait(false);
 
             Assert.IsTrue(favorites.Any());
         }
@@ -36,7 +37,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetAccountFavoritesAsync();
+            await endpoint.GetAccountFavoritesAsync().ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -51,7 +52,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var favorites =
-                await endpoint.GetAccountGalleryFavoritesAsync(page: 2, sort: AccountGallerySortOrder.Oldest);
+                await endpoint.GetAccountGalleryFavoritesAsync(page: 2, sort: AccountGallerySortOrder.Oldest).ConfigureAwait(false);
 
             Assert.IsTrue(favorites.Any());
         }
@@ -63,7 +64,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetAccountGalleryFavoritesAsync();
+            await endpoint.GetAccountGalleryFavoritesAsync().ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -72,7 +73,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetAccountGalleryFavoritesAsync(null);
+            await endpoint.GetAccountGalleryFavoritesAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -86,7 +87,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var submissions = await endpoint.GetAccountSubmissionsAsync(page: 2);
+            var submissions = await endpoint.GetAccountSubmissionsAsync(page: 2).ConfigureAwait(false);
 
             Assert.IsTrue(submissions.Any());
         }
@@ -97,7 +98,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetAccountSubmissionsAsync();
+            await endpoint.GetAccountSubmissionsAsync().ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -106,7 +107,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetAccountSubmissionsAsync(null);
+            await endpoint.GetAccountSubmissionsAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -120,7 +121,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var profile = await endpoint.GetGalleryProfileAsync();
+            var profile = await endpoint.GetGalleryProfileAsync().ConfigureAwait(false);
 
             Assert.IsNotNull(profile);
         }
@@ -131,7 +132,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetGalleryProfileAsync();
+            await endpoint.GetGalleryProfileAsync().ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -140,7 +141,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetGalleryProfileAsync(null);
+            await endpoint.GetGalleryProfileAsync(null).ConfigureAwait(false);
         }
     }
 }

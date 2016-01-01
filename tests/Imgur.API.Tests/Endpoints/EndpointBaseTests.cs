@@ -12,6 +12,8 @@ using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+// ReSharper disable ExceptionNotDocumented
+// ReSharper disable ThrowingSystemException
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -229,7 +231,7 @@ namespace Imgur.API.Tests.Endpoints
 
             //Query a url we know doesn't exist in the fake handler
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test2");
-            var image = await service.SendRequestAsync<Image>(request);
+            var image = await service.SendRequestAsync<Image>(request).ConfigureAwait(false);
 
             Assert.IsNull(image);
         }
@@ -253,7 +255,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var service = Substitute.ForPartsOf<EndpointBase>(constructorObjects);
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test");
-            var image = await service.SendRequestAsync<Image>(request);
+            var image = await service.SendRequestAsync<Image>(request).ConfigureAwait(false);
 
             Assert.IsNotNull(image);
         }
@@ -269,7 +271,7 @@ namespace Imgur.API.Tests.Endpoints
             constructorObjects[1] = httpClient;
 
             var service = Substitute.ForPartsOf<EndpointBase>(constructorObjects);
-            await service.SendRequestAsync<Image>(null);
+            await service.SendRequestAsync<Image>(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -287,7 +289,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var service = Substitute.ForPartsOf<EndpointBase>(constructorObjects);
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test");
-            var image = await service.SendRequestAsync<Image>(request);
+            var image = await service.SendRequestAsync<Image>(request).ConfigureAwait(false);
 
             Assert.IsNull(image);
         }
@@ -311,7 +313,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var service = Substitute.ForPartsOf<EndpointBase>(constructorObjects);
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test");
-            var image = await service.SendRequestAsync<Image>(request);
+            var image = await service.SendRequestAsync<Image>(request).ConfigureAwait(false);
 
             Assert.IsNull(image);
         }

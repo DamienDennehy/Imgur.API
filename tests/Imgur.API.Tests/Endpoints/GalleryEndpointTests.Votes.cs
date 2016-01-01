@@ -8,6 +8,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -25,7 +26,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var votes = await endpoint.GetGalleryItemVotesAsync("RoAjx");
+            var votes = await endpoint.GetGalleryItemVotesAsync("RoAjx").ConfigureAwait(false);
 
             Assert.IsNotNull(votes);
             Assert.AreEqual(751, votes.Downs);
@@ -38,7 +39,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryItemVotesAsync(null);
+            await endpoint.GetGalleryItemVotesAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -53,7 +54,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var voted = await endpoint.VoteGalleryItemAsync("XoPkL", VoteOption.Down);
+            var voted = await endpoint.VoteGalleryItemAsync("XoPkL", VoteOption.Down).ConfigureAwait(false);
 
             Assert.IsNotNull(voted);
         }
@@ -64,7 +65,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.VoteGalleryItemAsync(null, VoteOption.Down);
+            await endpoint.VoteGalleryItemAsync(null, VoteOption.Down).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -73,7 +74,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.VoteGalleryItemAsync("kjkjk", VoteOption.Down);
+            await endpoint.VoteGalleryItemAsync("kjkjk", VoteOption.Down).ConfigureAwait(false);
         }
     }
 }

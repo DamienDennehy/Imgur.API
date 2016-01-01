@@ -9,6 +9,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -25,7 +26,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new GalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var comment = await endpoint.CreateGalleryItemCommentAsync("Hello World!", "dO484");
+            var comment = await endpoint.CreateGalleryItemCommentAsync("Hello World!", "dO484").ConfigureAwait(false);
 
             Assert.IsNotNull(comment);
             Assert.AreEqual(548357773, comment.Id);
@@ -37,7 +38,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.CreateGalleryItemCommentAsync(null, "Xyz");
+            await endpoint.CreateGalleryItemCommentAsync(null, "Xyz").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -46,7 +47,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.CreateGalleryItemCommentAsync("Hello World!", null);
+            await endpoint.CreateGalleryItemCommentAsync("Hello World!", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -55,7 +56,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.CreateGalleryItemCommentAsync("Hello World!", "Xyz");
+            await endpoint.CreateGalleryItemCommentAsync("Hello World!", "Xyz").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -69,7 +70,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new GalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var comment = await endpoint.CreateGalleryItemCommentReplyAsync("Hello World!", "dO484", "1234890");
+            var comment = await endpoint.CreateGalleryItemCommentReplyAsync("Hello World!", "dO484", "1234890").ConfigureAwait(false);
 
             Assert.IsNotNull(comment);
             Assert.AreEqual(548358985, comment.Id);
@@ -81,7 +82,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.CreateGalleryItemCommentReplyAsync(null, "Xyz", "1234");
+            await endpoint.CreateGalleryItemCommentReplyAsync(null, "Xyz", "1234").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -90,7 +91,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.CreateGalleryItemCommentReplyAsync("Hello World!", null, "1234");
+            await endpoint.CreateGalleryItemCommentReplyAsync("Hello World!", null, "1234").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -99,7 +100,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.CreateGalleryItemCommentReplyAsync("Hello World!", "Xyz", "123");
+            await endpoint.CreateGalleryItemCommentReplyAsync("Hello World!", "Xyz", "123").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -108,7 +109,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.CreateGalleryItemCommentReplyAsync("Hello World!", "sshj", null);
+            await endpoint.CreateGalleryItemCommentReplyAsync("Hello World!", "sshj", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -122,7 +123,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var comment = await endpoint.GetGalleryItemCommentAsync("548357773", "Mxd8cg0");
+            var comment = await endpoint.GetGalleryItemCommentAsync("548357773", "Mxd8cg0").ConfigureAwait(false);
 
             Assert.IsNotNull(comment);
             Assert.AreEqual(548357773, comment.Id);
@@ -148,7 +149,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryItemCommentAsync(null, "Mxd8cg0");
+            await endpoint.GetGalleryItemCommentAsync(null, "Mxd8cg0").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -157,7 +158,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryItemCommentAsync("987878", null);
+            await endpoint.GetGalleryItemCommentAsync("987878", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -171,7 +172,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var count = await endpoint.GetGalleryItemCommentCountAsync("Mxd8cg0");
+            var count = await endpoint.GetGalleryItemCommentCountAsync("Mxd8cg0").ConfigureAwait(false);
 
             Assert.AreEqual(22, count);
         }
@@ -182,7 +183,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryItemCommentCountAsync(null);
+            await endpoint.GetGalleryItemCommentCountAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -196,7 +197,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var commentIds = await endpoint.GetGalleryItemCommentIdsAsync("Mxd8cg0");
+            var commentIds = await endpoint.GetGalleryItemCommentIdsAsync("Mxd8cg0").ConfigureAwait(false);
 
             Assert.AreEqual(23, commentIds.Count());
         }
@@ -207,7 +208,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryItemCommentIdsAsync(null);
+            await endpoint.GetGalleryItemCommentIdsAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -221,7 +222,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var comments = await endpoint.GetGalleryItemCommentsAsync("Mxd8cg0", CommentSortOrder.Oldest);
+            var comments = await endpoint.GetGalleryItemCommentsAsync("Mxd8cg0", CommentSortOrder.Oldest).ConfigureAwait(false);
 
             Assert.AreEqual(12, comments.Count());
         }
@@ -232,7 +233,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryItemCommentsAsync(null);
+            await endpoint.GetGalleryItemCommentsAsync(null).ConfigureAwait(false);
         }
     }
 }

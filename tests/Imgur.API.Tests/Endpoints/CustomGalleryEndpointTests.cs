@@ -11,6 +11,7 @@ using Imgur.API.Models;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -29,7 +30,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var added = await endpoint.AddCustomGalleryTagsAsync(new List<string> {"Cats", "Dogs"});
+            var added = await endpoint.AddCustomGalleryTagsAsync(new List<string> {"Cats", "Dogs"}).ConfigureAwait(false);
 
             Assert.IsTrue(added);
         }
@@ -40,7 +41,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client);
-            await endpoint.AddCustomGalleryTagsAsync(new List<string> {"Cats", "Dogs"});
+            await endpoint.AddCustomGalleryTagsAsync(new List<string> {"Cats", "Dogs"}).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -49,7 +50,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client);
-            await endpoint.AddCustomGalleryTagsAsync(null);
+            await endpoint.AddCustomGalleryTagsAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -64,7 +65,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var added = await endpoint.AddFilteredOutGalleryTagAsync("Cat");
+            var added = await endpoint.AddFilteredOutGalleryTagAsync("Cat").ConfigureAwait(false);
 
             Assert.IsTrue(added);
         }
@@ -75,7 +76,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client);
-            await endpoint.AddFilteredOutGalleryTagAsync("Cat");
+            await endpoint.AddFilteredOutGalleryTagAsync("Cat").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -84,7 +85,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client);
-            await endpoint.AddFilteredOutGalleryTagAsync(null);
+            await endpoint.AddFilteredOutGalleryTagAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -99,7 +100,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetCustomGalleryAsync();
+            var gallery = await endpoint.GetCustomGalleryAsync().ConfigureAwait(false);
 
             Assert.IsNotNull(gallery);
             Assert.AreEqual("imgurapidotnet", gallery.AccountUrl);
@@ -121,7 +122,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month);
+            var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month).ConfigureAwait(false);
 
             Assert.IsNotNull(gallery);
             Assert.AreEqual("imgurapidotnet", gallery.AccountUrl);
@@ -143,7 +144,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month, 1);
+            var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month, 1).ConfigureAwait(false);
 
             Assert.IsNotNull(gallery);
             Assert.AreEqual("imgurapidotnet", gallery.AccountUrl);
@@ -166,7 +167,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month, 1);
+            var gallery = await endpoint.GetCustomGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month, 1).ConfigureAwait(false);
 
             Assert.IsNotNull(gallery);
         }
@@ -183,7 +184,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var galleryItem = await endpoint.GetCustomGalleryItemAsync("AbcDef");
+            var galleryItem = await endpoint.GetCustomGalleryItemAsync("AbcDef").ConfigureAwait(false);
 
             Assert.IsNotNull(galleryItem);
             Assert.IsTrue(galleryItem is IGalleryAlbum);
@@ -202,7 +203,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var galleryItem = await endpoint.GetCustomGalleryItemAsync(null);
+            var galleryItem = await endpoint.GetCustomGalleryItemAsync(null).ConfigureAwait(false);
 
             Assert.IsNotNull(galleryItem);
         }
@@ -219,7 +220,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var galleryItem = await endpoint.GetCustomGalleryItemAsync("AbcDef");
+            var galleryItem = await endpoint.GetCustomGalleryItemAsync("AbcDef").ConfigureAwait(false);
 
             Assert.IsNotNull(galleryItem);
             Assert.IsTrue(galleryItem is IGalleryImage);
@@ -238,7 +239,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var galleryItem = await endpoint.GetCustomGalleryItemAsync("AbcDef");
+            var galleryItem = await endpoint.GetCustomGalleryItemAsync("AbcDef").ConfigureAwait(false);
 
             Assert.IsNotNull(galleryItem);
         }
@@ -255,7 +256,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetFilteredOutGalleryAsync();
+            var gallery = await endpoint.GetFilteredOutGalleryAsync().ConfigureAwait(false);
 
             Assert.IsNotNull(gallery);
             Assert.AreEqual("imgurapidotnet", gallery.AccountUrl);
@@ -277,7 +278,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month);
+            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month).ConfigureAwait(false);
 
             Assert.IsNotNull(gallery);
             Assert.AreEqual("imgurapidotnet", gallery.AccountUrl);
@@ -299,7 +300,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month, 1);
+            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month, 1).ConfigureAwait(false);
 
             Assert.IsNotNull(gallery);
             Assert.AreEqual("imgurapidotnet", gallery.AccountUrl);
@@ -322,7 +323,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month, 1);
+            var gallery = await endpoint.GetFilteredOutGalleryAsync(CustomGallerySortOrder.Top, TimeWindow.Month, 1).ConfigureAwait(false);
 
             Assert.IsNotNull(gallery);
         }
@@ -339,7 +340,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var added = await endpoint.RemoveCustomGalleryTagsAsync(new List<string> {"Cats", "Dogs"});
+            var added = await endpoint.RemoveCustomGalleryTagsAsync(new List<string> {"Cats", "Dogs"}).ConfigureAwait(false);
 
             Assert.IsTrue(added);
         }
@@ -350,7 +351,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client);
-            await endpoint.RemoveCustomGalleryTagsAsync(new List<string> {"Cats", "Dogs"});
+            await endpoint.RemoveCustomGalleryTagsAsync(new List<string> {"Cats", "Dogs"}).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -359,7 +360,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client);
-            await endpoint.RemoveCustomGalleryTagsAsync(null);
+            await endpoint.RemoveCustomGalleryTagsAsync(null).ConfigureAwait(false);
         }
 
 
@@ -375,7 +376,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CustomGalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var added = await endpoint.RemoveFilteredOutGalleryTagAsync("Cat");
+            var added = await endpoint.RemoveFilteredOutGalleryTagAsync("Cat").ConfigureAwait(false);
 
             Assert.IsTrue(added);
         }
@@ -386,7 +387,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client);
-            await endpoint.RemoveFilteredOutGalleryTagAsync("Cats");
+            await endpoint.RemoveFilteredOutGalleryTagAsync("Cats").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -395,7 +396,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CustomGalleryEndpoint(client);
-            await endpoint.RemoveFilteredOutGalleryTagAsync(null);
+            await endpoint.RemoveFilteredOutGalleryTagAsync(null).ConfigureAwait(false);
         }
     }
 }

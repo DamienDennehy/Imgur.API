@@ -58,7 +58,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var account = await SendRequestAsync<Account>(request);
+                var account = await SendRequestAsync<Account>(request).ConfigureAwait(false);
                 return account;
             }
         }
@@ -82,7 +82,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var settings = await SendRequestAsync<AccountSettings>(request);
+                var settings = await SendRequestAsync<AccountSettings>(request).ConfigureAwait(false);
                 return settings;
             }
         }
@@ -107,7 +107,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {
-                var verified = await SendRequestAsync<bool>(request);
+                var verified = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return verified;
             }
         }
@@ -149,7 +149,7 @@ namespace Imgur.API.Endpoints.Impl
                 var request = RequestBuilder.UpdateAccountSettingsRequest(url, bio, publicImages, messagingEnabled,
                     albumPrivacy, acceptedGalleryTerms, username, showMature, newsletterSubscribed))
             {
-                var updated = await SendRequestAsync<bool>(request);
+                var updated = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return updated;
             }
         }
@@ -173,7 +173,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var verified = await SendRequestAsync<bool>(request);
+                var verified = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return verified;
             }
         }

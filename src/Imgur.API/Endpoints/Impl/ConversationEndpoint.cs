@@ -57,7 +57,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {
-                var blocked = await SendRequestAsync<bool>(request);
+                var blocked = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return blocked;
             }
         }
@@ -89,7 +89,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateMessageRequest(url, body))
             {
-                var added = await SendRequestAsync<bool>(request);
+                var added = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return added;
             }
         }
@@ -117,7 +117,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
-                var deleted = await SendRequestAsync<bool>(request);
+                var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return deleted;
             }
         }
@@ -152,7 +152,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var conversation = await SendRequestAsync<Conversation>(request);
+                var conversation = await SendRequestAsync<Conversation>(request).ConfigureAwait(false);
                 return conversation;
             }
         }
@@ -177,7 +177,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var conversations = await SendRequestAsync<IEnumerable<Conversation>>(request);
+                var conversations = await SendRequestAsync<IEnumerable<Conversation>>(request).ConfigureAwait(false);
                 return conversations;
             }
         }
@@ -206,7 +206,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {
-                var reported = await SendRequestAsync<bool>(request);
+                var reported = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return reported;
             }
         }

@@ -41,7 +41,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var gallery = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
+                var gallery = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return gallery;
             }
         }
@@ -70,7 +70,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var image = await SendRequestAsync<GalleryImage>(request);
+                var image = await SendRequestAsync<GalleryImage>(request).ConfigureAwait(false);
                 return image;
             }
         }

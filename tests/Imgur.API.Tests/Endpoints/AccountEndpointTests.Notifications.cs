@@ -7,6 +7,7 @@ using Imgur.API.Endpoints.Impl;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -23,7 +24,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var notifications = await endpoint.GetNotificationsAsync(false);
+            var notifications = await endpoint.GetNotificationsAsync(false).ConfigureAwait(false);
 
             Assert.IsNotNull(notifications);
             Assert.IsNotNull(notifications.Messages);
@@ -36,7 +37,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetNotificationsAsync();
+            await endpoint.GetNotificationsAsync().ConfigureAwait(false);
         }
     }
 }

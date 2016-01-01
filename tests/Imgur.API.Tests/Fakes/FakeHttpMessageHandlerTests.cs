@@ -17,7 +17,7 @@ namespace Imgur.API.Tests.Fakes
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK) {Content = new StringContent("hello world")};
 
             var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
-            var httpResponse = await httpClient.GetAsync("http://example.org/notfound");
+            var httpResponse = await httpClient.GetAsync("http://example.org/notfound").ConfigureAwait(false);
 
             Assert.IsNull(httpResponse.Content);
         }
@@ -29,8 +29,8 @@ namespace Imgur.API.Tests.Fakes
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK) {Content = new StringContent("get response")};
 
             var httpClient = new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse));
-            var httpResponse = await httpClient.GetAsync("http://example.org/test");
-            var stringResponse = await httpResponse.Content.ReadAsStringAsync();
+            var httpResponse = await httpClient.GetAsync("http://example.org/test").ConfigureAwait(false);
+            var stringResponse = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             Assert.AreEqual("get response", stringResponse);
         }
@@ -46,8 +46,8 @@ namespace Imgur.API.Tests.Fakes
 
             var content = new FormUrlEncodedContent(parameters.ToArray());
 
-            var httpResponse = await httpClient.PostAsync("http://example.org/test", content);
-            var stringResponse = await httpResponse.Content.ReadAsStringAsync();
+            var httpResponse = await httpClient.PostAsync("http://example.org/test", content).ConfigureAwait(false);
+            var stringResponse = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             Assert.AreEqual("post response", stringResponse);
         }

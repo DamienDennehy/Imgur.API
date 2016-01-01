@@ -60,7 +60,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.AddAlbumImagesRequest(url, imageIds))
             {
-                var added = await SendRequestAsync<bool>(request);
+                var added = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return added;
             }
         }
@@ -86,7 +86,7 @@ namespace Imgur.API.Endpoints.Impl
             using (var request = RequestBuilder.CreateAlbumRequest(url, title, description,
                 privacy, layout, coverId, imageIds))
             {
-                var album = await SendRequestAsync<Album>(request);
+                var album = await SendRequestAsync<Album>(request).ConfigureAwait(false);
                 return album;
             }
         }
@@ -112,7 +112,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
-                var deleted = await SendRequestAsync<bool>(request);
+                var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return deleted;
             }
         }
@@ -144,14 +144,14 @@ namespace Imgur.API.Endpoints.Impl
                 //varies on if Imgur or Mashape Authentication is used
                 if (ApiClient is IImgurClient)
                 {
-                    var imgurResult = await SendRequestAsync<string>(request);
+                    var imgurResult = await SendRequestAsync<string>(request).ConfigureAwait(false);
                     return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
                 }
 
                 //If Mashape Authentication is used, the favorite is returned as an exception
                 try
                 {
-                    await SendRequestAsync<string>(request);
+                    await SendRequestAsync<string>(request).ConfigureAwait(false);
                 }
                 catch (ImgurException imgurException)
                 {
@@ -182,7 +182,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var album = await SendRequestAsync<Album>(request);
+                var album = await SendRequestAsync<Album>(request).ConfigureAwait(false);
                 return album;
             }
         }
@@ -211,7 +211,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var returnImage = await SendRequestAsync<Image>(request);
+                var returnImage = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return returnImage;
             }
         }
@@ -236,7 +236,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var images = await SendRequestAsync<IEnumerable<Image>>(request);
+                var images = await SendRequestAsync<IEnumerable<Image>>(request).ConfigureAwait(false);
                 return images;
             }
         }
@@ -266,7 +266,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.RemoveAlbumImagesRequest(url, imageIds))
             {
-                var removed = await SendRequestAsync<bool>(request);
+                var removed = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return removed;
             }
         }
@@ -296,7 +296,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.SetAlbumImagesRequest(url, imageIds))
             {
-                var set = await SendRequestAsync<bool>(request);
+                var set = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return set;
             }
         }
@@ -331,7 +331,7 @@ namespace Imgur.API.Endpoints.Impl
             using (var request = RequestBuilder.UpdateAlbumRequest(url, title, description,
                 privacy, layout, coverId, imageIds))
             {
-                var updated = await SendRequestAsync<bool>(request);
+                var updated = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return updated;
             }
         }

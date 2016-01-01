@@ -58,7 +58,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.AddCustomGalleryTagsRequest(url, tags))
             {
-                var added = await SendRequestAsync<bool>(request);
+                var added = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return added;
             }
         }
@@ -87,7 +87,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.AddFilteredOutGalleryTagRequest(url, tag))
             {
-                var added = await SendRequestAsync<bool>(request);
+                var added = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return added;
             }
         }
@@ -122,7 +122,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var gallery = await SendRequestAsync<CustomGallery>(request);
+                var gallery = await SendRequestAsync<CustomGallery>(request).ConfigureAwait(false);
                 return gallery;
             }
         }
@@ -151,7 +151,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var galleryItem = await SendRequestAsync<GalleryItem>(request);
+                var galleryItem = await SendRequestAsync<GalleryItem>(request).ConfigureAwait(false);
                 return galleryItem;
             }
         }
@@ -186,7 +186,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var gallery = await SendRequestAsync<CustomGallery>(request);
+                var gallery = await SendRequestAsync<CustomGallery>(request).ConfigureAwait(false);
                 return gallery;
             }
         }
@@ -215,7 +215,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.RemoveCustomGalleryTagsRequest(url, tags))
             {
-                var removed = await SendRequestAsync<bool>(request);
+                var removed = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return removed;
             }
         }
@@ -244,7 +244,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.RemoveFilteredOutGalleryTagRequest(url, tag))
             {
-                var removed = await SendRequestAsync<bool>(request);
+                var removed = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return removed;
             }
         }

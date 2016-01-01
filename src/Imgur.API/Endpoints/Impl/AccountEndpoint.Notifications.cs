@@ -30,7 +30,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var notifications = await SendRequestAsync<Notifications>(request);
+                var notifications = await SendRequestAsync<Notifications>(request).ConfigureAwait(false);
                 return notifications;
             }
         }

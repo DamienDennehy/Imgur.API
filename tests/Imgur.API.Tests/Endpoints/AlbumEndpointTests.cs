@@ -10,6 +10,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -28,7 +29,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
 
-            var updated = await endpoint.AddAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"});
+            var updated = await endpoint.AddAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"}).ConfigureAwait(false);
 
             Assert.IsTrue(updated);
         }
@@ -39,7 +40,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
-            await endpoint.AddAlbumImagesAsync(null, null);
+            await endpoint.AddAlbumImagesAsync(null, null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -48,7 +49,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
-            await endpoint.AddAlbumImagesAsync("12x5454", null);
+            await endpoint.AddAlbumImagesAsync("12x5454", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -62,7 +63,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/album";
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var album = await endpoint.CreateAlbumAsync();
+            var album = await endpoint.CreateAlbumAsync().ConfigureAwait(false);
 
             Assert.IsNotNull(album);
             Assert.AreEqual("3gfxo", album.Id);
@@ -80,7 +81,7 @@ namespace Imgur.API.Tests.Endpoints
             var fakeUrl = "https://api.imgur.com/3/album/12x5454";
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var deleted = await endpoint.DeleteAlbumAsync("12x5454");
+            var deleted = await endpoint.DeleteAlbumAsync("12x5454").ConfigureAwait(false);
 
             Assert.IsTrue(deleted);
         }
@@ -91,7 +92,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
-            await endpoint.DeleteAlbumAsync(null);
+            await endpoint.DeleteAlbumAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -100,7 +101,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AlbumEndpoint(client);
-            await endpoint.FavoriteAlbumAsync(null);
+            await endpoint.FavoriteAlbumAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -114,7 +115,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW");
+            var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW").ConfigureAwait(false);
 
             Assert.IsFalse(favorited);
         }
@@ -130,7 +131,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW");
+            var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW").ConfigureAwait(false);
 
             Assert.IsTrue(favorited);
         }
@@ -146,7 +147,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new MashapeClient("123", "1234", "xyz", FakeOAuth2Token);
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW");
+            var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW").ConfigureAwait(false);
 
             Assert.IsFalse(favorited);
         }
@@ -162,7 +163,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new MashapeClient("123", "1234", "xyz", FakeOAuth2Token);
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW");
+            var favorited = await endpoint.FavoriteAlbumAsync("zVpyzhW").ConfigureAwait(false);
 
             Assert.IsTrue(favorited);
         }
@@ -173,7 +174,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
-            await endpoint.FavoriteImageAsync("zVpyzhW");
+            await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -187,7 +188,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var album = await endpoint.GetAlbumAsync("5F5Cy");
+            var album = await endpoint.GetAlbumAsync("5F5Cy").ConfigureAwait(false);
 
             Assert.IsNotNull(album);
             Assert.AreEqual("5F5Cy", album.Id);
@@ -216,7 +217,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
-            await endpoint.GetAlbumAsync(null);
+            await endpoint.GetAlbumAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -230,7 +231,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var image = await endpoint.GetAlbumImageAsync("79MH23L", "5F5Cy");
+            var image = await endpoint.GetAlbumImageAsync("79MH23L", "5F5Cy").ConfigureAwait(false);
 
             Assert.IsNotNull(image);
 
@@ -258,7 +259,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
-            await endpoint.GetAlbumImageAsync(null, "xyuOi");
+            await endpoint.GetAlbumImageAsync(null, "xyuOi").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -267,7 +268,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
-            await endpoint.GetAlbumImageAsync("PioAxs8", null);
+            await endpoint.GetAlbumImageAsync("PioAxs8", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -281,7 +282,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var images = await endpoint.GetAlbumImagesAsync("5F5Cy");
+            var images = await endpoint.GetAlbumImagesAsync("5F5Cy").ConfigureAwait(false);
 
             Assert.IsTrue(images.Count() == 3);
         }
@@ -292,7 +293,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
-            await endpoint.GetAlbumImagesAsync(null);
+            await endpoint.GetAlbumImagesAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -306,7 +307,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var updated = await endpoint.RemoveAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"});
+            var updated = await endpoint.RemoveAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"}).ConfigureAwait(false);
 
             Assert.IsTrue(updated);
         }
@@ -317,7 +318,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
-            await endpoint.RemoveAlbumImagesAsync(null, null);
+            await endpoint.RemoveAlbumImagesAsync(null, null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -326,7 +327,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
-            await endpoint.RemoveAlbumImagesAsync("12x5454", null);
+            await endpoint.RemoveAlbumImagesAsync("12x5454", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -340,7 +341,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var updated = await endpoint.SetAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"});
+            var updated = await endpoint.SetAlbumImagesAsync("12x5454", new List<string> {"AbcDef", "IrcDef"}).ConfigureAwait(false);
 
             Assert.IsTrue(updated);
         }
@@ -351,7 +352,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
-            await endpoint.SetAlbumImagesAsync(null, null);
+            await endpoint.SetAlbumImagesAsync(null, null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -360,7 +361,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
-            await endpoint.SetAlbumImagesAsync("12x5454", null);
+            await endpoint.SetAlbumImagesAsync("12x5454", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -374,7 +375,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var updated = await endpoint.UpdateAlbumAsync("12x5454");
+            var updated = await endpoint.UpdateAlbumAsync("12x5454").ConfigureAwait(false);
 
             Assert.IsTrue(updated);
         }
@@ -385,7 +386,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AlbumEndpoint(client);
-            await endpoint.UpdateAlbumAsync(null);
+            await endpoint.UpdateAlbumAsync(null).ConfigureAwait(false);
         }
     }
 }

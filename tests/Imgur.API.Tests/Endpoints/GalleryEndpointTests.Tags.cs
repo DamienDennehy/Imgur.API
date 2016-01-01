@@ -9,6 +9,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -26,7 +27,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var tags = await endpoint.GetGalleryItemTagsAsync("xTYm");
+            var tags = await endpoint.GetGalleryItemTagsAsync("xTYm").ConfigureAwait(false);
 
             Assert.IsTrue(tags.Tags.Any());
         }
@@ -37,7 +38,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryItemTagsAsync(null);
+            await endpoint.GetGalleryItemTagsAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -52,7 +53,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var tag = await endpoint.GetGalleryTagAsync("cats");
+            var tag = await endpoint.GetGalleryTagAsync("cats").ConfigureAwait(false);
 
             Assert.IsNotNull(tag);
             Assert.AreEqual(196, tag.Followers);
@@ -68,7 +69,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryTagAsync(null);
+            await endpoint.GetGalleryTagAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -83,7 +84,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var image = await endpoint.GetGalleryTagImageAsync("XoPkL", "cats");
+            var image = await endpoint.GetGalleryTagImageAsync("XoPkL", "cats").ConfigureAwait(false);
 
             Assert.IsNotNull(image);
         }
@@ -94,7 +95,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryTagImageAsync(null, "xiui");
+            await endpoint.GetGalleryTagImageAsync(null, "xiui").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -103,7 +104,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryTagImageAsync("kjkjk", null);
+            await endpoint.GetGalleryTagImageAsync("kjkjk", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -118,7 +119,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var voted = await endpoint.VoteGalleryTagAsync("XoPkL", "cats", VoteOption.Down);
+            var voted = await endpoint.VoteGalleryTagAsync("XoPkL", "cats", VoteOption.Down).ConfigureAwait(false);
 
             Assert.IsNotNull(voted);
         }
@@ -129,7 +130,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.VoteGalleryTagAsync(null, "xiui", VoteOption.Down);
+            await endpoint.VoteGalleryTagAsync(null, "xiui", VoteOption.Down).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -138,7 +139,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.VoteGalleryTagAsync("kjkjk", "hjhj", VoteOption.Down);
+            await endpoint.VoteGalleryTagAsync("kjkjk", "hjhj", VoteOption.Down).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -147,7 +148,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.VoteGalleryTagAsync("kjkjk", null, VoteOption.Down);
+            await endpoint.VoteGalleryTagAsync("kjkjk", null, VoteOption.Down).ConfigureAwait(false);
         }
     }
 }

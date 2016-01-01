@@ -39,7 +39,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
-                var deleted = await SendRequestAsync<bool>(request);
+                var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return deleted;
             }
         }
@@ -72,7 +72,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var album = await SendRequestAsync<Album>(request);
+                var album = await SendRequestAsync<Album>(request).ConfigureAwait(false);
                 return album;
             }
         }
@@ -101,7 +101,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var count = await SendRequestAsync<int>(request);
+                var count = await SendRequestAsync<int>(request).ConfigureAwait(false);
                 return count;
             }
         }
@@ -131,7 +131,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var albums = await SendRequestAsync<IEnumerable<string>>(request);
+                var albums = await SendRequestAsync<IEnumerable<string>>(request).ConfigureAwait(false);
                 return albums;
             }
         }
@@ -162,7 +162,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var albums = await SendRequestAsync<IEnumerable<Album>>(request);
+                var albums = await SendRequestAsync<IEnumerable<Album>>(request).ConfigureAwait(false);
                 return albums;
             }
         }

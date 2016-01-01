@@ -32,7 +32,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var favorites = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
+                var favorites = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return favorites;
             }
         }
@@ -68,7 +68,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var favorites = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
+                var favorites = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return favorites;
             }
         }
@@ -98,7 +98,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var submissions = await SendRequestAsync<IEnumerable<GalleryItem>>(request);
+                var submissions = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return submissions;
             }
         }
@@ -127,7 +127,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var profile = await SendRequestAsync<GalleryProfile>(request);
+                var profile = await SendRequestAsync<GalleryProfile>(request).ConfigureAwait(false);
                 return profile;
             }
         }

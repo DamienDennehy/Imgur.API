@@ -76,7 +76,7 @@ namespace Imgur.API.Endpoints.Impl
                 var request = RequestBuilder.GetTokenByCodeRequest(TokenEndpointUrl, code, ApiClient.ClientId,
                     ApiClient.ClientSecret))
             {
-                token = await SendRequestAsync<OAuth2Token>(request);
+                token = await SendRequestAsync<OAuth2Token>(request).ConfigureAwait(false);
             }
 
             return token;
@@ -101,7 +101,7 @@ namespace Imgur.API.Endpoints.Impl
                 var request = RequestBuilder.GetTokenByPinRequest(TokenEndpointUrl, pin, ApiClient.ClientId,
                     ApiClient.ClientSecret))
             {
-                token = await SendRequestAsync<OAuth2Token>(request);
+                token = await SendRequestAsync<OAuth2Token>(request).ConfigureAwait(false);
             }
 
             return token;
@@ -134,7 +134,7 @@ namespace Imgur.API.Endpoints.Impl
                 var request = RequestBuilder.GetTokenByRefreshTokenRequest(TokenEndpointUrl, refreshToken,
                     ApiClient.ClientId, ApiClient.ClientSecret))
             {
-                token = await SendRequestAsync<OAuth2Token>(request);
+                token = await SendRequestAsync<OAuth2Token>(request).ConfigureAwait(false);
             }
 
             return token;

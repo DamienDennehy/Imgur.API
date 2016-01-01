@@ -29,7 +29,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var tagVotes = await SendRequestAsync<TagVotes>(request);
+                var tagVotes = await SendRequestAsync<TagVotes>(request).ConfigureAwait(false);
                 return tagVotes;
             }
         }
@@ -65,7 +65,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var returnTag = await SendRequestAsync<Tag>(request);
+                var returnTag = await SendRequestAsync<Tag>(request).ConfigureAwait(false);
                 return returnTag;
             }
         }
@@ -94,7 +94,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var image = await SendRequestAsync<GalleryImage>(request);
+                var image = await SendRequestAsync<GalleryImage>(request).ConfigureAwait(false);
                 return image;
             }
         }
@@ -128,7 +128,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {
-                var voted = await SendRequestAsync<bool>(request);
+                var voted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return voted;
             }
         }

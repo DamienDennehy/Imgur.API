@@ -9,6 +9,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -27,7 +28,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetGalleryAsync();
+            var gallery = await endpoint.GetGalleryAsync().ConfigureAwait(false);
 
             Assert.IsTrue(gallery.Any());
         }
@@ -46,7 +47,7 @@ namespace Imgur.API.Tests.Endpoints
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var gallery = await endpoint.GetGalleryAsync(GallerySection.User,
                 GallerySortOrder.Rising,
-                TimeWindow.Month, 2, false);
+                TimeWindow.Month, 2, false).ConfigureAwait(false);
 
             Assert.IsTrue(gallery.Any());
         }
@@ -63,7 +64,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetRandomGalleryAsync();
+            var gallery = await endpoint.GetRandomGalleryAsync().ConfigureAwait(false);
 
             Assert.IsTrue(gallery.Any());
         }
@@ -80,7 +81,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var gallery = await endpoint.GetRandomGalleryAsync(8);
+            var gallery = await endpoint.GetRandomGalleryAsync(8).ConfigureAwait(false);
 
             Assert.IsTrue(gallery.Any());
         }
@@ -97,7 +98,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var published = await endpoint.PublishToGalleryAsync("xyZ", "Test Title");
+            var published = await endpoint.PublishToGalleryAsync("xyZ", "Test Title").ConfigureAwait(false);
 
             Assert.IsTrue(published);
         }
@@ -108,7 +109,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.PublishToGalleryAsync(null, "Xyz", "ahj", true, true);
+            await endpoint.PublishToGalleryAsync(null, "Xyz", "ahj", true, true).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -117,7 +118,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.PublishToGalleryAsync("x48989", "Xyz", "ahj", true, true);
+            await endpoint.PublishToGalleryAsync("x48989", "Xyz", "ahj", true, true).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -126,7 +127,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.PublishToGalleryAsync("x48989", null, "ahj", true, true);
+            await endpoint.PublishToGalleryAsync("x48989", null, "ahj", true, true).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -141,7 +142,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var removed = await endpoint.RemoveFromGalleryAsync("xyZ");
+            var removed = await endpoint.RemoveFromGalleryAsync("xyZ").ConfigureAwait(false);
 
             Assert.IsTrue(removed);
         }
@@ -152,7 +153,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.RemoveFromGalleryAsync(null);
+            await endpoint.RemoveFromGalleryAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -161,7 +162,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.RemoveFromGalleryAsync("x48989");
+            await endpoint.RemoveFromGalleryAsync("x48989").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -179,7 +180,7 @@ namespace Imgur.API.Tests.Endpoints
             var galleries =
                 await
                     endpoint.SearchGalleryAdvancedAsync("star wars", "luke han leia", "Obi-Wan", "Kirk",
-                        ImageFileType.Anigif, ImageSize.Lrg, GallerySortOrder.Top, TimeWindow.Week, 2);
+                        ImageFileType.Anigif, ImageSize.Lrg, GallerySortOrder.Top, TimeWindow.Week, 2).ConfigureAwait(false);
 
             Assert.IsTrue(galleries.Any());
         }
@@ -190,7 +191,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.SearchGalleryAdvancedAsync();
+            await endpoint.SearchGalleryAdvancedAsync().ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -205,7 +206,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var galleries = await endpoint.SearchGalleryAsync("star wars", GallerySortOrder.Top, TimeWindow.Week, 2);
+            var galleries = await endpoint.SearchGalleryAsync("star wars", GallerySortOrder.Top, TimeWindow.Week, 2).ConfigureAwait(false);
 
             Assert.IsTrue(galleries.Any());
         }
@@ -216,7 +217,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.SearchGalleryAsync(null);
+            await endpoint.SearchGalleryAsync(null).ConfigureAwait(false);
         }
     }
 }

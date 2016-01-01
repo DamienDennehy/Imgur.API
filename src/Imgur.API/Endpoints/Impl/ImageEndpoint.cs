@@ -54,7 +54,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
-                var deleted = await SendRequestAsync<bool>(request);
+                var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return deleted;
             }
         }
@@ -86,14 +86,14 @@ namespace Imgur.API.Endpoints.Impl
                 //varies on if Imgur or Mashape Authentication is used
                 if (ApiClient is IImgurClient)
                 {
-                    var imgurResult = await SendRequestAsync<string>(request);
+                    var imgurResult = await SendRequestAsync<string>(request).ConfigureAwait(false);
                     return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
                 }
 
                 //If Mashape Authentication is used, the favorite is returned as an exception
                 try
                 {
-                    await SendRequestAsync<string>(request);
+                    await SendRequestAsync<string>(request).ConfigureAwait(false);
                 }
                 catch (ImgurException imgurException)
                 {
@@ -124,7 +124,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var image = await SendRequestAsync<Image>(request);
+                var image = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return image;
             }
         }
@@ -153,7 +153,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.UpdateImageRequest(url, title, description))
             {
-                var updated = await SendRequestAsync<bool>(request);
+                var updated = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return updated;
             }
         }
@@ -185,7 +185,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.UploadImageBinaryRequest(url, image, albumId, title, description))
             {
-                var returnImage = await SendRequestAsync<Image>(request);
+                var returnImage = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return returnImage;
             }
         }
@@ -217,7 +217,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.UploadImageStreamRequest(url, image, albumId, title, description))
             {
-                var returnImage = await SendRequestAsync<Image>(request);
+                var returnImage = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return returnImage;
             }
         }
@@ -249,7 +249,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.UploadImageUrlRequest(url, image, albumId, title, description))
             {
-                var returnImage = await SendRequestAsync<Image>(request);
+                var returnImage = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return returnImage;
             }
         }

@@ -8,6 +8,7 @@ using Imgur.API.Endpoints.Impl;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -26,7 +27,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new NotificationEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var notification = await endpoint.GetNotificationAsync("12345");
+            var notification = await endpoint.GetNotificationAsync("12345").ConfigureAwait(false);
 
             Assert.IsNotNull(notification);
         }
@@ -37,7 +38,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new NotificationEndpoint(client);
-            await endpoint.GetNotificationAsync("123");
+            await endpoint.GetNotificationAsync("123").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -46,7 +47,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new NotificationEndpoint(client);
-            await endpoint.GetNotificationAsync(null);
+            await endpoint.GetNotificationAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -61,7 +62,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new NotificationEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var notifications = await endpoint.GetNotificationsAsync(false);
+            var notifications = await endpoint.GetNotificationsAsync(false).ConfigureAwait(false);
 
             Assert.IsNotNull(notifications);
             Assert.IsNotNull(notifications.Messages);
@@ -74,7 +75,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new NotificationEndpoint(client);
-            await endpoint.GetNotificationsAsync();
+            await endpoint.GetNotificationsAsync().ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -89,7 +90,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new NotificationEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var marked = await endpoint.MarkNotificationViewedAsync("12345");
+            var marked = await endpoint.MarkNotificationViewedAsync("12345").ConfigureAwait(false);
 
             Assert.IsTrue(marked);
         }
@@ -100,7 +101,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new NotificationEndpoint(client);
-            await endpoint.MarkNotificationsViewedAsync(null);
+            await endpoint.MarkNotificationsViewedAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -109,7 +110,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new NotificationEndpoint(client);
-            await endpoint.MarkNotificationsViewedAsync(new List<string> {"456"});
+            await endpoint.MarkNotificationsViewedAsync(new List<string> {"456"}).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -124,7 +125,7 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new NotificationEndpoint(client,
                 new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var marked = await endpoint.MarkNotificationsViewedAsync(new List<string> {"12345", "4445"});
+            var marked = await endpoint.MarkNotificationsViewedAsync(new List<string> {"12345", "4445"}).ConfigureAwait(false);
 
             Assert.IsTrue(marked);
         }
@@ -135,7 +136,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new NotificationEndpoint(client);
-            await endpoint.MarkNotificationViewedAsync(null);
+            await endpoint.MarkNotificationViewedAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -144,7 +145,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new NotificationEndpoint(client);
-            await endpoint.MarkNotificationViewedAsync("123");
+            await endpoint.MarkNotificationViewedAsync("123").ConfigureAwait(false);
         }
     }
 }

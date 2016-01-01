@@ -40,7 +40,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
-                var deleted = await SendRequestAsync<bool>(request);
+                var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return deleted;
             }
         }
@@ -73,7 +73,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var image = await SendRequestAsync<Image>(request);
+                var image = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return image;
             }
         }
@@ -101,7 +101,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var count = await SendRequestAsync<int>(request);
+                var count = await SendRequestAsync<int>(request).ConfigureAwait(false);
                 return count;
             }
         }
@@ -131,7 +131,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var images = await SendRequestAsync<IEnumerable<string>>(request);
+                var images = await SendRequestAsync<IEnumerable<string>>(request).ConfigureAwait(false);
                 return images;
             }
         }
@@ -162,7 +162,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var images = await SendRequestAsync<IEnumerable<Image>>(request);
+                var images = await SendRequestAsync<IEnumerable<Image>>(request).ConfigureAwait(false);
                 return images;
             }
         }

@@ -40,7 +40,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
-                var deleted = await SendRequestAsync<bool>(request);
+                var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return deleted;
             }
         }
@@ -73,7 +73,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var comment = await SendRequestAsync<Comment>(request);
+                var comment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
                 return comment;
             }
         }
@@ -102,7 +102,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var count = await SendRequestAsync<int>(request);
+                var count = await SendRequestAsync<int>(request).ConfigureAwait(false);
                 return count;
             }
         }
@@ -137,7 +137,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var comments = await SendRequestAsync<IEnumerable<int>>(request);
+                var comments = await SendRequestAsync<IEnumerable<int>>(request).ConfigureAwait(false);
                 return comments;
             }
         }
@@ -172,7 +172,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var comments = await SendRequestAsync<IEnumerable<Comment>>(request);
+                var comments = await SendRequestAsync<IEnumerable<Comment>>(request).ConfigureAwait(false);
                 return comments;
             }
         }

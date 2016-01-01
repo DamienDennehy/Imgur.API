@@ -23,7 +23,7 @@ namespace Imgur.API.Tests.RequestBuilders
             Assert.IsNotNull(request);
             var expected = "body=Hello+World%21";
 
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/conversations/Bob", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Post, request.Method);
         }

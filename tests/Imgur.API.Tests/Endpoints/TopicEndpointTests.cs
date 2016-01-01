@@ -9,6 +9,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -26,7 +27,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new TopicEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var topics = await endpoint.GetDefaultTopicsAsync();
+            var topics = await endpoint.GetDefaultTopicsAsync().ConfigureAwait(false);
 
             Assert.IsTrue(topics.Any());
         }
@@ -42,7 +43,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new TopicEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var item = await endpoint.GetGalleryTopicItemAsync("xyZ", "Current Events");
+            var item = await endpoint.GetGalleryTopicItemAsync("xyZ", "Current Events").ConfigureAwait(false);
 
             Assert.IsNotNull(item);
         }
@@ -53,7 +54,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new TopicEndpoint(client);
-            await endpoint.GetGalleryTopicItemAsync(null, "Current Events");
+            await endpoint.GetGalleryTopicItemAsync(null, "Current Events").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -62,7 +63,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new TopicEndpoint(client);
-            await endpoint.GetGalleryTopicItemAsync("XyZ", null);
+            await endpoint.GetGalleryTopicItemAsync("XyZ", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -78,7 +79,7 @@ namespace Imgur.API.Tests.Endpoints
             var endpoint = new TopicEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var items =
                 await
-                    endpoint.GetGalleryTopicItemsAsync("Current Events", CustomGallerySortOrder.Top, TimeWindow.Day, 3);
+                    endpoint.GetGalleryTopicItemsAsync("Current Events", CustomGallerySortOrder.Top, TimeWindow.Day, 3).ConfigureAwait(false);
 
             Assert.IsTrue(items.Any());
         }
@@ -89,7 +90,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new TopicEndpoint(client);
-            await endpoint.GetGalleryTopicItemsAsync(null);
+            await endpoint.GetGalleryTopicItemsAsync(null).ConfigureAwait(false);
         }
     }
 }

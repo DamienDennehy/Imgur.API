@@ -29,7 +29,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var vote = await SendRequestAsync<Vote>(request);
+                var vote = await SendRequestAsync<Vote>(request).ConfigureAwait(false);
                 return vote;
             }
         }
@@ -60,7 +60,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {
-                var voted = await SendRequestAsync<bool>(request);
+                var voted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return voted;
             }
         }

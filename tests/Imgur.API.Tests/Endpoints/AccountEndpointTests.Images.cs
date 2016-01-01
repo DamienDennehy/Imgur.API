@@ -8,6 +8,7 @@ using Imgur.API.Endpoints.Impl;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -24,7 +25,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var deleted = await endpoint.DeleteImageAsync("hbzm7Ge", "sarah");
+            var deleted = await endpoint.DeleteImageAsync("hbzm7Ge", "sarah").ConfigureAwait(false);
 
             Assert.IsTrue(deleted);
         }
@@ -34,7 +35,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client);
-            await endpoint.DeleteImageAsync("hbzm7Ge", null);
+            await endpoint.DeleteImageAsync("hbzm7Ge", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -43,7 +44,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client);
-            await endpoint.DeleteImageAsync(null, null);
+            await endpoint.DeleteImageAsync(null, null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -52,7 +53,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.DeleteImageAsync("yMgB7", "sarah");
+            await endpoint.DeleteImageAsync("yMgB7", "sarah").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -61,7 +62,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client);
-            await endpoint.DeleteImageAsync("hbzm7Ge", null);
+            await endpoint.DeleteImageAsync("hbzm7Ge", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -75,7 +76,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var image = await endpoint.GetImageAsync("hbzm7Ge", "sarah");
+            var image = await endpoint.GetImageAsync("hbzm7Ge", "sarah").ConfigureAwait(false);
 
             Assert.IsNotNull(image);
             Assert.AreEqual(
@@ -106,7 +107,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageAsync("hbzm7Ge", null);
+            await endpoint.GetImageAsync("hbzm7Ge", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -115,7 +116,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageAsync(null, null);
+            await endpoint.GetImageAsync(null, null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -124,7 +125,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageAsync("hbzm7Ge", null);
+            await endpoint.GetImageAsync("hbzm7Ge", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -138,7 +139,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var count = await endpoint.GetImageCountAsync("sarah");
+            var count = await endpoint.GetImageCountAsync("sarah").ConfigureAwait(false);
 
             Assert.AreEqual(count, 2);
         }
@@ -148,7 +149,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageCountAsync();
+            await endpoint.GetImageCountAsync().ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -157,7 +158,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageCountAsync(null);
+            await endpoint.GetImageCountAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -171,7 +172,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var images = await endpoint.GetImageIdsAsync("sarah", 2);
+            var images = await endpoint.GetImageIdsAsync("sarah", 2).ConfigureAwait(false);
 
             Assert.AreEqual(2, images.Count());
         }
@@ -182,7 +183,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageIdsAsync();
+            await endpoint.GetImageIdsAsync().ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -191,7 +192,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageIdsAsync(null);
+            await endpoint.GetImageIdsAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -206,7 +207,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var images = await endpoint.GetImagesAsync("sarah", 2);
+            var images = await endpoint.GetImagesAsync("sarah", 2).ConfigureAwait(false);
 
             Assert.AreEqual(2, images.Count());
         }
@@ -217,7 +218,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImagesAsync();
+            await endpoint.GetImagesAsync().ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -226,7 +227,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImagesAsync(null);
+            await endpoint.GetImagesAsync(null).ConfigureAwait(false);
         }
     }
 }

@@ -10,6 +10,7 @@ using Imgur.API.Models;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -27,7 +28,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var deleted = await endpoint.DeleteImageAsync("123xyj");
+            var deleted = await endpoint.DeleteImageAsync("123xyj").ConfigureAwait(false);
 
             Assert.AreEqual(true, deleted);
         }
@@ -38,7 +39,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
-            await endpoint.DeleteImageAsync(null);
+            await endpoint.DeleteImageAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -47,7 +48,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
-            await endpoint.FavoriteImageAsync(null);
+            await endpoint.FavoriteImageAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -61,7 +62,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var favorited = await endpoint.FavoriteImageAsync("zVpyzhW");
+            var favorited = await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false);
 
             Assert.IsFalse(favorited);
         }
@@ -77,7 +78,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var favorited = await endpoint.FavoriteImageAsync("zVpyzhW");
+            var favorited = await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false);
 
             Assert.IsTrue(favorited);
         }
@@ -93,7 +94,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new MashapeClient("123", "1234", "xyz", FakeOAuth2Token);
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var favorited = await endpoint.FavoriteImageAsync("zVpyzhW");
+            var favorited = await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false);
 
             Assert.IsFalse(favorited);
         }
@@ -109,7 +110,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new MashapeClient("123", "1234", "xyz", FakeOAuth2Token);
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var favorited = await endpoint.FavoriteImageAsync("zVpyzhW");
+            var favorited = await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false);
 
             Assert.IsTrue(favorited);
         }
@@ -120,7 +121,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
-            await endpoint.FavoriteImageAsync("zVpyzhW");
+            await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -134,7 +135,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var image = await endpoint.GetImageAsync("zVpyzhW");
+            var image = await endpoint.GetImageAsync("zVpyzhW").ConfigureAwait(false);
 
             Assert.IsNotNull(image);
             Assert.AreEqual("zVpyzhW", image.Id);
@@ -165,7 +166,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
-            await endpoint.GetImageAsync(null);
+            await endpoint.GetImageAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -179,7 +180,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var updated = await endpoint.UpdateImageAsync("123xyj");
+            var updated = await endpoint.UpdateImageAsync("123xyj").ConfigureAwait(false);
 
             Assert.AreEqual(true, updated);
         }
@@ -190,7 +191,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
-            await endpoint.UpdateImageAsync(null);
+            await endpoint.UpdateImageAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -204,7 +205,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var image = await endpoint.UploadImageBinaryAsync(File.ReadAllBytes("banana.gif"));
+            var image = await endpoint.UploadImageBinaryAsync(File.ReadAllBytes("banana.gif")).ConfigureAwait(false);
 
             Assert.IsNotNull(image);
             Assert.AreEqual(true, image.Animated);
@@ -237,7 +238,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
-            await endpoint.UploadImageBinaryAsync(null);
+            await endpoint.UploadImageBinaryAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -255,7 +256,7 @@ namespace Imgur.API.Tests.Endpoints
 
             using (var fs = new FileStream("banana.gif", FileMode.Open))
             {
-                image = await endpoint.UploadImageStreamAsync(fs);
+                image = await endpoint.UploadImageStreamAsync(fs).ConfigureAwait(false);
             }
 
             Assert.IsNotNull(image);
@@ -294,7 +295,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var image = await endpoint.UploadImageUrlAsync("http://i.imgur.com/kiNOcUl.gif");
+            var image = await endpoint.UploadImageUrlAsync("http://i.imgur.com/kiNOcUl.gif").ConfigureAwait(false);
 
             Assert.IsNotNull(image);
             Assert.AreEqual(true, image.Animated);
@@ -327,7 +328,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
-            await endpoint.UploadImageUrlAsync(null);
+            await endpoint.UploadImageUrlAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -336,7 +337,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client);
-            await endpoint.UploadImageStreamAsync(null);
+            await endpoint.UploadImageStreamAsync(null).ConfigureAwait(false);
         }
     }
 }

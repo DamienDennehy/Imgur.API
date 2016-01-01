@@ -24,7 +24,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var expected = "ids=12345%2C9867%2C45678";
 
             Assert.IsNotNull(request);
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/notifications", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Post, request.Method);
         }

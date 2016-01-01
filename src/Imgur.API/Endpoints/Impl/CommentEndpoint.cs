@@ -62,7 +62,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateCommentRequest(url, comment, galleryItemId, parentId))
             {
-                var returnComment = await SendRequestAsync<Comment>(request);
+                var returnComment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
                 return returnComment;
             }
         }
@@ -99,7 +99,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateReplyRequest(url, comment, galleryItemId))
             {
-                var returnComment = await SendRequestAsync<Comment>(request);
+                var returnComment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
                 return returnComment;
             }
         }
@@ -128,7 +128,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
-                var deleted = await SendRequestAsync<bool>(request);
+                var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return deleted;
             }
         }
@@ -153,7 +153,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var comment = await SendRequestAsync<Comment>(request);
+                var comment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
                 return comment;
             }
         }
@@ -178,7 +178,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var comment = await SendRequestAsync<Comment>(request);
+                var comment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
                 return comment;
             }
         }
@@ -208,7 +208,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.ReportItemRequest(url, reason))
             {
-                var reported = await SendRequestAsync<bool?>(request);
+                var reported = await SendRequestAsync<bool?>(request).ConfigureAwait(false);
                 return reported ?? true;
             }
         }
@@ -239,7 +239,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {
-                var voted = await SendRequestAsync<bool>(request);
+                var voted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return voted;
             }
         }

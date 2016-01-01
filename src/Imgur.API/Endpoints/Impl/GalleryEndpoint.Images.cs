@@ -28,7 +28,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var image = await SendRequestAsync<GalleryImage>(request);
+                var image = await SendRequestAsync<GalleryImage>(request).ConfigureAwait(false);
                 return image;
             }
         }

@@ -25,7 +25,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var expected = "ids=Abc%2CDEF%2CXyZ";
 
             Assert.IsNotNull(request);
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/album/AbcdeF/add", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Put, request.Method);
         }
@@ -66,7 +66,7 @@ namespace Imgur.API.Tests.RequestBuilders
                 "privacy=hidden&layout=horizontal&cover=io9XpoO&title=TheTitle&description=TheDescription&ids=Abc%2CDEF%2CXyZ";
 
             Assert.IsNotNull(request);
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/album/AbcdeF", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Post, request.Method);
         }
@@ -127,7 +127,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var expected = "ids=Abc%2CDEF%2CXyZ";
 
             Assert.IsNotNull(request);
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/album/AbcdeF", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Post, request.Method);
         }
@@ -168,7 +168,7 @@ namespace Imgur.API.Tests.RequestBuilders
                 "privacy=hidden&layout=horizontal&cover=io9XpoO&title=TheTitle&description=TheDescription&ids=Abc%2CDEF%2CXyZ";
 
             Assert.IsNotNull(request);
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync());
+            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
             Assert.AreEqual("https://api.imgur.com/3/album/AbcdeF", request.RequestUri.ToString());
             Assert.AreEqual(HttpMethod.Post, request.Method);
         }

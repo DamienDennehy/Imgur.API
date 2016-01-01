@@ -9,6 +9,7 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.FakeResponses;
 using Imgur.API.Tests.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.Endpoints
 {
@@ -26,7 +27,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var comment = await endpoint.CreateCommentAsync("Hello World!", "xyz", "Abc");
+            var comment = await endpoint.CreateCommentAsync("Hello World!", "xyz", "Abc").ConfigureAwait(false);
 
             Assert.IsNotNull(comment);
             Assert.AreEqual(539710677, comment.Id);
@@ -38,7 +39,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateCommentAsync(null, "xyz", "Abc");
+            await endpoint.CreateCommentAsync(null, "xyz", "Abc").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -47,7 +48,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateCommentAsync("Hello World!", null, "Abc");
+            await endpoint.CreateCommentAsync("Hello World!", null, "Abc").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -56,7 +57,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateCommentAsync("Hello World", "xyz", "Abc");
+            await endpoint.CreateCommentAsync("Hello World", "xyz", "Abc").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -70,7 +71,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var comment = await endpoint.CreateReplyAsync("Hello World!", "xyz", "BNMxDs");
+            var comment = await endpoint.CreateReplyAsync("Hello World!", "xyz", "BNMxDs").ConfigureAwait(false);
 
             Assert.IsNotNull(comment);
             Assert.AreEqual(539717441, comment.Id);
@@ -82,7 +83,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateReplyAsync("Hello World!", "xyz", null);
+            await endpoint.CreateReplyAsync("Hello World!", "xyz", null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -91,7 +92,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateReplyAsync(null, "xyz", "Abc");
+            await endpoint.CreateReplyAsync(null, "xyz", "Abc").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -100,7 +101,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateReplyAsync("Hello World", null, "Abc");
+            await endpoint.CreateReplyAsync("Hello World", null, "Abc").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -109,7 +110,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateReplyAsync("Hello World", "xyz", "Abc");
+            await endpoint.CreateReplyAsync("Hello World", "xyz", "Abc").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -123,7 +124,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var deleted = await endpoint.DeleteCommentAsync("12x5454");
+            var deleted = await endpoint.DeleteCommentAsync("12x5454").ConfigureAwait(false);
 
             Assert.IsTrue(deleted);
         }
@@ -134,7 +135,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.DeleteCommentAsync(null);
+            await endpoint.DeleteCommentAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -143,7 +144,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client);
-            await endpoint.DeleteCommentAsync("12x5454");
+            await endpoint.DeleteCommentAsync("12x5454").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -157,7 +158,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var comment = await endpoint.GetCommentAsync("539556821");
+            var comment = await endpoint.GetCommentAsync("539556821").ConfigureAwait(false);
 
             Assert.IsNotNull(comment);
             Assert.AreEqual(539556821, comment.Id);
@@ -183,7 +184,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client);
-            await endpoint.GetCommentAsync(null);
+            await endpoint.GetCommentAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -197,7 +198,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var comments = await endpoint.GetRepliesAsync("539556821");
+            var comments = await endpoint.GetRepliesAsync("539556821").ConfigureAwait(false);
 
             Assert.IsTrue(comments.Children.Count() == 7);
         }
@@ -207,7 +208,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client);
-            await endpoint.GetRepliesAsync(null);
+            await endpoint.GetRepliesAsync(null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -221,7 +222,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var reported = await endpoint.ReportCommentAsync("539556821", ReportReason.MatureContentNotMarked);
+            var reported = await endpoint.ReportCommentAsync("539556821", ReportReason.MatureContentNotMarked).ConfigureAwait(false);
 
             Assert.IsTrue(reported);
         }
@@ -231,7 +232,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.ReportCommentAsync(null, ReportReason.Spam);
+            await endpoint.ReportCommentAsync(null, ReportReason.Spam).ConfigureAwait(false);
         }
 
         [ExpectedException(typeof (ArgumentNullException))]
@@ -239,7 +240,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client);
-            await endpoint.ReportCommentAsync("539556821", ReportReason.Spam);
+            await endpoint.ReportCommentAsync("539556821", ReportReason.Spam).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -253,7 +254,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var reported = await endpoint.VoteCommentAsync("539556821", VoteOption.Down);
+            var reported = await endpoint.VoteCommentAsync("539556821", VoteOption.Down).ConfigureAwait(false);
 
             Assert.IsTrue(reported);
         }
@@ -263,7 +264,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.VoteCommentAsync(null, VoteOption.Down);
+            await endpoint.VoteCommentAsync(null, VoteOption.Down).ConfigureAwait(false);
         }
 
         [ExpectedException(typeof (ArgumentNullException))]
@@ -271,7 +272,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client);
-            await endpoint.VoteCommentAsync("539556821", VoteOption.Down);
+            await endpoint.VoteCommentAsync("539556821", VoteOption.Down).ConfigureAwait(false);
         }
     }
 }

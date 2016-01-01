@@ -169,7 +169,7 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task SearchGalleryAdvancedAsync_IsTrue()
         {
-            var fakeUrl = "https://api.imgur.com/3/gallery/search/top/week/2";
+            var fakeUrl = "https://api.imgur.com/3/gallery/search/top/week/2?q_all=star+wars&q_any=luke+han+leia&q_exactly=Obi-Wan&q_not=Kirk&q_type=anigif&q_size_px=lrg";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(GalleryEndpointResponses.SearchGalleryAdvancedAsync)
@@ -199,7 +199,7 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task SearchGalleryAsync_IsTrue()
         {
-            var fakeUrl = "https://api.imgur.com/3/gallery/search/top/week/2";
+            var fakeUrl = "https://api.imgur.com/3/gallery/search/top/week/2?q=star+wars";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(GalleryEndpointResponses.SearchGalleryAsync)

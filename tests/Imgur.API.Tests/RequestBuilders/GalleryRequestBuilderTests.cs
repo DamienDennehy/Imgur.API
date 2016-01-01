@@ -62,22 +62,34 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
-        public async Task SearchGalleryAdvancedRequest_AreEqual()
+        public void SearchGalleryAdvancedRequest_AreEqual()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new GalleryRequestBuilder();
 
             var fakeUrl = $"{client.EndpointUrl}gallery/search";
-            var request = requestBuilder.SearchGalleryAdvancedRequest(fakeUrl, "star wars", "luke han leia", "Obi-Wan",
+            var actual = requestBuilder.SearchGalleryAdvancedRequest(fakeUrl, "star wars", "luke han leia", "Obi-Wan",
                 "Kirk", ImageFileType.Anigif, ImageSize.Lrg);
-
-            Assert.IsNotNull(request);
+            
             var expected =
-                "q_all=star+wars&q_any=luke+han+leia&q_exactly=Obi-Wan&q_not=Kirk&q_type=anigif&q_size_px=lrg";
+                "https://api.imgur.com/3/gallery/search?q_all=star+wars&q_any=luke+han+leia&q_exactly=Obi-Wan&q_not=Kirk&q_type=anigif&q_size_px=lrg";
+            
+            Assert.AreEqual(expected, actual);
+        }
 
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.AreEqual("https://api.imgur.com/3/gallery/search", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Get, request.Method);
+        [TestMethod]
+        public void SearchGalleryAdvancedRequest_WithDefaults_AreEqual()
+        {
+            var client = new ImgurClient("123", "1234");
+            var requestBuilder = new GalleryRequestBuilder();
+
+            var fakeUrl = $"{client.EndpointUrl}gallery/search";
+            var actual = requestBuilder.SearchGalleryAdvancedRequest(fakeUrl, "star wars");
+
+            var expected =
+                "https://api.imgur.com/3/gallery/search?q_all=star+wars";
+
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -97,20 +109,17 @@ namespace Imgur.API.Tests.RequestBuilders
         }
 
         [TestMethod]
-        public async Task SearchGalleryRequest_AreEqual()
+        public void SearchGalleryRequest_AreEqual()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new GalleryRequestBuilder();
 
             var fakeUrl = $"{client.EndpointUrl}gallery/search";
-            var request = requestBuilder.SearchGalleryRequest(fakeUrl, "star wars");
+            var actual = requestBuilder.SearchGalleryRequest(fakeUrl, "star wars");
 
-            Assert.IsNotNull(request);
-            var expected = "q=star+wars";
-
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.AreEqual("https://api.imgur.com/3/gallery/search", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Get, request.Method);
+            var expected = "https://api.imgur.com/3/gallery/search?q=star+wars";
+            
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]

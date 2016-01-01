@@ -231,10 +231,10 @@ namespace Imgur.API.Endpoints.Impl
             var windowValue = $"{window}".ToLower();
 
             var url = $"gallery/search/{sortValue}/{windowValue}/{page}";
+            url = RequestBuilder.SearchGalleryAdvancedRequest(url, qAll, qAny, qExactly, qNot, fileType,
+                imageSize);
 
-            using (
-                var request = RequestBuilder.SearchGalleryAdvancedRequest(url, qAll, qAny, qExactly, qNot, fileType,
-                    imageSize))
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var searchResults = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return searchResults;
@@ -273,8 +273,9 @@ namespace Imgur.API.Endpoints.Impl
             var windowValue = $"{window}".ToLower();
 
             var url = $"gallery/search/{sortValue}/{windowValue}/{page}";
+            url = RequestBuilder.SearchGalleryRequest(url, query);
 
-            using (var request = RequestBuilder.SearchGalleryRequest(url, query))
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
                 var searchResults = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return searchResults;

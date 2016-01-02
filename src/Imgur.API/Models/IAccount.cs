@@ -1,4 +1,5 @@
 ﻿using System;
+using Imgur.API.Enums;
 
 namespace Imgur.API.Models
 {
@@ -26,6 +27,11 @@ namespace Imgur.API.Models
         ///     The reputation for the account, in its numerical format.
         /// </summary>
         float Reputation { get; set; }
+
+        /// <summary>
+        /// Notoriety level based on the account's reputation.
+        /// </summary>
+        NotorietyLevel Notoriety { get; }
 
         /// <summary>
         ///     The account username, will be the same as requested in the URL.

@@ -23,7 +23,7 @@ namespace Imgur.API.RequestBuilders
             if (string.IsNullOrWhiteSpace(title))
                 throw new ArgumentNullException(nameof(title));
 
-            var parameters = new Dictionary<string, string> { { nameof(title), title } };
+            var parameters = new Dictionary<string, string> {{nameof(title), title}};
 
             if (topicId != null)
                 parameters.Add("topic", topicId);
@@ -95,7 +95,7 @@ namespace Imgur.API.RequestBuilders
 
             if (string.IsNullOrWhiteSpace(query))
                 throw new ArgumentNullException(nameof(query));
-            
+
             return $"{url}?q={WebUtility.UrlEncode(query)}";
         }
     }

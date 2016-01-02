@@ -70,10 +70,10 @@ namespace Imgur.API.Tests.RequestBuilders
             var fakeUrl = $"{client.EndpointUrl}gallery/search";
             var actual = requestBuilder.SearchGalleryAdvancedRequest(fakeUrl, "star wars", "luke han leia", "Obi-Wan",
                 "Kirk", ImageFileType.Anigif, ImageSize.Lrg);
-            
+
             var expected =
                 "https://api.imgur.com/3/gallery/search?q_all=star+wars&q_any=luke+han+leia&q_exactly=Obi-Wan&q_not=Kirk&q_type=anigif&q_size_px=lrg";
-            
+
             Assert.AreEqual(expected, actual);
         }
 
@@ -118,7 +118,7 @@ namespace Imgur.API.Tests.RequestBuilders
             var actual = requestBuilder.SearchGalleryRequest(fakeUrl, "star wars");
 
             var expected = "https://api.imgur.com/3/gallery/search?q=star+wars";
-            
+
             Assert.AreEqual(expected, actual);
         }
 

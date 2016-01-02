@@ -431,7 +431,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
-            var response = Substitute.For<HttpResponseMessage>();
+            var response = new HttpResponseMessage();
 
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "123");
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientRemaining", "345");
@@ -451,11 +451,40 @@ namespace Imgur.API.Tests.Endpoints
         }
 
         [TestMethod]
+        public async Task UpdateRateLimit_WithImgurClientHeadersAndFakeResponse_AreEqual()
+        {
+            var fakeUrl = "https://api.imgur.com/3/image/zVpyzhW/favorite";
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(ImageEndpointResponses.Imgur.FavoriteImageAsyncFalse)
+            };
+
+            fakeResponse.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "123");
+            fakeResponse.Headers.TryAddWithoutValidation("X-RateLimit-ClientRemaining", "345");
+
+            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
+            var endpoint = new ImageEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
+
+            await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false);
+
+            Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.AreEqual(345, endpoint.ApiClient.RateLimit.ClientRemaining);
+
+            fakeResponse.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "122");
+            fakeResponse.Headers.TryAddWithoutValidation("X-RateLimit-ClientRemaining", "344");
+
+            await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false);
+
+            Assert.AreEqual(122, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.AreEqual(344, endpoint.ApiClient.RateLimit.ClientRemaining);
+        }
+
+        [TestMethod]
         public void UpdateRateLimit_WithImgurClientHeadersRemoved_AreEqual()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
-            var response = Substitute.For<HttpResponseMessage>();
+            var response = new HttpResponseMessage();
 
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "123");
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientRemaining", "345");
@@ -479,7 +508,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new MashapeClient("123", "1234", "jhjhjhjh");
             var endpoint = Substitute.ForPartsOf<EndpointBase>(client);
-            var response = Substitute.For<HttpResponseMessage>();
+            var response = new HttpResponseMessage();
 
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Limit", "123");
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Remaining", "345");

@@ -35,6 +35,7 @@ namespace Imgur.API.Tests.Endpoints
             Assert.AreEqual("Bob", account.Url);
             Assert.AreEqual(null, account.Bio);
             Assert.AreEqual(4343, account.Reputation);
+            Assert.AreEqual(NotorietyLevel.Idolized, account.Notoriety);
             Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1229591601), account.Created);
         }
 

@@ -84,6 +84,7 @@
     <Compile Include="Enums\ImageFileType.cs" />
     <Compile Include="Enums\ImageSize.cs" />
     <Compile Include="Enums\GalleryTagSortOrder.cs" />
+    <Compile Include="Enums\NotorietyLevel.cs" />
     <Compile Include="Enums\SubredditGallerySortOrder.cs" />
     <Compile Include="Enums\MemesGallerySortOrder.cs" />
     <Compile Include="Enums\GallerySortOrder.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Models\IMashapeError.cs" />
     <Compile Include="Models\IMessage.cs" />
     <Compile Include="Models\IMessageNotification.cs" />
+    <Compile Include="Models\Impl\Account.Notoriety.cs" />
     <Compile Include="Models\Impl\CommentNotification.cs" />
     <Compile Include="Models\Impl\CustomGallery.cs" />
     <Compile Include="Models\Impl\TagVotes.cs" />
@@ -181,7 +183,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

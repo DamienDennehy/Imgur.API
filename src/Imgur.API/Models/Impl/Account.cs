@@ -7,7 +7,7 @@ namespace Imgur.API.Models.Impl
     /// <summary>
     ///     This model is used to represent the basic account information.
     /// </summary>
-    public class Account : IAccount
+    public partial class Account : IAccount
     {
         /// <summary>
         ///     A basic description the user has filled out.

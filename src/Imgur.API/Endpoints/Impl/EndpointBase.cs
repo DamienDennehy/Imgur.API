@@ -38,7 +38,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Initializes a new instance of the EndpointBase class.
         /// </summary>
-        protected internal EndpointBase()
+        internal EndpointBase()
         {
         }
 
@@ -51,7 +51,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        protected internal EndpointBase(IApiClient apiClient, HttpClient httpClient)
+        internal EndpointBase(IApiClient apiClient, HttpClient httpClient)
         {
             if (apiClient == null)
                 throw new ArgumentNullException(nameof(apiClient));

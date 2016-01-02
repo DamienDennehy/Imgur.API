@@ -15,7 +15,7 @@ namespace Imgur.API.RequestBuilders
         ///     valid argument.
         /// </exception>
         internal HttpRequestMessage PublishToGalleryRequest(string url, string title,
-            string topic = null, bool? bypassTerms = null, bool? mature = null)
+            string topicId = null, bool? bypassTerms = null, bool? mature = null)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -25,8 +25,8 @@ namespace Imgur.API.RequestBuilders
 
             var parameters = new Dictionary<string, string> { { nameof(title), title } };
 
-            if (topic != null)
-                parameters.Add(nameof(topic), topic);
+            if (topicId != null)
+                parameters.Add("topic", topicId);
 
             if (bypassTerms != null)
                 parameters.Add("terms", $"{bypassTerms}".ToLower());

@@ -34,9 +34,8 @@ namespace Imgur.API.Endpoints.Impl
             }
         }
 
-
         /// <summary>
-        ///     Vote for an item. Send the same value again to undo a vote.
+        ///     Vote for an item. Send the same value again to undo a vote. OAuth authentication required.
         /// </summary>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="vote">The vote.</param>

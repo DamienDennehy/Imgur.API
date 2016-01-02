@@ -33,8 +33,7 @@ namespace Imgur.API.Endpoints.Impl
                 return tagVotes;
             }
         }
-
-
+        
         /// <summary>
         ///     View images for a gallery tag.
         /// </summary>

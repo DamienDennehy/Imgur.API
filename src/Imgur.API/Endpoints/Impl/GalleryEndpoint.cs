@@ -99,7 +99,7 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="title">The title of the image. This is required.</param>
-        /// <param name="topic">The topic name.</param>
+        /// <param name="topicId">The topic id - not the topic name.</param>
         /// <param name="bypassTerms">
         ///     If the user has not accepted the terms yet, this endpoint will return an error. To by-pass
         ///     the terms in general simply set this value to true.
@@ -112,7 +112,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> PublishToGalleryAsync(string galleryItemId, string title, string topic = null,
+        public async Task<bool> PublishToGalleryAsync(string galleryItemId, string title, string topicId = null,
             bool? bypassTerms = null,
             bool? mature = null)
         {
@@ -127,7 +127,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/{galleryItemId}";
 
-            using (var request = RequestBuilder.PublishToGalleryRequest(url, title, topic, bypassTerms, mature))
+            using (var request = RequestBuilder.PublishToGalleryRequest(url, title, topicId, bypassTerms, mature))
             {
                 var published = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return published;

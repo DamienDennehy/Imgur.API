@@ -168,14 +168,14 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="title">The title of the image. This is required.</param>
-        /// <param name="topic">The topic name.</param>
+        /// <param name="topicId">The topic id - not the topic name.</param>
         /// <param name="bypassTerms">
         ///     If the user has not accepted the terms yet, this endpoint will return an error. To by-pass
         ///     the terms in general simply set this value to true.
         /// </param>
         /// <param name="mature">If the post is mature, set this value to true.</param>
         /// <returns></returns>
-        Task<bool> PublishToGalleryAsync(string galleryItemId, string title, string topic = null,
+        Task<bool> PublishToGalleryAsync(string galleryItemId, string title, string topicId = null,
             bool? bypassTerms = null,
             bool? mature = null);
 
@@ -229,7 +229,7 @@ namespace Imgur.API.Endpoints
             GallerySortOrder? sort = GallerySortOrder.Time, TimeWindow? window = TimeWindow.All, int? page = null);
 
         /// <summary>
-        ///     Vote for an item. Send the same value again to undo a vote.
+        ///     Vote for an item. Send the same value again to undo a vote. OAuth authentication required.
         /// </summary>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="vote">The vote.</param>

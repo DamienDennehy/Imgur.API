@@ -2,11 +2,14 @@
 
 ## Version 3.6.0 (2016-01-03)
 * Added Gallery endpoint. Now at feature parity with the official API.
+* Added Notoriety property to Account model, calculated from the Reputation property.
 * Updated several enums to prevent name clashes with models.
 * Updated all async methods to use ConfigureAwait(false) as per recommended async standards for libraries.
-* Updated package to use Json.NET 8.
+* Updated library to use Json.NET 8.
+* Updated library to use PCL Profile111 from PCL Profile7.
+* Removed protected internal constructor for abstract classes.
 * Fix for incorrect type on Topic model - Ephemeral is now boolean not string.
-* Fix for GetCommentIdsAsync method on AlbumEndpoint - return type is now IEnumerable[int] not IEnumerable[string].
+* Fix for GetCommentIdsAsync method on AlbumEndpoint - return type is now IEnumerable int not IEnumerable string.
 * Fix for CreateComment methods on Comment and GalleryEndpoint - return type is now int not IComment.
 
 ## Version 3.5.0 (2015-12-29)

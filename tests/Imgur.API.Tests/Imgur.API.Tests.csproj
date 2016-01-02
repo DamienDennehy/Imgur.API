@@ -110,6 +110,7 @@
     <Compile Include="Fakes\FakeOAuth2TokenHandler.cs" />
     <Compile Include="Fakes\FakeOAuth2TokenHandlerTests.cs" />
     <Compile Include="JsonConverters\NotificationConverterTests.cs" />
+    <Compile Include="Models\AccountTests.cs" />
     <Compile Include="RequestBuilders\AccountRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\GalleryRequestBuilderTests.cs" />
     <Compile Include="RequestBuilders\NotificationRequestBuilderTests.cs" />

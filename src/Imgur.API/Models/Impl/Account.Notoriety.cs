@@ -5,7 +5,7 @@ namespace Imgur.API.Models.Impl
     public partial class Account
     {
         /// <summary>
-        /// Notoriety level based on a user's reputation.
+        ///     Notoriety level based on a user's reputation.
         /// </summary>
         public NotorietyLevel Notoriety
         {
@@ -30,7 +30,7 @@ namespace Imgur.API.Models.Impl
                     return NotorietyLevel.Accepted;
 
                 if (Reputation >= 0 && Reputation <= 399)
-                    return NotorietyLevel.Accepted;
+                    return NotorietyLevel.Neutral;
 
                 return NotorietyLevel.ForeverAlone;
             }

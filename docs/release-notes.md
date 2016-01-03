@@ -1,7 +1,7 @@
 # Release Notes
 
 ## Version 3.6.0 (2016-01-03)
-* Added Gallery endpoint. Now at feature parity with the official API.
+* Added Gallery endpoint. All endpoints now completed and at feature parity with the official API.
 * Added Notoriety property to Account model, calculated from the Reputation property.
 * Updated several enums to prevent name clashes with models.
 * Updated all async methods to use ConfigureAwait(false) as per recommended async standards for libraries.

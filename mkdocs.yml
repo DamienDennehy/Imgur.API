@@ -10,6 +10,7 @@ pages:
     - 'Comment Endpoint': 'comment-endpoint.md'
     - 'Conversation Endpoint': 'conversation-endpoint.md'
     - 'Custom Gallery Endpoint': 'custom-gallery-endpoint.md'
+    - 'Gallery Endpoint': 'gallery-endpoint.md'
     - 'Image Endpoint': 'image-endpoint.md'
     - 'MemeGen Endpoint': 'memegen-endpoint.md'
     - 'Notification Endpoint': 'notification-endpoint.md'

@@ -5,21 +5,21 @@ Create a comment for an item. OAuth authentication required.
 
 		var client = new ImgurClient("CLIENT_ID", "CLIENT_SECRET", OAUTH2_TOKEN);
 		var endpoint = new GalleryEndpoint(client);
-		var comment = await endpoint.CreateGalleryItemCommentAsync("COMMENT", "GALLERY_ITEM_ID");
+		var commentId = await endpoint.CreateGalleryItemCommentAsync("COMMENT", "GALLERY_ITEM_ID");
 
 ##CreateGalleryItemCommentReplyAsync
 Reply to a comment that has been created for an item. OAuth authentication required.
 
 		var client = new ImgurClient("CLIENT_ID", "CLIENT_SECRET", OAUTH2_TOKEN);
 		var endpoint = new GalleryEndpoint(client);
-		var comment = await endpoint.CreateGalleryItemCommentReplyAsync("COMMENT", "GALLERY_ITEM_ID", "PARENT_ID");
+		var commentId = await endpoint.CreateGalleryItemCommentReplyAsync("COMMENT", "GALLERY_ITEM_ID", "PARENT_COMMENT_ID");
 		
 ##GetGalleryAlbumAsync
 Get additional information about an album in the gallery.
 
 		var client = new ImgurClient("CLIENT_ID", "CLIENT_SECRET");
 		var endpoint = new GalleryEndpoint(client);
-		var comment = await endpoint.GetGalleryAlbumAsync("ALBUM_ID");
+		var album = await endpoint.GetGalleryAlbumAsync("ALBUM_ID");
 
 ##GetGalleryAsync
 Returns the images in the gallery.
@@ -89,7 +89,7 @@ View a single image in a gallery tag.
 
 		var client = new ImgurClient("CLIENT_ID", "CLIENT_SECRET");
 		var endpoint = new GalleryEndpoint(client);
-		var tag = await endpoint.GetGalleryTagImageAsync("GALLERY_ITEM_ID", "TAG");
+		var image = await endpoint.GetGalleryTagImageAsync("GALLERY_ITEM_ID", "TAG");
 
 ##GetMemesSubGalleryAsync
 View images for memes subgallery.
@@ -103,21 +103,21 @@ View a single image in the memes gallery.
 
 		var client = new ImgurClient("CLIENT_ID", "CLIENT_SECRET");
 		var endpoint = new GalleryEndpoint(client);
-		var memes = await endpoint.GetMemesSubGalleryImageAsync("IMAGE_ID");
+		var image = await endpoint.GetMemesSubGalleryImageAsync("IMAGE_ID");
 
 ##GetRandomGalleryAsync
 Returns a random set of gallery images.
 
 		var client = new ImgurClient("CLIENT_ID", "CLIENT_SECRET");
 		var endpoint = new GalleryEndpoint(client);
-		var memes = await endpoint.GetRandomGalleryAsync();
+		var images = await endpoint.GetRandomGalleryAsync();
 
 ##GetSubredditGalleryAsync
 View gallery images for a subreddit.
 
 		var client = new ImgurClient("CLIENT_ID", "CLIENT_SECRET");
 		var endpoint = new GalleryEndpoint(client);
-		var subreddit = await endpoint.GetSubredditGalleryAsync("SUBREDDIT");
+		var images = await endpoint.GetSubredditGalleryAsync("SUBREDDIT");
 
 ##GetSubredditImageAsync
 View a single image in the subreddit.
@@ -127,11 +127,11 @@ View a single image in the subreddit.
 		var image = await endpoint.GetSubredditImageAsync("IMAGE_ID", "SUBREDDIT");
 
 ##PublishToGalleryAsync
-Remove an image from the gallery. OAuth authentication required.
+Share an Album or Image to the Gallery. OAuth authentication required.
 
 		var client = new ImgurClient("CLIENT_ID", "CLIENT_SECRET", OAUTH2_TOKEN);
 		var endpoint = new GalleryEndpoint(client);
-		var published = await endpoint.RemoveFromGalleryAsync("GALLERY_ITEM_ID");
+		var published = await endpoint.PublishToGalleryAsync("GALLERY_ITEM_ID", "TITLE");
 
 ##RemoveFromGalleryAsync
 Remove an image from the gallery. OAuth authentication required.

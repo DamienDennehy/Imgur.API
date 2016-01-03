@@ -34,6 +34,10 @@
     </dependencies>
   </metadata>
   <files>
+    <file src="Imgur.API.dll" target="lib\portable-net45+win+MonoAndroid10+xamarinios10+MonoTouch10\Imgur.API.dll" />
+    <file src="Imgur.API.XML" target="lib\portable-net45+win+MonoAndroid10+xamarinios10+MonoTouch10\Imgur.API.XML" />
+    <file src="Imgur.API.dll" target="lib\dotnet\Imgur.API.dll" />
+    <file src="Imgur.API.XML" target="lib\dotnet\Imgur.API.XML" />
     <file src="readme.txt" target="readme.txt" />
   </files>
 </package>

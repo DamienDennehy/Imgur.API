@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata>
-    <id>$id$</id>
+    <id>Imgur.API</id>
     <version>$version$</version>
     <authors>Damien Dennehy</authors>
     <owners>Damien Dennehy</owners>
@@ -14,7 +14,6 @@
     <tags>imgur.api imgur.net imgur api mashape</tags>
     <dependencies>
       <group>
-        <dependency id="Newtonsoft.Json" version="8.0.1" />
       </group>
       <group targetFramework="dotnet">
         <dependency id="Newtonsoft.Json" version="8.0.1" />

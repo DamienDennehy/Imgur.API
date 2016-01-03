@@ -34,6 +34,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\nuget\readme.txt" target="readme.txt" />
+    <file src="readme.txt" target="readme.txt" />
   </files>
 </package>

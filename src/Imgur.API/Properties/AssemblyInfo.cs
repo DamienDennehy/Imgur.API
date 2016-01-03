@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("Imgur.API")]
 [assembly:
     AssemblyDescription(
-        "Imgur.API is a .NET implementation of Imgur's v3 API. Supports Imgur's free and Mashape's commercial API endpoints."
+        "Imgur.API is a .NET implementation of Imgur's v3 API. It supports Imgur's free and Mashape's commercial API endpoints."
         )]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Damien Dennehy")]

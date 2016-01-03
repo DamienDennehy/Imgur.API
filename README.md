@@ -1,7 +1,7 @@
 # Imgur.API
 Imgur.API is a .NET implementation of Imgur's v3 API. 
 
-Supports Imgur's free and Mashape's commercial API endpoints.
+It supports Imgur's free and Mashape's commercial API endpoints.
 
 [![Read the Docs](https://readthedocs.org/projects/imgurapi/badge/?version=latest)](http://imgurapi.readthedocs.org/en/latest/)
 

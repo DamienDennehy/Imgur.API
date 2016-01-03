@@ -12,7 +12,8 @@ Reply to a comment that has been created for an item. OAuth authentication requi
 
 		var client = new ImgurClient("CLIENT_ID", "CLIENT_SECRET", OAUTH2_TOKEN);
 		var endpoint = new GalleryEndpoint(client);
-		var commentId = await endpoint.CreateGalleryItemCommentReplyAsync("COMMENT", "GALLERY_ITEM_ID", "PARENT_COMMENT_ID");
+		var commentId = await endpoint.CreateGalleryItemCommentReplyAsync("COMMENT", "GALLERY_ITEM_ID", 
+																			"PARENT_COMMENT_ID");
 		
 ##GetGalleryAlbumAsync
 Get additional information about an album in the gallery.

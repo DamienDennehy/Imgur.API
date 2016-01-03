@@ -11,6 +11,7 @@
 * Fix for incorrect type on Topic model - Ephemeral is now boolean not string.
 * Fix for GetCommentIdsAsync method on AlbumEndpoint - return type is now IEnumerable int not IEnumerable string.
 * Fix for CreateComment methods on Comment and GalleryEndpoint - return type is now int not IComment.
+* Fix for GetComment methods on Comment and GalleryEndpoint - commentId is now int not string.
 
 ## Version 3.5.0 (2015-12-29)
 * Added MemeGen endpoint.

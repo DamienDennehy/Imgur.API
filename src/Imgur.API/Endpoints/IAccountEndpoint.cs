@@ -24,7 +24,7 @@ namespace Imgur.API.Endpoints
         /// <param name="commentId">The comment id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Task<bool> DeleteCommentAsync(string commentId, string username = "me");
+        Task<bool> DeleteCommentAsync(int commentId, string username = "me");
 
         /// <summary>
         ///     Deletes an Image. OAuth authentication required.
@@ -110,7 +110,7 @@ namespace Imgur.API.Endpoints
         /// <param name="commentId">The comment id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Task<IComment> GetCommentAsync(string commentId, string username = "me");
+        Task<IComment> GetCommentAsync(int commentId, string username = "me");
 
         /// <summary>
         ///     Return a count of all of the comments associated with the account.

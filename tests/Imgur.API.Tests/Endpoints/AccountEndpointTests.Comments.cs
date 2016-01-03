@@ -19,7 +19,7 @@ namespace Imgur.API.Tests.Endpoints
         [TestMethod]
         public async Task DeleteCommentAsync_IsNotNull()
         {
-            var fakeUrl = "https://api.imgur.com/3/account/sarah/comment/yMgB7";
+            var fakeUrl = "https://api.imgur.com/3/account/sarah/comment/478897894";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.DeleteCommentAsync)
@@ -27,7 +27,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var deleted = await endpoint.DeleteCommentAsync("yMgB7", "sarah").ConfigureAwait(false);
+            var deleted = await endpoint.DeleteCommentAsync(478897894, "sarah").ConfigureAwait(false);
 
             Assert.IsTrue(deleted);
         }
@@ -37,16 +37,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client);
-            await endpoint.DeleteCommentAsync("yMgB7", null).ConfigureAwait(false);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public async Task DeleteCommentAsync_WithIdNull_ThrowsArgumentNullException()
-        {
-            var client = new ImgurClient("123", "1234", FakeOAuth2Token);
-            var endpoint = new AccountEndpoint(client);
-            await endpoint.DeleteCommentAsync(null, null).ConfigureAwait(false);
+            await endpoint.DeleteCommentAsync(456456456, null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -55,7 +46,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.DeleteCommentAsync("yMgB7", "sarah").ConfigureAwait(false);
+            await endpoint.DeleteCommentAsync(435345345, "sarah").ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -64,13 +55,13 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234", FakeOAuth2Token);
             var endpoint = new AccountEndpoint(client);
-            await endpoint.DeleteCommentAsync("yMgB7", null).ConfigureAwait(false);
+            await endpoint.DeleteCommentAsync(45345353, null).ConfigureAwait(false);
         }
 
         [TestMethod]
         public async Task GetCommentAsync_IsNotNull()
         {
-            var fakeUrl = "https://api.imgur.com/3/account/sarah/comment/yMgB7";
+            var fakeUrl = "https://api.imgur.com/3/account/sarah/comment/8787887";
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(AccountEndpointResponses.GetCommentAsync)
@@ -78,7 +69,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var comment = await endpoint.GetCommentAsync("yMgB7", "sarah").ConfigureAwait(false);
+            var comment = await endpoint.GetCommentAsync(8787887, "sarah").ConfigureAwait(false);
 
             Assert.IsNotNull(comment);
             Assert.AreEqual(487008510, comment.Id);
@@ -105,16 +96,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetCommentAsync("yMgB7", null).ConfigureAwait(false);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetCommentAsync_WithIdNull_ThrowsArgumentNullException()
-        {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(client);
-            await endpoint.GetCommentAsync(null, null).ConfigureAwait(false);
+            await endpoint.GetCommentAsync(453534535, null).ConfigureAwait(false);
         }
 
         [TestMethod]
@@ -123,7 +105,7 @@ namespace Imgur.API.Tests.Endpoints
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetCommentAsync("yMgB7", null).ConfigureAwait(false);
+            await endpoint.GetCommentAsync(68767677, null).ConfigureAwait(false);
         }
 
         [TestMethod]

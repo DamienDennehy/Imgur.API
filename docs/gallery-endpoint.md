@@ -40,7 +40,7 @@ Get information about a specific comment.
 
 		var client = new ImgurClient("CLIENT_ID", "CLIENT_SECRET");
 		var endpoint = new GalleryEndpoint(client);
-		var comment = await endpoint.GetGalleryItemCommentAsync("COMMENT_ID", "GALLERY_ITEM_ID");
+		var comment = await endpoint.GetGalleryItemCommentAsync(COMMENT_ID, "GALLERY_ITEM_ID");
 
 ##GetGalleryItemCommentCountAsync
 The number of comments on an item.

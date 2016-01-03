@@ -25,11 +25,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> DeleteCommentAsync(string commentId, string username = "me")
+        public async Task<bool> DeleteCommentAsync(int commentId, string username = "me")
         {
-            if (string.IsNullOrWhiteSpace(commentId))
-                throw new ArgumentNullException(nameof(commentId));
-
             if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 
@@ -57,11 +54,8 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IComment> GetCommentAsync(string commentId, string username = "me")
+        public async Task<IComment> GetCommentAsync(int commentId, string username = "me")
         {
-            if (string.IsNullOrWhiteSpace(commentId))
-                throw new ArgumentNullException(nameof(commentId));
-
             if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
 

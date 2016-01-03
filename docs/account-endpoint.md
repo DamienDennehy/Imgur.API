@@ -12,7 +12,7 @@ Delete a comment. OAuth authentication required.
 
 		var client = new ImgurClient("CLIENT_ID", "CLIENT_SECRET", OAUTH2_TOKEN);
 		var endpoint = new AccountEndpoint(client);
-		var deleted = await endpoint.DeleteCommentAsync("COMMENT_ID", "USERNAME");
+		var deleted = await endpoint.DeleteCommentAsync(COMMENT_ID, "USERNAME");
 
 ##DeleteImageAsync
 Deletes an Image. OAuth authentication required.
@@ -90,7 +90,7 @@ Return information about a specific comment.
 
 		var client = new ImgurClient("CLIENT_ID", "CLIENT_SECRET");
 		var endpoint = new AccountEndpoint(client);
-		var comment = await endpoint.GetCommentAsync("COMMENT_ID", "USERNAME");
+		var comment = await endpoint.GetCommentAsync(COMMENT_ID, "USERNAME");
 
 ##GetCommentCountAsync
 Return a count of all of the comments associated with the account.

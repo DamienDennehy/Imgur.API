@@ -35,21 +35,21 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="commentId">The comment id.</param>
         /// <returns></returns>
-        Task<bool> DeleteCommentAsync(string commentId);
+        Task<bool> DeleteCommentAsync(int commentId);
 
         /// <summary>
         ///     Get information about a specific comment.
         /// </summary>
         /// <param name="commentId">The comment id.</param>
         /// <returns></returns>
-        Task<IComment> GetCommentAsync(string commentId);
+        Task<IComment> GetCommentAsync(int commentId);
 
         /// <summary>
         ///     Get the comment with all of the replies for the comment.
         /// </summary>
         /// <param name="commentId">The comment id.</param>
         /// <returns></returns>
-        Task<IComment> GetRepliesAsync(string commentId);
+        Task<IComment> GetRepliesAsync(int commentId);
 
         /// <summary>
         ///     Report a comment for being inappropriate.
@@ -58,7 +58,7 @@ namespace Imgur.API.Endpoints
         /// <param name="commentId">The comment id.</param>
         /// <param name="reason">The reason why the comment is inappropriate.</param>
         /// <returns></returns>
-        Task<bool> ReportCommentAsync(string commentId, ReportReason reason);
+        Task<bool> ReportCommentAsync(int commentId, ReportReason reason);
 
         /// <summary>
         ///     Vote on a comment.
@@ -67,6 +67,6 @@ namespace Imgur.API.Endpoints
         /// <param name="commentId">The comment id.</param>
         /// <param name="vote">The vote.</param>
         /// <returns></returns>
-        Task<bool> VoteCommentAsync(string commentId, VoteOption vote);
+        Task<bool> VoteCommentAsync(int commentId, VoteOption vote);
     }
 }

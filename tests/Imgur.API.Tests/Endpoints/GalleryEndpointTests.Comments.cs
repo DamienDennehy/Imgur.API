@@ -127,7 +127,7 @@ namespace Imgur.API.Tests.Endpoints
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
-            var comment = await endpoint.GetGalleryItemCommentAsync("548357773", "Mxd8cg0").ConfigureAwait(false);
+            var comment = await endpoint.GetGalleryItemCommentAsync(548357773, "Mxd8cg0").ConfigureAwait(false);
 
             Assert.IsNotNull(comment);
             Assert.AreEqual(548357773, comment.Id);
@@ -149,20 +149,11 @@ namespace Imgur.API.Tests.Endpoints
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
-        public async Task GetGalleryItemCommentAsync_WithCommentIdNull_ThrowsArgumentNullException()
-        {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryItemCommentAsync(null, "Mxd8cg0").ConfigureAwait(false);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
         public async Task GetGalleryItemCommentAsync_WithGalleryItemIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryItemCommentAsync("987878", null).ConfigureAwait(false);
+            await endpoint.GetGalleryItemCommentAsync(987878, null).ConfigureAwait(false);
         }
 
         [TestMethod]

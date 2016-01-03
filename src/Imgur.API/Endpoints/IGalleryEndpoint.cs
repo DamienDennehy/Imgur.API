@@ -60,7 +60,7 @@ namespace Imgur.API.Endpoints
         /// <param name="commentId">The comment id.</param>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<IComment> GetGalleryItemCommentAsync(string commentId, string galleryItemId);
+        Task<IComment> GetGalleryItemCommentAsync(int commentId, string galleryItemId);
 
         /// <summary>
         ///     The number of comments on an item.

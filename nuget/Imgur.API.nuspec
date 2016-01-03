@@ -3,16 +3,19 @@
   <metadata>
     <id>$id$</id>
     <version>$version$</version>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <authors>Damien Dennehy</authors>
+    <owners>Damien Dennehy</owners>
     <licenseUrl>https://github.com/DamienDennehy/Imgur.API/blob/master/LICENSE</licenseUrl>
     <projectUrl>http://imgurapi.readthedocs.org/en/latest/</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/DamienDennehy/Imgur.API/master/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <copyright>$copyright$</copyright>
+    <description>Imgur.API is a .NET implementation of Imgur's v3 API. It supports Imgur's free and Mashape's commercial API endpoints.</description>
+    <copyright>Copyright © 2015-2016</copyright>
     <tags>imgur.api imgur.net imgur api mashape</tags>
     <dependencies>
+      <group>
+        <dependency id="Newtonsoft.Json" version="8.0.1" />
+      </group>
       <group targetFramework="dotnet">
         <dependency id="Newtonsoft.Json" version="8.0.1" />
         <dependency id="System.Collections" version="4.0.0" />
@@ -31,6 +34,6 @@
     </dependencies>
   </metadata>
   <files>
-	<file src="..\..\nuget\readme.txt" target="readme.txt" />
+    <file src="..\..\nuget\readme.txt" target="readme.txt" />
   </files>
 </package>

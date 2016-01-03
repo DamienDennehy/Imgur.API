@@ -159,7 +159,8 @@ Search the gallery with a given query string.
 
 		var client = new ImgurClient("CLIENT_ID", "CLIENT_SECRET", OAUTH2_TOKEN);
 		var endpoint = new GalleryEndpoint(client);
-		var images = await endpoint.SearchGalleryAdvancedAsync("ALL_WORDS_QUERY", "ANY_WORDS_QUERY", "EXACT_WORDS_QUERY", "NOT_WORDS_QUERY");
+		var images = await endpoint.SearchGalleryAdvancedAsync("ALL_WORDS_QUERY", "ANY_WORDS_QUERY", 
+																"EXACT_WORDS_QUERY", "NOT_WORDS_QUERY");
 
 ##VoteGalleryItemAsync
 Vote for an item. Send the same value again to undo a vote. OAuth authentication required.

@@ -15,7 +15,7 @@ after_build:
 
     Copy-Item 'nuget\readme.txt' 'src\Imgur.API\bin\Debug\readme.txt'
 
-    New-Item 'artifacts' -type directory
+    New-Item 'artifacts' -type directory | Out-Null
 
     nuget pack src\Imgur.API\bin\Debug\Imgur.API.nuspec -Version $env:appveyor_build_version -Symbols -OutputDirectory artifacts
 artifacts:

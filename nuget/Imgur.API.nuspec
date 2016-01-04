@@ -16,7 +16,8 @@
       <group>
         <dependency id="Newtonsoft.Json" version="8.0.1" />
       </group>
-      <group targetFramework="dotnet">
+      <group targetFramework="dotnet5.2">
+		<dependency id="Microsoft.CSharp" version="4.0.0" />
         <dependency id="Newtonsoft.Json" version="8.0.1" />
         <dependency id="System.Collections" version="4.0.0" />
         <dependency id="System.Diagnostics.Debug" version="4.0.0" />
@@ -32,12 +33,18 @@
         <dependency id="System.Threading.Tasks" version="4.0.0" />
       </group>
     </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="mscorlib" targetFramework=".NETFramework4.5.0" />
+      <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.5.0" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework=".NETFramework4.5.0" />
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.5.0" />
+    </frameworkAssemblies>
   </metadata>
   <files>
     <file src="Imgur.API.dll" target="lib\portable-net45+win+MonoAndroid10+xamarinios10+MonoTouch10\Imgur.API.dll" />
     <file src="Imgur.API.XML" target="lib\portable-net45+win+MonoAndroid10+xamarinios10+MonoTouch10\Imgur.API.XML" />
-    <file src="Imgur.API.dll" target="lib\dotnet\Imgur.API.dll" />
-    <file src="Imgur.API.XML" target="lib\dotnet\Imgur.API.XML" />
+    <file src="Imgur.API.dll" target="lib\dotnet5.2\Imgur.API.dll" />
+    <file src="Imgur.API.XML" target="lib\dotnet5.2\Imgur.API.XML" />
     <file src="readme.txt" target="readme.txt" />
   </files>
 </package>

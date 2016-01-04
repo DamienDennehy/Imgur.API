@@ -9,7 +9,7 @@ before_build:
 - ps: nuget restore
 build:
   verbosity: minimal
-after_build:
+after_test:
 - ps: >-
     Copy-Item 'nuget\Imgur.API.nuspec' 'src\Imgur.API\bin\Debug\Imgur.API.nuspec'
 

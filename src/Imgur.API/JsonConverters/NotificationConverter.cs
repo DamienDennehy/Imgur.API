@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Reflection;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
@@ -23,10 +22,7 @@ namespace Imgur.API.JsonConverters
             if (typeof (IMessageNotification).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo()))
                 return true;
 
-            if (typeof (ICommentNotification).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo()))
-                return true;
-
-            return false;
+            return typeof (ICommentNotification).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
         }
 
         /// <summary>
@@ -42,10 +38,10 @@ namespace Imgur.API.JsonConverters
         {
             var jsonString = JObject.Load(reader).ToString();
 
-            if (CultureInfo.CurrentCulture.CompareInfo.IndexOf(jsonString, "comment", CompareOptions.IgnoreCase) > 0)
+            if (jsonString.IndexOf("comment", StringComparison.OrdinalIgnoreCase) >= 0)
                 return JsonConvert.DeserializeObject<CommentNotification>(jsonString);
 
-            if (CultureInfo.CurrentCulture.CompareInfo.IndexOf(jsonString, "message_num", CompareOptions.IgnoreCase) > 0)
+            if (jsonString.IndexOf("message_num", StringComparison.OrdinalIgnoreCase) >= 0)
                 return JsonConvert.DeserializeObject<MessageNotification>(jsonString);
 
             throw new NotImplementedException("Unrecognized Notification type.");

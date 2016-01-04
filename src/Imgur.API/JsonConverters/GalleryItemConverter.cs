@@ -19,10 +19,7 @@ namespace Imgur.API.JsonConverters
         /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
-            if (typeof (IGalleryItem).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo()))
-                return true;
-
-            return false;
+            return typeof (IGalleryItem).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
         }
 
         /// <summary>
@@ -38,7 +35,7 @@ namespace Imgur.API.JsonConverters
         {
             var jsonString = JObject.Load(reader).ToString();
 
-            if (jsonString.Replace(" ", "").Contains("is_album\":true"))
+            if (jsonString.Replace(" ", "").IndexOf("is_album\":true", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 var album = JsonConvert.DeserializeObject<GalleryAlbum>(jsonString);
                 return album;

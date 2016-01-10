@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imgur.API", "src\Imgur.API\Imgur.API.csproj", "{59659C8E-3093-479C-AB10-F9B56571D920}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imgur.API.Tests", "tests\Imgur.API.Tests\Imgur.API.Tests.csproj", "{89CD4834-79D5-4649-86F6-0E466A01E7D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imgur.API.Tests", "test\Imgur.API.Tests\Imgur.API.Tests.csproj", "{89CD4834-79D5-4649-86F6-0E466A01E7D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

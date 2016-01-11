@@ -1,4 +1,4 @@
-version: 3.7.1-build{build}
+version: 3.7.0-build{build}
 install:
 - ps: dnvm install 1.0.0-rc2-16357 -u
 before_build:

@@ -1,0 +1,50 @@
+{
+  "version": "1.0.0-*",
+  "description": "Imgur.API is a .NET implementation of Imgur's v3 API. It supports Imgur's free and Mashape's commercial API endpoints.",
+  "authors": [ "Damien Dennehy" ],
+  "tags": [ "imgur.api imgur.net imgur api mashape" ],
+  "projectUrl": "http://imgurapi.readthedocs.org/en/latest",
+  "licenseUrl": "https://github.com/DamienDennehy/Imgur.API/blob/master/LICENSE",
+  "iconUrl": "https://raw.githubusercontent.com/DamienDennehy/Imgur.API/master/icon.png",
+  "copyright": "Copyright © 2015-2016",
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "System.Net": "4.0.0.0",
+        "System.Net.Http": "4.0.0.0"
+      }
+    },
+    "dotnet5.2": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.0",
+        "System.Collections": "4.0.0",
+        "System.Dynamic.Runtime": "4.0.0",
+        "System.Linq": "4.0.0",
+        "System.Net.Http": "4.0.0",
+        "System.Reflection": "4.0.10",
+        "System.Runtime": "4.0.20",
+        "System.Runtime.Extensions": "4.0.10",
+        "System.Threading": "4.0.0"
+      }
+    },
+    ".NETPortable,Version=v4.5,Profile=Profile111": {
+      "frameworkAssemblies": {
+        "Microsoft.CSharp": "4.0.0.0",
+        "System.Collections": "4.0.0.0",
+        "System.IO": "4.0.0.0",
+        "System.Linq": "4.0.0.0",
+        "System.Net": "4.0.0.0",
+        "System.Net.Http": "4.0.0.0",
+        "System.Net.Primitives": "4.0.0.0",
+        "System.Reflection": "4.0.0.0",
+        "System.Runtime": "4.0.0.0",
+        "System.Runtime.Extensions": "4.0.0.0",
+        "System.Threading": "4.0.0.0",
+        "System.Threading.Tasks": "4.0.0.0"
+      }
+    }
+  },
+  "dependencies": {
+    "Newtonsoft.Json": "8.0.2"
+  }
+}

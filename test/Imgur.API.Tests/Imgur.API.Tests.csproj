@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Imgur.API">
+      <HintPath>..\..\artifacts\bin\Imgur.API\Debug\net45\Imgur.API.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -137,12 +140,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestBuilders\RequestBuilderBaseTests.cs" />
     <Compile Include="TestBase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Imgur.API\Imgur.API.csproj">
-      <Project>{59659c8e-3093-479c-ab10-f9b56571d920}</Project>
-      <Name>Imgur.API</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

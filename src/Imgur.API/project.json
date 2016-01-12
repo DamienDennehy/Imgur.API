@@ -20,14 +20,14 @@
       "dependencies": {
         "Microsoft.CSharp": "4.0.0",
         "System.Collections": "4.0.0",
-        "System.Dynamic.Runtime": "4.0.0",
         "System.Linq": "4.0.0",
+        "System.Runtime": "4.0.0",
+        "System.Threading": "4.0.0",
+        "System.Dynamic.Runtime": "4.0.0",
         "System.Net.Http": "4.0.0",
         "System.Net.Primitives": "4.0.0",
-        "System.Reflection": "4.0.10",
-        "System.Runtime": "4.0.20",
-        "System.Runtime.Extensions": "4.0.10",
-        "System.Threading": "4.0.0",
+        "System.Reflection": "4.0.0",
+        "System.Runtime.Extensions": "4.0.0",
         "System.Threading.Tasks": "4.0.0"
       }
     },
@@ -35,16 +35,16 @@
       "frameworkAssemblies": {
         "Microsoft.CSharp": "4.0.0.0",
         "System.Collections": "4.0.0.0",
-        "System.IO": "4.0.0.0",
         "System.Linq": "4.0.0.0",
+        "System.Runtime": "4.0.0.0",
+        "System.Threading": "4.0.0.0",
         "System.Net": "4.0.0.0",
+        "System.IO": "4.0.0.0",
         "System.Net.Http": "4.0.0.0",
         "System.Net.Primitives": "4.0.0.0",
+        "System.Threading.Tasks": "4.0.0.0",
         "System.Reflection": "4.0.0.0",
-        "System.Runtime": "4.0.0.0",
-        "System.Runtime.Extensions": "4.0.0.0",
-        "System.Threading": "4.0.0.0",
-        "System.Threading.Tasks": "4.0.0.0"
+        "System.Runtime.Extensions": "4.0.0.0"
       }
     }
   },

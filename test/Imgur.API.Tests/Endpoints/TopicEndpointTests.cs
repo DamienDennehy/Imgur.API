@@ -29,8 +29,10 @@ namespace Imgur.API.Tests.Endpoints
             var client = new ImgurClient("123", "1234");
             var endpoint = new TopicEndpoint(client, new HttpClient(new FakeHttpMessageHandler(fakeUrl, fakeResponse)));
             var topics = await endpoint.GetDefaultTopicsAsync().ConfigureAwait(false);
+            var topic = topics.FirstOrDefault();
 
-            Assert.IsTrue(topics.Any());
+            Assert.IsNotNull(topic);
+            Assert.IsNotNull(topic.TopPost);
         }
 
         [TestMethod]

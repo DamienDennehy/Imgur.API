@@ -29,5 +29,10 @@
         ///     Topic name.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        ///     The top image in this topic.
+        /// </summary>
+        public IGalleryItem TopPost { get; set; }
     }
 }

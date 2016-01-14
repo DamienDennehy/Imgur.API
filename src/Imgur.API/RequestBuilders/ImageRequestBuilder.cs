@@ -48,6 +48,7 @@ namespace Imgur.API.RequestBuilders
 
             var request = new HttpRequestMessage(HttpMethod.Post, url);
 
+            // ReSharper disable once ExceptionNotDocumented
             var content = new MultipartFormDataContent($"{DateTime.UtcNow.Ticks}")
             {
                 {new StringContent("file"), "type"},
@@ -83,6 +84,7 @@ namespace Imgur.API.RequestBuilders
 
             var request = new HttpRequestMessage(HttpMethod.Post, url);
 
+            // ReSharper disable once ExceptionNotDocumented
             var content = new MultipartFormDataContent($"{DateTime.UtcNow.Ticks}")
             {
                 {new StringContent("file"), "type"},

@@ -8,7 +8,7 @@
   "iconUrl": "https://raw.githubusercontent.com/DamienDennehy/Imgur.API/master/icon.png",
   "copyright": "Copyright © 2015-2016",
   "packInclude": {
-    "README.txt": "README.txt"
+    "readme.txt": "readme.txt"
   },
   "frameworks": {
     "net45": {

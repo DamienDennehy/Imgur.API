@@ -1,5 +1,11 @@
 # Release Notes
 
+## Version 3.7.0-beta1 (2016-01-14)
+* Added .NET Platform Standard 1.1 support.
+* Added "TopPost" property to Topics model.
+* Added README.txt on package install instead of loading external site.
+* Removed Portable Class Library support - will be added by a NuGet update by Q1 2016.
+
 ## Version 3.6.0 (2016-01-03)
 * Added Gallery endpoint. All endpoints now completed and at feature parity with the official API.
 * Added Notoriety property to Account model, calculated from the Reputation property.

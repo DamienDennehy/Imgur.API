@@ -16,20 +16,19 @@
         "System.Net.Http": "4.0.0.0"
       }
     },
-    ".NETPortable,Version=v4.5,Profile=Profile111": {
-      "frameworkAssemblies": {
-        "Microsoft.CSharp": "4.0.0.0",
-        "System.Collections": "4.0.0.0",
-        "System.Linq": "4.0.0.0",
-        "System.Runtime": "4.0.0.0",
-        "System.Threading": "4.0.0.0",
-        "System.Net": "4.0.0.0",
-        "System.IO": "4.0.0.0",
-        "System.Net.Http": "4.0.0.0",
-        "System.Net.Primitives": "4.0.0.0",
-        "System.Threading.Tasks": "4.0.0.0",
-        "System.Reflection": "4.0.0.0",
-        "System.Runtime.Extensions": "4.0.0.0"
+    "dotnet5.2": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.0",
+        "System.Collections": "4.0.0",
+        "System.Linq": "4.0.0",
+        "System.Runtime": "4.0.0",
+        "System.Threading": "4.0.0",
+        "System.Dynamic.Runtime": "4.0.0",
+        "System.Net.Http": "4.0.0",
+        "System.Net.Primitives": "4.0.0",
+        "System.Reflection": "4.0.0",
+        "System.Runtime.Extensions": "4.0.0",
+        "System.Threading.Tasks": "4.0.0"
       }
     }
   },

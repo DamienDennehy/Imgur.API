@@ -3,13 +3,6 @@
 ## Issues
 Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https://github.com/DamienDennehy/Imgur.API/issues)
 
-## Latest Release
-### Version 3.7.0-beta1 (2016-01-14)
-* Added .NET Platform Standard 1.1 support.
-* Added "TopPost" property to Topics model.
-* Added readme.txt on package install instead of loading external site.
-* Removed Portable Class Library support - will be added by a NuGet update by Q1 2016.
-
 ## Quick Start
 ### Get Image 
 

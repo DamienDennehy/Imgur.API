@@ -19,7 +19,7 @@ namespace Imgur.API.JsonConverters
         /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
-            return typeof (IGalleryItem).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+            return typeof(IGalleryItem).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Imgur.API.JsonConverters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null)
+            if (reader.TokenType == JsonToken.Null || reader.TokenType == JsonToken.None)
                 return null;
 
             var jsonString = JObject.Load(reader).ToString();

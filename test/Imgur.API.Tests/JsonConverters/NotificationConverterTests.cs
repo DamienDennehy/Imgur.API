@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Imgur.API.JsonConverters;
 using Imgur.API.Models.Impl;
-using Imgur.API.Tests.FakeResponses;
+using Imgur.API.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
@@ -41,7 +41,7 @@ namespace Imgur.API.Tests.JsonConverters
         {
             var converter = new NotificationConverter();
             var reader =
-                new JsonTextReader(new StringReader(AccountEndpointResponses.GetCommentNotificationAsync));
+                new JsonTextReader(new StringReader(MockAccountEndpointResponses.GetCommentNotification));
             reader.Read();
             var serializer = new JsonSerializer();
 
@@ -71,7 +71,7 @@ namespace Imgur.API.Tests.JsonConverters
         {
             var converter = new NotificationConverter();
             var reader =
-                new JsonTextReader(new StringReader(AccountEndpointResponses.GetMessageNotificationAsync));
+                new JsonTextReader(new StringReader(MockAccountEndpointResponses.GetMessageNotification));
             reader.Read();
             var serializer = new JsonSerializer();
 

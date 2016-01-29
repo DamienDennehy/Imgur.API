@@ -4,7 +4,7 @@ using System.Linq;
 using Imgur.API.Enums;
 using Imgur.API.JsonConverters;
 using Imgur.API.Models.Impl;
-using Imgur.API.Tests.FakeResponses;
+using Imgur.API.Tests.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
@@ -38,10 +38,25 @@ namespace Imgur.API.Tests.JsonConverters
         }
 
         [TestMethod]
+        public void GalleryItemConverter_ReadJsonGallery_IsNull()
+        {
+            var converter = new GalleryItemConverter();
+            var reader = new JsonTextReader(new StringReader(""));
+            reader.Read();
+            var serializer = new JsonSerializer
+            {
+                Converters = { converter }
+            };
+
+            var actual = (GalleryAlbum)converter.ReadJson(reader, typeof(GalleryItem), null, serializer);
+            Assert.IsNull(actual);
+        }
+
+        [TestMethod]
         public void GalleryItemConverter_ReadJsonGalleryAlbum_AreEqual()
         {
             var converter = new GalleryItemConverter();
-            var reader = new JsonTextReader(new StringReader(AccountEndpointResponses.GetGalleryAlbumAsync));
+            var reader = new JsonTextReader(new StringReader(MockAccountEndpointResponses.GetGalleryAlbum));
             reader.Read();
             var serializer = new JsonSerializer
             {
@@ -83,7 +98,7 @@ namespace Imgur.API.Tests.JsonConverters
         public void GalleryItemConverter_ReadJsonGalleryImage_AreEqual()
         {
             var converter = new GalleryItemConverter();
-            var reader = new JsonTextReader(new StringReader(AccountEndpointResponses.GetGalleryImageAsync));
+            var reader = new JsonTextReader(new StringReader(MockAccountEndpointResponses.GetGalleryImage));
             reader.Read();
             var serializer = new JsonSerializer
             {

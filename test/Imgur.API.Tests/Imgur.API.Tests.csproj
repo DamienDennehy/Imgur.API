@@ -44,10 +44,6 @@
       <HintPath>..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NSubstitute, Version=1.9.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NSubstitute.1.9.2.0\lib\net45\NSubstitute.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
   </ItemGroup>
@@ -66,86 +62,89 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Authentication\ApiClientTests.cs" />
-    <Compile Include="Authentication\ImgurClientTests.cs" />
-    <Compile Include="Authentication\MashapeClientTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointTests.Comments.cs" />
-    <Compile Include="Endpoints\AccountEndpointTests.Notifications.cs" />
-    <Compile Include="Endpoints\AccountEndpointTests.Gallery.cs" />
-    <Compile Include="Endpoints\AccountEndpointTests.cs" />
-    <Compile Include="Endpoints\AccountEndpointTests.Images.cs" />
-    <Compile Include="Endpoints\AccountEndpointTests.Albums.cs" />
-    <Compile Include="Endpoints\AlbumEndpointTests.cs" />
-    <Compile Include="Endpoints\CommentEndpointTests.cs" />
-    <Compile Include="Endpoints\ConversationEndpointTests.cs" />
-    <Compile Include="Endpoints\CustomGalleryEndpointTests.cs" />
-    <Compile Include="Endpoints\GalleryEndpointTests.Votes.cs" />
-    <Compile Include="Endpoints\GalleryEndpointTests.Tags.cs" />
-    <Compile Include="Endpoints\GalleryEndpointTests.Subreddits.cs" />
-    <Compile Include="Endpoints\GalleryEndpointTests.Memes.cs" />
-    <Compile Include="Endpoints\GalleryEndpointTests.Images.cs" />
-    <Compile Include="Endpoints\GalleryEndpointTests.cs" />
-    <Compile Include="Endpoints\GalleryEndpointTests.Comments.cs" />
-    <Compile Include="Endpoints\GalleryEndpointTests.Albums.cs" />
-    <Compile Include="Endpoints\ImageEndpointTests.cs" />
-    <Compile Include="Endpoints\MemeGenEndpointTests.cs" />
-    <Compile Include="Endpoints\NotificationEndpointTests.cs" />
-    <Compile Include="Endpoints\OAuth2EndpointTests.cs" />
-    <Compile Include="Endpoints\TopicEndpointTests.cs" />
-    <Compile Include="FakeResponses\AccountEndpointResponses.Albums.cs" />
-    <Compile Include="FakeResponses\AccountEndpointResponses.Images.cs" />
-    <Compile Include="FakeResponses\AccountEndpointResponses.Comments.cs" />
-    <Compile Include="FakeResponses\AccountEndpointResponses.Notifications.cs" />
-    <Compile Include="FakeResponses\AccountEndpointResponses.Gallery.cs" />
-    <Compile Include="FakeResponses\CommentEndpointResponses.cs" />
-    <Compile Include="FakeResponses\ConversationEndpointResponses.cs" />
-    <Compile Include="FakeResponses\CustomGalleryEndpointResponses.cs" />
-    <Compile Include="FakeResponses\GalleryEndpointResponses.Images.cs" />
-    <Compile Include="FakeResponses\GalleryEndpointResponses.Comments.cs" />
-    <Compile Include="FakeResponses\GalleryEndpointResponses.Albums.cs" />
-    <Compile Include="FakeResponses\GalleryEndpointResponses.Votes.cs" />
-    <Compile Include="FakeResponses\GalleryEndpointResponses.Tags.cs" />
-    <Compile Include="FakeResponses\GalleryEndpointResponses.Subreddits.cs" />
-    <Compile Include="FakeResponses\GalleryEndpointResponses.Memes.cs" />
-    <Compile Include="FakeResponses\GalleryEndpointResponses.cs" />
-    <Compile Include="FakeResponses\TopicEndpointResponses.cs" />
-    <Compile Include="FakeResponses\MemeGenEndpointResponses.cs" />
-    <Compile Include="FakeResponses\NotificationEndpointResponses.cs" />
-    <Compile Include="Fakes\FakeOAuth2TokenHandler.cs" />
-    <Compile Include="Fakes\FakeOAuth2TokenHandlerTests.cs" />
-    <Compile Include="JsonConverters\NotificationConverterTests.cs" />
-    <Compile Include="Models\AccountTests.cs" />
-    <Compile Include="RequestBuilders\AccountRequestBuilderTests.cs" />
-    <Compile Include="RequestBuilders\GalleryRequestBuilderTests.cs" />
-    <Compile Include="RequestBuilders\NotificationRequestBuilderTests.cs" />
-    <Compile Include="RequestBuilders\AlbumRequestBuilderTests.cs" />
-    <Compile Include="RequestBuilders\CommentRequestBuilderTests.cs" />
-    <Compile Include="RequestBuilders\ConversationRequestBuilder.cs" />
-    <Compile Include="RequestBuilders\CustomGalleryRequestBuilderTests.cs" />
-    <Compile Include="RequestBuilders\ImageRequestBuilderTests.cs" />
-    <Compile Include="RequestBuilders\OAuth2RequestBuilderTests.cs" />
-    <Compile Include="Endpoints\RateLimitEndpointTests.cs" />
-    <Compile Include="FakeResponses\OAuth2EndpointResponses.cs" />
-    <Compile Include="FakeResponses\RateLimitEndpointResponses.cs" />
-    <Compile Include="Fakes\FakeHttpMessageHandlerTests.cs" />
-    <Compile Include="FakeResponses\FakeErrors.cs" />
-    <Compile Include="FakeResponses\AccountEndpointResponses.cs" />
-    <Compile Include="FakeResponses\AlbumEndpointResponses.cs" />
-    <Compile Include="Fakes\FakeHttpMessageHandler.cs" />
-    <Compile Include="FakeResponses\GenericEndpointResponses.cs" />
-    <Compile Include="FakeResponses\ImageEndpointResponses.cs" />
-    <Compile Include="Endpoints\EndpointBaseTests.cs" />
-    <Compile Include="JsonConverters\TypeConverterTests.cs" />
+    <Compile Include="AuthenticationTests\ApiClientTests.cs" />
+    <Compile Include="AuthenticationTests\ImgurClientTests.cs" />
+    <Compile Include="AuthenticationTests\MashapeClientTests.cs" />
+    <Compile Include="EndpointTests\EndpointBaseTests.cs" />
+    <Compile Include="EndpointTests\AccountEndpointTests.Albums.cs" />
+    <Compile Include="EndpointTests\AccountEndpointTests.Comments.cs" />
+    <Compile Include="EndpointTests\AccountEndpointTests.cs" />
+    <Compile Include="EndpointTests\AccountEndpointTests.Gallery.cs" />
+    <Compile Include="EndpointTests\AccountEndpointTests.Images.cs" />
+    <Compile Include="EndpointTests\AccountEndpointTests.Notifications.cs" />
+    <Compile Include="EndpointTests\AlbumEndpointTests.cs" />
+    <Compile Include="EndpointTests\CommentEndpointTests.cs" />
+    <Compile Include="EndpointTests\ConversationEndpointTests.cs" />
+    <Compile Include="EndpointTests\CustomGalleryEndpointTests.cs" />
+    <Compile Include="EndpointTests\GalleryEndpointTests.Albums.cs" />
+    <Compile Include="EndpointTests\GalleryEndpointTests.Comments.cs" />
+    <Compile Include="EndpointTests\GalleryEndpointTests.cs" />
+    <Compile Include="EndpointTests\GalleryEndpointTests.Images.cs" />
+    <Compile Include="EndpointTests\GalleryEndpointTests.Memes.cs" />
+    <Compile Include="EndpointTests\GalleryEndpointTests.Subreddits.cs" />
+    <Compile Include="EndpointTests\GalleryEndpointTests.Tags.cs" />
+    <Compile Include="EndpointTests\GalleryEndpointTests.Votes.cs" />
+    <Compile Include="EndpointTests\ImageEndpointTests.cs" />
+    <Compile Include="EndpointTests\MemeGenEndpointTests.cs" />
+    <Compile Include="EndpointTests\NotificationEndpointTests.cs" />
+    <Compile Include="EndpointTests\OAuth2EndpointTests.cs" />
+    <Compile Include="EndpointTests\RateLimitEndpointTests.cs" />
+    <Compile Include="EndpointTests\TopicEndpointTests.cs" />
+    <Compile Include="MockOAuth2TokenTests.cs" />
+    <Compile Include="Mocks\MockApiClient.cs" />
+    <Compile Include="Mocks\MockOAuth2Token.cs" />
     <Compile Include="JsonConverters\EpochTimeConverterTests.cs" />
     <Compile Include="JsonConverters\GalleryItemConverterTests.cs" />
+    <Compile Include="JsonConverters\NotificationConverterTests.cs" />
+    <Compile Include="JsonConverters\TypeConverterTests.cs" />
+    <Compile Include="MockHttpMessageHandlerTests.cs" />
+    <Compile Include="Mocks\MockAccountEndpointResponses.Albums.cs" />
+    <Compile Include="Mocks\MockAccountEndpointResponses.Comments.cs" />
+    <Compile Include="Mocks\MockAccountEndpointResponses.cs" />
+    <Compile Include="Mocks\MockAccountEndpointResponses.Gallery.cs" />
+    <Compile Include="Mocks\MockAccountEndpointResponses.Images.cs" />
+    <Compile Include="Mocks\MockAccountEndpointResponses.Notifications.cs" />
+    <Compile Include="Mocks\MockAlbumEndpointResponses.cs" />
+    <Compile Include="Mocks\MockCommentEndpointResponses.cs" />
+    <Compile Include="Mocks\MockConversationEndpointResponses.cs" />
+    <Compile Include="Mocks\MockCustomGalleryEndpointResponses.cs" />
+    <Compile Include="Mocks\MockEndpoint.cs" />
+    <Compile Include="Mocks\MockGalleryEndpointResponses.Albums.cs" />
+    <Compile Include="Mocks\MockGalleryEndpointResponses.Comments.cs" />
+    <Compile Include="Mocks\MockGalleryEndpointResponses.cs" />
+    <Compile Include="Mocks\MockGalleryEndpointResponses.Images.cs" />
+    <Compile Include="Mocks\MockGalleryEndpointResponses.Memes.cs" />
+    <Compile Include="Mocks\MockGalleryEndpointResponses.Subreddits.cs" />
+    <Compile Include="Mocks\MockGalleryEndpointResponses.Tags.cs" />
+    <Compile Include="Mocks\MockGalleryEndpointResponses.Votes.cs" />
+    <Compile Include="Mocks\MockGenericEndpointResponses.cs" />
+    <Compile Include="Mocks\MockImageEndpointResponses.cs" />
+    <Compile Include="Mocks\MockMemeGenEndpointResponses.cs" />
+    <Compile Include="Mocks\MockErrors.cs" />
+    <Compile Include="Mocks\MockHttpMessageHandler.cs" />
+    <Compile Include="Mocks\MockNotificationEndpointResponses.cs" />
+    <Compile Include="Mocks\MockOAuth2EndpointResponses.cs" />
+    <Compile Include="Mocks\MockRateLimitEndpointResponses.cs" />
+    <Compile Include="Mocks\MockTopicEndpointResponses.cs" />
+    <Compile Include="ModelTests\AccountTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestBuilders\RequestBuilderBaseTests.cs" />
+    <Compile Include="RequestBuilderTests\AccountRequestBuilderTests.cs" />
+    <Compile Include="RequestBuilderTests\AlbumRequestBuilderTests.cs" />
+    <Compile Include="RequestBuilderTests\CommentRequestBuilderTests.cs" />
+    <Compile Include="RequestBuilderTests\ConversationRequestBuilder.cs" />
+    <Compile Include="RequestBuilderTests\CustomGalleryRequestBuilderTests.cs" />
+    <Compile Include="RequestBuilderTests\GalleryRequestBuilderTests.cs" />
+    <Compile Include="RequestBuilderTests\ImageRequestBuilderTests.cs" />
+    <Compile Include="RequestBuilderTests\NotificationRequestBuilderTests.cs" />
+    <Compile Include="RequestBuilderTests\OAuth2RequestBuilderTests.cs" />
+    <Compile Include="RequestBuilderTests\RequestBuilderBaseTests.cs" />
     <Compile Include="TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Banana.gif">

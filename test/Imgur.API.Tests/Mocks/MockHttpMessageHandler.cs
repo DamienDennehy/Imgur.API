@@ -35,7 +35,7 @@ namespace Imgur.API.Tests.Mocks
             if (_responseMessages.ContainsKey(key))
                 return _responseMessages[key];
 
-            var notFoundMessage = new HttpResponseMessage(HttpStatusCode.NotFound) { RequestMessage = request };
+            var notFoundMessage = new HttpResponseMessage(HttpStatusCode.NotFound) {RequestMessage = request};
 
             return await Task.FromResult(notFoundMessage).ConfigureAwait(false);
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Tests.Mocks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 // ReSharper disable ExceptionNotDocumented
 
@@ -14,8 +14,8 @@ namespace Imgur.API.Tests.EndpointTests
 {
     public partial class AccountEndpointTests
     {
-        [TestMethod]
-        public async Task DeleteImageAsync_IsNotNull()
+        [Fact]
+        public async Task DeleteImageAsync_NotNull()
         {
             var mockUrl = "https://api.imgur.com/3/account/sarah/image/hbzm7Ge";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -27,46 +27,71 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new AccountEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var deleted = await endpoint.DeleteImageAsync("hbzm7Ge", "sarah").ConfigureAwait(false);
 
-            Assert.IsTrue(deleted);
+            Assert.True(deleted);
         }
 
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task DeleteImageAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
             var endpoint = new AccountEndpoint(client);
-            await endpoint.DeleteImageAsync("hbzm7Ge", null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.DeleteImageAsync("hbzm7Ge", null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task DeleteImageAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
             var endpoint = new AccountEndpoint(client);
-            await endpoint.DeleteImageAsync(null, null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.DeleteImageAsync(null, null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task DeleteImageAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.DeleteImageAsync("yMgB7", "sarah").ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.DeleteImageAsync("yMgB7", "sarah").ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task DeleteImageAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
             var endpoint = new AccountEndpoint(client);
-            await endpoint.DeleteImageAsync("hbzm7Ge", null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.DeleteImageAsync("hbzm7Ge", null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task GetImageAsync_IsNotNull()
+        [Fact]
+        public async Task GetImageAsync_NotNull()
         {
             var mockUrl = "https://api.imgur.com/3/account/sarah/image/hbzm7Ge";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -78,58 +103,77 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new AccountEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var image = await endpoint.GetImageAsync("hbzm7Ge", "sarah").ConfigureAwait(false);
 
-            Assert.IsNotNull(image);
-            Assert.AreEqual(
+            Assert.NotNull(image);
+            Assert.Equal(
                 "For three days at Camp Imgur, the Imgur flag flew proudly over our humble redwood camp, greeting Imgurians each morning.",
                 image.Title);
-            Assert.AreEqual(null, image.Description);
-            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1443651980), image.DateTime);
-            Assert.AreEqual("image/gif", image.Type);
-            Assert.AreEqual(true, image.Animated);
-            Assert.AreEqual(406, image.Width);
-            Assert.AreEqual(720, image.Height);
-            Assert.AreEqual(23386145, image.Size);
-            Assert.AreEqual(329881, image.Views);
-            Assert.AreEqual(7714644898745, image.Bandwidth);
-            Assert.AreEqual(null, image.Vote);
-            Assert.AreEqual(false, image.Favorite);
-            Assert.AreEqual(null, image.Nsfw);
-            Assert.AreEqual(null, image.Section);
-            Assert.AreEqual("http://i.imgur.com/hbzm7Ge.gifv", image.Gifv);
-            Assert.AreEqual("http://i.imgur.com/hbzm7Ge.webm", image.Webm);
-            Assert.AreEqual("http://i.imgur.com/hbzm7Ge.mp4", image.Mp4);
-            Assert.AreEqual("http://i.imgur.com/hbzm7Geh.gif", image.Link);
-            Assert.AreEqual(true, image.Looping);
+            Assert.Equal(null, image.Description);
+            Assert.Equal(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1443651980), image.DateTime);
+            Assert.Equal("image/gif", image.Type);
+            Assert.Equal(true, image.Animated);
+            Assert.Equal(406, image.Width);
+            Assert.Equal(720, image.Height);
+            Assert.Equal(23386145, image.Size);
+            Assert.Equal(329881, image.Views);
+            Assert.Equal(7714644898745, image.Bandwidth);
+            Assert.Equal(null, image.Vote);
+            Assert.Equal(false, image.Favorite);
+            Assert.Equal(null, image.Nsfw);
+            Assert.Equal(null, image.Section);
+            Assert.Equal("http://i.imgur.com/hbzm7Ge.gifv", image.Gifv);
+            Assert.Equal("http://i.imgur.com/hbzm7Ge.webm", image.Webm);
+            Assert.Equal("http://i.imgur.com/hbzm7Ge.mp4", image.Mp4);
+            Assert.Equal("http://i.imgur.com/hbzm7Geh.gif", image.Link);
+            Assert.Equal(true, image.Looping);
         }
 
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetImageAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageAsync("hbzm7Ge", null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetImageAsync("hbzm7Ge", null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetImageAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageAsync(null, null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetImageAsync(null, null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetImageAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageAsync("hbzm7Ge", null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetImageAsync("hbzm7Ge", null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task GetImageCountAsync_IsNotNull()
+        [Fact]
+        public async Task GetImageCountAsync_NotNull()
         {
             var mockUrl = "https://api.imgur.com/3/account/sarah/images/count";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -141,28 +185,41 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new AccountEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var count = await endpoint.GetImageCountAsync("sarah").ConfigureAwait(false);
 
-            Assert.AreEqual(count, 2);
+            Assert.Equal(count, 2);
         }
 
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetImageCountAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageCountAsync().ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetImageCountAsync().ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetImageCountAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageCountAsync(null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetImageCountAsync(null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task GetImageIdsAsync_AreEqual()
+        [Fact]
+        public async Task GetImageIdsAsync_Equal()
         {
             var mockUrl = "https://api.imgur.com/3/account/sarah/images/ids/2";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -174,29 +231,41 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new AccountEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var images = await endpoint.GetImageIdsAsync("sarah", 2).ConfigureAwait(false);
 
-            Assert.AreEqual(2, images.Count());
+            Assert.Equal(2, images.Count());
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetImageIdsAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageIdsAsync().ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetImageIdsAsync().ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetImageIdsAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImageIdsAsync(null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetImageIdsAsync(null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task GetImagesAsync_AreEqual()
+        [Fact]
+        public async Task GetImagesAsync_Equal()
         {
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
@@ -209,25 +278,37 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new AccountEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var images = await endpoint.GetImagesAsync("sarah", 2).ConfigureAwait(false);
 
-            Assert.AreEqual(2, images.Count());
+            Assert.Equal(2, images.Count());
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetImagesAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImagesAsync().ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetImagesAsync().ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetImagesAsync_WithUsernameNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
-            await endpoint.GetImagesAsync(null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetImagesAsync(null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
     }
 }

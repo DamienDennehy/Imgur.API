@@ -4,15 +4,16 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.RequestBuilders;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
+
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.RequestBuilderTests
 {
-    [TestClass]
     public class NotificationsRequestBuilderTests
     {
-        [TestMethod]
-        public async Task MarkNotificationsViewedRequest_AreEqual()
+        [Fact]
+        public async Task MarkNotificationsViewedRequest_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new NotificationRequestBuilder();
@@ -23,28 +24,35 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var request = requestBuilder.MarkNotificationsViewedRequest(mockUrl, ids);
             var expected = "ids=12345%2C9867%2C45678";
 
-            Assert.IsNotNull(request);
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.AreEqual("https://api.imgur.com/3/notifications", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Post, request.Method);
+            Assert.NotNull(request);
+            Assert.Equal(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("https://api.imgur.com/3/notifications", request.RequestUri.ToString());
+            Assert.Equal(HttpMethod.Post, request.Method);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void MarkNotificationsViewedRequest_WithIdsNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new NotificationRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}notification";
-            requestBuilder.MarkNotificationsViewedRequest(mockUrl, null);
+
+
+            var exception = Record.Exception(() => requestBuilder.MarkNotificationsViewedRequest(mockUrl, null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void MarkNotificationsViewedRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new NotificationRequestBuilder();
-            requestBuilder.MarkNotificationsViewedRequest(null, new List<string>());
+
+
+            var exception =
+                Record.Exception(() => requestBuilder.MarkNotificationsViewedRequest(null, new List<string>()));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
     }
 }

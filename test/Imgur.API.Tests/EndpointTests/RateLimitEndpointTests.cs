@@ -4,17 +4,16 @@ using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Tests.Mocks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 // ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.EndpointTests
 {
-    [TestClass]
     public class RateLimitEndpointTests : TestBase
     {
-        [TestMethod]
-        public async Task GetRateLimitAsync_AreEqual()
+        [Fact]
+        public async Task GetRateLimitAsync_Equal()
         {
             var mockUrl = "https://api.imgur.com/3/credits";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -29,9 +28,9 @@ namespace Imgur.API.Tests.EndpointTests
 
             var rateLimit = await endpoint.GetRateLimitAsync().ConfigureAwait(false);
 
-            Assert.IsNotNull(rateLimit);
-            Assert.AreEqual(10500, rateLimit.ClientLimit);
-            Assert.AreEqual(9500, rateLimit.ClientRemaining);
+            Assert.NotNull(rateLimit);
+            Assert.Equal(10500, rateLimit.ClientLimit);
+            Assert.Equal(9500, rateLimit.ClientRemaining);
         }
     }
 }

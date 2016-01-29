@@ -5,55 +5,56 @@ using Imgur.API.Enums;
 using Imgur.API.JsonConverters;
 using Imgur.API.Models.Impl;
 using Imgur.API.Tests.Mocks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Xunit;
+
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.JsonConverters
 {
-    [TestClass]
     public class GalleryItemConverterTests
     {
-        [TestMethod]
+        [Fact]
         public void GalleryItem_CanConvert_IsFalse()
         {
             var converter = new GalleryItemConverter();
             var canConvert = converter.CanConvert(new Image().GetType());
-            Assert.IsFalse(canConvert);
+            Assert.False(canConvert);
         }
 
-        [TestMethod]
-        public void GalleryItem_CanConvertGalleryAlbum_IsTrue()
+        [Fact]
+        public void GalleryItem_CanConvertGalleryAlbum_True()
         {
             var converter = new GalleryItemConverter();
             var canConvert = converter.CanConvert(new GalleryAlbum().GetType());
-            Assert.IsTrue(canConvert);
+            Assert.True(canConvert);
         }
 
-        [TestMethod]
-        public void GalleryItem_CanConvertGalleryImage_IsTrue()
+        [Fact]
+        public void GalleryItem_CanConvertGalleryImage_True()
         {
             var converter = new GalleryItemConverter();
             var canConvert = converter.CanConvert(new GalleryImage().GetType());
-            Assert.IsTrue(canConvert);
+            Assert.True(canConvert);
         }
 
-        [TestMethod]
-        public void GalleryItemConverter_ReadJsonGallery_IsNull()
+        [Fact]
+        public void GalleryItemConverter_ReadJsonGallery_Null()
         {
             var converter = new GalleryItemConverter();
             var reader = new JsonTextReader(new StringReader(""));
             reader.Read();
             var serializer = new JsonSerializer
             {
-                Converters = { converter }
+                Converters = {converter}
             };
 
-            var actual = (GalleryAlbum)converter.ReadJson(reader, typeof(GalleryItem), null, serializer);
-            Assert.IsNull(actual);
+            var actual = (GalleryAlbum) converter.ReadJson(reader, typeof (GalleryItem), null, serializer);
+            Assert.Null(actual);
         }
 
-        [TestMethod]
-        public void GalleryItemConverter_ReadJsonGalleryAlbum_AreEqual()
+        [Fact]
+        public void GalleryItemConverter_ReadJsonGalleryAlbum_Equal()
         {
             var converter = new GalleryItemConverter();
             var reader = new JsonTextReader(new StringReader(MockAccountEndpointResponses.GetGalleryAlbum));
@@ -64,38 +65,38 @@ namespace Imgur.API.Tests.JsonConverters
             };
 
             var actual = (GalleryAlbum) converter.ReadJson(reader, typeof (GalleryItem), null, serializer);
-            Assert.IsNotNull(actual);
+            Assert.NotNull(actual);
 
-            Assert.AreEqual(null, actual.AccountId);
-            Assert.AreEqual("SpaceCowboy02", actual.AccountUrl);
-            Assert.AreEqual(null, actual.CommentCount);
-            Assert.AreEqual(null, actual.CommentPreview);
-            Assert.AreEqual("JsKDPBN", actual.Cover);
-            Assert.AreEqual(240, actual.CoverHeight);
-            Assert.AreEqual(500, actual.CoverWidth);
-            Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 09, 19, 16, 43, 54, DateTimeKind.Utc)),
+            Assert.Equal(null, actual.AccountId);
+            Assert.Equal("SpaceCowboy02", actual.AccountUrl);
+            Assert.Equal(null, actual.CommentCount);
+            Assert.Equal(null, actual.CommentPreview);
+            Assert.Equal("JsKDPBN", actual.Cover);
+            Assert.Equal(240, actual.CoverHeight);
+            Assert.Equal(500, actual.CoverWidth);
+            Assert.Equal(new DateTimeOffset(new DateTime(2015, 09, 19, 16, 43, 54, DateTimeKind.Utc)),
                 actual.DateTime);
-            Assert.AreEqual(null, actual.Description);
-            Assert.AreEqual(119, actual.Downs);
-            Assert.AreEqual(true, actual.Favorite);
-            Assert.AreEqual("LqLmI", actual.Id);
-            Assert.AreEqual(9, actual.ImagesCount);
-            Assert.AreEqual(0, actual.Images.Count());
-            Assert.AreEqual(AlbumLayout.Blog, actual.Layout);
-            Assert.AreEqual("http://imgur.com/a/LqLmI", actual.Link);
-            Assert.AreEqual(null, actual.Nsfw);
-            Assert.AreEqual(null, actual.Privacy);
-            Assert.AreEqual(null, actual.Score);
-            Assert.AreEqual("Game of Expectation and Reality", actual.Title);
-            Assert.AreEqual(null, actual.Topic);
-            Assert.AreEqual(null, actual.TopicId);
-            Assert.AreEqual(4040, actual.Ups);
-            Assert.AreEqual(96803, actual.Views);
-            Assert.AreEqual(VoteOption.Down, actual.Vote);
+            Assert.Equal(null, actual.Description);
+            Assert.Equal(119, actual.Downs);
+            Assert.Equal(true, actual.Favorite);
+            Assert.Equal("LqLmI", actual.Id);
+            Assert.Equal(9, actual.ImagesCount);
+            Assert.Equal(0, actual.Images.Count());
+            Assert.Equal(AlbumLayout.Blog, actual.Layout);
+            Assert.Equal("http://imgur.com/a/LqLmI", actual.Link);
+            Assert.Equal(null, actual.Nsfw);
+            Assert.Equal(null, actual.Privacy);
+            Assert.Equal(null, actual.Score);
+            Assert.Equal("Game of Expectation and Reality", actual.Title);
+            Assert.Equal(null, actual.Topic);
+            Assert.Equal(null, actual.TopicId);
+            Assert.Equal(4040, actual.Ups);
+            Assert.Equal(96803, actual.Views);
+            Assert.Equal(VoteOption.Down, actual.Vote);
         }
 
-        [TestMethod]
-        public void GalleryItemConverter_ReadJsonGalleryImage_AreEqual()
+        [Fact]
+        public void GalleryItemConverter_ReadJsonGalleryImage_Equal()
         {
             var converter = new GalleryItemConverter();
             var reader = new JsonTextReader(new StringReader(MockAccountEndpointResponses.GetGalleryImage));
@@ -106,38 +107,38 @@ namespace Imgur.API.Tests.JsonConverters
             };
 
             var actual = (GalleryImage) converter.ReadJson(reader, typeof (GalleryItem), null, serializer);
-            Assert.IsNotNull(actual);
+            Assert.NotNull(actual);
 
-            Assert.AreEqual(null, actual.AccountId);
-            Assert.AreEqual("YoSoyPablo1", actual.AccountUrl);
-            Assert.AreEqual(false, actual.Animated);
-            Assert.AreEqual(118267772080, actual.Bandwidth);
-            Assert.AreEqual(null, actual.CommentCount);
-            Assert.AreEqual(null, actual.CommentPreview);
-            Assert.AreEqual(new DateTimeOffset(new DateTime(2015, 09, 19, 20, 29, 47, DateTimeKind.Utc)),
+            Assert.Equal(null, actual.AccountId);
+            Assert.Equal("YoSoyPablo1", actual.AccountUrl);
+            Assert.Equal(false, actual.Animated);
+            Assert.Equal(118267772080, actual.Bandwidth);
+            Assert.Equal(null, actual.CommentCount);
+            Assert.Equal(null, actual.CommentPreview);
+            Assert.Equal(new DateTimeOffset(new DateTime(2015, 09, 19, 20, 29, 47, DateTimeKind.Utc)),
                 actual.DateTime);
-            Assert.AreEqual(null, actual.DeleteHash);
-            Assert.AreEqual(null, actual.Description);
-            Assert.AreEqual(225, actual.Downs);
-            Assert.AreEqual(true, actual.Favorite);
-            Assert.AreEqual(null, actual.Gifv);
-            Assert.AreEqual(720, actual.Height);
-            Assert.AreEqual("http://i.imgur.com/l35eOVB.jpg", actual.Link);
-            Assert.AreEqual(false, actual.Looping);
-            Assert.AreEqual(null, actual.Mp4);
-            Assert.AreEqual(null, actual.Nsfw);
-            Assert.AreEqual(null, actual.Score);
-            Assert.AreEqual(null, actual.Section);
-            Assert.AreEqual(111952, actual.Size);
-            Assert.AreEqual("Someone is happy. New gadgets arrived to Ahmed from Microsoft", actual.Title);
-            Assert.AreEqual(null, actual.TopicId);
-            Assert.AreEqual(null, actual.Topic);
-            Assert.AreEqual("image/jpeg", actual.Type);
-            Assert.AreEqual(3567, actual.Ups);
-            Assert.AreEqual(1056415, actual.Views);
-            Assert.AreEqual(VoteOption.Up, actual.Vote);
-            Assert.AreEqual(null, actual.Webm);
-            Assert.AreEqual(960, actual.Width);
+            Assert.Equal(null, actual.DeleteHash);
+            Assert.Equal(null, actual.Description);
+            Assert.Equal(225, actual.Downs);
+            Assert.Equal(true, actual.Favorite);
+            Assert.Equal(null, actual.Gifv);
+            Assert.Equal(720, actual.Height);
+            Assert.Equal("http://i.imgur.com/l35eOVB.jpg", actual.Link);
+            Assert.Equal(false, actual.Looping);
+            Assert.Equal(null, actual.Mp4);
+            Assert.Equal(null, actual.Nsfw);
+            Assert.Equal(null, actual.Score);
+            Assert.Equal(null, actual.Section);
+            Assert.Equal(111952, actual.Size);
+            Assert.Equal("Someone is happy. New gadgets arrived to Ahmed from Microsoft", actual.Title);
+            Assert.Equal(null, actual.TopicId);
+            Assert.Equal(null, actual.Topic);
+            Assert.Equal("image/jpeg", actual.Type);
+            Assert.Equal(3567, actual.Ups);
+            Assert.Equal(1056415, actual.Views);
+            Assert.Equal(VoteOption.Up, actual.Vote);
+            Assert.Equal(null, actual.Webm);
+            Assert.Equal(960, actual.Width);
         }
     }
 }

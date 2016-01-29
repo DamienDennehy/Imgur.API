@@ -7,7 +7,7 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
 using Imgur.API.Tests.Mocks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 // ReSharper disable ExceptionNotDocumented
 
@@ -15,7 +15,7 @@ namespace Imgur.API.Tests.EndpointTests
 {
     public partial class GalleryEndpointTests
     {
-        [TestMethod]
+        [Fact]
         public async Task GetSubredditGalleryAsync_DefaultParameters_Any()
         {
             var mockUrl = "https://api.imgur.com/3/gallery/r/pics/time/week/";
@@ -29,19 +29,25 @@ namespace Imgur.API.Tests.EndpointTests
                 new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var gallery = await endpoint.GetSubredditGalleryAsync("pics").ConfigureAwait(false);
 
-            Assert.IsTrue(gallery.Any());
+            Assert.True(gallery.Any());
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetSubredditGalleryAsync_WithSubRedditNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetSubredditGalleryAsync(null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetSubredditGalleryAsync(null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetSubredditGalleryAsync_WithTopYearPage7_Any()
         {
             var mockUrl = "https://api.imgur.com/3/gallery/r/pics/time/week/7";
@@ -58,11 +64,11 @@ namespace Imgur.API.Tests.EndpointTests
                     endpoint.GetSubredditGalleryAsync("pics", SubredditGallerySortOrder.Time, TimeWindow.Week, 7)
                         .ConfigureAwait(false);
 
-            Assert.IsTrue(gallery.Any());
+            Assert.True(gallery.Any());
         }
 
-        [TestMethod]
-        public async Task GetSubredditImageAsync_IsNotNull()
+        [Fact]
+        public async Task GetSubredditImageAsync_NotNull()
         {
             var mockUrl = "https://api.imgur.com/3/gallery/r/pics/xyP";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -74,25 +80,37 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new GalleryEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var image = await endpoint.GetSubredditImageAsync("xyP", "pics").ConfigureAwait(false);
 
-            Assert.IsNotNull(image);
+            Assert.NotNull(image);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetSubredditImageAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetSubredditImageAsync(null, "test").ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetSubredditImageAsync(null, "test").ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetSubredditImageAsync_WithSubRedditNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetSubredditImageAsync("hhjkh", null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetSubredditImageAsync("hhjkh", null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
     }
 }

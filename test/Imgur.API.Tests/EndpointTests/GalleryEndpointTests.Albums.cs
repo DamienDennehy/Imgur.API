@@ -7,7 +7,7 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
 using Imgur.API.Tests.Mocks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 // ReSharper disable ExceptionNotDocumented
 
@@ -15,8 +15,8 @@ namespace Imgur.API.Tests.EndpointTests
 {
     public partial class GalleryEndpointTests
     {
-        [TestMethod]
-        public async Task GetAlbumAsync_IsNotNull()
+        [Fact]
+        public async Task GetAlbumAsync_NotNull()
         {
             var mockUrl = "https://api.imgur.com/3/gallery/album/dO484";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -28,43 +28,49 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new GalleryEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var album = await endpoint.GetGalleryAlbumAsync("dO484").ConfigureAwait(false);
 
-            Assert.IsNotNull(album);
-            Assert.AreEqual("dO484", album.Id);
-            Assert.AreEqual("25 Films on Netflix I'd like to recommend.", album.Title);
-            Assert.AreEqual(null, album.Description);
-            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1451445880), album.DateTime);
-            Assert.AreEqual("xUPbs5g", album.Cover);
-            Assert.AreEqual(700, album.CoverWidth);
-            Assert.AreEqual(394, album.CoverHeight);
-            Assert.AreEqual("bellsofwar3", album.AccountUrl);
-            Assert.AreEqual(28720941, album.AccountId);
-            Assert.AreEqual(AlbumPrivacy.Public, album.Privacy);
-            Assert.AreEqual(AlbumLayout.Blog, album.Layout);
-            Assert.AreEqual(13972, album.Views);
-            Assert.AreEqual("http://imgur.com/a/dO484", album.Link);
-            Assert.AreEqual(2024, album.Ups);
-            Assert.AreEqual(28, album.Downs);
-            Assert.AreEqual(1996, album.Points);
-            Assert.AreEqual(1994, album.Score);
-            Assert.AreEqual(null, album.Vote);
-            Assert.AreEqual(false, album.Favorite);
-            Assert.AreEqual(false, album.Nsfw);
-            Assert.AreEqual("", album.Section);
-            Assert.AreEqual(79, album.CommentCount);
-            Assert.AreEqual(10, album.CommentPreview.Count());
-            Assert.AreEqual("The More You Know", album.Topic);
-            Assert.AreEqual(11, album.TopicId);
-            Assert.AreEqual(25, album.ImagesCount);
-            Assert.AreEqual(25, album.Images.Count());
+            Assert.NotNull(album);
+            Assert.Equal("dO484", album.Id);
+            Assert.Equal("25 Films on Netflix I'd like to recommend.", album.Title);
+            Assert.Equal(null, album.Description);
+            Assert.Equal(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1451445880), album.DateTime);
+            Assert.Equal("xUPbs5g", album.Cover);
+            Assert.Equal(700, album.CoverWidth);
+            Assert.Equal(394, album.CoverHeight);
+            Assert.Equal("bellsofwar3", album.AccountUrl);
+            Assert.Equal(28720941, album.AccountId);
+            Assert.Equal(AlbumPrivacy.Public, album.Privacy);
+            Assert.Equal(AlbumLayout.Blog, album.Layout);
+            Assert.Equal(13972, album.Views);
+            Assert.Equal("http://imgur.com/a/dO484", album.Link);
+            Assert.Equal(2024, album.Ups);
+            Assert.Equal(28, album.Downs);
+            Assert.Equal(1996, album.Points);
+            Assert.Equal(1994, album.Score);
+            Assert.Equal(null, album.Vote);
+            Assert.Equal(false, album.Favorite);
+            Assert.Equal(false, album.Nsfw);
+            Assert.Equal("", album.Section);
+            Assert.Equal(79, album.CommentCount);
+            Assert.Equal(10, album.CommentPreview.Count());
+            Assert.Equal("The More You Know", album.Topic);
+            Assert.Equal(11, album.TopicId);
+            Assert.Equal(25, album.ImagesCount);
+            Assert.Equal(25, album.Images.Count());
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetAlbumAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryAlbumAsync(null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetGalleryAlbumAsync(null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
     }
 }

@@ -1,87 +1,87 @@
 ﻿using System;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Tests.Mocks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
+
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.AuthenticationTests
 {
-    [TestClass]
     public class MashapeClientTests
     {
-        [TestMethod]
-        public void ClientId_SetByConstructor_AreEqual()
+        [Fact]
+        public void ClientId_SetByConstructor_Equal()
         {
             var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey");
-            Assert.AreEqual("ClientId", client.ClientId);
+            Assert.Equal("ClientId", client.ClientId);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void ClientId_SetNullByConstructor_ThrowArgumentNullException()
         {
-            var client = new MashapeClient(null, "ClientSecret", "MashapeKey");
-            Assert.IsNotNull(client.MashapeKey);
+            var exception = Record.Exception(() => new MashapeClient(null, "ClientSecret", "MashapeKey"));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public void ClientSecret_SetByConstructor_AreEqual()
+        [Fact]
+        public void ClientSecret_SetByConstructor_Equal()
         {
             var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey");
-            Assert.AreEqual("ClientSecret", client.ClientSecret);
+            Assert.Equal("ClientSecret", client.ClientSecret);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void ClientSecret_SetNullByConstructor_ThrowArgumentNullException()
         {
-            var client = new MashapeClient("ClientId", null, "MashapeKey");
-            Assert.IsNotNull(client.ClientSecret);
+            var exception = Record.Exception(() => new MashapeClient("ClientId", null, "MashapeKey"));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
+        [Fact]
         public void EndpointUrl_IsImgurUrl()
         {
             var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey");
-            Assert.AreEqual("https://imgur-apiv3.p.mashape.com/3/", client.EndpointUrl);
+            Assert.Equal("https://imgur-apiv3.p.mashape.com/3/", client.EndpointUrl);
         }
 
-        [TestMethod]
-        public void MashapeKey_SetByConstructor_AreEqual()
+        [Fact]
+        public void MashapeKey_SetByConstructor_Equal()
         {
             var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey");
-            Assert.AreEqual("MashapeKey", client.MashapeKey);
+            Assert.Equal("MashapeKey", client.MashapeKey);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void MashapeKey_SetNullByConstructor_ThrowArgumentNullException()
         {
-            var client = new MashapeClient("ClientId", "ClientSecret", null);
-            Assert.IsNotNull(client.ClientId);
+            var exception = Record.Exception(() => new MashapeClient("ClientId", "ClientSecret", null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-
+        [Fact]
         public void OAuth2Token_SetByConstructor_AreSame()
         {
             var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
             var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey", oAuth2Token);
-            Assert.AreSame(oAuth2Token, client.OAuth2Token);
+            Assert.Same(oAuth2Token, client.OAuth2Token);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void OAuth2Token_SetNullByConstructor_ThrowArgumentNullException()
         {
-            var client = new MashapeClient("ClientId", "MashapeKey", null);
-            Assert.IsNotNull(client.OAuth2Token);
+            var exception = Record.Exception(() => new MashapeClient("ClientId", "MashapeKey", null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public void RateLimit_SetByConstructor_IsNotNull()
+        [Fact]
+        public void RateLimit_SetByConstructor_NotNull()
         {
             var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey");
-            Assert.IsNotNull(client.RateLimit);
+            Assert.NotNull(client.RateLimit);
         }
     }
 }

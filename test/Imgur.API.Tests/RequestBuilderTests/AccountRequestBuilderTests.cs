@@ -4,15 +4,16 @@ using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Enums;
 using Imgur.API.RequestBuilders;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
+
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.RequestBuilderTests
 {
-    [TestClass]
     public class AccountRequestBuilderTests
     {
-        [TestMethod]
-        public async Task UpdateAccountSettingsRequest_AreEqual()
+        [Fact]
+        public async Task UpdateAccountSettingsRequest_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new AccountRequestBuilder();
@@ -22,21 +23,23 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 mockUrl, "BioTest", true, true, AlbumPrivacy.Public,
                 true, "Bob2", true, true);
 
-            Assert.IsNotNull(request);
+            Assert.NotNull(request);
             var expected =
                 "public_images=true&messaging_enabled=true&album_privacy=public&accepted_gallery_terms=true&show_mature=true&newsletter_subscribed=true&bio=BioTest&username=Bob2";
 
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.AreEqual("https://api.imgur.com/3/account/me/settings", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Post, request.Method);
+            Assert.Equal(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("https://api.imgur.com/3/account/me/settings", request.RequestUri.ToString());
+            Assert.Equal(HttpMethod.Post, request.Method);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void UpdateAccountSettingsRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new AccountRequestBuilder();
-            requestBuilder.UpdateAccountSettingsRequest(null);
+
+            var exception = Record.Exception(() => requestBuilder.UpdateAccountSettingsRequest(null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
     }
 }

@@ -1,81 +1,83 @@
 ﻿using System;
 using Imgur.API.Tests.Mocks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 // ReSharper disable ExceptionNotDocumented
 // ReSharper disable ThrowingSystemException
 
 namespace Imgur.API.Tests.AuthenticationTests
 {
-    [TestClass]
     public class ApiClientTests
     {
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void ClientId_SetNullByConstructor_ThrowArgumentNullException()
         {
-            new MockApiClient(null, "ClientSecret");
+            var exception = Record.Exception(() => new MockApiClient(null, "ClientSecret"));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void ClientSecret_SetNullByConstructor_ThrowArgumentNullException()
         {
-            new MockApiClient("ClientId", null);
+            var exception = Record.Exception(() => new MockApiClient("ClientId", null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void OAuth2_SetNullByConstructor_ThrowArgumentNullException()
         {
-            new MockApiClient("ClientId", "ClientSecret", null);
+            var exception = Record.Exception(() => new MockApiClient("ClientId", "ClientSecret", null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
+        [Fact]
         public void OAuth2Token_SetByConstructor_AreSame()
         {
             var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
             var client = new MockApiClient("ClientId", "ClientSecret", oAuth2Token);
-            Assert.AreSame(oAuth2Token, client.OAuth2Token);
+            Assert.Same(oAuth2Token, client.OAuth2Token);
         }
 
-        [TestMethod]
+        [Fact]
         public void OAuth2Token_SetBySetOAuth2Token_AreSame()
         {
             var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
             var client = new MockApiClient("ClientId", "ClientSecret");
 
-            Assert.IsNull(client.OAuth2Token);
+            Assert.Null(client.OAuth2Token);
             client.SetOAuth2Token(oAuth2Token);
-            Assert.AreSame(oAuth2Token, client.OAuth2Token);
+            Assert.Same(oAuth2Token, client.OAuth2Token);
         }
 
-        [TestMethod]
-        public void OAuth2Token_SetBySetOAuth2Token_IsNull()
+        [Fact]
+        public void OAuth2Token_SetBySetOAuth2Token_Null()
         {
             var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
             var client = new MockApiClient("ClientId", "ClientSecret");
 
-            Assert.IsNull(client.OAuth2Token);
+            Assert.Null(client.OAuth2Token);
             client.SetOAuth2Token(oAuth2Token);
-            Assert.AreSame(oAuth2Token, client.OAuth2Token);
+            Assert.Same(oAuth2Token, client.OAuth2Token);
             client.SetOAuth2Token(null);
-            Assert.IsNull(client.OAuth2Token);
+            Assert.Null(client.OAuth2Token);
         }
 
-        [TestMethod]
-        public void RateLimit_SetByConstructor1_IsNotNull()
+        [Fact]
+        public void RateLimit_SetByConstructor1_NotNull()
         {
             var client = new MockApiClient("ClientId", "ClientSecret");
-            Assert.IsNotNull(client.RateLimit);
+            Assert.NotNull(client.RateLimit);
         }
 
-        [TestMethod]
-        public void RateLimit_SetByConstructor2_IsNotNull()
+        [Fact]
+        public void RateLimit_SetByConstructor2_NotNull()
         {
             var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
             var client = new MockApiClient("ClientId", "ClientSecret", oAuth2Token);
-            Assert.IsNotNull(client.RateLimit);
+            Assert.NotNull(client.RateLimit);
         }
     }
 }

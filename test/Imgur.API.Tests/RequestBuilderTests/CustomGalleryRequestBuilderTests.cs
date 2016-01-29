@@ -4,15 +4,16 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.RequestBuilders;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
+
+// ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.RequestBuilderTests
 {
-    [TestClass]
     public class CustomGalleryRequestBuilderTests
     {
-        [TestMethod]
-        public async Task AddCustomGalleryTagsRequest_AreEqual()
+        [Fact]
+        public async Task AddCustomGalleryTagsRequest_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
@@ -23,32 +24,36 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var request = requestBuilder.AddCustomGalleryTagsRequest(mockUrl, tags);
             var expected = "tags=Cats%2CDogs%2CSeals";
 
-            Assert.IsNotNull(request);
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.AreEqual("https://api.imgur.com/3/g/custom/add_tags", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Put, request.Method);
+            Assert.NotNull(request);
+            Assert.Equal(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("https://api.imgur.com/3/g/custom/add_tags", request.RequestUri.ToString());
+            Assert.Equal(HttpMethod.Put, request.Method);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void AddCustomGalleryTagsRequest_WithTagsNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}g/custom/add_tags";
-            requestBuilder.AddCustomGalleryTagsRequest(mockUrl, null);
+
+            var exception = Record.Exception(() => requestBuilder.AddCustomGalleryTagsRequest(mockUrl, null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void AddCustomGalleryTagsRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new CustomGalleryRequestBuilder();
-            requestBuilder.AddCustomGalleryTagsRequest(null, new List<string>());
+
+            var exception = Record.Exception(() => requestBuilder.AddCustomGalleryTagsRequest(null, new List<string>()));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task AddFilteredOutGalleryTagRequest_AreEqual()
+        [Fact]
+        public async Task AddFilteredOutGalleryTagRequest_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
@@ -59,32 +64,36 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var request = requestBuilder.AddFilteredOutGalleryTagRequest(mockUrl, tag);
             var expected = "tag=Cats";
 
-            Assert.IsNotNull(request);
-            Assert.AreEqual(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.AreEqual("https://api.imgur.com/3/g/block_tag", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Post, request.Method);
+            Assert.NotNull(request);
+            Assert.Equal(expected, await request.Content.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("https://api.imgur.com/3/g/block_tag", request.RequestUri.ToString());
+            Assert.Equal(HttpMethod.Post, request.Method);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void AddFilteredOutGalleryTagRequest_WithTagNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}g/block_tag";
-            requestBuilder.AddFilteredOutGalleryTagRequest(mockUrl, null);
+
+            var exception = Record.Exception(() => requestBuilder.AddFilteredOutGalleryTagRequest(mockUrl, null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void AddFilteredOutGalleryTagRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new CustomGalleryRequestBuilder();
-            requestBuilder.AddFilteredOutGalleryTagRequest(null, "test");
+
+            var exception = Record.Exception(() => requestBuilder.AddFilteredOutGalleryTagRequest(null, "test"));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public void RemoveCustomGalleryTagsRequest_AreEqual()
+        [Fact]
+        public void RemoveCustomGalleryTagsRequest_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
@@ -95,31 +104,36 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var request = requestBuilder.RemoveCustomGalleryTagsRequest(mockUrl, tags);
             var expected = "https://api.imgur.com/3/g/custom/remove_tags?tags=Cats%2CDogs%2CSeals";
 
-            Assert.IsNotNull(request);
-            Assert.AreEqual(expected, request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Delete, request.Method);
+            Assert.NotNull(request);
+            Assert.Equal(expected, request.RequestUri.ToString());
+            Assert.Equal(HttpMethod.Delete, request.Method);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void RemoveCustomGalleryTagsRequest_WithTagsNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}g/custom/remove_tags";
-            requestBuilder.RemoveCustomGalleryTagsRequest(mockUrl, null);
+
+            var exception = Record.Exception(() => requestBuilder.RemoveCustomGalleryTagsRequest(mockUrl, null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void RemoveCustomGalleryTagsRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new CustomGalleryRequestBuilder();
-            requestBuilder.RemoveCustomGalleryTagsRequest(null, new List<string>());
+
+            var exception =
+                Record.Exception(() => requestBuilder.RemoveCustomGalleryTagsRequest(null, new List<string>()));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public void RemoveFilteredOutGalleryTagRequest_AreEqual()
+        [Fact]
+        public void RemoveFilteredOutGalleryTagRequest_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
@@ -130,27 +144,31 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var request = requestBuilder.RemoveFilteredOutGalleryTagRequest(mockUrl, tag);
             var expected = "https://api.imgur.com/3/g/unblock_tag";
 
-            Assert.IsNotNull(request);
-            Assert.AreEqual(expected, request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Post, request.Method);
+            Assert.NotNull(request);
+            Assert.Equal(expected, request.RequestUri.ToString());
+            Assert.Equal(HttpMethod.Post, request.Method);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void RemoveFilteredOutGalleryTagRequest_WithTagNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new CustomGalleryRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}g/unblock_tag";
-            requestBuilder.RemoveFilteredOutGalleryTagRequest(mockUrl, null);
+
+            var exception = Record.Exception(() => requestBuilder.RemoveFilteredOutGalleryTagRequest(mockUrl, null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void RemoveFilteredOutGalleryTagRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new CustomGalleryRequestBuilder();
-            requestBuilder.RemoveFilteredOutGalleryTagRequest(null, "test");
+
+            var exception = Record.Exception(() => requestBuilder.RemoveFilteredOutGalleryTagRequest(null, "test"));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
     }
 }

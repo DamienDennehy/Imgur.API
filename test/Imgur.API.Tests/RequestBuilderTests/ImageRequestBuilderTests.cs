@@ -1,21 +1,21 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.RequestBuilders;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 // ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.RequestBuilderTests
 {
-    [TestClass]
     public class ImageRequestBuilderTests
     {
-        [TestMethod]
-        public async Task UpdateImageRequest_AreEqual()
+        [Fact]
+        public async Task UpdateImageRequest_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
@@ -23,25 +23,28 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}image/1234Xyz9";
             var request = requestBuilder.UpdateImageRequest(mockUrl, "TheTitle", "TheDescription");
 
-            Assert.IsNotNull(request);
-            Assert.AreEqual("https://api.imgur.com/3/image/1234Xyz9", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Post, request.Method);
+            Assert.NotNull(request);
+            Assert.Equal("https://api.imgur.com/3/image/1234Xyz9", request.RequestUri.ToString());
+            Assert.Equal(HttpMethod.Post, request.Method);
 
             var expected = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            Assert.AreEqual("title=TheTitle&description=TheDescription", expected);
+            Assert.Equal("title=TheTitle&description=TheDescription", expected);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void UpdateImageRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new ImageRequestBuilder();
-            requestBuilder.UpdateImageRequest(null, "1234Xyz9");
+
+            var exception = Record.Exception(() => requestBuilder.UpdateImageRequest(null, "1234Xyz9"));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task UploadImageBinaryRequest_AreEqual()
+        [Fact]
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
+        public async Task UploadImageBinaryRequest_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
@@ -51,9 +54,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var request = requestBuilder.UploadImageBinaryRequest(mockUrl, image, "TheAlbum", "TheTitle",
                 "TheDescription");
 
-            Assert.IsNotNull(request);
-            Assert.AreEqual("https://api.imgur.com/3/image", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Post, request.Method);
+            Assert.NotNull(request);
+            Assert.Equal("https://api.imgur.com/3/image", request.RequestUri.ToString());
+            Assert.Equal(HttpMethod.Post, request.Method);
 
             var content = (MultipartFormDataContent) request.Content;
             var imageContent =
@@ -64,40 +67,44 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var description =
                 (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
-            Assert.IsNotNull(imageContent);
-            Assert.IsNotNull(type);
-            Assert.IsNotNull(album);
-            Assert.IsNotNull(title);
-            Assert.IsNotNull(description);
+            Assert.NotNull(imageContent);
+            Assert.NotNull(type);
+            Assert.NotNull(album);
+            Assert.NotNull(title);
+            Assert.NotNull(description);
 
-            Assert.AreEqual(image.Length, imageContent.Headers.ContentLength);
-            Assert.AreEqual("file", await type.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.AreEqual("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.AreEqual("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.AreEqual("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal(image.Length, imageContent.Headers.ContentLength);
+            Assert.Equal("file", await type.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void UploadImageBinaryRequest_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}image";
-            requestBuilder.UploadImageBinaryRequest(mockUrl, null);
+
+            var exception = Record.Exception(() => requestBuilder.UploadImageBinaryRequest(mockUrl, null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void UploadImageBinaryRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new ImageRequestBuilder();
             var image = File.ReadAllBytes("banana.gif");
-            requestBuilder.UploadImageBinaryRequest(null, image);
+
+            var exception = Record.Exception(() => requestBuilder.UploadImageBinaryRequest(null, image));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task UploadImageUrlRequest_AreEqual()
+        [Fact]
+        public async Task UploadImageUrlRequest_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
@@ -106,37 +113,42 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var request = requestBuilder.UploadImageUrlRequest(mockUrl, "http://i.imgur.com/hxsPLa7.jpg",
                 "TheAlbum", "TheTitle", "TheDescription");
 
-            Assert.IsNotNull(request);
-            Assert.AreEqual("https://api.imgur.com/3/image", request.RequestUri.ToString());
-            Assert.AreEqual(HttpMethod.Post, request.Method);
+            Assert.NotNull(request);
+            Assert.Equal("https://api.imgur.com/3/image", request.RequestUri.ToString());
+            Assert.Equal(HttpMethod.Post, request.Method);
 
             var expected = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            Assert.AreEqual(
+            Assert.Equal(
                 "type=URL&image=http%3A%2F%2Fi.imgur.com%2FhxsPLa7.jpg&album=TheAlbum&title=TheTitle&description=TheDescription",
                 expected);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void UploadImageUrlRequest_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}image";
-            requestBuilder.UploadImageBinaryRequest(mockUrl, null);
+
+            var exception = Record.Exception(() => requestBuilder.UploadImageBinaryRequest(mockUrl, null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void UploadImageUrlRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new ImageRequestBuilder();
-            requestBuilder.UploadImageBinaryRequest(null, new byte[9]);
+
+            var exception = Record.Exception(() => requestBuilder.UploadImageBinaryRequest(null, new byte[9]));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task UploadStreamBinaryRequest_AreEqual()
+        [Fact]
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
+        public async Task UploadStreamBinaryRequest_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
@@ -148,9 +160,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 var request = requestBuilder.UploadImageStreamRequest(mockUrl, fs, "TheAlbum", "TheTitle",
                     "TheDescription");
 
-                Assert.IsNotNull(request);
-                Assert.AreEqual("https://api.imgur.com/3/image", request.RequestUri.ToString());
-                Assert.AreEqual(HttpMethod.Post, request.Method);
+                Assert.NotNull(request);
+                Assert.Equal("https://api.imgur.com/3/image", request.RequestUri.ToString());
+                Assert.Equal(HttpMethod.Post, request.Method);
 
                 var content = (MultipartFormDataContent) request.Content;
                 var imageContent =
@@ -161,40 +173,44 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 var description =
                     (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
-                Assert.IsNotNull(imageContent);
-                Assert.IsNotNull(type);
-                Assert.IsNotNull(album);
-                Assert.IsNotNull(title);
-                Assert.IsNotNull(description);
+                Assert.NotNull(imageContent);
+                Assert.NotNull(type);
+                Assert.NotNull(album);
+                Assert.NotNull(title);
+                Assert.NotNull(description);
 
                 var image = await imageContent.ReadAsByteArrayAsync().ConfigureAwait(false);
 
-                Assert.AreEqual(imageLength, image.Length);
-                Assert.AreEqual("file", await type.ReadAsStringAsync().ConfigureAwait(false));
-                Assert.AreEqual("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
-                Assert.AreEqual("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
-                Assert.AreEqual("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
+                Assert.Equal(imageLength, image.Length);
+                Assert.Equal("file", await type.ReadAsStringAsync().ConfigureAwait(false));
+                Assert.Equal("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
+                Assert.Equal("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
+                Assert.Equal("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
             }
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void UploadStreamBinaryRequest_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var requestBuilder = new ImageRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}image";
-            requestBuilder.UploadImageStreamRequest(mockUrl, null);
+
+            var exception = Record.Exception(() => requestBuilder.UploadImageStreamRequest(mockUrl, null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public void UploadStreamBinaryRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new ImageRequestBuilder();
             using (var fs = new FileStream("banana.gif", FileMode.Open))
             {
-                requestBuilder.UploadImageStreamRequest(null, fs);
+                // ReSharper disable once AccessToDisposedClosure
+                var exception = Record.Exception(() => requestBuilder.UploadImageStreamRequest(null, fs));
+                Assert.NotNull(exception);
+                Assert.IsType<ArgumentNullException>(exception);
             }
         }
     }

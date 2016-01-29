@@ -7,7 +7,7 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
 using Imgur.API.Tests.Mocks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 // ReSharper disable ExceptionNotDocumented
 
@@ -15,7 +15,7 @@ namespace Imgur.API.Tests.EndpointTests
 {
     public partial class GalleryEndpointTests
     {
-        [TestMethod]
+        [Fact]
         public async Task GetGalleryItemTagsAsync_DefaultParameters_Any()
         {
             var mockUrl = "https://api.imgur.com/3/gallery/xTYm/tags";
@@ -29,20 +29,26 @@ namespace Imgur.API.Tests.EndpointTests
                 new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var tags = await endpoint.GetGalleryItemTagsAsync("xTYm").ConfigureAwait(false);
 
-            Assert.IsTrue(tags.Tags.Any());
+            Assert.True(tags.Tags.Any());
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetGalleryItemTagsAsync_WithGalleryItemIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryItemTagsAsync(null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetGalleryItemTagsAsync(null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task GetGalleryTagAsync_DefaultParameters_AreEqual()
+        [Fact]
+        public async Task GetGalleryTagAsync_DefaultParameters_Equal()
         {
             var mockUrl = "https://api.imgur.com/3/gallery/t/cats/viral/week/";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -55,25 +61,31 @@ namespace Imgur.API.Tests.EndpointTests
                 new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var tag = await endpoint.GetGalleryTagAsync("cats").ConfigureAwait(false);
 
-            Assert.IsNotNull(tag);
-            Assert.AreEqual(196, tag.Followers);
-            Assert.AreEqual(false, tag.Following);
-            Assert.AreEqual(60, tag.Items.Count());
-            Assert.AreEqual("cats", tag.Name);
-            Assert.AreEqual(10920, tag.TotalItems);
+            Assert.NotNull(tag);
+            Assert.Equal(196, tag.Followers);
+            Assert.Equal(false, tag.Following);
+            Assert.Equal(60, tag.Items.Count());
+            Assert.Equal("cats", tag.Name);
+            Assert.Equal(10920, tag.TotalItems);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetGalleryTagAsync_WithGalleryItemIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryTagAsync(null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetGalleryTagAsync(null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task GetGalleryTagImageAsync_DefaultParameters_AreEqual()
+        [Fact]
+        public async Task GetGalleryTagImageAsync_DefaultParameters_Equal()
         {
             var mockUrl = "https://api.imgur.com/3/gallery/t/cats/XoPkL";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -86,29 +98,41 @@ namespace Imgur.API.Tests.EndpointTests
                 new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var image = await endpoint.GetGalleryTagImageAsync("XoPkL", "cats").ConfigureAwait(false);
 
-            Assert.IsNotNull(image);
+            Assert.NotNull(image);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetGalleryTagImageAsync_WithGalleryItemIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryTagImageAsync(null, "xiui").ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetGalleryTagImageAsync(null, "xiui").ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetGalleryTagImageAsync_WithTagNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryTagImageAsync("kjkjk", null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetGalleryTagImageAsync("kjkjk", null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task VoteGalleryTagAsync_IsTrue()
+        [Fact]
+        public async Task VoteGalleryTagAsync_True()
         {
             var mockUrl = "https://api.imgur.com/3/gallery/XoPkL/vote/tag/cats/down";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -121,34 +145,55 @@ namespace Imgur.API.Tests.EndpointTests
                 new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var voted = await endpoint.VoteGalleryTagAsync("XoPkL", "cats", VoteOption.Down).ConfigureAwait(false);
 
-            Assert.IsNotNull(voted);
+            Assert.NotNull(voted);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task VoteGalleryTagAsync_WithGalleryItemIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.VoteGalleryTagAsync(null, "xiui", VoteOption.Down).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () =>
+                            await endpoint.VoteGalleryTagAsync(null, "xiui", VoteOption.Down).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task VoteGalleryTagAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.VoteGalleryTagAsync("kjkjk", "hjhj", VoteOption.Down).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () =>
+                            await endpoint.VoteGalleryTagAsync("kjkjk", "hjhj", VoteOption.Down).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task VoteGalleryTagAsync_WithTagNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.VoteGalleryTagAsync("kjkjk", null, VoteOption.Down).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () =>
+                            await endpoint.VoteGalleryTagAsync("kjkjk", null, VoteOption.Down).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
     }
 }

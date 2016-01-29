@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Imgur.API", "src\Imgur.API\Imgur.API.xproj", "{59659C8E-3093-479C-AB10-F9B56571D920}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imgur.API.Tests", "test\Imgur.API.Tests\Imgur.API.Tests.csproj", "{89CD4834-79D5-4649-86F6-0E466A01E7D5}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Imgur.API.Tests", "test\Imgur.API.Tests\Imgur.API.Tests.xproj", "{89CD4834-79D5-4649-86F6-0E466A01E7D5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5219F28F-8C3D-481D-AF4D-29A484095F77}"
 EndProject

@@ -7,17 +7,16 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
 using Imgur.API.Tests.Mocks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 // ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.EndpointTests
 {
-    [TestClass]
     public class CommentEndpointTests : TestBase
     {
-        [TestMethod]
-        public async Task CreateCommentAsync_AreEqual()
+        [Fact]
+        public async Task CreateCommentAsync_Equal()
         {
             var mockUrl = "https://api.imgur.com/3/comment";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -29,39 +28,57 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new CommentEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var comment = await endpoint.CreateCommentAsync("Hello World!", "xyz", "Abc").ConfigureAwait(false);
 
-            Assert.IsNotNull(comment);
-            Assert.AreEqual(539710677, comment);
+            Assert.NotNull(comment);
+            Assert.Equal(539710677, comment);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task CreateCommentAsync_WithCommentNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateCommentAsync(null, "xyz", "Abc").ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.CreateCommentAsync(null, "xyz", "Abc").ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task CreateCommentAsync_WithImageIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateCommentAsync("Hello World!", null, "Abc").ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.CreateCommentAsync("Hello World!", null, "Abc").ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task CreateCommentAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateCommentAsync("Hello World", "xyz", "Abc").ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.CreateCommentAsync("Hello World", "xyz", "Abc").ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task CreateReplyAsync_AreEqual()
+        [Fact]
+        public async Task CreateReplyAsync_Equal()
         {
             var mockUrl = "https://api.imgur.com/3/comment/BNMxDs";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -73,48 +90,72 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new CommentEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var comment = await endpoint.CreateReplyAsync("Hello World!", "xyz", "BNMxDs").ConfigureAwait(false);
 
-            Assert.IsNotNull(comment);
-            Assert.AreEqual(539717441, comment);
+            Assert.NotNull(comment);
+            Assert.Equal(539717441, comment);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task CreateReplyAsync_WithCommentIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateReplyAsync("Hello World!", "xyz", null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.CreateReplyAsync("Hello World!", "xyz", null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task CreateReplyAsync_WithCommentNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateReplyAsync(null, "xyz", "Abc").ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.CreateReplyAsync(null, "xyz", "Abc").ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task CreateReplyAsync_WithImageIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateReplyAsync("Hello World", null, "Abc").ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.CreateReplyAsync("Hello World", null, "Abc").ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task CreateReplyAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client);
-            await endpoint.CreateReplyAsync("Hello World", "xyz", "Abc").ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.CreateReplyAsync("Hello World", "xyz", "Abc").ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task DeleteCommentAsync_IsTrue()
+        [Fact]
+        public async Task DeleteCommentAsync_True()
         {
             var mockUrl = "https://api.imgur.com/3/comment/6767676";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -126,20 +167,26 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new CommentEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var deleted = await endpoint.DeleteCommentAsync(6767676).ConfigureAwait(false);
 
-            Assert.IsTrue(deleted);
+            Assert.True(deleted);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task DeleteCommentAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client);
-            await endpoint.DeleteCommentAsync(678867866).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.DeleteCommentAsync(678867866).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task GetCommentAsync_IsTrue()
+        [Fact]
+        public async Task GetCommentAsync_True()
         {
             var mockUrl = "https://api.imgur.com/3/comment/539556821";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -151,26 +198,26 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new CommentEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var comment = await endpoint.GetCommentAsync(539556821).ConfigureAwait(false);
 
-            Assert.IsNotNull(comment);
-            Assert.AreEqual(539556821, comment.Id);
-            Assert.AreEqual("n6gcXdY", comment.ImageId);
-            Assert.AreEqual("It's called smirking. Lots of people do it.", comment.CommentText);
-            Assert.AreEqual("WomanWiththeTattooedHands", comment.Author);
-            Assert.AreEqual(499505, comment.AuthorId);
-            Assert.AreEqual(false, comment.OnAlbum);
-            Assert.AreEqual(null, comment.AlbumCover);
-            Assert.AreEqual(379, comment.Ups);
-            Assert.AreEqual(16, comment.Downs);
-            Assert.AreEqual(363, comment.Points);
-            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1450526522), comment.DateTime);
-            Assert.AreEqual(0, comment.ParentId);
-            Assert.AreEqual("iphone", comment.Platform);
-            Assert.AreEqual(false, comment.Deleted);
-            Assert.AreEqual(VoteOption.Veto, comment.Vote);
+            Assert.NotNull(comment);
+            Assert.Equal(539556821, comment.Id);
+            Assert.Equal("n6gcXdY", comment.ImageId);
+            Assert.Equal("It's called smirking. Lots of people do it.", comment.CommentText);
+            Assert.Equal("WomanWiththeTattooedHands", comment.Author);
+            Assert.Equal(499505, comment.AuthorId);
+            Assert.Equal(false, comment.OnAlbum);
+            Assert.Equal(null, comment.AlbumCover);
+            Assert.Equal(379, comment.Ups);
+            Assert.Equal(16, comment.Downs);
+            Assert.Equal(363, comment.Points);
+            Assert.Equal(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1450526522), comment.DateTime);
+            Assert.Equal(0, comment.ParentId);
+            Assert.Equal("iphone", comment.Platform);
+            Assert.Equal(false, comment.Deleted);
+            Assert.Equal(VoteOption.Veto, comment.Vote);
         }
 
-        [TestMethod]
-        public async Task GetRepliesAsync_IsTrue()
+        [Fact]
+        public async Task GetRepliesAsync_True()
         {
             var mockUrl = "https://api.imgur.com/3/comment/539556821/replies";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -182,11 +229,11 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new CommentEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var comments = await endpoint.GetRepliesAsync(539556821).ConfigureAwait(false);
 
-            Assert.IsTrue(comments.Children.Count() == 7);
+            Assert.True(comments.Children.Count() == 7);
         }
 
-        [TestMethod]
-        public async Task ReportCommentAsync_IsTrue()
+        [Fact]
+        public async Task ReportCommentAsync_True()
         {
             var mockUrl = "https://api.imgur.com/3/comment/539556821/report";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -200,19 +247,27 @@ namespace Imgur.API.Tests.EndpointTests
                 await
                     endpoint.ReportCommentAsync(539556821, ReportReason.MatureContentNotMarked).ConfigureAwait(false);
 
-            Assert.IsTrue(reported);
+            Assert.True(reported);
         }
 
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task ReportCommentAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client);
-            await endpoint.ReportCommentAsync(539556821, ReportReason.Spam).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () =>
+                            await endpoint.ReportCommentAsync(539556821, ReportReason.Spam).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task VoteCommentAsync_IsTrue()
+        [Fact]
+        public async Task VoteCommentAsync_True()
         {
             var mockUrl = "https://api.imgur.com/3/comment/539556821/vote/down";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -224,15 +279,22 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new CommentEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var reported = await endpoint.VoteCommentAsync(539556821, VoteOption.Down).ConfigureAwait(false);
 
-            Assert.IsTrue(reported);
+            Assert.True(reported);
         }
 
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task VoteCommentAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client);
-            await endpoint.VoteCommentAsync(539556821, VoteOption.Down).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.VoteCommentAsync(539556821, VoteOption.Down).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
     }
 }

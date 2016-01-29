@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Tests.Mocks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 // ReSharper disable ExceptionNotDocumented
 
@@ -14,8 +14,8 @@ namespace Imgur.API.Tests.EndpointTests
 {
     public partial class GalleryEndpointTests
     {
-        [TestMethod]
-        public async Task GetImageAsync_IsNotNull()
+        [Fact]
+        public async Task GetImageAsync_NotNull()
         {
             var mockUrl = "https://api.imgur.com/3/gallery/image/rNdMhHm";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -27,43 +27,49 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new GalleryEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var image = await endpoint.GetGalleryImageAsync("rNdMhHm").ConfigureAwait(false);
 
-            Assert.IsNotNull(image);
-            Assert.AreEqual("rNdMhHm", image.Id);
-            Assert.AreEqual("wanna make money quickly? follow the instruction below", image.Title);
-            Assert.AreEqual("i am not lying", image.Description);
-            Assert.AreEqual(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1451524552), image.DateTime);
-            Assert.AreEqual("image/png", image.Type);
-            Assert.AreEqual(false, image.Animated);
-            Assert.AreEqual(610, image.Width);
-            Assert.AreEqual(558, image.Height);
-            Assert.AreEqual(564133, image.Size);
-            Assert.AreEqual(410285, image.Views);
-            Assert.AreEqual(231455307905, image.Bandwidth);
-            Assert.AreEqual(null, image.Vote);
-            Assert.AreEqual(false, image.Favorite);
-            Assert.AreEqual(false, image.Nsfw);
-            Assert.AreEqual("pics", image.Section);
-            Assert.AreEqual("Calasin", image.AccountUrl);
-            Assert.AreEqual(22349254, image.AccountId);
-            Assert.AreEqual(352, image.CommentCount);
-            Assert.AreEqual(10, image.CommentPreview.Count());
-            Assert.AreEqual("No Topic", image.Topic);
-            Assert.AreEqual(29, image.TopicId);
-            Assert.AreEqual("http://i.imgur.com/rNdMhHm.png", image.Link);
-            Assert.AreEqual(352, image.CommentCount);
-            Assert.AreEqual(15226, image.Ups);
-            Assert.AreEqual(2339, image.Downs);
-            Assert.AreEqual(12887, image.Points);
-            Assert.AreEqual(13092, image.Score);
+            Assert.NotNull(image);
+            Assert.Equal("rNdMhHm", image.Id);
+            Assert.Equal("wanna make money quickly? follow the instruction below", image.Title);
+            Assert.Equal("i am not lying", image.Description);
+            Assert.Equal(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(1451524552), image.DateTime);
+            Assert.Equal("image/png", image.Type);
+            Assert.Equal(false, image.Animated);
+            Assert.Equal(610, image.Width);
+            Assert.Equal(558, image.Height);
+            Assert.Equal(564133, image.Size);
+            Assert.Equal(410285, image.Views);
+            Assert.Equal(231455307905, image.Bandwidth);
+            Assert.Equal(null, image.Vote);
+            Assert.Equal(false, image.Favorite);
+            Assert.Equal(false, image.Nsfw);
+            Assert.Equal("pics", image.Section);
+            Assert.Equal("Calasin", image.AccountUrl);
+            Assert.Equal(22349254, image.AccountId);
+            Assert.Equal(352, image.CommentCount);
+            Assert.Equal(10, image.CommentPreview.Count());
+            Assert.Equal("No Topic", image.Topic);
+            Assert.Equal(29, image.TopicId);
+            Assert.Equal("http://i.imgur.com/rNdMhHm.png", image.Link);
+            Assert.Equal(352, image.CommentCount);
+            Assert.Equal(15226, image.Ups);
+            Assert.Equal(2339, image.Downs);
+            Assert.Equal(12887, image.Points);
+            Assert.Equal(13092, image.Score);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetImageAsync_WithIdNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new GalleryEndpoint(client);
-            await endpoint.GetGalleryImageAsync(null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetGalleryImageAsync(null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
     }
 }

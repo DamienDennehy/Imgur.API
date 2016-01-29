@@ -7,17 +7,17 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Enums;
 using Imgur.API.Tests.Mocks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
+// ReSharper disable PossibleNullReferenceException
 // ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.EndpointTests
 {
-    [TestClass]
     public class TopicEndpointTests : TestBase
     {
-        [TestMethod]
-        public async Task GetDefaultTopicsAsync_IsTrue()
+        [Fact]
+        public async Task GetDefaultTopicsAsync_True()
         {
             var mockUrl = "https://api.imgur.com/3/topics/defaults";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -30,12 +30,12 @@ namespace Imgur.API.Tests.EndpointTests
             var topics = await endpoint.GetDefaultTopicsAsync().ConfigureAwait(false);
             var topic = topics.FirstOrDefault();
 
-            Assert.IsNotNull(topic);
-            Assert.IsNotNull(topic.TopPost);
+            Assert.NotNull(topic);
+            Assert.NotNull(topic.TopPost);
         }
 
-        [TestMethod]
-        public async Task GetGalleryTopicItemAsync_IsNotNull()
+        [Fact]
+        public async Task GetGalleryTopicItemAsync_NotNull()
         {
             var mockUrl = "https://api.imgur.com/3/topics/Current_Events/xyZ";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -47,29 +47,42 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new TopicEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var item = await endpoint.GetGalleryTopicItemAsync("xyZ", "Current Events").ConfigureAwait(false);
 
-            Assert.IsNotNull(item);
+            Assert.NotNull(item);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetGalleryTopicItemAsync_WithGalleryItemIdNull_ThrowsNewArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new TopicEndpoint(client);
-            await endpoint.GetGalleryTopicItemAsync(null, "Current Events").ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () =>
+                            await endpoint.GetGalleryTopicItemAsync(null, "Current Events").ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetGalleryTopicItemAsync_WithTopicIdNull_ThrowsNewArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new TopicEndpoint(client);
-            await endpoint.GetGalleryTopicItemAsync("XyZ", null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetGalleryTopicItemAsync("XyZ", null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public async Task GetGalleryTopicItemsAsync_IsTrue()
+        [Fact]
+        public async Task GetGalleryTopicItemsAsync_True()
         {
             var mockUrl = "https://api.imgur.com/3/topics/Current_Events/top/day/3";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -84,16 +97,22 @@ namespace Imgur.API.Tests.EndpointTests
                     endpoint.GetGalleryTopicItemsAsync("Current Events", CustomGallerySortOrder.Top, TimeWindow.Day, 3)
                         .ConfigureAwait(false);
 
-            Assert.IsTrue(items.Any());
+            Assert.True(items.Any());
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [Fact]
         public async Task GetGalleryTopicItemsAsync_WithTopicIdNull_ThrowsNewArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new TopicEndpoint(client);
-            await endpoint.GetGalleryTopicItemsAsync(null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetGalleryTopicItemsAsync(null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
     }
 }

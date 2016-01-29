@@ -1,106 +1,73 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Imgur.API.JsonConverters;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Xunit;
 
 // ReSharper disable ExceptionNotDocumented
 
 namespace Imgur.API.Tests.JsonConverters
 {
-    [TestClass]
     public class EpochTimeConverterTests
     {
-        [TestMethod]
-        public void EpochTimeConverter_CanConvertDateTimeOffset_IsTrue()
+        public static IEnumerable<object[]> ReadJsonData => new[]
+        {
+            new object[] {new DateTimeOffset(new DateTime(2015, 8, 9, 15, 30, 35, DateTimeKind.Utc)), "1439134235"}
+        };
+
+        public static IEnumerable<object[]> WriteJsonData => new[]
+        {
+            new object[] {"1439134235", new DateTimeOffset(new DateTime(2015, 8, 9, 15, 30, 35, DateTimeKind.Utc))}
+        };
+
+        [Theory]
+        [InlineData(typeof (DateTimeOffset), true)]
+        [InlineData(typeof (DateTime), false)]
+        [InlineData(typeof (string), false)]
+        [InlineData(typeof (int), false)]
+        [InlineData(typeof (bool), false)]
+        [InlineData(typeof (float), false)]
+        public void CanConvert(Type type, bool canConvert)
         {
             var converter = new EpochTimeConverter();
 
-            Assert.IsTrue(converter.CanConvert(typeof (DateTimeOffset)));
+            Assert.Equal(converter.CanConvert(type), canConvert);
         }
 
-        [TestMethod]
-        public void EpochTimeConverter_CanConvertInt_IsFalse()
+        [Theory, MemberData("ReadJsonData")]
+        public void ReadJson(DateTimeOffset expected, string original)
         {
             var converter = new EpochTimeConverter();
 
-            Assert.IsFalse(converter.CanConvert(typeof (int)));
-        }
-
-        [TestMethod]
-        public void EpochTimeConverter_CanConvertString_IsFalse()
-        {
-            var converter = new EpochTimeConverter();
-
-            Assert.IsFalse(converter.CanConvert(typeof (string)));
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (InvalidCastException))]
-        public void EpochTimeConverter_ReadJsonBoolean_ThrowsInvalidCastException()
-        {
-            var converter = new EpochTimeConverter();
-
-            var reader = new JsonTextReader(new StringReader("true"));
+            var reader = new JsonTextReader(new StringReader(original));
             reader.Read();
             var serializer = new JsonSerializer();
 
-            var expected = new DateTimeOffset(new DateTime(2015, 8, 9, 15, 30, 35, DateTimeKind.Utc));
             var actual = (DateTimeOffset) converter.ReadJson(reader, typeof (DateTimeOffset), null, serializer);
 
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
-        [TestMethod]
-        public void EpochTimeConverter_ReadJsonInt64_AreEqual()
+        [Theory]
+        [InlineData("'abcdefg'")]
+        [InlineData("true")]
+        public void ReadJson_ThrowsInvalidCastException(string data)
         {
             var converter = new EpochTimeConverter();
 
-            var reader = new JsonTextReader(new StringReader("1439134235"));
+            var reader = new JsonTextReader(new StringReader(data));
             reader.Read();
             var serializer = new JsonSerializer();
 
-            var expected = new DateTimeOffset(new DateTime(2015, 8, 9, 15, 30, 35, DateTimeKind.Utc));
-            var actual = (DateTimeOffset) converter.ReadJson(reader, typeof (DateTimeOffset), null, serializer);
-
-            Assert.AreEqual(expected, actual);
+            var exception = Record.Exception(() => converter.ReadJson(reader, typeof (DateTimeOffset), null, serializer));
+            Assert.NotNull(exception);
+            Assert.IsType<InvalidCastException>(exception);
         }
 
-        [TestMethod]
-        public void EpochTimeConverter_ReadJsonInt64_AreNotEqual()
-        {
-            var converter = new EpochTimeConverter();
-
-            var reader = new JsonTextReader(new StringReader("1439134235"));
-            reader.Read();
-            var serializer = new JsonSerializer();
-
-            var expected = new DateTimeOffset(new DateTime(2005, 8, 9, 15, 30, 35, DateTimeKind.Utc));
-            var actual = (DateTimeOffset) converter.ReadJson(reader, typeof (DateTimeOffset), null, serializer);
-
-            Assert.AreNotEqual(expected, actual);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (InvalidCastException))]
-        public void EpochTimeConverter_ReadJsonString_ThrowsInvalidCastException()
-        {
-            var converter = new EpochTimeConverter();
-
-            var reader = new JsonTextReader(new StringReader("'abcdefg'"));
-            reader.Read();
-            var serializer = new JsonSerializer();
-
-            var expected = new DateTimeOffset(new DateTime(2015, 8, 9, 15, 30, 35, DateTimeKind.Utc));
-            var actual = (DateTimeOffset) converter.ReadJson(reader, typeof (DateTimeOffset), null, serializer);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (InvalidCastException))]
-        public void EpochTimeConverter_WriteJsonBoolean_ThrowsInvalidCastException()
+        [Theory, MemberData("WriteJsonData")]
+        public void WriteJson(string expected, DateTimeOffset original)
         {
             var converter = new EpochTimeConverter();
 
@@ -109,15 +76,18 @@ namespace Imgur.API.Tests.JsonConverters
             var writer = new JsonTextWriter(stringWriter);
             var serializer = new JsonSerializer();
 
-            converter.WriteJson(writer, true, serializer);
+            converter.WriteJson(writer, original, serializer);
 
             var actual = sb.ToString();
 
-            Assert.AreNotEqual("1439134235", actual);
+            Assert.Equal(expected, actual);
         }
 
-        [TestMethod]
-        public void EpochTimeConverter_WriteJsonInt64_AreEqual()
+        [Theory]
+        [InlineData("xyz")]
+        [InlineData("true")]
+        [InlineData("21312312")]
+        public void WriteJson_ThrowsInvalidCastException(object data)
         {
             var converter = new EpochTimeConverter();
 
@@ -126,48 +96,9 @@ namespace Imgur.API.Tests.JsonConverters
             var writer = new JsonTextWriter(stringWriter);
             var serializer = new JsonSerializer();
 
-            var date = new DateTimeOffset(new DateTime(2015, 8, 9, 15, 30, 35, DateTimeKind.Utc));
-            converter.WriteJson(writer, date, serializer);
-
-            var actual = sb.ToString();
-
-            Assert.AreEqual("1439134235", actual);
-        }
-
-        [TestMethod]
-        public void EpochTimeConverter_WriteJsonInt64_AreNotEqual()
-        {
-            var converter = new EpochTimeConverter();
-
-            var sb = new StringBuilder();
-            var stringWriter = new StringWriter(sb);
-            var writer = new JsonTextWriter(stringWriter);
-            var serializer = new JsonSerializer();
-
-            var date = new DateTimeOffset(new DateTime(2015, 8, 4, 15, 30, 32, DateTimeKind.Utc));
-            converter.WriteJson(writer, date, serializer);
-
-            var actual = sb.ToString();
-
-            Assert.AreNotEqual("1439134235", actual);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof (InvalidCastException))]
-        public void EpochTimeConverter_WriteJsonString_ThrowsInvalidCastException()
-        {
-            var converter = new EpochTimeConverter();
-
-            var sb = new StringBuilder();
-            var stringWriter = new StringWriter(sb);
-            var writer = new JsonTextWriter(stringWriter);
-            var serializer = new JsonSerializer();
-
-            converter.WriteJson(writer, "xyz", serializer);
-
-            var actual = sb.ToString();
-
-            Assert.AreNotEqual("1439134235", actual);
+            var exception = Record.Exception(() => converter.WriteJson(writer, data, serializer));
+            Assert.NotNull(exception);
+            Assert.IsType<InvalidCastException>(exception);
         }
     }
 }

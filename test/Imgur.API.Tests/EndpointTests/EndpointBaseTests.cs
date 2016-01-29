@@ -8,48 +8,48 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints.Impl;
 using Imgur.API.Models.Impl;
 using Imgur.API.Tests.Mocks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 // ReSharper disable ExceptionNotDocumented
 // ReSharper disable ThrowingSystemException
 
 namespace Imgur.API.Tests.EndpointTests
 {
-    [TestClass]
     public class EndpointTests : TestBase
     {
-        [TestMethod]
-        public void ApiClient_SetByConstructor1_AreEqual()
+        [Fact]
+        public void ApiClient_SetByConstructor1_Equal()
         {
             var client = new ImgurClient("ClientId", "ClientSecret");
             var endpoint = new MockEndpoint(client);
-            Assert.AreSame(client, endpoint.ApiClient);
+            Assert.Same(client, endpoint.ApiClient);
         }
 
-        [TestMethod]
-        public void ApiClient_SetByConstructor2_AreEqual()
+        [Fact]
+        public void ApiClient_SetByConstructor2_Equal()
         {
             var client = new ImgurClient("ClientId", "ClientSecret");
             var endpoint = new MockEndpoint(client);
-            Assert.AreSame(client, endpoint.ApiClient);
+            Assert.Same(client, endpoint.ApiClient);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void ApiClient_SetNullByConstructor1_ThrowArgumentNullException()
         {
-            new MockEndpoint(null);
+            var exception = Record.Exception(() => new MockEndpoint(null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public void HttpClient_SetByConstructor1_IsNotNull()
+        [Fact]
+        public void HttpClient_SetByConstructor1_NotNull()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
-            Assert.IsNotNull(endpoint.HttpClient);
+            Assert.NotNull(endpoint.HttpClient);
         }
 
-        [TestMethod]
+        [Fact]
         public void HttpClient_SetByConstructor2_AreSame()
         {
             var client = new ImgurClient("123", "1234");
@@ -57,72 +57,73 @@ namespace Imgur.API.Tests.EndpointTests
 
             var endpoint = new MockEndpoint(client, httpCLient);
 
-            Assert.AreSame(httpCLient, endpoint.HttpClient);
+            Assert.Same(httpCLient, endpoint.HttpClient);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void HttpClient_SetNullByConstructor1_ThrowArgumentNullException()
         {
-            new MockEndpoint(new ImgurClient("test", "test"), null);
+            var exception = Record.Exception(() => new MockEndpoint(new ImgurClient("test", "test"), null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
+        [Fact]
         public void HttpClientBaseAddress_WithImgurClient_IsImgurUrl()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
 
-            Assert.AreEqual(new Uri("https://api.imgur.com/3/"), endpoint.HttpClient.BaseAddress);
+            Assert.Equal(new Uri("https://api.imgur.com/3/"), endpoint.HttpClient.BaseAddress);
         }
 
-        [TestMethod]
+        [Fact]
         public void HttpClientBaseAddress_WithMashapeClient_IsMashapeUrl()
         {
             var client = new MashapeClient("123", "1234", "12345");
             var endpoint = new MockEndpoint(client);
 
-            Assert.AreEqual(new Uri("https://imgur-apiv3.p.mashape.com/3/"), endpoint.HttpClient.BaseAddress);
+            Assert.Equal(new Uri("https://imgur-apiv3.p.mashape.com/3/"), endpoint.HttpClient.BaseAddress);
         }
 
-        [TestMethod]
-        public void HttpClientWithImgurClient_SetByConstructor_HeadersAreEqual()
+        [Fact]
+        public void HttpClientWithImgurClient_SetByConstructor_HeadersEqual()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
             var authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
             var accept = endpoint.HttpClient.DefaultRequestHeaders.Accept.First();
-            Assert.AreEqual("Client-ID 123", authHeader);
-            Assert.AreEqual("application/json", accept.MediaType);
+            Assert.Equal("Client-ID 123", authHeader);
+            Assert.Equal("application/json", accept.MediaType);
         }
 
-        [TestMethod]
-        public void HttpClientWithImgurClientAndOAuth2Token_SetByConstructor_HeadersAreEqual()
+        [Fact]
+        public void HttpClientWithImgurClientAndOAuth2Token_SetByConstructor_HeadersEqual()
         {
             var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", "bob", 2419200);
             var client = new ImgurClient("123", "1234", oAuth2Token);
             var endpoint = new MockEndpoint(client);
             var authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
             var accept = endpoint.HttpClient.DefaultRequestHeaders.Accept.First();
-            Assert.AreEqual("Bearer access_token", authHeader);
-            Assert.AreEqual("application/json", accept.MediaType);
+            Assert.Equal("Bearer access_token", authHeader);
+            Assert.Equal("application/json", accept.MediaType);
         }
 
-        [TestMethod]
-        public void HttpClientWithMashapeClient_SetByConstructor_HeadersAreEqual()
+        [Fact]
+        public void HttpClientWithMashapeClient_SetByConstructor_HeadersEqual()
         {
             var client = new MashapeClient("123", "1234", "1234567");
             var endpoint = new MockEndpoint(client);
             var authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
             var mashapeHeaders = endpoint.HttpClient.DefaultRequestHeaders.GetValues("X-Mashape-Key").First();
             var accept = endpoint.HttpClient.DefaultRequestHeaders.Accept.First();
-            Assert.AreEqual("Client-ID 123", authHeader);
-            Assert.AreEqual("1234567", mashapeHeaders);
-            Assert.AreEqual("application/json", accept.MediaType);
+            Assert.Equal("Client-ID 123", authHeader);
+            Assert.Equal("1234567", mashapeHeaders);
+            Assert.Equal("application/json", accept.MediaType);
         }
 
-        [TestMethod]
-        public void HttpClientWithMashapeClientAndOAuth2Token_SetByConstructor_HeadersAreEqual()
+        [Fact]
+        public void HttpClientWithMashapeClientAndOAuth2Token_SetByConstructor_HeadersEqual()
         {
             var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", "bob", 2419200);
             var client = new MashapeClient("123", "1234", "1234567", oAuth2Token);
@@ -130,67 +131,78 @@ namespace Imgur.API.Tests.EndpointTests
             var authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
             var mashapeHeaders = endpoint.HttpClient.DefaultRequestHeaders.GetValues("X-Mashape-Key").First();
             var accept = endpoint.HttpClient.DefaultRequestHeaders.Accept.First();
-            Assert.AreEqual("Bearer access_token", authHeader);
-            Assert.AreEqual("1234567", mashapeHeaders);
-            Assert.AreEqual("application/json", accept.MediaType);
+            Assert.Equal("Bearer access_token", authHeader);
+            Assert.Equal("1234567", mashapeHeaders);
+            Assert.Equal("application/json", accept.MediaType);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [Fact]
         public void ProcessEndpointBaseResponse_WithStringResponseNull_ThrowsImgurException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
-            endpoint.ProcessEndpointResponse<bool>(null);
+
+            var exception = Record.Exception(() => endpoint.ProcessEndpointResponse<bool>(null));
+            Assert.NotNull(exception);
+            Assert.IsType<ImgurException>(exception);
         }
 
-        [TestMethod]
-        public void ProcessEndpointResponse_WithSuccessfulResponse_AreEqual()
+        [Fact]
+        public void ProcessEndpointResponse_WithSuccessfulResponse_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
             var response = endpoint.ProcessEndpointResponse<bool>(MockGenericEndpointResponses.SuccessfulResponse);
-            Assert.IsTrue(response);
+            Assert.True(response);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [Fact]
         public void ProcessImgurEndpointResponse_WithAuthorization_ThrowImgurException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
-            endpoint.ProcessEndpointResponse<RateLimit>(MockErrors.ImgurClientError);
+
+            var exception =
+                Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>(MockErrors.ImgurClientError));
+            Assert.NotNull(exception);
+            Assert.IsType<ImgurException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [Fact]
         public void ProcessImgurEndpointResponse_WithExpectedCapacityError_ThrowImgurException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
-            endpoint.ProcessEndpointResponse<RateLimit>(MockErrors.ImgurCapacityError);
+
+            var exception =
+                Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>(MockErrors.ImgurCapacityError));
+            Assert.NotNull(exception);
+            Assert.IsType<ImgurException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [Fact]
         public void ProcessImgurEndpointResponse_WithInvalidResponse_ThrowsImgurException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
-            endpoint.ProcessEndpointResponse<RateLimit>("<html>");
+
+            var exception = Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>("<html>"));
+            Assert.NotNull(exception);
+            Assert.IsType<ImgurException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(MashapeException))]
+        [Fact]
         public void ProcessMashapeEndpointResponse_WithoutAuthorization_ThrowMashapeException()
         {
             var client = new MashapeClient("123", "567567", "1234");
             var endpoint = new MockEndpoint(client);
-            endpoint.ProcessEndpointResponse<RateLimit>(MockErrors.MashapeError);
+
+            var exception = Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>(MockErrors.MashapeError));
+            Assert.NotNull(exception);
+            Assert.IsType<MashapeException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [Fact]
         public async Task SendRequestAsync_WithInvalidUrl__ThrowsImgurException()
         {
             var mockUrl = "http://example.org/test";
@@ -204,13 +216,18 @@ namespace Imgur.API.Tests.EndpointTests
 
             //Query a url we know doesn't exist in the fake handler
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test2");
-            var image = await endpoint.SendRequestAsync<Image>(request).ConfigureAwait(false);
 
-            Assert.IsNull(image);
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.SendRequestAsync<Image>(request).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ImgurException>(exception);
         }
 
-        [TestMethod]
-        public async Task SendRequestAsync_WithMessage_AreEqual()
+        [Fact]
+        public async Task SendRequestAsync_WithMessage_Equal()
         {
             var constructorObjects = new object[2];
             constructorObjects[0] = new ImgurClient("123", "1234");
@@ -227,20 +244,25 @@ namespace Imgur.API.Tests.EndpointTests
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test");
             var image = await endpoint.SendRequestAsync<Image>(request).ConfigureAwait(false);
 
-            Assert.IsNotNull(image);
+            Assert.NotNull(image);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public async Task SendRequestAsync_WithMessageNull_ThrowsArgumentNullException()
         {
             var httpClient = new HttpClient(new MockHttpMessageHandler());
             var endpoint = new MockEndpoint(new ImgurClient("123", "1234"), httpClient);
-            await endpoint.SendRequestAsync<Image>(null).ConfigureAwait(false);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.SendRequestAsync<Image>(null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [Fact]
         public async Task SendRequestAsync_WithResponseNull_ThrowsImgurException()
         {
             var mockUrl = "http://example.org/test";
@@ -250,13 +272,17 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new MockEndpoint(new ImgurClient("123", "1234"), httpClient);
 
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test");
-            var image = await endpoint.SendRequestAsync<Image>(request).ConfigureAwait(false);
 
-            Assert.IsNull(image);
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.SendRequestAsync<Image>(request).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ImgurException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ImgurException))]
+        [Fact]
         public async Task SendRequestAsync_WithUnauthorizedErrorMessage__ThrowsImgurException()
         {
             var mockUrl = "http://example.org/test";
@@ -269,120 +295,128 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new MockEndpoint(new ImgurClient("123", "1234"), httpClient);
 
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test");
-            var image = await endpoint.SendRequestAsync<Image>(request).ConfigureAwait(false);
 
-            Assert.IsNull(image);
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.SendRequestAsync<Image>(request).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ImgurException>(exception);
         }
 
-        [TestMethod]
-        public void SwitchClient_SetImgurClient_IsTrue()
+        [Fact]
+        public void SwitchClient_SetImgurClient_True()
         {
             var client = new ImgurClient("123", "1234");
             var mashapeClient = new MashapeClient("123444", "567567", "12354564");
             var endpoint = new MockEndpoint(mashapeClient);
 
-            Assert.IsTrue(endpoint.ApiClient is IMashapeClient);
+            Assert.True(endpoint.ApiClient is IMashapeClient);
             endpoint.SwitchClient(client);
-            Assert.IsTrue(endpoint.ApiClient is IImgurClient);
+            Assert.True(endpoint.ApiClient is IImgurClient);
         }
 
-        [TestMethod]
-        public void SwitchClient_SetMashapeClient_IsTrue()
+        [Fact]
+        public void SwitchClient_SetMashapeClient_True()
         {
             var client = new ImgurClient("123", "1234");
             var mashapeClient = new MashapeClient("123444", "567567", "12354564");
             var endpoint = new MockEndpoint(client);
 
-            Assert.IsTrue(endpoint.ApiClient is IImgurClient);
+            Assert.True(endpoint.ApiClient is IImgurClient);
             endpoint.SwitchClient(mashapeClient);
-            Assert.IsTrue(endpoint.ApiClient is IMashapeClient);
+            Assert.True(endpoint.ApiClient is IMashapeClient);
         }
 
-        [TestMethod]
-        public void SwitchClient_SetMashapeClientAndOAuth2TokenThenImgurClient_HeadersAreEqual()
+        [Fact]
+        public void SwitchClient_SetMashapeClientAndOAuth2TokenThenImgurClient_HeadersEqual()
         {
             var oAuth2Token = new OAuth2Token("access_token", "refresh_token", "bearer", "11345", "bob", 2419200);
             var client = new ImgurClient("123", "1234", oAuth2Token);
             var mashapeClient = new MashapeClient("123444", "567567", "12354564");
             var endpoint = new MockEndpoint(mashapeClient);
 
-            Assert.IsTrue(endpoint.ApiClient is IMashapeClient);
+            Assert.True(endpoint.ApiClient is IMashapeClient);
 
             var authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
 
-            Assert.AreEqual("Client-ID 123444", authHeader);
+            Assert.Equal("Client-ID 123444", authHeader);
 
             endpoint.SwitchClient(client);
             authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
 
-            Assert.IsTrue(endpoint.ApiClient is IImgurClient);
-            Assert.AreEqual("Bearer access_token", authHeader);
+            Assert.True(endpoint.ApiClient is IImgurClient);
+            Assert.Equal("Bearer access_token", authHeader);
         }
 
-        [TestMethod]
-        public void SwitchClient_SetMashapeClientThenImgurClient_BaseAddressAreEqual()
+        [Fact]
+        public void SwitchClient_SetMashapeClientThenImgurClient_BaseAddressEqual()
         {
             var client = new ImgurClient("123", "1234");
             var mashapeClient = new MashapeClient("123444", "567567", "12354564");
             var endpoint = new MockEndpoint(mashapeClient);
 
-            Assert.IsTrue(endpoint.ApiClient is IMashapeClient);
+            Assert.True(endpoint.ApiClient is IMashapeClient);
 
-            Assert.AreEqual(new Uri("https://imgur-apiv3.p.mashape.com/3/"), endpoint.HttpClient.BaseAddress);
+            Assert.Equal(new Uri("https://imgur-apiv3.p.mashape.com/3/"), endpoint.HttpClient.BaseAddress);
 
             endpoint.SwitchClient(client);
 
-            Assert.IsTrue(endpoint.ApiClient is IImgurClient);
+            Assert.True(endpoint.ApiClient is IImgurClient);
 
-            Assert.AreEqual(new Uri("https://api.imgur.com/3/"), endpoint.HttpClient.BaseAddress);
+            Assert.Equal(new Uri("https://api.imgur.com/3/"), endpoint.HttpClient.BaseAddress);
         }
 
-        [TestMethod]
-        public void SwitchClient_SetMashapeClientThenImgurClient_HeadersAreEqual()
+        [Fact]
+        public void SwitchClient_SetMashapeClientThenImgurClient_HeadersEqual()
         {
             var client = new ImgurClient("123", "1234");
             var mashapeClient = new MashapeClient("123444", "567567", "12354564");
             var endpoint = new MockEndpoint(mashapeClient);
 
-            Assert.IsTrue(endpoint.ApiClient is IMashapeClient);
+            Assert.True(endpoint.ApiClient is IMashapeClient);
 
             var authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
             var mashapeHeaders = endpoint.HttpClient.DefaultRequestHeaders.GetValues("X-Mashape-Key").First();
             var accept = endpoint.HttpClient.DefaultRequestHeaders.Accept.First();
 
-            Assert.AreEqual("Client-ID 123444", authHeader);
-            Assert.AreEqual("12354564", mashapeHeaders);
-            Assert.AreEqual("application/json", accept.MediaType);
+            Assert.Equal("Client-ID 123444", authHeader);
+            Assert.Equal("12354564", mashapeHeaders);
+            Assert.Equal("application/json", accept.MediaType);
 
             endpoint.SwitchClient(client);
             authHeader = endpoint.HttpClient.DefaultRequestHeaders.GetValues("Authorization").First();
             accept = endpoint.HttpClient.DefaultRequestHeaders.Accept.First();
 
-            Assert.IsTrue(endpoint.ApiClient is IImgurClient);
-            Assert.AreEqual("Client-ID 123", authHeader);
-            Assert.AreEqual("application/json", accept.MediaType);
+            Assert.True(endpoint.ApiClient is IImgurClient);
+            Assert.Equal("Client-ID 123", authHeader);
+            Assert.Equal("application/json", accept.MediaType);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void SwitchClient_SetNull_ThrowsArgumentNullException()
         {
             var endpoint = new MockEndpoint(new ImgurClient("123", "1234"));
-            endpoint.SwitchClient(null);
+
+            var exception = Record.Exception(() => endpoint.SwitchClient(null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void UpdateRateLimit_WithHeadersNull_ThrowArgumentException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
 
-            endpoint.UpdateRateLimit(null);
+            var exception = Record.Exception(() => endpoint.UpdateRateLimit(null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
-        [TestMethod]
-        public void UpdateRateLimit_WithImgurClientHeaders_AreEqual()
+        [Fact]
+        public void UpdateRateLimit_WithImgurClientHeaders_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
@@ -393,20 +427,20 @@ namespace Imgur.API.Tests.EndpointTests
 
             endpoint.UpdateRateLimit(response.Headers);
 
-            Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
-            Assert.AreEqual(345, endpoint.ApiClient.RateLimit.ClientRemaining);
+            Assert.Equal(123, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.Equal(345, endpoint.ApiClient.RateLimit.ClientRemaining);
 
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "122");
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientRemaining", "344");
 
             endpoint.UpdateRateLimit(response.Headers);
 
-            Assert.AreEqual(122, endpoint.ApiClient.RateLimit.ClientLimit);
-            Assert.AreEqual(344, endpoint.ApiClient.RateLimit.ClientRemaining);
+            Assert.Equal(122, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.Equal(344, endpoint.ApiClient.RateLimit.ClientRemaining);
         }
 
-        [TestMethod]
-        public async Task UpdateRateLimit_WithImgurClientHeadersAndFakeResponse_AreEqual()
+        [Fact]
+        public async Task UpdateRateLimit_WithImgurClientHeadersAndFakeResponse_Equal()
         {
             var mockUrl = "https://api.imgur.com/3/image/zVpyzhW/favorite";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -422,20 +456,20 @@ namespace Imgur.API.Tests.EndpointTests
 
             await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false);
 
-            Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
-            Assert.AreEqual(345, endpoint.ApiClient.RateLimit.ClientRemaining);
+            Assert.Equal(123, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.Equal(345, endpoint.ApiClient.RateLimit.ClientRemaining);
 
             mockResponse.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "122");
             mockResponse.Headers.TryAddWithoutValidation("X-RateLimit-ClientRemaining", "344");
 
             await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false);
 
-            Assert.AreEqual(122, endpoint.ApiClient.RateLimit.ClientLimit);
-            Assert.AreEqual(344, endpoint.ApiClient.RateLimit.ClientRemaining);
+            Assert.Equal(122, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.Equal(344, endpoint.ApiClient.RateLimit.ClientRemaining);
         }
 
-        [TestMethod]
-        public void UpdateRateLimit_WithImgurClientHeadersRemoved_AreEqual()
+        [Fact]
+        public void UpdateRateLimit_WithImgurClientHeadersRemoved_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
@@ -446,20 +480,20 @@ namespace Imgur.API.Tests.EndpointTests
 
             endpoint.UpdateRateLimit(response.Headers);
 
-            Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
-            Assert.AreEqual(345, endpoint.ApiClient.RateLimit.ClientRemaining);
+            Assert.Equal(123, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.Equal(345, endpoint.ApiClient.RateLimit.ClientRemaining);
 
             response.Headers.Remove("X-RateLimit-ClientLimit");
             response.Headers.Remove("X-RateLimit-ClientRemaining");
 
             endpoint.UpdateRateLimit(response.Headers);
 
-            Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
-            Assert.AreEqual(345, endpoint.ApiClient.RateLimit.ClientRemaining);
+            Assert.Equal(123, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.Equal(345, endpoint.ApiClient.RateLimit.ClientRemaining);
         }
 
-        [TestMethod]
-        public void UpdateRateLimit_WithMashapeClientHeaders_AreEqual()
+        [Fact]
+        public void UpdateRateLimit_WithMashapeClientHeaders_Equal()
         {
             var client = new MashapeClient("123", "1234", "jhjhjhjh");
             var endpoint = new MockEndpoint(client);
@@ -470,16 +504,16 @@ namespace Imgur.API.Tests.EndpointTests
 
             endpoint.UpdateRateLimit(response.Headers);
 
-            Assert.AreEqual(123, endpoint.ApiClient.RateLimit.ClientLimit);
-            Assert.AreEqual(345, endpoint.ApiClient.RateLimit.ClientRemaining);
+            Assert.Equal(123, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.Equal(345, endpoint.ApiClient.RateLimit.ClientRemaining);
 
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Limit", "122");
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Remaining", "344");
 
             endpoint.UpdateRateLimit(response.Headers);
 
-            Assert.AreEqual(122, endpoint.ApiClient.RateLimit.ClientLimit);
-            Assert.AreEqual(344, endpoint.ApiClient.RateLimit.ClientRemaining);
+            Assert.Equal(122, endpoint.ApiClient.RateLimit.ClientLimit);
+            Assert.Equal(344, endpoint.ApiClient.RateLimit.ClientRemaining);
         }
     }
 }

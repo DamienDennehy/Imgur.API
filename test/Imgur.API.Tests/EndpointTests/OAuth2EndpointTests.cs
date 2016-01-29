@@ -71,7 +71,7 @@ namespace Imgur.API.Tests.EndpointTests
                         async () => await endpoint.GetTokenByCodeAsync("12345").ConfigureAwait(false))
                         .ConfigureAwait(false);
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
+            Assert.IsType<ImgurException>(exception);
         }
 
         [Fact]

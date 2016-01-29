@@ -234,7 +234,7 @@ namespace Imgur.API.Tests.EndpointTests
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new ImageEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
-            var image = await endpoint.UploadImageBinaryAsync(File.ReadAllBytes("banana.gif")).ConfigureAwait(false);
+            var image = await endpoint.UploadImageBinaryAsync(new byte[9]).ConfigureAwait(false);
 
             Assert.NotNull(image);
             Assert.Equal(true, image.Animated);

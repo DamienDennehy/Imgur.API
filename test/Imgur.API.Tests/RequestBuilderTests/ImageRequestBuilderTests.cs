@@ -50,7 +50,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new ImageRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}image";
 
-            var image = File.ReadAllBytes("banana.gif");
+            var image = new byte[9];
             var request = requestBuilder.UploadImageBinaryRequest(mockUrl, image, "TheAlbum", "TheTitle",
                 "TheDescription");
 
@@ -96,7 +96,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         public void UploadImageBinaryRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new ImageRequestBuilder();
-            var image = File.ReadAllBytes("banana.gif");
+            var image = new byte[9];
 
             var exception = Record.Exception(() => requestBuilder.UploadImageBinaryRequest(null, image));
             Assert.NotNull(exception);

@@ -20,7 +20,7 @@ build:
   verbosity: minimal
 test_script:
 - ps: >-
-    (Get-Content src\Imgur.API.Tests\project.json).replace('"Imgur.API": "1.0.0-*"', '"Imgur.API": "' + $env:APPVEYOR_BUILD_VERSION + '",') | Set-Content src\Imgur.API.Tests\project.json
+    (Get-Content test\Imgur.API.Tests\project.json).replace('"Imgur.API": "1.0.0-*"', '"Imgur.API": "' + $env:APPVEYOR_BUILD_VERSION + '",') | Set-Content test\Imgur.API.Tests\project.json
 
     cd test\Imgur.API.Tests
 

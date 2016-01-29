@@ -1,21 +1,30 @@
 version: 3.7.0-build{build}
 install:
-- ps: dnvm install 1.0.0-rc2-16357 -u
+- ps: >-
+    dnvm install 1.0.0-rc1-update1
+
+    dnvm use 1.0.0-rc1-update1
+
+    nuget sources add -Name Local-CI -Source C:\Users\appveyor\.dnx\packages
+
+    nuget sources add -Name MyGet-CI -Source http://myget.org/f/damiendennehy/
 cache:
 - C:\Users\appveyor\.dnx\runtimes
 - C:\Users\appveyor\.dnx\packages
-- C:\projects\imgur-api\packages
 before_build:
 - ps: >-
     dnu restore
 
-    nuget restore
-
     (Get-Content src\Imgur.API\project.json).replace('"version": "1.0.0-*",', '"version": "' + $env:APPVEYOR_BUILD_VERSION + '",') | Set-Content src\Imgur.API\project.json
 build:
   verbosity: minimal
+test_script:
+- ps: >-
+    cd test\Imgur.API.Tests
+
+    dnx test
 artifacts:
-- path: artifacts\**\*.nupkg
+- path: artifacts\bin\Imgur.API\Debug\*.nupkg
 deploy:
 - provider: NuGet
   server: https://www.myget.org/F/damiendennehy/api/v2/package

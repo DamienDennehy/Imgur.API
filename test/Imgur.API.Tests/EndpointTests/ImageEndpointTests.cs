@@ -289,9 +289,9 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new ImageEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             IImage image;
 
-            using (var fs = new FileStream("banana.gif", FileMode.Open))
+            using (var ms = new MemoryStream(new byte[9]))
             {
-                image = await endpoint.UploadImageStreamAsync(fs).ConfigureAwait(false);
+                image = await endpoint.UploadImageStreamAsync(ms).ConfigureAwait(false);
             }
 
             Assert.NotNull(image);

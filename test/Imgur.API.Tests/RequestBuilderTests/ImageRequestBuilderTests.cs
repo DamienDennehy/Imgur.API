@@ -154,24 +154,24 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new ImageRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}image";
 
-            using (var fs = new FileStream("banana.gif", FileMode.Open))
+            using (var ms = new MemoryStream(new byte[9]))
             {
-                var imageLength = fs.Length;
-                var request = requestBuilder.UploadImageStreamRequest(mockUrl, fs, "TheAlbum", "TheTitle",
+                var imageLength = ms.Length;
+                var request = requestBuilder.UploadImageStreamRequest(mockUrl, ms, "TheAlbum", "TheTitle",
                     "TheDescription");
 
                 Assert.NotNull(request);
                 Assert.Equal("https://api.imgur.com/3/image", request.RequestUri.ToString());
                 Assert.Equal(HttpMethod.Post, request.Method);
 
-                var content = (MultipartFormDataContent) request.Content;
+                var content = (MultipartFormDataContent)request.Content;
                 var imageContent =
-                    (StreamContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
-                var album = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
-                var type = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
-                var title = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
+                    (StreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
+                var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
+                var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+                var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
                 var description =
-                    (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
+                    (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
                 Assert.NotNull(imageContent);
                 Assert.NotNull(type);
@@ -205,10 +205,10 @@ namespace Imgur.API.Tests.RequestBuilderTests
         public void UploadStreamBinaryRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new ImageRequestBuilder();
-            using (var fs = new FileStream("banana.gif", FileMode.Open))
+            using (var ms = new MemoryStream(new byte[9]))
             {
                 // ReSharper disable once AccessToDisposedClosure
-                var exception = Record.Exception(() => requestBuilder.UploadImageStreamRequest(null, fs));
+                var exception = Record.Exception(() => requestBuilder.UploadImageStreamRequest(null, ms));
                 Assert.NotNull(exception);
                 Assert.IsType<ArgumentNullException>(exception);
             }

@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 3.7.0-beta2 (2016-01-30)
+* Built using DNX 1.0.0-rc1.
+* Fix for .NET Platform Standard 1.1 support - corrected dependencies.
+* Fix for "TopPost" property on Topics model - made nullable.
+
 ## Version 3.7.0-beta1 (2016-01-14)
 * Added .NET Platform Standard 1.1 support.
 * Added "TopPost" property to Topics model.

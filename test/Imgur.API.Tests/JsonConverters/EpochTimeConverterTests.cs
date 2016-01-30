@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Imgur.API.JsonConverters;
+using Imgur.API.Models.Impl;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -25,6 +26,7 @@ namespace Imgur.API.Tests.JsonConverters
         [Theory]
         [InlineData(typeof (DateTimeOffset), true)]
         [InlineData(typeof (DateTime), false)]
+        [InlineData(typeof (Image), false)]
         [InlineData(typeof (string), false)]
         [InlineData(typeof (int), false)]
         [InlineData(typeof (bool), false)]

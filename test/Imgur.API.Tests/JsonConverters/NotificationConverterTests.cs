@@ -13,28 +13,25 @@ namespace Imgur.API.Tests.JsonConverters
 {
     public class NotificationConverterTests
     {
-        [Fact]
-        public void NotificationConverter_CanConvertCommentNotification_True()
+        [Theory]
+        [InlineData(typeof (CommentNotification), true)]
+        [InlineData(typeof (MessageNotification), true)]
+        [InlineData(typeof (GalleryAlbum), false)]
+        [InlineData(typeof (GalleryImage), false)]
+        [InlineData(typeof (GalleryItem), false)]
+        [InlineData(typeof (Image), false)]
+        [InlineData(typeof (DateTime), false)]
+        [InlineData(typeof (string), false)]
+        [InlineData(typeof (int), false)]
+        [InlineData(typeof (bool), false)]
+        [InlineData(typeof (float), false)]
+        [InlineData(typeof (bool), false)]
+        [InlineData(typeof (float), false)]
+        public void CanConvert(Type type, bool canConvert)
         {
             var converter = new NotificationConverter();
-            var canConvert = converter.CanConvert(new CommentNotification().GetType());
-            Assert.True(canConvert);
-        }
 
-        [Fact]
-        public void NotificationConverter_CanConvertMessageNotification_IsFalse()
-        {
-            var converter = new NotificationConverter();
-            var canConvert = converter.CanConvert(new Image().GetType());
-            Assert.False(canConvert);
-        }
-
-        [Fact]
-        public void NotificationConverter_CanConvertMessageNotification_True()
-        {
-            var converter = new NotificationConverter();
-            var canConvert = converter.CanConvert(new MessageNotification().GetType());
-            Assert.True(canConvert);
+            Assert.Equal(converter.CanConvert(type), canConvert);
         }
 
         [Fact]

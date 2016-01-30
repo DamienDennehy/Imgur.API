@@ -14,28 +14,23 @@ namespace Imgur.API.Tests.JsonConverters
 {
     public class GalleryItemConverterTests
     {
-        [Fact]
-        public void GalleryItem_CanConvert_IsFalse()
+        [Theory]
+        [InlineData(typeof (GalleryAlbum), true)]
+        [InlineData(typeof (GalleryImage), true)]
+        [InlineData(typeof (GalleryItem), true)]
+        [InlineData(typeof (DateTime), false)]
+        [InlineData(typeof (string), false)]
+        [InlineData(typeof (int), false)]
+        [InlineData(typeof (bool), false)]
+        [InlineData(typeof (float), false)]
+        [InlineData(typeof (Image), false)]
+        [InlineData(typeof (bool), false)]
+        [InlineData(typeof (float), false)]
+        public void CanConvert(Type type, bool canConvert)
         {
             var converter = new GalleryItemConverter();
-            var canConvert = converter.CanConvert(new Image().GetType());
-            Assert.False(canConvert);
-        }
 
-        [Fact]
-        public void GalleryItem_CanConvertGalleryAlbum_True()
-        {
-            var converter = new GalleryItemConverter();
-            var canConvert = converter.CanConvert(new GalleryAlbum().GetType());
-            Assert.True(canConvert);
-        }
-
-        [Fact]
-        public void GalleryItem_CanConvertGalleryImage_True()
-        {
-            var converter = new GalleryItemConverter();
-            var canConvert = converter.CanConvert(new GalleryImage().GetType());
-            Assert.True(canConvert);
+            Assert.Equal(converter.CanConvert(type), canConvert);
         }
 
         [Fact]

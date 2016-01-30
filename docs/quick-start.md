@@ -3,8 +3,7 @@
 ## Issues
 Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https://github.com/DamienDennehy/Imgur.API/issues)
 
-## Quick Start
-### Get Image 
+## Get Image 
 
 		public async Task GetImage()
 		{
@@ -22,7 +21,7 @@ Report any issues at [https://github.com/DamienDennehy/Imgur.API/issues](https:/
 			}
 		}
 		
-### Upload Image
+## Upload Image
 
 		public async Task UploadImage()
 		{

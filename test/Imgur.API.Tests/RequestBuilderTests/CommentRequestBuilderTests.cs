@@ -39,6 +39,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 Record.Exception(() => requestBuilder.CreateCommentRequest(mockUrl, null, "xYxAbcD", "ABCdef"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "comment");
         }
 
         [Fact]
@@ -52,6 +55,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 Record.Exception(() => requestBuilder.CreateCommentRequest(mockUrl, "Hello World", null, "ABCdef"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "galleryItemId");
         }
 
         [Fact]
@@ -63,6 +69,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 Record.Exception(() => requestBuilder.CreateCommentRequest(null, "Hello World!", "xYxAbcD", "ABCdef"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
 
         [Fact]
@@ -92,6 +101,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.CreateGalleryItemCommentRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "comment");
         }
 
         [Fact]
@@ -102,6 +114,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.CreateGalleryItemCommentRequest(null, "Hello World!"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
 
         [Fact]
@@ -131,6 +146,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.CreateReplyRequest(mockUrl, null, "xYxAbcD"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "comment");
         }
 
         [Fact]
@@ -143,6 +161,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.CreateReplyRequest(mockUrl, "Hello World", null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "galleryItemId");
         }
 
         [Fact]
@@ -153,6 +174,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.CreateReplyRequest(null, "Hello World!", "xYxAbcD"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
 
         [Fact]

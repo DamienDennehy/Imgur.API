@@ -40,6 +40,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.UpdateImageRequest(null, "1234Xyz9"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
 
         [Fact]
@@ -90,6 +93,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.UploadImageBinaryRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "image");
         }
 
         [Fact]
@@ -101,6 +107,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.UploadImageBinaryRequest(null, image));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
 
         [Fact]
@@ -134,6 +143,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.UploadImageBinaryRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "image");
         }
 
         [Fact]
@@ -144,6 +156,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.UploadImageBinaryRequest(null, new byte[9]));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
 
         [Fact]
@@ -164,14 +179,14 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 Assert.Equal("https://api.imgur.com/3/image", request.RequestUri.ToString());
                 Assert.Equal(HttpMethod.Post, request.Method);
 
-                var content = (MultipartFormDataContent)request.Content;
+                var content = (MultipartFormDataContent) request.Content;
                 var imageContent =
-                    (StreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
-                var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
-                var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
-                var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
+                    (StreamContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
+                var album = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
+                var type = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+                var title = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
                 var description =
-                    (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
+                    (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
                 Assert.NotNull(imageContent);
                 Assert.NotNull(type);
@@ -199,6 +214,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.UploadImageStreamRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "image");
         }
 
         [Fact]
@@ -211,6 +229,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 var exception = Record.Exception(() => requestBuilder.UploadImageStreamRequest(null, ms));
                 Assert.NotNull(exception);
                 Assert.IsType<ArgumentNullException>(exception);
+
+                var argNullException = (ArgumentNullException)exception;
+                Assert.Equal(argNullException.ParamName, "url");
             }
         }
     }

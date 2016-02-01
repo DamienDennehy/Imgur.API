@@ -125,7 +125,7 @@ namespace Imgur.API.RequestBuilders
         internal HttpRequestMessage UpdateAlbumRequest(string url,
             string title = null, string description = null,
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null,
-            string coverId = null, IEnumerable<string> ids = null)
+            string coverId = null, IEnumerable<string> imageIds = null)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -147,8 +147,8 @@ namespace Imgur.API.RequestBuilders
             if (description != null)
                 parameters.Add(nameof(description), description);
 
-            if (ids != null)
-                parameters.Add(nameof(ids), string.Join(",", ids));
+            if (imageIds != null)
+                parameters.Add("ids", string.Join(",", imageIds));
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)
             {

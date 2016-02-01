@@ -40,6 +40,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.AddCustomGalleryTagsRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "tags");
         }
 
         [Fact]
@@ -50,6 +53,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.AddCustomGalleryTagsRequest(null, new List<string>()));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
 
         [Fact]
@@ -80,6 +86,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.AddFilteredOutGalleryTagRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "tag");
         }
 
         [Fact]
@@ -90,6 +99,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.AddFilteredOutGalleryTagRequest(null, "test"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
 
         [Fact]
@@ -119,6 +131,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.RemoveCustomGalleryTagsRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "tags");
         }
 
         [Fact]
@@ -130,6 +145,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 Record.Exception(() => requestBuilder.RemoveCustomGalleryTagsRequest(null, new List<string>()));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
 
         [Fact]
@@ -159,6 +177,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.RemoveFilteredOutGalleryTagRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "tag");
         }
 
         [Fact]
@@ -169,6 +190,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.RemoveFilteredOutGalleryTagRequest(null, "test"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
     }
 }

@@ -24,8 +24,6 @@ namespace Imgur.API.Tests.JsonConverters
         [InlineData(typeof (bool), false)]
         [InlineData(typeof (float), false)]
         [InlineData(typeof (Image), false)]
-        [InlineData(typeof (bool), false)]
-        [InlineData(typeof (float), false)]
         public void CanConvert(Type type, bool canConvert)
         {
             var converter = new GalleryItemConverter();

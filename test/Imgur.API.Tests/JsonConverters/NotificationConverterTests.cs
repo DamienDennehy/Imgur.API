@@ -25,8 +25,6 @@ namespace Imgur.API.Tests.JsonConverters
         [InlineData(typeof (int), false)]
         [InlineData(typeof (bool), false)]
         [InlineData(typeof (float), false)]
-        [InlineData(typeof (bool), false)]
-        [InlineData(typeof (float), false)]
         public void CanConvert(Type type, bool canConvert)
         {
             var converter = new NotificationConverter();

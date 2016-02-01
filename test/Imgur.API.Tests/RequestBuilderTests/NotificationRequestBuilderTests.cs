@@ -41,6 +41,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.MarkNotificationsViewedRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "notificationIds");
         }
 
         [Fact]
@@ -53,6 +56,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 Record.Exception(() => requestBuilder.MarkNotificationsViewedRequest(null, new List<string>()));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
     }
 }

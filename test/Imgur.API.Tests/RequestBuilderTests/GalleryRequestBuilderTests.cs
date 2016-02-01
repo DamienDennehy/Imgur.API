@@ -37,6 +37,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.PublishToGalleryRequest("url", null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "title");
         }
 
         [Fact]
@@ -64,6 +67,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.PublishToGalleryRequest(null, "test"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
 
         [Fact]
@@ -105,6 +111,8 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.SearchGalleryAdvancedRequest("Xio"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+            
+            Assert.True(exception.Message.Contains("At least one search parameter must be provided (All | Any | Exactly | Not)"));
         }
 
         [Fact]
@@ -115,6 +123,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.SearchGalleryAdvancedRequest(null, "dfdfd"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
 
         [Fact]
@@ -139,6 +150,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.SearchGalleryRequest("Xio", null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "query");
         }
 
         [Fact]
@@ -149,6 +163,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception = Record.Exception(() => requestBuilder.SearchGalleryRequest(null, "dfdfd"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal(argNullException.ParamName, "url");
         }
     }
 }

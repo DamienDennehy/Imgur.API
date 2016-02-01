@@ -5,6 +5,14 @@ namespace Imgur.API.Tests.Mocks
 {
     public class MockApiClient : ApiClientBase
     {
+        public MockApiClient(string clientId) : base(clientId)
+        {
+        }
+
+        public MockApiClient(string clientId, IOAuth2Token oAuth2Token) : base(clientId, oAuth2Token)
+        {
+        }
+
         public MockApiClient(string clientId, string clientSecret) : base(clientId, clientSecret)
         {
         }

@@ -16,7 +16,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "clientId");
         }
 
@@ -30,28 +30,28 @@ namespace Imgur.API.Tests.AuthenticationTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "mashapeKey");
 
             exception = Record.Exception(() => new MashapeClient("ClientId", "ClientSecret", mashapeKey: null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            argNullException = (ArgumentNullException)exception;
+            argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "mashapeKey");
 
             exception = Record.Exception(() => new MashapeClient("ClientId", null, oAuth2Token));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            argNullException = (ArgumentNullException)exception;
+            argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "mashapeKey");
 
             exception = Record.Exception(() => new MashapeClient("ClientId", "ClientSecret", null, oAuth2Token));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            argNullException = (ArgumentNullException)exception;
+            argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "mashapeKey");
         }
 
@@ -62,7 +62,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "clientSecret");
         }
 
@@ -74,7 +74,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "oAuth2Token");
         }
 
@@ -85,7 +85,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "oAuth2Token");
         }
 

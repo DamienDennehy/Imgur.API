@@ -42,7 +42,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "notificationIds");
         }
 
@@ -57,7 +57,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "url");
         }
     }

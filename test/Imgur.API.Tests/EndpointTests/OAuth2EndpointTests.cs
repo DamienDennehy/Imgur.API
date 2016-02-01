@@ -88,7 +88,7 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "code");
         }
 
@@ -178,7 +178,7 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "ClientSecret");
         }
 
@@ -196,7 +196,7 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "ClientSecret");
         }
 
@@ -214,7 +214,7 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "ClientSecret");
         }
     }

@@ -35,7 +35,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "httpMethod");
         }
 
@@ -48,7 +48,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "url");
         }
 
@@ -78,7 +78,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "url");
         }
     }

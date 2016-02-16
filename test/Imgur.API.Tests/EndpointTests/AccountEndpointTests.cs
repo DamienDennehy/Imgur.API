@@ -78,6 +78,7 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new AccountEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
             var accountSettings = await endpoint.GetAccountSettingsAsync().ConfigureAwait(false);
 
+            Assert.Equal("Bob", accountSettings.AccountUrl);
             Assert.Equal(true, accountSettings.AcceptedGalleryTerms);
             Assert.Equal("ImgurApiTest@noreply.com", accountSettings.ActiveEmails.First());
             Assert.Equal(AlbumPrivacy.Secret, accountSettings.AlbumPrivacy);

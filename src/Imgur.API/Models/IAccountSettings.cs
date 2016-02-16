@@ -9,6 +9,11 @@ namespace Imgur.API.Models
     public interface IAccountSettings : IDataModel
     {
         /// <summary>
+        ///     The account username.
+        /// </summary>
+        string AccountUrl { get; set; }
+
+        /// <summary>
         ///     True if the user has accepted the terms of uploading to the Imgur gallery.
         /// </summary>
         bool AcceptedGalleryTerms { get; set; }

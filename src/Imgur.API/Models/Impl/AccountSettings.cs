@@ -11,6 +11,12 @@ namespace Imgur.API.Models.Impl
     public class AccountSettings : IAccountSettings
     {
         /// <summary>
+        ///     The account username.
+        /// </summary>
+        [JsonProperty("account_url")]
+        public string AccountUrl { get; set; }
+
+        /// <summary>
         ///     True if the user has accepted the terms of uploading to the Imgur gallery.
         /// </summary>
         [JsonProperty("accepted_gallery_terms")]

@@ -19,7 +19,7 @@ namespace Imgur.API.Tests.EndpointTests
         {
             var client = new ImgurClient("abc", "ioa");
             var endpoint = new OAuth2Endpoint(client);
-            var expected = "https://api.imgur.com/oauth2/authorize?client_id=abc&response_type=Code&state=test";
+            var expected = "https://api.imgur.com/oauth2/authorize?client_id=abc&response_type=code&state=test";
             Assert.Equal(expected, endpoint.GetAuthorizationUrl(OAuth2ResponseType.Code, "test"));
         }
 
@@ -28,7 +28,7 @@ namespace Imgur.API.Tests.EndpointTests
         {
             var client = new ImgurClient("xyz", "deb");
             var endpoint = new OAuth2Endpoint(client);
-            var expected = "https://api.imgur.com/oauth2/authorize?client_id=xyz&response_type=Code&state=";
+            var expected = "https://api.imgur.com/oauth2/authorize?client_id=xyz&response_type=code&state=";
             Assert.Equal(expected, endpoint.GetAuthorizationUrl(OAuth2ResponseType.Code));
         }
 

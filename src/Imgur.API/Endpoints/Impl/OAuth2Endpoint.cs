@@ -48,8 +48,9 @@ namespace Imgur.API.Endpoints.Impl
         /// <returns></returns>
         public string GetAuthorizationUrl(OAuth2ResponseType oAuth2ResponseType, string state = null)
         {
+            var responseType = oAuth2ResponseType.ToString().ToLowerInvariant();
             var url =
-                $"{AuthorizationEndpointUrl}?client_id={ApiClient.ClientId}&response_type={oAuth2ResponseType}&state={state}";
+                $"{AuthorizationEndpointUrl}?client_id={ApiClient.ClientId}&response_type={responseType}&state={state}";
             return url;
         }
 

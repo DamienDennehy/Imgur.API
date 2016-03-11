@@ -445,7 +445,7 @@ namespace Imgur.API.Tests.EndpointTests
             var mockUrl = "https://api.imgur.com/3/image/zVpyzhW/favorite";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(MockImageEndpointResponses.Imgur.FavoriteImageAsyncFalse)
+                Content = new StringContent(MockImageEndpointResponses.Imgur.FavoriteImageFalse)
             };
 
             mockResponse.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "123");

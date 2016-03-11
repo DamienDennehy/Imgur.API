@@ -135,7 +135,7 @@ namespace Imgur.API.Tests.EndpointTests
             var mockUrl = "https://api.imgur.com/3/album/zVpyzhW/favorite";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(MockAlbumEndpointResponses.Imgur.FavoriteAlbumResponseFalse)
+                Content = new StringContent(MockAlbumEndpointResponses.Imgur.FavoriteAlbumFalse)
             };
 
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
@@ -151,7 +151,7 @@ namespace Imgur.API.Tests.EndpointTests
             var mockUrl = "https://api.imgur.com/3/album/zVpyzhW/favorite";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(MockAlbumEndpointResponses.Imgur.FavoriteAlbumResponseTrue)
+                Content = new StringContent(MockAlbumEndpointResponses.Imgur.FavoriteAlbumTrue)
             };
 
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
@@ -167,7 +167,7 @@ namespace Imgur.API.Tests.EndpointTests
             var mockUrl = "https://imgur-apiv3.p.mashape.com/3/album/zVpyzhW/favorite";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(MockAlbumEndpointResponses.Mashape.FavoriteAlbumResponseFalse)
+                Content = new StringContent(MockAlbumEndpointResponses.Imgur.FavoriteAlbumFalse)
             };
 
             var client = new MashapeClient("123", "1234", "xyz", MockOAuth2Token);
@@ -183,7 +183,7 @@ namespace Imgur.API.Tests.EndpointTests
             var mockUrl = "https://imgur-apiv3.p.mashape.com/3/album/zVpyzhW/favorite";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(MockAlbumEndpointResponses.Mashape.FavoriteAlbumResponseTrue)
+                Content = new StringContent(MockAlbumEndpointResponses.Imgur.FavoriteAlbumTrue)
             };
 
             var client = new MashapeClient("123", "1234", "xyz", MockOAuth2Token);

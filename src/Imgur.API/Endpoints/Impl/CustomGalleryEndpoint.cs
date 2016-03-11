@@ -58,8 +58,8 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.AddCustomGalleryTagsRequest(url, tags))
             {
-                var added = await SendRequestAsync<bool>(request).ConfigureAwait(false);
-                return added;
+                var added = await SendRequestAsync<bool?>(request).ConfigureAwait(false);
+                return added ?? true;
             }
         }
 
@@ -87,8 +87,8 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.AddFilteredOutGalleryTagRequest(url, tag))
             {
-                var added = await SendRequestAsync<bool>(request).ConfigureAwait(false);
-                return added;
+                var added = await SendRequestAsync<bool?>(request).ConfigureAwait(false);
+                return added ?? true;
             }
         }
 
@@ -215,8 +215,8 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.RemoveCustomGalleryTagsRequest(url, tags))
             {
-                var removed = await SendRequestAsync<bool>(request).ConfigureAwait(false);
-                return removed;
+                var removed = await SendRequestAsync<bool?>(request).ConfigureAwait(false);
+                return removed ?? true;
             }
         }
 
@@ -244,8 +244,8 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.RemoveFilteredOutGalleryTagRequest(url, tag))
             {
-                var removed = await SendRequestAsync<bool>(request).ConfigureAwait(false);
-                return removed;
+                var removed = await SendRequestAsync<bool?>(request).ConfigureAwait(false);
+                return removed ?? true;
             }
         }
     }

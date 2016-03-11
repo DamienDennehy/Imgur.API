@@ -82,26 +82,9 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
             {
-                //The structure of the response of favoriting an image
-                //varies on if Imgur or Mashape Authentication is used
-                if (ApiClient is IImgurClient)
-                {
-                    var imgurResult = await SendRequestAsync<string>(request).ConfigureAwait(false);
-                    return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
-                }
-
-                //If Mashape Authentication is used, the favorite is returned as an exception
-                try
-                {
-                    await SendRequestAsync<string>(request).ConfigureAwait(false);
-                }
-                catch (ImgurException imgurException)
-                {
-                    return imgurException.Message.Equals("f", StringComparison.OrdinalIgnoreCase);
-                }
+                var imgurResult = await SendRequestAsync<string>(request).ConfigureAwait(false);
+                return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
             }
-
-            return false;
         }
 
         /// <summary>

@@ -13,10 +13,10 @@
             public const string DeleteAlbum =
                 "{\"data\":true,\"success\":true,\"status\":200}";
 
-            public const string FavoriteAlbumResponseFalse =
+            public const string FavoriteAlbumFalse =
                 "{\"data\":\"unfavorited\",\"success\":true,\"status\":200}";
 
-            public const string FavoriteAlbumResponseTrue =
+            public const string FavoriteAlbumTrue =
                 "{\"data\":\"favorited\",\"success\":true,\"status\":200}";
 
             public const string GetAlbum =
@@ -36,15 +36,6 @@
 
             public const string UpdateAlbum =
                 "{\"data\":true,\"success\":true,\"status\":200}";
-        }
-
-        public class Mashape
-        {
-            public const string FavoriteAlbumResponseFalse =
-                "{\"data\":{\"error\":\"u\",\"request\":\"/3/album/EtUrX/favorite\",\"method\":\"POST\"},\"success\":true,\"status\":200}";
-
-            public const string FavoriteAlbumResponseTrue =
-                "{\"data\":{\"error\":\"f\",\"request\":\"/3/album/EtUrX/favorite\",\"method\":\"POST\"},\"success\":true,\"status\":200}";
         }
     }
 }

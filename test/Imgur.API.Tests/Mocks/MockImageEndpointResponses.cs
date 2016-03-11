@@ -7,10 +7,10 @@
             public const string DeleteImage =
                 "{\"data\":true,\"success\":true,\"status\":200}";
 
-            public const string FavoriteImageAsyncFalse =
+            public const string FavoriteImageFalse =
                 "{\"data\":\"unfavorited\",\"success\":true,\"status\":200}";
 
-            public const string FavoriteImageAsyncTrue =
+            public const string FavoriteImageTrue =
                 "{\"data\":\"favorited\",\"success\":true,\"status\":200}";
 
             public const string GetImage =
@@ -21,15 +21,6 @@
 
             public const string UploadImage =
                 "{\"data\":{\"id\":\"kiNOcUl\",\"title\":\"Title Test\",\"description\":\"Description Test\",\"datetime\":1440373411,\"type\":\"image/gif\",\"animated\":true,\"width\":290,\"height\":189,\"size\":1038889,\"views\":0,\"bandwidth\":0,\"vote\":null,\"favorite\":false,\"nsfw\":null,\"section\":null,\"account_url\":null,\"account_id\":24234234,\"comment_preview\":null,\"deletehash\":\"nGxOKC9ML6KyTWQ\",\"name\":\"\",\"gifv\":\"http://i.imgur.com/kiNOcUl.gifv\",\"webm\":\"http://i.imgur.com/kiNOcUl.webm\",\"mp4\":\"http://i.imgur.com/kiNOcUl.mp4\",\"link\":\"http://i.imgur.com/kiNOcUl.gif\",\"looping\":true},\"success\":true,\"status\":200}";
-        }
-
-        public class Mashape
-        {
-            public const string FavoriteImageResponseFalse =
-                "{\"data\":{\"error\":\"u\",\"request\":\"/3/image/CgBdJN9/favorite\",\"method\":\"POST\"},\"success\":true,\"status\":200}";
-
-            public const string FavoriteImageResponseTrue =
-                "{\"data\":{\"error\":\"f\",\"request\":\"/3/image/CgBdJN9/favorite\",\"method\":\"POST\"},\"success\":true,\"status\":200}";
         }
     }
 }

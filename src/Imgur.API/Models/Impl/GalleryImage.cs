@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Imgur.API.Enums;
 using Imgur.API.JsonConverters;
 using Newtonsoft.Json;
@@ -33,6 +34,12 @@ namespace Imgur.API.Models.Impl
         public virtual long Bandwidth { get; set; }
 
         /// <summary>
+        ///     Number of comments on the gallery item.
+        /// </summary>
+        [JsonProperty("comment_count")]
+        public virtual int? CommentCount { get; set; }
+
+        /// <summary>
         ///     Utc timestamp of when the image was inserted into the gallery, converted from epoch time.
         /// </summary>
         [JsonConverter(typeof(EpochTimeConverter))]
@@ -47,6 +54,11 @@ namespace Imgur.API.Models.Impl
         ///     Description of the image.
         /// </summary>
         public virtual string Description { get; set; }
+
+        /// <summary>
+        ///     Number of downvotes for the item.
+        /// </summary>
+        public virtual int? Downs { get; set; }
 
         /// <summary>
         ///     Indicates if the current user favorited the image. Defaults to false if not signed in.
@@ -96,6 +108,16 @@ namespace Imgur.API.Models.Impl
         public virtual bool? Nsfw { get; set; }
 
         /// <summary>
+        ///     Upvotes minus downvotes.
+        /// </summary>
+        public virtual int? Points { get; set; }
+
+        /// <summary>
+        ///     Imgur popularity score.
+        /// </summary>
+        public virtual int? Score { get; set; }
+
+        /// <summary>
         ///     If the image has been categorized then this will contain the section the image belongs in. (funny, cats,
         ///     adviceanimals, wtf, etc)
         /// </summary>
@@ -112,9 +134,25 @@ namespace Imgur.API.Models.Impl
         public virtual string Title { get; set; }
 
         /// <summary>
+        ///     Topic of the gallery item.
+        /// </summary>
+        public virtual string Topic { get; set; }
+
+        /// <summary>
+        ///     Topic ID of the gallery item.
+        /// </summary>
+        [JsonProperty("topic_id")]
+        public virtual int? TopicId { get; set; }
+
+        /// <summary>
         ///     Image MIME type.
         /// </summary>
         public virtual string Type { get; set; }
+
+        /// <summary>
+        ///     Upvotes for the item.
+        /// </summary>
+        public virtual int? Ups { get; set; }
 
         /// <summary>
         ///     The size of the image in bytes.

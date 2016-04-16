@@ -51,7 +51,6 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal(false, album.Nsfw);
             Assert.Equal("", album.Section);
             Assert.Equal(79, album.CommentCount);
-            Assert.Equal(10, album.CommentPreview.Count());
             Assert.Equal("The More You Know", album.Topic);
             Assert.Equal(11, album.TopicId);
             Assert.Equal(25, album.ImagesCount);

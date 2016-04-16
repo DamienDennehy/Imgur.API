@@ -84,7 +84,6 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal("Calasin", image.AccountUrl);
             Assert.Equal(22349254, image.AccountId);
             Assert.Equal(352, image.CommentCount);
-            Assert.Equal(10, image.CommentPreview.Count());
             Assert.Equal("No Topic", image.Topic);
             Assert.Equal(29, image.TopicId);
             Assert.Equal("http://i.imgur.com/rNdMhHm.png", image.Link);

@@ -54,6 +54,11 @@ namespace Imgur.API.Models
         string Id { get; set; }
 
         /// <summary>
+        /// 	True if the image has been submitted to the gallery, false if otherwise.
+        /// </summary>
+        bool InGallery { get; set; }
+
+        /// <summary>
         ///     The direct link to the the image. (Note: if fetching an animated GIF that was over 20MB in original size, a .gif
         ///     thumbnail will be returned)
         /// </summary>

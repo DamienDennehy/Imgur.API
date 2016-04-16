@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("Imgur.API")]
-[assembly: AssemblyDescription("Imgur.API is a .NET implementation of Imgur's v3 API.")]
+[assembly: AssemblyDescription("Imgur.API is a .NET implementation of Imgur's API.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Damien Dennehy")]
 [assembly: AssemblyProduct("Imgur.API")]

@@ -233,13 +233,14 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal(9571, album.AccountId);
             Assert.Equal(AlbumPrivacy.Public, album.Privacy);
             Assert.Equal(AlbumLayout.Blog, album.Layout);
-            Assert.Equal(4, album.Views);
+            Assert.Equal(19, album.Views);
             Assert.Equal("http://imgur.com/a/5F5Cy", album.Link);
             Assert.Equal(false, album.Favorite);
             Assert.Equal(null, album.Nsfw);
             Assert.Equal(null, album.Section);
             Assert.Equal(3, album.ImagesCount);
             Assert.Equal(3, album.Images.Count());
+            Assert.Equal(false, album.InGallery);
         }
 
         [Fact]

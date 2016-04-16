@@ -63,7 +63,6 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.Equal(null, actual.AccountId);
             Assert.Equal("SpaceCowboy02", actual.AccountUrl);
             Assert.Equal(null, actual.CommentCount);
-            Assert.Equal(null, actual.CommentPreview);
             Assert.Equal("JsKDPBN", actual.Cover);
             Assert.Equal(240, actual.CoverHeight);
             Assert.Equal(500, actual.CoverWidth);
@@ -107,7 +106,6 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.Equal(false, actual.Animated);
             Assert.Equal(118267772080, actual.Bandwidth);
             Assert.Equal(null, actual.CommentCount);
-            Assert.Equal(null, actual.CommentPreview);
             Assert.Equal(new DateTimeOffset(new DateTime(2015, 09, 19, 20, 29, 47, DateTimeKind.Utc)),
                 actual.DateTime);
             Assert.Equal(null, actual.DeleteHash);

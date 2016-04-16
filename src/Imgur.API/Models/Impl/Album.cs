@@ -36,10 +36,10 @@ namespace Imgur.API.Models.Impl
         public virtual int? CoverHeight { get; set; }
 
         /// <summary>
-        ///     The width, in pixels, of the album cover image.
+        ///     True if the album has been submitted to the gallery, false if otherwise.
         /// </summary>
-        [JsonProperty("cover_width")]
-        public virtual int? CoverWidth { get; set; }
+        [JsonProperty("in_gallery")]
+        public virtual bool InGallery { get; set; }
 
         /// <summary>
         ///     Utc timestamp of when the album was inserted into the gallery, converted from epoch time.
@@ -66,6 +66,12 @@ namespace Imgur.API.Models.Impl
         ///     The ID for the album.
         /// </summary>
         public virtual string Id { get; set; }
+
+        /// <summary>
+        ///     The width, in pixels, of the album cover image.
+        /// </summary>
+        [JsonProperty("cover_width")]
+        public virtual int? CoverWidth { get; set; }
 
         /// <summary>
         ///     A list of all the images in the album (only available when requesting the direct album).

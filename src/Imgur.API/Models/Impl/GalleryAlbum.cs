@@ -24,6 +24,12 @@ namespace Imgur.API.Models.Impl
         public virtual string AccountUrl { get; set; }
 
         /// <summary>
+        ///     Number of comments on the gallery item.
+        /// </summary>
+        [JsonProperty("comment_count")]
+        public virtual int? CommentCount { get; set; }
+        
+        /// <summary>
         ///     The ID of the album cover image.
         /// </summary>
         public virtual string Cover { get; set; }
@@ -55,6 +61,11 @@ namespace Imgur.API.Models.Impl
         ///     The description of the album in the gallery.
         /// </summary>
         public virtual string Description { get; set; }
+
+        /// <summary>
+        ///     Number of downvotes for the item.
+        /// </summary>
+        public virtual int? Downs { get; set; }
 
         /// <summary>
         ///     Indicates if the current user favorited the album. Defaults to false if not signed in.
@@ -99,9 +110,19 @@ namespace Imgur.API.Models.Impl
         public virtual int Order { get; set; }
 
         /// <summary>
+        ///     Upvotes minus downvotes.
+        /// </summary>
+        public virtual int? Points { get; set; }
+
+        /// <summary>
         ///     The privacy level of the album, you can only view public virtual if not logged in as album owner.
         /// </summary>
         public virtual AlbumPrivacy? Privacy { get; set; }
+
+        /// <summary>
+        ///     Imgur popularity score.
+        /// </summary>
+        public virtual int? Score { get; set; }
 
         /// <summary>
         ///     If the image has been categorized then this will contain the section the image belongs in. (funny, cats,
@@ -113,6 +134,22 @@ namespace Imgur.API.Models.Impl
         ///     The title of the album in the gallery.
         /// </summary>
         public virtual string Title { get; set; }
+
+        /// <summary>
+        ///     Topic of the gallery item.
+        /// </summary>
+        public virtual string Topic { get; set; }
+
+        /// <summary>
+        ///     Topic ID of the gallery item.
+        /// </summary>
+        [JsonProperty("topic_id")]
+        public virtual int? TopicId { get; set; }
+
+        /// <summary>
+        ///     Upvotes for the item.
+        /// </summary>
+        public virtual int? Ups { get; set; }
 
         /// <summary>
         ///     The number of album views.

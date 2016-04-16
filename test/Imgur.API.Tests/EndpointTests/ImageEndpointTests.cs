@@ -164,8 +164,8 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal(426, image.Width);
             Assert.Equal(240, image.Height);
             Assert.Equal(26270273, image.Size);
-            Assert.Equal(1583864, image.Views);
-            Assert.Equal(41608539674872, image.Bandwidth);
+            Assert.Equal(3185896, image.Views);
+            Assert.InRange(image.Bandwidth, 1, long.MaxValue);
             Assert.Equal(VoteOption.Up, image.Vote);
             Assert.Equal(false, image.Favorite);
             Assert.Equal(false, image.Nsfw);
@@ -175,6 +175,7 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal("http://i.imgur.com/zVpyzhW.mp4", image.Mp4);
             Assert.Equal("http://i.imgur.com/zVpyzhWh.gif", image.Link);
             Assert.Equal(true, image.Looping);
+            Assert.Equal(true, image.InGallery);
         }
 
         [Fact]

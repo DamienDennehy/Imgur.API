@@ -23,7 +23,7 @@ namespace Imgur.API.Models
         ///     Number of comments on the gallery item.
         /// </summary>
         int? CommentCount { get; set; }
-        
+
         /// <summary>
         ///     The ID of the album cover image.
         /// </summary>

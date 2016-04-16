@@ -54,7 +54,7 @@ namespace Imgur.API.Models
         string Id { get; set; }
 
         /// <summary>
-        /// 	True if the image has been submitted to the gallery, false if otherwise.
+        ///     True if the image has been submitted to the gallery, false if otherwise.
         /// </summary>
         bool InGallery { get; set; }
 

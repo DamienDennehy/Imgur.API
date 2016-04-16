@@ -28,7 +28,7 @@ namespace Imgur.API.Models.Impl
         /// </summary>
         [JsonProperty("comment_count")]
         public virtual int? CommentCount { get; set; }
-        
+
         /// <summary>
         ///     The ID of the album cover image.
         /// </summary>

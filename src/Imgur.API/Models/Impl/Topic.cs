@@ -34,5 +34,15 @@
         ///     The top image in this topic.
         /// </summary>
         public virtual IGalleryItem TopPost { get; set; }
+
+        /// <summary>
+        ///     The current 'hero' image or album chosen by the Imgur community staff.
+        /// </summary>
+        public virtual IGalleryItem HeroImage { get; set; }
+
+        /// <summary>
+        ///     Whether the topic's HeroImage should be used as the overall hero image.
+        /// </summary>
+        public virtual bool IsHero { get; set; }
     }
 }

@@ -32,6 +32,7 @@ namespace Imgur.API.Tests.EndpointTests
 
             Assert.NotNull(topic);
             Assert.NotNull(topic.TopPost);
+            Assert.NotNull(topic.HeroImage);
         }
 
         [Fact]

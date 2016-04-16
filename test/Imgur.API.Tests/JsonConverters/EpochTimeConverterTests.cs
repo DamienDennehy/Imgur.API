@@ -24,13 +24,13 @@ namespace Imgur.API.Tests.JsonConverters
         };
 
         [Theory]
-        [InlineData(typeof (DateTimeOffset), true)]
-        [InlineData(typeof (DateTime), false)]
-        [InlineData(typeof (Image), false)]
-        [InlineData(typeof (string), false)]
-        [InlineData(typeof (int), false)]
-        [InlineData(typeof (bool), false)]
-        [InlineData(typeof (float), false)]
+        [InlineData(typeof(DateTimeOffset), true)]
+        [InlineData(typeof(DateTime), false)]
+        [InlineData(typeof(Image), false)]
+        [InlineData(typeof(string), false)]
+        [InlineData(typeof(int), false)]
+        [InlineData(typeof(bool), false)]
+        [InlineData(typeof(float), false)]
         public void CanConvert(Type type, bool canConvert)
         {
             var converter = new EpochTimeConverter();
@@ -47,7 +47,7 @@ namespace Imgur.API.Tests.JsonConverters
             reader.Read();
             var serializer = new JsonSerializer();
 
-            var actual = (DateTimeOffset) converter.ReadJson(reader, typeof (DateTimeOffset), null, serializer);
+            var actual = (DateTimeOffset) converter.ReadJson(reader, typeof(DateTimeOffset), null, serializer);
 
             Assert.Equal(expected, actual);
         }
@@ -63,7 +63,7 @@ namespace Imgur.API.Tests.JsonConverters
             reader.Read();
             var serializer = new JsonSerializer();
 
-            var exception = Record.Exception(() => converter.ReadJson(reader, typeof (DateTimeOffset), null, serializer));
+            var exception = Record.Exception(() => converter.ReadJson(reader, typeof(DateTimeOffset), null, serializer));
             Assert.NotNull(exception);
             Assert.IsType<InvalidCastException>(exception);
         }

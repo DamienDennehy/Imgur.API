@@ -8,6 +8,6 @@
         /// <summary>
         ///     A description of the error.
         /// </summary>
-        public string Message { get; set; }
+        public virtual string Message { get; set; }
     }
 }

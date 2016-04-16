@@ -12,13 +12,13 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     A list of message notifications.
         /// </summary>
-        [JsonConverter(typeof (TypeConverter<IEnumerable<Notification>>))]
-        public IEnumerable<INotification> Messages { get; set; } = new List<INotification>();
+        [JsonConverter(typeof(TypeConverter<IEnumerable<Notification>>))]
+        public virtual IEnumerable<INotification> Messages { get; set; } = new List<INotification>();
 
         /// <summary>
         ///     A list of comment notifications.
         /// </summary>
-        [JsonConverter(typeof (TypeConverter<IEnumerable<Notification>>))]
-        public IEnumerable<INotification> Replies { get; set; } = new List<INotification>();
+        [JsonConverter(typeof(TypeConverter<IEnumerable<Notification>>))]
+        public virtual IEnumerable<INotification> Replies { get; set; } = new List<INotification>();
     }
 }

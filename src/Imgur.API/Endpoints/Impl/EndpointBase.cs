@@ -174,7 +174,7 @@ namespace Imgur.API.Endpoints.Impl
 
             //If the type being requested is an OAuth2Token
             //Deserialize it immediately and return
-            if (typeof (T) == typeof (IOAuth2Token) || typeof (T) == typeof (OAuth2Token))
+            if (typeof(T) == typeof(IOAuth2Token) || typeof(T) == typeof(OAuth2Token))
             {
                 var oAuth2Response = JsonConvert.DeserializeObject<T>(stringResponse);
                 return oAuth2Response;

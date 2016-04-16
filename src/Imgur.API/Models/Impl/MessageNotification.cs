@@ -13,40 +13,40 @@ namespace Imgur.API.Models.Impl
         ///     Account ID of the user in conversation.
         /// </summary>
         [JsonProperty("account_id")]
-        public int AccountId { get; set; }
+        public virtual int AccountId { get; set; }
 
         /// <summary>
         ///     Utc timestamp of last sent message, converted from epoch time.
         /// </summary>
-        [JsonConverter(typeof (EpochTimeConverter))]
-        public DateTimeOffset DateTime { get; set; }
+        [JsonConverter(typeof(EpochTimeConverter))]
+        public virtual DateTimeOffset DateTime { get; set; }
 
         /// <summary>
         ///     The username of the other user in conversation.
         /// </summary>
-        public string From { get; set; }
+        public virtual string From { get; set; }
 
         /// <summary>
         ///     Conversation ID
         /// </summary>
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
         /// <summary>
         ///     The last message
         /// </summary>
         [JsonProperty("last_message")]
-        public string LastMessage { get; set; }
+        public virtual string LastMessage { get; set; }
 
         /// <summary>
         ///     Total number of messages in the conversation.
         /// </summary>
         [JsonProperty("message_num")]
-        public int MessageNum { get; set; }
+        public virtual int MessageNum { get; set; }
 
         /// <summary>
         ///     Account ID of the other user in conversation.
         /// </summary>
         [JsonProperty("with_account")]
-        public int WithAccount { get; set; }
+        public virtual int WithAccount { get; set; }
     }
 }

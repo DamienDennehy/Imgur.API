@@ -16,7 +16,7 @@ namespace Imgur.API.JsonConverters
         /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
-            return typeof (T).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
+            return typeof(T).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
         }
 
         /// <summary>

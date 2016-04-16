@@ -15,15 +15,15 @@ namespace Imgur.API.Tests.JsonConverters
     public class GalleryItemConverterTests
     {
         [Theory]
-        [InlineData(typeof (GalleryAlbum), true)]
-        [InlineData(typeof (GalleryImage), true)]
-        [InlineData(typeof (GalleryItem), true)]
-        [InlineData(typeof (DateTime), false)]
-        [InlineData(typeof (string), false)]
-        [InlineData(typeof (int), false)]
-        [InlineData(typeof (bool), false)]
-        [InlineData(typeof (float), false)]
-        [InlineData(typeof (Image), false)]
+        [InlineData(typeof(GalleryAlbum), true)]
+        [InlineData(typeof(GalleryImage), true)]
+        [InlineData(typeof(GalleryItem), true)]
+        [InlineData(typeof(DateTime), false)]
+        [InlineData(typeof(string), false)]
+        [InlineData(typeof(int), false)]
+        [InlineData(typeof(bool), false)]
+        [InlineData(typeof(float), false)]
+        [InlineData(typeof(Image), false)]
         public void CanConvert(Type type, bool canConvert)
         {
             var converter = new GalleryItemConverter();
@@ -42,7 +42,7 @@ namespace Imgur.API.Tests.JsonConverters
                 Converters = {converter}
             };
 
-            var actual = (GalleryAlbum) converter.ReadJson(reader, typeof (GalleryItem), null, serializer);
+            var actual = (GalleryAlbum) converter.ReadJson(reader, typeof(GalleryItem), null, serializer);
             Assert.Null(actual);
         }
 
@@ -57,7 +57,7 @@ namespace Imgur.API.Tests.JsonConverters
                 Converters = {converter}
             };
 
-            var actual = (GalleryAlbum) converter.ReadJson(reader, typeof (GalleryItem), null, serializer);
+            var actual = (GalleryAlbum) converter.ReadJson(reader, typeof(GalleryItem), null, serializer);
             Assert.NotNull(actual);
 
             Assert.Equal(null, actual.AccountId);
@@ -99,7 +99,7 @@ namespace Imgur.API.Tests.JsonConverters
                 Converters = {converter}
             };
 
-            var actual = (GalleryImage) converter.ReadJson(reader, typeof (GalleryItem), null, serializer);
+            var actual = (GalleryImage) converter.ReadJson(reader, typeof(GalleryItem), null, serializer);
             Assert.NotNull(actual);
 
             Assert.Equal(null, actual.AccountId);

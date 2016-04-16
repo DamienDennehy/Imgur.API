@@ -13,24 +13,24 @@ namespace Imgur.API.Models.Impl
         ///     Total number of comments the user has made in the gallery.
         /// </summary>
         [JsonProperty("total_gallery_comments")]
-        public int TotalGalleryComments { get; set; }
+        public virtual int TotalGalleryComments { get; set; }
 
         /// <summary>
         ///     Total number of items favorited by the user in the gallery.
         /// </summary>
         [JsonProperty("total_gallery_favorites")]
-        public int TotalGalleryFavorites { get; set; }
+        public virtual int TotalGalleryFavorites { get; set; }
 
         /// <summary>
         ///     Total number of images submitted by the user.
         /// </summary>
         [JsonProperty("total_gallery_submissions")]
-        public int TotalGallerySubmissions { get; set; }
+        public virtual int TotalGallerySubmissions { get; set; }
 
         /// <summary>
         ///     A list of trophies that the user has.
         /// </summary>
-        [JsonConverter(typeof (TypeConverter<IEnumerable<Trophy>>))]
-        public IEnumerable<ITrophy> Trophies { get; set; } = new List<ITrophy>();
+        [JsonConverter(typeof(TypeConverter<IEnumerable<Trophy>>))]
+        public virtual IEnumerable<ITrophy> Trophies { get; set; } = new List<ITrophy>();
     }
 }

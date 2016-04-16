@@ -75,6 +75,24 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
+        public async Task GetTokenByCodeAsync_WithClientSecretNull_ThrowsArgumentNullException()
+        {
+            var client = new ImgurClient("123");
+            var endpoint = new OAuth2Endpoint(client);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetTokenByCodeAsync("1234").ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException) exception;
+            Assert.Equal(argNullException.ParamName, "ClientSecret");
+        }
+
+        [Fact]
         public async Task GetTokenByCodeAsync_WithCodeNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
@@ -114,6 +132,24 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
+        public async Task GetTokenByPinAsync_WithClientSecretNull_ThrowsArgumentNullException()
+        {
+            var client = new ImgurClient("123");
+            var endpoint = new OAuth2Endpoint(client);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetTokenByPinAsync("1234").ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException) exception;
+            Assert.Equal(argNullException.ParamName, "ClientSecret");
+        }
+
+        [Fact]
         public async Task GetTokenByPinAsync_WithPinNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
@@ -150,57 +186,6 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetTokenByRefreshTokenAsync_WithTokenNull_ThrowsArgumentNullException()
-        {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new OAuth2Endpoint(client);
-
-            var exception =
-                await
-                    Record.ExceptionAsync(
-                        async () => await endpoint.GetTokenByRefreshTokenAsync(null).ConfigureAwait(false))
-                        .ConfigureAwait(false);
-            Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
-        }
-
-        [Fact]
-        public async Task GetTokenByCodeAsync_WithClientSecretNull_ThrowsArgumentNullException()
-        {
-            var client = new ImgurClient("123");
-            var endpoint = new OAuth2Endpoint(client);
-
-            var exception =
-                await
-                    Record.ExceptionAsync(
-                        async () => await endpoint.GetTokenByCodeAsync("1234").ConfigureAwait(false))
-                        .ConfigureAwait(false);
-            Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
-
-            var argNullException = (ArgumentNullException) exception;
-            Assert.Equal(argNullException.ParamName, "ClientSecret");
-        }
-
-        [Fact]
-        public async Task GetTokenByPinAsync_WithClientSecretNull_ThrowsArgumentNullException()
-        {
-            var client = new ImgurClient("123");
-            var endpoint = new OAuth2Endpoint(client);
-
-            var exception =
-                await
-                    Record.ExceptionAsync(
-                        async () => await endpoint.GetTokenByPinAsync("1234").ConfigureAwait(false))
-                        .ConfigureAwait(false);
-            Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
-
-            var argNullException = (ArgumentNullException) exception;
-            Assert.Equal(argNullException.ParamName, "ClientSecret");
-        }
-
-        [Fact]
         public async Task GetTokenByRefreshTokenAsync_WithClientSecretNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123");
@@ -216,6 +201,21 @@ namespace Imgur.API.Tests.EndpointTests
 
             var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "ClientSecret");
+        }
+
+        [Fact]
+        public async Task GetTokenByRefreshTokenAsync_WithTokenNull_ThrowsArgumentNullException()
+        {
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new OAuth2Endpoint(client);
+
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetTokenByRefreshTokenAsync(null).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
     }
 }

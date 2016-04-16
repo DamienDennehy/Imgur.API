@@ -17,7 +17,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     Utc timestamp of account creation, converted from epoch time.
         /// </summary>
-        [JsonConverter(typeof (EpochTimeConverter))]
+        [JsonConverter(typeof(EpochTimeConverter))]
         public virtual DateTimeOffset Created { get; set; }
 
         /// <summary>

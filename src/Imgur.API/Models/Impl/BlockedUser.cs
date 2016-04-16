@@ -11,12 +11,12 @@ namespace Imgur.API.Models.Impl
         ///     The account id of the user.
         /// </summary>
         [JsonProperty("blocked_id")]
-        public int BlockedId { get; set; }
+        public virtual int BlockedId { get; set; }
 
         /// <summary>
         ///     The account username.
         /// </summary>
         [JsonProperty("blocked_url")]
-        public string BlockedUrl { get; set; }
+        public virtual string BlockedUrl { get; set; }
     }
 }

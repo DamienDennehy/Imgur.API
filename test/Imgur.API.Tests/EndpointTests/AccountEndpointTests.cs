@@ -107,6 +107,19 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
+        public async Task SendVerificationEmail_OAuth2Null_ThrowsArgumentNullException()
+        {
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new AccountEndpoint(client);
+
+            var exception = await Record.ExceptionAsync(
+                async () => await endpoint.SendVerificationEmailAsync().ConfigureAwait(false))
+                .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
+        }
+
+        [Fact]
         public async Task SendVerificationEmail_True()
         {
             var mockUrl = "https://api.imgur.com/3/account/me/verifyemail";
@@ -120,19 +133,6 @@ namespace Imgur.API.Tests.EndpointTests
             var updated = await endpoint.SendVerificationEmailAsync().ConfigureAwait(false);
 
             Assert.True(updated);
-        }
-
-        [Fact]
-        public async Task SendVerificationEmail_OAuth2Null_ThrowsArgumentNullException()
-        {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(client);
-
-            var exception = await Record.ExceptionAsync(
-                async () => await endpoint.SendVerificationEmailAsync().ConfigureAwait(false))
-                .ConfigureAwait(false);
-            Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
         }
 
         [Fact]
@@ -157,22 +157,6 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task UpdateAccountSettingsAsync_True()
-        {
-            var mockUrl = "https://api.imgur.com/3/account/me/settings";
-            var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent(MockAccountEndpointResponses.UpdateAccountSettings)
-            };
-
-            var client = new ImgurClient("123", "1234", MockOAuth2Token);
-            var endpoint = new AccountEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
-            var updated = await endpoint.UpdateAccountSettingsAsync().ConfigureAwait(false);
-
-            Assert.True(updated);
-        }
-
-        [Fact]
         public async Task UpdateAccountSettingsAsync_OAuth2Null_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");
@@ -188,17 +172,17 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task VerifyEmailAsync_True()
+        public async Task UpdateAccountSettingsAsync_True()
         {
-            var mockUrl = "https://api.imgur.com/3/account/me/verifyemail";
+            var mockUrl = "https://api.imgur.com/3/account/me/settings";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(MockAccountEndpointResponses.VerifyEmail)
+                Content = new StringContent(MockAccountEndpointResponses.UpdateAccountSettings)
             };
 
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
-            var updated = await endpoint.VerifyEmailAsync().ConfigureAwait(false);
+            var updated = await endpoint.UpdateAccountSettingsAsync().ConfigureAwait(false);
 
             Assert.True(updated);
         }
@@ -237,6 +221,22 @@ namespace Imgur.API.Tests.EndpointTests
                         .ConfigureAwait(false);
             Assert.NotNull(exception);
             Assert.IsType<ImgurException>(exception);
+        }
+
+        [Fact]
+        public async Task VerifyEmailAsync_True()
+        {
+            var mockUrl = "https://api.imgur.com/3/account/me/verifyemail";
+            var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(MockAccountEndpointResponses.VerifyEmail)
+            };
+
+            var client = new ImgurClient("123", "1234", MockOAuth2Token);
+            var endpoint = new AccountEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
+            var updated = await endpoint.VerifyEmailAsync().ConfigureAwait(false);
+
+            Assert.True(updated);
         }
     }
 }

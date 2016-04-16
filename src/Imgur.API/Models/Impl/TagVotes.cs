@@ -12,7 +12,7 @@ namespace Imgur.API.Models.Impl
         /// <summary>
         ///     The list of tags.
         /// </summary>
-        [JsonConverter(typeof (TypeConverter<IEnumerable<TagVote>>))]
-        public IEnumerable<ITagVote> Tags { get; set; }
+        [JsonConverter(typeof(TypeConverter<IEnumerable<TagVote>>))]
+        public virtual IEnumerable<ITagVote> Tags { get; set; }
     }
 }

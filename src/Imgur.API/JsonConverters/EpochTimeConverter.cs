@@ -15,7 +15,7 @@ namespace Imgur.API.JsonConverters
         /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof (DateTimeOffset);
+            return objectType == typeof(DateTimeOffset);
         }
 
         /// <summary>

@@ -11,16 +11,16 @@ namespace Imgur.API.Models.Impl
         ///     A description of the error.
         /// </summary>
         [JsonProperty("error")]
-        public string Error { get; set; }
+        public virtual string Error { get; set; }
 
         /// <summary>
         ///     The HttpMethod that was used to send the request.
         /// </summary>
-        public string Method { get; set; }
+        public virtual string Method { get; set; }
 
         /// <summary>
         ///     The request Uri that the error came from.
         /// </summary>
-        public string Request { get; set; }
+        public virtual string Request { get; set; }
     }
 }

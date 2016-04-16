@@ -10,6 +10,14 @@ namespace Imgur.API.Tests.AuthenticationTests
     public class ImgurClientTests
     {
         [Fact]
+        public void ClientId_SetByConstructor_AreEqual()
+        {
+            var client = new ImgurClient("ClientId123", "ClientSecret123");
+
+            Assert.Equal("ClientId123", client.ClientId);
+        }
+
+        [Fact]
         public void ClientId_SetNullByConstructor_ThrowArgumentNullException()
         {
             var exception = Record.Exception(() => new ImgurClient(null));
@@ -18,6 +26,14 @@ namespace Imgur.API.Tests.AuthenticationTests
 
             var argNullException = (ArgumentNullException) exception;
             Assert.Equal(argNullException.ParamName, "clientId");
+        }
+
+        [Fact]
+        public void ClientSecret_SetByConstructor_AreEqual()
+        {
+            var client = new ImgurClient("ClientId123", "ClientSecret123");
+
+            Assert.Equal("ClientSecret123", client.ClientSecret);
         }
 
         [Fact]
@@ -32,33 +48,10 @@ namespace Imgur.API.Tests.AuthenticationTests
         }
 
         [Fact]
-        public void OAuth2Token_SetNullByClientIdConstructor_ThrowArgumentNullException()
+        public void EndpointUrl_IsImgurUrl()
         {
-            var exception = Record.Exception(() => new ImgurClient("ClientId", oAuth2Token: null));
-            Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
-
-            var argNullException = (ArgumentNullException) exception;
-            Assert.Equal(argNullException.ParamName, "oAuth2Token");
-        }
-
-        [Fact]
-        public void OAuth2Token_SetNullByClientIdAndSecretConstructor_ThrowArgumentNullException()
-        {
-            var exception = Record.Exception(() => new ImgurClient("ClientId", "ClientSecret", null));
-            Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
-
-            var argNullException = (ArgumentNullException) exception;
-            Assert.Equal(argNullException.ParamName, "oAuth2Token");
-        }
-
-        [Fact]
-        public void OAuth2Token_SetByClientIdConstructor_AreSame()
-        {
-            var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
-            var client = new ImgurClient("ClientId", oAuth2Token);
-            Assert.Same(oAuth2Token, client.OAuth2Token);
+            var client = new ImgurClient("ClientId", "ClientSecret");
+            Assert.Equal("https://api.imgur.com/3/", client.EndpointUrl);
         }
 
         [Fact]
@@ -66,6 +59,14 @@ namespace Imgur.API.Tests.AuthenticationTests
         {
             var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
             var client = new ImgurClient("ClientId", "ClientSecret", oAuth2Token);
+            Assert.Same(oAuth2Token, client.OAuth2Token);
+        }
+
+        [Fact]
+        public void OAuth2Token_SetByClientIdConstructor_AreSame()
+        {
+            var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
+            var client = new ImgurClient("ClientId", oAuth2Token);
             Assert.Same(oAuth2Token, client.OAuth2Token);
         }
 
@@ -94,19 +95,25 @@ namespace Imgur.API.Tests.AuthenticationTests
         }
 
         [Fact]
-        public void ClientId_SetByConstructor_AreEqual()
+        public void OAuth2Token_SetNullByClientIdAndSecretConstructor_ThrowArgumentNullException()
         {
-            var client = new ImgurClient("ClientId123", "ClientSecret123");
+            var exception = Record.Exception(() => new ImgurClient("ClientId", "ClientSecret", null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
 
-            Assert.Equal("ClientId123", client.ClientId);
+            var argNullException = (ArgumentNullException) exception;
+            Assert.Equal(argNullException.ParamName, "oAuth2Token");
         }
 
         [Fact]
-        public void ClientSecret_SetByConstructor_AreEqual()
+        public void OAuth2Token_SetNullByClientIdConstructor_ThrowArgumentNullException()
         {
-            var client = new ImgurClient("ClientId123", "ClientSecret123");
+            var exception = Record.Exception(() => new ImgurClient("ClientId", oAuth2Token: null));
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
 
-            Assert.Equal("ClientSecret123", client.ClientSecret);
+            var argNullException = (ArgumentNullException) exception;
+            Assert.Equal(argNullException.ParamName, "oAuth2Token");
         }
 
         [Fact]
@@ -114,13 +121,6 @@ namespace Imgur.API.Tests.AuthenticationTests
         {
             var client = new ImgurClient("ClientId", "ClientSecret");
             Assert.NotNull(client.RateLimit);
-        }
-
-        [Fact]
-        public void EndpointUrl_IsImgurUrl()
-        {
-            var client = new ImgurClient("ClientId", "ClientSecret");
-            Assert.Equal("https://api.imgur.com/3/", client.EndpointUrl);
         }
     }
 }

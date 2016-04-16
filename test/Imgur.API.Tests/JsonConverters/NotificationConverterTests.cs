@@ -14,17 +14,17 @@ namespace Imgur.API.Tests.JsonConverters
     public class NotificationConverterTests
     {
         [Theory]
-        [InlineData(typeof (CommentNotification), true)]
-        [InlineData(typeof (MessageNotification), true)]
-        [InlineData(typeof (GalleryAlbum), false)]
-        [InlineData(typeof (GalleryImage), false)]
-        [InlineData(typeof (GalleryItem), false)]
-        [InlineData(typeof (Image), false)]
-        [InlineData(typeof (DateTime), false)]
-        [InlineData(typeof (string), false)]
-        [InlineData(typeof (int), false)]
-        [InlineData(typeof (bool), false)]
-        [InlineData(typeof (float), false)]
+        [InlineData(typeof(CommentNotification), true)]
+        [InlineData(typeof(MessageNotification), true)]
+        [InlineData(typeof(GalleryAlbum), false)]
+        [InlineData(typeof(GalleryImage), false)]
+        [InlineData(typeof(GalleryItem), false)]
+        [InlineData(typeof(Image), false)]
+        [InlineData(typeof(DateTime), false)]
+        [InlineData(typeof(string), false)]
+        [InlineData(typeof(int), false)]
+        [InlineData(typeof(bool), false)]
+        [InlineData(typeof(float), false)]
         public void CanConvert(Type type, bool canConvert)
         {
             var converter = new NotificationConverter();
@@ -42,7 +42,7 @@ namespace Imgur.API.Tests.JsonConverters
             var serializer = new JsonSerializer();
 
             var actual =
-                (CommentNotification) converter.ReadJson(reader, typeof (CommentNotification), null, serializer);
+                (CommentNotification) converter.ReadJson(reader, typeof(CommentNotification), null, serializer);
             Assert.NotNull(actual);
 
             Assert.Equal(null, actual.AlbumCover);
@@ -72,7 +72,7 @@ namespace Imgur.API.Tests.JsonConverters
             var serializer = new JsonSerializer();
 
             var actual =
-                (MessageNotification) converter.ReadJson(reader, typeof (MessageNotification), null, serializer);
+                (MessageNotification) converter.ReadJson(reader, typeof(MessageNotification), null, serializer);
             Assert.NotNull(actual);
 
             Assert.Equal(76767, actual.Id);

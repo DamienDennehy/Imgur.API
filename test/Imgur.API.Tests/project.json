@@ -1,12 +1,13 @@
 ﻿{
   "version": "1.0.0-*",
   "description": "Imgur.API.Tests",
-  "authors": [ "Damien Dennehy" ],
-  "tags": [ "" ],
+  "authors": ["Damien Dennehy"],
+  "tags": [""],
   "projectUrl": "",
   "licenseUrl": "",
   "frameworks": {
     "dnx451": {
+    
     },
     "dnxcore50": {
       "dependencies": {

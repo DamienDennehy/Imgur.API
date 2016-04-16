@@ -8,11 +8,11 @@
         /// <summary>
         ///     The number of downvotes.
         /// </summary>
-        public int Downs { get; set; }
+        public virtual int Downs { get; set; }
 
         /// <summary>
         ///     Number of upvotes.
         /// </summary>
-        public int Ups { get; set; }
+        public virtual int Ups { get; set; }
     }
 }

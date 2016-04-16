@@ -97,6 +97,13 @@ namespace Imgur.API.Models.Impl
         public virtual string Mp4 { get; set; }
 
         /// <summary>
+        ///     OPTIONAL, The Content-Length of the .mp4. Only available if the image is animated and type is 'image/gif'. Note
+        ///     that a zero value (0) is possible if the video has not yet been generated.
+        /// </summary>
+        [JsonProperty("mp4_size")]
+        public virtual int? Mp4Size { get; set; }
+
+        /// <summary>
         ///     OPTIONAL, the original filename, if you're logged in as the image owner.
         /// </summary>
         public virtual string Name { get; set; }
@@ -168,6 +175,13 @@ namespace Imgur.API.Models.Impl
         ///     OPTIONAL, The direct link to the .webm. Only available if the image is animated and type is 'image/gif'.
         /// </summary>
         public virtual string Webm { get; set; }
+
+        /// <summary>
+        ///     OPTIONAL, The Content-Length of the .webm. Only available if the image is animated and type is 'image/gif'. Note
+        ///     that a zero value (0) is possible if the video has not yet been generated.
+        /// </summary>
+        [JsonProperty("webm_size")]
+        public int? WebmSize { get; set; }
 
         /// <summary>
         ///     The width of the image in pixels.

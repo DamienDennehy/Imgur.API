@@ -176,6 +176,8 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal("http://i.imgur.com/zVpyzhWh.gif", image.Link);
             Assert.Equal(true, image.Looping);
             Assert.Equal(true, image.InGallery);
+            Assert.Equal(595876, image.Mp4Size);
+            Assert.Equal(543019, image.WebmSize);
         }
 
         [Fact]

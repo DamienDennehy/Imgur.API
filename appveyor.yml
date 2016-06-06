@@ -1,32 +1,20 @@
 version: 4.0.0-build{build}
 install:
 - ps: >-
-    dnvm install 1.0.0-rc1-update1
-
-    dnvm use 1.0.0-rc1-update1
-
-    nuget sources add -Name Local-CI -Source C:\Users\appveyor\.dnx\packages
-
-    nuget sources add -Name MyGet-CI -Source http://myget.org/f/damiendennehy/
-cache:
-- C:\Users\appveyor\.dnx\runtimes
-- C:\Users\appveyor\.dnx\packages
+    (new-object net.webclient).DownloadFile('https://download.microsoft.com/download/4/6/1/46116DFF-29F9-4FF8-94BF-F9BE05BE263B/packages/DotNetCore.1.0.0.RC2-SDK.Preview1-x64.exe','core.exe')
+    core.exe /install /quiet /norestart
+    dotnet restore
+cache: "C:\Program Files (x86)\Microsoft SDKs\NuGetPackages"
 before_build:
 - ps: >-
     (Get-Content src\Imgur.API\project.json).replace('"version": "1.0.0-*",', '"version": "' + $env:APPVEYOR_BUILD_VERSION + '",') | Set-Content src\Imgur.API\project.json
-
-    (Get-Content test\Imgur.API.Tests\project.json).replace('"Imgur.API": "1.0.0-*",', '"Imgur.API": "' + $env:APPVEYOR_BUILD_VERSION + '",') | Set-Content test\Imgur.API.Tests\project.json
-
-    dnu restore
+    (Get-Content test\Imgur.API.Tests\project.json).replace('"Imgur.API": "1.0.0-*"', '"Imgur.API": "' + $env:APPVEYOR_BUILD_VERSION + '"') | Set-Content test\Imgur.API.Tests\project.json
 build:
   verbosity: minimal
 test_script:
-- ps: >-
-    cd test\Imgur.API.Tests
-
-    dnx test
+- cmd: dotnet test test\Imgur.API.Tests
 artifacts:
-- path: artifacts\bin\Imgur.API\Debug\*.nupkg
+- path: src\Imgur.API\bin\Debug\*.nupkg
 deploy:
 - provider: NuGet
   server: https://www.myget.org/F/damiendennehy/api/v2/package

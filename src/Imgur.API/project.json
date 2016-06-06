@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "description": "Imgur.API is a .NET implementation of Imgur's API. It supports Imgur's free and Mashape's commercial API endpoints.",
   "authors": [ "Damien Dennehy" ],
@@ -42,5 +42,8 @@
     "postcompile": [
       "dotnet pack --no-build"
     ]
+  },
+  "buildOptions": {
+    "xmlDoc": true
   }
 }

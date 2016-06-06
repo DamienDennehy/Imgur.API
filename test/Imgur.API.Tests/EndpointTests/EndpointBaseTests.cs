@@ -137,7 +137,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public void ProcessEndpointBaseResponse_WithStringResponseNull_ThrowsImgurException()
+        public void ProcessEndpointBaseResponse_WithResponseNull_ThrowsImgurException()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
@@ -148,12 +148,28 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
+        public void ProcessEndpointBaseResponse_WithStringResponseNull_ThrowsImgurException()
+        {
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new MockEndpoint(client);
+
+            var response = new HttpResponseMessage {Content = new StringContent("")};
+
+            var exception = Record.Exception(() => endpoint.ProcessEndpointResponse<bool>(response));
+            Assert.NotNull(exception);
+            Assert.IsType<ImgurException>(exception);
+        }
+
+        [Fact]
         public void ProcessEndpointResponse_WithSuccessfulResponse_Equal()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
-            var response = endpoint.ProcessEndpointResponse<bool>(MockGenericEndpointResponses.SuccessfulResponse);
-            Assert.True(response);
+
+            var response = new HttpResponseMessage { Content = new StringContent(MockGenericEndpointResponses.SuccessfulResponse) };
+
+            var result = endpoint.ProcessEndpointResponse<bool>(response);
+            Assert.True(result);
         }
 
         [Fact]
@@ -162,8 +178,10 @@ namespace Imgur.API.Tests.EndpointTests
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
 
+            var response = new HttpResponseMessage {Content = new StringContent(MockErrors.ImgurClientError)};
+
             var exception =
-                Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>(MockErrors.ImgurClientError));
+                Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>(response));
             Assert.NotNull(exception);
             Assert.IsType<ImgurException>(exception);
         }
@@ -174,8 +192,10 @@ namespace Imgur.API.Tests.EndpointTests
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
 
+            var response = new HttpResponseMessage { Content = new StringContent(MockErrors.ImgurCapacityError) };
+
             var exception =
-                Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>(MockErrors.ImgurCapacityError));
+                Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>(response));
             Assert.NotNull(exception);
             Assert.IsType<ImgurException>(exception);
         }
@@ -186,7 +206,22 @@ namespace Imgur.API.Tests.EndpointTests
             var client = new ImgurClient("123", "1234");
             var endpoint = new MockEndpoint(client);
 
-            var exception = Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>("<html>"));
+            var response = new HttpResponseMessage { Content = new StringContent("<html>") };
+
+            var exception = Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>(response));
+            Assert.NotNull(exception);
+            Assert.IsType<ImgurException>(exception);
+        }
+
+        [Fact]
+        public void ProcessImgurEndpointResponse_WithImgurCacheErrorResponse_ThrowsImgurException()
+        {
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new MockEndpoint(client);
+
+            var response = new HttpResponseMessage {Content = new StringContent("<html>")};
+
+            var exception = Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>(response));
             Assert.NotNull(exception);
             Assert.IsType<ImgurException>(exception);
         }
@@ -197,7 +232,9 @@ namespace Imgur.API.Tests.EndpointTests
             var client = new MashapeClient("123", "567567", "1234");
             var endpoint = new MockEndpoint(client);
 
-            var exception = Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>(MockErrors.MashapeError));
+            var response = new HttpResponseMessage { Content = new StringContent(MockErrors.MashapeError) };
+
+            var exception = Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>(response));
             Assert.NotNull(exception);
             Assert.IsType<MashapeException>(exception);
         }

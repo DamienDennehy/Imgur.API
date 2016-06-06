@@ -1,4 +1,5 @@
-﻿using Imgur.API.Authentication.Impl;
+﻿using System.Net.Http;
+using Imgur.API.Authentication.Impl;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Imgur.API.Tests.Mocks;
@@ -18,7 +19,11 @@ namespace Imgur.API.Tests
                 return _token;
 
             var endpoint = new MockEndpoint(new ImgurClient("a", "b"));
-            _token = endpoint.ProcessEndpointResponse<OAuth2Token>(MockOAuth2EndpointResponses.GetTokenByCode);
+            var response = new HttpResponseMessage
+            {
+                Content = new StringContent(MockOAuth2EndpointResponses.GetTokenByCode)
+            };
+            _token = endpoint.ProcessEndpointResponse<OAuth2Token>(response);
             return _token;
         }
     }

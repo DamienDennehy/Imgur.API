@@ -10,5 +10,9 @@
 
         public const string MashapeError =
             "{\"message\":\"Missing Mashape application key.Go to http://docs.mashape.com/api-keys to learn how to get your API application key.\"}";
+
+        public const string ImgurCacheError =
+            "\r\n" +
+            " <xml";
     }
 }

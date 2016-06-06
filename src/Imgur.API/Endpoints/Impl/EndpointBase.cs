@@ -139,7 +139,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Parses the string stringResponse from the endpoint into an expected type T.
         /// </summary>
         /// <typeparam name="T">The expected output type, Image, bool, etc.</typeparam>
-        /// <param name="stringResponse">The string response from the endpoint.</param>
+        /// <param name="response">The response from the endpoint.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -147,15 +147,35 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <returns></returns>
-        internal virtual T ProcessEndpointResponse<T>(string stringResponse)
+        internal virtual T ProcessEndpointResponse<T>(HttpResponseMessage response)
         {
             //If no result is found, then we can't proceed
-            if (string.IsNullOrWhiteSpace(stringResponse))
-                throw new ImgurException("The response from the endpoint is empty.");
+            if (response == null)
+                throw new ImgurException("The response from the endpoint is missing.");
 
+            string stringResponse = null;
+
+            if (response.Content != null)
+            {
+                var task = response.Content.ReadAsStringAsync();
+                Task.WaitAll(task);
+                stringResponse = task.Result.Trim();
+            }
+            
+            //On rare occasions Imgur will not return any response (example: 429 Too Many Requests).
+            //In this case, if the reason phrase is not null then we should throw an ImgurException.
+            if (string.IsNullOrWhiteSpace(stringResponse)
+                && !response.IsSuccessStatusCode
+                && !string.IsNullOrWhiteSpace(response.ReasonPhrase))
+                throw new ImgurException($"{(int)response.StatusCode} {response.ReasonPhrase}");
+
+            //If no result is found, then we can't proceed
+            if (string.IsNullOrWhiteSpace(stringResponse))
+                throw new ImgurException($"The response from the endpoint is missing. {response.ReasonPhrase}");
+            
             //If the result isn't a json response, then we can't proceed
             if (stringResponse.StartsWith("<"))
-                throw new ImgurException("The response from the endpoint is invalid.");
+                throw new ImgurException($"The response from the endpoint is invalid. {response.ReasonPhrase}");
 
             //If the authentication method is Mashape, then an error response
             //is different to that of Imgur's error response.
@@ -220,19 +240,7 @@ namespace Imgur.API.Endpoints.Impl
 
             UpdateRateLimit(httpResponse.Headers);
 
-            string stringResponse = null;
-
-            if (httpResponse.Content != null)
-                stringResponse = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-            //On rare occasions Imgur will not return any response (example: 429 Too Many Requests).
-            //In this case, if the reason phrase is not null then we should throw an ImgurException.
-            if (string.IsNullOrWhiteSpace(stringResponse)
-                && !httpResponse.IsSuccessStatusCode
-                && !string.IsNullOrWhiteSpace(httpResponse.ReasonPhrase))
-                throw new ImgurException($"{(int) httpResponse.StatusCode} {httpResponse.ReasonPhrase}");
-
-            return ProcessEndpointResponse<T>(stringResponse);
+            return ProcessEndpointResponse<T>(httpResponse);
         }
 
         /// <summary>

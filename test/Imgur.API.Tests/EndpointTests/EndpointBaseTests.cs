@@ -430,6 +430,9 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal(123, endpoint.ApiClient.RateLimit.ClientLimit);
             Assert.Equal(345, endpoint.ApiClient.RateLimit.ClientRemaining);
 
+            response.Headers.Remove("X-RateLimit-ClientLimit");
+            response.Headers.Remove("X-RateLimit-ClientRemaining");
+
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "122");
             response.Headers.TryAddWithoutValidation("X-RateLimit-ClientRemaining", "344");
 
@@ -458,6 +461,9 @@ namespace Imgur.API.Tests.EndpointTests
 
             Assert.Equal(123, endpoint.ApiClient.RateLimit.ClientLimit);
             Assert.Equal(345, endpoint.ApiClient.RateLimit.ClientRemaining);
+
+            mockResponse.Headers.Remove("X-RateLimit-ClientLimit");
+            mockResponse.Headers.Remove("X-RateLimit-ClientRemaining");
 
             mockResponse.Headers.TryAddWithoutValidation("X-RateLimit-ClientLimit", "122");
             mockResponse.Headers.TryAddWithoutValidation("X-RateLimit-ClientRemaining", "344");
@@ -506,6 +512,9 @@ namespace Imgur.API.Tests.EndpointTests
 
             Assert.Equal(123, endpoint.ApiClient.RateLimit.ClientLimit);
             Assert.Equal(345, endpoint.ApiClient.RateLimit.ClientRemaining);
+
+            response.Headers.Remove("X-RateLimit-Requests-Limit");
+            response.Headers.Remove("X-RateLimit-Requests-Remaining");
 
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Limit", "122");
             response.Headers.TryAddWithoutValidation("X-RateLimit-Requests-Remaining", "344");

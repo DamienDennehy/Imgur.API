@@ -171,11 +171,16 @@ namespace Imgur.API.Endpoints.Impl
 
             //If no result is found, then we can't proceed
             if (string.IsNullOrWhiteSpace(stringResponse))
-                throw new ImgurException($"The response from the endpoint is missing. {response.ReasonPhrase}");
+                throw new ImgurException($"The response from the endpoint is missing. {(int)response.StatusCode} {response.ReasonPhrase}");
             
             //If the result isn't a json response, then we can't proceed
             if (stringResponse.StartsWith("<"))
-                throw new ImgurException($"The response from the endpoint is invalid. {response.ReasonPhrase}");
+            {
+                if (!string.IsNullOrWhiteSpace(response.ReasonPhrase))
+                    throw new ImgurException($"{(int)response.StatusCode} {response.ReasonPhrase}");
+                
+                throw new ImgurException($"The response from the endpoint is invalid. Status Code: {(int)response.StatusCode}");
+            }
 
             //If the authentication method is Mashape, then an error response
             //is different to that of Imgur's error response.

@@ -161,13 +161,6 @@ namespace Imgur.API.Endpoints.Impl
                 Task.WaitAll(task);
                 stringResponse = task.Result.Trim();
             }
-            
-            //On rare occasions Imgur will not return any response (example: 429 Too Many Requests).
-            //In this case, if the reason phrase is not null then we should throw an ImgurException.
-            if (string.IsNullOrWhiteSpace(stringResponse)
-                && !response.IsSuccessStatusCode
-                && !string.IsNullOrWhiteSpace(response.ReasonPhrase))
-                throw new ImgurException($"{(int)response.StatusCode} {response.ReasonPhrase}");
 
             //If no result is found, then we can't proceed
             if (string.IsNullOrWhiteSpace(stringResponse))
@@ -176,10 +169,7 @@ namespace Imgur.API.Endpoints.Impl
             //If the result isn't a json response, then we can't proceed
             if (stringResponse.StartsWith("<"))
             {
-                if (!string.IsNullOrWhiteSpace(response.ReasonPhrase))
-                    throw new ImgurException($"{(int)response.StatusCode} {response.ReasonPhrase}");
-                
-                throw new ImgurException($"The response from the endpoint is invalid. Status Code: {(int)response.StatusCode}");
+                throw new ImgurException($"The response from the endpoint is invalid. {(int)response.StatusCode} {response.ReasonPhrase}");
             }
 
             //If the authentication method is Mashape, then an error response

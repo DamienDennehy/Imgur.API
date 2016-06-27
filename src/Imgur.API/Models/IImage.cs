@@ -122,18 +122,7 @@ namespace Imgur.API.Models
         ///     the gallery.
         /// </summary>
         VoteOption? Vote { get; set; }
-
-        /// <summary>
-        ///     OPTIONAL, The direct link to the .webm. Only available if the image is animated and type is 'image/gif'.
-        /// </summary>
-        string Webm { get; set; }
-
-        /// <summary>
-        ///     OPTIONAL, The Content-Length of the .webm. Only available if the image is animated and type is 'image/gif'. Note
-        ///     that a zero value (0) is possible if the video has not yet been generated.
-        /// </summary>
-        int? WebmSize { get; set; }
-
+        
         /// <summary>
         ///     The width of the image in pixels.
         /// </summary>

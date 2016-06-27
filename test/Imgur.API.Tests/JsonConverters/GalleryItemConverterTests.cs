@@ -128,7 +128,6 @@ namespace Imgur.API.Tests.JsonConverters
             Assert.Equal(3567, actual.Ups);
             Assert.Equal(1056415, actual.Views);
             Assert.Equal(VoteOption.Up, actual.Vote);
-            Assert.Equal(null, actual.Webm);
             Assert.Equal(960, actual.Width);
         }
     }

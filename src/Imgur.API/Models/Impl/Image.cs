@@ -127,19 +127,7 @@ namespace Imgur.API.Models.Impl
         ///     the gallery.
         /// </summary>
         public virtual VoteOption? Vote { get; set; }
-
-        /// <summary>
-        ///     OPTIONAL, The direct link to the .webm. Only available if the image is animated and type is 'image/gif'.
-        /// </summary>
-        public virtual string Webm { get; set; }
-
-        /// <summary>
-        ///     OPTIONAL, The Content-Length of the .webm. Only available if the image is animated and type is 'image/gif'. Note
-        ///     that a zero value (0) is possible if the video has not yet been generated.
-        /// </summary>
-        [JsonProperty("webm_size")]
-        public int? WebmSize { get; set; }
-
+        
         /// <summary>
         ///     The width of the image in pixels.
         /// </summary>

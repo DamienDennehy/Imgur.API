@@ -54,7 +54,6 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal(22133, image.Points);
             Assert.Equal(22594, image.Score);
             Assert.Null(image.Mp4Size);
-            Assert.Null(image.WebmSize);
         }
 
         [Fact]

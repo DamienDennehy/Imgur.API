@@ -171,13 +171,11 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal(false, image.Nsfw);
             Assert.Equal("Eyebleach", image.Section);
             Assert.Equal("http://i.imgur.com/zVpyzhW.gifv", image.Gifv);
-            Assert.Equal("http://i.imgur.com/zVpyzhW.webm", image.Webm);
             Assert.Equal("http://i.imgur.com/zVpyzhW.mp4", image.Mp4);
             Assert.Equal("http://i.imgur.com/zVpyzhWh.gif", image.Link);
             Assert.Equal(true, image.Looping);
             Assert.Equal(true, image.InGallery);
             Assert.Equal(595876, image.Mp4Size);
-            Assert.Equal(543019, image.WebmSize);
         }
 
         [Fact]
@@ -260,7 +258,6 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal("image/gif", image.Type);
             Assert.Equal(0, image.Views);
             Assert.Equal(null, image.Vote);
-            Assert.Equal("http://i.imgur.com/kiNOcUl.webm", image.Webm);
             Assert.Equal(290, image.Width);
         }
 
@@ -318,7 +315,6 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal("image/gif", image.Type);
             Assert.Equal(0, image.Views);
             Assert.Equal(null, image.Vote);
-            Assert.Equal("http://i.imgur.com/kiNOcUl.webm", image.Webm);
             Assert.Equal(290, image.Width);
         }
 
@@ -356,7 +352,6 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal("image/gif", image.Type);
             Assert.Equal(0, image.Views);
             Assert.Equal(null, image.Vote);
-            Assert.Equal("http://i.imgur.com/kiNOcUl.webm", image.Webm);
             Assert.Equal(290, image.Width);
         }
 

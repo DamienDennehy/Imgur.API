@@ -121,7 +121,6 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal(null, image.Nsfw);
             Assert.Equal(null, image.Section);
             Assert.Equal("http://i.imgur.com/hbzm7Ge.gifv", image.Gifv);
-            Assert.Equal("http://i.imgur.com/hbzm7Ge.webm", image.Webm);
             Assert.Equal("http://i.imgur.com/hbzm7Ge.mp4", image.Mp4);
             Assert.Equal("http://i.imgur.com/hbzm7Geh.gif", image.Link);
             Assert.Equal(true, image.Looping);

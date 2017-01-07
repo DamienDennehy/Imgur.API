@@ -18,7 +18,7 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public async Task GetAccountFavoritesAsync_Any()
         {
-            var mockUrl = "https://api.imgur.com/3/account/me/favorites";
+            var mockUrl = "https://api.imgur.com/3/account/me/favorites/2/oldest";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(MockAccountEndpointResponses.GetAccountFavorites)
@@ -26,7 +26,7 @@ namespace Imgur.API.Tests.EndpointTests
 
             var client = new ImgurClient("123", "1234", MockOAuth2Token);
             var endpoint = new AccountEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
-            var favorites = await endpoint.GetAccountFavoritesAsync().ConfigureAwait(false);
+            var favorites = await endpoint.GetAccountFavoritesAsync(page: 2, sort: AccountGallerySortOrder.Oldest).ConfigureAwait(false);
 
             Assert.True(favorites.Any());
         }

@@ -16,6 +16,17 @@
           "version": "1.0.0"
         }
       }
+    },
+    "net451": {
+      "dependencies": {
+        "Imgur.API": {
+          "target": "project"
+        },
+        "Microsoft.NETCore.Platforms": "1.0.1"
+      },
+      "frameworkAssemblies": {
+        "System.Net.Http": "4.0.0.0"
+      }
     }
   }
 }

@@ -1,13 +1,6 @@
-version: 4.0.1-build{build}
+version: 5.0.0-build{build}
 install:
-- ps: >-
-    (new-object net.webclient).DownloadFile('https://download.microsoft.com/download/A/3/8/A38489F3-9777-41DD-83F8-2CBDFAB2520C/packages/DotNetCore.1.0.0-SDK.Preview2-x64.exe','core.exe')
-
-
-    core.exe /install /quiet /norestart
-
-
-    dotnet restore
+- ps: nuget restore
 cache: C:\Program Files (x86)\Microsoft SDKs\NuGetPackages
 before_build:
 - ps: >-
@@ -16,6 +9,8 @@ before_build:
     (Get-Content test\Imgur.API.Tests\project.json).replace('"Imgur.API": "1.0.0-*"', '"Imgur.API": "' + $env:APPVEYOR_BUILD_VERSION + '"') | Set-Content test\Imgur.API.Tests\project.json
 build:
   verbosity: minimal
+after_build:
+- ps: dotnet pack src\Imgur.API
 test_script:
 - cmd: dotnet test test\Imgur.API.Tests
 artifacts:

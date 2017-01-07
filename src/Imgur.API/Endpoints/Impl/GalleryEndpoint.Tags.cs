@@ -97,39 +97,5 @@ namespace Imgur.API.Endpoints.Impl
                 return image;
             }
         }
-
-        /// <summary>
-        ///     Vote for a tag. Send the same value again to undo a vote. OAuth authentication required.
-        /// </summary>
-        /// <param name="galleryItemId">The gallery item id.</param>
-        /// <param name="tag">Name of the tag (implicitly created, if doesn't exist).</param>
-        /// <param name="vote">The vote.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
-        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
-        /// <returns></returns>
-        public async Task<bool> VoteGalleryTagAsync(string galleryItemId, string tag, VoteOption vote)
-        {
-            if (string.IsNullOrWhiteSpace(galleryItemId))
-                throw new ArgumentNullException(nameof(galleryItemId));
-
-            if (string.IsNullOrWhiteSpace(tag))
-                throw new ArgumentNullException(nameof(tag));
-
-            if (ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
-
-            var voteValue = $"{vote}".ToLower();
-            var url = $"gallery/{galleryItemId}/vote/tag/{tag}/{voteValue}";
-
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
-            {
-                var voted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
-                return voted;
-            }
-        }
     }
 }

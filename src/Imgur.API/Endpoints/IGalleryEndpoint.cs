@@ -235,14 +235,5 @@ namespace Imgur.API.Endpoints
         /// <param name="vote">The vote.</param>
         /// <returns></returns>
         Task<bool> VoteGalleryItemAsync(string galleryItemId, VoteOption vote);
-
-        /// <summary>
-        ///     Vote for a tag. Send the same value again to undo a vote. OAuth authentication required.
-        /// </summary>
-        /// <param name="galleryItemId">The gallery item id.</param>
-        /// <param name="tag">Name of the tag (implicitly created, if doesn't exist).</param>
-        /// <param name="vote">The vote.</param>
-        /// <returns></returns>
-        Task<bool> VoteGalleryTagAsync(string galleryItemId, string tag, VoteOption vote);
     }
 }

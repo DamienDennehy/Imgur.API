@@ -227,9 +227,14 @@ namespace Imgur.API.Tests.EndpointTests
 
             var client = new ImgurClient("123", "1234");
             var endpoint = new CommentEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
-            var comment = await endpoint.GetCommentAsync(539556821).ConfigureAwait(false);
 
-            Assert.Null(comment);
+            var exception =
+                await
+                    Record.ExceptionAsync(
+                        async () => await endpoint.GetCommentAsync(539556821).ConfigureAwait(false))
+                        .ConfigureAwait(false);
+            Assert.NotNull(exception);
+            Assert.IsType<ImgurException>(exception);
         }
 
         [Fact]

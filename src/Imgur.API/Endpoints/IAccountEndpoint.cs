@@ -46,7 +46,7 @@ namespace Imgur.API.Endpoints
         ///     Returns the users favorited images. OAuth authentication required.
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<IGalleryItem>> GetAccountFavoritesAsync();
+        Task<IEnumerable<IGalleryItem>> GetAccountFavoritesAsync(int? page = null, AccountGallerySortOrder? sort = AccountGallerySortOrder.Newest);
 
         /// <summary>
         ///     Return the images the user has favorited in the gallery.

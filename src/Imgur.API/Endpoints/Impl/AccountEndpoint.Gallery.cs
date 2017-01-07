@@ -23,12 +23,16 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IEnumerable<IGalleryItem>> GetAccountFavoritesAsync()
+        public async Task<IEnumerable<IGalleryItem>> GetAccountFavoritesAsync(int? page = null,
+            AccountGallerySortOrder? sort = AccountGallerySortOrder.Newest)
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = "account/me/favorites";
+            sort = sort ?? AccountGallerySortOrder.Newest;
+
+            var sortValue = $"{sort}".ToLower();
+            var url = $"account/me/favorites/{page}/{sortValue}";
 
             using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
             {

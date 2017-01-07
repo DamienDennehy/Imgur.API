@@ -1,16 +1,10 @@
 {
   "version": "1.0.0-*",
-  "description": "Imgur.API is a .NET implementation of Imgur's API. It supports Imgur's free and Mashape's commercial API endpoints.",
   "authors": [ "Damien Dennehy" ],
-  "copyright": "Copyright © 2015-2016",
-  "packOptions": {
-    "tags": [ "imgur.api imgur.net imgur api mashape" ],
-    "projectUrl": "http://imgurapi.readthedocs.org/en/latest",
-    "licenseUrl": "https://github.com/DamienDennehy/Imgur.API/blob/master/LICENSE",
-    "iconUrl": "https://raw.githubusercontent.com/DamienDennehy/Imgur.API/master/icon.png",
-    "packInclude": {
-      "readme.txt": "readme.txt"
-    }
+  "description": "Imgur.API is a .NET implementation of Imgur's API. It supports Imgur's free and Mashape's commercial API endpoints.",
+  "copyright": "Copyright © 2015-2017",
+  "dependencies": {
+    "Newtonsoft.Json": "9.0.1"
   },
   "frameworks": {
     "net45": {
@@ -24,15 +18,16 @@
       }
     }
   },
-  "dependencies": {
-    "Newtonsoft.Json": "9.0.1"
-  },
-  "scripts": {
-    "postcompile": [
-      "dotnet pack --no-build"
-    ]
-  },
   "buildOptions": {
     "xmlDoc": true
+  },
+  "packOptions": {
+    "tags": [ "imgur.api imgur.net imgur api mashape" ],
+    "projectUrl": "http://imgurapi.readthedocs.org/en/latest",
+    "licenseUrl": "https://github.com/DamienDennehy/Imgur.API/blob/master/LICENSE",
+    "iconUrl": "https://raw.githubusercontent.com/DamienDennehy/Imgur.API/master/icon.png",
+    "packInclude": {
+      "readme.txt": "readme.txt"
+    }
   }
 }

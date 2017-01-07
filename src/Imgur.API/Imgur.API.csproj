@@ -48,7 +48,6 @@
     <Compile Include="Endpoints\IAccountEndpoint.cs" />
     <Compile Include="Endpoints\IAlbumEndpoint.cs" />
     <Compile Include="Endpoints\ICommentEndpoint.cs" />
-    <Compile Include="Endpoints\IConversationEndpoint.cs" />
     <Compile Include="Endpoints\ICustomGalleryEndpoint.cs" />
     <Compile Include="Endpoints\IEndpoint.cs" />
     <Compile Include="Endpoints\IGalleryEndpoint.cs" />
@@ -62,7 +61,6 @@
     <Compile Include="Endpoints\Impl\AccountEndpoint.Notifications.cs" />
     <Compile Include="Endpoints\Impl\AlbumEndpoint.cs" />
     <Compile Include="Endpoints\Impl\CommentEndpoint.cs" />
-    <Compile Include="Endpoints\Impl\ConversationEndpoint.cs" />
     <Compile Include="Endpoints\Impl\CustomGalleryEndpoint.cs" />
     <Compile Include="Endpoints\Impl\EndpointBase.cs" />
     <Compile Include="Endpoints\Impl\GalleryEndpoint.Albums.cs" />

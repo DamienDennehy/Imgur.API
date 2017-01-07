@@ -27,7 +27,7 @@ namespace Imgur.API.Endpoints.Impl
         /// </summary>
         /// <param name="apiClient">The type of client that will be used for authentication.</param>
         /// <param name="httpClient"> The class for sending HTTP requests and receiving HTTP responses from the endpoint methods.</param>
-        internal ImageEndpoint(IApiClient apiClient, HttpClient httpClient) : base(apiClient, httpClient)
+        public ImageEndpoint(IApiClient apiClient, HttpClient httpClient) : base(apiClient, httpClient)
         {
         }
 

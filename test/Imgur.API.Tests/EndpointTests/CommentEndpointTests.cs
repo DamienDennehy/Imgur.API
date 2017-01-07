@@ -217,6 +217,22 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
+        public async Task GetCommentAsync_False()
+        {
+            var mockUrl = "https://api.imgur.com/3/comment/539556821";
+            var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(MockCommentEndpointResponses.GetCommentNotExists)
+            };
+
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new CommentEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
+            var comment = await endpoint.GetCommentAsync(539556821).ConfigureAwait(false);
+
+            Assert.Null(comment);
+        }
+
+        [Fact]
         public async Task GetRepliesAsync_True()
         {
             var mockUrl = "https://api.imgur.com/3/comment/539556821/replies";

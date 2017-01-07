@@ -8,6 +8,7 @@ using Imgur.API.JsonConverters;
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Imgur.API.Endpoints.Impl
 {
@@ -185,6 +186,14 @@ namespace Imgur.API.Endpoints.Impl
             {
                 var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(stringResponse);
                 throw new ImgurException(apiError.Data.Error);
+            }
+
+            //If an error occurs, throw an exception
+            if (stringResponse.StartsWith("{\"data\":\"An error occurred"))
+            {
+                dynamic apiError = JObject.Parse(stringResponse);
+                string errorMessage = apiError.data;
+                throw new ImgurException(errorMessage);
             }
 
             //If the type being requested is an OAuth2Token

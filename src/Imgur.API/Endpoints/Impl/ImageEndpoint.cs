@@ -183,6 +183,8 @@ namespace Imgur.API.Endpoints.Impl
         /// </param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
+        /// <param name="progressBytes">A provider for progress updates.</param>
+        /// <param name="progressBufferSize">The amount of bytes that should be uploaded while performing a progress upload.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -191,14 +193,14 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
         public async Task<IImage> UploadImageStreamAsync(Stream image, string albumId = null, string title = null,
-            string description = null)
+            string description = null, IProgress<int> progressBytes = null, int progressBufferSize = 4096)
         {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
 
             var url = "image";
 
-            using (var request = RequestBuilder.UploadImageStreamRequest(url, image, albumId, title, description))
+            using (var request = RequestBuilder.UploadImageStreamRequest(url, image, albumId, title, description, progressBytes, progressBufferSize))
             {
                 var returnImage = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return returnImage;

@@ -74,7 +74,7 @@ namespace Imgur.API.RequestBuilders
         ///     valid argument.
         /// </exception>
         internal HttpRequestMessage UploadImageStreamRequest(string url, Stream image, string albumId = null,
-            string title = null, string description = null)
+            string title = null, string description = null, IProgress<int> progressBytes = null, int progressBufferSize = 4096)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -87,10 +87,18 @@ namespace Imgur.API.RequestBuilders
             // ReSharper disable once ExceptionNotDocumented
             var content = new MultipartFormDataContent($"{DateTime.UtcNow.Ticks}")
             {
-                {new StringContent("file"), "type"},
-                {new StreamContent(image), nameof(image)}
+                {new StringContent("file"), "type"}
             };
 
+            if (progressBytes != null)
+            {
+                content.Add(new ProgressStreamContent(image, progressBytes, progressBufferSize), nameof(image));
+            }
+            else
+            {
+                content.Add(new StreamContent(image), nameof(image));
+            }
+            
             if (!string.IsNullOrWhiteSpace(albumId))
                 content.Add(new StringContent(albumId), "album");
 

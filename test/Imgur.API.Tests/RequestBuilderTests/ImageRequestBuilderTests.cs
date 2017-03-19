@@ -205,6 +205,57 @@ namespace Imgur.API.Tests.RequestBuilderTests
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
+        public async Task UploadStreamBinaryProgressRequest_Equal()
+        {
+            var client = new ImgurClient("123", "1234");
+            var requestBuilder = new ImageRequestBuilder();
+            var mockUrl = $"{client.EndpointUrl}image";
+            var progress = 0;
+            
+            var progressHandler = new Progress<int>(value =>
+            {
+                progress += value;
+            });
+
+            using (var ms = new MemoryStream(new byte[11]))
+            {
+                var imageLength = ms.Length;
+                var request = requestBuilder.UploadImageStreamRequest(mockUrl, ms, "TheAlbum", "TheTitle",
+                    "TheDescription", progressHandler);
+
+                Assert.NotNull(request);
+                Assert.Equal("https://api.imgur.com/3/image", request.RequestUri.ToString());
+                Assert.Equal(HttpMethod.Post, request.Method);
+
+                var content = (MultipartFormDataContent)request.Content;
+                var imageContent =
+                    (ProgressStreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
+                var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
+                var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+                var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
+                var description =
+                    (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
+
+                Assert.NotNull(imageContent);
+                Assert.NotNull(type);
+                Assert.NotNull(album);
+                Assert.NotNull(title);
+                Assert.NotNull(description);
+                Assert.NotNull(progressHandler);
+
+                var image = await imageContent.ReadAsByteArrayAsync().ConfigureAwait(false);
+
+                Assert.Equal(imageLength, image.Length);
+                Assert.Equal(imageLength, progress);
+                Assert.Equal("file", await type.ReadAsStringAsync().ConfigureAwait(false));
+                Assert.Equal("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
+                Assert.Equal("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
+                Assert.Equal("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
+            }
+        }
+
+        [Fact]
         public void UploadStreamBinaryRequest_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ImgurClient("123", "1234");

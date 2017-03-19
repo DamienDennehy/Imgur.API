@@ -1,12 +1,12 @@
 version: 5.0.0-build{build}
+image: Visual Studio 2017
 install:
-- ps: nuget restore
-cache: C:\Program Files (x86)\Microsoft SDKs\NuGetPackages
+- ps: dotnet restore
 before_build:
 - ps: >-
-    (Get-Content src\Imgur.API\project.json).replace('"version": "1.0.0-*",', '"version": "' + $env:APPVEYOR_BUILD_VERSION + '",') | Set-Content src\Imgur.API\project.json
+    (Get-Content src\Imgur.API\Imgur.API.csproj).replace('<Version>1.0.0</Version>', '<Version>' + $env:APPVEYOR_BUILD_VERSION + '</Version>') | Set-Content src\Imgur.API\Imgur.API.csproj
 
-    (Get-Content test\Imgur.API.Tests\project.json).replace('"Imgur.API": "1.0.0-*"', '"Imgur.API": "' + $env:APPVEYOR_BUILD_VERSION + '"') | Set-Content test\Imgur.API.Tests\project.json
+    (Get-Content test\Imgur.API.Tests\Imgur.API.Tests.csproj).replace('<Version>1.0.0</Version>', '<Version>' + $env:APPVEYOR_BUILD_VERSION + '</Version>') | Set-Content test\Imgur.API.Tests\Imgur.API.Tests.csproj
 build:
   verbosity: minimal
 after_build:

@@ -12,7 +12,7 @@ build:
 after_build:
 - ps: dotnet pack src\Imgur.API
 test_script:
-- cmd: dotnet test test\Imgur.API.Tests
+- cmd: dotnet test test\Imgur.API.Tests\Imgur.API.Tests.csproj
 artifacts:
 - path: src\Imgur.API\bin\Debug\*.nupkg
 deploy:

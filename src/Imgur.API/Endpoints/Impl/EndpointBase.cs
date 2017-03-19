@@ -72,8 +72,7 @@ namespace Imgur.API.Endpoints.Impl
                     : $"Client-ID {apiClient.ClientId}");
 
             //Add Mashape Authentication header
-            var mashapeClient = apiClient as IMashapeClient;
-            if (mashapeClient != null)
+            if (apiClient is IMashapeClient mashapeClient)
             {
                 httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
                     "X-Mashape-Key", mashapeClient.MashapeKey);
@@ -82,6 +81,7 @@ namespace Imgur.API.Endpoints.Impl
             // ReSharper disable once ExceptionNotDocumented
             httpClient.BaseAddress = new Uri(apiClient.EndpointUrl);
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            httpClient.DefaultRequestHeaders.TransferEncodingChunked = true;
 
             ApiClient = apiClient;
             HttpClient = httpClient;

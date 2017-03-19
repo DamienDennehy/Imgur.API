@@ -317,7 +317,7 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.Equal(null, image.Vote);
             Assert.Equal(290, image.Width);
         }
-
+        
         [Fact]
         public async Task UploadImageUrlAsync_Equal()
         {

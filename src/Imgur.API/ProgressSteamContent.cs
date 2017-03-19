@@ -29,7 +29,7 @@
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
-
+            
             PrepareContent();
             
             using (_content)
@@ -38,10 +38,10 @@
 
                 while (true)
                 {
-                    var bytesRead = await _content.ReadAsync(buffer, 0, buffer.Length);
+                    var bytesRead = await _content.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
                     if (bytesRead <= 0) return;
 
-                    await stream.WriteAsync(buffer, 0, bytesRead);
+                    await stream.WriteAsync(buffer, 0, bytesRead).ConfigureAwait(false);
 
                     _progress.Report(bytesRead);
                 }
@@ -62,7 +62,6 @@
             }
             base.Dispose(disposing);
         }
-
 
         private void PrepareContent()
         {

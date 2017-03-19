@@ -67,11 +67,18 @@ namespace Imgur.API.Endpoints
         /// </param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
+        /// <returns></returns>
+        Task<IImage> UploadImageStreamAsync(Stream image, string albumId = null, string title = null,
+            string description = null);
+
+        /// <summary>
+        ///     Upload a new image using a stream.
+        /// </summary>
+        /// <param name="image">A stream.</param>
         /// <param name="progressBytes">A provider for progress updates.</param>
         /// <param name="progressBufferSize">The amount of bytes that should be uploaded while performing a progress upload.</param>
         /// <returns></returns>
-        Task<IImage> UploadImageStreamAsync(Stream image, string albumId = null, string title = null,
-            string description = null, IProgress<int> progressBytes = null, int progressBufferSize = 4096);
+        Task<IImage> UploadImageStreamWithProgressAsync(Stream image, IProgress<int> progressBytes, int progressBufferSize);
 
         /// <summary>
         ///     Upload a new image using a URL.

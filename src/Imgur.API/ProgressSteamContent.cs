@@ -31,11 +31,11 @@
                 throw new ArgumentNullException(nameof(stream));
             
             var buffer = new byte[_bufferSize];
-            var size = _content.Length;
-            var uploaded = 0;
 
             using (_content)
             {
+                _progress.Report(0);
+
                 while (true)
                 {
                     var length = await _content.ReadAsync(buffer, 0, buffer.Length);
@@ -43,10 +43,10 @@
                     {
                         break;
                     }
-
-                    uploaded += length;
-                    _progress.Report(uploaded);
+                    
                     await stream.WriteAsync(buffer, 0, length);
+
+                    _progress.Report(length);
                 }
             }
         }

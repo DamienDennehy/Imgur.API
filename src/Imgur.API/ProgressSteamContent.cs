@@ -30,20 +30,23 @@
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
             
-            PrepareContent();
-            
+            var buffer = new byte[_bufferSize];
+            var size = _content.Length;
+            var uploaded = 0;
+
             using (_content)
             {
-                var buffer = new Byte[_bufferSize];
-
                 while (true)
                 {
-                    var bytesRead = await _content.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
-                    if (bytesRead <= 0) return;
+                    var length = await _content.ReadAsync(buffer, 0, buffer.Length);
+                    if (length <= 0)
+                    {
+                        break;
+                    }
 
-                    await stream.WriteAsync(buffer, 0, bytesRead).ConfigureAwait(false);
-
-                    _progress.Report(bytesRead);
+                    uploaded += length;
+                    _progress.Report(uploaded);
+                    await stream.WriteAsync(buffer, 0, length);
                 }
             }
         }
@@ -61,26 +64,6 @@
                 _content.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private void PrepareContent()
-        {
-            if (_contentConsumed)
-            {
-                // If the content needs to be written to a target stream a 2nd time, then the stream must support
-                // seeking (e.g. a FileStream), otherwise the stream can't be copied a second time to a target 
-                // stream (e.g. a NetworkStream).
-                if (_content.CanSeek)
-                {
-                    _content.Position = 0;
-                }
-                else
-                {
-                    throw new InvalidOperationException("Can't set stream position.");
-                }
-            }
-
-            _contentConsumed = true;
         }
     }
 }

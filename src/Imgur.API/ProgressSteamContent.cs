@@ -38,7 +38,7 @@
 
                 while (true)
                 {
-                    var length = _content.Read(buffer, 0, buffer.Length);
+                    var length = await _content.ReadAsync(buffer, 0, buffer.Length);
                     if (length <= 0)
                     {
                         break;

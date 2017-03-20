@@ -117,27 +117,6 @@ namespace Imgur.API.RequestBuilders
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        internal HttpRequestMessage UploadImageStreamRequestWithProgress(string url, Stream image, IProgress<int> progressBytes, int progressBufferSize = 4096)
-        {
-            if (string.IsNullOrWhiteSpace(url))
-                throw new ArgumentNullException(nameof(url));
-
-            if (image == null)
-                throw new ArgumentNullException(nameof(image));
-
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                // ReSharper disable once ExceptionNotDocumented
-                Content = new ProgressStreamContent(image, progressBytes, progressBufferSize)
-            };
-            
-            return request;
-        }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
         internal HttpRequestMessage UploadImageUrlRequest(string url, string imageUrl, string albumId = null,
             string title = null, string description = null)
         {

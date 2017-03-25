@@ -1,7 +1,5 @@
 ﻿using Xunit;
 
-// ReSharper disable ExceptionNotDocumented
-
 namespace Imgur.API.Tests
 {
     public class MockOAuth2TokenHandlerTests : TestBase

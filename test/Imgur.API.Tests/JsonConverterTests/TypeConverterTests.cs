@@ -2,8 +2,6 @@
 using Imgur.API.JsonConverters;
 using Xunit;
 
-// ReSharper disable ExceptionNotDocumented
-
 namespace Imgur.API.Tests.JsonConverterTests
 {
     public class TypeConverterTests

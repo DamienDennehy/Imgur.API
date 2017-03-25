@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 using Imgur.API.Tests.Mocks;
 using Xunit;
 
-//using Xunit;
-
-// ReSharper disable ExceptionNotDocumented
-
 namespace Imgur.API.Tests
 {
     public class MockHttpMessageHandlerTests

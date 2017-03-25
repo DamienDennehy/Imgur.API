@@ -4,8 +4,6 @@ using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 using Imgur.API.Tests.Mocks;
 
-// ReSharper disable ExceptionNotDocumented
-
 namespace Imgur.API.Tests
 {
     public abstract class TestBase

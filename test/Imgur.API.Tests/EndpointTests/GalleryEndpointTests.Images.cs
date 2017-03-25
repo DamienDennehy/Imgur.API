@@ -7,8 +7,6 @@ using Imgur.API.Endpoints.Impl;
 using Imgur.API.Tests.Mocks;
 using Xunit;
 
-// ReSharper disable ExceptionNotDocumented
-
 namespace Imgur.API.Tests.EndpointTests
 {
     public partial class GalleryEndpointTests

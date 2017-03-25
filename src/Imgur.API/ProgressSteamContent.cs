@@ -9,10 +9,9 @@
     internal class ProgressStreamContent : HttpContent
     {
         private const int _defaultBufferSize = 4096;
-        private int _bufferSize = _defaultBufferSize;
-        private Stream _content;
-        private bool _contentConsumed;
-        private IProgress<int> _progress;
+        private readonly int _bufferSize = _defaultBufferSize;
+        private readonly Stream _content;
+        private readonly IProgress<int> _progress;
 
         public ProgressStreamContent(Stream content, IProgress<int> progress): this(content, progress, _defaultBufferSize)
         {
@@ -29,7 +28,7 @@
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
-            
+
             var buffer = new byte[_bufferSize];
 
             using (_content)
@@ -43,7 +42,7 @@
                     {
                         break;
                     }
-                    
+
                     await stream.WriteAsync(buffer, 0, length);
 
                     _progress.Report(length);

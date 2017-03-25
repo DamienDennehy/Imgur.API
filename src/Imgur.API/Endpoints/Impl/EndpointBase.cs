@@ -77,8 +77,7 @@ namespace Imgur.API.Endpoints.Impl
                 httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
                     "X-Mashape-Key", mashapeClient.MashapeKey);
             }
-
-            // ReSharper disable once ExceptionNotDocumented
+            
             httpClient.BaseAddress = new Uri(apiClient.EndpointUrl);
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             httpClient.DefaultRequestHeaders.TransferEncodingChunked = true;
@@ -130,8 +129,7 @@ namespace Imgur.API.Endpoints.Impl
                 HttpClient.DefaultRequestHeaders.TryAddWithoutValidation(
                     "X-Mashape-Key", mashapeClient.MashapeKey);
             }
-
-            // ReSharper disable once ExceptionNotDocumented
+            
             HttpClient.BaseAddress = new Uri(apiClient.EndpointUrl);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }

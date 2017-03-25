@@ -6,8 +6,6 @@ using Imgur.API.Enums;
 using Imgur.API.RequestBuilders;
 using Xunit;
 
-// ReSharper disable ExceptionNotDocumented
-
 namespace Imgur.API.Tests.RequestBuilderTests
 {
     public class RequestBuilderBaseTests

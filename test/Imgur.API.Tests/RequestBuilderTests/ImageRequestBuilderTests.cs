@@ -9,8 +9,6 @@ using Imgur.API.RequestBuilders;
 using Xunit;
 using System.Diagnostics;
 
-// ReSharper disable ExceptionNotDocumented
-
 namespace Imgur.API.Tests.RequestBuilderTests
 {
     public class ImageRequestBuilderTests
@@ -47,7 +45,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
         }
 
         [Fact]
-        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         public async Task UploadImageBinaryRequest_Equal()
         {
             var client = new ImgurClient("123", "1234");
@@ -163,7 +160,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
         }
 
         [Fact]
-        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         public async Task UploadStreamBinaryRequest_Equal()
         {
             var client = new ImgurClient("123", "1234");
@@ -226,7 +222,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new ImageRequestBuilder();
             using (var ms = new MemoryStream(new byte[9]))
             {
-                // ReSharper disable once AccessToDisposedClosure
                 var exception = Record.Exception(() => requestBuilder.UploadImageStreamRequest(null, ms));
                 Assert.NotNull(exception);
                 Assert.IsType<ArgumentNullException>(exception);

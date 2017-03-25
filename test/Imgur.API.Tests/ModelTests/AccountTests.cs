@@ -2,8 +2,6 @@
 using Imgur.API.Models.Impl;
 using Xunit;
 
-// ReSharper disable ExceptionNotDocumented
-
 namespace Imgur.API.Tests.ModelTests
 {
     public class AccountTests

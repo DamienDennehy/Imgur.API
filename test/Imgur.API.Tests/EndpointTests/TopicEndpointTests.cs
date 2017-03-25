@@ -9,9 +9,6 @@ using Imgur.API.Enums;
 using Imgur.API.Tests.Mocks;
 using Xunit;
 
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable ExceptionNotDocumented
-
 namespace Imgur.API.Tests.EndpointTests
 {
     public class TopicEndpointTests : TestBase

@@ -10,9 +10,6 @@ using Imgur.API.Models.Impl;
 using Imgur.API.Tests.Mocks;
 using Xunit;
 
-// ReSharper disable ExceptionNotDocumented
-// ReSharper disable ThrowingSystemException
-
 namespace Imgur.API.Tests.EndpointTests
 {
     public class EndpointTests : TestBase

@@ -3,8 +3,6 @@ using Imgur.API.Authentication.Impl;
 using Imgur.API.Tests.Mocks;
 using Xunit;
 
-// ReSharper disable ExceptionNotDocumented
-
 namespace Imgur.API.Tests.AuthenticationTests
 {
     public class MashapeClientTests
@@ -57,7 +55,7 @@ namespace Imgur.API.Tests.AuthenticationTests
         [Fact]
         public void MashapeKey_SetNullByConstructor_ThrowArgumentNullException()
         {
-            var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
+            var oAuth2Token = MockOAuth2Token.GetOAuth2Token();
 
             var exception = Record.Exception(() => new MashapeClient("ClientId", null));
 
@@ -92,7 +90,7 @@ namespace Imgur.API.Tests.AuthenticationTests
         [Fact]
         public void OAuth2Token_SetByClientIdAndSecretConstructor_AreSame()
         {
-            var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
+            var oAuth2Token = MockOAuth2Token.GetOAuth2Token();
             var client = new MashapeClient("ClientId", "ClientSecret", "MashapeKey", oAuth2Token);
             Assert.Same(oAuth2Token, client.OAuth2Token);
         }
@@ -100,7 +98,7 @@ namespace Imgur.API.Tests.AuthenticationTests
         [Fact]
         public void OAuth2Token_SetByClientIdConstructor_AreSame()
         {
-            var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
+            var oAuth2Token = MockOAuth2Token.GetOAuth2Token();
             var client = new MashapeClient("ClientId", "MashapeKey", oAuth2Token);
             Assert.Same(oAuth2Token, client.OAuth2Token);
         }
@@ -108,7 +106,7 @@ namespace Imgur.API.Tests.AuthenticationTests
         [Fact]
         public void OAuth2Token_SetBySetOAuth2Token_AreSame()
         {
-            var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
+            var oAuth2Token = MockOAuth2Token.GetOAuth2Token();
             var client = new MashapeClient("ClientId", "MashapeKey");
 
             Assert.Null(client.OAuth2Token);
@@ -119,7 +117,7 @@ namespace Imgur.API.Tests.AuthenticationTests
         [Fact]
         public void OAuth2Token_SetBySetOAuth2Token_Null()
         {
-            var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
+            var oAuth2Token = MockOAuth2Token.GetOAuth2Token();
             var client = new MashapeClient("ClientId", "MashapeKey");
 
             Assert.Null(client.OAuth2Token);

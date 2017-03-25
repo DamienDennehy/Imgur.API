@@ -2,9 +2,6 @@
 using Imgur.API.Tests.Mocks;
 using Xunit;
 
-// ReSharper disable ExceptionNotDocumented
-// ReSharper disable ThrowingSystemException
-
 namespace Imgur.API.Tests.AuthenticationTests
 {
     public class ApiClientTests
@@ -50,7 +47,7 @@ namespace Imgur.API.Tests.AuthenticationTests
         [Fact]
         public void OAuth2Token_SetByClientIdAndSecretConstructor_AreSame()
         {
-            var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
+            var oAuth2Token = MockOAuth2Token.GetOAuth2Token();
             var client = new MockApiClient("ClientId", "ClientSecret", oAuth2Token);
             Assert.Same(oAuth2Token, client.OAuth2Token);
         }
@@ -58,7 +55,7 @@ namespace Imgur.API.Tests.AuthenticationTests
         [Fact]
         public void OAuth2Token_SetByClientIdConstructor_AreSame()
         {
-            var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
+            var oAuth2Token = MockOAuth2Token.GetOAuth2Token();
             var client = new MockApiClient("ClientId", oAuth2Token);
             Assert.Same(oAuth2Token, client.OAuth2Token);
         }
@@ -66,7 +63,7 @@ namespace Imgur.API.Tests.AuthenticationTests
         [Fact]
         public void OAuth2Token_SetBySetOAuth2Token_AreSame()
         {
-            var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
+            var oAuth2Token = MockOAuth2Token.GetOAuth2Token();
             var client = new MockApiClient("ClientId", "ClientSecret");
 
             Assert.Null(client.OAuth2Token);
@@ -77,7 +74,7 @@ namespace Imgur.API.Tests.AuthenticationTests
         [Fact]
         public void OAuth2Token_SetBySetOAuth2Token_Null()
         {
-            var oAuth2Token = new MockOAuth2Token().GetOAuth2Token();
+            var oAuth2Token = MockOAuth2Token.GetOAuth2Token();
             var client = new MockApiClient("ClientId", "ClientSecret");
 
             Assert.Null(client.OAuth2Token);

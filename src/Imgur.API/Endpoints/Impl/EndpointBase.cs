@@ -80,7 +80,6 @@ namespace Imgur.API.Endpoints.Impl
             
             httpClient.BaseAddress = new Uri(apiClient.EndpointUrl);
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            httpClient.DefaultRequestHeaders.TransferEncodingChunked = true;
 
             ApiClient = apiClient;
             HttpClient = httpClient;

@@ -75,10 +75,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(description);
 
             Assert.Equal(image.Length, imageContent.Headers.ContentLength);
-            Assert.Equal("file", await type.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.Equal("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.Equal("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.Equal("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
         }
 
         [Fact]
@@ -190,14 +186,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 Assert.NotNull(album);
                 Assert.NotNull(title);
                 Assert.NotNull(description);
-
-                var image = await imageContent.ReadAsByteArrayAsync().ConfigureAwait(false);
-
-                Assert.Equal(imageLength, image.Length);
-                Assert.Equal("file", await type.ReadAsStringAsync().ConfigureAwait(false));
-                Assert.Equal("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
-                Assert.Equal("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
-                Assert.Equal("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
             }
         }
         

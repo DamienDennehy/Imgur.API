@@ -40,7 +40,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException) exception;
+            var argNullException = (ArgumentNullException)exception;
             Assert.Equal(argNullException.ParamName, "url");
         }
 
@@ -59,14 +59,14 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal("https://api.imgur.com/3/image", request.RequestUri.ToString());
             Assert.Equal(HttpMethod.Post, request.Method);
 
-            var content = (MultipartFormDataContent) request.Content;
+            var content = (MultipartFormDataContent)request.Content;
             var imageContent =
-                (ByteArrayContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
-            var album = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
-            var type = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
-            var title = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
+                (ByteArrayContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
+            var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
+            var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+            var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
             var description =
-                (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
+                (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
             Assert.NotNull(imageContent);
             Assert.NotNull(type);
@@ -75,6 +75,10 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(description);
 
             Assert.Equal(image.Length, imageContent.Headers.ContentLength);
+            Assert.Equal("file", await type.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
         }
 
         [Fact]
@@ -88,7 +92,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException) exception;
+            var argNullException = (ArgumentNullException)exception;
             Assert.Equal(argNullException.ParamName, "image");
         }
 
@@ -102,7 +106,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException) exception;
+            var argNullException = (ArgumentNullException)exception;
             Assert.Equal(argNullException.ParamName, "url");
         }
 
@@ -138,7 +142,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException) exception;
+            var argNullException = (ArgumentNullException)exception;
             Assert.Equal(argNullException.ParamName, "image");
         }
 
@@ -151,7 +155,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException) exception;
+            var argNullException = (ArgumentNullException)exception;
             Assert.Equal(argNullException.ParamName, "url");
         }
 
@@ -172,23 +176,31 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 Assert.Equal("https://api.imgur.com/3/image", request.RequestUri.ToString());
                 Assert.Equal(HttpMethod.Post, request.Method);
 
-                var content = (MultipartFormDataContent) request.Content;
+                var content = (MultipartFormDataContent)request.Content;
                 var imageContent =
-                    (StreamContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
-                var album = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
-                var type = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
-                var title = (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
+                    (StreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
+                var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
+                var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+                var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
                 var description =
-                    (StringContent) content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
+                    (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
                 Assert.NotNull(imageContent);
                 Assert.NotNull(type);
                 Assert.NotNull(album);
                 Assert.NotNull(title);
                 Assert.NotNull(description);
+
+                var image = await imageContent.ReadAsByteArrayAsync().ConfigureAwait(false);
+
+                Assert.Equal(imageLength, image.Length);
+                Assert.Equal("file", await type.ReadAsStringAsync().ConfigureAwait(false));
+                Assert.Equal("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
+                Assert.Equal("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
+                Assert.Equal("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
             }
         }
-        
+
         [Fact]
         public void UploadStreamBinaryRequest_WithImageNull_ThrowsArgumentNullException()
         {
@@ -200,7 +212,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException) exception;
+            var argNullException = (ArgumentNullException)exception;
             Assert.Equal(argNullException.ParamName, "image");
         }
 
@@ -214,7 +226,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 Assert.NotNull(exception);
                 Assert.IsType<ArgumentNullException>(exception);
 
-                var argNullException = (ArgumentNullException) exception;
+                var argNullException = (ArgumentNullException)exception;
                 Assert.Equal(argNullException.ParamName, "url");
             }
         }

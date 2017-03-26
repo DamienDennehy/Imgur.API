@@ -26,7 +26,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/image/{imageId}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var image = await SendRequestAsync<GalleryImage>(request).ConfigureAwait(false);
                 return image;

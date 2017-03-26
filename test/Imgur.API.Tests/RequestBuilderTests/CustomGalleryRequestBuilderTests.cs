@@ -19,7 +19,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}g/custom/add_tags";
             var tags = new List<string> {"Cats", "Dogs", "Seals"};
 
-            var request = requestBuilder.AddCustomGalleryTagsRequest(mockUrl, tags);
+            var request = CustomGalleryRequestBuilder.AddCustomGalleryTagsRequest(mockUrl, tags);
             var expected = "tags=Cats%2CDogs%2CSeals";
 
             Assert.NotNull(request);
@@ -35,7 +35,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CustomGalleryRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}g/custom/add_tags";
 
-            var exception = Record.Exception(() => requestBuilder.AddCustomGalleryTagsRequest(mockUrl, null));
+            var exception = Record.Exception(() => CustomGalleryRequestBuilder.AddCustomGalleryTagsRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -48,7 +48,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new CustomGalleryRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.AddCustomGalleryTagsRequest(null, new List<string>()));
+            var exception = Record.Exception(() => CustomGalleryRequestBuilder.AddCustomGalleryTagsRequest(null, new List<string>()));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -65,7 +65,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}g/block_tag";
             var tag = "Cats";
 
-            var request = requestBuilder.AddFilteredOutGalleryTagRequest(mockUrl, tag);
+            var request = CustomGalleryRequestBuilder.AddFilteredOutGalleryTagRequest(mockUrl, tag);
             var expected = "tag=Cats";
 
             Assert.NotNull(request);
@@ -81,7 +81,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CustomGalleryRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}g/block_tag";
 
-            var exception = Record.Exception(() => requestBuilder.AddFilteredOutGalleryTagRequest(mockUrl, null));
+            var exception = Record.Exception(() => CustomGalleryRequestBuilder.AddFilteredOutGalleryTagRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -94,7 +94,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new CustomGalleryRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.AddFilteredOutGalleryTagRequest(null, "test"));
+            var exception = Record.Exception(() => CustomGalleryRequestBuilder.AddFilteredOutGalleryTagRequest(null, "test"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -111,7 +111,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}g/custom/remove_tags";
             var tags = new List<string> {"Cats", "Dogs", "Seals"};
 
-            var request = requestBuilder.RemoveCustomGalleryTagsRequest(mockUrl, tags);
+            var request = CustomGalleryRequestBuilder.RemoveCustomGalleryTagsRequest(mockUrl, tags);
             var expected = "https://api.imgur.com/3/g/custom/remove_tags?tags=Cats%2CDogs%2CSeals";
 
             Assert.NotNull(request);
@@ -126,7 +126,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CustomGalleryRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}g/custom/remove_tags";
 
-            var exception = Record.Exception(() => requestBuilder.RemoveCustomGalleryTagsRequest(mockUrl, null));
+            var exception = Record.Exception(() => CustomGalleryRequestBuilder.RemoveCustomGalleryTagsRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -140,7 +140,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CustomGalleryRequestBuilder();
 
             var exception =
-                Record.Exception(() => requestBuilder.RemoveCustomGalleryTagsRequest(null, new List<string>()));
+                Record.Exception(() => CustomGalleryRequestBuilder.RemoveCustomGalleryTagsRequest(null, new List<string>()));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -157,7 +157,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}g/unblock_tag";
             var tag = "Cats";
 
-            var request = requestBuilder.RemoveFilteredOutGalleryTagRequest(mockUrl, tag);
+            var request = CustomGalleryRequestBuilder.RemoveFilteredOutGalleryTagRequest(mockUrl, tag);
             var expected = "https://api.imgur.com/3/g/unblock_tag";
 
             Assert.NotNull(request);
@@ -172,7 +172,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CustomGalleryRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}g/unblock_tag";
 
-            var exception = Record.Exception(() => requestBuilder.RemoveFilteredOutGalleryTagRequest(mockUrl, null));
+            var exception = Record.Exception(() => CustomGalleryRequestBuilder.RemoveFilteredOutGalleryTagRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -185,7 +185,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new CustomGalleryRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.RemoveFilteredOutGalleryTagRequest(null, "test"));
+            var exception = Record.Exception(() => CustomGalleryRequestBuilder.RemoveFilteredOutGalleryTagRequest(null, "test"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 

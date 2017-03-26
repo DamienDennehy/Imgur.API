@@ -20,7 +20,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new ImageRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}image/1234Xyz9";
-            var request = requestBuilder.UpdateImageRequest(mockUrl, "TheTitle", "TheDescription");
+            var request = ImageRequestBuilder.UpdateImageRequest(mockUrl, "TheTitle", "TheDescription");
 
             Assert.NotNull(request);
             Assert.Equal("https://api.imgur.com/3/image/1234Xyz9", request.RequestUri.ToString());
@@ -36,7 +36,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new ImageRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.UpdateImageRequest(null, "1234Xyz9"));
+            var exception = Record.Exception(() => ImageRequestBuilder.UpdateImageRequest(null, "1234Xyz9"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -52,7 +52,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}image";
 
             var image = new byte[9];
-            var request = requestBuilder.UploadImageBinaryRequest(mockUrl, image, "TheAlbum", "TheTitle",
+            var request = ImageRequestBuilder.UploadImageBinaryRequest(mockUrl, image, "TheAlbum", "TheTitle",
                 "TheDescription");
 
             Assert.NotNull(request);
@@ -88,7 +88,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new ImageRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}image";
 
-            var exception = Record.Exception(() => requestBuilder.UploadImageBinaryRequest(mockUrl, null));
+            var exception = Record.Exception(() => ImageRequestBuilder.UploadImageBinaryRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -102,7 +102,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new ImageRequestBuilder();
             var image = new byte[9];
 
-            var exception = Record.Exception(() => requestBuilder.UploadImageBinaryRequest(null, image));
+            var exception = Record.Exception(() => ImageRequestBuilder.UploadImageBinaryRequest(null, image));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -117,7 +117,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new ImageRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}image";
 
-            var request = requestBuilder.UploadImageUrlRequest(mockUrl, "http://i.imgur.com/hxsPLa7.jpg",
+            var request = ImageRequestBuilder.UploadImageUrlRequest(mockUrl, "http://i.imgur.com/hxsPLa7.jpg",
                 "TheAlbum", "TheTitle", "TheDescription");
 
             Assert.NotNull(request);
@@ -138,7 +138,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new ImageRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}image";
 
-            var exception = Record.Exception(() => requestBuilder.UploadImageBinaryRequest(mockUrl, null));
+            var exception = Record.Exception(() => ImageRequestBuilder.UploadImageBinaryRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -151,7 +151,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new ImageRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.UploadImageBinaryRequest(null, new byte[9]));
+            var exception = Record.Exception(() => ImageRequestBuilder.UploadImageBinaryRequest(null, new byte[9]));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -169,7 +169,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             using (var ms = new MemoryStream(new byte[9]))
             {
                 var imageLength = ms.Length;
-                var request = requestBuilder.UploadImageStreamRequest(mockUrl, ms, "TheAlbum", "TheTitle",
+                var request = ImageRequestBuilder.UploadImageStreamRequest(mockUrl, ms, "TheAlbum", "TheTitle",
                     "TheDescription");
 
                 Assert.NotNull(request);
@@ -208,7 +208,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new ImageRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}image";
 
-            var exception = Record.Exception(() => requestBuilder.UploadImageStreamRequest(mockUrl, null));
+            var exception = Record.Exception(() => ImageRequestBuilder.UploadImageStreamRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -222,7 +222,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new ImageRequestBuilder();
             using (var ms = new MemoryStream(new byte[9]))
             {
-                var exception = Record.Exception(() => requestBuilder.UploadImageStreamRequest(null, ms));
+                var exception = Record.Exception(() => ImageRequestBuilder.UploadImageStreamRequest(null, ms));
                 Assert.NotNull(exception);
                 Assert.IsType<ArgumentNullException>(exception);
 

@@ -9,11 +9,7 @@ namespace Imgur.API.RequestBuilders
 {
     internal class AlbumRequestBuilder : RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage AddAlbumImagesRequest(string url, IEnumerable<string> imageIds)
+        internal static HttpRequestMessage AddAlbumImagesRequest(string url, IEnumerable<string> imageIds)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -34,11 +30,7 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage CreateAlbumRequest(string url,
+        internal static HttpRequestMessage CreateAlbumRequest(string url,
             string title = null, string description = null,
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null,
             string coverId = null, IEnumerable<string> imageIds = null)
@@ -73,12 +65,8 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage RemoveAlbumImagesRequest(string url, IEnumerable<string> imageIds)
+        
+        internal static HttpRequestMessage RemoveAlbumImagesRequest(string url, IEnumerable<string> imageIds)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -93,11 +81,7 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage SetAlbumImagesRequest(string url, IEnumerable<string> imageIds)
+        internal static HttpRequestMessage SetAlbumImagesRequest(string url, IEnumerable<string> imageIds)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -117,12 +101,8 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage UpdateAlbumRequest(string url,
+        
+        internal static HttpRequestMessage UpdateAlbumRequest(string url,
             string title = null, string description = null,
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null,
             string coverId = null, IEnumerable<string> imageIds = null)

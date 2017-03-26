@@ -17,7 +17,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new AccountRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}account/me/settings";
-            var request = requestBuilder.UpdateAccountSettingsRequest(
+            var request = AccountRequestBuilder.UpdateAccountSettingsRequest(
                 mockUrl, "BioTest", true, true, AlbumPrivacy.Public,
                 true, "Bob2", true, true);
 
@@ -35,7 +35,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new AccountRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.UpdateAccountSettingsRequest(null));
+            var exception = Record.Exception(() => AccountRequestBuilder.UpdateAccountSettingsRequest(null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 

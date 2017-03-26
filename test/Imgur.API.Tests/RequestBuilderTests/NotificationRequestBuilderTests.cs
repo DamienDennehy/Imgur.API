@@ -19,7 +19,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}notifications";
             var ids = new List<string> {"12345", "9867", "45678"};
 
-            var request = requestBuilder.MarkNotificationsViewedRequest(mockUrl, ids);
+            var request = NotificationRequestBuilder.MarkNotificationsViewedRequest(mockUrl, ids);
             var expected = "ids=12345%2C9867%2C45678";
 
             Assert.NotNull(request);
@@ -36,7 +36,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}notification";
 
 
-            var exception = Record.Exception(() => requestBuilder.MarkNotificationsViewedRequest(mockUrl, null));
+            var exception = Record.Exception(() => NotificationRequestBuilder.MarkNotificationsViewedRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -51,7 +51,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
 
 
             var exception =
-                Record.Exception(() => requestBuilder.MarkNotificationsViewedRequest(null, new List<string>()));
+                Record.Exception(() => NotificationRequestBuilder.MarkNotificationsViewedRequest(null, new List<string>()));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 

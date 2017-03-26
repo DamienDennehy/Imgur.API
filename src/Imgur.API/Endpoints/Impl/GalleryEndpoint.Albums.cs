@@ -26,7 +26,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/album/{albumId}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var album = await SendRequestAsync<GalleryAlbum>(request).ConfigureAwait(false);
                 return album;

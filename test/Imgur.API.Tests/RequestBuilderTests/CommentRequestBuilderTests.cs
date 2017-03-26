@@ -16,7 +16,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CommentRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}comment/XysioD";
-            var request = requestBuilder.CreateCommentRequest(mockUrl, "Hello World!", "xYxAbcD", "ABCdef");
+            var request = CommentRequestBuilder.CreateCommentRequest(mockUrl, "Hello World!", "xYxAbcD", "ABCdef");
 
             Assert.NotNull(request);
             var expected = "image_id=xYxAbcD&comment=Hello+World%21&parent_id=ABCdef";
@@ -34,7 +34,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}comment";
 
             var exception =
-                Record.Exception(() => requestBuilder.CreateCommentRequest(mockUrl, null, "xYxAbcD", "ABCdef"));
+                Record.Exception(() => CommentRequestBuilder.CreateCommentRequest(mockUrl, null, "xYxAbcD", "ABCdef"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -50,7 +50,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}comment";
 
             var exception =
-                Record.Exception(() => requestBuilder.CreateCommentRequest(mockUrl, "Hello World", null, "ABCdef"));
+                Record.Exception(() => CommentRequestBuilder.CreateCommentRequest(mockUrl, "Hello World", null, "ABCdef"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -64,7 +64,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CommentRequestBuilder();
 
             var exception =
-                Record.Exception(() => requestBuilder.CreateCommentRequest(null, "Hello World!", "xYxAbcD", "ABCdef"));
+                Record.Exception(() => CommentRequestBuilder.CreateCommentRequest(null, "Hello World!", "xYxAbcD", "ABCdef"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -79,7 +79,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CommentRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}gallery/XysioD/comment";
-            var request = requestBuilder.CreateGalleryItemCommentRequest(mockUrl, "Hello World!");
+            var request = CommentRequestBuilder.CreateGalleryItemCommentRequest(mockUrl, "Hello World!");
 
             Assert.NotNull(request);
             var expected = "comment=Hello+World%21";
@@ -96,7 +96,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CommentRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}comment";
 
-            var exception = Record.Exception(() => requestBuilder.CreateGalleryItemCommentRequest(mockUrl, null));
+            var exception = Record.Exception(() => CommentRequestBuilder.CreateGalleryItemCommentRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -109,7 +109,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new CommentRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.CreateGalleryItemCommentRequest(null, "Hello World!"));
+            var exception = Record.Exception(() => CommentRequestBuilder.CreateGalleryItemCommentRequest(null, "Hello World!"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -124,7 +124,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CommentRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}comment";
-            var request = requestBuilder.CreateReplyRequest(mockUrl, "Hello World!", "xYxAbcD");
+            var request = CommentRequestBuilder.CreateReplyRequest(mockUrl, "Hello World!", "xYxAbcD");
 
             Assert.NotNull(request);
             var expected = "image_id=xYxAbcD&comment=Hello+World%21";
@@ -141,7 +141,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CommentRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}comment";
 
-            var exception = Record.Exception(() => requestBuilder.CreateReplyRequest(mockUrl, null, "xYxAbcD"));
+            var exception = Record.Exception(() => CommentRequestBuilder.CreateReplyRequest(mockUrl, null, "xYxAbcD"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -156,7 +156,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CommentRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}comment";
 
-            var exception = Record.Exception(() => requestBuilder.CreateReplyRequest(mockUrl, "Hello World", null));
+            var exception = Record.Exception(() => CommentRequestBuilder.CreateReplyRequest(mockUrl, "Hello World", null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -169,7 +169,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new CommentRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.CreateReplyRequest(null, "Hello World!", "xYxAbcD"));
+            var exception = Record.Exception(() => CommentRequestBuilder.CreateReplyRequest(null, "Hello World!", "xYxAbcD"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -184,7 +184,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CommentRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}comment/XysioD/vote/up";
-            var request = requestBuilder.CreateRequest(HttpMethod.Post, mockUrl);
+            var request = RequestBuilderBase.CreateRequest(HttpMethod.Post, mockUrl);
 
             Assert.NotNull(request);
 

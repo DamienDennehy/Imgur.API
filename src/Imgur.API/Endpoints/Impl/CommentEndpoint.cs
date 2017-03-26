@@ -58,9 +58,9 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = "comment";
+            const string url = nameof(comment);
 
-            using (var request = RequestBuilder.CreateCommentRequest(url, comment, galleryItemId, parentId))
+            using (var request = CommentRequestBuilder.CreateCommentRequest(url, comment, galleryItemId, parentId))
             {
                 var returnComment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
                 return returnComment.Id;
@@ -97,7 +97,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"comment/{parentId}";
 
-            using (var request = RequestBuilder.CreateReplyRequest(url, comment, galleryItemId))
+            using (var request = CommentRequestBuilder.CreateReplyRequest(url, comment, galleryItemId))
             {
                 var returnComment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
                 return returnComment.Id;
@@ -123,7 +123,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"comment/{commentId}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Delete, url))
             {
                 var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return deleted;
@@ -145,7 +145,7 @@ namespace Imgur.API.Endpoints.Impl
         {
             var url = $"comment/{commentId}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var comment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
                 return comment;
@@ -167,7 +167,7 @@ namespace Imgur.API.Endpoints.Impl
         {
             var url = $"comment/{commentId}/replies";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var comment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
                 return comment;
@@ -194,7 +194,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"comment/{commentId}/report";
 
-            using (var request = RequestBuilder.ReportItemRequest(url, reason))
+            using (var request = RequestBuilderBase.ReportItemRequest(url, reason))
             {
                 var reported = await SendRequestAsync<bool?>(request).ConfigureAwait(false);
                 return reported ?? true;
@@ -222,7 +222,7 @@ namespace Imgur.API.Endpoints.Impl
             var voteValue = $"{vote}".ToLower();
             var url = $"comment/{commentId}/vote/{voteValue}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Post, url))
             {
                 var voted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return voted;

@@ -44,7 +44,7 @@ namespace Imgur.API.Endpoints.Impl
         {
             var url = "topics/defaults";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var topics = await SendRequestAsync<IEnumerable<Topic>>(request).ConfigureAwait(false);
                 return topics;
@@ -76,7 +76,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"topics/{topicId.Replace(" ", "_")}/{galleryItemId}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var items = await SendRequestAsync<GalleryItem>(request).ConfigureAwait(false);
                 return items;
@@ -114,7 +114,7 @@ namespace Imgur.API.Endpoints.Impl
             var windowValue = $"{window}".ToLower();
             var url = $"topics/{topicId.Replace(" ", "_")}/{sortValue}/{windowValue}/{page}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var items = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return items;

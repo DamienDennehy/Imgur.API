@@ -8,11 +8,7 @@ namespace Imgur.API.RequestBuilders
 {
     internal abstract class RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage CreateRequest(HttpMethod httpMethod, string url)
+        internal static HttpRequestMessage CreateRequest(HttpMethod httpMethod, string url)
         {
             if (httpMethod == null)
                 throw new ArgumentNullException(nameof(httpMethod));
@@ -22,19 +18,15 @@ namespace Imgur.API.RequestBuilders
 
             return new HttpRequestMessage(httpMethod, url);
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage ReportItemRequest(string url, ReportReason reason)
+        
+        internal static HttpRequestMessage ReportItemRequest(string url, ReportReason reason)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
             var parameters = new Dictionary<string, string>
             {
-                {"reason", ((int) reason).ToString()}
+                {nameof(reason), ((int) reason).ToString()}
             };
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)

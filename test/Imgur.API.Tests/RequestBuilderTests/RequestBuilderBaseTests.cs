@@ -17,7 +17,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new AccountRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}account/bob";
-            var request = requestBuilder.CreateRequest(HttpMethod.Get, mockUrl);
+            var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, mockUrl);
 
             Assert.NotNull(request);
             Assert.Equal("https://api.imgur.com/3/account/bob", request.RequestUri.ToString());
@@ -29,7 +29,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new AccountRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.CreateRequest(null, null));
+            var exception = Record.Exception(() => RequestBuilderBase.CreateRequest(null, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -42,7 +42,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new AccountRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.CreateRequest(HttpMethod.Get, null));
+            var exception = Record.Exception(() => RequestBuilderBase.CreateRequest(HttpMethod.Get, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -57,7 +57,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new CommentRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}comment/XysioD/report";
-            var request = requestBuilder.ReportItemRequest(mockUrl, ReportReason.Abusive);
+            var request = RequestBuilderBase.ReportItemRequest(mockUrl, ReportReason.Abusive);
 
             Assert.NotNull(request);
             var expected = "reason=3";
@@ -72,7 +72,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new AccountRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.ReportItemRequest(null, ReportReason.Abusive));
+            var exception = Record.Exception(() => RequestBuilderBase.ReportItemRequest(null, ReportReason.Abusive));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 

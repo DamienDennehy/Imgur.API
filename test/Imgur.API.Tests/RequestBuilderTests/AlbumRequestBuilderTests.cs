@@ -20,7 +20,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}album/AbcdeF/add";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
-            var request = requestBuilder.AddAlbumImagesRequest(mockUrl, ids);
+            var request = AlbumRequestBuilder.AddAlbumImagesRequest(mockUrl, ids);
             var expected = "ids=Abc%2CDEF%2CXyZ";
 
             Assert.NotNull(request);
@@ -36,7 +36,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new AlbumRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}album/AbcdeF/add";
 
-            var exception = Record.Exception(() => requestBuilder.AddAlbumImagesRequest(mockUrl, null));
+            var exception = Record.Exception(() => AlbumRequestBuilder.AddAlbumImagesRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -49,7 +49,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new AlbumRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.AddAlbumImagesRequest(null, new List<string>()));
+            var exception = Record.Exception(() => AlbumRequestBuilder.AddAlbumImagesRequest(null, new List<string>()));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -66,7 +66,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}album/AbcdeF";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
-            var request = requestBuilder.CreateAlbumRequest(
+            var request = AlbumRequestBuilder.CreateAlbumRequest(
                 mockUrl, "TheTitle", "TheDescription",
                 AlbumPrivacy.Hidden, AlbumLayout.Horizontal,
                 "io9XpoO", ids);
@@ -84,7 +84,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         public void CreateAlbumRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             var requestBuilder = new AlbumRequestBuilder();
-            var exception = Record.Exception(() => requestBuilder.CreateAlbumRequest(null));
+            var exception = Record.Exception(() => AlbumRequestBuilder.CreateAlbumRequest(null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -101,7 +101,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}album/AbcdeF/remove_images";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
-            var request = requestBuilder.RemoveAlbumImagesRequest(mockUrl, ids);
+            var request = AlbumRequestBuilder.RemoveAlbumImagesRequest(mockUrl, ids);
             var expected = "https://api.imgur.com/3/album/AbcdeF/remove_images?ids=Abc%2CDEF%2CXyZ";
 
             Assert.NotNull(request);
@@ -116,7 +116,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new AlbumRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}album/AbcdeF/remove_images";
 
-            var exception = Record.Exception(() => requestBuilder.RemoveAlbumImagesRequest(mockUrl, null));
+            var exception = Record.Exception(() => AlbumRequestBuilder.RemoveAlbumImagesRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -129,7 +129,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new AlbumRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.RemoveAlbumImagesRequest(null, new List<string>()));
+            var exception = Record.Exception(() => AlbumRequestBuilder.RemoveAlbumImagesRequest(null, new List<string>()));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -146,7 +146,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}album/AbcdeF";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
-            var request = requestBuilder.SetAlbumImagesRequest(mockUrl, ids);
+            var request = AlbumRequestBuilder.SetAlbumImagesRequest(mockUrl, ids);
             var expected = "ids=Abc%2CDEF%2CXyZ";
 
             Assert.NotNull(request);
@@ -162,7 +162,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new AlbumRequestBuilder();
             var mockUrl = $"{client.EndpointUrl}album/AbcdeF";
 
-            var exception = Record.Exception(() => requestBuilder.SetAlbumImagesRequest(mockUrl, null));
+            var exception = Record.Exception(() => AlbumRequestBuilder.SetAlbumImagesRequest(mockUrl, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -175,7 +175,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new AlbumRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.SetAlbumImagesRequest(null, new List<string>()));
+            var exception = Record.Exception(() => AlbumRequestBuilder.SetAlbumImagesRequest(null, new List<string>()));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -192,7 +192,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}album/AbcdeF";
             var ids = new List<string> {"Abc", "DEF", "XyZ"};
 
-            var request = requestBuilder.UpdateAlbumRequest(
+            var request = AlbumRequestBuilder.UpdateAlbumRequest(
                 mockUrl, "TheTitle", "TheDescription",
                 AlbumPrivacy.Hidden, AlbumLayout.Horizontal,
                 "io9XpoO", ids);
@@ -211,7 +211,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new AlbumRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.UpdateAlbumRequest(null));
+            var exception = Record.Exception(() => AlbumRequestBuilder.UpdateAlbumRequest(null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 

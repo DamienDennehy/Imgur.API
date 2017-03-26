@@ -47,7 +47,7 @@ namespace Imgur.API.Endpoints.Impl
         {
             var url = "memegen/defaults";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var images = await SendRequestAsync<IEnumerable<Image>>(request).ConfigureAwait(false);
                 return images;

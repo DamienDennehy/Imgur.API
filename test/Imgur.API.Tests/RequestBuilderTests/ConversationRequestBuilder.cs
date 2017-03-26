@@ -17,7 +17,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
 
             var mockUrl = $"{client.EndpointUrl}conversations/Bob";
 
-            var request = requestBuilder.CreateMessageRequest(mockUrl, "Hello World!");
+            var request = ConversationRequestBuilder.CreateMessageRequest(mockUrl, "Hello World!");
 
             Assert.NotNull(request);
             var expected = "body=Hello+World%21";
@@ -32,7 +32,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new ConversationRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.CreateMessageRequest("url", null));
+            var exception = Record.Exception(() => ConversationRequestBuilder.CreateMessageRequest("url", null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -45,7 +45,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new ConversationRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.CreateMessageRequest(null, "Test"));
+            var exception = Record.Exception(() => ConversationRequestBuilder.CreateMessageRequest(null, "Test"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 

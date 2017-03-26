@@ -7,11 +7,7 @@ namespace Imgur.API.RequestBuilders
 {
     internal class OAuth2RequestBuilder : RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage GetTokenByCodeRequest(string url, string code, string clientId, string clientSecret)
+        internal static HttpRequestMessage GetTokenByCodeRequest(string url, string code, string clientId, string clientSecret)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -30,7 +26,7 @@ namespace Imgur.API.RequestBuilders
                 {"client_id", clientId},
                 {"client_secret", clientSecret},
                 {"grant_type", "authorization_code"},
-                {"code", code}
+                {nameof(code), code}
             };
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)
@@ -40,12 +36,8 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage GetTokenByPinRequest(string url, string pin, string clientId, string clientSecret)
+        
+        internal static HttpRequestMessage GetTokenByPinRequest(string url, string pin, string clientId, string clientSecret)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -63,8 +55,8 @@ namespace Imgur.API.RequestBuilders
             {
                 {"client_id", clientId},
                 {"client_secret", clientSecret},
-                {"grant_type", "pin"},
-                {"pin", pin}
+                {"grant_type", nameof(pin)},
+                {nameof(pin), pin}
             };
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)
@@ -74,12 +66,8 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage GetTokenByRefreshTokenRequest(string url, string refreshToken, string clientId,
+        
+        internal static HttpRequestMessage GetTokenByRefreshTokenRequest(string url, string refreshToken, string clientId,
             string clientSecret)
         {
             if (string.IsNullOrWhiteSpace(url))

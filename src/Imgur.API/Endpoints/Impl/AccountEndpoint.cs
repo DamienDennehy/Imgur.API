@@ -56,7 +56,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var account = await SendRequestAsync<Account>(request).ConfigureAwait(false);
                 return account;
@@ -80,7 +80,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = "account/me/settings";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var settings = await SendRequestAsync<AccountSettings>(request).ConfigureAwait(false);
                 return settings;
@@ -105,7 +105,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = "account/me/verifyemail";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Post, url))
             {
                 var verified = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return verified;
@@ -146,7 +146,7 @@ namespace Imgur.API.Endpoints.Impl
             var url = "account/me/settings";
 
             using (
-                var request = RequestBuilder.UpdateAccountSettingsRequest(url, bio, publicImages, messagingEnabled,
+                var request = AccountRequestBuilder.UpdateAccountSettingsRequest(url, bio, publicImages, messagingEnabled,
                     albumPrivacy, acceptedGalleryTerms, username, showMature, newsletterSubscribed))
             {
                 var updated = await SendRequestAsync<bool>(request).ConfigureAwait(false);
@@ -171,7 +171,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = "account/me/verifyemail";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var verified = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return verified;

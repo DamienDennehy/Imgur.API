@@ -8,11 +8,7 @@ namespace Imgur.API.RequestBuilders
 {
     internal class CustomGalleryRequestBuilder : RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage AddCustomGalleryTagsRequest(string url, IEnumerable<string> tags)
+        internal static HttpRequestMessage AddCustomGalleryTagsRequest(string url, IEnumerable<string> tags)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -32,12 +28,8 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage AddFilteredOutGalleryTagRequest(string url, string tag)
+        
+        internal static HttpRequestMessage AddFilteredOutGalleryTagRequest(string url, string tag)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -57,12 +49,8 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage RemoveCustomGalleryTagsRequest(string url, IEnumerable<string> tags)
+        
+        internal static HttpRequestMessage RemoveCustomGalleryTagsRequest(string url, IEnumerable<string> tags)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -76,12 +64,8 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage RemoveFilteredOutGalleryTagRequest(string url, string tag)
+        
+        internal static HttpRequestMessage RemoveFilteredOutGalleryTagRequest(string url, string tag)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));

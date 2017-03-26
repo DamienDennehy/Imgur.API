@@ -10,11 +10,7 @@ namespace Imgur.API.RequestBuilders
 {
     internal class GalleryRequestBuilder : RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage PublishToGalleryRequest(string url, string title,
+        internal static HttpRequestMessage PublishToGalleryRequest(string url, string title,
             string topicId = null, bool? bypassTerms = null, bool? mature = null)
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -41,12 +37,8 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal string SearchGalleryAdvancedRequest(string url,
+        
+        internal static string SearchGalleryAdvancedRequest(string url,
             string qAll = null, string qAny = null,
             string qExactly = null, string qNot = null,
             ImageFileType? fileType = null, ImageSize? imageSize = null)
@@ -83,12 +75,8 @@ namespace Imgur.API.RequestBuilders
 
             return $"{url}?{query}".Replace("?&", "?");
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal string SearchGalleryRequest(string url, string query)
+        
+        internal static string SearchGalleryRequest(string url, string query)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));

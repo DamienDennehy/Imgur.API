@@ -8,11 +8,7 @@ namespace Imgur.API.RequestBuilders
 {
     internal class ImageRequestBuilder : RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage UpdateImageRequest(string url, string title = null, string description = null)
+        internal static HttpRequestMessage UpdateImageRequest(string url, string title = null, string description = null)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -32,12 +28,8 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage UploadImageBinaryRequest(string url, byte[] image, string albumId = null,
+        
+        internal static HttpRequestMessage UploadImageBinaryRequest(string url, byte[] image, string albumId = null,
             string title = null, string description = null)
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -47,7 +39,7 @@ namespace Imgur.API.RequestBuilders
                 throw new ArgumentNullException(nameof(image));
 
             var request = new HttpRequestMessage(HttpMethod.Post, url);
-            
+
             var content = new MultipartFormDataContent($"{DateTime.UtcNow.Ticks}")
             {
                 {new StringContent("file"), "type"},
@@ -55,24 +47,29 @@ namespace Imgur.API.RequestBuilders
             };
 
             if (!string.IsNullOrWhiteSpace(albumId))
-                content.Add(new StringContent(albumId), "album");
+                using (var stringContent = new StringContent(albumId))
+                {
+                    content.Add(stringContent, "album");
+                }
 
             if (title != null)
-                content.Add(new StringContent(title), nameof(title));
+                using (var stringContent = new StringContent(title))
+                {
+                    content.Add(stringContent, nameof(title));
+                }
 
             if (description != null)
-                content.Add(new StringContent(description), nameof(description));
+                using (var stringContent = new StringContent(description))
+                {
+                    content.Add(stringContent, nameof(description));
+                }
 
             request.Content = content;
 
             return request;
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage UploadImageStreamRequest(string url, Stream image, string albumId = null,
+        
+        internal static HttpRequestMessage UploadImageStreamRequest(string url, Stream image, string albumId = null,
             string title = null, string description = null, IProgress<int> progressBytes = null, int progressBufferSize = 4096)
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -82,7 +79,7 @@ namespace Imgur.API.RequestBuilders
                 throw new ArgumentNullException(nameof(image));
 
             var request = new HttpRequestMessage(HttpMethod.Post, url);
-            
+
             var content = new MultipartFormDataContent($"{DateTime.UtcNow.Ticks}")
             {
                 {new StringContent("file"), "type"}
@@ -90,32 +87,43 @@ namespace Imgur.API.RequestBuilders
 
             if (progressBytes != null)
             {
-                content.Add(new ProgressStreamContent(image, progressBytes, progressBufferSize), nameof(image));
+                using (var progressStreamContent = new ProgressStreamContent(image, progressBytes, progressBufferSize))
+                {
+                    content.Add(progressStreamContent, nameof(image));
+                }
             }
             else
             {
-                content.Add(new StreamContent(image), nameof(image));
+                using (var streamContent = new StreamContent(image))
+                {
+                    content.Add(streamContent, nameof(image));
+                }
             }
-            
+
             if (!string.IsNullOrWhiteSpace(albumId))
-                content.Add(new StringContent(albumId), "album");
+                using (var stringContent = new StringContent(albumId))
+                {
+                    content.Add(stringContent, "album");
+                }
 
             if (title != null)
-                content.Add(new StringContent(title), nameof(title));
+                using (var stringContent = new StringContent(title))
+                {
+                    content.Add(stringContent, nameof(title));
+                }
 
             if (description != null)
-                content.Add(new StringContent(description), nameof(description));
+                using (var stringContent = new StringContent(description))
+                {
+                    content.Add(stringContent, nameof(description));
+                }
 
             request.Content = content;
 
             return request;
         }
 
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage UploadImageUrlRequest(string url, string imageUrl, string albumId = null,
+        internal static HttpRequestMessage UploadImageUrlRequest(string url, string imageUrl, string albumId = null,
             string title = null, string description = null)
         {
             if (string.IsNullOrWhiteSpace(url))

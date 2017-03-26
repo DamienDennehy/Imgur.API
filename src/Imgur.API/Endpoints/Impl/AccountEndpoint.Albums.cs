@@ -37,7 +37,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/album/{albumId}";
 
-            using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Delete, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Delete, url))
             {
                 var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return deleted;
@@ -70,7 +70,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/album/{albumId}";
 
-            using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var album = await SendRequestAsync<Album>(request).ConfigureAwait(false);
                 return album;
@@ -99,7 +99,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/albums/count";
 
-            using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var count = await SendRequestAsync<int>(request).ConfigureAwait(false);
                 return count;
@@ -129,7 +129,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/albums/ids/{page}";
 
-            using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var albums = await SendRequestAsync<IEnumerable<string>>(request).ConfigureAwait(false);
                 return albums;
@@ -160,7 +160,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/albums/{page}";
 
-            using (var request = AlbumRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var albums = await SendRequestAsync<IEnumerable<Album>>(request).ConfigureAwait(false);
                 return albums;

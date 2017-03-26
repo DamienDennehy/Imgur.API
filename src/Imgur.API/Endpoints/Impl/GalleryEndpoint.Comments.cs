@@ -38,7 +38,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/{galleryItemId}/comment";
 
-            using (var request = CommentRequestBuilder.CreateGalleryItemCommentRequest(url, comment))
+            using (var request = RequestBuilders.CommentRequestBuilder.CreateGalleryItemCommentRequest(url, comment))
             {
                 var returnComment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
                 return returnComment.Id;
@@ -75,7 +75,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/{galleryItemId}/comment/{parentId}";
 
-            using (var request = CommentRequestBuilder.CreateGalleryItemCommentRequest(url, comment))
+            using (var request = RequestBuilders.CommentRequestBuilder.CreateGalleryItemCommentRequest(url, comment))
             {
                 var returnComment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
                 return returnComment.Id;
@@ -101,7 +101,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/{galleryItemId}/comment/{commentId}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var comment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
                 return comment;
@@ -126,7 +126,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/{galleryItemId}/comments/count";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var count = await SendRequestAsync<int>(request).ConfigureAwait(false);
                 return count;
@@ -151,7 +151,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/{galleryItemId}/comments/ids";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var commentIds = await SendRequestAsync<IEnumerable<int>>(request).ConfigureAwait(false);
                 return commentIds;
@@ -181,7 +181,7 @@ namespace Imgur.API.Endpoints.Impl
             var sortValue = $"{sort}".ToLower();
             var url = $"gallery/{galleryItemId}/comments/{sortValue}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var comments = await SendRequestAsync<IEnumerable<Comment>>(request).ConfigureAwait(false);
                 return comments;

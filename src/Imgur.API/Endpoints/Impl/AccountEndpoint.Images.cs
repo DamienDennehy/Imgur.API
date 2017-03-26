@@ -38,7 +38,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/image/{imageId}";
 
-            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Delete, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Delete, url))
             {
                 var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return deleted;
@@ -71,7 +71,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/image/{imageId}";
 
-            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var image = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return image;
@@ -82,6 +82,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Returns the total number of images associated with the account.
         ///     OAuth authentication required.
         /// </summary>
+        /// <param name="username">The username. Default: me</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -99,7 +100,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/images/count";
 
-            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var count = await SendRequestAsync<int>(request).ConfigureAwait(false);
                 return count;
@@ -129,7 +130,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/images/ids/{page}";
 
-            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var images = await SendRequestAsync<IEnumerable<string>>(request).ConfigureAwait(false);
                 return images;
@@ -160,7 +161,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/images/{page}";
 
-            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var images = await SendRequestAsync<IEnumerable<Image>>(request).ConfigureAwait(false);
                 return images;

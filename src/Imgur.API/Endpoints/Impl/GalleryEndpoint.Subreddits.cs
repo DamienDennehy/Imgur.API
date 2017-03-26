@@ -39,7 +39,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/r/{subreddit}/{sortValue}/{windowValue}/{page}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var gallery = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return gallery;
@@ -68,7 +68,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/r/{subreddit}/{imageId}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var image = await SendRequestAsync<GalleryImage>(request).ConfigureAwait(false);
                 return image;

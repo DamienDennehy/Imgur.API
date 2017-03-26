@@ -7,11 +7,7 @@ namespace Imgur.API.RequestBuilders
 {
     internal class NotificationRequestBuilder : RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage MarkNotificationsViewedRequest(string url, IEnumerable<string> notificationIds)
+        internal static HttpRequestMessage MarkNotificationsViewedRequest(string url, IEnumerable<string> notificationIds)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));

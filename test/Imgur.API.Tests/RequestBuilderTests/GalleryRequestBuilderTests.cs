@@ -17,7 +17,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new GalleryRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}gallery/XysioD";
-            var request = requestBuilder.PublishToGalleryRequest(mockUrl, "Hello World!", "Funny", true, true);
+            var request = GalleryRequestBuilder.PublishToGalleryRequest(mockUrl, "Hello World!", "Funny", true, true);
 
             Assert.NotNull(request);
             var expected = "title=Hello+World%21&topic=Funny&terms=true&mature=true";
@@ -32,7 +32,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new GalleryRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.PublishToGalleryRequest("url", null));
+            var exception = Record.Exception(() => GalleryRequestBuilder.PublishToGalleryRequest("url", null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -47,7 +47,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new GalleryRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}gallery/XysioD";
-            var request = requestBuilder.PublishToGalleryRequest(mockUrl, "Hello World!");
+            var request = GalleryRequestBuilder.PublishToGalleryRequest(mockUrl, "Hello World!");
 
             Assert.NotNull(request);
             var expected = "title=Hello+World%21";
@@ -62,7 +62,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new GalleryRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.PublishToGalleryRequest(null, "test"));
+            var exception = Record.Exception(() => GalleryRequestBuilder.PublishToGalleryRequest(null, "test"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -77,7 +77,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new GalleryRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}gallery/search";
-            var actual = requestBuilder.SearchGalleryAdvancedRequest(mockUrl, "star wars", "luke han leia", "Obi-Wan",
+            var actual = GalleryRequestBuilder.SearchGalleryAdvancedRequest(mockUrl, "star wars", "luke han leia", "Obi-Wan",
                 "Kirk", ImageFileType.Anigif, ImageSize.Lrg);
 
             var expected =
@@ -93,7 +93,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new GalleryRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}gallery/search";
-            var actual = requestBuilder.SearchGalleryAdvancedRequest(mockUrl, "star wars");
+            var actual = GalleryRequestBuilder.SearchGalleryAdvancedRequest(mockUrl, "star wars");
 
             var expected =
                 "https://api.imgur.com/3/gallery/search?q_all=star+wars";
@@ -106,7 +106,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new GalleryRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.SearchGalleryAdvancedRequest("Xio"));
+            var exception = Record.Exception(() => GalleryRequestBuilder.SearchGalleryAdvancedRequest("Xio"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -119,7 +119,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new GalleryRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.SearchGalleryAdvancedRequest(null, "dfdfd"));
+            var exception = Record.Exception(() => GalleryRequestBuilder.SearchGalleryAdvancedRequest(null, "dfdfd"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -134,7 +134,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new GalleryRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}gallery/search";
-            var actual = requestBuilder.SearchGalleryRequest(mockUrl, "star wars");
+            var actual = GalleryRequestBuilder.SearchGalleryRequest(mockUrl, "star wars");
 
             var expected = "https://api.imgur.com/3/gallery/search?q=star+wars";
 
@@ -146,7 +146,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new GalleryRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.SearchGalleryRequest("Xio", null));
+            var exception = Record.Exception(() => GalleryRequestBuilder.SearchGalleryRequest("Xio", null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -159,7 +159,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new GalleryRequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.SearchGalleryRequest(null, "dfdfd"));
+            var exception = Record.Exception(() => GalleryRequestBuilder.SearchGalleryRequest(null, "dfdfd"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 

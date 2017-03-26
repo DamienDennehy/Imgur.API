@@ -52,7 +52,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"image/{imageId}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Delete, url))
             {
                 var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return deleted;
@@ -80,7 +80,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"image/{imageId}/favorite";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Post, url))
             {
                 var imgurResult = await SendRequestAsync<string>(request).ConfigureAwait(false);
                 return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
@@ -105,7 +105,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"image/{imageId}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var image = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return image;
@@ -134,7 +134,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"image/{imageId}";
 
-            using (var request = RequestBuilder.UpdateImageRequest(url, title, description))
+            using (var request = ImageRequestBuilder.UpdateImageRequest(url, title, description))
             {
                 var updated = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return updated;
@@ -164,9 +164,9 @@ namespace Imgur.API.Endpoints.Impl
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
 
-            var url = "image";
+            const string url = nameof(image);
 
-            using (var request = RequestBuilder.UploadImageBinaryRequest(url, image, albumId, title, description))
+            using (var request = ImageRequestBuilder.UploadImageBinaryRequest(url, image, albumId, title, description))
             {
                 var returnImage = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return returnImage;
@@ -198,9 +198,9 @@ namespace Imgur.API.Endpoints.Impl
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
 
-            var url = "image";
+            const string url = nameof(image);
 
-            using (var request = RequestBuilder.UploadImageStreamRequest(url, image, albumId, title, description, progressBytes, progressBufferSize))
+            using (var request = ImageRequestBuilder.UploadImageStreamRequest(url, image, albumId, title, description, progressBytes, progressBufferSize))
             {
                 var returnImage = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return returnImage;
@@ -230,9 +230,9 @@ namespace Imgur.API.Endpoints.Impl
             if (string.IsNullOrWhiteSpace(image))
                 throw new ArgumentNullException(nameof(image));
 
-            var url = "image";
+            const string url = nameof(image);
 
-            using (var request = RequestBuilder.UploadImageUrlRequest(url, image, albumId, title, description))
+            using (var request = ImageRequestBuilder.UploadImageUrlRequest(url, image, albumId, title, description))
             {
                 var returnImage = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return returnImage;

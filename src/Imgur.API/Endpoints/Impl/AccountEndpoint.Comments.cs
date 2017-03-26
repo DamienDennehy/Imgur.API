@@ -35,7 +35,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/comment/{commentId}";
 
-            using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Delete, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Delete, url))
             {
                 var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return deleted;
@@ -65,7 +65,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/comment/{commentId}";
 
-            using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var comment = await SendRequestAsync<Comment>(request).ConfigureAwait(false);
                 return comment;
@@ -94,7 +94,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/comments/count";
 
-            using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var count = await SendRequestAsync<int>(request).ConfigureAwait(false);
                 return count;
@@ -129,7 +129,7 @@ namespace Imgur.API.Endpoints.Impl
             var sortValue = $"{sort}".ToLower();
             var url = $"account/{username}/comments/ids/{sortValue}/{page}";
 
-            using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var comments = await SendRequestAsync<IEnumerable<int>>(request).ConfigureAwait(false);
                 return comments;
@@ -164,7 +164,7 @@ namespace Imgur.API.Endpoints.Impl
             var sortValue = $"{sort}".ToLower();
             var url = $"account/{username}/comments/{sortValue}/{page}";
 
-            using (var request = CommentRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var comments = await SendRequestAsync<IEnumerable<Comment>>(request).ConfigureAwait(false);
                 return comments;

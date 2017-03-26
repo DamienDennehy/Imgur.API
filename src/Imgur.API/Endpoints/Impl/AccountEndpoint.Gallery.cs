@@ -36,7 +36,7 @@ namespace Imgur.API.Endpoints.Impl
             var sortValue = $"{sort}".ToLower();
             var url = $"account/me/favorites/{page}/{sortValue}";
 
-            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var favorites = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return favorites;
@@ -72,7 +72,7 @@ namespace Imgur.API.Endpoints.Impl
             var sortValue = $"{sort}".ToLower();
             var url = $"account/{username}/gallery_favorites/{page}/{sortValue}";
 
-            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var favorites = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return favorites;
@@ -102,7 +102,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/submissions/{page}";
 
-            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var submissions = await SendRequestAsync<IEnumerable<GalleryItem>>(request).ConfigureAwait(false);
                 return submissions;
@@ -131,7 +131,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/gallery_profile";
 
-            using (var request = ImageRequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var profile = await SendRequestAsync<GalleryProfile>(request).ConfigureAwait(false);
                 return profile;

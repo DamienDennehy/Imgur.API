@@ -27,7 +27,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/{galleryItemId}/tags";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var tagVotes = await SendRequestAsync<TagVotes>(request).ConfigureAwait(false);
                 return tagVotes;
@@ -62,7 +62,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/t/{tag}/{sortValue}/{windowValue}/{page}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var returnTag = await SendRequestAsync<Tag>(request).ConfigureAwait(false);
                 return returnTag;
@@ -91,7 +91,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/t/{tag}/{galleryItemId}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var image = await SendRequestAsync<GalleryImage>(request).ConfigureAwait(false);
                 return image;

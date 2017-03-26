@@ -58,7 +58,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"album/{albumId}/add";
 
-            using (var request = RequestBuilder.AddAlbumImagesRequest(url, imageIds))
+            using (var request = AlbumRequestBuilder.AddAlbumImagesRequest(url, imageIds))
             {
                 var added = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return added;
@@ -83,7 +83,7 @@ namespace Imgur.API.Endpoints.Impl
         {
             var url = "album";
 
-            using (var request = RequestBuilder.CreateAlbumRequest(url, title, description,
+            using (var request = AlbumRequestBuilder.CreateAlbumRequest(url, title, description,
                 privacy, layout, coverId, imageIds))
             {
                 var album = await SendRequestAsync<Album>(request).ConfigureAwait(false);
@@ -110,7 +110,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"album/{albumId}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Delete, url))
             {
                 var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return deleted;
@@ -138,7 +138,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"album/{albumId}/favorite";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Post, url))
             {
                 var imgurResult = await SendRequestAsync<string>(request).ConfigureAwait(false);
                 return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
@@ -163,7 +163,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"album/{albumId}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var album = await SendRequestAsync<Album>(request).ConfigureAwait(false);
                 return album;
@@ -192,7 +192,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"album/{albumId}/image/{imageId}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var returnImage = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return returnImage;
@@ -217,7 +217,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"album/{albumId}/images";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var images = await SendRequestAsync<IEnumerable<Image>>(request).ConfigureAwait(false);
                 return images;
@@ -247,7 +247,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"album/{albumId}/remove_images";
 
-            using (var request = RequestBuilder.RemoveAlbumImagesRequest(url, imageIds))
+            using (var request = AlbumRequestBuilder.RemoveAlbumImagesRequest(url, imageIds))
             {
                 var removed = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return removed;
@@ -277,7 +277,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"album/{albumId}";
 
-            using (var request = RequestBuilder.SetAlbumImagesRequest(url, imageIds))
+            using (var request = AlbumRequestBuilder.SetAlbumImagesRequest(url, imageIds))
             {
                 var set = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return set;
@@ -311,7 +311,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"album/{albumId}";
 
-            using (var request = RequestBuilder.UpdateAlbumRequest(url, title, description,
+            using (var request = AlbumRequestBuilder.UpdateAlbumRequest(url, title, description,
                 privacy, layout, coverId, imageIds))
             {
                 var updated = await SendRequestAsync<bool>(request).ConfigureAwait(false);

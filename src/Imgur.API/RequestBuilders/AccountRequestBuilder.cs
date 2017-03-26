@@ -8,11 +8,7 @@ namespace Imgur.API.RequestBuilders
 {
     internal class AccountRequestBuilder : RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage UpdateAccountSettingsRequest(
+        internal static HttpRequestMessage UpdateAccountSettingsRequest(
             string url,
             string bio = null,
             bool? publicImages = null,

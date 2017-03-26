@@ -14,7 +14,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new OAuth2RequestBuilder();
 
             var exception =
-                Record.Exception(() => requestBuilder.GetTokenByCodeRequest("url", "123code", null, "secret"));
+                Record.Exception(() => OAuth2RequestBuilder.GetTokenByCodeRequest("url", "123code", null, "secret"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -30,7 +30,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception =
                 Record.Exception(
                     () =>
-                        requestBuilder.GetTokenByCodeRequest("https://api.imgur.com/oauth2/token", "123code", "clientId",
+OAuth2RequestBuilder.GetTokenByCodeRequest("https://api.imgur.com/oauth2/token", "123code", "clientId",
                             null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
@@ -44,7 +44,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new OAuth2RequestBuilder();
 
-            var request = requestBuilder.GetTokenByCodeRequest("https://api.imgur.com/oauth2/token", "123code", "123",
+            var request = OAuth2RequestBuilder.GetTokenByCodeRequest("https://api.imgur.com/oauth2/token", "123code", "123",
                 "1234");
 
             Assert.NotNull(request);
@@ -63,7 +63,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new OAuth2RequestBuilder();
 
             var exception =
-                Record.Exception(() => requestBuilder.GetTokenByCodeRequest(null, "123code", "clientId", "clientSecret"));
+                Record.Exception(() => OAuth2RequestBuilder.GetTokenByCodeRequest(null, "123code", "clientId", "clientSecret"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -76,7 +76,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new OAuth2RequestBuilder();
             var exception =
-                Record.Exception(() => requestBuilder.GetTokenByCodeRequest("url", null, "clientId", "clientSecret"));
+                Record.Exception(() => OAuth2RequestBuilder.GetTokenByCodeRequest("url", null, "clientId", "clientSecret"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -90,7 +90,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new OAuth2RequestBuilder();
 
             var exception =
-                Record.Exception(() => requestBuilder.GetTokenByPinRequest("url", "123", null, "clientSecret"));
+                Record.Exception(() => OAuth2RequestBuilder.GetTokenByPinRequest("url", "123", null, "clientSecret"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -103,7 +103,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new OAuth2RequestBuilder();
 
-            var exception = Record.Exception(() => requestBuilder.GetTokenByPinRequest("url", "123", "clientId", null));
+            var exception = Record.Exception(() => OAuth2RequestBuilder.GetTokenByPinRequest("url", "123", "clientId", null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -117,7 +117,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new OAuth2RequestBuilder();
 
             var exception =
-                Record.Exception(() => requestBuilder.GetTokenByPinRequest(null, "123", "clientId", "clientSecret"));
+                Record.Exception(() => OAuth2RequestBuilder.GetTokenByPinRequest(null, "123", "clientId", "clientSecret"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -130,7 +130,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new OAuth2RequestBuilder();
 
-            var request = requestBuilder.GetTokenByPinRequest("https://api.imgur.com/oauth2/token", "4899", "123",
+            var request = OAuth2RequestBuilder.GetTokenByPinRequest("https://api.imgur.com/oauth2/token", "4899", "123",
                 "1234");
 
             Assert.NotNull(request);
@@ -149,7 +149,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var requestBuilder = new OAuth2RequestBuilder();
 
             var exception =
-                Record.Exception(() => requestBuilder.GetTokenByPinRequest("url", null, "clientId", "clientSecret"));
+                Record.Exception(() => OAuth2RequestBuilder.GetTokenByPinRequest("url", null, "clientId", "clientSecret"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -165,7 +165,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception =
                 Record.Exception(
                     () =>
-                        requestBuilder.GetTokenByRefreshTokenRequest("url", "ABChjfhjhjdhfjksdfsdfsdfs", null,
+OAuth2RequestBuilder.GetTokenByRefreshTokenRequest("url", "ABChjfhjhjdhfjksdfsdfsdfs", null,
                             "clientSecret"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
@@ -182,7 +182,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception =
                 Record.Exception(
                     () =>
-                        requestBuilder.GetTokenByRefreshTokenRequest("url", "ABChjfhjhjdhfjksdfsdfsdfs", "clientId",
+OAuth2RequestBuilder.GetTokenByRefreshTokenRequest("url", "ABChjfhjhjdhfjksdfsdfsdfs", "clientId",
                             null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
@@ -199,7 +199,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var exception =
                 Record.Exception(
                     () =>
-                        requestBuilder.GetTokenByRefreshTokenRequest(null, "ABChjfhjhjdhfjksdfsdfsdfs", "clientId",
+OAuth2RequestBuilder.GetTokenByRefreshTokenRequest(null, "ABChjfhjhjdhfjksdfsdfsdfs", "clientId",
                             "clientSecret"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
@@ -213,7 +213,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         {
             var requestBuilder = new OAuth2RequestBuilder();
 
-            var request = requestBuilder.GetTokenByRefreshTokenRequest("https://api.imgur.com/oauth2/token",
+            var request = OAuth2RequestBuilder.GetTokenByRefreshTokenRequest("https://api.imgur.com/oauth2/token",
                 "ABChjfhjhjdhfjksdfsdfsdfs", "123", "1234");
 
             Assert.NotNull(request);
@@ -235,7 +235,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
 
             var exception =
                 Record.Exception(
-                    () => requestBuilder.GetTokenByRefreshTokenRequest("url", null, "clientId", "clientSecret"));
+                    () => OAuth2RequestBuilder.GetTokenByRefreshTokenRequest("url", null, "clientId", "clientSecret"));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 

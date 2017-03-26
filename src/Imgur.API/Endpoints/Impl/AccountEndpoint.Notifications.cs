@@ -28,7 +28,7 @@ namespace Imgur.API.Endpoints.Impl
             var newNotificationsValue = $"{newNotifications}".ToLower();
             var url = $"account/me/notifications?new={newNotificationsValue}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var notifications = await SendRequestAsync<Notifications>(request).ConfigureAwait(false);
                 return notifications;

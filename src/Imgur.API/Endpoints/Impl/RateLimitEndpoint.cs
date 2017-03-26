@@ -48,7 +48,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = "credits";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 limit = await SendRequestAsync<RateLimit>(request).ConfigureAwait(false);
             }

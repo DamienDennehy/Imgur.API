@@ -77,7 +77,7 @@ namespace Imgur.API.Endpoints.Impl
             IOAuth2Token token;
 
             using (
-                var request = RequestBuilder.GetTokenByCodeRequest(TokenEndpointUrl, code, ApiClient.ClientId,
+                var request = OAuth2RequestBuilder.GetTokenByCodeRequest(TokenEndpointUrl, code, ApiClient.ClientId,
                     ApiClient.ClientSecret))
             {
                 token = await SendRequestAsync<OAuth2Token>(request).ConfigureAwait(false);
@@ -108,7 +108,7 @@ namespace Imgur.API.Endpoints.Impl
             IOAuth2Token token;
 
             using (
-                var request = RequestBuilder.GetTokenByPinRequest(TokenEndpointUrl, pin, ApiClient.ClientId,
+                var request = OAuth2RequestBuilder.GetTokenByPinRequest(TokenEndpointUrl, pin, ApiClient.ClientId,
                     ApiClient.ClientSecret))
             {
                 token = await SendRequestAsync<OAuth2Token>(request).ConfigureAwait(false);
@@ -129,6 +129,7 @@ namespace Imgur.API.Endpoints.Impl
         ///         for their login information again.
         ///     </para>
         /// </summary>
+        /// <param name="refreshToken">The refresh token.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -147,7 +148,7 @@ namespace Imgur.API.Endpoints.Impl
             IOAuth2Token token;
 
             using (
-                var request = RequestBuilder.GetTokenByRefreshTokenRequest(TokenEndpointUrl, refreshToken,
+                var request = OAuth2RequestBuilder.GetTokenByRefreshTokenRequest(TokenEndpointUrl, refreshToken,
                     ApiClient.ClientId, ApiClient.ClientSecret))
             {
                 token = await SendRequestAsync<OAuth2Token>(request).ConfigureAwait(false);

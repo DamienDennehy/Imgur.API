@@ -7,11 +7,7 @@ namespace Imgur.API.RequestBuilders
 {
     internal class CommentRequestBuilder : RequestBuilderBase
     {
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage CreateCommentRequest(string url, string comment, string galleryItemId,
+        internal static HttpRequestMessage CreateCommentRequest(string url, string comment, string galleryItemId,
             string parentId)
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -26,7 +22,7 @@ namespace Imgur.API.RequestBuilders
             var parameters = new Dictionary<string, string>
             {
                 {"image_id", galleryItemId},
-                {"comment", comment}
+                {nameof(comment), comment}
             };
 
             if (!string.IsNullOrWhiteSpace(parentId))
@@ -39,12 +35,8 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage CreateGalleryItemCommentRequest(string url, string comment)
+        
+        internal static HttpRequestMessage CreateGalleryItemCommentRequest(string url, string comment)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -54,7 +46,7 @@ namespace Imgur.API.RequestBuilders
 
             var parameters = new Dictionary<string, string>
             {
-                {"comment", comment}
+                {nameof(comment), comment}
             };
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)
@@ -64,12 +56,8 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when a null reference is passed to a method that does not accept it as a
-        ///     valid argument.
-        /// </exception>
-        internal HttpRequestMessage CreateReplyRequest(string url, string comment, string galleryItemId)
+        
+        internal static HttpRequestMessage CreateReplyRequest(string url, string comment, string galleryItemId)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -83,7 +71,7 @@ namespace Imgur.API.RequestBuilders
             var parameters = new Dictionary<string, string>
             {
                 {"image_id", galleryItemId},
-                {"comment", comment}
+                {nameof(comment), comment}
             };
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)

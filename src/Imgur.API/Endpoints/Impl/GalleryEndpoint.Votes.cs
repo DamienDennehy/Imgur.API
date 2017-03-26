@@ -27,7 +27,7 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/{galleryItemId}/votes";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
                 var vote = await SendRequestAsync<Vote>(request).ConfigureAwait(false);
                 return vote;
@@ -57,7 +57,7 @@ namespace Imgur.API.Endpoints.Impl
             var voteValue = $"{vote}".ToLower();
             var url = $"gallery/{galleryItemId}/vote/{voteValue}";
 
-            using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
+            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Post, url))
             {
                 var voted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
                 return voted;

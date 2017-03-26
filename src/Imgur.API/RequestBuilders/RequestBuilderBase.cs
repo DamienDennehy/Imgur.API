@@ -18,7 +18,7 @@ namespace Imgur.API.RequestBuilders
 
             return new HttpRequestMessage(httpMethod, url);
         }
-        
+
         internal static HttpRequestMessage ReportItemRequest(string url, ReportReason reason)
         {
             if (string.IsNullOrWhiteSpace(url))

@@ -28,7 +28,7 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-        
+
         internal static HttpRequestMessage AddFilteredOutGalleryTagRequest(string url, string tag)
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -49,7 +49,7 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-        
+
         internal static HttpRequestMessage RemoveCustomGalleryTagsRequest(string url, IEnumerable<string> tags)
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -64,7 +64,7 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-        
+
         internal static HttpRequestMessage RemoveFilteredOutGalleryTagRequest(string url, string tag)
         {
             if (string.IsNullOrWhiteSpace(url))

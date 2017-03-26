@@ -37,7 +37,7 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-        
+
         internal static string SearchGalleryAdvancedRequest(string url,
             string qAll = null, string qAny = null,
             string qExactly = null, string qNot = null,
@@ -75,7 +75,7 @@ namespace Imgur.API.RequestBuilders
 
             return $"{url}?{query}".Replace("?&", "?");
         }
-        
+
         internal static string SearchGalleryRequest(string url, string query)
         {
             if (string.IsNullOrWhiteSpace(url))

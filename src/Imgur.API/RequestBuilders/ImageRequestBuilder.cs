@@ -37,7 +37,7 @@ namespace Imgur.API.RequestBuilders
 
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
-            
+
             var content = new MultipartFormDataContent($"{DateTime.UtcNow.Ticks}")
             {
                 {new StringContent("file"), "type"},
@@ -69,7 +69,7 @@ namespace Imgur.API.RequestBuilders
 
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
-            
+
             var content = new MultipartFormDataContent($"{DateTime.UtcNow.Ticks}")
             {
                 {new StringContent("file"), "type"}
@@ -97,7 +97,7 @@ namespace Imgur.API.RequestBuilders
             {
                 Content = content
             };
-        
+
             return request;
         }
 

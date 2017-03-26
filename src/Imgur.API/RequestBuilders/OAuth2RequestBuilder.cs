@@ -36,7 +36,7 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-        
+
         internal static HttpRequestMessage GetTokenByPinRequest(string url, string pin, string clientId, string clientSecret)
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -66,7 +66,7 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-        
+
         internal static HttpRequestMessage GetTokenByRefreshTokenRequest(string url, string refreshToken, string clientId,
             string clientSecret)
         {

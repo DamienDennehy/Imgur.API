@@ -78,7 +78,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = "account/me/settings";
+            const string url = "account/me/settings";
 
             using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
@@ -103,7 +103,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = "account/me/verifyemail";
+            const string url = "account/me/verifyemail";
 
             using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Post, url))
             {
@@ -143,7 +143,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = "account/me/settings";
+            const string url = "account/me/settings";
 
             using (
                 var request = AccountRequestBuilder.UpdateAccountSettingsRequest(url, bio, publicImages, messagingEnabled,
@@ -169,7 +169,7 @@ namespace Imgur.API.Endpoints.Impl
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = "account/me/verifyemail";
+            const string url = "account/me/verifyemail";
 
             using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {

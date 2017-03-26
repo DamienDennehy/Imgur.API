@@ -170,7 +170,7 @@ namespace Imgur.API.Models.Impl
         ///     the gallery.
         /// </summary>
         public virtual VoteOption? Vote { get; set; }
-        
+
         /// <summary>
         ///     The width of the image in pixels.
         /// </summary>

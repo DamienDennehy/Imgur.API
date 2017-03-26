@@ -14,9 +14,9 @@ namespace Imgur.API.Tests.EndpointTests
     public partial class AccountEndpointTests
     {
         [Fact]
-        public async Task GetAccountFavoritesAsync_Any()
+        public async Task Any_GetAccountFavoritesAsync()
         {
-            var mockUrl = "https://api.imgur.com/3/account/me/favorites/2/oldest";
+            const string mockUrl = "https://api.imgur.com/3/account/me/favorites/2/oldest";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(MockAccountEndpointResponses.GetAccountFavorites)
@@ -30,7 +30,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetAccountFavoritesAsync_WithOAuth2TokenNull_ThrowsArgumentNullException()
+        public async Task WithOAuth2TokenNull_ThrowsArgumentNullException_GetAccountFavoritesAsync()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
@@ -45,9 +45,9 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetAccountGalleryFavoritesAsync_Any()
+        public async Task Any_GetAccountGalleryFavoritesAsync()
         {
-            var mockUrl = "https://api.imgur.com/3/account/me/gallery_favorites/2/oldest";
+            const string mockUrl = "https://api.imgur.com/3/account/me/gallery_favorites/2/oldest";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(MockAccountEndpointResponses.GetAccountGalleryFavorites)
@@ -64,7 +64,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetAccountGalleryFavoritesAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
+        public async Task WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException_GetAccountGalleryFavoritesAsync()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
@@ -79,7 +79,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetAccountGalleryFavoritesAsync_WithUsernameNull_ThrowsArgumentNullException()
+        public async Task WithUsernameNull_ThrowsArgumentNullException_GetAccountGalleryFavoritesAsync()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
@@ -94,9 +94,9 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetAccountSubmissionsAsync_Any()
+        public async Task Any_GetAccountSubmissionsAsync()
         {
-            var mockUrl = "https://api.imgur.com/3/account/me/submissions/2";
+            const string mockUrl = "https://api.imgur.com/3/account/me/submissions/2";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(MockAccountEndpointResponses.GetAccountSubmissions)
@@ -110,7 +110,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetAccountSubmissionsAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
+        public async Task WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException_GetAccountSubmissionsAsync()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
@@ -125,7 +125,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetAccountSubmissionsAsync_WithUsernameNull_ThrowsArgumentNullException()
+        public async Task WithUsernameNull_ThrowsArgumentNullException_GetAccountSubmissionsAsync()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
@@ -140,9 +140,9 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetGalleryProfileAsync_NotNull()
+        public async Task NotNull_GetGalleryProfileAsync()
         {
-            var mockUrl = "https://api.imgur.com/3/account/me/gallery_profile";
+            const string mockUrl = "https://api.imgur.com/3/account/me/gallery_profile";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(MockAccountEndpointResponses.GetGalleryProfile)
@@ -156,7 +156,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetGalleryProfileAsync_WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException()
+        public async Task WithDefaultUsernameAndOAuth2Null_ThrowsArgumentNullException_GetGalleryProfileAsync()
         {
             var client = new ImgurClient("123", "1234");
             var endpoint = new AccountEndpoint(client);
@@ -165,21 +165,6 @@ namespace Imgur.API.Tests.EndpointTests
                 await
                     Record.ExceptionAsync(
                         async () => await endpoint.GetGalleryProfileAsync().ConfigureAwait(false))
-                        .ConfigureAwait(false);
-            Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
-        }
-
-        [Fact]
-        public async Task GetGalleryProfileAsync_WithUsernameNull_ThrowsArgumentNullException()
-        {
-            var client = new ImgurClient("123", "1234");
-            var endpoint = new AccountEndpoint(client);
-
-            var exception =
-                await
-                    Record.ExceptionAsync(
-                        async () => await endpoint.GetGalleryProfileAsync(null).ConfigureAwait(false))
                         .ConfigureAwait(false);
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);

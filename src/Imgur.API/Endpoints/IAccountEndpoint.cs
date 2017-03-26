@@ -142,9 +142,8 @@ namespace Imgur.API.Endpoints
         /// <summary>
         ///     The totals for a users gallery information.
         /// </summary>
-        /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Task<IGalleryProfile> GetGalleryProfileAsync(string username = "me");
+        Task<IGalleryProfile> GetGalleryProfileAsync();
 
         /// <summary>
         ///     Return information about a specific image.

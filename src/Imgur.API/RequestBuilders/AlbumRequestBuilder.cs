@@ -65,7 +65,7 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-        
+
         internal static HttpRequestMessage RemoveAlbumImagesRequest(string url, IEnumerable<string> imageIds)
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -101,7 +101,7 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-        
+
         internal static HttpRequestMessage UpdateAlbumRequest(string url,
             string title = null, string description = null,
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null,

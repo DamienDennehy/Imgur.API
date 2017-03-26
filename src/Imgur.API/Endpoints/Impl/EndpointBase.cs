@@ -30,10 +30,7 @@ namespace Imgur.API.Endpoints.Impl
         protected EndpointBase(IApiClient apiClient)
             : this(apiClient, new HttpClient())
         {
-            if (apiClient == null)
-                throw new ArgumentNullException(nameof(apiClient));
-
-            ApiClient = apiClient;
+            ApiClient = apiClient ?? throw new ArgumentNullException(nameof(apiClient));
         }
 
         /// <summary>
@@ -77,7 +74,7 @@ namespace Imgur.API.Endpoints.Impl
                 httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
                     "X-Mashape-Key", mashapeClient.MashapeKey);
             }
-            
+
             httpClient.BaseAddress = new Uri(apiClient.EndpointUrl);
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -105,10 +102,7 @@ namespace Imgur.API.Endpoints.Impl
         /// </exception>
         public virtual void SwitchClient(IApiClient apiClient)
         {
-            if (apiClient == null)
-                throw new ArgumentNullException(nameof(apiClient));
-
-            ApiClient = apiClient;
+            ApiClient = apiClient ?? throw new ArgumentNullException(nameof(apiClient));
 
             HttpClient.DefaultRequestHeaders.Remove("Authorization");
             HttpClient.DefaultRequestHeaders.Remove("X-Mashape-Key");
@@ -122,13 +116,12 @@ namespace Imgur.API.Endpoints.Impl
                     : $"Client-ID {apiClient.ClientId}");
 
             //Add Mashape Authentication header
-            var mashapeClient = apiClient as IMashapeClient;
-            if (mashapeClient != null)
+            if (apiClient is IMashapeClient mashapeClient)
             {
                 HttpClient.DefaultRequestHeaders.TryAddWithoutValidation(
                     "X-Mashape-Key", mashapeClient.MashapeKey);
             }
-            
+
             HttpClient.BaseAddress = new Uri(apiClient.EndpointUrl);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -161,7 +154,7 @@ namespace Imgur.API.Endpoints.Impl
             //If no result is found, then we can't proceed
             if (string.IsNullOrWhiteSpace(stringResponse))
                 throw new ImgurException($"The response from the endpoint is missing. {(int)response.StatusCode} {response.ReasonPhrase}");
-            
+
             //If the result isn't a json response, then we can't proceed
             if (stringResponse.StartsWith("<"))
             {
@@ -279,14 +272,11 @@ namespace Imgur.API.Endpoints.Impl
                 clientRemainingHeader = headers.GetValues("X-RateLimit-Requests-Remaining").FirstOrDefault();
             }
 
-            int clientLimit;
-            int clientRemaining;
-
             //If the values can't be parsed use the previous value
-            if (!int.TryParse(clientLimitHeader, out clientLimit))
+            if (!int.TryParse(clientLimitHeader, out int clientLimit))
                 clientLimit = ApiClient.RateLimit.ClientLimit;
 
-            if (!int.TryParse(clientRemainingHeader, out clientRemaining))
+            if (!int.TryParse(clientRemainingHeader, out int clientRemaining))
                 clientRemaining = ApiClient.RateLimit.ClientRemaining;
 
             ApiClient.RateLimit.ClientLimit = clientLimit;

@@ -122,7 +122,7 @@ namespace Imgur.API.Models
         ///     the gallery.
         /// </summary>
         VoteOption? Vote { get; set; }
-        
+
         /// <summary>
         ///     The width of the image in pixels.
         /// </summary>

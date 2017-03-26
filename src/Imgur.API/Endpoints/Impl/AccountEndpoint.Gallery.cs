@@ -112,7 +112,6 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     The totals for a users gallery information.
         /// </summary>
-        /// <param name="username">The user account. Default: me</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
@@ -120,16 +119,12 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IGalleryProfile> GetGalleryProfileAsync(string username = "me")
+        public async Task<IGalleryProfile> GetGalleryProfileAsync()
         {
-            if (string.IsNullOrWhiteSpace(username))
-                throw new ArgumentNullException(nameof(username));
-
-            if (username.Equals("me", StringComparison.OrdinalIgnoreCase)
-                && ApiClient.OAuth2Token == null)
+            if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
-            var url = $"account/{username}/gallery_profile";
+            var url = $"account/me/gallery_profile";
 
             using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {

@@ -35,7 +35,7 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-        
+
         internal static HttpRequestMessage CreateGalleryItemCommentRequest(string url, string comment)
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -56,7 +56,7 @@ namespace Imgur.API.RequestBuilders
 
             return request;
         }
-        
+
         internal static HttpRequestMessage CreateReplyRequest(string url, string comment, string galleryItemId)
         {
             if (string.IsNullOrWhiteSpace(url))

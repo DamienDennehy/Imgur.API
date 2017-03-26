@@ -198,6 +198,20 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
+        public void ProcessImgurEndpointResponse_With500Error_ThrowImgurException()
+        {
+            var client = new ImgurClient("123", "1234");
+            var endpoint = new MockEndpoint(client);
+
+            var response = new HttpResponseMessage { Content = new StringContent(MockErrors.ImgurClient500Error) };
+
+            var exception =
+                Record.Exception(() => endpoint.ProcessEndpointResponse<RateLimit>(response));
+            Assert.NotNull(exception);
+            Assert.IsType<ImgurException>(exception);
+        }
+
+        [Fact]
         public void ProcessImgurEndpointResponse_WithInvalidResponse_ThrowsImgurException()
         {
             var client = new ImgurClient("123", "1234");

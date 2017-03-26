@@ -151,13 +151,11 @@ namespace Imgur.API.Endpoints.Impl
             if (response == null)
                 throw new ImgurException("The response from the endpoint is missing.");
 
-            string stringResponse = null;
+            var stringResponse = string.Empty;
 
             if (response.Content != null)
             {
-                var task = response.Content.ReadAsStringAsync();
-                Task.WaitAll(task);
-                stringResponse = task.Result.Trim();
+                stringResponse = response.Content.ReadAsStringAsync().GetAwaiter().GetResult().Trim();
             }
 
             //If no result is found, then we can't proceed
@@ -181,16 +179,22 @@ namespace Imgur.API.Endpoints.Impl
             //If an error occurs, throw an exception
             if (stringResponse.StartsWith("{\"data\":{\"error\":"))
             {
-                var apiError = JsonConvert.DeserializeObject<Basic<ImgurError>>(stringResponse);
-                throw new ImgurException(apiError.Data.Error);
+                dynamic jsonResponse = JObject.Parse(stringResponse);
+                if (stringResponse.Contains("{\"message\":"))
+                {
+                    throw new ImgurException(jsonResponse.data.error.message.ToString());
+                }
+                else
+                {
+                    throw new ImgurException(jsonResponse.data.error.ToString());
+                }
             }
 
             //If an error occurs, throw an exception
             if (stringResponse.StartsWith("{\"data\":\"An error occurred"))
             {
-                dynamic apiError = JObject.Parse(stringResponse);
-                string errorMessage = apiError.data;
-                throw new ImgurException(errorMessage);
+                dynamic jsonResponse = JObject.Parse(stringResponse);
+                throw new ImgurException(jsonResponse.data.ToString());
             }
 
             //If the type being requested is an OAuth2Token

@@ -52,7 +52,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}image";
 
             var image = new byte[9];
-            var request = ImageRequestBuilder.UploadImageBinaryRequest(mockUrl, image, "TheAlbum", "TheTitle",
+            var request = ImageRequestBuilder.UploadImageBinaryRequest(mockUrl, image, "TheAlbum", "TheName", "TheTitle",
                 "TheDescription");
 
             Assert.NotNull(request);
@@ -64,6 +64,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 (ByteArrayContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
             var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
             var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+            var name = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "name");
             var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
             var description =
                 (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
@@ -71,12 +72,14 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(imageContent);
             Assert.NotNull(type);
             Assert.NotNull(album);
+            Assert.NotNull(name);
             Assert.NotNull(title);
             Assert.NotNull(description);
 
             Assert.Equal(image.Length, imageContent.Headers.ContentLength);
             Assert.Equal("file", await type.ReadAsStringAsync().ConfigureAwait(false));
             Assert.Equal("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("TheName", await name.ReadAsStringAsync().ConfigureAwait(false));
             Assert.Equal("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
             Assert.Equal("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
         }
@@ -118,7 +121,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var mockUrl = $"{client.EndpointUrl}image";
 
             var request = ImageRequestBuilder.UploadImageUrlRequest(mockUrl, "http://i.imgur.com/hxsPLa7.jpg",
-                "TheAlbum", "TheTitle", "TheDescription");
+                "TheAlbum", "TheName", "TheTitle", "TheDescription");
 
             Assert.NotNull(request);
             Assert.Equal("https://api.imgur.com/3/image", request.RequestUri.ToString());
@@ -127,7 +130,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var expected = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             Assert.Equal(
-                "type=URL&image=http%3A%2F%2Fi.imgur.com%2FhxsPLa7.jpg&album=TheAlbum&title=TheTitle&description=TheDescription",
+                "type=URL&image=http%3A%2F%2Fi.imgur.com%2FhxsPLa7.jpg&album=TheAlbum&name=TheName&title=TheTitle&description=TheDescription",
                 expected);
         }
 
@@ -169,7 +172,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             using (var ms = new MemoryStream(new byte[9]))
             {
                 var imageLength = ms.Length;
-                var request = ImageRequestBuilder.UploadImageStreamRequest(mockUrl, ms, "TheAlbum", "TheTitle",
+                var request = ImageRequestBuilder.UploadImageStreamRequest(mockUrl, ms, "TheAlbum", "TheName", "TheTitle",
                     "TheDescription");
 
                 Assert.NotNull(request);
@@ -181,6 +184,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
                     (StreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
                 var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
                 var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+                var name = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "name");
                 var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
                 var description =
                     (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
@@ -188,6 +192,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 Assert.NotNull(imageContent);
                 Assert.NotNull(type);
                 Assert.NotNull(album);
+                Assert.NotNull(name);
                 Assert.NotNull(title);
                 Assert.NotNull(description);
 
@@ -196,6 +201,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 Assert.Equal(imageLength, image.Length);
                 Assert.Equal("file", await type.ReadAsStringAsync().ConfigureAwait(false));
                 Assert.Equal("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
+                Assert.Equal("TheName", await name.ReadAsStringAsync().ConfigureAwait(false));
                 Assert.Equal("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
                 Assert.Equal("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
             }

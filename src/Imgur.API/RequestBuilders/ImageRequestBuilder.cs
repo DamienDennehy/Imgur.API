@@ -30,7 +30,7 @@ namespace Imgur.API.RequestBuilders
         }
 
         internal static HttpRequestMessage UploadImageBinaryRequest(string url, byte[] image, string albumId = null,
-            string title = null, string description = null)
+            string name = null, string title = null, string description = null)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -47,6 +47,9 @@ namespace Imgur.API.RequestBuilders
             if (!string.IsNullOrWhiteSpace(albumId))
                 content.Add(new StringContent(albumId), "album");
 
+            if (name != null)
+                content.Add( new StringContent( name ), nameof( name ) );
+
             if (title != null)
                 content.Add(new StringContent(title), nameof(title));
 
@@ -62,7 +65,7 @@ namespace Imgur.API.RequestBuilders
         }
 
         internal static HttpRequestMessage UploadImageStreamRequest(string url, Stream image, string albumId = null,
-            string title = null, string description = null, IProgress<int> progressBytes = null, int progressBufferSize = 4096)
+            string name = null, string title = null, string description = null, IProgress<int> progressBytes = null, int progressBufferSize = 4096)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -87,6 +90,9 @@ namespace Imgur.API.RequestBuilders
             if (!string.IsNullOrWhiteSpace(albumId))
                 content.Add(new StringContent(albumId), "album");
 
+            if (name != null)
+                content.Add( new StringContent( name ), nameof( name ) );
+
             if (title != null)
                 content.Add(new StringContent(title), nameof(title));
 
@@ -102,7 +108,7 @@ namespace Imgur.API.RequestBuilders
         }
 
         internal static HttpRequestMessage UploadImageUrlRequest(string url, string imageUrl, string albumId = null,
-            string title = null, string description = null)
+            string name = null, string title = null, string description = null)
         {
             if (string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
@@ -118,6 +124,9 @@ namespace Imgur.API.RequestBuilders
 
             if (!string.IsNullOrWhiteSpace(albumId))
                 parameters.Add("album", albumId);
+
+            if (name != null)
+                parameters.Add(nameof( name ),name);
 
             if (title != null)
                 parameters.Add(nameof(title), title);

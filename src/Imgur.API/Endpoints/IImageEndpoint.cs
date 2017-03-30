@@ -51,10 +51,11 @@ namespace Imgur.API.Endpoints
         ///     The id of the album you want to add the image to. For anonymous albums, {albumId} should be the
         ///     deletehash that is returned at creation.
         /// </param>
+        /// <param name="name">The name of the file.</param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<IImage> UploadImageBinaryAsync(byte[] image, string albumId = null, string title = null,
+        Task<IImage> UploadImageBinaryAsync(byte[] image, string albumId = null, string name = null, string title = null,
             string description = null);
 
         /// <summary>
@@ -65,12 +66,13 @@ namespace Imgur.API.Endpoints
         ///     The id of the album you want to add the image to. For anonymous albums, {albumId} should be the
         ///     deletehash that is returned at creation.
         /// </param>
+        /// <param name="name">The name of the file.</param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <param name="progressBytes">A provider for progress updates.</param>
         /// <param name="progressBufferSize">The amount of bytes that should be uploaded while performing a progress upload.</param>
         /// <returns></returns>
-        Task<IImage> UploadImageStreamAsync(Stream image, string albumId = null, string title = null,
+        Task<IImage> UploadImageStreamAsync(Stream image, string albumId = null, string name = null, string title = null,
             string description = null, IProgress<int> progressBytes = null, int progressBufferSize = 4096);
 
         /// <summary>
@@ -81,10 +83,11 @@ namespace Imgur.API.Endpoints
         ///     The id of the album you want to add the image to. For anonymous albums, {albumId} should be the
         ///     deletehash that is returned at creation.
         /// </param>
+        /// <param name="name">The name of the file.</param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<IImage> UploadImageUrlAsync(string image, string albumId = null, string title = null,
+        Task<IImage> UploadImageUrlAsync(string image, string albumId = null, string name = null, string title = null,
             string description = null);
     }
 }

@@ -149,6 +149,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     The id of the album you want to add the image to. For anonymous albums, {albumId} should be the
         ///     deletehash that is returned at creation.
         /// </param>
+        /// <param name="name">The name of the file.</param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <exception cref="ArgumentNullException">
@@ -158,7 +159,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IImage> UploadImageBinaryAsync(byte[] image, string albumId = null, string title = null,
+        public async Task<IImage> UploadImageBinaryAsync(byte[] image, string albumId = null, string name = null, string title = null,
             string description = null)
         {
             if (image == null)
@@ -166,7 +167,7 @@ namespace Imgur.API.Endpoints.Impl
 
             const string url = nameof(image);
 
-            using (var request = ImageRequestBuilder.UploadImageBinaryRequest(url, image, albumId, title, description))
+            using (var request = ImageRequestBuilder.UploadImageBinaryRequest(url, image, albumId, name, title, description))
             {
                 var returnImage = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return returnImage;
@@ -181,6 +182,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     The id of the album you want to add the image to. For anonymous albums, {albumId} should be the
         ///     deletehash that is returned at creation.
         /// </param>
+        /// <param name="name">The name of the file.</param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <param name="progressBytes">A provider for progress updates.</param>
@@ -192,7 +194,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IImage> UploadImageStreamAsync(Stream image, string albumId = null, string title = null,
+        public async Task<IImage> UploadImageStreamAsync(Stream image, string albumId = null, string name = null, string title = null,
             string description = null, IProgress<int> progressBytes = null, int progressBufferSize = 4096)
         {
             if (image == null)
@@ -200,7 +202,7 @@ namespace Imgur.API.Endpoints.Impl
 
             const string url = nameof(image);
 
-            using (var request = ImageRequestBuilder.UploadImageStreamRequest(url, image, albumId, title, description, progressBytes, progressBufferSize))
+            using (var request = ImageRequestBuilder.UploadImageStreamRequest(url, image, albumId, name, title, description, progressBytes, progressBufferSize))
             {
                 var returnImage = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return returnImage;
@@ -215,6 +217,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     The id of the album you want to add the image to. For anonymous albums, {albumId} should be the
         ///     deletehash that is returned at creation.
         /// </param>
+        /// <param name="name">The name of the file.</param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <exception cref="ArgumentNullException">
@@ -224,7 +227,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IImage> UploadImageUrlAsync(string image, string albumId = null, string title = null,
+        public async Task<IImage> UploadImageUrlAsync(string image, string albumId = null, string name = null, string title = null,
             string description = null)
         {
             if (string.IsNullOrWhiteSpace(image))
@@ -232,7 +235,7 @@ namespace Imgur.API.Endpoints.Impl
 
             const string url = nameof(image);
 
-            using (var request = ImageRequestBuilder.UploadImageUrlRequest(url, image, albumId, title, description))
+            using (var request = ImageRequestBuilder.UploadImageUrlRequest(url, image, albumId, name, title, description))
             {
                 var returnImage = await SendRequestAsync<Image>(request).ConfigureAwait(false);
                 return returnImage;

@@ -30,7 +30,9 @@ namespace Imgur.API.Endpoints.Impl
         protected EndpointBase(IApiClient apiClient)
             : this(apiClient, new HttpClient())
         {
-            ApiClient = apiClient ?? throw new ArgumentNullException(nameof(apiClient));
+            if(apiClient == null)
+                throw new ArgumentNullException(nameof(apiClient));
+            ApiClient = apiClient;
         }
 
         /// <summary>
@@ -69,10 +71,10 @@ namespace Imgur.API.Endpoints.Impl
                     : $"Client-ID {apiClient.ClientId}");
 
             //Add Mashape Authentication header
-            if (apiClient is IMashapeClient mashapeClient)
+            if (apiClient is IMashapeClient)
             {
                 httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                    "X-Mashape-Key", mashapeClient.MashapeKey);
+                    "X-Mashape-Key", ((IMashapeClient)apiClient).MashapeKey);
             }
 
             httpClient.BaseAddress = new Uri(apiClient.EndpointUrl);
@@ -102,7 +104,9 @@ namespace Imgur.API.Endpoints.Impl
         /// </exception>
         public virtual void SwitchClient(IApiClient apiClient)
         {
-            ApiClient = apiClient ?? throw new ArgumentNullException(nameof(apiClient));
+            if(apiClient == null)
+                throw new ArgumentNullException(nameof(apiClient));
+            ApiClient = apiClient; 
 
             HttpClient.DefaultRequestHeaders.Remove("Authorization");
             HttpClient.DefaultRequestHeaders.Remove("X-Mashape-Key");
@@ -116,10 +120,10 @@ namespace Imgur.API.Endpoints.Impl
                     : $"Client-ID {apiClient.ClientId}");
 
             //Add Mashape Authentication header
-            if (apiClient is IMashapeClient mashapeClient)
+            if (apiClient is IMashapeClient)
             {
                 HttpClient.DefaultRequestHeaders.TryAddWithoutValidation(
-                    "X-Mashape-Key", mashapeClient.MashapeKey);
+                    "X-Mashape-Key", ((IMashapeClient)apiClient).MashapeKey);
             }
 
             HttpClient.BaseAddress = new Uri(apiClient.EndpointUrl);
@@ -273,10 +277,12 @@ namespace Imgur.API.Endpoints.Impl
             }
 
             //If the values can't be parsed use the previous value
-            if (!int.TryParse(clientLimitHeader, out int clientLimit))
+            int clientLimit;
+            if (!int.TryParse(clientLimitHeader, out clientLimit))
                 clientLimit = ApiClient.RateLimit.ClientLimit;
 
-            if (!int.TryParse(clientRemainingHeader, out int clientRemaining))
+            int clientRemaining;
+            if (!int.TryParse(clientRemainingHeader, out clientRemaining))
                 clientRemaining = ApiClient.RateLimit.ClientRemaining;
 
             ApiClient.RateLimit.ClientLimit = clientLimit;

@@ -20,8 +20,13 @@
         public ProgressStreamContent(Stream content, IProgress<int> progress, int bufferSize)
         {
             _bufferSize = bufferSize > 0 ? bufferSize : _defaultBufferSize;
-            _content = content ?? throw new ArgumentNullException(nameof(content));
-            _progress = progress ?? throw new ArgumentNullException(nameof(progress));
+            if(content == null)
+                throw new ArgumentNullException(nameof(content));
+            _content = content;
+
+            if(progress == null)
+                throw new ArgumentNullException(nameof(progress));
+            _progress = progress;
         }
 
         protected async override Task SerializeToStreamAsync(Stream stream, TransportContext context)

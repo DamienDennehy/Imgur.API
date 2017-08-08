@@ -20,7 +20,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<Vote> GetGalleryItemVotesAsync(string galleryItemId)
+        public Basic<Vote> GetGalleryItemVotesAsync(string galleryItemId)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
@@ -46,7 +46,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<bool> VoteGalleryItemAsync(string galleryItemId, VoteOption vote)
+        public Basic<bool> VoteGalleryItemAsync(string galleryItemId, VoteOption vote)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));

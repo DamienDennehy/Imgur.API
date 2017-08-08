@@ -20,7 +20,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<TagVotes> GetGalleryItemTagsAsync(string galleryItemId)
+        public Basic<TagVotes> GetGalleryItemTagsAsync(string galleryItemId)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
@@ -48,7 +48,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<Tag> GetGalleryTagAsync(string tag, GalleryTagSortOrder? sort = GalleryTagSortOrder.Viral,
+        public Basic<Tag> GetGalleryTagAsync(string tag, GalleryTagSortOrder? sort = GalleryTagSortOrder.Viral,
             TimeWindow? window = TimeWindow.Week, int? page = null)
         {
             if (string.IsNullOrWhiteSpace(tag))
@@ -81,7 +81,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<GalleryImage> GetGalleryTagImageAsync(string galleryItemId, string tag)
+        public Basic<GalleryImage> GetGalleryTagImageAsync(string galleryItemId, string tag)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));

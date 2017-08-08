@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imgur.api-net40", "imgur.api-net40\imgur.api-net40.csproj", "{B87584D6-8F49-4670-92E0-E10837C29E2C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imgur.API-net40", "imgur.api-net40\Imgur.API-net40.csproj", "{B87584D6-8F49-4670-92E0-E10837C29E2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imgur.API-net40.UnitTests", "imgur.api-net40.UnitTests\Imgur.API-net40.UnitTests.csproj", "{0C6951DA-CE56-4ABE-9C0E-5E72F346FA9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B87584D6-8F49-4670-92E0-E10837C29E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B87584D6-8F49-4670-92E0-E10837C29E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B87584D6-8F49-4670-92E0-E10837C29E2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C6951DA-CE56-4ABE-9C0E-5E72F346FA9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C6951DA-CE56-4ABE-9C0E-5E72F346FA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C6951DA-CE56-4ABE-9C0E-5E72F346FA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C6951DA-CE56-4ABE-9C0E-5E72F346FA9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

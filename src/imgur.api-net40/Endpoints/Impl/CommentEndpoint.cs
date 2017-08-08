@@ -62,7 +62,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = CommentRequestBuilder.CreateCommentRequest(url, comment, galleryItemId, parentId))
             {
-                var returnComment = SendRequestAsync<Comment>(request).Result;
+                var returnComment = SendRequestAsync<Comment>(request).Data;
                 return returnComment.Id;
             }
         }
@@ -99,7 +99,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = CommentRequestBuilder.CreateReplyRequest(url, comment, galleryItemId))
             {
-                var returnComment = SendRequestAsync<Comment>(request).Result;
+                var returnComment = SendRequestAsync<Comment>(request).Data;
                 return returnComment.Id;
             }
         }
@@ -116,7 +116,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<bool> DeleteCommentAsync(int commentId)
+        public Basic<bool> DeleteCommentAsync(int commentId)
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
@@ -141,7 +141,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<Comment> GetCommentAsync(int commentId)
+        public Basic<Comment> GetCommentAsync(int commentId)
         {
             var url = $"comment/{commentId}";
 
@@ -163,7 +163,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<Comment> GetRepliesAsync(int commentId)
+        public Basic<Comment> GetRepliesAsync(int commentId)
         {
             var url = $"comment/{commentId}/replies";
 
@@ -196,7 +196,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilderBase.ReportItemRequest(url, reason))
             {
-                var reported = SendRequestAsync<bool>(request).Result;
+                var reported = SendRequestAsync<bool>(request).Data;
                 return reported;
             }
         }
@@ -214,7 +214,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<bool> VoteCommentAsync(int commentId, VoteOption vote)
+        public Basic<bool> VoteCommentAsync(int commentId, VoteOption vote)
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);

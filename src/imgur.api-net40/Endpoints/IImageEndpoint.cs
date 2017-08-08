@@ -17,7 +17,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="imageId">The image id.</param>
         /// <returns></returns>
-        Task<bool> DeleteImageAsync(string imageId);
+        Basic<bool> DeleteImageAsync(string imageId);
 
         /// <summary>
         ///     Favorite an image with the given ID. OAuth authentication required.
@@ -31,7 +31,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="imageId">The image id.</param>
         /// <returns></returns>
-        Task<Image> GetImageAsync(string imageId);
+        Basic<IImage> GetImageAsync(string imageId);
 
         /// <summary>
         ///     Updates the title or description of an image.
@@ -42,7 +42,7 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<bool> UpdateImageAsync(string imageId, string title = null, string description = null);
+        Basic<bool> UpdateImageAsync(string imageId, string title = null, string description = null);
 
         /// <summary>
         ///     Upload a new image using a binary file.
@@ -56,7 +56,7 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<Image> UploadImageBinaryAsync(byte[] image, string albumId = null, string name = null, string title = null,
+        Basic<Image> UploadImageBinaryAsync(byte[] image, string albumId = null, string name = null, string title = null,
             string description = null);
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Imgur.API.Endpoints
         /// <param name="progressBytes">A provider for progress updates.</param>
         /// <param name="progressBufferSize">The amount of bytes that should be uploaded while performing a progress upload.</param>
         /// <returns></returns>
-        Task<Image> UploadImageStreamAsync(Stream image, string albumId = null, string name = null, string title = null,
+        Basic<Image> UploadImageStreamAsync(Stream image, string albumId = null, string name = null, string title = null,
             string description = null);
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Task<Image> UploadImageUrlAsync(string image, string albumId = null, string name = null, string title = null,
+        Basic<Image> UploadImageUrlAsync(string image, string albumId = null, string name = null, string title = null,
             string description = null);
     }
 }

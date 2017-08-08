@@ -213,7 +213,7 @@ namespace Imgur.API.Endpoints.Impl
             converters[0] = new GalleryItemConverter();
 
             //Deserialize the response to the correct Type
-            var finalResponse = JsonConvert.DeserializeObject<Basic<T>>(stringResponse, converters);
+            var finalResponse = JsonConvert.DeserializeObject<Basic<T>>(stringResponse);
 
             return finalResponse.Data;
         }
@@ -229,7 +229,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <returns></returns>
-        internal virtual Task<T> SendRequestAsync<T>(HttpRequestMessage message)
+        internal virtual Basic<T> SendRequestAsync<T>(HttpRequestMessage message)
         {
             if (message == null)
                 throw new ArgumentNullException(nameof(message));
@@ -238,7 +238,7 @@ namespace Imgur.API.Endpoints.Impl
 
             UpdateRateLimit(httpResponse.Headers);
 
-            return ProcessEndpointResponse<Task<T>>(httpResponse);
+            return ProcessEndpointResponse<Basic<T>>(httpResponse);
         }
 
         /// <summary>

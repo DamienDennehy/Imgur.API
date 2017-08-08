@@ -19,7 +19,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<GalleryAlbum> GetGalleryAlbumAsync(string albumId)
+        public Basic<GalleryAlbum> GetGalleryAlbumAsync(string albumId)
         {
             if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));

@@ -19,7 +19,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<GalleryImage> GetGalleryImageAsync(string imageId)
+        public Basic<IGalleryImage> GetGalleryImageAsync(string imageId)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
@@ -28,7 +28,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
-                var image = SendRequestAsync<GalleryImage>(request);
+                var image = SendRequestAsync<IGalleryImage>(request);
                 return image;
             }
         }

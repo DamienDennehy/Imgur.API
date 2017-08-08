@@ -19,7 +19,7 @@ namespace Imgur.API.Endpoints
         /// <param name="albumId">The id or deletehash of the album.</param>
         /// <param name="imageIds">The imageIds that you want to be added to the album.</param>
         /// <returns></returns>
-        Task<bool> AddAlbumImagesAsync(string albumId, IEnumerable<string> imageIds);
+        Basic<bool> AddAlbumImagesAsync(string albumId, IEnumerable<string> imageIds);
 
         /// <summary>
         ///     Create a new album.
@@ -31,7 +31,7 @@ namespace Imgur.API.Endpoints
         /// <param name="coverId">The Id of an image that you want to be the cover of the album.</param>
         /// <param name="imageIds">The imageIds that you want to be included in the album.</param>
         /// <returns></returns>
-        Task<Album> CreateAlbumAsync(string title = null, string description = null,
+        Basic<Album> CreateAlbumAsync(string title = null, string description = null,
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null,
             string coverId = null, IEnumerable<string> imageIds = null);
 
@@ -41,7 +41,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="albumId">The id or deletehash of the album.</param>
         /// <returns></returns>
-        Task<bool> DeleteAlbumAsync(string albumId);
+        Basic<bool> DeleteAlbumAsync(string albumId);
 
         /// <summary>
         ///     Favorite an album with a given Id. OAuth authentication required.
@@ -55,7 +55,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="albumId">The album id.</param>
         /// <returns></returns>
-        Task<Album> GetAlbumAsync(string albumId);
+        Basic<Album> GetAlbumAsync(string albumId);
 
         /// <summary>
         ///     Get information about an image in an album.
@@ -63,14 +63,14 @@ namespace Imgur.API.Endpoints
         /// <param name="imageId">The image id.</param>
         /// <param name="albumId">The album id.</param>
         /// <returns></returns>
-        Task<Image> GetAlbumImageAsync(string imageId, string albumId);
+        Basic<Image> GetAlbumImageAsync(string imageId, string albumId);
 
         /// <summary>
         ///     Return all of the images in the album.
         /// </summary>
         /// <param name="albumId">The album id.</param>
         /// <returns></returns>
-        Task<IEnumerable<Image>> GetAlbumImagesAsync(string albumId);
+        Basic<IEnumerable<Image>> GetAlbumImagesAsync(string albumId);
 
         /// <summary>
         ///     Takes a list of imageIds and removes from the album. For anonymous albums, {albumId} should be the
@@ -79,7 +79,7 @@ namespace Imgur.API.Endpoints
         /// <param name="albumId">The id or deletehash of the album.</param>
         /// <param name="imageIds">The imageIds that you want to be removed from the album.</param>
         /// <returns></returns>
-        Task<bool> RemoveAlbumImagesAsync(string albumId, IEnumerable<string> imageIds);
+        Basic<bool> RemoveAlbumImagesAsync(string albumId, IEnumerable<string> imageIds);
 
         /// <summary>
         ///     Sets the images for an album, removes all other images and only uses the images in this request. For anonymous
@@ -88,7 +88,7 @@ namespace Imgur.API.Endpoints
         /// <param name="albumId">The id or deletehash of the album.</param>
         /// <param name="imageIds">The imageIds that you want to be added to the album.</param>
         /// <returns></returns>
-        Task<bool> SetAlbumImagesAsync(string albumId, IEnumerable<string> imageIds);
+        Basic<bool> SetAlbumImagesAsync(string albumId, IEnumerable<string> imageIds);
 
         /// <summary>
         ///     Update the information of an album. For anonymous albums, {albumId} should be the deletehash that is returned at
@@ -102,7 +102,7 @@ namespace Imgur.API.Endpoints
         /// <param name="coverId">The Id of an image that you want to be the cover of the album.</param>
         /// <param name="imageIds">The imageIds that you want to be included in the album.</param>
         /// <returns></returns>
-        Task<bool> UpdateAlbumAsync(string albumId, string title = null, string description = null,
+        Basic<bool> UpdateAlbumAsync(string albumId, string title = null, string description = null,
             AlbumPrivacy? privacy = null, AlbumLayout? layout = null,
             string coverId = null, IEnumerable<string> imageIds = null);
     }

@@ -45,7 +45,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<bool> DeleteImageAsync(string imageId)
+        public Basic<bool> DeleteImageAsync(string imageId)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
@@ -82,7 +82,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Post, url))
             {
-                var imgurResult = SendRequestAsync<string>(request).Result;
+                var imgurResult = SendRequestAsync<string>(request).Data;
                 return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
             }
         }
@@ -98,7 +98,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<Image> GetImageAsync(string imageId)
+        public Basic<IImage> GetImageAsync(string imageId)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
@@ -107,7 +107,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
             {
-                var image = SendRequestAsync<Image>(request);
+                var image = SendRequestAsync<IImage>(request);
                 return image;
             }
         }
@@ -127,7 +127,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<bool> UpdateImageAsync(string imageId, string title = null, string description = null)
+        public Basic<bool> UpdateImageAsync(string imageId, string title = null, string description = null)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
@@ -159,7 +159,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<Image> UploadImageBinaryAsync(byte[] image, string albumId = null, string name = null, string title = null, string description = null)
+        public Basic<Image> UploadImageBinaryAsync(byte[] image, string albumId = null, string name = null, string title = null, string description = null)
         {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
@@ -193,7 +193,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<Image> UploadImageStreamAsync(Stream image, string albumId = null, string name = null, string title = null, string description = null)
+        public Basic<Image> UploadImageStreamAsync(Stream image, string albumId = null, string name = null, string title = null, string description = null)
         {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
@@ -224,7 +224,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<Image> UploadImageUrlAsync(string image, string albumId = null, string name = null, string title = null, string description = null)
+        public Basic<Image> UploadImageUrlAsync(string image, string albumId = null, string name = null, string title = null, string description = null)
         {
             if (string.IsNullOrWhiteSpace(image))
                 throw new ArgumentNullException(nameof(image));

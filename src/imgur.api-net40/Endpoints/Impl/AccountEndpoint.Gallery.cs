@@ -25,7 +25,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<IEnumerable<GalleryItem>> GetAccountFavoritesAsync(int? page = null,
+        public Basic<IEnumerable<GalleryItem>> GetAccountFavoritesAsync(int? page = null,
             AccountGallerySortOrder? sort = AccountGallerySortOrder.Newest)
         {
             if (ApiClient.OAuth2Token == null)
@@ -56,7 +56,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<IEnumerable<GalleryItem>> GetAccountGalleryFavoritesAsync(string username = "me",
+        public Basic<IEnumerable<GalleryItem>> GetAccountGalleryFavoritesAsync(string username = "me",
             int? page = null,
             AccountGallerySortOrder? sort = AccountGallerySortOrder.Newest)
         {
@@ -91,7 +91,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<IEnumerable<GalleryItem>> GetAccountSubmissionsAsync(string username = "me", int? page = null)
+        public Basic<IEnumerable<GalleryItem>> GetAccountSubmissionsAsync(string username = "me", int? page = null)
         {
             if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
@@ -119,7 +119,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<GalleryProfile> GetGalleryProfileAsync()
+        public Basic<GalleryProfile> GetGalleryProfileAsync()
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);

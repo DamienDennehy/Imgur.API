@@ -23,7 +23,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<IEnumerable<GalleryItem>> GetMemesSubGalleryAsync(
+        public Basic<IEnumerable<GalleryItem>> GetMemesSubGalleryAsync(
             MemesGallerySortOrder? sort = MemesGallerySortOrder.Viral,
             TimeWindow? window = TimeWindow.Week, int? page = null)
         {
@@ -53,7 +53,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<GalleryImage> GetMemesSubGalleryImageAsync(string imageId)
+        public Basic<GalleryImage> GetMemesSubGalleryImageAsync(string imageId)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));

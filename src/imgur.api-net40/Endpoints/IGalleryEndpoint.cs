@@ -33,7 +33,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="albumId">The album id.</param>
         /// <returns></returns>
-        Task<GalleryAlbum> GetGalleryAlbumAsync(string albumId);
+        Basic<GalleryAlbum> GetGalleryAlbumAsync(string albumId);
 
         /// <summary>
         ///     Returns the images in the gallery.
@@ -44,7 +44,7 @@ namespace Imgur.API.Endpoints
         /// <param name="page">The data paging number. Default: null</param>
         /// <param name="showViral">Show or hide viral images from the 'user' section. Default: true</param>
         /// <returns></returns>
-        Task<IEnumerable<GalleryItem>> GetGalleryAsync(GallerySection? section = GallerySection.Hot,
+        Basic<IEnumerable<GalleryItem>> GetGalleryAsync(GallerySection? section = GallerySection.Hot,
             GallerySortOrder? sort = GallerySortOrder.Viral, TimeWindow? window = TimeWindow.Day, int? page = null,
             bool? showViral = true);
 
@@ -53,7 +53,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="imageId">The image id.</param>
         /// <returns></returns>
-        Task<GalleryImage> GetGalleryImageAsync(string imageId);
+        Basic<IGalleryImage> GetGalleryImageAsync(string imageId);
 
         /// <summary>
         ///     Get information about a specific comment.
@@ -61,21 +61,21 @@ namespace Imgur.API.Endpoints
         /// <param name="commentId">The comment id.</param>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<Comment> GetGalleryItemCommentAsync(int commentId, string galleryItemId);
+        Basic<Comment> GetGalleryItemCommentAsync(int commentId, string galleryItemId);
 
         /// <summary>
         ///     The number of comments on an item.
         /// </summary>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<int> GetGalleryItemCommentCountAsync(string galleryItemId);
+        Basic<int> GetGalleryItemCommentCountAsync(string galleryItemId);
 
         /// <summary>
         ///     List all of the IDs for the comments on an item.
         /// </summary>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<IEnumerable<int>> GetGalleryItemCommentIdsAsync(string galleryItemId);
+        Basic<IEnumerable<int>> GetGalleryItemCommentIdsAsync(string galleryItemId);
 
         /// <summary>
         ///     Get all comments for a gallery item.
@@ -83,7 +83,7 @@ namespace Imgur.API.Endpoints
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="sort">The order that comments should be sorted by.</param>
         /// <returns></returns>
-        Task<IEnumerable<Comment>> GetGalleryItemCommentsAsync(string galleryItemId,
+        Basic<IEnumerable<Comment>> GetGalleryItemCommentsAsync(string galleryItemId,
             CommentSortOrder? sort = CommentSortOrder.Best);
 
         /// <summary>
@@ -91,14 +91,14 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<TagVotes> GetGalleryItemTagsAsync(string galleryItemId);
+        Basic<TagVotes> GetGalleryItemTagsAsync(string galleryItemId);
 
         /// <summary>
         ///     Get the vote information about an image.
         /// </summary>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<Vote> GetGalleryItemVotesAsync(string galleryItemId);
+        Basic<Vote> GetGalleryItemVotesAsync(string galleryItemId);
 
         /// <summary>
         ///     View images for a gallery tag.
@@ -108,7 +108,7 @@ namespace Imgur.API.Endpoints
         /// <param name="window">The time period that should be used in filtering requests. Default: Week</param>
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
-        Task<Tag> GetGalleryTagAsync(string tag, GalleryTagSortOrder? sort = GalleryTagSortOrder.Viral,
+        Basic<Tag> GetGalleryTagAsync(string tag, GalleryTagSortOrder? sort = GalleryTagSortOrder.Viral,
             TimeWindow? window = TimeWindow.Week, int? page = null);
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Imgur.API.Endpoints
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="tag">The name of the tag.</param>
         /// <returns></returns>
-        Task<GalleryImage> GetGalleryTagImageAsync(string galleryItemId, string tag);
+        Basic<GalleryImage> GetGalleryTagImageAsync(string galleryItemId, string tag);
 
         /// <summary>
         ///     View images for memes subgallery.
@@ -126,7 +126,7 @@ namespace Imgur.API.Endpoints
         /// <param name="window">The time period that should be used in filtering requests. Default: Day</param>
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
-        Task<IEnumerable<GalleryItem>> GetMemesSubGalleryAsync(
+        Basic<IEnumerable<GalleryItem>> GetMemesSubGalleryAsync(
             MemesGallerySortOrder? sort = MemesGallerySortOrder.Viral, TimeWindow? window = TimeWindow.Day,
             int? page = null);
 
@@ -135,14 +135,14 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="imageId">The image id.</param>
         /// <returns></returns>
-        Task<GalleryImage> GetMemesSubGalleryImageAsync(string imageId);
+        Basic<GalleryImage> GetMemesSubGalleryImageAsync(string imageId);
 
         /// <summary>
         ///     Returns a random set of gallery images.
         /// </summary>
         /// <param name="page">A page of random gallery images, from 0-50. Pages are regenerated every hour.</param>
         /// <returns></returns>
-        Task<IEnumerable<GalleryItem>> GetRandomGalleryAsync(int? page = null);
+        Basic<IEnumerable<GalleryItem>> GetRandomGalleryAsync(int? page = null);
 
         /// <summary>
         ///     View gallery images for a subreddit.
@@ -152,7 +152,7 @@ namespace Imgur.API.Endpoints
         /// <param name="window">The time period that should be used in filtering requests. Default: Week</param>
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
-        Task<IEnumerable<GalleryItem>> GetSubredditGalleryAsync(string subreddit,
+        Basic<IEnumerable<GalleryItem>> GetSubredditGalleryAsync(string subreddit,
             SubredditGallerySortOrder? sort = SubredditGallerySortOrder.Time, TimeWindow? window = TimeWindow.Week,
             int? page = null);
 
@@ -162,7 +162,7 @@ namespace Imgur.API.Endpoints
         /// <param name="imageId">The image id.</param>
         /// <param name="subreddit">A valid subreddit name. Example: pics, gaming</param>
         /// <returns></returns>
-        Task<GalleryImage> GetSubredditImageAsync(string imageId, string subreddit);
+        Basic<GalleryImage> GetSubredditImageAsync(string imageId, string subreddit);
 
         /// <summary>
         ///     Share an Album or Image to the Gallery. OAuth authentication required.
@@ -176,7 +176,7 @@ namespace Imgur.API.Endpoints
         /// </param>
         /// <param name="mature">If the post is mature, set this value to true.</param>
         /// <returns></returns>
-        Task<bool> PublishToGalleryAsync(string galleryItemId, string title, string topicId = null,
+        Basic<bool> PublishToGalleryAsync(string galleryItemId, string title, string topicId = null,
             bool? bypassTerms = null,
             bool? mature = null);
 
@@ -185,7 +185,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <returns></returns>
-        Task<bool> RemoveFromGalleryAsync(string galleryItemId);
+        Basic<bool> RemoveFromGalleryAsync(string galleryItemId);
 
         /// <summary>
         ///     Report an item in the gallery. OAuth authentication required.
@@ -193,7 +193,7 @@ namespace Imgur.API.Endpoints
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="reason">A reason why content is inappropriate.</param>
         /// <returns></returns>
-        Task<bool> ReportGalleryItemAsync(string galleryItemId, ReportReason reason);
+        Basic<bool> ReportGalleryItemAsync(string galleryItemId, ReportReason reason);
 
         /// <summary>
         ///     Search the gallery with a given query string.
@@ -208,7 +208,7 @@ namespace Imgur.API.Endpoints
         /// <param name="window">The time period that should be used in filtering requests. Default: Day</param>
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
-        Task<IEnumerable<GalleryItem>> SearchGalleryAdvancedAsync(
+        Basic<IEnumerable<GalleryItem>> SearchGalleryAdvancedAsync(
             string qAll = null, string qAny = null,
             string qExactly = null, string qNot = null,
             ImageFileType? fileType = null, ImageSize? imageSize = null,
@@ -226,7 +226,7 @@ namespace Imgur.API.Endpoints
         /// <param name="window">The time period that should be used in filtering requests. Default: Day</param>
         /// <param name="page">The data paging number. Default: null</param>
         /// <returns></returns>
-        Task<IEnumerable<GalleryItem>> SearchGalleryAsync(string query,
+        Basic<IEnumerable<GalleryItem>> SearchGalleryAsync(string query,
             GallerySortOrder? sort = GallerySortOrder.Time, TimeWindow? window = TimeWindow.All, int? page = null);
 
         /// <summary>
@@ -235,6 +235,6 @@ namespace Imgur.API.Endpoints
         /// <param name="galleryItemId">The gallery item id.</param>
         /// <param name="vote">The vote.</param>
         /// <returns></returns>
-        Task<bool> VoteGalleryItemAsync(string galleryItemId, VoteOption vote);
+        Basic<bool> VoteGalleryItemAsync(string galleryItemId, VoteOption vote);
     }
 }

@@ -20,7 +20,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <param name="newNotifications">false for all notifications, true for only non-viewed notification. Default is true.</param>
         /// <returns></returns>
-        public Task<Notifications> GetNotificationsAsync(bool newNotifications = true)
+        public Basic<Notifications> GetNotificationsAsync(bool newNotifications = true)
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);

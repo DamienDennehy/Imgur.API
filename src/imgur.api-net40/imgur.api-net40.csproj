@@ -7,8 +7,8 @@
     <ProjectGuid>{B87584D6-8F49-4670-92E0-E10837C29E2C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>imgur.api_net40</RootNamespace>
-    <AssemblyName>imgur.api-net40</AssemblyName>
+    <RootNamespace>Imgur.API</RootNamespace>
+    <AssemblyName>Imgur.API-net40</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

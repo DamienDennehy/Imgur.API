@@ -40,7 +40,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilders.CommentRequestBuilder.CreateGalleryItemCommentRequest(url, comment))
             {
-                var returnComment = SendRequestAsync<Comment>(request);
+                var returnComment = SendRequestAsync<Comment>(request).Data;
                 return returnComment.Id;
             }
         }
@@ -77,7 +77,7 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = RequestBuilders.CommentRequestBuilder.CreateGalleryItemCommentRequest(url, comment))
             {
-                var returnComment = SendRequestAsync<Comment>(request);
+                var returnComment = SendRequestAsync<Comment>(request).Data;
                 return returnComment.Id;
             }
         }
@@ -94,7 +94,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<Comment> GetGalleryItemCommentAsync(int commentId, string galleryItemId)
+        public Basic<Comment> GetGalleryItemCommentAsync(int commentId, string galleryItemId)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
@@ -119,7 +119,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<int> GetGalleryItemCommentCountAsync(string galleryItemId)
+        public Basic<int> GetGalleryItemCommentCountAsync(string galleryItemId)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
@@ -144,7 +144,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<IEnumerable<int>> GetGalleryItemCommentIdsAsync(string galleryItemId)
+        public Basic<IEnumerable<int>> GetGalleryItemCommentIdsAsync(string galleryItemId)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
@@ -170,7 +170,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<IEnumerable<Comment>> GetGalleryItemCommentsAsync(string galleryItemId,
+        public Basic<IEnumerable<Comment>> GetGalleryItemCommentsAsync(string galleryItemId,
             CommentSortOrder? sort = CommentSortOrder.Best)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))

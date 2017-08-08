@@ -49,7 +49,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<IEnumerable<GalleryItem>> GetGalleryAsync(GallerySection? section = GallerySection.Hot,
+        public Basic<IEnumerable<GalleryItem>> GetGalleryAsync(GallerySection? section = GallerySection.Hot,
             GallerySortOrder? sort = GallerySortOrder.Viral, TimeWindow? window = TimeWindow.Day, int? page = null,
             bool? showViral = true)
         {
@@ -83,7 +83,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<IEnumerable<GalleryItem>> GetRandomGalleryAsync(int? page = null)
+        public Basic<IEnumerable<GalleryItem>> GetRandomGalleryAsync(int? page = null)
         {
             var url = $"gallery/random/random/{page}";
 
@@ -112,7 +112,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<bool> PublishToGalleryAsync(string galleryItemId, string title, string topicId = null,
+        public Basic<bool> PublishToGalleryAsync(string galleryItemId, string title, string topicId = null,
             bool? bypassTerms = null,
             bool? mature = null)
         {
@@ -145,7 +145,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<bool> RemoveFromGalleryAsync(string galleryItemId)
+        public Basic<bool> RemoveFromGalleryAsync(string galleryItemId)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
@@ -174,7 +174,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<bool> ReportGalleryItemAsync(string galleryItemId, ReportReason reason)
+        public Basic<bool> ReportGalleryItemAsync(string galleryItemId, ReportReason reason)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
@@ -210,7 +210,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<IEnumerable<GalleryItem>> SearchGalleryAdvancedAsync(
+        public Basic<IEnumerable<GalleryItem>> SearchGalleryAdvancedAsync(
             string qAll = null, string qAny = null,
             string qExactly = null, string qNot = null,
             ImageFileType? fileType = null, ImageSize? imageSize = null,
@@ -259,7 +259,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<IEnumerable<GalleryItem>> SearchGalleryAsync(string query,
+        public Basic<IEnumerable<GalleryItem>> SearchGalleryAsync(string query,
             GallerySortOrder? sort = GallerySortOrder.Time,
             TimeWindow? window = TimeWindow.All, int? page = null)
         {

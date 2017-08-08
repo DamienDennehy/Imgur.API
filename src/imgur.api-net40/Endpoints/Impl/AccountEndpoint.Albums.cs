@@ -24,7 +24,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<bool> DeleteAlbumAsync(string albumId, string username = "me")
+        public Basic<bool> DeleteAlbumAsync(string albumId, string username = "me")
         {
             if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));
@@ -56,7 +56,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<Album> GetAlbumAsync(string albumId, string username = "me")
+        public Basic<Album> GetAlbumAsync(string albumId, string username = "me")
         {
             if (string.IsNullOrWhiteSpace(albumId))
                 throw new ArgumentNullException(nameof(albumId));
@@ -69,8 +69,8 @@ namespace Imgur.API.Endpoints.Impl
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"account/{username}/album/{albumId}";
-
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
                 var album = SendRequestAsync<Album>(request);
                 return album;
@@ -88,7 +88,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<int> GetAlbumCountAsync(string username = "me")
+        public Basic<int> GetAlbumCountAsync(string username = "me")
         {
             if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
@@ -118,7 +118,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<IEnumerable<string>> GetAlbumIdsAsync(string username = "me", int? page = null)
+        public Basic<IEnumerable<string>> GetAlbumIdsAsync(string username = "me", int? page = null)
         {
             if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
@@ -149,7 +149,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<IEnumerable<Album>> GetAlbumsAsync(string username = "me", int? page = null)
+        public Basic<IEnumerable<Album>> GetAlbumsAsync(string username = "me", int? page = null)
         {
             if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));

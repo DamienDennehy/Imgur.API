@@ -36,21 +36,21 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="commentId">The comment id.</param>
         /// <returns></returns>
-        Task<bool> DeleteCommentAsync(int commentId);
+        Basic<bool> DeleteCommentAsync(int commentId);
 
         /// <summary>
         ///     Get information about a specific comment.
         /// </summary>
         /// <param name="commentId">The comment id.</param>
         /// <returns></returns>
-        Task<Comment> GetCommentAsync(int commentId);
+        Basic<Comment> GetCommentAsync(int commentId);
 
         /// <summary>
         ///     Get the comment with all of the replies for the comment.
         /// </summary>
         /// <param name="commentId">The comment id.</param>
         /// <returns></returns>
-        Task<Comment> GetRepliesAsync(int commentId);
+        Basic<Comment> GetRepliesAsync(int commentId);
 
         /// <summary>
         ///     Report a comment for being inappropriate.
@@ -68,6 +68,6 @@ namespace Imgur.API.Endpoints
         /// <param name="commentId">The comment id.</param>
         /// <param name="vote">The vote.</param>
         /// <returns></returns>
-        Task<bool> VoteCommentAsync(int commentId, VoteOption vote);
+        Basic<bool> VoteCommentAsync(int commentId, VoteOption vote);
     }
 }

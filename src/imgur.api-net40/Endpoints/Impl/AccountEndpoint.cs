@@ -45,7 +45,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<Account> GetAccountAsync(string username = "me")
+        public Basic<Account> GetAccount(string username = "me")
         {
             if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
@@ -56,10 +56,12 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var account = SendRequestAsync<Account>(request);
-                return account;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<Account>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -73,17 +75,19 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<AccountSettings> GetAccountSettingsAsync()
+        public Basic<AccountSettings> GetAccountSettings()
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             const string url = "account/me/settings";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var settings = SendRequestAsync<AccountSettings>(request);
-                return settings;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<AccountSettings>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -98,17 +102,19 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<bool> SendVerificationEmailAsync()
+        public Basic<bool> SendVerificationEmail()
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             const string url = "account/me/verifyemail";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Post, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var verified = SendRequestAsync<bool>(request);
-                return verified;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<bool>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -130,7 +136,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<bool> UpdateAccountSettingsAsync(
+        public Basic<bool> UpdateAccountSettings(
             string bio = null,
             bool? publicImages = null,
             bool? messagingEnabled = null,
@@ -149,8 +155,10 @@ namespace Imgur.API.Endpoints.Impl
                 var request = AccountRequestBuilder.UpdateAccountSettingsRequest(url, bio, publicImages, messagingEnabled,
                     albumPrivacy, acceptedGalleryTerms, username, showMature, newsletterSubscribed))
             {
-                var updated = SendRequestAsync<bool>(request);
-                return updated;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<bool>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -164,17 +172,19 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<bool> VerifyEmailAsync()
+        public Basic<bool> VerifyEmail()
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             const string url = "account/me/verifyemail";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var verified = SendRequestAsync<bool>(request);
-                return verified;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<bool>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
     }

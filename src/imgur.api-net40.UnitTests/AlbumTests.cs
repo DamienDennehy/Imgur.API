@@ -28,10 +28,10 @@ namespace Imgur.API.UnitTests
         public void GetAlbum()
         {
             // Arrange
-            var albumId = "tLkdC";
+            var albumId = "";
 
             // Act
-            var album = this._endpoint.GetAlbumAsync(albumId);
+            var album = this._endpoint.GetAlbum(albumId);
 
             // Assert
             Assert.IsNotNull(album);

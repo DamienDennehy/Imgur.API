@@ -20,17 +20,19 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<Vote> GetGalleryItemVotesAsync(string galleryItemId)
+        public Basic<Vote> GetGalleryItemVotes(string galleryItemId)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
 
             var url = $"gallery/{galleryItemId}/votes";
 
-            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var vote = SendRequestAsync<Vote>(request);
-                return vote;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<Vote>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -46,7 +48,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<bool> VoteGalleryItemAsync(string galleryItemId, VoteOption vote)
+        public Basic<bool> VoteGalleryItem(string galleryItemId, VoteOption vote)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
@@ -57,10 +59,12 @@ namespace Imgur.API.Endpoints.Impl
             var voteValue = $"{vote}".ToLower();
             var url = $"gallery/{galleryItemId}/vote/{voteValue}";
 
-            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Post, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var voted = SendRequestAsync<bool>(request);
-                return voted;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<bool>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
     }

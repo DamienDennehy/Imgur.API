@@ -20,17 +20,19 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<TagVotes> GetGalleryItemTagsAsync(string galleryItemId)
+        public Basic<TagVotes> GetGalleryItemTags(string galleryItemId)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
 
             var url = $"gallery/{galleryItemId}/tags";
 
-            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var tagVotes = SendRequestAsync<TagVotes>(request);
-                return tagVotes;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<TagVotes>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -48,7 +50,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<Tag> GetGalleryTagAsync(string tag, GalleryTagSortOrder? sort = GalleryTagSortOrder.Viral,
+        public Basic<Tag> GetGalleryTag(string tag, GalleryTagSortOrder? sort = GalleryTagSortOrder.Viral,
             TimeWindow? window = TimeWindow.Week, int? page = null)
         {
             if (string.IsNullOrWhiteSpace(tag))
@@ -62,10 +64,12 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/t/{tag}/{sortValue}/{windowValue}/{page}";
 
-            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var returnTag = SendRequestAsync<Tag>(request);
-                return returnTag;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<Tag>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -81,7 +85,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<GalleryImage> GetGalleryTagImageAsync(string galleryItemId, string tag)
+        public Basic<GalleryImage> GetGalleryTagImage(string galleryItemId, string tag)
         {
             if (string.IsNullOrWhiteSpace(galleryItemId))
                 throw new ArgumentNullException(nameof(galleryItemId));
@@ -91,10 +95,12 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/t/{tag}/{galleryItemId}";
 
-            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var image = SendRequestAsync<GalleryImage>(request);
-                return image;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<GalleryImage>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
     }

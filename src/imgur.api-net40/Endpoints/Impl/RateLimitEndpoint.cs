@@ -42,7 +42,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <returns></returns>
-        public IRateLimit GetRateLimitAsync()
+        public IRateLimit GetRateLimit()
         {
             IRateLimit limit;
 

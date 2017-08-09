@@ -45,17 +45,19 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<bool> DeleteImageAsync(string imageId)
+        public Basic<bool> DeleteImage(string imageId)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
 
             var url = $"image/{imageId}";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Delete, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var deleted = SendRequestAsync<bool>(request);
-                return deleted;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<bool>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -70,7 +72,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public bool FavoriteImageAsync(string imageId)
+        public bool FavoriteImage(string imageId)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
@@ -80,10 +82,12 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"image/{imageId}/favorite";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Post, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var imgurResult = SendRequestAsync<string>(request).Data;
-                return imgurResult.Equals("favorited", StringComparison.OrdinalIgnoreCase);
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<string>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output.Data.Equals("favorited", StringComparison.OrdinalIgnoreCase);
             }
         }
 
@@ -98,17 +102,19 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<IImage> GetImageAsync(string imageId)
+        public Basic<Image> GetImage(string imageId)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
 
             var url = $"image/{imageId}";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var image = SendRequestAsync<IImage>(request);
-                return image;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<Image>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -127,7 +133,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<bool> UpdateImageAsync(string imageId, string title = null, string description = null)
+        public Basic<bool> UpdateImage(string imageId, string title = null, string description = null)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
@@ -136,8 +142,10 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.UpdateImageRequest(url, title, description))
             {
-                var updated = SendRequestAsync<bool>(request);
-                return updated;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<bool>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -159,7 +167,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<Image> UploadImageBinaryAsync(byte[] image, string albumId = null, string name = null, string title = null, string description = null)
+        public Basic<Image> UploadImageBinary(byte[] image, string albumId = null, string name = null, string title = null, string description = null)
         {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
@@ -168,8 +176,10 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.UploadImageBinaryRequest(url, image, albumId, name, title, description))
             {
-                var returnImage = SendRequestAsync<Image>(request);
-                return returnImage;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<Image>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -193,7 +203,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<Image> UploadImageStreamAsync(Stream image, string albumId = null, string name = null, string title = null, string description = null)
+        public Basic<Image> UploadImageStream(Stream image, string albumId = null, string name = null, string title = null, string description = null)
         {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
@@ -202,7 +212,10 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.UploadImageStreamRequest(url, image, albumId, name, title, description))
             {
-                return SendRequestAsync<Image>(request);
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<Image>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -224,7 +237,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<Image> UploadImageUrlAsync(string image, string albumId = null, string name = null, string title = null, string description = null)
+        public Basic<Image> UploadImageUrl(string image, string albumId = null, string name = null, string title = null, string description = null)
         {
             if (string.IsNullOrWhiteSpace(image))
                 throw new ArgumentNullException(nameof(image));
@@ -233,8 +246,10 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = ImageRequestBuilder.UploadImageUrlRequest(url, image, albumId, name, title, description))
             {
-                var returnImage = SendRequestAsync<Image>(request);
-                return returnImage;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<Image>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
     }

@@ -25,7 +25,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<IEnumerable<GalleryItem>> GetAccountFavoritesAsync(int? page = null,
+        public Basic<IEnumerable<GalleryItem>> GetAccountFavorites(int? page = null,
             AccountGallerySortOrder? sort = AccountGallerySortOrder.Newest)
         {
             if (ApiClient.OAuth2Token == null)
@@ -36,10 +36,12 @@ namespace Imgur.API.Endpoints.Impl
             var sortValue = $"{sort}".ToLower();
             var url = $"account/me/favorites/{page}/{sortValue}";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var favorites = SendRequestAsync<IEnumerable<GalleryItem>>(request);
-                return favorites;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<IEnumerable<GalleryItem>>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -56,7 +58,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<IEnumerable<GalleryItem>> GetAccountGalleryFavoritesAsync(string username = "me",
+        public Basic<IEnumerable<GalleryItem>> GetAccountGalleryFavorites(string username = "me",
             int? page = null,
             AccountGallerySortOrder? sort = AccountGallerySortOrder.Newest)
         {
@@ -72,10 +74,12 @@ namespace Imgur.API.Endpoints.Impl
             var sortValue = $"{sort}".ToLower();
             var url = $"account/{username}/gallery_favorites/{page}/{sortValue}";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var favorites = SendRequestAsync<IEnumerable<GalleryItem>>(request);
-                return favorites;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<IEnumerable<GalleryItem>>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -91,7 +95,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<IEnumerable<GalleryItem>> GetAccountSubmissionsAsync(string username = "me", int? page = null)
+        public Basic<IEnumerable<GalleryItem>> GetAccountSubmissions(string username = "me", int? page = null)
         {
             if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentNullException(nameof(username));
@@ -102,10 +106,12 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"account/{username}/submissions/{page}";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var submissions = SendRequestAsync<IEnumerable<GalleryItem>>(request);
-                return submissions;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<IEnumerable<GalleryItem>>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -119,17 +125,19 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<GalleryProfile> GetGalleryProfileAsync()
+        public Basic<GalleryProfile> GetGalleryProfile()
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"account/me/gallery_profile";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var profile = SendRequestAsync<GalleryProfile>(request);
-                return profile;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<GalleryProfile>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
     }

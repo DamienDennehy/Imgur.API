@@ -47,7 +47,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public int CreateCommentAsync(string comment, string galleryItemId, string parentId = null)
+        public int CreateComment(string comment, string galleryItemId, string parentId = null)
         {
             if (string.IsNullOrWhiteSpace(comment))
                 throw new ArgumentNullException(nameof(comment));
@@ -62,8 +62,10 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = CommentRequestBuilder.CreateCommentRequest(url, comment, galleryItemId, parentId))
             {
-                var returnComment = SendRequestAsync<Comment>(request).Data;
-                return returnComment.Id;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<Comment>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output.Data.Id;
             }
         }
 
@@ -81,7 +83,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public int CreateReplyAsync(string comment, string galleryItemId, string parentId)
+        public int CreateReply(string comment, string galleryItemId, string parentId)
         {
             if (string.IsNullOrWhiteSpace(comment))
                 throw new ArgumentNullException(nameof(comment));
@@ -99,8 +101,10 @@ namespace Imgur.API.Endpoints.Impl
 
             using (var request = CommentRequestBuilder.CreateReplyRequest(url, comment, galleryItemId))
             {
-                var returnComment = SendRequestAsync<Comment>(request).Data;
-                return returnComment.Id;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<Comment>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output.Data.Id;
             }
         }
 
@@ -116,17 +120,19 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<bool> DeleteCommentAsync(int commentId)
+        public Basic<bool> DeleteComment(int commentId)
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"comment/{commentId}";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Delete, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var deleted = SendRequestAsync<bool>(request);
-                return deleted;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<bool>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -141,14 +147,16 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<Comment> GetCommentAsync(int commentId)
+        public Basic<Comment> GetComment(int commentId)
         {
             var url = $"comment/{commentId}";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var comment = SendRequestAsync<Comment>(request);
-                return comment;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<Comment>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -163,14 +171,16 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<Comment> GetRepliesAsync(int commentId)
+        public Basic<Comment> GetReplies(int commentId)
         {
             var url = $"comment/{commentId}/replies";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var comment = SendRequestAsync<Comment>(request);
-                return comment;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<Comment>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -187,17 +197,19 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public bool ReportCommentAsync(int commentId, ReportReason reason)
+        public Basic<bool> ReportComment(int commentId, ReportReason reason)
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
 
             var url = $"comment/{commentId}/report";
 
-            using (var request = RequestBuilderBase.ReportItemRequest(url, reason))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var reported = SendRequestAsync<bool>(request).Data;
-                return reported;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<bool>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -214,7 +226,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<bool> VoteCommentAsync(int commentId, VoteOption vote)
+        public Basic<bool> VoteComment(int commentId, VoteOption vote)
         {
             if (ApiClient.OAuth2Token == null)
                 throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
@@ -222,10 +234,12 @@ namespace Imgur.API.Endpoints.Impl
             var voteValue = $"{vote}".ToLower();
             var url = $"comment/{commentId}/vote/{voteValue}";
 
-            using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Post, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var voted = SendRequestAsync<bool>(request);
-                return voted;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<bool>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
     }

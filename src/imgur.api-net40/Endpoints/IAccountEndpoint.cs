@@ -17,7 +17,7 @@ namespace Imgur.API.Endpoints
         /// <param name="albumId">The album id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Basic<bool> DeleteAlbumAsync(string albumId, string username = "me");
+        Basic<bool> DeleteAlbum(string albumId, string username = "me");
 
         /// <summary>
         ///     Delete a comment. OAuth authentication required.
@@ -25,7 +25,7 @@ namespace Imgur.API.Endpoints
         /// <param name="commentId">The comment id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Basic<bool> DeleteCommentAsync(int commentId, string username = "me");
+        Basic<bool> DeleteComment(int commentId, string username = "me");
 
         /// <summary>
         ///     Deletes an Image. OAuth authentication required.
@@ -33,7 +33,7 @@ namespace Imgur.API.Endpoints
         /// <param name="imageId">The image id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Basic<bool> DeleteImageAsync(string imageId, string username = "me");
+        Basic<bool> DeleteImage(string imageId, string username = "me");
 
         /// <summary>
         ///     Request standard user information.
@@ -41,13 +41,13 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Basic<Account> GetAccountAsync(string username = "me");
+        Basic<Account> GetAccount(string username = "me");
 
         /// <summary>
         ///     Returns the users favorited images. OAuth authentication required.
         /// </summary>
         /// <returns></returns>
-        Basic<IEnumerable<GalleryItem>> GetAccountFavoritesAsync(int? page = null, AccountGallerySortOrder? sort = AccountGallerySortOrder.Newest);
+        Basic<IEnumerable<GalleryItem>> GetAccountFavorites(int? page = null, AccountGallerySortOrder? sort = AccountGallerySortOrder.Newest);
 
         /// <summary>
         ///     Return the images the user has favorited in the gallery.
@@ -56,14 +56,14 @@ namespace Imgur.API.Endpoints
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <param name="sort">The order that the account gallery should be sorted by. Default: Newest</param>
         /// <returns></returns>
-        Basic<IEnumerable<GalleryItem>> GetAccountGalleryFavoritesAsync(string username = "me", int? page = null,
+        Basic<IEnumerable<GalleryItem>> GetAccountGalleryFavorites(string username = "me", int? page = null,
             AccountGallerySortOrder? sort = AccountGallerySortOrder.Newest);
 
         /// <summary>
         ///     Returns the account settings. OAuth authentication required.
         /// </summary>
         /// <returns></returns>
-        Basic<AccountSettings> GetAccountSettingsAsync();
+        Basic<AccountSettings> GetAccountSettings();
 
         /// <summary>
         ///     Return the images a user has submitted to the gallery.
@@ -71,7 +71,7 @@ namespace Imgur.API.Endpoints
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
-        Basic<IEnumerable<GalleryItem>> GetAccountSubmissionsAsync(string username = "me", int? page = null);
+        Basic<IEnumerable<GalleryItem>> GetAccountSubmissions(string username = "me", int? page = null);
 
         /// <summary>
         ///     Get additional information about an album, this works the same as the Album Endpoint.
@@ -79,14 +79,14 @@ namespace Imgur.API.Endpoints
         /// <param name="albumId">The album's id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Basic<Album> GetAlbumAsync(string albumId, string username = "me");
+        Basic<Album> GetAlbum(string albumId, string username = "me");
 
         /// <summary>
         ///     Return the total number of albums associated with the account.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Basic<int> GetAlbumCountAsync(string username = "me");
+        Basic<int> GetAlbumCount(string username = "me");
 
         /// <summary>
         ///     Return a list of all of the album IDs.
@@ -94,7 +94,7 @@ namespace Imgur.API.Endpoints
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
-        Basic<IEnumerable<string>> GetAlbumIdsAsync(string username = "me", int? page = null);
+        Basic<IEnumerable<string>> GetAlbumIds(string username = "me", int? page = null);
 
         /// <summary>
         ///     Get all the albums associated with the account.
@@ -103,7 +103,7 @@ namespace Imgur.API.Endpoints
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
-        Basic<IEnumerable<Album>> GetAlbumsAsync(string username = "me", int? page = null);
+        Basic<IEnumerable<Album>> GetAlbums(string username = "me", int? page = null);
 
         /// <summary>
         ///     Return information about a specific comment.
@@ -111,14 +111,14 @@ namespace Imgur.API.Endpoints
         /// <param name="commentId">The comment id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Basic<Comment> GetCommentAsync(int commentId, string username = "me");
+        Basic<Comment> GetComment(int commentId, string username = "me");
 
         /// <summary>
         ///     Return a count of all of the comments associated with the account.
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Basic<int> GetCommentCountAsync(string username = "me");
+        Basic<int> GetCommentCount(string username = "me");
 
         /// <summary>
         ///     Return a list of all of the comment IDs.
@@ -127,7 +127,7 @@ namespace Imgur.API.Endpoints
         /// <param name="sort">The order that the comments should be sorted by. Default: Newest</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once.</param>
         /// <returns></returns>
-        Basic<IEnumerable<int>> GetCommentIdsAsync(string username = "me",
+        Basic<IEnumerable<int>> GetCommentIds(string username = "me",
             CommentSortOrder? sort = CommentSortOrder.Newest, int? page = null);
 
         /// <summary>
@@ -137,14 +137,14 @@ namespace Imgur.API.Endpoints
         /// <param name="sort">The order that the comments should be sorted by. Default: Newest</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
-        Basic<IEnumerable<Comment>> GetCommentsAsync(string username = "me",
+        Basic<IEnumerable<Comment>> GetComments(string username = "me",
             CommentSortOrder? sort = CommentSortOrder.Newest, int? page = null);
 
         /// <summary>
         ///     The totals for a users gallery information.
         /// </summary>
         /// <returns></returns>
-        Basic<GalleryProfile> GetGalleryProfileAsync();
+        Basic<GalleryProfile> GetGalleryProfile();
 
         /// <summary>
         ///     Return information about a specific image.
@@ -152,7 +152,7 @@ namespace Imgur.API.Endpoints
         /// <param name="imageId">The images's id.</param>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Basic<Image> GetImageAsync(string imageId, string username = "me");
+        Basic<Image> GetImage(string imageId, string username = "me");
 
         /// <summary>
         ///     Returns the total number of images associated with the account.
@@ -160,7 +160,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="username">The user account. Default: me</param>
         /// <returns></returns>
-        Basic<int> GetImageCountAsync(string username = "me");
+        Basic<int> GetImageCount(string username = "me");
 
         /// <summary>
         ///     Returns a list of Image IDs that are associated with the account. OAuth authentication required.
@@ -168,7 +168,7 @@ namespace Imgur.API.Endpoints
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
-        Basic<IEnumerable<string>> GetImageIdsAsync(string username = "me", int? page = null);
+        Basic<IEnumerable<string>> GetImageIds(string username = "me", int? page = null);
 
         /// <summary>
         ///     Return all of the images associated with the account.
@@ -178,7 +178,7 @@ namespace Imgur.API.Endpoints
         /// <param name="username">The user account. Default: me</param>
         /// <param name="page">Allows you to set the page number so you don't have to retrieve all the data at once. Default: null</param>
         /// <returns></returns>
-        Basic<IEnumerable<Image>> GetImagesAsync(string username = "me", int? page = null);
+        Basic<IEnumerable<Image>> GetImages(string username = "me", int? page = null);
 
         /// <summary>
         ///     Returns all of the notifications for the user.
@@ -186,14 +186,14 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="newNotifications">false for all notifications, true for only non-viewed notification. Default is true.</param>
         /// <returns></returns>
-        Basic<Notifications> GetNotificationsAsync(bool newNotifications = true);
+        Basic<Notifications> GetNotifications(bool newNotifications = true);
 
         /// <summary>
         ///     Sends an email to the user to verify that their email is valid to upload to gallery.
         ///     OAuth authentication required.
         /// </summary>
         /// <returns></returns>
-        Basic<bool> SendVerificationEmailAsync();
+        Basic<bool> SendVerificationEmail();
 
         /// <summary>
         ///     Updates the account settings for a given user.
@@ -208,7 +208,7 @@ namespace Imgur.API.Endpoints
         /// <param name="showMature">Toggle display of mature images in gallery list endpoints.</param>
         /// <param name="newsletterSubscribed">Toggle subscription to email newsletter.</param>
         /// <returns></returns>
-        Basic<bool> UpdateAccountSettingsAsync(
+        Basic<bool> UpdateAccountSettings(
             string bio = null,
             bool? publicImages = null,
             bool? messagingEnabled = null,
@@ -223,6 +223,6 @@ namespace Imgur.API.Endpoints
         ///     OAuth authentication required.
         /// </summary>
         /// <returns></returns>
-        Basic<bool> VerifyEmailAsync();
+        Basic<bool> VerifyEmail();
     }
 }

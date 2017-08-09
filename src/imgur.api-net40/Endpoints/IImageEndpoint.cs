@@ -17,21 +17,21 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="imageId">The image id.</param>
         /// <returns></returns>
-        Basic<bool> DeleteImageAsync(string imageId);
+        Basic<bool> DeleteImage(string imageId);
 
         /// <summary>
         ///     Favorite an image with the given ID. OAuth authentication required.
         /// </summary>
         /// <param name="imageId">The image id.</param>
         /// <returns></returns>
-        bool FavoriteImageAsync(string imageId);
+        bool FavoriteImage(string imageId);
 
         /// <summary>
         ///     Get information about an image.
         /// </summary>
         /// <param name="imageId">The image id.</param>
         /// <returns></returns>
-        Basic<IImage> GetImageAsync(string imageId);
+        Basic<Image> GetImage(string imageId);
 
         /// <summary>
         ///     Updates the title or description of an image.
@@ -42,7 +42,7 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Basic<bool> UpdateImageAsync(string imageId, string title = null, string description = null);
+        Basic<bool> UpdateImage(string imageId, string title = null, string description = null);
 
         /// <summary>
         ///     Upload a new image using a binary file.
@@ -56,7 +56,7 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Basic<Image> UploadImageBinaryAsync(byte[] image, string albumId = null, string name = null, string title = null,
+        Basic<Image> UploadImageBinary(byte[] image, string albumId = null, string name = null, string title = null,
             string description = null);
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Imgur.API.Endpoints
         /// <param name="progressBytes">A provider for progress updates.</param>
         /// <param name="progressBufferSize">The amount of bytes that should be uploaded while performing a progress upload.</param>
         /// <returns></returns>
-        Basic<Image> UploadImageStreamAsync(Stream image, string albumId = null, string name = null, string title = null,
+        Basic<Image> UploadImageStream(Stream image, string albumId = null, string name = null, string title = null,
             string description = null);
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Imgur.API.Endpoints
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <returns></returns>
-        Basic<Image> UploadImageUrlAsync(string image, string albumId = null, string name = null, string title = null,
+        Basic<Image> UploadImageUrl(string image, string albumId = null, string name = null, string title = null,
             string description = null);
     }
 }

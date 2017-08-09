@@ -24,7 +24,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<IEnumerable<GalleryItem>> GetSubredditGalleryAsync(string subreddit,
+        public Basic<IEnumerable<GalleryItem>> GetSubredditGallery(string subreddit,
             SubredditGallerySortOrder? sort = SubredditGallerySortOrder.Time, TimeWindow? window = TimeWindow.Week,
             int? page = null)
         {
@@ -39,10 +39,12 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/r/{subreddit}/{sortValue}/{windowValue}/{page}";
 
-            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var gallery = SendRequestAsync<IEnumerable<GalleryItem>>(request);
-                return gallery;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<IEnumerable<GalleryItem>>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
 
@@ -58,7 +60,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Basic<GalleryImage> GetSubredditImageAsync(string imageId, string subreddit)
+        public Basic<GalleryImage> GetSubredditImage(string imageId, string subreddit)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
@@ -68,10 +70,12 @@ namespace Imgur.API.Endpoints.Impl
 
             var url = $"gallery/r/{subreddit}/{imageId}";
 
-            using (var request = RequestBuilders.RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
+            using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
-                var image = SendRequestAsync<GalleryImage>(request);
-                return image;
+                var httpResponse = HttpClient.SendAsync(request).Result;
+                var jsonString = httpResponse.Content.ReadAsStringAsync().Result;
+                var output = Newtonsoft.Json.JsonConvert.DeserializeObject<Basic<GalleryImage>>(httpResponse.Content.ReadAsStringAsync().Result.ToString());
+                return output;
             }
         }
     }

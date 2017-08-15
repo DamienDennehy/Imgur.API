@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B87584D6-8F49-4670-92E0-E10837C29E2C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Imgur.API</RootNamespace>
+    <AssemblyName>Imgur.API-net40</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO, Version=2.6.8.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.8\lib\net40\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Threading.Tasks, Version=2.6.8.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.8\lib\net40\System.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Authentication\IApiClient.cs" />
+    <Compile Include="Authentication\IImgurClient.cs" />
+    <Compile Include="Authentication\IMashapeClient.cs" />
+    <Compile Include="Authentication\Impl\ApiClientBase.cs" />
+    <Compile Include="Authentication\Impl\ImgurClient.cs" />
+    <Compile Include="Authentication\Impl\MashapeClient.cs" />
+    <Compile Include="Endpoints\IAccountEndpoint.cs" />
+    <Compile Include="Endpoints\IAlbumEndpoint.cs" />
+    <Compile Include="Endpoints\ICommentEndpoint.cs" />
+    <Compile Include="Endpoints\IEndpoint.cs" />
+    <Compile Include="Endpoints\IGalleryEndpoint.cs" />
+    <Compile Include="Endpoints\IImageEndpoint.cs" />
+    <Compile Include="Endpoints\Impl\AccountEndpoint.Albums.cs" />
+    <Compile Include="Endpoints\Impl\AccountEndpoint.Comments.cs" />
+    <Compile Include="Endpoints\Impl\AccountEndpoint.cs" />
+    <Compile Include="Endpoints\Impl\AccountEndpoint.Gallery.cs" />
+    <Compile Include="Endpoints\Impl\AccountEndpoint.Images.cs" />
+    <Compile Include="Endpoints\Impl\AccountEndpoint.Notifications.cs" />
+    <Compile Include="Endpoints\Impl\AlbumEndpoint.cs" />
+    <Compile Include="Endpoints\Impl\CommentEndpoint.cs" />
+    <Compile Include="Endpoints\Impl\EndpointBase.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Albums.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Comments.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Images.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Memes.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Subreddits.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Tags.cs" />
+    <Compile Include="Endpoints\Impl\GalleryEndpoint.Votes.cs" />
+    <Compile Include="Endpoints\Impl\ImageEndpoint.cs" />
+    <Compile Include="Endpoints\Impl\OAuth2Endpoint.cs" />
+    <Compile Include="Endpoints\Impl\RateLimitEndpoint.cs" />
+    <Compile Include="Endpoints\IOAuth2Endpoint.cs" />
+    <Compile Include="Endpoints\IRateLimitEndpoint.cs" />
+    <Compile Include="Enums\AccountGallerySortOrder.cs" />
+    <Compile Include="Enums\AlbumLayout.cs" />
+    <Compile Include="Enums\AlbumPrivacy.cs" />
+    <Compile Include="Enums\CommentSortOrder.cs" />
+    <Compile Include="Enums\CustomGallerySortOrder.cs" />
+    <Compile Include="Enums\GallerySection.cs" />
+    <Compile Include="Enums\GallerySortOrder.cs" />
+    <Compile Include="Enums\GalleryTagSortOrder.cs" />
+    <Compile Include="Enums\ImageFileType.cs" />
+    <Compile Include="Enums\ImageSize.cs" />
+    <Compile Include="Enums\MemesGallerySortOrder.cs" />
+    <Compile Include="Enums\NotorietyLevel.cs" />
+    <Compile Include="Enums\OAuth2ResponseType.cs" />
+    <Compile Include="Enums\ReportReason.cs" />
+    <Compile Include="Enums\SubredditGallerySortOrder.cs" />
+    <Compile Include="Enums\TimeWindow.cs" />
+    <Compile Include="Enums\VoteOption.cs" />
+    <Compile Include="ImgurException.cs" />
+    <Compile Include="JsonConverters\EpochTimeConverter.cs" />
+    <Compile Include="JsonConverters\GalleryItemConverter.cs" />
+    <Compile Include="JsonConverters\NotificationConverter.cs" />
+    <Compile Include="JsonConverters\TypeConverter.cs" />
+    <Compile Include="MashapeException.cs" />
+    <Compile Include="Models\IAccount.cs" />
+    <Compile Include="Models\IAccountSettings.cs" />
+    <Compile Include="Models\IAlbum.cs" />
+    <Compile Include="Models\IBasic.cs" />
+    <Compile Include="Models\IBlockedUser.cs" />
+    <Compile Include="Models\IComment.cs" />
+    <Compile Include="Models\ICommentNotification.cs" />
+    <Compile Include="Models\IConversation.cs" />
+    <Compile Include="Models\ICustomGallery.cs" />
+    <Compile Include="Models\IDataModel.cs" />
+    <Compile Include="Models\IGalleryAlbum.cs" />
+    <Compile Include="Models\IGalleryImage.cs" />
+    <Compile Include="Models\IGalleryItem.cs" />
+    <Compile Include="Models\IGalleryProfile.cs" />
+    <Compile Include="Models\IImage.cs" />
+    <Compile Include="Models\IImgurError.cs" />
+    <Compile Include="Models\IMashapeError.cs" />
+    <Compile Include="Models\IMessage.cs" />
+    <Compile Include="Models\IMessageNotification.cs" />
+    <Compile Include="Models\Impl\Account.cs" />
+    <Compile Include="Models\Impl\Account.Notoriety.cs" />
+    <Compile Include="Models\Impl\AccountSettings.cs" />
+    <Compile Include="Models\Impl\Album.cs" />
+    <Compile Include="Models\Impl\Basic.cs" />
+    <Compile Include="Models\Impl\BlockedUser.cs" />
+    <Compile Include="Models\Impl\Comment.cs" />
+    <Compile Include="Models\Impl\CommentNotification.cs" />
+    <Compile Include="Models\Impl\Conversation.cs" />
+    <Compile Include="Models\Impl\CustomGallery.cs" />
+    <Compile Include="Models\Impl\GalleryAlbum.cs" />
+    <Compile Include="Models\Impl\GalleryImage.cs" />
+    <Compile Include="Models\Impl\GalleryItem.cs" />
+    <Compile Include="Models\Impl\GalleryProfile.cs" />
+    <Compile Include="Models\Impl\Image.cs" />
+    <Compile Include="Models\Impl\ImgurError.cs" />
+    <Compile Include="Models\Impl\MashapeError.cs" />
+    <Compile Include="Models\Impl\Message.cs" />
+    <Compile Include="Models\Impl\MessageNotification.cs" />
+    <Compile Include="Models\Impl\Notification.cs" />
+    <Compile Include="Models\Impl\Notifications.cs" />
+    <Compile Include="Models\Impl\OAuth2Token.cs" />
+    <Compile Include="Models\Impl\RateLimit.cs" />
+    <Compile Include="Models\Impl\Tag.cs" />
+    <Compile Include="Models\Impl\TagVote.cs" />
+    <Compile Include="Models\Impl\TagVotes.cs" />
+    <Compile Include="Models\Impl\Topic.cs" />
+    <Compile Include="Models\Impl\Trophy.cs" />
+    <Compile Include="Models\Impl\Vote.cs" />
+    <Compile Include="Models\INotification.cs" />
+    <Compile Include="Models\INotifications.cs" />
+    <Compile Include="Models\IOAuth2Token.cs" />
+    <Compile Include="Models\IRateLimit.cs" />
+    <Compile Include="Models\ITag.cs" />
+    <Compile Include="Models\ITagVote.cs" />
+    <Compile Include="Models\ITagVotes.cs" />
+    <Compile Include="Models\ITopic.cs" />
+    <Compile Include="Models\ITrophy.cs" />
+    <Compile Include="Models\IVote.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestBuilders\AccountRequestBuilder.cs" />
+    <Compile Include="RequestBuilders\AlbumRequestBuilder.cs" />
+    <Compile Include="RequestBuilders\CommentRequestBuilder.cs" />
+    <Compile Include="RequestBuilders\ConversationRequestBuilder.cs" />
+    <Compile Include="RequestBuilders\CustomGalleryRequestBuilder.cs" />
+    <Compile Include="RequestBuilders\GalleryRequestBuilder.cs" />
+    <Compile Include="RequestBuilders\ImageRequestBuilder.cs" />
+    <Compile Include="RequestBuilders\MemeGenRequestBuilder.cs" />
+    <Compile Include="RequestBuilders\NotificationRequestBuilder.cs" />
+    <Compile Include="RequestBuilders\OAuth2RequestBuilder.cs" />
+    <Compile Include="RequestBuilders\RateLimitRequestBuilder.cs" />
+    <Compile Include="RequestBuilders\RequestBuilderBase.cs" />
+    <Compile Include="RequestBuilders\TopicRequestBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+</Project>

@@ -1,5 +1,5 @@
-﻿using System.Net.Http;
-using Imgur.API.Authentication;
+﻿using Imgur.API.Authentication;
+using System.Net.Http;
 
 namespace Imgur.API.Endpoints
 {

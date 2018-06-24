@@ -1,10 +1,10 @@
-﻿using System.Net.Http;
-using Imgur.API.Authentication.Impl;
-using Imgur.API.Models.Impl;
+﻿using Imgur.API.Authentication;
+using Imgur.API.Models;
+using System.Net.Http;
 
 namespace Imgur.API.Tests.Mocks
 {
-    public class MockOAuth2Token
+    public static class MockOAuth2Token
     {
         public static OAuth2Token GetOAuth2Token()
         {

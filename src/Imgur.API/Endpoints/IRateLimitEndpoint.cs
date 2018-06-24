@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Imgur.API.Models;
+﻿using Imgur.API.Models;
+using System.Threading.Tasks;
 
 namespace Imgur.API.Endpoints
 {

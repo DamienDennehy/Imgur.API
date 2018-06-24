@@ -3,8 +3,8 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Imgur.API.Authentication.Impl;
-using Imgur.API.Endpoints.Impl;
+using Imgur.API.Authentication;
+using Imgur.API.Endpoints;
 using Imgur.API.Enums;
 using Imgur.API.Models;
 using Imgur.API.Tests.Mocks;
@@ -136,7 +136,7 @@ namespace Imgur.API.Tests.EndpointTests
                         async () => await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false))
                         .ConfigureAwait(false);
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
+            Assert.IsType<ArgumentException>(exception);
         }
 
         [Fact]

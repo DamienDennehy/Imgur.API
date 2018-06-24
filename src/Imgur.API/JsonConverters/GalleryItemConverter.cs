@@ -1,9 +1,8 @@
-﻿using System;
-using System.Reflection;
-using Imgur.API.Models;
-using Imgur.API.Models.Impl;
+﻿using Imgur.API.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Reflection;
 
 namespace Imgur.API.JsonConverters
 {
@@ -34,7 +33,9 @@ namespace Imgur.API.JsonConverters
             JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null || reader.TokenType == JsonToken.None)
+            {
                 return null;
+            }
 
             var jsonString = JObject.Load(reader).ToString();
 

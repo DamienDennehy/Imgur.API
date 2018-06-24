@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Imgur.API.Authentication;
+using Imgur.API.Endpoints;
+using Imgur.API.Enums;
+using Imgur.API.Tests.Mocks;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Imgur.API.Authentication.Impl;
-using Imgur.API.Endpoints.Impl;
-using Imgur.API.Enums;
-using Imgur.API.Tests.Mocks;
 using Xunit;
 
 namespace Imgur.API.Tests.EndpointTests
@@ -84,10 +84,10 @@ namespace Imgur.API.Tests.EndpointTests
                         async () => await endpoint.GetTokenByCodeAsync("1234").ConfigureAwait(false))
                         .ConfigureAwait(false);
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
+            Assert.IsType<ArgumentException>(exception);
 
-            var argNullException = (ArgumentNullException) exception;
-            Assert.Equal(argNullException.ParamName, "ClientSecret");
+            var argNullException = (ArgumentException) exception;
+            Assert.Equal(argNullException.Message, "ApiClient.ClientSecret is required.");
         }
 
         [Fact]
@@ -141,10 +141,10 @@ namespace Imgur.API.Tests.EndpointTests
                         async () => await endpoint.GetTokenByPinAsync("1234").ConfigureAwait(false))
                         .ConfigureAwait(false);
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
+            Assert.IsType<ArgumentException>(exception);
 
-            var argNullException = (ArgumentNullException) exception;
-            Assert.Equal(argNullException.ParamName, "ClientSecret");
+            var argNullException = (ArgumentException) exception;
+            Assert.Equal(argNullException.Message, "ApiClient.ClientSecret is required.");
         }
 
         [Fact]
@@ -195,10 +195,10 @@ namespace Imgur.API.Tests.EndpointTests
                         async () => await endpoint.GetTokenByRefreshTokenAsync("ahkjhkjhc").ConfigureAwait(false))
                         .ConfigureAwait(false);
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
+            Assert.IsType<ArgumentException>(exception);
 
-            var argNullException = (ArgumentNullException) exception;
-            Assert.Equal(argNullException.ParamName, "ClientSecret");
+            var argNullException = (ArgumentException) exception;
+            Assert.Equal(argNullException.Message, "ApiClient.ClientSecret is required.");
         }
 
         [Fact]

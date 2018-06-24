@@ -1,5 +1,5 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Imgur.API.JsonConverters
 {
@@ -31,7 +31,9 @@ namespace Imgur.API.JsonConverters
             JsonSerializer serializer)
         {
             if (reader.TokenType != JsonToken.Integer)
+            {
                 throw new InvalidCastException("TokenType must be of type Integer.");
+            }
 
             var time = (long) reader.Value;
 

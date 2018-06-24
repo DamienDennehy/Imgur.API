@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Imgur.API.Authentication.Impl;
+using Imgur.API.Authentication;
 using Imgur.API.RequestBuilders;
 using Xunit;
 using System.Diagnostics;

@@ -1,6 +1,6 @@
 ﻿using Imgur.API.Models;
 
-namespace Imgur.API.Authentication.Impl
+namespace Imgur.API.Authentication
 {
     /// <summary>
     ///     Imgur API application credentials.

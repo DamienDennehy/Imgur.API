@@ -36,7 +36,7 @@ namespace Imgur.API.Endpoints.Impl
         /// <summary>
         ///     Initializes a new instance of the EndpointBase class.
         /// </summary>
-        internal EndpointBase()
+        protected EndpointBase()
         {
         }
 
@@ -49,7 +49,7 @@ namespace Imgur.API.Endpoints.Impl
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        internal EndpointBase(IApiClient apiClient, HttpClient httpClient)
+        protected EndpointBase(IApiClient apiClient, HttpClient httpClient)
         {
             if (apiClient == null)
                 throw new ArgumentNullException(nameof(apiClient));
@@ -229,11 +229,27 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <returns></returns>
-        internal virtual async Task<T> SendRequestAsync<T>(HttpRequestMessage message)
+        internal virtual Task<T> SendRequestAsync<T>(HttpRequestMessage message)
         {
             if (message == null)
                 throw new ArgumentNullException(nameof(message));
+            
+            return SendRequestInternalAsync<T>(message);
+        }
 
+        /// <summary>
+        ///     Send requests to the service.
+        /// </summary>
+        /// <param name="message">The HttpRequestMessage that should be sent.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <returns></returns>
+        internal virtual async Task<T> SendRequestInternalAsync<T>(HttpRequestMessage message)
+        {
             var httpResponse = await HttpClient.SendAsync(message).ConfigureAwait(false);
 
             UpdateRateLimit(httpResponse.Headers);

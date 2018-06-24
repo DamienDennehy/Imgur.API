@@ -2,7 +2,7 @@
 using Imgur.API.Models;
 using Imgur.API.Models.Impl;
 
-namespace Imgur.API.Authentication.Impl
+namespace Imgur.API.Authentication
 {
     /// <summary>
     ///     Base Client class.
@@ -12,7 +12,7 @@ namespace Imgur.API.Authentication.Impl
         /// <summary>
         ///     Initializes a new instance of the ApiClientBase class.
         /// </summary>
-        internal ApiClientBase()
+        protected ApiClientBase()
         {
         }
 
@@ -64,19 +64,19 @@ namespace Imgur.API.Authentication.Impl
                 throw new ArgumentNullException(nameof(oAuth2Token));
 
             if (oAuth2Token.AccessToken == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.AccessToken));
+                throw new ArgumentException(nameof(oAuth2Token.AccessToken));
 
             if (oAuth2Token.RefreshToken == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.RefreshToken));
+                throw new ArgumentException(nameof(oAuth2Token.RefreshToken));
 
             if (oAuth2Token.TokenType == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.TokenType));
+                throw new ArgumentException(nameof(oAuth2Token.TokenType));
 
             if (oAuth2Token.AccountId == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.AccountId));
+                throw new ArgumentException(nameof(oAuth2Token.AccountId));
 
             if (oAuth2Token.AccountUsername == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.AccountUsername));
+                throw new ArgumentException(nameof(oAuth2Token.AccountUsername));
 
             OAuth2Token = oAuth2Token;
         }
@@ -98,19 +98,19 @@ namespace Imgur.API.Authentication.Impl
                 throw new ArgumentNullException(nameof(oAuth2Token));
 
             if (oAuth2Token.AccessToken == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.AccessToken));
+                throw new ArgumentException(nameof(oAuth2Token.AccessToken));
 
             if (oAuth2Token.RefreshToken == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.RefreshToken));
+                throw new ArgumentException(nameof(oAuth2Token.RefreshToken));
 
             if (oAuth2Token.TokenType == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.TokenType));
+                throw new ArgumentException(nameof(oAuth2Token.TokenType));
 
             if (oAuth2Token.AccountId == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.AccountId));
+                throw new ArgumentException(nameof(oAuth2Token.AccountId));
 
             if (oAuth2Token.AccountUsername == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.AccountUsername));
+                throw new ArgumentException(nameof(oAuth2Token.AccountUsername));
 
             OAuth2Token = oAuth2Token;
         }
@@ -144,35 +144,35 @@ namespace Imgur.API.Authentication.Impl
         /// <summary>
         ///     Sets the oAuth2Token to be used.
         /// </summary>
-        /// <param name="oAuth2Token">See <see cref="IOAuth2Token" />.</param>
+        /// <param name="token">See <see cref="IOAuth2Token" />.</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when a null reference is passed to a method that does not accept it as a
         ///     valid argument.
         /// </exception>
-        public virtual void SetOAuth2Token(IOAuth2Token oAuth2Token)
+        public virtual void SetOAuth2Token(IOAuth2Token token)
         {
-            if (oAuth2Token == null)
+            if (token == null)
             {
                 OAuth2Token = null;
                 return;
             }
 
-            if (oAuth2Token.AccessToken == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.AccessToken));
+            if (token.AccessToken == null)
+                throw new ArgumentException(nameof(token.AccessToken));
 
-            if (oAuth2Token.RefreshToken == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.RefreshToken));
+            if (token.RefreshToken == null)
+                throw new ArgumentException(nameof(token.RefreshToken));
 
-            if (oAuth2Token.TokenType == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.TokenType));
+            if (token.TokenType == null)
+                throw new ArgumentException(nameof(token.TokenType));
 
-            if (oAuth2Token.AccountId == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.AccountId));
+            if (token.AccountId == null)
+                throw new ArgumentException(nameof(token.AccountId));
 
-            if (oAuth2Token.AccountUsername == null)
-                throw new ArgumentNullException(nameof(oAuth2Token.AccountUsername));
+            if (token.AccountUsername == null)
+                throw new ArgumentException(nameof(token.AccountUsername));
 
-            OAuth2Token = oAuth2Token;
+            OAuth2Token = token;
         }
     }
 }

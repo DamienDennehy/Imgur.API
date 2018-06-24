@@ -1,4 +1,4 @@
-﻿using Imgur.API.Authentication.Impl;
+﻿using Imgur.API.Authentication;
 using Imgur.API.Models;
 
 namespace Imgur.API.Tests.Mocks

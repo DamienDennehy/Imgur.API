@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Imgur.API.Authentication.Impl;
+using Imgur.API.Authentication;
 using Imgur.API.Enums;
 using Imgur.API.RequestBuilders;
 using Xunit;

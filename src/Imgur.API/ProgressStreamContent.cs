@@ -24,7 +24,7 @@
             _progress = progress ?? throw new ArgumentNullException(nameof(progress));
         }
 
-        protected async override Task SerializeToStreamAsync(Stream stream, TransportContext context)
+        protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));

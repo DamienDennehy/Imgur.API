@@ -5,6 +5,7 @@ namespace Imgur.API
     /// <summary>
     ///     The exception that is thrown when an error is found in a response from an Imgur endpoint.
     /// </summary>
+    [Serializable]
     public class ImgurException : Exception
     {
         /// <summary>

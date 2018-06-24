@@ -1,5 +1,5 @@
 ﻿using System.Net.Http;
-using Imgur.API.Authentication.Impl;
+using Imgur.API.Authentication;
 using Imgur.API.Models.Impl;
 
 namespace Imgur.API.Tests.Mocks

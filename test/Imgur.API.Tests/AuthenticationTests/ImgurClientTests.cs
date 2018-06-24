@@ -1,5 +1,5 @@
 ﻿using System;
-using Imgur.API.Authentication.Impl;
+using Imgur.API.Authentication;
 using Imgur.API.Tests.Mocks;
 using Xunit;
 

@@ -45,11 +45,28 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> DeleteImageAsync(string imageId)
+        public Task<bool> DeleteImageAsync(string imageId)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
 
+            return DeleteImageAsync(imageId);
+        }
+
+        /// <summary>
+        ///     Deletes an image. For an anonymous image, {id} must be the image's deletehash.
+        ///     If the image belongs to your account then passing the ID of the image is sufficient.
+        /// </summary>
+        /// <param name="imageId">The image id.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <returns></returns>
+        public async Task<bool> DeleteImageInternalAsync(string imageId)
+        {
             var url = $"image/{imageId}";
 
             using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Delete, url))
@@ -70,14 +87,30 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> FavoriteImageAsync(string imageId)
+        public Task<bool> FavoriteImageAsync(string imageId)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
 
             if (ApiClient.OAuth2Token == null)
-                throw new ArgumentNullException(nameof(ApiClient.OAuth2Token), OAuth2RequiredExceptionMessage);
+                throw new ArgumentException(OAuth2RequiredExceptionMessage);
 
+            return FavoriteImageInternalAsync(imageId);
+        }
+
+        /// <summary>
+        ///     Favorite an image with the given ID. OAuth authentication required.
+        /// </summary>
+        /// <param name="imageId">The image id.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <returns></returns>
+        public async Task<bool> FavoriteImageInternalAsync(string imageId)
+        {
             var url = $"image/{imageId}/favorite";
 
             using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Post, url))
@@ -98,11 +131,27 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IImage> GetImageAsync(string imageId)
+        public Task<IImage> GetImageAsync(string imageId)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
 
+            return GetImageInternalAsync(imageId);
+        }
+
+        /// <summary>
+        ///     Get information about an image.
+        /// </summary>
+        /// <param name="imageId">The image id.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <returns></returns>
+        public async Task<IImage> GetImageInternalAsync(string imageId)
+        {
             var url = $"image/{imageId}";
 
             using (var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, url))
@@ -127,11 +176,32 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<bool> UpdateImageAsync(string imageId, string title = null, string description = null)
+        public Task<bool> UpdateImageAsync(string imageId, string title = null, string description = null)
         {
             if (string.IsNullOrWhiteSpace(imageId))
                 throw new ArgumentNullException(nameof(imageId));
 
+            return UpdateImageInternalAsync(imageId, title, description);
+        }
+
+
+        /// <summary>
+        ///     Updates the title or description of an image.
+        ///     You can only update an image you own and is associated with your account.
+        ///     For an anonymous image, {id} must be the image's deletehash.
+        /// </summary>
+        /// <param name="imageId">The image id.</param>
+        /// <param name="title">The title of the image.</param>
+        /// <param name="description">The description of the image.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <returns></returns>
+        public async Task<bool> UpdateImageInternalAsync(string imageId, string title = null, string description = null)
+        {
             var url = $"image/{imageId}";
 
             using (var request = ImageRequestBuilder.UpdateImageRequest(url, title, description))
@@ -159,12 +229,36 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IImage> UploadImageBinaryAsync(byte[] image, string albumId = null, string name = null, string title = null,
+        public Task<IImage> UploadImageBinaryAsync(byte[] image, string albumId = null, string name = null, string title = null,
             string description = null)
         {
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
 
+            return UploadImageBinaryInternalAsync(image, albumId, name, title);
+        }
+
+        /// <summary>
+        ///     Upload a new image using a binary file.
+        /// </summary>
+        /// <param name="image">A binary file.</param>
+        /// <param name="albumId">
+        ///     The id of the album you want to add the image to. For anonymous albums, {albumId} should be the
+        ///     deletehash that is returned at creation.
+        /// </param>
+        /// <param name="name">The name of the file.</param>
+        /// <param name="title">The title of the image.</param>
+        /// <param name="description">The description of the image.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <returns></returns>
+        public async Task<IImage> UploadImageBinaryInternalAsync(byte[] image, string albumId = null, string name = null, string title = null,
+            string description = null)
+        {
             const string url = nameof(image);
 
             using (var request = ImageRequestBuilder.UploadImageBinaryRequest(url, image, albumId, name, title, description))

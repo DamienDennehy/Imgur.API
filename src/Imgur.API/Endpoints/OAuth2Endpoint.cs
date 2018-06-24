@@ -71,7 +71,7 @@ namespace Imgur.API.Endpoints
                 throw new ArgumentNullException(nameof(code));
 
             if (string.IsNullOrWhiteSpace(ApiClient.ClientSecret))
-                throw new ArgumentException(nameof(ApiClient.ClientSecret));
+                throw new ArgumentException("ApiClient.ClientSecret is required.");
             
             return GetTokenByCodeInternalAsync(code);
         }
@@ -119,7 +119,7 @@ namespace Imgur.API.Endpoints
                 throw new ArgumentNullException(nameof(pin));
 
             if (string.IsNullOrWhiteSpace(ApiClient.ClientSecret))
-                throw new ArgumentException(nameof(ApiClient.ClientSecret));
+                throw new ArgumentException("ApiClient.ClientSecret is required.");
 
             return GetTokenByPinInternalAsync(pin);
         }
@@ -175,7 +175,7 @@ namespace Imgur.API.Endpoints
                 throw new ArgumentNullException(nameof(refreshToken));
 
             if (string.IsNullOrWhiteSpace(ApiClient.ClientSecret))
-                throw new ArgumentException(nameof(ApiClient.ClientSecret));
+                throw new ArgumentException("ApiClient.ClientSecret is required.");
 
             return GetTokenByRefreshTokenInternalAsync(refreshToken);
         }

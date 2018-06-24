@@ -84,10 +84,10 @@ namespace Imgur.API.Tests.EndpointTests
                         async () => await endpoint.GetTokenByCodeAsync("1234").ConfigureAwait(false))
                         .ConfigureAwait(false);
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
+            Assert.IsType<ArgumentException>(exception);
 
-            var argNullException = (ArgumentNullException) exception;
-            Assert.Equal(argNullException.ParamName, "ClientSecret");
+            var argNullException = (ArgumentException) exception;
+            Assert.Equal(argNullException.Message, "ApiClient.ClientSecret is required.");
         }
 
         [Fact]
@@ -141,10 +141,10 @@ namespace Imgur.API.Tests.EndpointTests
                         async () => await endpoint.GetTokenByPinAsync("1234").ConfigureAwait(false))
                         .ConfigureAwait(false);
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
+            Assert.IsType<ArgumentException>(exception);
 
-            var argNullException = (ArgumentNullException) exception;
-            Assert.Equal(argNullException.ParamName, "ClientSecret");
+            var argNullException = (ArgumentException) exception;
+            Assert.Equal(argNullException.Message, "ApiClient.ClientSecret is required.");
         }
 
         [Fact]
@@ -195,10 +195,10 @@ namespace Imgur.API.Tests.EndpointTests
                         async () => await endpoint.GetTokenByRefreshTokenAsync("ahkjhkjhc").ConfigureAwait(false))
                         .ConfigureAwait(false);
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
+            Assert.IsType<ArgumentException>(exception);
 
-            var argNullException = (ArgumentNullException) exception;
-            Assert.Equal(argNullException.ParamName, "ClientSecret");
+            var argNullException = (ArgumentException) exception;
+            Assert.Equal(argNullException.Message, "ApiClient.ClientSecret is required.");
         }
 
         [Fact]

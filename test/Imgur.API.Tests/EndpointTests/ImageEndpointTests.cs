@@ -136,7 +136,7 @@ namespace Imgur.API.Tests.EndpointTests
                         async () => await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false))
                         .ConfigureAwait(false);
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
+            Assert.IsType<ArgumentException>(exception);
         }
 
         [Fact]

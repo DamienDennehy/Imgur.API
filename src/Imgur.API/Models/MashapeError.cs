@@ -1,4 +1,4 @@
-﻿namespace Imgur.API.Models.Impl
+﻿namespace Imgur.API.Models
 {
     /// <summary>
     ///     An error returned after an Endpoint request.

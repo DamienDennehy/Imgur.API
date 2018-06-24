@@ -1,4 +1,4 @@
-﻿namespace Imgur.API.Models.Impl
+﻿namespace Imgur.API.Models
 {
     /// <summary>
     ///     Remaining credits for the application.

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Imgur.API.Authentication;
+﻿using Imgur.API.Authentication;
 using Imgur.API.Enums;
 using Imgur.API.Models;
-using Imgur.API.Models.Impl;
 using Imgur.API.RequestBuilders;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
-namespace Imgur.API.Endpoints.Impl
+namespace Imgur.API.Endpoints
 {
     /// <summary>
     ///     Authorizes account access.
@@ -66,14 +65,31 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IOAuth2Token> GetTokenByCodeAsync(string code)
+        public Task<IOAuth2Token> GetTokenByCodeAsync(string code)
         {
             if (string.IsNullOrWhiteSpace(code))
                 throw new ArgumentNullException(nameof(code));
 
             if (string.IsNullOrWhiteSpace(ApiClient.ClientSecret))
-                throw new ArgumentNullException(nameof(ApiClient.ClientSecret));
+                throw new ArgumentException(nameof(ApiClient.ClientSecret));
+            
+            return GetTokenByCodeInternalAsync(code);
+        }
 
+        /// <summary>
+        ///     After the user authorizes, the pin is returned as a code to your application
+        ///     via the redirect URL you specified during registration, in the form of a regular query string parameter.
+        /// </summary>
+        /// <param name="code">The code from the query string.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <returns></returns>
+        private async Task<IOAuth2Token> GetTokenByCodeInternalAsync(string code)
+        {
             IOAuth2Token token;
 
             using (
@@ -97,14 +113,30 @@ namespace Imgur.API.Endpoints.Impl
         /// </exception>
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
-        public async Task<IOAuth2Token> GetTokenByPinAsync(string pin)
+        public Task<IOAuth2Token> GetTokenByPinAsync(string pin)
         {
             if (string.IsNullOrWhiteSpace(pin))
                 throw new ArgumentNullException(nameof(pin));
 
             if (string.IsNullOrWhiteSpace(ApiClient.ClientSecret))
-                throw new ArgumentNullException(nameof(ApiClient.ClientSecret));
+                throw new ArgumentException(nameof(ApiClient.ClientSecret));
 
+            return GetTokenByPinInternalAsync(pin);
+        }
+
+        /// <summary>
+        ///     After the user authorizes, they will receive a PIN code that they copy into your app.
+        /// </summary>
+        /// <param name="pin">The PIN that the user is prompted to enter.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        private async Task<IOAuth2Token> GetTokenByPinInternalAsync(string pin)
+        {
             IOAuth2Token token;
 
             using (
@@ -137,14 +169,39 @@ namespace Imgur.API.Endpoints.Impl
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public async Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken)
+        public Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken)
         {
             if (string.IsNullOrWhiteSpace(refreshToken))
                 throw new ArgumentNullException(nameof(refreshToken));
 
             if (string.IsNullOrWhiteSpace(ApiClient.ClientSecret))
-                throw new ArgumentNullException(nameof(ApiClient.ClientSecret));
+                throw new ArgumentException(nameof(ApiClient.ClientSecret));
 
+            return GetTokenByRefreshTokenInternalAsync(refreshToken);
+        }
+
+        /// <summary>
+        ///     If a user has authorized their account but you no longer have a valid access_token for them,
+        ///     then a new one can be generated by using the refreshToken.
+        ///     <para>
+        ///         When your application receives a refresh token, it is important to store
+        ///         that refresh token for future use.
+        ///     </para>
+        ///     <para>
+        ///         If your application loses the refresh token, you will have to prompt the user
+        ///         for their login information again.
+        ///     </para>
+        /// </summary>
+        /// <param name="refreshToken">The refresh token.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <returns></returns>
+        public async Task<IOAuth2Token> GetTokenByRefreshTokenInternalAsync(string refreshToken)
+        {
             IOAuth2Token token;
 
             using (

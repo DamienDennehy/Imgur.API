@@ -14,7 +14,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
         public void CreateRequest_Equal()
         {
             var client = new ImgurClient("123", "1234");
-            var requestBuilder = new AccountRequestBuilder();
 
             var mockUrl = $"{client.EndpointUrl}account/bob";
             var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, mockUrl);
@@ -27,8 +26,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public void CreateRequest_WithHttpMethodNull_ThrowsArgumentNullException()
         {
-            var requestBuilder = new AccountRequestBuilder();
-
             var exception = Record.Exception(() => RequestBuilderBase.CreateRequest(null, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
@@ -40,8 +37,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public void CreateRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var requestBuilder = new AccountRequestBuilder();
-
             var exception = Record.Exception(() => RequestBuilderBase.CreateRequest(HttpMethod.Get, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
@@ -70,8 +65,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public void ReportItemRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var requestBuilder = new AccountRequestBuilder();
-
             var exception = Record.Exception(() => RequestBuilderBase.ReportItemRequest(null, ReportReason.Abusive));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);

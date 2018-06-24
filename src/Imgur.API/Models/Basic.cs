@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Imgur.API.Models.Impl
+namespace Imgur.API.Models
 {
     /// <summary>
     ///     A response from the API.

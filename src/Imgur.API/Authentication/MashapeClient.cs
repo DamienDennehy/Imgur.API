@@ -1,5 +1,5 @@
-﻿using System;
-using Imgur.API.Models;
+﻿using Imgur.API.Models;
+using System;
 
 namespace Imgur.API.Authentication
 {

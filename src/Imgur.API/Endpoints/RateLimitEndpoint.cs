@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Imgur.API.Authentication;
+using Imgur.API.Models;
+using Imgur.API.RequestBuilders;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Imgur.API.Authentication;
-using Imgur.API.Models;
-using Imgur.API.Models.Impl;
-using Imgur.API.RequestBuilders;
 
-namespace Imgur.API.Endpoints.Impl
+namespace Imgur.API.Endpoints
 {
     /// <summary>
     ///     Gets credit limit.

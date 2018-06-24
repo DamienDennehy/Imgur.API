@@ -3,7 +3,7 @@ using Imgur.API.Enums;
 using Imgur.API.JsonConverters;
 using Newtonsoft.Json;
 
-namespace Imgur.API.Models.Impl
+namespace Imgur.API.Models
 {
     /// <summary>
     ///     The data model formatted for gallery images.

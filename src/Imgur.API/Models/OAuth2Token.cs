@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Imgur.API.Models.Impl
+namespace Imgur.API.Models
 {
     /// <summary>
     ///     The response from an OAuth2 Token request.

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Imgur.API.JsonConverters;
+using Imgur.API.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Imgur.API.JsonConverters;
-using Imgur.API.Models.Impl;
-using Newtonsoft.Json;
 using Xunit;
 
 namespace Imgur.API.Tests.JsonConverterTests

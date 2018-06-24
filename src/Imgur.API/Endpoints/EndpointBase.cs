@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Imgur.API.Authentication;
+using Imgur.API.JsonConverters;
+using Imgur.API.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Imgur.API.Authentication;
-using Imgur.API.JsonConverters;
-using Imgur.API.Models;
-using Imgur.API.Models.Impl;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace Imgur.API.Endpoints.Impl
+namespace Imgur.API.Endpoints
 {
     /// <summary>
     ///     Builder class for endpoints.

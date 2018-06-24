@@ -1,7 +1,7 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using Imgur.API.Models;
+﻿using Imgur.API.Models;
 using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Imgur.API.Endpoints
 {

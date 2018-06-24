@@ -230,7 +230,7 @@ namespace Imgur.API.Endpoints
         /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
         /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
         /// <returns></returns>
-        public Task<bool> UpdateImageAsync(string imageId, string title = null, string description = null)
+        public Task<bool> UpdateImageAsync(string imageId, string title, string description)
         {
             if (string.IsNullOrWhiteSpace(imageId))
             {

@@ -174,6 +174,53 @@ namespace Imgur.API.Endpoints
         ///     For an anonymous image, {id} must be the image's deletehash.
         /// </summary>
         /// <param name="imageId">The image id.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <returns></returns>
+        public Task<bool> UpdateImageAsync(string imageId)
+        {
+            if (string.IsNullOrWhiteSpace(imageId))
+            {
+                throw new ArgumentNullException(nameof(imageId));
+            }
+
+            return UpdateImageInternalAsync(imageId);
+        }
+
+        /// <summary>
+        ///     Updates the title or description of an image.
+        ///     You can only update an image you own and is associated with your account.
+        ///     For an anonymous image, {id} must be the image's deletehash.
+        /// </summary>
+        /// <param name="imageId">The image id.</param>
+        /// <param name="title">The title of the image.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when a null reference is passed to a method that does not accept it as a
+        ///     valid argument.
+        /// </exception>
+        /// <exception cref="ImgurException">Thrown when an error is found in a response from an Imgur endpoint.</exception>
+        /// <exception cref="MashapeException">Thrown when an error is found in a response from a Mashape endpoint.</exception>
+        /// <returns></returns>
+        public Task<bool> UpdateImageAsync(string imageId, string title)
+        {
+            if (string.IsNullOrWhiteSpace(imageId))
+            {
+                throw new ArgumentNullException(nameof(imageId));
+            }
+
+            return UpdateImageInternalAsync(imageId, title);
+        }
+
+        /// <summary>
+        ///     Updates the title or description of an image.
+        ///     You can only update an image you own and is associated with your account.
+        ///     For an anonymous image, {id} must be the image's deletehash.
+        /// </summary>
+        /// <param name="imageId">The image id.</param>
         /// <param name="title">The title of the image.</param>
         /// <param name="description">The description of the image.</param>
         /// <exception cref="ArgumentNullException">
@@ -192,7 +239,6 @@ namespace Imgur.API.Endpoints
 
             return UpdateImageInternalAsync(imageId, title, description);
         }
-
 
         /// <summary>
         ///     Updates the title or description of an image.

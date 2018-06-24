@@ -26,7 +26,9 @@ namespace Imgur.API.Authentication
         protected ApiClientBase(string clientId)
         {
             if (string.IsNullOrWhiteSpace(clientId))
+            {
                 throw new ArgumentNullException(nameof(clientId));
+            }
 
             ClientId = clientId;
         }
@@ -43,7 +45,9 @@ namespace Imgur.API.Authentication
         protected ApiClientBase(string clientId, string clientSecret) : this(clientId)
         {
             if (string.IsNullOrWhiteSpace(clientSecret))
+            {
                 throw new ArgumentNullException(nameof(clientSecret));
+            }
 
             ClientSecret = clientSecret;
         }
@@ -60,22 +64,34 @@ namespace Imgur.API.Authentication
         protected ApiClientBase(string clientId, IOAuth2Token oAuth2Token) : this(clientId)
         {
             if (oAuth2Token == null)
+            {
                 throw new ArgumentNullException(nameof(oAuth2Token));
+            }
 
             if (oAuth2Token.AccessToken == null)
+            {
                 throw new ArgumentException(nameof(oAuth2Token.AccessToken));
+            }
 
             if (oAuth2Token.RefreshToken == null)
+            {
                 throw new ArgumentException(nameof(oAuth2Token.RefreshToken));
+            }
 
             if (oAuth2Token.TokenType == null)
+            {
                 throw new ArgumentException(nameof(oAuth2Token.TokenType));
+            }
 
             if (oAuth2Token.AccountId == null)
+            {
                 throw new ArgumentException(nameof(oAuth2Token.AccountId));
+            }
 
             if (oAuth2Token.AccountUsername == null)
+            {
                 throw new ArgumentException(nameof(oAuth2Token.AccountUsername));
+            }
 
             OAuth2Token = oAuth2Token;
         }
@@ -94,22 +110,34 @@ namespace Imgur.API.Authentication
             : this(clientId, clientSecret)
         {
             if (oAuth2Token == null)
+            {
                 throw new ArgumentNullException(nameof(oAuth2Token));
+            }
 
             if (oAuth2Token.AccessToken == null)
+            {
                 throw new ArgumentException(nameof(oAuth2Token.AccessToken));
+            }
 
             if (oAuth2Token.RefreshToken == null)
+            {
                 throw new ArgumentException(nameof(oAuth2Token.RefreshToken));
+            }
 
             if (oAuth2Token.TokenType == null)
+            {
                 throw new ArgumentException(nameof(oAuth2Token.TokenType));
+            }
 
             if (oAuth2Token.AccountId == null)
+            {
                 throw new ArgumentException(nameof(oAuth2Token.AccountId));
+            }
 
             if (oAuth2Token.AccountUsername == null)
+            {
                 throw new ArgumentException(nameof(oAuth2Token.AccountUsername));
+            }
 
             OAuth2Token = oAuth2Token;
         }
@@ -157,19 +185,29 @@ namespace Imgur.API.Authentication
             }
 
             if (token.AccessToken == null)
+            {
                 throw new ArgumentException(nameof(token.AccessToken));
+            }
 
             if (token.RefreshToken == null)
+            {
                 throw new ArgumentException(nameof(token.RefreshToken));
+            }
 
             if (token.TokenType == null)
+            {
                 throw new ArgumentException(nameof(token.TokenType));
+            }
 
             if (token.AccountId == null)
+            {
                 throw new ArgumentException(nameof(token.AccountId));
+            }
 
             if (token.AccountUsername == null)
+            {
                 throw new ArgumentException(nameof(token.AccountUsername));
+            }
 
             OAuth2Token = token;
         }

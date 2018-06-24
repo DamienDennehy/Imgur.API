@@ -10,16 +10,24 @@ namespace Imgur.API.RequestBuilders
         internal static HttpRequestMessage GetTokenByCodeRequest(string url, string code, string clientId, string clientSecret)
         {
             if (string.IsNullOrWhiteSpace(url))
+            {
                 throw new ArgumentNullException(nameof(url));
+            }
 
             if (string.IsNullOrWhiteSpace(code))
+            {
                 throw new ArgumentNullException(nameof(code));
+            }
 
             if (string.IsNullOrWhiteSpace(clientId))
+            {
                 throw new ArgumentNullException(nameof(clientId));
+            }
 
             if (string.IsNullOrWhiteSpace(clientSecret))
+            {
                 throw new ArgumentNullException(nameof(clientSecret));
+            }
 
             var parameters = new Dictionary<string, string>
             {
@@ -40,16 +48,24 @@ namespace Imgur.API.RequestBuilders
         internal static HttpRequestMessage GetTokenByPinRequest(string url, string pin, string clientId, string clientSecret)
         {
             if (string.IsNullOrWhiteSpace(url))
+            {
                 throw new ArgumentNullException(nameof(url));
+            }
 
             if (string.IsNullOrWhiteSpace(pin))
+            {
                 throw new ArgumentNullException(nameof(pin));
+            }
 
             if (string.IsNullOrWhiteSpace(clientId))
+            {
                 throw new ArgumentNullException(nameof(clientId));
+            }
 
             if (string.IsNullOrWhiteSpace(clientSecret))
+            {
                 throw new ArgumentNullException(nameof(clientSecret));
+            }
 
             var parameters = new Dictionary<string, string>
             {
@@ -71,16 +87,24 @@ namespace Imgur.API.RequestBuilders
             string clientSecret)
         {
             if (string.IsNullOrWhiteSpace(url))
+            {
                 throw new ArgumentNullException(nameof(url));
+            }
 
             if (string.IsNullOrWhiteSpace(refreshToken))
+            {
                 throw new ArgumentNullException(nameof(refreshToken));
+            }
 
             if (string.IsNullOrWhiteSpace(clientId))
+            {
                 throw new ArgumentNullException(nameof(clientId));
+            }
 
             if (string.IsNullOrWhiteSpace(clientSecret))
+            {
                 throw new ArgumentNullException(nameof(clientSecret));
+            }
 
             var parameters = new Dictionary<string, string>
             {

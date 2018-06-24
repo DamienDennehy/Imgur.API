@@ -47,7 +47,9 @@ namespace Imgur.API.Endpoints
         public Task<bool> DeleteImageAsync(string imageId)
         {
             if (string.IsNullOrWhiteSpace(imageId))
+            {
                 throw new ArgumentNullException(nameof(imageId));
+            }
 
             return DeleteImageInternalAsync(imageId);
         }
@@ -89,10 +91,14 @@ namespace Imgur.API.Endpoints
         public Task<bool> FavoriteImageAsync(string imageId)
         {
             if (string.IsNullOrWhiteSpace(imageId))
+            {
                 throw new ArgumentNullException(nameof(imageId));
+            }
 
             if (ApiClient.OAuth2Token == null)
+            {
                 throw new ArgumentException(OAuth2RequiredExceptionMessage);
+            }
 
             return FavoriteImageInternalAsync(imageId);
         }
@@ -133,7 +139,9 @@ namespace Imgur.API.Endpoints
         public Task<IImage> GetImageAsync(string imageId)
         {
             if (string.IsNullOrWhiteSpace(imageId))
+            {
                 throw new ArgumentNullException(nameof(imageId));
+            }
 
             return GetImageInternalAsync(imageId);
         }
@@ -178,7 +186,9 @@ namespace Imgur.API.Endpoints
         public Task<bool> UpdateImageAsync(string imageId, string title = null, string description = null)
         {
             if (string.IsNullOrWhiteSpace(imageId))
+            {
                 throw new ArgumentNullException(nameof(imageId));
+            }
 
             return UpdateImageInternalAsync(imageId, title, description);
         }
@@ -232,7 +242,9 @@ namespace Imgur.API.Endpoints
             string description = null)
         {
             if (image == null)
+            {
                 throw new ArgumentNullException(nameof(image));
+            }
 
             return UploadImageBinaryInternalAsync(image, albumId, name, title);
         }
@@ -291,7 +303,9 @@ namespace Imgur.API.Endpoints
             string description = null, IProgress<int> progressBytes = null, int progressBufferSize = 4096)
         {
             if (image == null)
+            {
                 throw new ArgumentNullException(nameof(image));
+            }
 
             return UploadImageStreamInternalAsync(image, albumId, name, title, description, progressBytes, progressBufferSize);
         }
@@ -350,7 +364,9 @@ namespace Imgur.API.Endpoints
             string description = null)
         {
             if (string.IsNullOrWhiteSpace(image))
+            {
                 throw new ArgumentNullException(nameof(image));
+            }
 
             return UploadImageUrlInternalAsync(image, albumId, name, title, description);
         }

@@ -68,11 +68,15 @@ namespace Imgur.API.Endpoints
         public Task<IOAuth2Token> GetTokenByCodeAsync(string code)
         {
             if (string.IsNullOrWhiteSpace(code))
+            {
                 throw new ArgumentNullException(nameof(code));
+            }
 
             if (string.IsNullOrWhiteSpace(ApiClient.ClientSecret))
+            {
                 throw new ArgumentException("ApiClient.ClientSecret is required.");
-            
+            }
+
             return GetTokenByCodeInternalAsync(code);
         }
 
@@ -116,10 +120,14 @@ namespace Imgur.API.Endpoints
         public Task<IOAuth2Token> GetTokenByPinAsync(string pin)
         {
             if (string.IsNullOrWhiteSpace(pin))
+            {
                 throw new ArgumentNullException(nameof(pin));
+            }
 
             if (string.IsNullOrWhiteSpace(ApiClient.ClientSecret))
+            {
                 throw new ArgumentException("ApiClient.ClientSecret is required.");
+            }
 
             return GetTokenByPinInternalAsync(pin);
         }
@@ -172,10 +180,14 @@ namespace Imgur.API.Endpoints
         public Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken)
         {
             if (string.IsNullOrWhiteSpace(refreshToken))
+            {
                 throw new ArgumentNullException(nameof(refreshToken));
+            }
 
             if (string.IsNullOrWhiteSpace(ApiClient.ClientSecret))
+            {
                 throw new ArgumentException("ApiClient.ClientSecret is required.");
+            }
 
             return GetTokenByRefreshTokenInternalAsync(refreshToken);
         }

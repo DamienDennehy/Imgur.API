@@ -33,7 +33,9 @@ namespace Imgur.API.JsonConverters
             JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null || reader.TokenType == JsonToken.None)
+            {
                 return null;
+            }
 
             var jsonString = JObject.Load(reader).ToString();
 

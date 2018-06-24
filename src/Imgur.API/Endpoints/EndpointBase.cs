@@ -51,10 +51,14 @@ namespace Imgur.API.Endpoints
         protected EndpointBase(IApiClient apiClient, HttpClient httpClient)
         {
             if (apiClient == null)
+            {
                 throw new ArgumentNullException(nameof(apiClient));
+            }
 
             if (httpClient == null)
+            {
                 throw new ArgumentNullException(nameof(httpClient));
+            }
 
             httpClient.DefaultRequestHeaders.Remove("Authorization");
             httpClient.DefaultRequestHeaders.Remove("X-Mashape-Key");
@@ -141,7 +145,9 @@ namespace Imgur.API.Endpoints
         {
             //If no result is found, then we can't proceed
             if (response == null)
+            {
                 throw new ImgurException("The response from the endpoint is missing.");
+            }
 
             var stringResponse = string.Empty;
 
@@ -152,7 +158,9 @@ namespace Imgur.API.Endpoints
 
             //If no result is found, then we can't proceed
             if (string.IsNullOrWhiteSpace(stringResponse))
+            {
                 throw new ImgurException($"The response from the endpoint is missing. {(int)response.StatusCode} {response.ReasonPhrase}");
+            }
 
             //If the result isn't a json response, then we can't proceed
             if (stringResponse.StartsWith("<"))
@@ -231,8 +239,10 @@ namespace Imgur.API.Endpoints
         internal virtual Task<T> SendRequestAsync<T>(HttpRequestMessage message)
         {
             if (message == null)
+            {
                 throw new ArgumentNullException(nameof(message));
-            
+            }
+
             return SendRequestInternalAsync<T>(message);
         }
 
@@ -268,7 +278,9 @@ namespace Imgur.API.Endpoints
         internal virtual void UpdateRateLimit(HttpResponseHeaders headers)
         {
             if (headers == null)
+            {
                 throw new ArgumentNullException(nameof(headers));
+            }
 
             var clientLimitHeader = string.Empty;
             var clientRemainingHeader = string.Empty;
@@ -289,10 +301,14 @@ namespace Imgur.API.Endpoints
 
             //If the values can't be parsed use the previous value
             if (!int.TryParse(clientLimitHeader, out int clientLimit))
+            {
                 clientLimit = ApiClient.RateLimit.ClientLimit;
+            }
 
             if (!int.TryParse(clientRemainingHeader, out int clientRemaining))
+            {
                 clientRemaining = ApiClient.RateLimit.ClientRemaining;
+            }
 
             ApiClient.RateLimit.ClientLimit = clientLimit;
             ApiClient.RateLimit.ClientRemaining = clientRemaining;

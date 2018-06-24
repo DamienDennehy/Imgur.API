@@ -21,7 +21,9 @@ namespace Imgur.API.Authentication
         public MashapeClient(string clientId, string mashapeKey) : base(clientId)
         {
             if (string.IsNullOrWhiteSpace(mashapeKey))
+            {
                 throw new ArgumentNullException(nameof(mashapeKey));
+            }
 
             MashapeKey = mashapeKey;
         }
@@ -40,7 +42,9 @@ namespace Imgur.API.Authentication
             : base(clientId, clientSecret)
         {
             if (string.IsNullOrWhiteSpace(mashapeKey))
+            {
                 throw new ArgumentNullException(nameof(mashapeKey));
+            }
 
             MashapeKey = mashapeKey;
         }
@@ -59,7 +63,9 @@ namespace Imgur.API.Authentication
             : base(clientId, oAuth2Token)
         {
             if (string.IsNullOrWhiteSpace(mashapeKey))
+            {
                 throw new ArgumentNullException(nameof(mashapeKey));
+            }
 
             MashapeKey = mashapeKey;
         }
@@ -79,7 +85,9 @@ namespace Imgur.API.Authentication
             : base(clientId, clientSecret, oAuth2Token)
         {
             if (string.IsNullOrWhiteSpace(mashapeKey))
+            {
                 throw new ArgumentNullException(nameof(mashapeKey));
+            }
 
             MashapeKey = mashapeKey;
         }

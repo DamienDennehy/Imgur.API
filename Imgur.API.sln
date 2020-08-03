@@ -9,7 +9,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{09EF3665-F9F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{95D79228-2307-4CD0-940D-35D89D59FCF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imgur.API.Tests", "tests\Imgur.API.Tests\Imgur.API.Tests.csproj", "{65F14BBA-B4B5-4243-823A-4FAF41AB67BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imgur.API.Tests", "tests\Imgur.API.Tests\Imgur.API.Tests.csproj", "{65F14BBA-B4B5-4243-823A-4FAF41AB67BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D42AD5DE-ED8F-42B5-A22D-4AC6B811DF95}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

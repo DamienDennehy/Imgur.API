@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Imgur.API.Authentication
+﻿namespace Imgur.API.Authentication
 {
     /// <summary>
     /// The type of client that will be used for authentication.
@@ -20,9 +16,9 @@ namespace Imgur.API.Authentication
         string ClientSecret { get; }
 
         /// <summary>
-        /// The Endpoint Url.
+        /// The Base Api Address.
         /// https://api.imgur.com/3/ or https://imgur-apiv3.p.rapidapi.com/3/
         /// </summary>
-        string EndpointUrl { get; }
+        string BaseAddress { get; }
     }
 }

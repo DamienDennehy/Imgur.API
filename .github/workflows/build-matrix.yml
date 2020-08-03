@@ -67,8 +67,8 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore --verbosity minimal -p:Version=${{steps.gitversion.outputs.semVer}}
 
-    - name: Test
-      run: dotnet test --configuration Release --no-restore --no-build --verbosity minimal --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory ./artifacts
+    # - name: Test
+    #   run: dotnet test --configuration Release --no-restore --no-build --verbosity minimal --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory ./artifacts
 
     - name: Pack
       run: dotnet pack --configuration Release --no-restore --no-build --verbosity minimal --output ./artifacts -p:Version=${{steps.gitversion.outputs.semVer}}

@@ -28,8 +28,8 @@ jobs:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}           
       SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}   
-      SONAR_PROJECT_KEY: GitHub-Actions-Examples
-      SONAR_PROJECT_NAME: GitHub Actions Examples   
+      SONAR_PROJECT_KEY: ImgurAPI
+      SONAR_PROJECT_NAME: Imgur.API   
 
     steps:
     - name: Checkout      

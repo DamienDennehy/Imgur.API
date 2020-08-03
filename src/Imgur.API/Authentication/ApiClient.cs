@@ -8,12 +8,12 @@ namespace Imgur.API.Authentication
         /// <summary>
         /// The client id obtained during application registration.
         /// </summary>
-        public virtual string ClientId { get; }
+        public virtual string ClientId { get; private set; }
 
         /// <summary>
         /// The client secret obtained during application registration.
         /// </summary>
-        public virtual string ClientSecret { get; }
+        public virtual string ClientSecret { get; private set; }
 
         /// <summary>
         /// An OAuth2 Token used for actions against a user's account.
@@ -24,7 +24,7 @@ namespace Imgur.API.Authentication
         /// The Base Api Address.
         /// https://api.imgur.com/3/ or https://imgur-apiv3.p.rapidapi.com/3/
         /// </summary>
-        public virtual string BaseAddress { get; }
+        public virtual string BaseAddress { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the ApiClient.
@@ -72,27 +72,27 @@ namespace Imgur.API.Authentication
 
             if (token.AccessToken == null)
             {
-                throw new ArgumentException(nameof(token.AccessToken));
+                throw new ArgumentException("token.AccessToken property not set.");
             }
 
             if (token.RefreshToken == null)
             {
-                throw new ArgumentException(nameof(token.RefreshToken));
+                throw new ArgumentException("token.RefreshToken property not set.");
             }
 
             if (token.TokenType == null)
             {
-                throw new ArgumentException(nameof(token.TokenType));
+                throw new ArgumentException("token.TokenType property not set.");
             }
 
             if (token.AccountId == null)
             {
-                throw new ArgumentException(nameof(token.AccountId));
+                throw new ArgumentException("token.AccountId property not set.");
             }
 
             if (token.AccountUsername == null)
             {
-                throw new ArgumentException(nameof(token.AccountUsername));
+                throw new ArgumentException("token.AccountUsername property not set.");
             }
 
             OAuth2Token = token;

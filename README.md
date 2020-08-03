@@ -3,10 +3,11 @@ Imgur.API is a .NET implementation of Imgur's API.
 
 It supports Imgur's free and Mashape's commercial API endpoints.
 
-[![Read the Docs](https://readthedocs.org/projects/imgurapi/badge/?version=latest)](http://imgurapi.readthedocs.org/en/latest/)
+![Build](https://github.com/DamienDennehy/Imgur.API/workflows/Build%20Matrix/badge.svg)
 
-[![Build](https://img.shields.io/appveyor/ci/damiendennehy/imgur-api.svg)](https://ci.appveyor.com/project/DamienDennehy/imgur-api)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ImgurAPI&metric=alert_status)](https://sonarcloud.io/dashboard?id=ImgurAPI)
 
 [![NuGet](https://img.shields.io/nuget/vpre/Imgur.API.svg)](https://www.nuget.org/packages/Imgur.API/)
 
+[![Read the Docs](https://readthedocs.org/projects/imgurapi/badge/?version=latest)](http://imgurapi.readthedocs.org/en/latest/)
 

@@ -1,0 +1,115 @@
+name: Build Matrix
+on:
+  # Manual Run.
+  workflow_dispatch:  
+  
+  # On a push to a branch or tag.
+  push:
+    branches: [ master, 'release/**' ]
+    tags: ['*']
+
+  # On a PR to a branch or tag.
+  pull_request:
+    branches: [ master, 'release/**' ]
+    tags: ['*']
+
+  # On a schedule. Default branch only. 
+  # See https://crontab.guru/examples.html    
+  # schedule:
+  #   - cron:  '0 6 * * *'  
+
+jobs:
+  build:
+
+    name: build-${{matrix.os}}
+
+    runs-on: ${{matrix.os}}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    env:
+        DOTNET_NOLOGO: true
+        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+    steps:
+    - name: Checkout      
+      uses: actions/checkout@v2
+      with: 
+          fetch-depth: 0
+
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.4
+      with:
+          versionSpec: 5.3.x
+
+    - name: Use GitVersion
+      id: gitversion
+      uses: gittools/actions/gitversion/execute@v0.9.4
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+        source-url: https://nuget.pkg.github.com/GenesisAutomation/index.json    
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.PACKAGE_TOKEN}}
+
+    - name: Setup NuGet Cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: Restore
+      run: dotnet restore --use-lock-file
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore --verbosity minimal -p:Version=${{steps.gitversion.outputs.semVer}}
+
+    - name: Test
+      run: dotnet test --configuration Release --no-restore --no-build --verbosity minimal --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory ./artifacts
+
+    - name: Pack
+      run: dotnet pack --configuration Release --no-restore --no-build --verbosity minimal --output ./artifacts -p:Version=${{steps.gitversion.outputs.semVer}}
+
+    - name: Publish
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{matrix.os}}
+        path: ./artifacts
+
+  deploy-packages:
+
+    needs: build
+
+    if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/release')
+
+    runs-on: ubuntu-latest
+
+    env:
+        DOTNET_NOLOGO: true
+        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+    steps:
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+        source-url: https://nuget.pkg.github.com/GenesisAutomation/index.json    
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        
+    - name: Download Artifacts 
+      uses: actions/download-artifact@v2
+      with:
+        name: ubuntu-latest
+        path: ./artifacts
+
+    - name: Push to GitHub Packages
+      run: dotnet nuget push './artifacts/**/*.nupkg' --skip-duplicate --no-symbols true
+      env:
+        DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLE: false   

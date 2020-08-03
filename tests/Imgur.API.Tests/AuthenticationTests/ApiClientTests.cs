@@ -46,11 +46,11 @@ namespace Imgur.API.Tests.AuthenticationTests
         }
 
         [Fact]
-        public void SetOAuth2Token_WithNullAccessToken_ThrowsArgumentNullException()
+        public void SetOAuth2Token_WithNullAccessToken_ThrowsArgumentException()
         {
             var oAuth2Token = new OAuth2Token
             {
-                AccessToken = Guid.NewGuid().ToString(),
+                AccessToken = null,
                 AccountId = Guid.NewGuid().ToString(),
                 AccountUsername = Guid.NewGuid().ToString(),
                 ExpiresIn = DateTime.Now.Minute,
@@ -65,11 +65,11 @@ namespace Imgur.API.Tests.AuthenticationTests
             });
 
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
+            Assert.IsType<ArgumentException>(exception);
         }
 
         [Fact]
-        public void SetOAuth2Token_WithNullAccessId_ThrowsArgumentNullException()
+        public void SetOAuth2Token_WithNullAccessId_ThrowsArgumentException()
         {
             var oAuth2Token = new OAuth2Token
             {
@@ -88,11 +88,11 @@ namespace Imgur.API.Tests.AuthenticationTests
             });
 
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
+            Assert.IsType<ArgumentException>(exception);
         }
 
         [Fact]
-        public void SetOAuth2Token_WithNullAccountUsername_ThrowsArgumentNullException()
+        public void SetOAuth2Token_WithNullAccountUsername_ThrowsArgumentException()
         {
             var oAuth2Token = new OAuth2Token
             {
@@ -111,7 +111,76 @@ namespace Imgur.API.Tests.AuthenticationTests
             });
 
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
+            Assert.IsType<ArgumentException>(exception);
+        }
+
+        [Fact]
+        public void SetOAuth2Token_WithNullExpiresIn_ThrowsArgumentException()
+        {
+            var oAuth2Token = new OAuth2Token
+            {
+                AccessToken = Guid.NewGuid().ToString(),
+                AccountId = Guid.NewGuid().ToString(),
+                AccountUsername = Guid.NewGuid().ToString(),
+                ExpiresIn = null,
+                RefreshToken = Guid.NewGuid().ToString(),
+                TokenType = Guid.NewGuid().ToString()
+            };
+
+            var exception = Record.Exception(() =>
+            {
+                var apiClient = new ApiClient("ClientId");
+                apiClient.SetOAuth2Token(oAuth2Token);
+            });
+
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentException>(exception);
+        }
+
+        [Fact]
+        public void SetOAuth2Token_WithNullRefreshToken_ThrowsArgumentException()
+        {
+            var oAuth2Token = new OAuth2Token
+            {
+                AccessToken = Guid.NewGuid().ToString(),
+                AccountId = Guid.NewGuid().ToString(),
+                AccountUsername = Guid.NewGuid().ToString(),
+                ExpiresIn = DateTime.Now.Minute,
+                RefreshToken = null,
+                TokenType = Guid.NewGuid().ToString()
+            };
+
+            var exception = Record.Exception(() =>
+            {
+                var apiClient = new ApiClient("ClientId");
+                apiClient.SetOAuth2Token(oAuth2Token);
+            });
+
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentException>(exception);
+        }
+
+        [Fact]
+        public void SetOAuth2Token_WithNullTokenType_ThrowsArgumentException()
+        {
+            var oAuth2Token = new OAuth2Token
+            {
+                AccessToken = Guid.NewGuid().ToString(),
+                AccountId = Guid.NewGuid().ToString(),
+                AccountUsername = Guid.NewGuid().ToString(),
+                ExpiresIn = DateTime.Now.Minute,
+                RefreshToken = Guid.NewGuid().ToString(),
+                TokenType = null
+            };
+
+            var exception = Record.Exception(() =>
+            {
+                var apiClient = new ApiClient("ClientId");
+                apiClient.SetOAuth2Token(oAuth2Token);
+            });
+
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentException>(exception);
         }
 
         [Fact]

@@ -95,6 +95,11 @@ namespace Imgur.API.Authentication
                 throw new ArgumentException("token.AccountUsername property not set.");
             }
 
+            if (token.ExpiresIn == null)
+            {
+                throw new ArgumentException("token.ExpiresIn property not set.");
+            }
+
             OAuth2Token = token;
         }
     }

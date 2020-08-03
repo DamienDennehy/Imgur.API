@@ -14,7 +14,7 @@
         /// <summary>
         /// The lifetime of the token in seconds.
         /// </summary>
-        int ExpiresIn { get; }
+        int? ExpiresIn { get; }
 
         /// <summary>
         /// The kind of token that is being returned.

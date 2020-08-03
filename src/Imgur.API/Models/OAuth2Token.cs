@@ -18,7 +18,7 @@ namespace Imgur.API.Models
         /// The lifetime of the token in seconds.
         /// </summary>
         [JsonPropertyName("expires_in")]
-        public virtual int ExpiresIn { get; set; }
+        public virtual int? ExpiresIn { get; set; }
 
         /// <summary>
         /// The kind of token that is being returned.

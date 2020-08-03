@@ -3,7 +3,7 @@
     /// <summary>
     /// An OAuth2 Token used for actions against a user's account.
     /// </summary>
-    interface IOAuth2Token
+    public interface IOAuth2Token
     {
         /// <summary>
         /// The secret key used to access the user's data. 

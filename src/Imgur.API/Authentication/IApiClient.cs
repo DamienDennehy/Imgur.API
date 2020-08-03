@@ -1,4 +1,6 @@
-﻿namespace Imgur.API.Authentication
+﻿using Imgur.API.Models;
+
+namespace Imgur.API.Authentication
 {
     /// <summary>
     /// The type of client that will be used for authentication.
@@ -6,7 +8,7 @@
     public interface IApiClient
     {
         /// <summary>
-        /// The client_id obtained during application registration.
+        /// The client id obtained during application registration.
         /// </summary>
         string ClientId { get; }
 
@@ -14,6 +16,11 @@
         /// The client secret obtained during application registration.
         /// </summary>
         string ClientSecret { get; }
+
+        /// <summary>
+        /// An OAuth2 Token used for actions against a user's account.
+        /// </summary>
+        IOAuth2Token OAuth2Token { get; }
 
         /// <summary>
         /// The Base Api Address.

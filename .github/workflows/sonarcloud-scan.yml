@@ -5,12 +5,12 @@ on:
   
   # On a push to a branch or tag.
   push:
-    branches: [ master, 'release/**' ]
+    branches: [ master, 'develop/**' ]
     tags: ['*']
 
   # On a PR to a branch or tag.
   pull_request:
-    branches: [ master, 'release/**' ]
+    branches: [ master, 'develop/**' ]
     tags: ['*']
 
   # On a schedule. Default branch only. 
@@ -49,10 +49,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.301
-        source-url: https://nuget.pkg.github.com/GenesisAutomation/index.json    
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.PACKAGE_TOKEN}}            
+        dotnet-version: 3.1.301     
 
     - name: Setup Java JDK
       uses: actions/setup-java@v1

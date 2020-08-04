@@ -23,8 +23,7 @@ namespace Imgur.API.Authentication
         IOAuth2Token OAuth2Token { get; }
 
         /// <summary>
-        /// The Base Api Address.
-        /// https://api.imgur.com/3/ or https://imgur-apiv3.p.rapidapi.com/3/
+        /// The Base Api Address. Typically https://api.imgur.com/3/
         /// </summary>
         string BaseAddress { get; }
     }

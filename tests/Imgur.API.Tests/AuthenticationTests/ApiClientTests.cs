@@ -16,6 +16,14 @@ namespace Imgur.API.Tests.AuthenticationTests
         }
 
         [Fact]
+        public void BaseAddress_SetByConstructor_AreEqual()
+        {
+            var client = new ApiClient("ClientId123", "ClientSecret123");
+
+            Assert.Equal("https://api.imgur.com/3/", client.BaseAddress);
+        }
+
+        [Fact]
         public void ClientId_SetNullByConstructor_ThrowArgumentNullException()
         {
             var exception = Record.Exception(() => new ApiClient(null));

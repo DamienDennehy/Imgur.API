@@ -21,9 +21,9 @@ namespace Imgur.API.Authentication
         public virtual IOAuth2Token OAuth2Token { get; private set; }
 
         /// <summary>
-        /// The Base Api Address.
+        /// The Base Api Address. Typically https://api.imgur.com/3/
         /// </summary>
-        public virtual string BaseAddress { get; } = "https://api.imgur.com/3/";
+        public virtual string BaseAddress { get; }
 
         /// <summary>
         /// Initializes a new instance of the ApiClient.

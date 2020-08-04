@@ -22,9 +22,8 @@ namespace Imgur.API.Authentication
 
         /// <summary>
         /// The Base Api Address.
-        /// https://api.imgur.com/3/ or https://imgur-apiv3.p.rapidapi.com/3/
         /// </summary>
-        public virtual string BaseAddress { get; private set; }
+        public virtual string BaseAddress { get; } = "https://api.imgur.com/3/";
 
         /// <summary>
         /// Initializes a new instance of the ApiClient.

@@ -32,6 +32,10 @@ jobs:
     env:
         DOTNET_NOLOGO: true
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}           
+        SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}   
+        SONAR_PROJECT_KEY: ImgurAPI
+        SONAR_PROJECT_NAME: Imgur.API   
 
     steps:
     - name: Checkout      
@@ -53,6 +57,16 @@ jobs:
       with:
         dotnet-version: 3.1.301
 
+    - name: Setup Java JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: '14.0.1'
+        java-package: jdk
+        architecture: x64
+
+    - name: Setup SonarScanner
+      run: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
+
     - name: Setup NuGet Cache
       uses: actions/cache@v2
       with:
@@ -64,11 +78,22 @@ jobs:
     - name: Restore
       run: dotnet restore --use-lock-file
 
+    - name: Begin Build Scan
+      if: matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request'
+      run: dotnet-sonarscanner begin /k:"$SONAR_PROJECT_KEY" /n:"$SONAR_PROJECT_NAME" /d:sonar.login="${{secrets.SONAR_TOKEN}}" /d:sonar.host.url="${{secrets.SONAR_URL}}" /o:"${{secrets.SONAR_ORG}}" /d:sonar.cs.opencover.reportsPaths="artifacts/**/*.xml" 
+
+    - name: Begin Build Scan (Pull Request)
+      if: matrix.os == 'ubuntu-latest' && github.event_name == 'pull_request'
+      run: dotnet-sonarscanner begin /k:"$SONAR_PROJECT_KEY" /n:"$SONAR_PROJECT_NAME" /d:sonar.login="${{secrets.SONAR_TOKEN}}" /d:sonar.host.url="${{secrets.SONAR_URL}}" /o:"${{secrets.SONAR_ORG}}" /d:sonar.cs.opencover.reportsPaths="artifacts/**/*.xml" /d:sonar.pullrequest.key=${{github.event.number}} /d:sonar.pullrequest.branch=${{github.head_ref}} /d:sonar.pullrequest.base=${{github.base_ref}} /d:sonar.pullrequest.github.repository=${{github.repository}} /d:sonar.pullrequest.provider=github
+
     - name: Build
       run: dotnet build --configuration Release --no-restore --verbosity minimal -p:Version=${{steps.gitversion.outputs.semVer}}
 
     - name: Test
       run: dotnet test --configuration Release --no-restore --no-build --verbosity minimal --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory ./artifacts
 
+    - name: End Build Scan
+      run: dotnet sonarscanner end /d:sonar.login="${{secrets.SONAR_TOKEN}}"
+      
     - name: Pack
       run: dotnet pack --configuration Release --no-restore --no-build --verbosity minimal --output ./artifacts -p:Version=${{steps.gitversion.outputs.semVer}}

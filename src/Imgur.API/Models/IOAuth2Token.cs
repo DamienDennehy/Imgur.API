@@ -3,7 +3,7 @@
     /// <summary>
     /// An OAuth2 Token used for actions against a user's account.
     /// </summary>
-    public interface IOAuth2Token
+    public interface IOAuth2Token: IDataModel
     {
         /// <summary>
         /// The secret key used to access the user's data. 
@@ -27,7 +27,7 @@
         string RefreshToken { get; }
 
         /// <summary>
-        /// The account's id.
+        /// The account id.
         /// </summary>
         string AccountId { get; }
 

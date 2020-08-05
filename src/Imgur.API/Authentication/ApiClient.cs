@@ -5,25 +5,13 @@ namespace Imgur.API.Authentication
 {
     public class ApiClient : IApiClient
     {
-        /// <summary>
-        /// The client id obtained during application registration.
-        /// </summary>
         public virtual string ClientId { get; private set; }
 
-        /// <summary>
-        /// The client secret obtained during application registration.
-        /// </summary>
         public virtual string ClientSecret { get; private set; }
 
-        /// <summary>
-        /// An OAuth2 Token used for actions against a user's account.
-        /// </summary>
         public virtual IOAuth2Token OAuth2Token { get; private set; }
 
-        /// <summary>
-        /// The Base Api Address. Typically https://api.imgur.com/3/
-        /// </summary>
-        public virtual string BaseAddress { get; }
+        public virtual string BaseAddress { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the ApiClient.
@@ -57,10 +45,6 @@ namespace Imgur.API.Authentication
             ClientSecret = clientSecret;
         }
 
-        /// <summary>
-        /// Sets an OAuth2Token that would be used instead of the Client Secret.
-        /// </summary>
-        /// <param name="token"></param>
         public virtual void SetOAuth2Token(IOAuth2Token token)
         {
             if (token == null)

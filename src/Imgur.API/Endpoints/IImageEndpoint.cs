@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Imgur.API.Endpoints
 {
-    interface IImageEndpoint
+    public interface IImageEndpoint
     {
         /// <summary>
         /// Get information about an image.

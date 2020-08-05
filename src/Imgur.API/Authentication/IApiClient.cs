@@ -3,7 +3,7 @@
 namespace Imgur.API.Authentication
 {
     /// <summary>
-    /// The type of client that will be used for authentication.
+    /// The client that will be used for authentication, containing ClientId, ClientSecret, etc.
     /// </summary>
     public interface IApiClient
     {
@@ -26,5 +26,11 @@ namespace Imgur.API.Authentication
         /// The Base Api Address. Typically https://api.imgur.com/3/
         /// </summary>
         string BaseAddress { get; }
+
+        /// <summary>
+        /// Sets the OAuth2Token to be used for authentication.
+        /// </summary>
+        /// <param name="token"></param>
+        void SetOAuth2Token(IOAuth2Token token);
     }
 }

@@ -73,6 +73,15 @@ namespace Imgur.API.Tests.ResponseConverterTests
         }
 
         [Fact]
+        public void GetOAuth2Token_WithOAuth2TokenResponse_ReturnsOAuth2Token()
+        {
+            var basicResponseConverter = new BasicResponseConverter();
+            var oauth2Token = basicResponseConverter.GetOAuth2Token<IOAuth2Token>(Mocks.MockOAuth2Responses.GetTokenResponse);
+            Assert.NotNull(oauth2Token);
+            Assert.IsType<OAuth2Token>(oauth2Token);
+        }
+
+        [Fact]
         public void ConvertResponse_WithImageResponse_ReturnsImage()
         {
             var basicResponseConverter = new BasicResponseConverter();

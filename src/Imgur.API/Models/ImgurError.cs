@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Imgur.API.Models
+﻿namespace Imgur.API.Models
 {
     /// <summary>
     /// An error returned after an Endpoint request.

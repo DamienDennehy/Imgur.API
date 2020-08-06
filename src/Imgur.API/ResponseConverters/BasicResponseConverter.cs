@@ -11,7 +11,7 @@ namespace Imgur.API.ResponseConverters
         /// <typeparam name="T"></typeparam>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal T ConvertResponse<T>(string response) where T: IDataModel
+        internal T ConvertResponse<T>(string response) where T : IDataModel
         {
             ThrowImgurExceptionIfResponseIsNull(response);
             ThrowImgurExceptionIfResponseIsInvalid(response);
@@ -24,9 +24,9 @@ namespace Imgur.API.ResponseConverters
             var oauth2Token = GetOAuth2Token<T>(response);
             if (oauth2Token != null)
             {
-                return oauth2Token;
+                return (T)oauth2Token;
             }
-            
+
             ThrowImgurExceptionIfResponseNotSuccess(response);
 
             return GetResponse<T>(response);
@@ -113,7 +113,7 @@ namespace Imgur.API.ResponseConverters
             }
         }
 
-        internal T GetOAuth2Token<T>(string response)
+        internal IOAuth2Token GetOAuth2Token<T>(string response)
         {
             var options = new JsonSerializerOptions
             {
@@ -126,7 +126,7 @@ namespace Imgur.API.ResponseConverters
                 return default;
             }
 
-            var oAuth2Response = JsonSerializer.Deserialize<T>(response, options);
+            var oAuth2Response = JsonSerializer.Deserialize<OAuth2Token>(response, options);
             return oAuth2Response;
         }
 

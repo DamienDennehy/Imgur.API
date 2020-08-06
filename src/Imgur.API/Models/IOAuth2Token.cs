@@ -29,7 +29,7 @@
         /// <summary>
         /// The account id.
         /// </summary>
-        string AccountId { get; }
+        int? AccountId { get; }
 
         /// <summary>
         /// The account's username.

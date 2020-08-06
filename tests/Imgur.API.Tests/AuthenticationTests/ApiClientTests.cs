@@ -59,7 +59,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             var oAuth2Token = new OAuth2Token
             {
                 AccessToken = null,
-                AccountId = Guid.NewGuid().ToString(),
+                AccountId = (int)DateTime.Now.Ticks,
                 AccountUsername = Guid.NewGuid().ToString(),
                 ExpiresIn = DateTime.Now.Minute,
                 RefreshToken = Guid.NewGuid().ToString(),
@@ -77,7 +77,7 @@ namespace Imgur.API.Tests.AuthenticationTests
         }
 
         [Fact]
-        public void SetOAuth2Token_WithNullAccessId_ThrowsArgumentException()
+        public void SetOAuth2Token_WithNullAccountId_ThrowsArgumentException()
         {
             var oAuth2Token = new OAuth2Token
             {
@@ -105,7 +105,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             var oAuth2Token = new OAuth2Token
             {
                 AccessToken = Guid.NewGuid().ToString(),
-                AccountId = Guid.NewGuid().ToString(),
+                AccountId = (int)DateTime.Now.Ticks,
                 AccountUsername = null,
                 ExpiresIn = DateTime.Now.Minute,
                 RefreshToken = Guid.NewGuid().ToString(),
@@ -128,7 +128,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             var oAuth2Token = new OAuth2Token
             {
                 AccessToken = Guid.NewGuid().ToString(),
-                AccountId = Guid.NewGuid().ToString(),
+                AccountId = (int)DateTime.Now.Ticks,
                 AccountUsername = Guid.NewGuid().ToString(),
                 ExpiresIn = null,
                 RefreshToken = Guid.NewGuid().ToString(),
@@ -151,7 +151,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             var oAuth2Token = new OAuth2Token
             {
                 AccessToken = Guid.NewGuid().ToString(),
-                AccountId = Guid.NewGuid().ToString(),
+                AccountId = (int)DateTime.Now.Ticks,
                 AccountUsername = Guid.NewGuid().ToString(),
                 ExpiresIn = DateTime.Now.Minute,
                 RefreshToken = null,
@@ -174,7 +174,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             var oAuth2Token = new OAuth2Token
             {
                 AccessToken = Guid.NewGuid().ToString(),
-                AccountId = Guid.NewGuid().ToString(),
+                AccountId = (int)DateTime.Now.Ticks,
                 AccountUsername = Guid.NewGuid().ToString(),
                 ExpiresIn = DateTime.Now.Minute,
                 RefreshToken = Guid.NewGuid().ToString(),
@@ -197,7 +197,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             var oAuth2Token = new OAuth2Token
             {
                 AccessToken = Guid.NewGuid().ToString(),
-                AccountId = Guid.NewGuid().ToString(),
+                AccountId = (int)DateTime.Now.Ticks,
                 AccountUsername = Guid.NewGuid().ToString(),
                 ExpiresIn = DateTime.Now.Minute,
                 RefreshToken = Guid.NewGuid().ToString(),
@@ -215,7 +215,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             var oAuth2Token = new OAuth2Token
             {
                 AccessToken = Guid.NewGuid().ToString(),
-                AccountId = Guid.NewGuid().ToString(),
+                AccountId = (int)DateTime.Now.Ticks,
                 AccountUsername = Guid.NewGuid().ToString(),
                 ExpiresIn = DateTime.Now.Minute,
                 RefreshToken = Guid.NewGuid().ToString(),
@@ -235,7 +235,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             var oAuth2Token = new OAuth2Token
             {
                 AccessToken = Guid.NewGuid().ToString(),
-                AccountId = Guid.NewGuid().ToString(),
+                AccountId = (int)DateTime.Now.Ticks,
                 AccountUsername = Guid.NewGuid().ToString(),
                 ExpiresIn = DateTime.Now.Minute,
                 RefreshToken = Guid.NewGuid().ToString(),

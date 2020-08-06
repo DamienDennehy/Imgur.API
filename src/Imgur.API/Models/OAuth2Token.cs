@@ -20,7 +20,7 @@ namespace Imgur.API.Models
         public virtual string RefreshToken { get; set; }
 
         [JsonPropertyName("account_id")]
-        public virtual string AccountId { get; set; }
+        public virtual int? AccountId { get; set; }
 
         [JsonPropertyName("account_username")]
         public virtual string AccountUsername { get; set; }

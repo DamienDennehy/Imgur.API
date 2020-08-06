@@ -1,4 +1,4 @@
-name: Build Matrix
+name: Build
 on:
   # Manual Run.
   workflow_dispatch:  

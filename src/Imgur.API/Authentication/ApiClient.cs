@@ -68,7 +68,7 @@ namespace Imgur.API.Authentication
                 throw new ArgumentException("token.TokenType property not set.");
             }
 
-            if (token.AccountId == null)
+            if (token.AccountId == 0)
             {
                 throw new ArgumentException("token.AccountId property not set.");
             }
@@ -78,7 +78,7 @@ namespace Imgur.API.Authentication
                 throw new ArgumentException("token.AccountUsername property not set.");
             }
 
-            if (token.ExpiresIn == null)
+            if (token.ExpiresIn == 0)
             {
                 throw new ArgumentException("token.ExpiresIn property not set.");
             }

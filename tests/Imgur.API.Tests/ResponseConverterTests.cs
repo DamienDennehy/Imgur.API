@@ -80,13 +80,5 @@ namespace Imgur.API.Tests.ResponseConverterTests
             Assert.NotNull(oauth2Token);
             Assert.IsType<OAuth2Token>(oauth2Token);
         }
-
-        [Fact]
-        public void ConvertResponse_WithImageResponse_ReturnsImage()
-        {
-            var basicResponseConverter = new ResponseConverter();
-            var image = basicResponseConverter.ConvertResponse<Image>(Mocks.MockImageResponses.GetImage);
-            Assert.IsType<Image>(image);
-        }
     }
 }

@@ -14,7 +14,7 @@
         /// <summary>
         /// The lifetime of the token in seconds.
         /// </summary>
-        int? ExpiresIn { get; }
+        int ExpiresIn { get; }
 
         /// <summary>
         /// The kind of token that is being returned.
@@ -29,7 +29,7 @@
         /// <summary>
         /// The account id.
         /// </summary>
-        int? AccountId { get; }
+        int AccountId { get; }
 
         /// <summary>
         /// The account's username.

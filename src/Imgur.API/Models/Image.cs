@@ -41,7 +41,7 @@ namespace Imgur.API.Models
         public string AccountUrl { get; set; }
 
         [JsonPropertyName("account_id")]
-        public string AccountId { get; set; }
+        public int AccountId { get; set; }
 
         [JsonPropertyName("is_ad")]
         public bool IsAd { get; set; }

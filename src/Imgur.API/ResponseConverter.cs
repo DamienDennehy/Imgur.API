@@ -42,8 +42,7 @@ namespace Imgur.API.ResponseConverters
                 PropertyNameCaseInsensitive = true
             };
 
-            var oAuth2Response = JsonSerializer.Deserialize<OAuth2Token>(response, options);
-            return oAuth2Response;
+            return JsonSerializer.Deserialize<OAuth2Token>(response, options);
         }
 
         internal void ThrowImgurExceptionIfResponseIsNull(string response)

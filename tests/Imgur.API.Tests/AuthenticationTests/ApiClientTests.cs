@@ -82,7 +82,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             var oAuth2Token = new OAuth2Token
             {
                 AccessToken = Guid.NewGuid().ToString(),
-                AccountId = null,
+                AccountId = 0,
                 AccountUsername = Guid.NewGuid().ToString(),
                 ExpiresIn = DateTime.Now.Minute,
                 RefreshToken = Guid.NewGuid().ToString(),
@@ -123,14 +123,14 @@ namespace Imgur.API.Tests.AuthenticationTests
         }
 
         [Fact]
-        public void SetOAuth2Token_WithNullExpiresIn_ThrowsArgumentException()
+        public void SetOAuth2Token_WithEmptyExpiresIn_ThrowsArgumentException()
         {
             var oAuth2Token = new OAuth2Token
             {
                 AccessToken = Guid.NewGuid().ToString(),
                 AccountId = (int)DateTime.Now.Ticks,
                 AccountUsername = Guid.NewGuid().ToString(),
-                ExpiresIn = null,
+                ExpiresIn = 0,
                 RefreshToken = Guid.NewGuid().ToString(),
                 TokenType = Guid.NewGuid().ToString()
             };

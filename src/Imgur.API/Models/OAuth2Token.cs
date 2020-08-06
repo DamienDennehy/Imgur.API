@@ -11,7 +11,7 @@ namespace Imgur.API.Models
         public virtual string AccessToken { get; set; }
 
         [JsonPropertyName("expires_in")]
-        public virtual int? ExpiresIn { get; set; }
+        public virtual int ExpiresIn { get; set; }
 
         [JsonPropertyName("token_type")]
         public virtual string TokenType { get; set; }
@@ -20,7 +20,7 @@ namespace Imgur.API.Models
         public virtual string RefreshToken { get; set; }
 
         [JsonPropertyName("account_id")]
-        public virtual int? AccountId { get; set; }
+        public virtual int AccountId { get; set; }
 
         [JsonPropertyName("account_username")]
         public virtual string AccountUsername { get; set; }

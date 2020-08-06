@@ -19,6 +19,7 @@ namespace Imgur.API.Tests.ResponseTests
             Assert.Equal("That's got to hurt", image.Description);
             Assert.Equal(1596483255, image.DateTime);
             Assert.Equal("video/mp4", image.Type);
+            Assert.True(image.Animated);
             Assert.Equal(854, image.Width);
             Assert.Equal(482, image.Height);
             Assert.Equal(7701069, image.Size);
@@ -28,6 +29,7 @@ namespace Imgur.API.Tests.ResponseTests
             Assert.True(image.Favorite);
             Assert.True(image.Nsfw);
             Assert.Equal("viral", image.Section);
+            Assert.Equal("https://imgur.com/user/Sarah", image.AccountUrl);
             Assert.Equal(12345679, image.AccountId);
             Assert.True(image.IsAd);
             Assert.True(image.InMostViral);
@@ -37,6 +39,7 @@ namespace Imgur.API.Tests.ResponseTests
             Assert.True(image.InGallery);
             Assert.Equal("https://i.imgur.com/mvWNMH4.mp4", image.Link);
             Assert.Equal("ABCDEFGH1234", image.DeleteHash);
+            Assert.Equal("ouch.mp4", image.Name);
         }
     }
 }

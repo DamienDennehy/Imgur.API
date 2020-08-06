@@ -33,7 +33,7 @@ namespace Imgur.API.Tests.ResponseConverterTests
         {
             var basicConverter = new BasicResponseConverter();
 
-            var exception = Record.Exception(() => basicConverter.ThrowImgurExceptionIfResponseContainsRawError(Mocks.MockErrorResponses.ImgurRawError));
+            var exception = Record.Exception(() => basicConverter.ThrowImgurExceptionIfResponseContainsRawError(Mocks.MockErrorResponses.RawError));
             Assert.NotNull(exception);
             Assert.IsType<ImgurException>(exception);
             Assert.Contains("An error occurred", exception.Message);
@@ -44,7 +44,7 @@ namespace Imgur.API.Tests.ResponseConverterTests
         {
             var basicConverter = new BasicResponseConverter();
 
-            var exception = Record.Exception(() => basicConverter.ThrowImgurExceptionIfResponseContainsError(Mocks.MockErrorResponses.ImgurError));
+            var exception = Record.Exception(() => basicConverter.ThrowImgurExceptionIfResponseContainsError(Mocks.MockErrorResponses.Error));
             Assert.NotNull(exception);
             Assert.IsType<ImgurException>(exception);
             Assert.Contains("Imgur is over capacity", exception.Message);
@@ -55,10 +55,21 @@ namespace Imgur.API.Tests.ResponseConverterTests
         {
             var basicConverter = new BasicResponseConverter();
 
-            var exception = Record.Exception(() => basicConverter.ThrowImgurExceptionIfResponseContainsErrorMessage(Mocks.MockErrorResponses.ImgurErrorMessage));
+            var exception = Record.Exception(() => basicConverter.ThrowImgurExceptionIfResponseContainsErrorMessage(Mocks.MockErrorResponses.ErrorMessage));
             Assert.NotNull(exception);
             Assert.IsType<ImgurException>(exception);
             Assert.Contains("Could not complete request", exception.Message);
+        }
+
+        [Fact]
+        public void ThrowImgurExceptionIfResponseNotSuccess_WithUnsuccessfulMessage_ThrowsImgurException()
+        {
+            var basicConverter = new BasicResponseConverter();
+
+            var exception = Record.Exception(() => basicConverter.ThrowImgurExceptionIfResponseNotSuccess(Mocks.MockErrorResponses.Error));
+            Assert.NotNull(exception);
+            Assert.IsType<ImgurException>(exception);
+            Assert.Contains("Imgur is over capacity", exception.Message);
         }
 
         [Fact]

@@ -6,9 +6,5 @@
     public class ImgurErrorDetail : IImgurErrorDetail
     {
         public Error Error { get; set; }
-
-        public string Method { get; set; }
-
-        public string Request { get; set; }
     }
 }

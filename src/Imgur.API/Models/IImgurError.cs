@@ -3,7 +3,7 @@
     /// <summary>
     /// An error returned after an Endpoint request.
     /// </summary>
-    public interface IImgurError
+    public interface IImgurError: IDataModel
     {
         /// <summary>
         /// A description of the error.

@@ -3,7 +3,7 @@ using Imgur.API.Models;
 
 namespace Imgur.API.ResponseConverters
 {
-    internal class BasicResponseConverter
+    internal class ResponseConverter
     {
         /// <summary>
         /// Parses the string response from the endpoint into an expected type T.
@@ -18,18 +18,32 @@ namespace Imgur.API.ResponseConverters
             ThrowImgurExceptionIfResponseContainsRawError(response);
             ThrowImgurExceptionIfResponseContainsError(response);
             ThrowImgurExceptionIfResponseContainsErrorMessage(response);
-
-            //If the type being requested is an OAuth2Token,
-            //deserialize it immediately and return.
-            var oauth2Token = GetOAuth2Token<T>(response);
-            if (oauth2Token != null)
-            {
-                return (T)oauth2Token;
-            }
-
             ThrowImgurExceptionIfResponseNotSuccess(response);
 
             return GetResponse<T>(response);
+        }
+
+        /// <summary>
+        /// Parses the string response from the endpoint into an OAuth2Token.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        internal IOAuth2Token ConvertOAuth2TokenResponse(string response)
+        {
+            ThrowImgurExceptionIfResponseIsNull(response);
+            ThrowImgurExceptionIfResponseIsInvalid(response);
+            ThrowImgurExceptionIfResponseContainsRawError(response);
+            ThrowImgurExceptionIfResponseContainsError(response);
+            ThrowImgurExceptionIfResponseContainsErrorMessage(response);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            var oAuth2Response = JsonSerializer.Deserialize<OAuth2Token>(response, options);
+            return oAuth2Response;
         }
 
         internal void ThrowImgurExceptionIfResponseIsNull(string response)
@@ -111,23 +125,6 @@ namespace Imgur.API.ResponseConverters
                 var errorResponse = JsonSerializer.Deserialize<Basic<ImgurError>>(response, options);
                 throw new ImgurException(errorResponse.Data.Error);
             }
-        }
-
-        internal IOAuth2Token GetOAuth2Token<T>(string response)
-        {
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
-
-            if (!(typeof(T) == typeof(IOAuth2Token)
-                || typeof(T) == typeof(OAuth2Token)))
-            {
-                return default;
-            }
-
-            var oAuth2Response = JsonSerializer.Deserialize<OAuth2Token>(response, options);
-            return oAuth2Response;
         }
 
         internal T GetResponse<T>(string response)

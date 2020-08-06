@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Imgur.API.Models;
 
 namespace Imgur.API.ResponseConverters
@@ -12,7 +11,7 @@ namespace Imgur.API.ResponseConverters
         /// <typeparam name="T"></typeparam>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal virtual T ConvertResponse<T>(string response) where T: IDataModel
+        internal T ConvertResponse<T>(string response) where T: IDataModel
         {
             ThrowImgurExceptionIfResponseIsNull(response);
             ThrowImgurExceptionIfResponseIsInvalid(response);
@@ -20,33 +19,17 @@ namespace Imgur.API.ResponseConverters
             ThrowImgurExceptionIfResponseContainsError(response);
             ThrowImgurExceptionIfResponseContainsErrorMessage(response);
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
-
             //If the type being requested is an OAuth2Token,
-            //deserialize it immediately and return
-            if (typeof(T) == typeof(IOAuth2Token) || typeof(T) == typeof(OAuth2Token))
+            //deserialize it immediately and return.
+            var oauth2Token = GetOAuth2Token<T>(response);
+            if (oauth2Token != null)
             {
-                var oAuth2Response = JsonSerializer.Deserialize<T>(response, options);
-                return oAuth2Response;
+                return oauth2Token;
             }
+            
+            ThrowImgurExceptionIfResponseNotSuccess(response);
 
-            //Deserialize the response into a generic Basic<object> type.
-            var objectResponse = JsonSerializer.Deserialize<Basic<object>>(response, options);
-
-            //If the request was not a success, then the objectResponse type is 
-            //Basic<ImgurError> and should be handled as such.
-            if (!objectResponse.Success)
-            {
-                var errorResponse = JsonSerializer.Deserialize<Basic<ImgurError>>(response, options);
-                throw new ImgurException(errorResponse.Data.Error);
-            }
-
-            var basicResponse = JsonSerializer.Deserialize<Basic<T>>(response, options);
-
-            return basicResponse.Data;
+            return GetResponse<T>(response);
         }
 
         internal void ThrowImgurExceptionIfResponseIsNull(string response)
@@ -112,6 +95,51 @@ namespace Imgur.API.ResponseConverters
                 var imgurError = JsonSerializer.Deserialize<Basic<ImgurErrorDetail>>(response, options);
                 throw new ImgurException(imgurError.Data.Error.Message);
             }
+        }
+
+        internal void ThrowImgurExceptionIfResponseNotSuccess(string response)
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            var objectResponse = JsonSerializer.Deserialize<Basic<object>>(response, options);
+
+            if (!objectResponse.Success)
+            {
+                var errorResponse = JsonSerializer.Deserialize<Basic<ImgurError>>(response, options);
+                throw new ImgurException(errorResponse.Data.Error);
+            }
+        }
+
+        internal T GetOAuth2Token<T>(string response)
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            if (!(typeof(T) == typeof(IOAuth2Token)
+                || typeof(T) == typeof(OAuth2Token)))
+            {
+                return default;
+            }
+
+            var oAuth2Response = JsonSerializer.Deserialize<T>(response, options);
+            return oAuth2Response;
+        }
+
+        internal T GetResponse<T>(string response)
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            var basicResponse = JsonSerializer.Deserialize<Basic<T>>(response, options);
+
+            return basicResponse.Data;
         }
     }
 }

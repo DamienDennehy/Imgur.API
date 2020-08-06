@@ -7,26 +7,10 @@ using Xunit;
 
 namespace Imgur.API.Tests.EndpointTests
 {
-    public class EndpointTests
+    public class EndpointBaseTests
     {
         [Fact]
-        public void ApiClient_SetByConstructor1_Equal()
-        {
-            var client = new ApiClient("ClientId");
-            var endpoint = new MockEndpoint(client, new HttpClient());
-            Assert.Same(client, endpoint.ApiClient);
-        }
-
-        [Fact]
-        public void ApiClient_SetByConstructor2_Equal()
-        {
-            var client = new ApiClient("ClientId", "ClientSecret");
-            var endpoint = new MockEndpoint(client, new HttpClient());
-            Assert.Same(client, endpoint.ApiClient);
-        }
-
-        [Fact]
-        public void ApiClient_SetNullByConstructor1_ThrowArgumentNullException()
+        public void ApiClient_SetNullByConstructor_ThrowsArgumentNullException()
         {
             var exception = Record.Exception(() => new MockEndpoint(null, new HttpClient()));
             Assert.NotNull(exception);
@@ -34,22 +18,11 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public void HttpClient_SetByConstructor1_NotNull()
+        public void ApiClient_SetByConstructor_AreSame()
         {
-            var client = new ApiClient("123", "1234");
+            var client = new ApiClient("ClientId");
             var endpoint = new MockEndpoint(client, new HttpClient());
-            Assert.NotNull(endpoint.HttpClient);
-        }
-
-        [Fact]
-        public void HttpClient_SetByConstructor2_AreSame()
-        {
-            var client = new ApiClient("123", "1234");
-            var httpCLient = new HttpClient();
-
-            var endpoint = new MockEndpoint(client, httpCLient);
-
-            Assert.Same(httpCLient, endpoint.HttpClient);
+            Assert.Same(client, endpoint.ApiClient);
         }
 
         [Fact]
@@ -61,7 +34,18 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public void HttpClientBaseAddress_WithApiClient_IsImgurUrl()
+        public void HttpClient_SetByConstructor_AreSame()
+        {
+            var client = new ApiClient("123", "1234");
+            var httpCLient = new HttpClient();
+
+            var endpoint = new MockEndpoint(client, httpCLient);
+
+            Assert.Same(httpCLient, endpoint.HttpClient);
+        }
+
+        [Fact]
+        public void HttpClient_SetByConstructor_HasBaseAddressSet()
         {
             var client = new ApiClient("123", "1234");
             var endpoint = new MockEndpoint(client, new HttpClient());
@@ -70,7 +54,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public void HttpClientWithApiClient_SetByConstructor_HeadersEqual()
+        public void HttpClient_SetByConstructor_HasHeadersSet()
         {
             var client = new ApiClient("123", "1234");
             var endpoint = new MockEndpoint(client, new HttpClient());

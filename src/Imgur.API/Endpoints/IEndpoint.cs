@@ -11,11 +11,11 @@ namespace Imgur.API.Endpoints
         /// <summary>
         /// The client that will be used for authentication, containing ClientId, ClientSecret, etc.
         /// </summary>
-        IApiClient ApiClient { get; }
+        IApiClient ApiClient { get; set; }
 
         /// <summary>
         /// HttpClient used for Http Requests.  
         /// </summary>
-        HttpClient HttpClient { get; }
+        HttpClient HttpClient { get; set; }
     }
 }

@@ -12,9 +12,9 @@ namespace Imgur.API.Endpoints
     {
         internal const string OAuth2RequiredExceptionMessage = "OAuth authentication required.";
 
-        public IApiClient ApiClient { get; }
+        public IApiClient ApiClient { get; set; }
 
-        public HttpClient HttpClient { get; }
+        public HttpClient HttpClient { get; set; }
 
         protected EndpointBase(IApiClient apiClient, HttpClient httpClient)
         {

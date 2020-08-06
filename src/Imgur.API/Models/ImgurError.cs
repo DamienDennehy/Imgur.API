@@ -7,7 +7,6 @@ namespace Imgur.API.Models
     /// </summary>
     internal class ImgurError : IImgurError
     {
-        [JsonPropertyName("error")]
         public virtual string Error { get; set; }
 
         public virtual string Method { get; set; }

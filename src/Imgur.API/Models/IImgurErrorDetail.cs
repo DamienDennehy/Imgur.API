@@ -3,12 +3,12 @@
     /// <summary>
     /// An error returned after an Endpoint request.
     /// </summary>
-    public interface IImgurError
+    public interface IImgurErrorDetail
     {
         /// <summary>
         /// A description of the error.
         /// </summary>
-        string Error { get; }
+        Error Error { get; }
 
         /// <summary>
         /// The HttpMethod that was used to send the request.

@@ -39,6 +39,7 @@ namespace Imgur.API.Endpoints
         /// <returns></returns>
         Task UploadImageAsync(string image, string albumId = null, string name = null, string title = null, string description = null, CancellationToken cancellationToken = default);
 
+
         /// <summary>
         /// Upload a new image.
         /// </summary>
@@ -51,6 +52,7 @@ namespace Imgur.API.Endpoints
         /// <param name="disableAudio"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
         Task UploadVideoAsync(Stream video, string albumId = null, string type = null, string name = null, string title = null, string description = null, bool disableAudio = false, CancellationToken cancellationToken = default);
 
         /// <summary>

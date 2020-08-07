@@ -5,7 +5,12 @@ namespace Imgur.API.RequestBuilders
 {
     internal abstract class RequestBuilderBase
     {
-        internal static HttpRequestMessage CreateRequest(HttpMethod httpMethod, string url)
+        protected RequestBuilderBase()
+        {
+        }
+
+        internal static HttpRequestMessage CreateRequest(HttpMethod httpMethod,
+                                                         string url)
         {
             if (httpMethod == null)
             {

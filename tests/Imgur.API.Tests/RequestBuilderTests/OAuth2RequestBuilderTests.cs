@@ -11,12 +11,12 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public void GetTokenByRefreshTokenRequest_WithClientIdNull_ThrowsArgumentNullException()
         {
-            var exception = 
-                Record.Exception(() => 
-                OAuth2RequestBuilder.GetTokenByRefreshTokenRequest("url", 
-                "ABChjfhjhjdhfjksdfsdfsdfs", 
-                null,
-                "clientSecret"));
+            var exception =
+                Record.Exception(() =>
+                OAuth2RequestBuilder.GetTokenByRefreshTokenRequest("url",
+                                                                   "ABChjfhjhjdhfjksdfsdfsdfs",
+                                                                   null,
+                                                                   "clientSecret"));
 
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
@@ -28,13 +28,13 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public void GetTokenByRefreshTokenRequest_WithClientSecretNull_ThrowsArgumentNullException()
         {
-            var requestBuilder = new OAuth2RequestBuilder();
-
             var exception =
-                Record.Exception(
-                    () =>
-OAuth2RequestBuilder.GetTokenByRefreshTokenRequest("url", "ABChjfhjhjdhfjksdfsdfsdfs", "clientId",
-                            null));
+                Record.Exception(() =>
+                OAuth2RequestBuilder.GetTokenByRefreshTokenRequest("url",
+                                                                   "ABChjfhjhjdhfjksdfsdfsdfs",
+                                                                   "clientId",
+                                                                   null));
+
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -45,13 +45,13 @@ OAuth2RequestBuilder.GetTokenByRefreshTokenRequest("url", "ABChjfhjhjdhfjksdfsdf
         [Fact]
         public void GetTokenByRefreshTokenRequest_WithEndpointUrlNull_ThrowsArgumentNullException()
         {
-            var requestBuilder = new OAuth2RequestBuilder();
-
             var exception =
-                Record.Exception(
-                    () =>
-OAuth2RequestBuilder.GetTokenByRefreshTokenRequest(null, "ABChjfhjhjdhfjksdfsdfsdfs", "clientId",
-                            "clientSecret"));
+                Record.Exception(() => 
+                OAuth2RequestBuilder.GetTokenByRefreshTokenRequest(null,
+                                                                   "ABChjfhjhjdhfjksdfsdfsdfs",
+                                                                   "clientId",
+                                                                   "clientSecret"));
+
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -62,10 +62,8 @@ OAuth2RequestBuilder.GetTokenByRefreshTokenRequest(null, "ABChjfhjhjdhfjksdfsdfs
         [Fact]
         public async Task GetTokenByRefreshTokenRequest_WithRefreshTokenEqual()
         {
-            var requestBuilder = new OAuth2RequestBuilder();
-
             var request = OAuth2RequestBuilder.GetTokenByRefreshTokenRequest("https://api.imgur.com/oauth2/token",
-                "ABChjfhjhjdhfjksdfsdfsdfs", "123", "1234");
+                                                                             "ABChjfhjhjdhfjksdfsdfsdfs", "123", "1234");
 
             Assert.NotNull(request);
             Assert.Equal("https://api.imgur.com/oauth2/token", request.RequestUri.ToString());
@@ -82,11 +80,13 @@ OAuth2RequestBuilder.GetTokenByRefreshTokenRequest(null, "ABChjfhjhjdhfjksdfsdfs
         [Fact]
         public void GetTokenByRefreshTokenRequest_WithTokenNull_ThrowsArgumentNullException()
         {
-            var requestBuilder = new OAuth2RequestBuilder();
-
             var exception =
-                Record.Exception(
-                    () => OAuth2RequestBuilder.GetTokenByRefreshTokenRequest("url", null, "clientId", "clientSecret"));
+                Record.Exception(() => 
+                OAuth2RequestBuilder.GetTokenByRefreshTokenRequest("url",
+                                                                   null,
+                                                                   "clientId",
+                                                                   "clientSecret"));
+            
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 

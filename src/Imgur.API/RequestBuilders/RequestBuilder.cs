@@ -3,12 +3,8 @@ using System.Net.Http;
 
 namespace Imgur.API.RequestBuilders
 {
-    internal abstract class RequestBuilderBase
+    internal static class RequestBuilder
     {
-        protected RequestBuilderBase()
-        {
-        }
-
         internal static HttpRequestMessage CreateRequest(HttpMethod httpMethod,
                                                          string url)
         {

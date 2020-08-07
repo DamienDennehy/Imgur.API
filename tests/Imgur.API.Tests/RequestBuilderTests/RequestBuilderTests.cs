@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Imgur.API.Tests.RequestBuilderTests
 {
-    public class RequestBuilderBaseTests
+    public class RequestBuilderTests
     {
         [Fact]
         public void CreateRequest_Equal()
@@ -14,7 +14,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var client = new ApiClient("123", "1234");
 
             var mockUrl = $"{client.BaseAddress}account/bob";
-            var request = RequestBuilderBase.CreateRequest(HttpMethod.Get, mockUrl);
+            var request = RequestBuilder.CreateRequest(HttpMethod.Get, mockUrl);
 
             Assert.NotNull(request);
             Assert.Equal("https://api.imgur.com/3/account/bob", request.RequestUri.ToString());
@@ -24,7 +24,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public void CreateRequest_WithHttpMethodNull_ThrowsArgumentNullException()
         {
-            var exception = Record.Exception(() => RequestBuilderBase.CreateRequest(null, null));
+            var exception = Record.Exception(() => RequestBuilder.CreateRequest(null, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
@@ -35,7 +35,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public void CreateRequest_WithUrlNull_ThrowsArgumentNullException()
         {
-            var exception = Record.Exception(() => RequestBuilderBase.CreateRequest(HttpMethod.Get, null));
+            var exception = Record.Exception(() => RequestBuilder.CreateRequest(HttpMethod.Get, null));
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 

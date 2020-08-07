@@ -5,7 +5,7 @@ using System.Net.Http;
 
 namespace Imgur.API.RequestBuilders
 {
-    internal class OAuth2RequestBuilder : RequestBuilderBase
+    internal static class OAuth2RequestBuilder
     {
         internal static HttpRequestMessage GetTokenByRefreshTokenRequest(string url,
                                                                          string refreshToken,

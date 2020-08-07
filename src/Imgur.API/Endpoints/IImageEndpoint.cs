@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Imgur.API.Endpoints
@@ -9,8 +10,9 @@ namespace Imgur.API.Endpoints
         /// Get information about an image.
         /// </summary>
         /// <param name="imageId"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task GetImageAsync(string imageId);
+        Task GetImageAsync(string imageId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Upload a new image.
@@ -20,8 +22,9 @@ namespace Imgur.API.Endpoints
         /// <param name="name"></param>
         /// <param name="title"></param>
         /// <param name="description"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task UploadImageAsync(Stream image, string albumId = null, string name = null, string title = null, string description = null);
+        Task UploadImageAsync(Stream image, string albumId = null, string name = null, string title = null, string description = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Upload a new image.
@@ -32,8 +35,9 @@ namespace Imgur.API.Endpoints
         /// <param name="name"></param>
         /// <param name="title"></param>
         /// <param name="description"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task UploadImageAsync(string image, string albumId = null, string name = null, string title = null, string description = null);
+        Task UploadImageAsync(string image, string albumId = null, string name = null, string title = null, string description = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Upload a new image.
@@ -45,15 +49,17 @@ namespace Imgur.API.Endpoints
         /// <param name="title"></param>
         /// <param name="description"></param>
         /// <param name="disableAudio"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task UploadVideoAsync(Stream video, string albumId = null, string type = null, string name = null, string title = null, string description = null, bool disableAudio = false);
+        Task UploadVideoAsync(Stream video, string albumId = null, string type = null, string name = null, string title = null, string description = null, bool disableAudio = false, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes an image.
         /// </summary>
         /// <param name="imageId"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task DeleteImageAsync(string imageId);
+        Task DeleteImageAsync(string imageId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates the title or description of an image.
@@ -61,14 +67,16 @@ namespace Imgur.API.Endpoints
         /// <param name="imageId"></param>
         /// <param name="title"></param>
         /// <param name="description"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task UpdateImageAsync(string imageId, string title = null, string description = null);
+        Task UpdateImageAsync(string imageId, string title = null, string description = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Favorite an image with the given ID. The user is required to be logged in to favorite the image.
         /// </summary>
         /// <param name="imageId"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task FavoriteImageAsync(string imageId);
+        Task FavoriteImageAsync(string imageId, CancellationToken cancellationToken = default);
     }
 }

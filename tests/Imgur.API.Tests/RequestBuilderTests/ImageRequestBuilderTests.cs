@@ -127,6 +127,51 @@ namespace Imgur.API.Tests.RequestBuilderTests
         }
 
         [Fact]
+        public async Task UploadProgressStreamBinaryRequest_Equal()
+        {
+            var client = new ApiClient("123", "1234");
+            var mockUrl = $"{client.BaseAddress}image";
+
+            using var ms = new MemoryStream(new byte[9]);
+            var imageLength = ms.Length;
+            var currentProgress = 0;
+            int report(int progress) => currentProgress = progress;
+            var byteProgress = new Progress<int>(percent => report(percent));
+            var request = ImageRequestBuilder.UploadImageStreamRequest(mockUrl, ms, "TheAlbum", "TheName", "TheTitle",
+                "TheDescription", byteProgress);
+
+            Assert.NotNull(request);
+            Assert.Equal("https://api.imgur.com/3/image", request.RequestUri.ToString());
+            Assert.Equal(HttpMethod.Post, request.Method);
+
+            var content = (MultipartFormDataContent)request.Content;
+            var imageContent =
+                (ProgressStreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
+            var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
+            var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+            var name = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "name");
+            var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
+            var description =
+                (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
+
+            Assert.NotNull(imageContent);
+            Assert.NotNull(type);
+            Assert.NotNull(album);
+            Assert.NotNull(name);
+            Assert.NotNull(title);
+            Assert.NotNull(description);
+
+            var image = await imageContent.ReadAsByteArrayAsync().ConfigureAwait(false);
+
+            Assert.Equal(imageLength, image.Length);
+            Assert.Equal("file", await type.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("TheName", await name.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
+        }
+
+        [Fact]
         public void UploadStreamBinaryRequest_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ApiClient("123", "1234");

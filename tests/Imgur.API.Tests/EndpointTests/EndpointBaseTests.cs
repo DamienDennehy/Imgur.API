@@ -154,7 +154,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task SendRequestAsync_WithResponseNull_ThrowsHttpRequestException()
+        public async Task SendRequestInternalAsync_WithResponseNull_ThrowsHttpRequestException()
         {
             var mockUrl = "http://example.org/test";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
@@ -166,7 +166,7 @@ namespace Imgur.API.Tests.EndpointTests
 
             var exception = await Record.ExceptionAsync(async () =>
             {
-                await endpoint.SendRequestAsync<Image>(request)
+                await endpoint.SendRequestInternalAsync<Image>(request)
                               .ConfigureAwait(false);
             }).ConfigureAwait(false);
 
@@ -175,7 +175,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task SendRequestAsync_WithUnauthorizedErrorMessage_ThrowsHttpRequestException()
+        public async Task SendRequestInternalAsync_WithUnauthorizedErrorMessage_ThrowsHttpRequestException()
         {
             var mockUrl = "http://example.org/test";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.Unauthorized)
@@ -190,7 +190,7 @@ namespace Imgur.API.Tests.EndpointTests
 
             var exception = await Record.ExceptionAsync(async () =>
             {
-                await endpoint.SendRequestAsync<Image>(request)
+                await endpoint.SendRequestInternalAsync<Image>(request)
                               .ConfigureAwait(false);
             }).ConfigureAwait(false);
 

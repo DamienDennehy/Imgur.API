@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Linq;
 using Xunit;
 
 namespace Imgur.API.Tests
@@ -65,6 +64,35 @@ namespace Imgur.API.Tests
 
             var argNullException = (ArgumentNullException)exception;
             Assert.Equal("bufferSize", argNullException.ParamName);
+        }
+
+        [Fact]
+        public void ProgressStreamContent_5MB_File_Matches()
+        {
+            var inputBytes = new byte[5242880];
+            var outputBytes = new byte[5242880];
+
+            var random = new Random();
+            random.NextBytes(inputBytes);
+
+            var currentProgress = 0;
+            int report(int progress) => currentProgress += progress;
+            var byteProgress = new Progress<int>(percent => report(percent));
+
+            using var inputMs = new MemoryStream(inputBytes);
+            using var progressStreamContent = new ProgressStreamContent(inputMs, byteProgress, 4096);
+            using var outputMs = new MemoryStream(outputBytes);
+            var task = progressStreamContent.CopyToAsync(outputMs);
+            task.Wait();
+
+            inputMs.Position = 0;
+            outputMs.Position = 0;
+
+            var inputArray = inputMs.ToArray();
+            var outputArray = outputMs.ToArray();
+
+            Assert.True(inputArray.SequenceEqual(outputArray));
+            Assert.True(currentProgress > 0);
         }
     }
 }

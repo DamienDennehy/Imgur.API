@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -11,7 +12,7 @@ namespace Imgur.API
     {
         private const int DefaultBufferSize = 4096;
         private readonly int _bufferSize = DefaultBufferSize;
-        private readonly Stream _content;
+        private readonly Stream _readStream;
         private readonly IProgress<int> _progress;
         private readonly CancellationToken _cancellationToken;
 
@@ -30,7 +31,7 @@ namespace Imgur.API
                                        int? bufferSize,
                                        CancellationToken cancellationToken = default)
         {
-            _content = content ?? throw new ArgumentNullException(nameof(content));
+            _readStream = content ?? throw new ArgumentNullException(nameof(content));
             _progress = progress ?? throw new ArgumentNullException(nameof(progress));
             _bufferSize = bufferSize ?? throw new ArgumentNullException(nameof(bufferSize));
             _cancellationToken = cancellationToken;
@@ -41,36 +42,34 @@ namespace Imgur.API
         {
             var buffer = new byte[_bufferSize];
 
-            using (_content)
+            _progress.Report(0);
+
+            while (true)
             {
-                _progress.Report(0);
+                var length = await _readStream.ReadAsync(buffer,
+                                                         0,
+                                                         buffer.Length,
+                                                         _cancellationToken)
+                                              .ConfigureAwait(false);
 
-                while (true)
+                if (length <= 0)
                 {
-                    var length = await _content.ReadAsync(buffer,
-                                                          0,
-                                                          buffer.Length,
-                                                          _cancellationToken)
-                                               .ConfigureAwait(false);
-                    if (length <= 0)
-                    {
-                        break;
-                    }
-
-                    await stream.WriteAsync(buffer,
-                                            0,
-                                            length,
-                                            _cancellationToken)
-                                .ConfigureAwait(false);
-
-                    _progress.Report(length);
+                    break;
                 }
+
+                await stream.WriteAsync(buffer,
+                                        0,
+                                        length,
+                                        _cancellationToken)
+                            .ConfigureAwait(false);
+
+                _progress.Report(length);
             }
         }
 
         protected override bool TryComputeLength(out long length)
         {
-            length = _content.Length;
+            length = _readStream.Length;
             return true;
         }
 
@@ -78,7 +77,7 @@ namespace Imgur.API
         {
             if (disposing)
             {
-                _content.Dispose();
+                _readStream.Dispose();
             }
 
             base.Dispose(disposing);

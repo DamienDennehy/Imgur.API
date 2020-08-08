@@ -10,8 +10,8 @@ namespace Imgur.API.Tests.ResponseTests
         [Fact]
         public void ConvertResponse_WithGetImageResponse_ReturnsImage()
         {
-            var basicResponseConverter = new ResponseConverter();
-            var response = basicResponseConverter.ConvertResponse<Image>(Mocks.MockImageResponses.GetImage);
+            var responseConverter = new ResponseConverter();
+            var response = responseConverter.ConvertResponse<Image>(Mocks.MockImageResponses.GetImage);
             Assert.NotNull(response);
             Assert.IsType<Image>(response);
             Assert.Equal("mvWNMH4", response.Id);
@@ -45,8 +45,8 @@ namespace Imgur.API.Tests.ResponseTests
         [Fact]
         public void ConvertResponse_WithUploadImageResponse_ReturnsImage()
         {
-            var basicResponseConverter = new ResponseConverter();
-            var response = basicResponseConverter.ConvertResponse<Image>(Mocks.MockImageResponses.UploadImage);
+            var responseConverter = new ResponseConverter();
+            var response = responseConverter.ConvertResponse<Image>(Mocks.MockImageResponses.UploadImage);
             Assert.NotNull(response);
             Assert.IsType<Image>(response);
             Assert.Equal("mvWNMH4", response.Id);
@@ -80,8 +80,8 @@ namespace Imgur.API.Tests.ResponseTests
         [Fact]
         public void ConvertResponse_WithFavoriteImageResponse_ReturnsString()
         {
-            var basicResponseConverter = new ResponseConverter();
-            var response = basicResponseConverter.ConvertResponse<string>(Mocks.MockImageResponses.FavoriteImage);
+            var responseConverter = new ResponseConverter();
+            var response = responseConverter.ConvertResponse<string>(Mocks.MockImageResponses.FavoriteImage);
             Assert.NotNull(response);
             Assert.IsType<string>(response);
             Assert.Equal("favorited", response);
@@ -90,8 +90,8 @@ namespace Imgur.API.Tests.ResponseTests
         [Fact]
         public void ConvertResponse_WithDeleteImageResponse_ReturnsBoolean()
         {
-            var basicResponseConverter = new ResponseConverter();
-            var response = basicResponseConverter.ConvertResponse<bool>(Mocks.MockImageResponses.DeleteImage);
+            var responseConverter = new ResponseConverter();
+            var response = responseConverter.ConvertResponse<bool>(Mocks.MockImageResponses.DeleteImage);
             Assert.IsType<bool>(response);
             Assert.True(response);
         }

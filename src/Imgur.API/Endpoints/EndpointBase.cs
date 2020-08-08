@@ -38,21 +38,21 @@ namespace Imgur.API.Endpoints
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        internal virtual Task<T> SendRequestAsync<T>(HttpRequestMessage message,
+        internal virtual Task<T> SendRequestAsync<T>(HttpRequestMessage httpRequestMessage,
                                                      CancellationToken cancellationToken = default)
         {
-            if (message == null)
+            if (httpRequestMessage == null)
             {
-                throw new ArgumentNullException(nameof(message));
+                throw new ArgumentNullException(nameof(httpRequestMessage));
             }
 
-            return SendRequestInternalAsync<T>(message, cancellationToken);
+            return SendRequestInternalAsync<T>(httpRequestMessage, cancellationToken);
         }
 
-        internal virtual async Task<T> SendRequestInternalAsync<T>(HttpRequestMessage message,
+        internal virtual async Task<T> SendRequestInternalAsync<T>(HttpRequestMessage httpRequestMessage,
                                                                    CancellationToken cancellationToken = default)
         {
-            var httpResponse = await _httpClient.SendAsync(message)
+            var httpResponse = await _httpClient.SendAsync(httpRequestMessage)
                                                 .ConfigureAwait(false);
 
             httpResponse.EnsureSuccessStatusCode();

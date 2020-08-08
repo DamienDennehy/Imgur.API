@@ -74,6 +74,24 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
+        public async Task SendRequestAsync_WithNullMessage_ThrowsArgumentNullException()
+        {
+            var endpoint = new MockEndpoint(new ApiClient("123", "1234"), new HttpClient());
+
+            var exception = await Record.ExceptionAsync(async () =>
+            {
+                await endpoint.SendRequestAsync<Image>(null)
+                              .ConfigureAwait(false);
+            }).ConfigureAwait(false);
+
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal("httpRequestMessage", argNullException.ParamName);
+        }
+
+        [Fact]
         public async Task SendRequestAsync_WithInvalidUrl_ThrowsHttpRequestException()
         {
             var mockUrl = "http://example.org/test";

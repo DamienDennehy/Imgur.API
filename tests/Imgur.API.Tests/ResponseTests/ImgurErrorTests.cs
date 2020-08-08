@@ -16,7 +16,7 @@ namespace Imgur.API.Tests.ResponseTests
                 PropertyNameCaseInsensitive = true
             };
 
-            var errorResponse = JsonSerializer.Deserialize<Basic<ImgurError>>(Mocks.MockErrorResponses.Error, options);
+            var errorResponse = JsonSerializer.Deserialize<Basic<ImgurError>>(Mocks.MockResponses.Error, options);
             Assert.NotNull(errorResponse);
             Assert.IsType<Basic<ImgurError>>(errorResponse);
             Assert.Equal(1203, errorResponse.Status);

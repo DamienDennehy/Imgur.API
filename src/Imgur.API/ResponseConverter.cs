@@ -11,7 +11,7 @@ namespace Imgur.API.ResponseConverters
         /// <typeparam name="T"></typeparam>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal T ConvertResponse<T>(string response) where T : IDataModel
+        internal T ConvertResponse<T>(string response)
         {
             ThrowImgurExceptionIfResponseIsNull(response);
             ThrowImgurExceptionIfResponseIsInvalid(response);

@@ -1,7 +1,10 @@
 ﻿namespace Imgur.API.Tests.Mocks
 {
-    public static class MockErrorResponses
+    public static class MockResponses
     {
+        public const string SuccessfulResponse = 
+            "{\"data\":true,\"success\":true,\"status\":200}";
+
         public const string RawError =
             "{\"data\":\"An error occurred\",\"success\":false,\"status\":500}";
 

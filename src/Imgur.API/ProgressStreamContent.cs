@@ -16,9 +16,12 @@ namespace Imgur.API
         private readonly CancellationToken _cancellationToken;
 
         internal ProgressStreamContent(Stream content,
-                                       IProgress<int> progress) : this(content,
-                                                                       progress,
-                                                                       DefaultBufferSize)
+                                       IProgress<int> progress,
+                                       CancellationToken cancellationToken = default) : 
+            this(content,
+                 progress,
+                 DefaultBufferSize,
+                 cancellationToken)
         {
         }
 

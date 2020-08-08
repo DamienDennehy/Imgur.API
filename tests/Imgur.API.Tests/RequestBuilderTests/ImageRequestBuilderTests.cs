@@ -85,7 +85,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         }
 
         [Fact]
-        public async Task UploadStreamBinaryRequest_Equal()
+        public async Task UploadStreamRequest_Equal()
         {
             var client = new ApiClient("123", "1234");
             var mockUrl = $"{client.BaseAddress}image";
@@ -127,7 +127,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         }
 
         [Fact]
-        public async Task UploadProgressStreamBinaryRequest_Equal()
+        public async Task UploadProgressStreamRequest_Equal()
         {
             var client = new ApiClient("123", "1234");
             var mockUrl = $"{client.BaseAddress}image";
@@ -137,7 +137,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var currentProgress = 0;
             int report(int progress) => currentProgress = progress;
             var byteProgress = new Progress<int>(percent => report(percent));
-            var request = ImageRequestBuilder.UploadImageStreamRequest(mockUrl, ms, "TheAlbum", "TheName", "TheTitle",
+            using var request = ImageRequestBuilder.UploadImageStreamRequest(mockUrl, ms, "TheAlbum", "TheName", "TheTitle",
                 "TheDescription", byteProgress);
 
             Assert.NotNull(request);
@@ -172,7 +172,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         }
 
         [Fact]
-        public void UploadStreamBinaryRequest_WithImageNull_ThrowsArgumentNullException()
+        public void UploadStreamRequest_WithImageNull_ThrowsArgumentNullException()
         {
             var client = new ApiClient("123", "1234");
             var mockUrl = $"{client.BaseAddress}image";
@@ -186,7 +186,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
         }
 
         [Fact]
-        public void UploadStreamBinaryRequest_WithUrlNull_ThrowsArgumentNullException()
+        public void UploadStreamRequest_WithUrlNull_ThrowsArgumentNullException()
         {
             using var ms = new MemoryStream(new byte[9]);
             var exception = Record.Exception(() => ImageRequestBuilder.UploadImageStreamRequest(null, ms));

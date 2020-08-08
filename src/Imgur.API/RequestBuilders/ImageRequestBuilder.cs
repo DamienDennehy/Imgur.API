@@ -89,7 +89,7 @@ namespace Imgur.API.RequestBuilders
                 content.Add(new StringContent(description), "description");
             }
 
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
+            var request = new ProgressHttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = content
             };

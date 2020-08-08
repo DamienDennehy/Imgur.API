@@ -17,7 +17,7 @@ namespace Imgur.API
 
         internal ProgressStreamContent(Stream content,
                                        IProgress<int> progress,
-                                       CancellationToken cancellationToken = default) : 
+                                       CancellationToken cancellationToken = default) :
             this(content,
                  progress,
                  DefaultBufferSize,
@@ -34,17 +34,6 @@ namespace Imgur.API
             _progress = progress ?? throw new ArgumentNullException(nameof(progress));
             _bufferSize = bufferSize ?? throw new ArgumentNullException(nameof(bufferSize));
             _cancellationToken = cancellationToken;
-        }
-
-        internal Task SerializeToProgressStreamAsync(Stream stream,
-                                                     TransportContext context)
-        {
-            if (stream == null)
-            {
-                throw new ArgumentNullException(nameof(stream));
-            }
-
-            return SerializeToStreamAsync(stream, context);
         }
 
         protected override async Task SerializeToStreamAsync(Stream stream,

@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace Imgur.API
+namespace Imgur.API.RequestBuilders
 {
     internal class ProgressHttpRequestMessage : HttpRequestMessage
     {

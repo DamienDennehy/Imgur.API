@@ -41,7 +41,8 @@ namespace Imgur.API.Tests.Mocks
                 RequestMessage = request
             };
 
-            return await Task.FromResult(notFoundMessage).ConfigureAwait(false);
+            return await Task.FromResult(notFoundMessage)
+                             .ConfigureAwait(false);
         }
     }
 }

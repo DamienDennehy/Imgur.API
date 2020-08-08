@@ -4,8 +4,8 @@ namespace Imgur.API.RequestBuilders
 {
     internal class ProgressHttpRequestMessage : HttpRequestMessage
     {
-        public ProgressHttpRequestMessage(HttpMethod method, string url) :
-            base(method, url)
+        public ProgressHttpRequestMessage(HttpMethod method, string url) : base(
+            method, url)
         {
 
         }

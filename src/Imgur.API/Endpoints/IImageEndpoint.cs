@@ -18,33 +18,33 @@ namespace Imgur.API.Endpoints
         /// Upload a new image.
         /// </summary>
         /// <param name="image"></param>
-        /// <param name="albumId"></param>
+        /// <param name="album"></param>
         /// <param name="name"></param>
         /// <param name="title"></param>
         /// <param name="description"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task UploadImageAsync(Stream image, string albumId = null, string name = null, string title = null, string description = null, CancellationToken cancellationToken = default);
+        Task UploadImageAsync(Stream image, string album = null, string name = null, string title = null, string description = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Upload a new image.
         /// </summary>
         /// <param name="image"></param>
-        /// <param name="albumId"></param>
+        /// <param name="album"></param>
         /// <param name="type"></param>
         /// <param name="name"></param>
         /// <param name="title"></param>
         /// <param name="description"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task UploadImageAsync(string image, string albumId = null, string name = null, string title = null, string description = null, CancellationToken cancellationToken = default);
+        Task UploadImageAsync(string image, string album = null, string name = null, string title = null, string description = null, CancellationToken cancellationToken = default);
 
 
         /// <summary>
         /// Upload a new image.
         /// </summary>
         /// <param name="video"></param>
-        /// <param name="albumId"></param>
+        /// <param name="album"></param>
         /// <param name="type"></param>
         /// <param name="name"></param>
         /// <param name="title"></param>
@@ -53,7 +53,7 @@ namespace Imgur.API.Endpoints
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
-        Task UploadVideoAsync(Stream video, string albumId = null, string type = null, string name = null, string title = null, string description = null, bool disableAudio = false, CancellationToken cancellationToken = default);
+        Task UploadVideoAsync(Stream video, string album = null, string type = null, string name = null, string title = null, string description = null, bool disableAudio = false, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deletes an image.

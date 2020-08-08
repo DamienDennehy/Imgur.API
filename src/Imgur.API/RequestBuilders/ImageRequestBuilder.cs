@@ -99,7 +99,7 @@ namespace Imgur.API.RequestBuilders
 
         internal static HttpRequestMessage UploadImageUrlRequest(string url,
                                                                  string imageUrl,
-                                                                 string albumId = null,
+                                                                 string album = null,
                                                                  string name = null,
                                                                  string title = null,
                                                                  string description = null)
@@ -120,9 +120,9 @@ namespace Imgur.API.RequestBuilders
                 {"image", imageUrl}
             };
 
-            if (!string.IsNullOrWhiteSpace(albumId))
+            if (!string.IsNullOrWhiteSpace(album))
             {
-                parameters.Add("album", albumId);
+                parameters.Add("album", album);
             }
 
             if (name != null)

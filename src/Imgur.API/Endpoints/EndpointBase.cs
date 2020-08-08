@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
 using Imgur.API.ResponseConverters;
@@ -37,17 +38,19 @@ namespace Imgur.API.Endpoints
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        internal virtual Task<T> SendRequestAsync<T>(HttpRequestMessage message)
+        internal virtual Task<T> SendRequestAsync<T>(HttpRequestMessage message,
+                                                     CancellationToken cancellationToken = default)
         {
             if (message == null)
             {
                 throw new ArgumentNullException(nameof(message));
             }
 
-            return SendRequestInternalAsync<T>(message);
+            return SendRequestInternalAsync<T>(message, cancellationToken);
         }
 
-        internal virtual async Task<T> SendRequestInternalAsync<T>(HttpRequestMessage message)
+        internal virtual async Task<T> SendRequestInternalAsync<T>(HttpRequestMessage message,
+                                                                   CancellationToken cancellationToken = default)
         {
             var httpResponse = await _httpClient.SendAsync(message)
                                                 .ConfigureAwait(false);

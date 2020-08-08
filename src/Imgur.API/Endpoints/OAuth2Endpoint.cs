@@ -48,7 +48,8 @@ namespace Imgur.API.Endpoints
                 _apiClient.ClientId,
                 _apiClient.ClientSecret))
             {
-                token = await SendRequestAsync<OAuth2Token>(request).ConfigureAwait(false);
+                token = await SendRequestAsync<OAuth2Token>(request, cancellationToken)
+                             .ConfigureAwait(false);
             }
 
             return token;

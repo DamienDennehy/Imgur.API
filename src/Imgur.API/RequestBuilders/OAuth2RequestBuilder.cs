@@ -7,7 +7,7 @@ namespace Imgur.API.RequestBuilders
 {
     internal static class OAuth2RequestBuilder
     {
-        internal static HttpRequestMessage GetTokenByRefreshTokenRequest(string url,
+        internal static HttpRequestMessage GetTokenRequest(string url,
                                                                          string refreshToken,
                                                                          string clientId,
                                                                          string clientSecret)

@@ -1,5 +1,5 @@
 ﻿using Imgur.API.Models;
-using Imgur.API.ResponseConverters;
+using Imgur.API.Converters;
 using Xunit;
 
 namespace Imgur.API.Tests.ResponseConverterTests

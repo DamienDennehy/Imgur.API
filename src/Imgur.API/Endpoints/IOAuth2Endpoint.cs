@@ -23,6 +23,6 @@ namespace Imgur.API.Endpoints
         /// <param name="refreshToken"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken, CancellationToken cancellationToken = default);
+        Task<IOAuth2Token> GetTokenAsync(string refreshToken, CancellationToken cancellationToken = default);
     }
 }

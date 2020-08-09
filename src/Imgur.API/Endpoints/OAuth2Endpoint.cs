@@ -26,22 +26,22 @@ namespace Imgur.API.Endpoints
             return url;
         }
 
-        public Task<IOAuth2Token> GetTokenByRefreshTokenAsync(string refreshToken,
-                                                              CancellationToken cancellationToken = default)
+        public Task<IOAuth2Token> GetTokenAsync(string refreshToken,
+                                                CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(refreshToken))
             {
                 throw new ArgumentNullException("refreshToken", nameof(refreshToken));
             }
 
-            return GetTokenByRefreshTokenInternalAsync(refreshToken, cancellationToken);
+            return GetTokenInternalAsync(refreshToken, cancellationToken);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
-        public async Task<IOAuth2Token> GetTokenByRefreshTokenInternalAsync(string refreshToken,
-                                                                            CancellationToken cancellationToken = default)
+        public async Task<IOAuth2Token> GetTokenInternalAsync(string refreshToken,
+                                                              CancellationToken cancellationToken = default)
         {
-            using (var request = OAuth2RequestBuilder.GetTokenByRefreshTokenRequest(
+            using (var request = OAuth2RequestBuilder.GetTokenRequest(
                 TokenEndpointUrl,
                 refreshToken,
                 _apiClient.ClientId,

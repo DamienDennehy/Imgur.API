@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Imgur.API.Authentication;
-using Imgur.API.ResponseConverters;
+using Imgur.API.Converters;
 
 namespace Imgur.API.Endpoints
 {

@@ -30,7 +30,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetTokenByRefreshTokenAsync_Equal()
+        public async Task GetTokenAsync_Equal()
         {
             var mockUrl = "https://api.imgur.com/oauth2/token";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -41,7 +41,7 @@ namespace Imgur.API.Tests.EndpointTests
             var apiClient = new ApiClient("123", "1234");
             var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
             var endpoint = new OAuth2Endpoint(apiClient, httpClient);
-            var token = await endpoint.GetTokenByRefreshTokenAsync("xhjhjhj");
+            var token = await endpoint.GetTokenAsync("xhjhjhj");
 
             Assert.Equal("6e079993b20f45fab3c22ed489a6f454", token.AccessToken);
             Assert.Equal("e325da142cd545298ef68868824d3b8a", token.RefreshToken);
@@ -52,14 +52,14 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetTokenByRefreshTokenAsync_WithTokenNull_ThrowsArgumentNullException()
+        public async Task GetTokenAsync_WithTokenNull_ThrowsArgumentNullException()
         {
             var apiClient = new ApiClient("123", "1234");
             var endpoint = new OAuth2Endpoint(apiClient, new HttpClient());
 
             var exception = await Record.ExceptionAsync(async () =>
             {
-                await endpoint.GetTokenByRefreshTokenAsync(null);
+                await endpoint.GetTokenAsync(null);
             });
 
             Assert.NotNull(exception);

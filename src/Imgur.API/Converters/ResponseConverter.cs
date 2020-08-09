@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Imgur.API.Models;
 
-namespace Imgur.API.ResponseConverters
+namespace Imgur.API.Converters
 {
     internal class ResponseConverter
     {

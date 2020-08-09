@@ -60,6 +60,10 @@ namespace Imgur.API.Authentication
             ClientSecret = clientSecret;
         }
 
+        /// <summary>
+        /// Sets the OAuth2Token to be used for authentication.
+        /// </summary>
+        /// <param name="token"></param>
         public virtual void SetOAuth2Token(IOAuth2Token token)
         {
             if (token == null)

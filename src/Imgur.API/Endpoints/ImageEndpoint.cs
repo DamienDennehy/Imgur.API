@@ -6,34 +6,33 @@ using Imgur.API.Models;
 
 namespace Imgur.API.Endpoints
 {
+    /// <summary>
+    /// Image Endpoint.
+    /// </summary>
     public class ImageEndpoint : IImageEndpoint
     {
-        public Task<bool> DeleteImageAsync(string imageId,
-                                           CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<string> FavoriteImageAsync(string imageId,
-                                               CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Get information about an image.
+        /// </summary>
+        /// <param name="imageId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<IImage> GetImageAsync(string imageId,
                                           CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateImageAsync(string imageId,
-                                           string title = null,
-                                           string description = null,
-                                           CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Upload a new image.
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="album"></param>
+        /// <param name="name"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<IImage> UploadImageAsync(Stream image,
                                              string album = null,
                                              string name = null,
@@ -44,6 +43,16 @@ namespace Imgur.API.Endpoints
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Upload a new image.
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="album"></param>
+        /// <param name="name"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<IImage> UploadImageAsync(string image,
                                              string album = null,
                                              string name = null,
@@ -54,6 +63,18 @@ namespace Imgur.API.Endpoints
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Upload a new image.
+        /// </summary>
+        /// <param name="video"></param>
+        /// <param name="album"></param>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="disableAudio"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<IImage> UploadVideoAsync(Stream video,
                                              string album = null,
                                              string type = null,
@@ -62,6 +83,46 @@ namespace Imgur.API.Endpoints
                                              string description = null,
                                              bool disableAudio = false,
                                              CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Deletes an image.
+        /// </summary>
+        /// <param name="imageId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<bool> DeleteImageAsync(string imageId,
+                                           CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Updates the title or description of an image.
+        /// </summary>
+        /// <param name="imageId"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<bool> UpdateImageAsync(string imageId,
+                                           string title = null,
+                                           string description = null,
+                                           CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Favorite an image with the given ID. The user is required to be logged in to favorite the image.
+        /// </summary>
+        /// <param name="imageId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<string> FavoriteImageAsync(string imageId,
+                                               CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

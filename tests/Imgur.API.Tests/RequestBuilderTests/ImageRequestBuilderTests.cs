@@ -14,9 +14,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public async Task UpdateImageRequest_Equal()
         {
-            var client = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123", "1234");
 
-            var mockUrl = $"{client.BaseAddress}image/1234Xyz9";
+            var mockUrl = $"{apiClient.BaseAddress}image/1234Xyz9";
             var request = ImageRequestBuilder.UpdateImageRequest(mockUrl, "TheTitle", "TheDescription");
 
             Assert.NotNull(request);
@@ -42,8 +42,8 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public async Task UploadImageUrlRequest_Equal()
         {
-            var client = new ApiClient("123", "1234");
-            var mockUrl = $"{client.BaseAddress}image";
+            var apiClient = new ApiClient("123", "1234");
+            var mockUrl = $"{apiClient.BaseAddress}image";
 
             var request = ImageRequestBuilder.UploadImageUrlRequest(mockUrl, "http://i.imgur.com/hxsPLa7.jpg",
                 "TheAlbum", "TheName", "TheTitle", "TheDescription");
@@ -62,8 +62,8 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public void UploadImageUrlRequest_WithImageNull_ThrowsArgumentNullException()
         {
-            var client = new ApiClient("123", "1234");
-            var mockUrl = $"{client.BaseAddress}image";
+            var apiClient = new ApiClient("123", "1234");
+            var mockUrl = $"{apiClient.BaseAddress}image";
 
             var exception = Record.Exception(() => ImageRequestBuilder.UploadImageUrlRequest(mockUrl, null));
             Assert.NotNull(exception);
@@ -87,8 +87,8 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public async Task UploadStreamRequest_Equal()
         {
-            var client = new ApiClient("123", "1234");
-            var mockUrl = $"{client.BaseAddress}image";
+            var apiClient = new ApiClient("123", "1234");
+            var mockUrl = $"{apiClient.BaseAddress}image";
 
             using var ms = new MemoryStream(new byte[9]);
             var imageLength = ms.Length;
@@ -129,8 +129,8 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public async Task UploadProgressStreamRequest_Equal()
         {
-            var client = new ApiClient("123", "1234");
-            var mockUrl = $"{client.BaseAddress}image";
+            var apiClient = new ApiClient("123", "1234");
+            var mockUrl = $"{apiClient.BaseAddress}image";
 
             using var ms = new MemoryStream(new byte[9]);
             var imageLength = ms.Length;
@@ -174,8 +174,8 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public void UploadStreamRequest_WithImageNull_ThrowsArgumentNullException()
         {
-            var client = new ApiClient("123", "1234");
-            var mockUrl = $"{client.BaseAddress}image";
+            var apiClient = new ApiClient("123", "1234");
+            var mockUrl = $"{apiClient.BaseAddress}image";
 
             var exception = Record.Exception(() => ImageRequestBuilder.UploadImageStreamRequest(mockUrl, null));
             Assert.NotNull(exception);

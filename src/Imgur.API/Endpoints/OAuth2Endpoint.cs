@@ -31,7 +31,7 @@ namespace Imgur.API.Endpoints
         {
             if (string.IsNullOrWhiteSpace(refreshToken))
             {
-                throw new ArgumentException("refreshToken", nameof(refreshToken));
+                throw new ArgumentNullException("refreshToken", nameof(refreshToken));
             }
 
             return GetTokenByRefreshTokenInternalAsync(refreshToken, cancellationToken);
@@ -40,19 +40,22 @@ namespace Imgur.API.Endpoints
         public async Task<IOAuth2Token> GetTokenByRefreshTokenInternalAsync(string refreshToken,
                                                                             CancellationToken cancellationToken = default)
         {
-            IOAuth2Token token;
-
             using (var request = OAuth2RequestBuilder.GetTokenByRefreshTokenRequest(
                 TokenEndpointUrl,
                 refreshToken,
                 _apiClient.ClientId,
                 _apiClient.ClientSecret))
             {
-                token = await SendRequestAsync<OAuth2Token>(request, cancellationToken)
-                             .ConfigureAwait(false);
-            }
+                var httpResponse = await _httpClient.SendAsync(request)
+                                                    .ConfigureAwait(false);
 
-            return token;
+                httpResponse.EnsureSuccessStatusCode();
+
+                var response = await httpResponse.Content.ReadAsStringAsync()
+                                                         .ConfigureAwait(false);
+
+                return _responseConverter.ConvertOAuth2TokenResponse(response);
+            }
         }
     }
 }

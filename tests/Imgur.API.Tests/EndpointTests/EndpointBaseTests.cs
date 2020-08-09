@@ -26,9 +26,9 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public void ApiClient_SetByConstructor_AreSame()
         {
-            var client = new ApiClient("ClientId");
-            var endpoint = new MockEndpoint(client, new HttpClient());
-            Assert.Same(client, endpoint._apiClient);
+            var apiClient = new ApiClient("ClientId");
+            var endpoint = new MockEndpoint(apiClient, new HttpClient());
+            Assert.Same(apiClient, endpoint._apiClient);
         }
 
         [Fact]
@@ -45,10 +45,10 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public void _httpClient_SetByConstructor_AreSame()
         {
-            var client = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123", "1234");
             var httpCLient = new HttpClient();
 
-            var endpoint = new MockEndpoint(client, httpCLient);
+            var endpoint = new MockEndpoint(apiClient, httpCLient);
 
             Assert.Same(httpCLient, endpoint._httpClient);
         }
@@ -56,8 +56,8 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public void _httpClient_SetByConstructor_HasBaseAddressSet()
         {
-            var client = new ApiClient("123", "1234");
-            var endpoint = new MockEndpoint(client, new HttpClient());
+            var apiClient = new ApiClient("123", "1234");
+            var endpoint = new MockEndpoint(apiClient, new HttpClient());
 
             Assert.Equal(new Uri("https://api.imgur.com/3/"), endpoint._httpClient.BaseAddress);
         }
@@ -65,8 +65,8 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public void _httpClient_SetByConstructor_HasHeadersSet()
         {
-            var client = new ApiClient("123", "1234");
-            var endpoint = new MockEndpoint(client, new HttpClient());
+            var apiClient = new ApiClient("123", "1234");
+            var endpoint = new MockEndpoint(apiClient, new HttpClient());
             var authHeader = endpoint._httpClient.DefaultRequestHeaders.GetValues("Authorization").First();
             var accept = endpoint._httpClient.DefaultRequestHeaders.Accept.First();
             Assert.Equal("Client-ID 123", authHeader);

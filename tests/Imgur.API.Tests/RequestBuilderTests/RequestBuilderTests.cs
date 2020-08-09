@@ -11,9 +11,9 @@ namespace Imgur.API.Tests.RequestBuilderTests
         [Fact]
         public void CreateRequest_Equal()
         {
-            var client = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123", "1234");
 
-            var mockUrl = $"{client.BaseAddress}account/bob";
+            var mockUrl = $"{apiClient.BaseAddress}account/bob";
             var request = RequestBuilder.CreateRequest(HttpMethod.Get, mockUrl);
 
             Assert.NotNull(request);

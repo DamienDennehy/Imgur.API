@@ -10,17 +10,17 @@ namespace Imgur.API.Tests.AuthenticationTests
         [Fact]
         public void ClientId_SetByConstructor_AreEqual()
         {
-            var client = new ApiClient("ClientId123", "ClientSecret123");
+            var apiClient = new ApiClient("ClientId123", "ClientSecret123");
 
-            Assert.Equal("ClientId123", client.ClientId);
+            Assert.Equal("ClientId123", apiClient.ClientId);
         }
 
         [Fact]
         public void BaseAddress_SetByConstructor_AreEqual()
         {
-            var client = new ApiClient("ClientId123", "ClientSecret123");
+            var apiClient = new ApiClient("ClientId123", "ClientSecret123");
 
-            Assert.Equal("https://api.imgur.com/3/", client.BaseAddress);
+            Assert.Equal("https://api.imgur.com/3/", apiClient.BaseAddress);
         }
 
         [Fact]
@@ -37,9 +37,9 @@ namespace Imgur.API.Tests.AuthenticationTests
         [Fact]
         public void ClientSecret_SetByConstructor_AreEqual()
         {
-            var client = new ApiClient("ClientId123", "ClientSecret123");
+            var apiClient = new ApiClient("ClientId123", "ClientSecret123");
 
-            Assert.Equal("ClientSecret123", client.ClientSecret);
+            Assert.Equal("ClientSecret123", apiClient.ClientSecret);
         }
 
         [Fact]
@@ -204,9 +204,9 @@ namespace Imgur.API.Tests.AuthenticationTests
                 TokenType = Guid.NewGuid().ToString()
             };
 
-            var client = new ApiClient("ClientId");
-            client.SetOAuth2Token(oAuth2Token);
-            Assert.Same(oAuth2Token, client.OAuth2Token);
+            var apiClient = new ApiClient("ClientId");
+            apiClient.SetOAuth2Token(oAuth2Token);
+            Assert.Same(oAuth2Token, apiClient.OAuth2Token);
         }
 
         [Fact]
@@ -222,11 +222,11 @@ namespace Imgur.API.Tests.AuthenticationTests
                 TokenType = Guid.NewGuid().ToString()
             };
 
-            var client = new ApiClient("ClientId", "ClientSecret");
+            var apiClient = new ApiClient("ClientId", "ClientSecret");
 
-            Assert.Null(client.OAuth2Token);
-            client.SetOAuth2Token(oAuth2Token);
-            Assert.Same(oAuth2Token, client.OAuth2Token);
+            Assert.Null(apiClient.OAuth2Token);
+            apiClient.SetOAuth2Token(oAuth2Token);
+            Assert.Same(oAuth2Token, apiClient.OAuth2Token);
         }
 
         [Fact]
@@ -242,13 +242,13 @@ namespace Imgur.API.Tests.AuthenticationTests
                 TokenType = Guid.NewGuid().ToString()
             };
 
-            var client = new ApiClient("ClientId", "ClientSecret");
+            var apiClient = new ApiClient("ClientId", "ClientSecret");
 
-            Assert.Null(client.OAuth2Token);
-            client.SetOAuth2Token(oAuth2Token);
-            Assert.Same(oAuth2Token, client.OAuth2Token);
-            client.SetOAuth2Token(null);
-            Assert.Null(client.OAuth2Token);
+            Assert.Null(apiClient.OAuth2Token);
+            apiClient.SetOAuth2Token(oAuth2Token);
+            Assert.Same(oAuth2Token, apiClient.OAuth2Token);
+            apiClient.SetOAuth2Token(null);
+            Assert.Null(apiClient.OAuth2Token);
         }
     }
 }

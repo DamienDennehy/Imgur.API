@@ -70,7 +70,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal(HttpMethod.Post, request.Method);
             Assert.NotNull(request.Content);
 
-            var expected = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var expected = await request.Content.ReadAsStringAsync();
 
             Assert.Equal(
                 "client_id=123&client_secret=1234&grant_type=refresh_token&refresh_token=ABChjfhjhjdhfjksdfsdfsdfs",

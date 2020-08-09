@@ -90,7 +90,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore --verbosity minimal -p:Version=${{steps.gitversion.outputs.semVer}}
 
     - name: Test
-      run: dotnet test --configuration Release --no-restore --no-build --verbosity minimal --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory ./artifacts
+      run: dotnet test --configuration Release --no-restore --no-build --verbosity minimal --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory ./artifacts --filter FullyQualifiedName!~Imgur.API.Tests.Integration
 
     - name: End Build Scan
       if: matrix.os == 'ubuntu-latest'

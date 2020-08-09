@@ -23,7 +23,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal("https://api.imgur.com/3/image/1234Xyz9", request.RequestUri.ToString());
             Assert.Equal(HttpMethod.Post, request.Method);
 
-            var expected = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var expected = await request.Content.ReadAsStringAsync();
 
             Assert.Equal("title=TheTitle&description=TheDescription", expected);
         }
@@ -52,7 +52,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal("https://api.imgur.com/3/image", request.RequestUri.ToString());
             Assert.Equal(HttpMethod.Post, request.Method);
 
-            var expected = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var expected = await request.Content.ReadAsStringAsync();
 
             Assert.Equal(
                 "type=URL&image=http%3A%2F%2Fi.imgur.com%2FhxsPLa7.jpg&album=TheAlbum&name=TheName&title=TheTitle&description=TheDescription",
@@ -116,14 +116,14 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(title);
             Assert.NotNull(description);
 
-            var image = await imageContent.ReadAsByteArrayAsync().ConfigureAwait(false);
+            var image = await imageContent.ReadAsByteArrayAsync();
 
             Assert.Equal(imageLength, image.Length);
-            Assert.Equal("file", await type.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.Equal("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.Equal("TheName", await name.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.Equal("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.Equal("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("file", await type.ReadAsStringAsync());
+            Assert.Equal("TheAlbum", await album.ReadAsStringAsync());
+            Assert.Equal("TheName", await name.ReadAsStringAsync());
+            Assert.Equal("TheTitle", await title.ReadAsStringAsync());
+            Assert.Equal("TheDescription", await description.ReadAsStringAsync());
         }
 
         [Fact]
@@ -161,14 +161,14 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(title);
             Assert.NotNull(description);
 
-            var image = await imageContent.ReadAsByteArrayAsync().ConfigureAwait(false);
+            var image = await imageContent.ReadAsByteArrayAsync();
 
             Assert.Equal(imageLength, image.Length);
-            Assert.Equal("file", await type.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.Equal("TheAlbum", await album.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.Equal("TheName", await name.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.Equal("TheTitle", await title.ReadAsStringAsync().ConfigureAwait(false));
-            Assert.Equal("TheDescription", await description.ReadAsStringAsync().ConfigureAwait(false));
+            Assert.Equal("file", await type.ReadAsStringAsync());
+            Assert.Equal("TheAlbum", await album.ReadAsStringAsync());
+            Assert.Equal("TheName", await name.ReadAsStringAsync());
+            Assert.Equal("TheTitle", await title.ReadAsStringAsync());
+            Assert.Equal("TheDescription", await description.ReadAsStringAsync());
         }
 
         [Fact]

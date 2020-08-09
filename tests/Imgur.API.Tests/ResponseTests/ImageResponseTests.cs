@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Imgur.API.Models;
+﻿using Imgur.API.Models;
 using Imgur.API.ResponseConverters;
 using Xunit;
 

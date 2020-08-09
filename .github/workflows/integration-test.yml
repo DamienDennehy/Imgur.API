@@ -1,0 +1,55 @@
+name: Build
+on:
+  # Manual Run.
+  workflow_dispatch:  
+
+jobs:
+  build:
+
+    name: build-${{matrix.os}}
+
+    runs-on: ${{matrix.os}}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    env:
+        DOTNET_NOLOGO: true
+        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}           
+        SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}   
+        SONAR_PROJECT_KEY: ImgurAPI
+        SONAR_PROJECT_NAME: Imgur.API   
+
+    steps:
+    - name: Checkout      
+      uses: actions/checkout@v2
+      with: 
+          fetch-depth: 0
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+
+    - name: Setup NuGet Cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: Restore
+      run: dotnet restore --use-lock-file
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore --verbosity minimal
+
+    - name: Test
+      run: dotnet test --configuration Release --no-restore --no-build --verbosity minimal --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory ./artifacts
+      env:
+        IMGUR_CLIENT_KEY: ${{secrets.IMGUR_CLIENT_KEY}}           
+        IMGUR_CLIENT_SECRET: ${{secrets.IMGUR_CLIENT_SECRET}}   
+        IMGUR_REFRESH_TOKEN: ${{secrets.IMGUR_REFRESH_TOKEN}}  

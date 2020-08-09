@@ -80,9 +80,8 @@ namespace Imgur.API.Tests.EndpointTests
 
             var exception = await Record.ExceptionAsync(async () =>
             {
-                await endpoint.SendRequestAsync<Image>(null)
-                              .ConfigureAwait(false);
-            }).ConfigureAwait(false);
+                await endpoint.SendRequestAsync<Image>(null);
+            });
 
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
@@ -108,9 +107,8 @@ namespace Imgur.API.Tests.EndpointTests
 
             var exception = await Record.ExceptionAsync(async () =>
             {
-                await endpoint.SendRequestAsync<Image>(request)
-                              .ConfigureAwait(false);
-            }).ConfigureAwait(false);
+                await endpoint.SendRequestAsync<Image>(request);
+            });
 
             Assert.NotNull(exception);
             Assert.IsType<HttpRequestException>(exception);
@@ -132,8 +130,7 @@ namespace Imgur.API.Tests.EndpointTests
             var endpoint = new MockEndpoint(new ApiClient("123", "1234"), httpClient);
 
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test");
-            var image = await endpoint.SendRequestAsync<Image>(request)
-                                      .ConfigureAwait(false);
+            var image = await endpoint.SendRequestAsync<Image>(request);
 
             Assert.NotNull(image);
         }
@@ -146,8 +143,8 @@ namespace Imgur.API.Tests.EndpointTests
 
             var exception = await Record.ExceptionAsync(async () =>
             {
-                await endpoint.SendRequestAsync<Image>(null).ConfigureAwait(false);
-            }).ConfigureAwait(false);
+                await endpoint.SendRequestAsync<Image>(null);
+            });
 
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
@@ -166,9 +163,8 @@ namespace Imgur.API.Tests.EndpointTests
 
             var exception = await Record.ExceptionAsync(async () =>
             {
-                await endpoint.SendRequestInternalAsync<Image>(request)
-                              .ConfigureAwait(false);
-            }).ConfigureAwait(false);
+                await endpoint.SendRequestInternalAsync<Image>(request);
+            });
 
             Assert.NotNull(exception);
             Assert.IsType<HttpRequestException>(exception);
@@ -190,9 +186,8 @@ namespace Imgur.API.Tests.EndpointTests
 
             var exception = await Record.ExceptionAsync(async () =>
             {
-                await endpoint.SendRequestInternalAsync<Image>(request)
-                              .ConfigureAwait(false);
-            }).ConfigureAwait(false);
+                await endpoint.SendRequestInternalAsync<Image>(request);
+            });
 
             Assert.NotNull(exception);
             Assert.IsType<HttpRequestException>(exception);

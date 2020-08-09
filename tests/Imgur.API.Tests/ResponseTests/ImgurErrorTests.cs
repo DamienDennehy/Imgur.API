@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Imgur.API.Models;
-using Imgur.API.ResponseConverters;
 using Xunit;
 
 namespace Imgur.API.Tests.ResponseTests

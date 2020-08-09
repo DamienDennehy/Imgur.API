@@ -41,8 +41,7 @@ namespace Imgur.API.Tests.EndpointTests
             var apiClient = new ApiClient("123", "1234");
             var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
             var endpoint = new OAuth2Endpoint(apiClient, httpClient);
-            var token = await endpoint.GetTokenByRefreshTokenAsync("xhjhjhj")
-                                      .ConfigureAwait(false);
+            var token = await endpoint.GetTokenByRefreshTokenAsync("xhjhjhj");
 
             Assert.Equal("6e079993b20f45fab3c22ed489a6f454", token.AccessToken);
             Assert.Equal("e325da142cd545298ef68868824d3b8a", token.RefreshToken);
@@ -60,9 +59,8 @@ namespace Imgur.API.Tests.EndpointTests
 
             var exception = await Record.ExceptionAsync(async () =>
             {
-                await endpoint.GetTokenByRefreshTokenAsync(null)
-                              .ConfigureAwait(false);
-            }).ConfigureAwait(false);
+                await endpoint.GetTokenByRefreshTokenAsync(null);
+            });
 
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);

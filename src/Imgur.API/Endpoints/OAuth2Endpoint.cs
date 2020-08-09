@@ -59,7 +59,7 @@ namespace Imgur.API.Endpoints
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
         internal async Task<IOAuth2Token> GetTokenInternalAsync(string refreshToken,
-                                                              CancellationToken cancellationToken = default)
+                                                                CancellationToken cancellationToken = default)
         {
             using (var request = OAuth2RequestBuilder.GetTokenRequest(
                 TokenEndpointUrl,

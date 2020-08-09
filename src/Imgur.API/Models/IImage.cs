@@ -90,7 +90,7 @@
         /// <summary>
         /// The account id.
         /// </summary>
-        int AccountId { get; }
+        int? AccountId { get; }
 
         /// <summary>
         /// True if the image is an ad, false if otherwise.

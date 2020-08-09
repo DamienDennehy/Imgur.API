@@ -51,7 +51,7 @@ namespace Imgur.API.Tests.Integration
         {
             var apiClient = GetApiClientWithKeyAndSecret();
             var oAuth2Endpoint = new OAuth2Endpoint(apiClient, new HttpClient());
-            _oAuth2Token = Task.Run(() => oAuth2Endpoint.GetTokenByRefreshTokenAsync(_refreshToken)).Result;
+            _oAuth2Token = Task.Run(() => oAuth2Endpoint.GetTokenAsync(_refreshToken)).Result;
         }
 
         public IOAuth2Token GetOAuth2Token()

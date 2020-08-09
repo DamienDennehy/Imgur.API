@@ -42,6 +42,41 @@ namespace Imgur.API.Tests.ResponseTests
         }
 
         [Fact]
+        public void ConvertResponse_WithGetImagePublicResponse_ReturnsImage()
+        {
+            var responseConverter = new ResponseConverter();
+            var response = responseConverter.ConvertResponse<Image>(Mocks.MockImageResponses.GetImagePublc);
+            Assert.NotNull(response);
+            Assert.IsType<Image>(response);
+            Assert.Equal("PdvlRWc", response.Id);
+            Assert.Null(response.Title);
+            Assert.StartsWith("After years of playing around", response.Description);
+            Assert.Equal(1596966065, response.DateTime);
+            Assert.Equal("image/jpeg", response.Type);
+            Assert.False(response.Animated);
+            Assert.Equal(1600, response.Width);
+            Assert.Equal(1312, response.Height);
+            Assert.Equal(150117, response.Size);
+            Assert.Equal(20625, response.Views);
+            Assert.Equal(3096163125, response.Bandwidth);
+            Assert.Null(response.Vote);
+            Assert.False(response.Favorite);
+            Assert.False(response.Nsfw);
+            Assert.Null(response.Section);
+            Assert.Null(response.AccountUrl);
+            Assert.Null(response.AccountId);
+            Assert.False(response.IsAd);
+            Assert.False(response.InMostViral);
+            Assert.Empty(response.Tags);
+            Assert.Equal(0, response.AdType);
+            Assert.True(string.IsNullOrWhiteSpace(response.AdUrl));
+            Assert.False(response.InGallery);
+            Assert.Equal("https://i.imgur.com/PdvlRWc.jpg", response.Link);
+            Assert.Null(response.DeleteHash);
+            Assert.Null(response.Name);
+        }
+
+        [Fact]
         public void ConvertResponse_WithUploadImageResponse_ReturnsImage()
         {
             var responseConverter = new ResponseConverter();

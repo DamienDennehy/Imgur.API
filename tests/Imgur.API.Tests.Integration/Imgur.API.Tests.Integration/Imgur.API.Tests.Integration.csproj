@@ -24,4 +24,10 @@
     <ProjectReference Include="..\..\..\src\Imgur.API\Imgur.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="OAuth2EndpointIntegrationTests - Copy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

@@ -1,16 +1,29 @@
 ﻿using System;
 using System.IO;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Imgur.API.Authentication;
 using Imgur.API.Models;
+using Imgur.API.RequestBuilders;
 
 namespace Imgur.API.Endpoints
 {
     /// <summary>
     /// Image Endpoint.
     /// </summary>
-    public class ImageEndpoint : IImageEndpoint
+    public class ImageEndpoint : EndpointBase, IImageEndpoint
     {
+        /// <summary>
+        /// Declares a new instance of the endpoint.
+        /// </summary>
+        /// <param name="apiClient"></param>
+        /// <param name="httpClient"></param>
+        public ImageEndpoint(IApiClient apiClient, HttpClient httpClient) : base(
+            apiClient, httpClient)
+        {
+        }
+
         /// <summary>
         /// Get information about an image.
         /// </summary>
@@ -20,7 +33,25 @@ namespace Imgur.API.Endpoints
         public Task<IImage> GetImageAsync(string imageId,
                                           CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(imageId))
+            {
+                throw new ArgumentNullException(nameof(imageId));
+            }
+
+            return GetImageInternalAsync(imageId, cancellationToken);
+        }
+
+        private async Task<IImage> GetImageInternalAsync(string imageId,
+                                                         CancellationToken cancellationToken = default)
+        {
+            var url = $"image/{imageId}";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            {
+                var image = await SendRequestAsync<Image>(request,
+                                                          cancellationToken).ConfigureAwait(false);
+                return image;
+            }
         }
 
         /// <summary>

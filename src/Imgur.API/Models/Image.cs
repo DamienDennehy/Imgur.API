@@ -94,7 +94,7 @@ namespace Imgur.API.Models
         /// The account id.
         /// </summary>
         [JsonPropertyName("account_id")]
-        public int AccountId { get; set; }
+        public int? AccountId { get; set; }
 
         /// <summary>
         /// True if the image is an ad, false if otherwise.

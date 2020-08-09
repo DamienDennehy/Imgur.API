@@ -26,7 +26,6 @@ namespace Imgur.API.Converters
         /// <summary>
         /// Parses the string response from the endpoint into an OAuth2Token.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="response"></param>
         /// <returns></returns>
         internal IOAuth2Token ConvertOAuth2TokenResponse(string response)

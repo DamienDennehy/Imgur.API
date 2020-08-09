@@ -18,6 +18,11 @@ namespace Imgur.API.Endpoints
         internal readonly HttpClient _httpClient;
         internal readonly ResponseConverter _responseConverter;
 
+        /// <summary>
+        /// Declares a new instance of an endpoint.
+        /// </summary>
+        /// <param name="apiClient"></param>
+        /// <param name="httpClient"></param>
         protected EndpointBase(IApiClient apiClient, HttpClient httpClient)
         {
             _apiClient = apiClient ?? throw new ArgumentNullException(nameof(apiClient));

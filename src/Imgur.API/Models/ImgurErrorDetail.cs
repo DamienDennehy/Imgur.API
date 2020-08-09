@@ -5,6 +5,9 @@
     /// </summary>
     public class ImgurErrorDetail : IImgurErrorDetail
     {
+        /// <summary>
+        /// A description of the error.
+        /// </summary>
         public Error Error { get; set; }
     }
 }

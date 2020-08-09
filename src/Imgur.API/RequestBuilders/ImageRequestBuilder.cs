@@ -19,12 +19,12 @@ namespace Imgur.API.RequestBuilders
 
             var parameters = new Dictionary<string, string>();
 
-            if (title != null)
+            if (!string.IsNullOrWhiteSpace(title))
             {
                 parameters.Add("title", title);
             }
 
-            if (description != null)
+            if (!string.IsNullOrWhiteSpace(description))
             {
                 parameters.Add("description", description);
             }
@@ -74,17 +74,17 @@ namespace Imgur.API.RequestBuilders
                 content.Add(new StringContent(album), "album");
             }
 
-            if (name != null)
+            if (!string.IsNullOrWhiteSpace(name))
             {
                 content.Add(new StringContent(name), "name");
             }
 
-            if (title != null)
+            if (!string.IsNullOrWhiteSpace(title))
             {
                 content.Add(new StringContent(title), "title");
             }
 
-            if (description != null)
+            if (!string.IsNullOrWhiteSpace(description))
             {
                 content.Add(new StringContent(description), "description");
             }
@@ -125,17 +125,17 @@ namespace Imgur.API.RequestBuilders
                 parameters.Add("album", album);
             }
 
-            if (name != null)
+            if (!string.IsNullOrWhiteSpace(name))
             {
                 parameters.Add("name", name);
             }
 
-            if (title != null)
+            if (!string.IsNullOrWhiteSpace(title))
             {
                 parameters.Add("title", title);
             }
 
-            if (description != null)
+            if (!string.IsNullOrWhiteSpace(description))
             {
                 parameters.Add("description", description);
             }

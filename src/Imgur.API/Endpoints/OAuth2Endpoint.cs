@@ -8,6 +8,9 @@ using Imgur.API.RequestBuilders;
 
 namespace Imgur.API.Endpoints
 {
+    /// <summary>
+    /// Authorizes account access.
+    /// </summary>
     public class OAuth2Endpoint : EndpointBase, IOAuth2Endpoint
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<Pending>")]
@@ -15,6 +18,11 @@ namespace Imgur.API.Endpoints
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<Pending>")]
         internal const string TokenEndpointUrl = "https://api.imgur.com/oauth2/token";
 
+        /// <summary>
+        /// Declares a new instance of the endpoint.
+        /// </summary>
+        /// <param name="apiClient"></param>
+        /// <param name="httpClient"></param>
         public OAuth2Endpoint(IApiClient apiClient, HttpClient httpClient) : base(
             apiClient, httpClient)
         {

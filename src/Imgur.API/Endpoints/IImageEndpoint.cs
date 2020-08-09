@@ -5,6 +5,9 @@ using Imgur.API.Models;
 
 namespace Imgur.API.Endpoints
 {
+    /// <summary>
+    /// Image Endpoint.
+    /// </summary>
     public interface IImageEndpoint
     {
         /// <summary>

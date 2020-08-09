@@ -10,10 +10,10 @@ namespace Imgur.API.Endpoints
 {
     public class OAuth2Endpoint : EndpointBase, IOAuth2Endpoint
     {
-#pragma warning disable S1075 // URIs should not be hardcoded
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<Pending>")]
         internal const string AuthorizationEndpointUrl = "https://api.imgur.com/oauth2/authorize";
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<Pending>")]
         internal const string TokenEndpointUrl = "https://api.imgur.com/oauth2/token";
-#pragma warning restore S1075 // URIs should not be hardcoded
 
         public OAuth2Endpoint(IApiClient apiClient, HttpClient httpClient) : base(
             apiClient, httpClient)
@@ -37,6 +37,7 @@ namespace Imgur.API.Endpoints
             return GetTokenByRefreshTokenInternalAsync(refreshToken, cancellationToken);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
         public async Task<IOAuth2Token> GetTokenByRefreshTokenInternalAsync(string refreshToken,
                                                                             CancellationToken cancellationToken = default)
         {

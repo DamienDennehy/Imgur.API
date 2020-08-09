@@ -6,9 +6,8 @@ namespace Imgur.API
     /// The exception that is thrown when an error is found in a response from an Imgur endpoint.
     /// </summary>
     [Serializable]
-#pragma warning disable S3925 // "ISerializable" should be implemented correctly
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S3925:\"ISerializable\" should be implemented correctly", Justification = "<Pending>")]
     public class ImgurException : Exception
-#pragma warning restore S3925 // "ISerializable" should be implemented correctly
     {
         /// <summary>
         /// Initializes a new instance of the ImgurException class with a specified error message.

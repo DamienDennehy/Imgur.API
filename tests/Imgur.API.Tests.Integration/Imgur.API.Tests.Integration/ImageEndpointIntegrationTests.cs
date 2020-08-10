@@ -16,7 +16,7 @@ namespace Imgur.API.Tests.Integration
         }
 
         [Fact]
-        public async Task ImageEndpoint_GetImageWithClientKey_GetsImage()
+        public async Task GetImageWithClientKey_GetsImage()
         {
             var apiClient = _fixture.GetApiClientWithKey();
             var httpClient = new HttpClient();
@@ -29,7 +29,7 @@ namespace Imgur.API.Tests.Integration
         }
 
         [Fact]
-        public async Task ImageEndpoint_GetImageWithClientKeyAndSecret_GetsImage()
+        public async Task GetImageWithClientKeyAndSecret_GetsImage()
         {
             var apiClient = _fixture.GetApiClientWithKeyAndSecret();
             var httpClient = new HttpClient();
@@ -42,7 +42,7 @@ namespace Imgur.API.Tests.Integration
         }
 
         [Fact]
-        public async Task ImageEndpoint_GetApiClientWithKeyAndOAuthToken_GetsImage()
+        public async Task GetApiClientWithKeyAndOAuthToken_GetsImage()
         {
             var apiClient = _fixture.GetApiClientWithKeyAndOAuthToken();
             var httpClient = new HttpClient();

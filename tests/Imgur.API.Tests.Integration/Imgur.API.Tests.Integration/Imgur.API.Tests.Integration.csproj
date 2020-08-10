@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="OAuth2EndpointIntegrationTests - Copy.cs">
+    <Compile Update="OAuth2EndpointIntegrationTests.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

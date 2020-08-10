@@ -13,7 +13,7 @@ namespace Imgur.API.Tests.Integration
         }
 
         [Fact]
-        public void OAuth2Endpoint_GetAccessTokenFromRefreshToken_GetsToken()
+        public void GetAccessTokenFromRefreshToken_GetsToken()
         {
             var oAuth2Token = _fixture.GetOAuth2Token();
 

@@ -71,7 +71,34 @@ namespace Imgur.API.Endpoints
                                              string description = null,
                                              CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (image == null)
+            {
+                throw new ArgumentNullException(nameof(image));
+            }
+
+            return UploadImageInternalAsync(image, album, name, title, description, cancellationToken);
+        }
+
+        private async Task<IImage> UploadImageInternalAsync(Stream image,
+                                                            string album = null,
+                                                            string name = null,
+                                                            string title = null,
+                                                            string description = null,
+                                                            CancellationToken cancellationToken = default)
+        {
+            const string url = "image";
+
+            using (var request = ImageRequestBuilder.UploadImageStreamRequest(url,
+                                                                              image,
+                                                                              album,
+                                                                              name,
+                                                                              title,
+                                                                              description))
+            {
+                var returnImage = await SendRequestAsync<Image>(request,
+                                                                cancellationToken).ConfigureAwait(false);
+                return returnImage;
+            }
         }
 
         /// <summary>

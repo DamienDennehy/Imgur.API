@@ -79,6 +79,26 @@ namespace Imgur.API.Endpoints
             return UploadImageInternalAsync(image, album, name, title, description, cancellationToken);
         }
 
+        /// <summary>
+        /// Upload a new image.
+        /// </summary>
+        /// <param name="imageUrl"></param>
+        /// <param name="album"></param>
+        /// <param name="name"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IImage> UploadImageAsync(string imageUrl,
+                                             string album = null,
+                                             string name = null,
+                                             string title = null,
+                                             string description = null,
+                                             CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
         private async Task<IImage> UploadImageInternalAsync(Stream image,
                                                             string album = null,
                                                             string name = null,
@@ -99,26 +119,6 @@ namespace Imgur.API.Endpoints
                                                                 cancellationToken).ConfigureAwait(false);
                 return returnImage;
             }
-        }
-
-        /// <summary>
-        /// Upload a new image.
-        /// </summary>
-        /// <param name="image"></param>
-        /// <param name="album"></param>
-        /// <param name="name"></param>
-        /// <param name="title"></param>
-        /// <param name="description"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task<IImage> UploadImageAsync(string image,
-                                             string album = null,
-                                             string name = null,
-                                             string title = null,
-                                             string description = null,
-                                             CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>

@@ -33,14 +33,14 @@ namespace Imgur.API.Endpoints
         /// <summary>
         /// Upload a new image.
         /// </summary>
-        /// <param name="image"></param>
+        /// <param name="imageUrl"></param>
         /// <param name="album"></param>
         /// <param name="name"></param>
         /// <param name="title"></param>
         /// <param name="description"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<IImage> UploadImageAsync(string image, string album = null, string name = null, string title = null, string description = null, CancellationToken cancellationToken = default);
+        Task<IImage> UploadImageAsync(string imageUrl, string album = null, string name = null, string title = null, string description = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Upload a new image.

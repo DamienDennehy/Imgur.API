@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Imgur.API.Endpoints;
 using Xunit;
@@ -16,42 +17,21 @@ namespace Imgur.API.Tests.Integration
         }
 
         [Fact]
-        public async Task GetImageWithClientKey_GetsImage()
+        public async Task UploadImageStreamWithClientKey_UploadsImageStream()
         {
             var apiClient = _fixture.GetApiClientWithKey();
             var httpClient = new HttpClient();
 
-            var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
-            var image = await imageEndpoint.GetImageAsync("PdvlRWc");
-
-            Assert.NotNull(image);
-            Assert.Equal("PdvlRWc", image.Id);
-        }
-
-        [Fact]
-        public async Task GetImageWithClientKeyAndSecret_GetsImage()
-        {
-            var apiClient = _fixture.GetApiClientWithKeyAndSecret();
-            var httpClient = new HttpClient();
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "banana.jpg");
+            using var fileStream = File.OpenRead(filePath);
 
             var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
-            var image = await imageEndpoint.GetImageAsync("PdvlRWc");
+            var imageUpload = await imageEndpoint.UploadImageAsync(fileStream);
+            var image = await imageEndpoint.GetImageAsync(imageUpload.Id);
 
+            Assert.NotNull(imageUpload);
             Assert.NotNull(image);
-            Assert.Equal("PdvlRWc", image.Id);
-        }
-
-        [Fact]
-        public async Task GetApiClientWithKeyAndOAuthToken_GetsImage()
-        {
-            var apiClient = _fixture.GetApiClientWithKeyAndOAuthToken();
-            var httpClient = new HttpClient();
-
-            var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
-            var image = await imageEndpoint.GetImageAsync("PdvlRWc");
-
-            Assert.NotNull(image);
-            Assert.Equal("PdvlRWc", image.Id);
+            Assert.Equal(imageUpload.Id, image.Id);
         }
     }
 }

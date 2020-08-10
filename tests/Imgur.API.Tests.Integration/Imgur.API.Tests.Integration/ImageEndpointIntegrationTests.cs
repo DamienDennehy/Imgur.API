@@ -27,11 +27,11 @@ namespace Imgur.API.Tests.Integration
 
             var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
             var imageUpload = await imageEndpoint.UploadImageAsync(fileStream);
-            var image = await imageEndpoint.GetImageAsync(imageUpload.Id);
+            var imageDownload = await imageEndpoint.GetImageAsync(imageUpload.Id);
 
             Assert.NotNull(imageUpload);
-            Assert.NotNull(image);
-            Assert.Equal(imageUpload.Id, image.Id);
+            Assert.NotNull(imageDownload);
+            Assert.Equal(imageUpload.Id, imageDownload.Id);
         }
     }
 }

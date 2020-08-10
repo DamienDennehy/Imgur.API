@@ -21,6 +21,9 @@ namespace Imgur.API.Tests.EndpointTests
             });
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal("apiClient", argNullException.ParamName);
         }
 
         [Fact]
@@ -40,6 +43,9 @@ namespace Imgur.API.Tests.EndpointTests
             });
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal("httpClient", argNullException.ParamName);
         }
 
         [Fact]
@@ -148,6 +154,9 @@ namespace Imgur.API.Tests.EndpointTests
 
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal("message", argNullException.ParamName);
         }
 
         [Fact]

@@ -33,7 +33,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetImageAsync_WithTokenNull_ThrowsArgumentNullException()
+        public async Task GetImageAsync_WithImageNull_ThrowsArgumentNullException()
         {
             var apiClient = new ApiClient("123", "1234");
             var endpoint = new ImageEndpoint(apiClient, new HttpClient());
@@ -45,6 +45,9 @@ namespace Imgur.API.Tests.EndpointTests
 
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal("imageId", argNullException.ParamName);
         }
 
         [Fact]
@@ -60,14 +63,12 @@ namespace Imgur.API.Tests.EndpointTests
             var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
             var endpoint = new ImageEndpoint(apiClient, httpClient);
 
-            using (var ms = new MemoryStream(new byte[9]))
-            {
-                var response = await endpoint.UploadImageAsync(ms);
+            using var ms = new MemoryStream(new byte[9]);
+            var response = await endpoint.UploadImageAsync(ms);
 
-                Assert.NotNull(response);
-                Assert.IsAssignableFrom<IImage>(response);
-                Assert.Equal("mvWNMH4", response.Id);
-            }
+            Assert.NotNull(response);
+            Assert.IsAssignableFrom<IImage>(response);
+            Assert.Equal("mvWNMH4", response.Id);
         }
     }
 }

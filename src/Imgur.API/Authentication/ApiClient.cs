@@ -74,32 +74,32 @@ namespace Imgur.API.Authentication
 
             if (token.AccessToken == null)
             {
-                throw new ArgumentException("token.AccessToken property not set.");
+                throw new ArgumentNullException(nameof(token), "token.AccessToken property not set.");
             }
 
             if (token.RefreshToken == null)
             {
-                throw new ArgumentException("token.RefreshToken property not set.");
+                throw new ArgumentNullException(nameof(token), "token.RefreshToken property not set.");
             }
 
             if (token.TokenType == null)
             {
-                throw new ArgumentException("token.TokenType property not set.");
+                throw new ArgumentNullException(nameof(token), "token.TokenType property not set.");
             }
 
             if (token.AccountId == 0)
             {
-                throw new ArgumentException("token.AccountId property not set.");
+                throw new ArgumentNullException(nameof(token), "token.AccountId property not set.");
             }
 
             if (token.AccountUsername == null)
             {
-                throw new ArgumentException("token.AccountUsername property not set.");
+                throw new ArgumentNullException(nameof(token), "token.AccountUsername property not set.");
             }
 
             if (token.ExpiresIn == 0)
             {
-                throw new ArgumentException("token.ExpiresIn property not set.");
+                throw new ArgumentNullException(nameof(token), "token.ExpiresIn property not set.");
             }
 
             OAuth2Token = token;

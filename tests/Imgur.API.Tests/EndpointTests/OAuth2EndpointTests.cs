@@ -64,6 +64,9 @@ namespace Imgur.API.Tests.EndpointTests
 
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal("token", argNullException.ParamName);
         }
     }
 }

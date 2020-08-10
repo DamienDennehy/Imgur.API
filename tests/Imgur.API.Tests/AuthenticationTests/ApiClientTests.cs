@@ -73,7 +73,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             });
 
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentException>(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
         [Fact]
@@ -96,7 +96,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             });
 
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentException>(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
         [Fact]
@@ -119,7 +119,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             });
 
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentException>(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
         [Fact]
@@ -142,7 +142,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             });
 
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentException>(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
         [Fact]
@@ -165,7 +165,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             });
 
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentException>(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
         [Fact]
@@ -188,7 +188,7 @@ namespace Imgur.API.Tests.AuthenticationTests
             });
 
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentException>(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
 
         [Fact]

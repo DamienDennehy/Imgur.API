@@ -156,7 +156,7 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.IsType<ArgumentNullException>(exception);
 
             var argNullException = (ArgumentNullException)exception;
-            Assert.Equal("message", argNullException.ParamName);
+            Assert.Equal("httpRequestMessage", argNullException.ParamName);
         }
 
         [Fact]

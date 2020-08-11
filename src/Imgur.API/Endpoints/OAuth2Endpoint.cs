@@ -61,11 +61,10 @@ namespace Imgur.API.Endpoints
         internal async Task<IOAuth2Token> GetTokenInternalAsync(string refreshToken,
                                                                 CancellationToken cancellationToken = default)
         {
-            using (var request = OAuth2RequestBuilder.GetTokenRequest(
-                TokenEndpointUrl,
-                refreshToken,
-                _apiClient.ClientId,
-                _apiClient.ClientSecret))
+            using (var request = OAuth2RequestBuilder.GetTokenRequest(TokenEndpointUrl,
+                                                                      refreshToken,
+                                                                      _apiClient.ClientId,
+                                                                      _apiClient.ClientSecret))
             {
                 var httpResponse = await _httpClient.SendAsync(request)
                                                     .ConfigureAwait(false);

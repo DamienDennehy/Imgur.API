@@ -53,7 +53,7 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public async Task UploadImageStreamAsync_Equal()
         {
-            var mockUrl = "https://api.imgur.com/3/image";
+            var mockUrl = "https://api.imgur.com/3/upload";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(MockImageResponses.UploadImage)

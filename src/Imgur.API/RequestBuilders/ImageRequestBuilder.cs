@@ -97,6 +97,66 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
+        internal static HttpRequestMessage UploadVideoStreamRequest(string url,
+                                                                    Stream video,
+                                                                    string album = null,
+                                                                    string name = null,
+                                                                    string title = null,
+                                                                    string description = null,
+                                                                    IProgress<int> progressBytes = null)
+        {
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
+
+            if (video == null)
+            {
+                throw new ArgumentNullException(nameof(video));
+            }
+
+            var content = new MultipartFormDataContent($"{DateTime.UtcNow.Ticks}")
+            {
+                {new StringContent("file"), "type"}
+            };
+
+            if (progressBytes != null)
+            {
+                content.Add(new ProgressStreamContent(video, progressBytes), "video");
+            }
+            else
+            {
+                content.Add(new StreamContent(video), "video");
+            }
+
+            if (!string.IsNullOrWhiteSpace(album))
+            {
+                content.Add(new StringContent(album), "album");
+            }
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                content.Add(new StringContent(name), "name");
+            }
+
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                content.Add(new StringContent(title), "title");
+            }
+
+            if (!string.IsNullOrWhiteSpace(description))
+            {
+                content.Add(new StringContent(description), "description");
+            }
+
+            var request = new ProgressHttpRequestMessage(HttpMethod.Post, url)
+            {
+                Content = content
+            };
+
+            return request;
+        }
+
         internal static HttpRequestMessage UploadImageUrlRequest(string url,
                                                                  string imageUrl,
                                                                  string album = null,

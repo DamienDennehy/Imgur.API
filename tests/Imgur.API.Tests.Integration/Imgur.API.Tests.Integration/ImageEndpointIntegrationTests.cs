@@ -59,7 +59,7 @@ namespace Imgur.API.Tests.Integration
             var uploadProgress = new Progress<int>(percent => report(percent));
 
             var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
-            var imageUpload = await imageEndpoint.UploadImageAsync(fileStream, uploadProgress, );
+            var imageUpload = await imageEndpoint.UploadImageAsync(fileStream, progress: uploadProgress, bufferSize: 4096);
             var imageDownload = await imageEndpoint.GetImageAsync(imageUpload.Id);
 
             Assert.NotNull(imageUpload);

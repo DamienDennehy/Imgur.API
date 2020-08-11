@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace Imgur.API.RequestBuilders
 {
@@ -39,7 +40,7 @@ namespace Imgur.API.RequestBuilders
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
         internal static HttpRequestMessage UploadImageStreamRequest(string url,
-                                                                    Stream image,
+                                                                    Stream image = null,
                                                                     string album = null,
                                                                     string name = null,
                                                                     string title = null,
@@ -64,11 +65,11 @@ namespace Imgur.API.RequestBuilders
 
             if (progressBytes != null)
             {
-                content.Add(new ProgressStreamContent(image, progressBytes, bufferSize), "image");
+                content.Add(new ProgressStreamContent(image, progressBytes, bufferSize), "image", "image");
             }
             else
             {
-                content.Add(new StreamContent(image), "image");
+                content.Add(new StreamContent(image), "image", "image");
             }
 
             if (!string.IsNullOrWhiteSpace(album))
@@ -96,6 +97,8 @@ namespace Imgur.API.RequestBuilders
                 Content = content
             };
 
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+           
             return request;
         }
 
@@ -126,11 +129,11 @@ namespace Imgur.API.RequestBuilders
 
             if (progressBytes != null)
             {
-                content.Add(new ProgressStreamContent(video, progressBytes, bufferSize), "video");
+                content.Add(new ProgressStreamContent(video, progressBytes, bufferSize), "video", "video");
             }
             else
             {
-                content.Add(new StreamContent(video), "video");
+                content.Add(new StreamContent(video), "video", "video");
             }
 
             if (!string.IsNullOrWhiteSpace(album))
@@ -157,6 +160,8 @@ namespace Imgur.API.RequestBuilders
             {
                 Content = content
             };
+
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
 
             return request;
         }

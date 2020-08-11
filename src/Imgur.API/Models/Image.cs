@@ -117,7 +117,7 @@ namespace Imgur.API.Models
         /// The Ad Type.
         /// </summary>
         [JsonPropertyName("ad_type")]
-        public int AdType { get; set; }
+        public int? AdType { get; set; }
 
         /// <summary>
         /// The ad url.

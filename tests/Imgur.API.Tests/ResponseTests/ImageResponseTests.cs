@@ -138,7 +138,7 @@ namespace Imgur.API.Tests.ResponseTests
             Assert.True(response.IsAd);
             Assert.True(response.InMostViral);
             Assert.Contains(response.Tags, e => e == "funny");
-            Assert.Equal(1, response.AdType);
+            Assert.Null(response.AdType);
             Assert.Equal("http://imgur.com", response.AdUrl);
             Assert.True(response.InGallery);
             Assert.Equal("https://i.imgur.com/mvWNMH4.mp4", response.Link);

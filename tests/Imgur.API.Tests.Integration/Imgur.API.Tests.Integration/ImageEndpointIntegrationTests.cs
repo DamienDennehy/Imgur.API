@@ -23,7 +23,7 @@ namespace Imgur.API.Tests.Integration
         }
 
         [Fact]
-        public async Task UploadImageStreamWithClientKey_UploadsImageStream()
+        public async Task UploadImageStreamWithClientKey_UploadsImage()
         {
             var apiClient = _fixture.GetApiClientWithKey();
             var httpClient = new HttpClient();
@@ -41,9 +41,9 @@ namespace Imgur.API.Tests.Integration
         }
 
         [Fact]
-        public async Task UploadVideoStreamWithClientKey_UploadsImageStream()
+        public async Task UploadImageProgressStreamWithClientKey_UploadsImage()
         {
-            var currentProgress = 0;
+            var totalProgress = 0;
             var apiClient = _fixture.GetApiClientWithKey();
             var httpClient = new HttpClient();
 
@@ -52,11 +52,10 @@ namespace Imgur.API.Tests.Integration
 
             void report(int progress)
             {
-                currentProgress += progress;
-                _output.WriteLine($"{currentProgress} of {fileStream.Length}");
+                totalProgress += progress;
             }
 
-            var uploadProgress = new Progress<int>(percent => report(percent));
+            var uploadProgress = new Progress<int>(report);
 
             var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
             var imageUpload = await imageEndpoint.UploadImageAsync(fileStream, progress: uploadProgress, bufferSize: 4096);
@@ -65,6 +64,54 @@ namespace Imgur.API.Tests.Integration
             Assert.NotNull(imageUpload);
             Assert.NotNull(imageDownload);
             Assert.Equal(imageUpload.Id, imageDownload.Id);
+
+            _output.WriteLine($"{totalProgress} of {fileStream.Length} reported.");
+        }
+
+        [Fact]
+        public async Task UploadVideoStreamWithClientKey_UploadsVideo()
+        {
+            var apiClient = _fixture.GetApiClientWithKey();
+            var httpClient = new HttpClient();
+
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "banana.mp4");
+            using var fileStream = File.OpenRead(filePath);
+
+            var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
+            var imageUpload = await imageEndpoint.UploadImageAsync(fileStream);
+            var imageDownload = await imageEndpoint.GetImageAsync(imageUpload.Id);
+
+            Assert.NotNull(imageUpload);
+            Assert.NotNull(imageDownload);
+            Assert.Equal(imageUpload.Id, imageDownload.Id);
+        }
+
+        [Fact]
+        public async Task UploadVideoProgressStreamWithClientKey_UploadsVideo()
+        {
+            var totalProgress = 0;
+            var apiClient = _fixture.GetApiClientWithKey();
+            var httpClient = new HttpClient();
+
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "banana.mp4");
+            using var fileStream = File.OpenRead(filePath);
+
+            void report(int progress)
+            {
+                totalProgress += progress;
+            }
+
+            var uploadProgress = new Progress<int>(report);
+
+            var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
+            var imageUpload = await imageEndpoint.UploadVideoAsync(fileStream, progress: uploadProgress, bufferSize: 4096);
+            var imageDownload = await imageEndpoint.GetImageAsync(imageUpload.Id);
+
+            Assert.NotNull(imageUpload);
+            Assert.NotNull(imageDownload);
+            Assert.Equal(imageUpload.Id, imageDownload.Id);
+
+            _output.WriteLine($"{totalProgress} of {fileStream.Length} reported.");
         }
     }
 }

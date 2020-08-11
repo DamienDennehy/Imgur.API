@@ -41,8 +41,6 @@ namespace Imgur.API
         {
             var buffer = new byte[_bufferSize];
 
-            _progress.Report(0);
-
             while (true)
             {
                 var length = await _readStream.ReadAsync(buffer,

@@ -80,7 +80,7 @@ namespace Imgur.API.Endpoints
                 throw new ArgumentNullException(nameof(image));
             }
 
-            return UploadImageInternalAsync(image, album, name, title, description, cancellationToken);
+            return UploadImageInternalAsync(image, album, name, title, description, progress, bufferSize, cancellationToken);
         }
 
         /// <summary>
@@ -103,11 +103,14 @@ namespace Imgur.API.Endpoints
             throw new NotImplementedException();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
         private async Task<IImage> UploadImageInternalAsync(Stream image,
                                                             string album = null,
                                                             string name = null,
                                                             string title = null,
                                                             string description = null,
+                                                            IProgress<int> progress = null,
+                                                            int? bufferSize = 4096,
                                                             CancellationToken cancellationToken = default)
         {
             const string url = "upload";
@@ -117,7 +120,9 @@ namespace Imgur.API.Endpoints
                                                                               album,
                                                                               name,
                                                                               title,
-                                                                              description))
+                                                                              description,
+                                                                              progress,
+                                                                              bufferSize))
             {
                 var returnImage = await SendRequestAsync<Image>(request,
                                                                 cancellationToken).ConfigureAwait(false);
@@ -155,14 +160,17 @@ namespace Imgur.API.Endpoints
                 throw new ArgumentNullException(nameof(video));
             }
 
-            return UploadVideoInternalAsync(video, album, name, title, description, cancellationToken);
+            return UploadVideoInternalAsync(video, album, name, title, description, progress, bufferSize, cancellationToken);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
         private async Task<IImage> UploadVideoInternalAsync(Stream image,
                                                             string album = null,
                                                             string name = null,
                                                             string title = null,
                                                             string description = null,
+                                                            IProgress<int> progress = null,
+                                                            int? bufferSize = 4096,
                                                             CancellationToken cancellationToken = default)
         {
             const string url = "upload";
@@ -172,7 +180,9 @@ namespace Imgur.API.Endpoints
                                                                               album,
                                                                               name,
                                                                               title,
-                                                                              description))
+                                                                              description,
+                                                                              progress,
+                                                                              bufferSize))
             {
                 var returnImage = await SendRequestAsync<Image>(request,
                                                                 cancellationToken).ConfigureAwait(false);

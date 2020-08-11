@@ -110,7 +110,7 @@
         /// <summary>
         /// The Ad Type.
         /// </summary>
-        int AdType { get; }
+        int? AdType { get; }
 
         /// <summary>
         /// The ad url.

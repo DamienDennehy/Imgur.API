@@ -66,7 +66,7 @@ namespace Imgur.API.Endpoints
                                                                       _apiClient.ClientId,
                                                                       _apiClient.ClientSecret))
             {
-                var httpResponse = await _httpClient.SendAsync(request)
+                var httpResponse = await _httpClient.SendAsync(request, cancellationToken)
                                                     .ConfigureAwait(false);
 
                 httpResponse.EnsureSuccessStatusCode();

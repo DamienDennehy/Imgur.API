@@ -62,6 +62,8 @@ namespace Imgur.API.Endpoints
         /// <param name="name"></param>
         /// <param name="title"></param>
         /// <param name="description"></param>
+        /// <param name="progress"></param>
+        /// <param name="bufferSize"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<IImage> UploadImageAsync(Stream image,
@@ -69,6 +71,8 @@ namespace Imgur.API.Endpoints
                                              string name = null,
                                              string title = null,
                                              string description = null,
+                                             IProgress<int> progress = null,
+                                             int? bufferSize = 4096,
                                              CancellationToken cancellationToken = default)
         {
             if (image == null)
@@ -131,6 +135,8 @@ namespace Imgur.API.Endpoints
         /// <param name="title"></param>
         /// <param name="description"></param>
         /// <param name="disableAudio"></param>
+        /// <param name="progress"></param>
+        /// <param name="bufferSize"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<IImage> UploadVideoAsync(Stream video,
@@ -140,6 +146,8 @@ namespace Imgur.API.Endpoints
                                              string title = null,
                                              string description = null,
                                              bool disableAudio = false,
+                                             IProgress<int> progress = null,
+                                             int? bufferSize = 4096,
                                              CancellationToken cancellationToken = default)
         {
             if (video == null)

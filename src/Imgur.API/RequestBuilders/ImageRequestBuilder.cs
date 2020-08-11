@@ -37,13 +37,15 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
         internal static HttpRequestMessage UploadImageStreamRequest(string url,
                                                                     Stream image,
                                                                     string album = null,
                                                                     string name = null,
                                                                     string title = null,
                                                                     string description = null,
-                                                                    IProgress<int> progressBytes = null)
+                                                                    IProgress<int> progressBytes = null,
+                                                                    int? bufferSize = null)
         {
             if (string.IsNullOrWhiteSpace(url))
             {
@@ -62,7 +64,7 @@ namespace Imgur.API.RequestBuilders
 
             if (progressBytes != null)
             {
-                content.Add(new ProgressStreamContent(image, progressBytes), "image");
+                content.Add(new ProgressStreamContent(image, progressBytes, bufferSize), "image");
             }
             else
             {
@@ -97,13 +99,15 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
         internal static HttpRequestMessage UploadVideoStreamRequest(string url,
                                                                     Stream video,
                                                                     string album = null,
                                                                     string name = null,
                                                                     string title = null,
                                                                     string description = null,
-                                                                    IProgress<int> progressBytes = null)
+                                                                    IProgress<int> progressBytes = null,
+                                                                    int? bufferSize = null)
         {
             if (string.IsNullOrWhiteSpace(url))
             {
@@ -122,7 +126,7 @@ namespace Imgur.API.RequestBuilders
 
             if (progressBytes != null)
             {
-                content.Add(new ProgressStreamContent(video, progressBytes), "video");
+                content.Add(new ProgressStreamContent(video, progressBytes, bufferSize), "video");
             }
             else
             {

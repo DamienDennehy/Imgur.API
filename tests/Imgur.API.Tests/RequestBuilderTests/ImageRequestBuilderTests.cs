@@ -138,7 +138,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             int report(int progress) => currentProgress = progress;
             var byteProgress = new Progress<int>(percent => report(percent));
             using var request = ImageRequestBuilder.UploadImageStreamRequest(mockUrl, ms, "TheAlbum", "TheName", "TheTitle",
-                "TheDescription", byteProgress);
+                "TheDescription", byteProgress, 9999);
 
             Assert.NotNull(request);
             Assert.Equal("https://api.imgur.com/3/image", request.RequestUri.ToString());
@@ -155,6 +155,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
             Assert.NotNull(imageContent);
+            Assert.Equal(9999, imageContent._bufferSize);
             Assert.NotNull(type);
             Assert.NotNull(album);
             Assert.NotNull(name);
@@ -251,7 +252,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             int report(int progress) => currentProgress = progress;
             var byteProgress = new Progress<int>(percent => report(percent));
             using var request = ImageRequestBuilder.UploadVideoStreamRequest(mockUrl, ms, "TheAlbum", "TheName", "TheTitle",
-                "TheDescription", byteProgress);
+                "TheDescription", byteProgress, 9999);
 
             Assert.NotNull(request);
             Assert.Equal("https://api.imgur.com/3/upload", request.RequestUri.ToString());
@@ -268,6 +269,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
             Assert.NotNull(imageContent);
+            Assert.Equal(9999, imageContent._bufferSize);
             Assert.NotNull(type);
             Assert.NotNull(album);
             Assert.NotNull(name);

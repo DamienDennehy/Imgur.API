@@ -159,7 +159,7 @@ namespace Imgur.API.Endpoints
         {
             const string url = "upload";
 
-            using (var request = ImageRequestBuilder.UploadImageStreamRequest(url,
+            using (var request = ImageRequestBuilder.UploadVideoStreamRequest(url,
                                                                               image,
                                                                               album,
                                                                               name,

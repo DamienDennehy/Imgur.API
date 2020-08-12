@@ -189,34 +189,36 @@ namespace Imgur.API.RequestBuilders
 
             var parameters = new Dictionary<string, string>
             {
+                {"image", imageUrl},
                 {"type", "URL"},
-                {"image", imageUrl}
             };
-
-            if (!string.IsNullOrWhiteSpace(name))
-            {
-                parameters.Add("name", name);
-            }
 
             if (!string.IsNullOrWhiteSpace(album))
             {
                 parameters.Add("album", album);
             }
 
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                parameters.Add(nameof(name), name);
+            }
+
             if (!string.IsNullOrWhiteSpace(title))
             {
-                parameters.Add("title", title);
+                parameters.Add(nameof(title), title);
             }
 
             if (!string.IsNullOrWhiteSpace(description))
             {
-                parameters.Add("description", description);
+                parameters.Add(nameof(description), description);
             }
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = new FormUrlEncodedContent(parameters.ToArray())
             };
+
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
 
             return request;
         }

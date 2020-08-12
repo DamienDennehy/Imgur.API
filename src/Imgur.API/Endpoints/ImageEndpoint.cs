@@ -142,7 +142,7 @@ namespace Imgur.API.Endpoints
                                                             string description = null,
                                                             CancellationToken cancellationToken = default)
         {
-            const string url = "upload";
+            const string url = "image";
 
             using (var request = ImageRequestBuilder.UploadImageUrlRequest(url,
                                                                            imageUrl,

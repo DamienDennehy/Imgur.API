@@ -48,9 +48,9 @@ namespace Imgur.API.Endpoints
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
             {
-                var image = await SendRequestAsync<Image>(request,
-                                                          cancellationToken).ConfigureAwait(false);
-                return image;
+                var response = await SendRequestAsync<Image>(request,
+                                                             cancellationToken).ConfigureAwait(false);
+                return response;
             }
         }
 
@@ -129,9 +129,9 @@ namespace Imgur.API.Endpoints
                                                                               progress,
                                                                               bufferSize))
             {
-                var returnImage = await SendRequestAsync<Image>(request,
-                                                                cancellationToken).ConfigureAwait(false);
-                return returnImage;
+                var response = await SendRequestAsync<Image>(request,
+                                                             cancellationToken).ConfigureAwait(false);
+                return response;
             }
         }
 
@@ -151,9 +151,9 @@ namespace Imgur.API.Endpoints
                                                                            title,
                                                                            description))
             {
-                var returnImage = await SendRequestAsync<Image>(request,
-                                                                cancellationToken).ConfigureAwait(false);
-                return returnImage;
+                var response = await SendRequestAsync<Image>(request,
+                                                             cancellationToken).ConfigureAwait(false);
+                return response;
             }
         }
 
@@ -211,9 +211,9 @@ namespace Imgur.API.Endpoints
                                                                               progress,
                                                                               bufferSize))
             {
-                var returnImage = await SendRequestAsync<Image>(request,
-                                                                cancellationToken).ConfigureAwait(false);
-                return returnImage;
+                var response = await SendRequestAsync<Image>(request,
+                                                             cancellationToken).ConfigureAwait(false);
+                return response;
             }
         }
 
@@ -240,8 +240,8 @@ namespace Imgur.API.Endpoints
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
-                var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
-                return deleted;
+                var response = await SendRequestAsync<bool>(request).ConfigureAwait(false);
+                return response;
             }
         }
 
@@ -270,7 +270,30 @@ namespace Imgur.API.Endpoints
         public Task<string> FavoriteImageAsync(string imageId,
                                                CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(imageId))
+            {
+                throw new ArgumentNullException(nameof(imageId));
+            }
+
+            if (_apiClient.OAuth2Token == null)
+            {
+                throw new ArgumentException(OAuth2RequiredExceptionMessage);
+            }
+
+            return FavoriteImageInternalAsync(imageId);
+        }
+
+        private async Task<string> FavoriteImageInternalAsync(string imageId,
+                                                              CancellationToken cancellationToken = default)
+        {
+            var url = $"image/{imageId}/favorite";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Post, url))
+            {
+                var response = await SendRequestAsync<string>(request,
+                                                              cancellationToken).ConfigureAwait(false);
+                return response;
+            }
         }
     }
 }

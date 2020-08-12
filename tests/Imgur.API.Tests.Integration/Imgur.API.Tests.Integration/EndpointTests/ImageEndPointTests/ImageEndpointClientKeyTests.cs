@@ -23,6 +23,24 @@ namespace Imgur.API.Tests.Integration.EndpointTests.ImageEndPointTests
         }
 
         [Fact]
+        public async Task UploadImageUrl_UploadsImage()
+        {
+            var apiClient = _fixture.GetApiClientWithKey();
+            var httpClient = new HttpClient();
+
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "banana.jpg");
+            using var fileStream = File.OpenRead(filePath);
+
+            var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
+            var imageUpload = await imageEndpoint.UploadImageAsync(fileStream);
+            var imageUrlUpload = await imageEndpoint.UploadImageAsync(imageUpload.Link);
+
+            Assert.NotNull(imageUpload);
+            Assert.NotNull(imageUrlUpload);
+            Assert.NotEqual(imageUpload.Id, imageUrlUpload.Id);
+        }
+
+        [Fact]
         public async Task UploadImageStream_UploadsImage()
         {
             var apiClient = _fixture.GetApiClientWithKey();

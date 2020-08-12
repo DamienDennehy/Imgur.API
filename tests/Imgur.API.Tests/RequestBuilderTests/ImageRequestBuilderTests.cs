@@ -55,7 +55,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var expected = await request.Content.ReadAsStringAsync();
 
             Assert.Equal(
-                "type=URL&image=http%3A%2F%2Fi.imgur.com%2FhxsPLa7.jpg&name=TheName&album=TheAlbum&title=TheTitle&description=TheDescription",
+                "image=http%3A%2F%2Fi.imgur.com%2FhxsPLa7.jpg&type=URL&album=TheAlbum&name=TheName&title=TheTitle&description=TheDescription",
                 expected);
         }
 

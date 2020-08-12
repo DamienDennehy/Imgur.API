@@ -200,17 +200,17 @@ namespace Imgur.API.RequestBuilders
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                parameters.Add(nameof(name), name);
+                parameters.Add("name", name);
             }
 
             if (!string.IsNullOrWhiteSpace(title))
             {
-                parameters.Add(nameof(title), title);
+                parameters.Add("title", title);
             }
 
             if (!string.IsNullOrWhiteSpace(description))
             {
-                parameters.Add(nameof(description), description);
+                parameters.Add("description", description);
             }
 
             var request = new HttpRequestMessage(HttpMethod.Post, url)

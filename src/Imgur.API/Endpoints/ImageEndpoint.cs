@@ -59,7 +59,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="image"></param>
         /// <param name="album"></param>
-        /// <param name="name"></param>
+        /// <param name="name">The image filename.</param>
         /// <param name="title"></param>
         /// <param name="description"></param>
         /// <param name="progress"></param>
@@ -88,7 +88,7 @@ namespace Imgur.API.Endpoints
         /// </summary>
         /// <param name="imageUrl"></param>
         /// <param name="album"></param>
-        /// <param name="name"></param>
+        /// <param name="name">The image filename.</param>
         /// <param name="title"></param>
         /// <param name="description"></param>
         /// <param name="cancellationToken"></param>
@@ -100,7 +100,12 @@ namespace Imgur.API.Endpoints
                                              string description = null,
                                              CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(imageUrl))
+            {
+                throw new ArgumentNullException(nameof(imageUrl));
+            }
+
+            return UploadImageInternalAsync(imageUrl: imageUrl, album, name, title, description, cancellationToken);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
@@ -130,13 +135,35 @@ namespace Imgur.API.Endpoints
             }
         }
 
+        private async Task<IImage> UploadImageInternalAsync(string imageUrl,
+                                                            string album = null,
+                                                            string name = null,
+                                                            string title = null,
+                                                            string description = null,
+                                                            CancellationToken cancellationToken = default)
+        {
+            const string url = "upload";
+
+            using (var request = ImageRequestBuilder.UploadImageUrlRequest(url,
+                                                                           imageUrl,
+                                                                           album,
+                                                                           name,
+                                                                           title,
+                                                                           description))
+            {
+                var returnImage = await SendRequestAsync<Image>(request,
+                                                                cancellationToken).ConfigureAwait(false);
+                return returnImage;
+            }
+        }
+
         /// <summary>
         /// Upload a new image.
         /// </summary>
         /// <param name="video"></param>
         /// <param name="album"></param>
         /// <param name="type"></param>
-        /// <param name="name"></param>
+        /// <param name="name">The image filename.</param>
         /// <param name="title"></param>
         /// <param name="description"></param>
         /// <param name="disableAudio"></param>

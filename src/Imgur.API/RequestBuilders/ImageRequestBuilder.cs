@@ -58,6 +58,11 @@ namespace Imgur.API.RequestBuilders
                 throw new ArgumentNullException(nameof(image));
             }
 
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                name = "name";
+            }
+
             var content = new MultipartFormDataContent($"{DateTime.UtcNow.Ticks}")
             {
                 {new StringContent("file"), "type"}
@@ -65,21 +70,18 @@ namespace Imgur.API.RequestBuilders
 
             if (progressBytes != null)
             {
-                content.Add(new ProgressStreamContent(image, progressBytes, bufferSize), "image", "image");
+                content.Add(new ProgressStreamContent(image,
+                                                      progressBytes,
+                                                      bufferSize), "image", name);
             }
             else
             {
-                content.Add(new StreamContent(image), "image", "image");
+                content.Add(new StreamContent(image), "image", name);
             }
 
             if (!string.IsNullOrWhiteSpace(album))
             {
                 content.Add(new StringContent(album), "album");
-            }
-
-            if (!string.IsNullOrWhiteSpace(name))
-            {
-                content.Add(new StringContent(name), "name");
             }
 
             if (!string.IsNullOrWhiteSpace(title))
@@ -122,6 +124,11 @@ namespace Imgur.API.RequestBuilders
                 throw new ArgumentNullException(nameof(video));
             }
 
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                name = "name";
+            }
+
             var content = new MultipartFormDataContent($"{DateTime.UtcNow.Ticks}")
             {
                 {new StringContent("file"), "type"}
@@ -129,21 +136,18 @@ namespace Imgur.API.RequestBuilders
 
             if (progressBytes != null)
             {
-                content.Add(new ProgressStreamContent(video, progressBytes, bufferSize), "video", "video");
+                content.Add(new ProgressStreamContent(video,
+                                                      progressBytes,
+                                                      bufferSize), "video", name);
             }
             else
             {
-                content.Add(new StreamContent(video), "video", "video");
+                content.Add(new StreamContent(video), "video", name);
             }
 
             if (!string.IsNullOrWhiteSpace(album))
             {
                 content.Add(new StringContent(album), "album");
-            }
-
-            if (!string.IsNullOrWhiteSpace(name))
-            {
-                content.Add(new StringContent(name), "name");
             }
 
             if (!string.IsNullOrWhiteSpace(title))
@@ -189,14 +193,14 @@ namespace Imgur.API.RequestBuilders
                 {"image", imageUrl}
             };
 
-            if (!string.IsNullOrWhiteSpace(album))
-            {
-                parameters.Add("album", album);
-            }
-
             if (!string.IsNullOrWhiteSpace(name))
             {
                 parameters.Add("name", name);
+            }
+
+            if (!string.IsNullOrWhiteSpace(album))
+            {
+                parameters.Add("album", album);
             }
 
             if (!string.IsNullOrWhiteSpace(title))

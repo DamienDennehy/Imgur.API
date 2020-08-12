@@ -127,5 +127,43 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.IsAssignableFrom<IImage>(response);
             Assert.Equal("mvWNMH4", response.Id);
         }
+
+        [Fact]
+        public async Task UploadImageUrlAsync_WithImageIrlNull_ThrowsArgumentNullException()
+        {
+            var apiClient = new ApiClient("123", "1234");
+            var endpoint = new ImageEndpoint(apiClient, new HttpClient());
+
+            var exception = await Record.ExceptionAsync(async () =>
+            {
+                await endpoint.UploadImageAsync(imageUrl: null);
+            });
+
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal("imageUrl", argNullException.ParamName);
+        }
+
+        [Fact]
+        public async Task UploadImageUrlAsync_Equal()
+        {
+            var mockUrl = "https://api.imgur.com/3/upload";
+            var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(MockImageResponses.UploadImage)
+            };
+
+            var apiClient = new ApiClient("123", "1234");
+            var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
+            var endpoint = new ImageEndpoint(apiClient, httpClient);
+
+            var response = await endpoint.UploadImageAsync(mockUrl);
+
+            Assert.NotNull(response);
+            Assert.IsAssignableFrom<IImage>(response);
+            Assert.Equal("mvWNMH4", response.Id);
+        }
     }
 }

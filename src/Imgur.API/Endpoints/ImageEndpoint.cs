@@ -226,7 +226,23 @@ namespace Imgur.API.Endpoints
         public Task<bool> DeleteImageAsync(string imageId,
                                            CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(imageId))
+            {
+                throw new ArgumentNullException(nameof(imageId));
+            }
+
+            return DeleteImageInternalAsync(imageId);
+        }
+
+        private async Task<bool> DeleteImageInternalAsync(string imageId)
+        {
+            var url = $"image/{imageId}";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
+            {
+                var deleted = await SendRequestAsync<bool>(request).ConfigureAwait(false);
+                return deleted;
+            }
         }
 
         /// <summary>

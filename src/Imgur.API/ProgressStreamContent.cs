@@ -9,8 +9,9 @@ namespace Imgur.API
 {
     internal class ProgressStreamContent : HttpContent
     {
+        internal bool _disposed;
         internal const int DefaultBufferSize = 4096;
-        internal readonly Stream _readStream;
+        internal Stream _readStream;
         internal readonly IProgress<int> _progress;
         internal readonly CancellationToken _cancellationToken;
         internal readonly int _bufferSize = DefaultBufferSize;
@@ -74,8 +75,10 @@ namespace Imgur.API
         {
             if (disposing)
             {
-                _readStream.Dispose();
+                _disposed = true;
             }
+
+            _readStream = null;
 
             base.Dispose(disposing);
         }

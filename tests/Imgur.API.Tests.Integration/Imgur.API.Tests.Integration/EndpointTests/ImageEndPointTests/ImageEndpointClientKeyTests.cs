@@ -32,12 +32,17 @@ namespace Imgur.API.Tests.Integration.EndpointTests.ImageEndPointTests
             using var fileStream = File.OpenRead(filePath);
 
             var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
+
             var imageUpload = await imageEndpoint.UploadImageAsync(fileStream);
             var imageUrlUpload = await imageEndpoint.UploadImageAsync(imageUpload.Link);
 
-            Assert.NotNull(imageUpload);
+            var imageDeleted = await imageEndpoint.DeleteImageAsync(imageUpload.DeleteHash);
+            var imageUrlDeleted = await imageEndpoint.DeleteImageAsync(imageUrlUpload.DeleteHash);
+
             Assert.NotNull(imageUrlUpload);
             Assert.NotEqual(imageUpload.Id, imageUrlUpload.Id);
+            Assert.True(imageDeleted);
+            Assert.True(imageUrlDeleted);
         }
 
         [Fact]
@@ -50,12 +55,12 @@ namespace Imgur.API.Tests.Integration.EndpointTests.ImageEndPointTests
             using var fileStream = File.OpenRead(filePath);
 
             var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
+
             var imageUpload = await imageEndpoint.UploadImageAsync(fileStream);
-            var imageDownload = await imageEndpoint.GetImageAsync(imageUpload.Id);
+            var imageDeleted = await imageEndpoint.DeleteImageAsync(imageUpload.DeleteHash);
 
             Assert.NotNull(imageUpload);
-            Assert.NotNull(imageDownload);
-            Assert.Equal(imageUpload.Id, imageDownload.Id);
+            Assert.True(imageDeleted);
         }
 
         [Fact]
@@ -76,12 +81,12 @@ namespace Imgur.API.Tests.Integration.EndpointTests.ImageEndPointTests
             var uploadProgress = new Progress<int>(report);
 
             var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
+
             var imageUpload = await imageEndpoint.UploadImageAsync(fileStream, progress: uploadProgress, bufferSize: 4096);
-            var imageDownload = await imageEndpoint.GetImageAsync(imageUpload.Id);
+            var imageDeleted = await imageEndpoint.DeleteImageAsync(imageUpload.DeleteHash);
 
             Assert.NotNull(imageUpload);
-            Assert.NotNull(imageDownload);
-            Assert.Equal(imageUpload.Id, imageDownload.Id);
+            Assert.True(imageDeleted);
 
             _output.WriteLine($"{totalProgress} of {fileStream.Length} reported.");
         }
@@ -96,12 +101,12 @@ namespace Imgur.API.Tests.Integration.EndpointTests.ImageEndPointTests
             using var fileStream = File.OpenRead(filePath);
 
             var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
+
             var imageUpload = await imageEndpoint.UploadImageAsync(fileStream);
-            var imageDownload = await imageEndpoint.GetImageAsync(imageUpload.Id);
+            var imageDeleted = await imageEndpoint.DeleteImageAsync(imageUpload.DeleteHash);
 
             Assert.NotNull(imageUpload);
-            Assert.NotNull(imageDownload);
-            Assert.Equal(imageUpload.Id, imageDownload.Id);
+            Assert.True(imageDeleted);
         }
 
         [Fact]
@@ -122,12 +127,12 @@ namespace Imgur.API.Tests.Integration.EndpointTests.ImageEndPointTests
             var uploadProgress = new Progress<int>(report);
 
             var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
+
             var imageUpload = await imageEndpoint.UploadVideoAsync(fileStream, progress: uploadProgress, bufferSize: 4096);
-            var imageDownload = await imageEndpoint.GetImageAsync(imageUpload.Id);
+            var imageDeleted = await imageEndpoint.DeleteImageAsync(imageUpload.DeleteHash);
 
             Assert.NotNull(imageUpload);
-            Assert.NotNull(imageDownload);
-            Assert.Equal(imageUpload.Id, imageDownload.Id);
+            Assert.True(imageDeleted);
 
             _output.WriteLine($"{totalProgress} of {fileStream.Length} reported.");
         }

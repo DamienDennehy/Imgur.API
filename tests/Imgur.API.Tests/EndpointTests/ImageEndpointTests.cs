@@ -165,5 +165,42 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.IsAssignableFrom<IImage>(response);
             Assert.Equal("mvWNMH4", response.Id);
         }
+
+        [Fact]
+        public async Task DeleteImageAsync_Equal()
+        {
+            var mockUrl = "https://api.imgur.com/3/image/123xyj";
+            var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(MockImageResponses.DeleteImage)
+            };
+
+            var apiClient = new ApiClient("123", "1234");
+            var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
+            var endpoint = new ImageEndpoint(apiClient, httpClient);
+
+            var deleted = await endpoint.DeleteImageAsync("123xyj");
+
+            Assert.True(deleted);
+        }
+
+        [Fact]
+        public async Task DeleteImageAsync_WithIdNull_ThrowsArgumentNullException()
+        {
+            var apiClient = new ApiClient("123", "1234");
+            var httpClient = new HttpClient();
+            var endpoint = new ImageEndpoint(apiClient, httpClient);
+
+            var exception = await Record.ExceptionAsync(async () =>
+            {
+                await endpoint.DeleteImageAsync(null);
+            });
+
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal("imageId", argNullException.ParamName);
+        }
     }
 }

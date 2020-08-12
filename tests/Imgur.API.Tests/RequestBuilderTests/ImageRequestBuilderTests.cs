@@ -100,24 +100,27 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal(HttpMethod.Post, request.Method);
 
             var content = (MultipartFormDataContent)request.Content;
-            var imageContent =
+            var streamContent =
                 (StreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
-            var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
             var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+            var name = streamContent.Headers.ContentDisposition.FileName;
+            var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
             var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
             var description =
                 (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
-            Assert.NotNull(imageContent);
+            Assert.NotNull(streamContent);
             Assert.NotNull(type);
+            Assert.NotNull(name);
             Assert.NotNull(album);
             Assert.NotNull(title);
             Assert.NotNull(description);
 
-            var image = await imageContent.ReadAsByteArrayAsync();
+            var image = await streamContent.ReadAsByteArrayAsync();
 
             Assert.Equal(imageLength, image.Length);
             Assert.Equal("file", await type.ReadAsStringAsync());
+            Assert.Equal("TheName", name);
             Assert.Equal("TheAlbum", await album.ReadAsStringAsync());
             Assert.Equal("TheTitle", await title.ReadAsStringAsync());
             Assert.Equal("TheDescription", await description.ReadAsStringAsync());
@@ -142,25 +145,28 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal(HttpMethod.Post, request.Method);
 
             var content = (MultipartFormDataContent)request.Content;
-            var imageContent =
+            var streamContent =
                 (ProgressStreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
-            var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
             var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+            var name = streamContent.Headers.ContentDisposition.FileName;
+            var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
             var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
             var description =
                 (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
-            Assert.NotNull(imageContent);
-            Assert.Equal(9999, imageContent._bufferSize);
+            Assert.NotNull(streamContent);
+            Assert.Equal(9999, streamContent._bufferSize);
             Assert.NotNull(type);
+            Assert.NotNull(name);
             Assert.NotNull(album);
             Assert.NotNull(title);
             Assert.NotNull(description);
 
-            var image = await imageContent.ReadAsByteArrayAsync();
+            var image = await streamContent.ReadAsByteArrayAsync();
 
             Assert.Equal(imageLength, image.Length);
             Assert.Equal("file", await type.ReadAsStringAsync());
+            Assert.Equal("TheName", name);
             Assert.Equal("TheAlbum", await album.ReadAsStringAsync());
             Assert.Equal("TheTitle", await title.ReadAsStringAsync());
             Assert.Equal("TheDescription", await description.ReadAsStringAsync());
@@ -208,24 +214,26 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal(HttpMethod.Post, request.Method);
 
             var content = (MultipartFormDataContent)request.Content;
-            var imageContent =
+            var streamContent =
                 (StreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "video");
-            var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
             var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+            var name = streamContent.Headers.ContentDisposition.FileName;
+            var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
             var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
             var description =
                 (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
-            Assert.NotNull(imageContent);
+            Assert.NotNull(streamContent);
             Assert.NotNull(type);
             Assert.NotNull(album);
             Assert.NotNull(title);
             Assert.NotNull(description);
 
-            var image = await imageContent.ReadAsByteArrayAsync();
+            var image = await streamContent.ReadAsByteArrayAsync();
 
             Assert.Equal(imageLength, image.Length);
             Assert.Equal("file", await type.ReadAsStringAsync());
+            Assert.Equal("TheName", name);
             Assert.Equal("TheAlbum", await album.ReadAsStringAsync());
             Assert.Equal("TheTitle", await title.ReadAsStringAsync());
             Assert.Equal("TheDescription", await description.ReadAsStringAsync());
@@ -250,25 +258,28 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal(HttpMethod.Post, request.Method);
 
             var content = (MultipartFormDataContent)request.Content;
-            var imageContent =
+            var streamContent =
                 (ProgressStreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "video");
-            var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
             var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
+            var name = streamContent.Headers.ContentDisposition.FileName;
+            var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
             var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
             var description =
                 (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
 
-            Assert.NotNull(imageContent);
-            Assert.Equal(9999, imageContent._bufferSize);
+            Assert.NotNull(streamContent);
+            Assert.Equal(9999, streamContent._bufferSize);
             Assert.NotNull(type);
+            Assert.NotNull(name);
             Assert.NotNull(album);
             Assert.NotNull(title);
             Assert.NotNull(description);
 
-            var image = await imageContent.ReadAsByteArrayAsync();
+            var image = await streamContent.ReadAsByteArrayAsync();
 
             Assert.Equal(imageLength, image.Length);
             Assert.Equal("file", await type.ReadAsStringAsync());
+            Assert.Equal("TheName", name);
             Assert.Equal("TheAlbum", await album.ReadAsStringAsync());
             Assert.Equal("TheTitle", await title.ReadAsStringAsync());
             Assert.Equal("TheDescription", await description.ReadAsStringAsync());

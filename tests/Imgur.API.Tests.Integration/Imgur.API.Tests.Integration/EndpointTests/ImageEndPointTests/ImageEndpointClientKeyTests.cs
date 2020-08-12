@@ -7,23 +7,23 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Extensions.AssemblyFixture;
 
-namespace Imgur.API.Tests.Integration
+namespace Imgur.API.Tests.Integration.EndpointTests.ImageEndPointTests
 {
-    public class ImageEndpointIntegrationTests : IAssemblyFixture<ApiClientAssemblyFixture>
+    public class ImageEndpointClientKeyTests : IAssemblyFixture<ApiClientAssemblyFixture>
     {
         private readonly ApiClientAssemblyFixture _fixture;
         private readonly ITestOutputHelper _output;
 
 
-        public ImageEndpointIntegrationTests(ApiClientAssemblyFixture fixture,
-                                             ITestOutputHelper output)
+        public ImageEndpointClientKeyTests(ApiClientAssemblyFixture fixture,
+                                           ITestOutputHelper output)
         {
             _fixture = fixture;
             _output = output;
         }
 
         [Fact]
-        public async Task UploadImageStreamWithClientKey_UploadsImage()
+        public async Task UploadImageStream_UploadsImage()
         {
             var apiClient = _fixture.GetApiClientWithKey();
             var httpClient = new HttpClient();
@@ -41,7 +41,7 @@ namespace Imgur.API.Tests.Integration
         }
 
         [Fact]
-        public async Task UploadImageProgressStreamWithClientKey_UploadsImage()
+        public async Task UploadImageProgressStream_UploadsImage()
         {
             var totalProgress = 0;
             var apiClient = _fixture.GetApiClientWithKey();
@@ -69,7 +69,7 @@ namespace Imgur.API.Tests.Integration
         }
 
         [Fact]
-        public async Task UploadVideoStreamWithClientKey_UploadsVideo()
+        public async Task UploadVideoStream_UploadsVideo()
         {
             var apiClient = _fixture.GetApiClientWithKey();
             var httpClient = new HttpClient();
@@ -87,7 +87,7 @@ namespace Imgur.API.Tests.Integration
         }
 
         [Fact]
-        public async Task UploadVideoProgressStreamWithClientKey_UploadsVideo()
+        public async Task UploadVideoProgressStream_UploadsVideo()
         {
             var totalProgress = 0;
             var apiClient = _fixture.GetApiClientWithKey();

@@ -1,7 +1,7 @@
 ﻿using Xunit;
 using Xunit.Extensions.AssemblyFixture;
 
-namespace Imgur.API.Tests.Integration
+namespace Imgur.API.Tests.Integration.EndpointTests
 {
     public class OAuth2EndpointIntegrationTests : IAssemblyFixture<ApiClientAssemblyFixture>
     {

@@ -51,7 +51,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task UploadImageStreamAsync_Equal()
+        public async Task UploadImageAsync_Equal()
         {
             var mockUrl = "https://api.imgur.com/3/upload";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -72,7 +72,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task UploadImageStreamAsync_WithImageNull_ThrowsArgumentNullException()
+        public async Task UploadImageAsync_WithImageNull_ThrowsArgumentNullException()
         {
             var apiClient = new ApiClient("123", "1234");
             var endpoint = new ImageEndpoint(apiClient, new HttpClient());
@@ -90,7 +90,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task UploadVideoStreamAsync_WithImageNull_ThrowsArgumentNullException()
+        public async Task UploadVideoAsync_WithImageNull_ThrowsArgumentNullException()
         {
             var apiClient = new ApiClient("123", "1234");
             var endpoint = new ImageEndpoint(apiClient, new HttpClient());
@@ -108,7 +108,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task UploadVideoStreamAsync_Equal()
+        public async Task UploadVideoAsync_Equal()
         {
             var mockUrl = "https://api.imgur.com/3/upload";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)

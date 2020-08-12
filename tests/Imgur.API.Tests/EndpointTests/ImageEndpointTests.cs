@@ -88,5 +88,44 @@ namespace Imgur.API.Tests.EndpointTests
             var argNullException = (ArgumentNullException)exception;
             Assert.Equal("image", argNullException.ParamName);
         }
+
+        [Fact]
+        public async Task UploadVideoStreamAsync_WithImageNull_ThrowsArgumentNullException()
+        {
+            var apiClient = new ApiClient("123", "1234");
+            var endpoint = new ImageEndpoint(apiClient, new HttpClient());
+
+            var exception = await Record.ExceptionAsync(async () =>
+            {
+                await endpoint.UploadVideoAsync(video: null);
+            });
+
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal("video", argNullException.ParamName);
+        }
+
+        [Fact]
+        public async Task UploadVideoStreamAsync_Equal()
+        {
+            var mockUrl = "https://api.imgur.com/3/upload";
+            var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(MockImageResponses.UploadImage)
+            };
+
+            var apiClient = new ApiClient("123", "1234");
+            var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
+            var endpoint = new ImageEndpoint(apiClient, httpClient);
+
+            using var ms = new MemoryStream(new byte[9]);
+            var response = await endpoint.UploadVideoAsync(ms);
+
+            Assert.NotNull(response);
+            Assert.IsAssignableFrom<IImage>(response);
+            Assert.Equal("mvWNMH4", response.Id);
+        }
     }
 }

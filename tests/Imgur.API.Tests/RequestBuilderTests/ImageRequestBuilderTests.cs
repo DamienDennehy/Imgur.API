@@ -55,7 +55,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var expected = await request.Content.ReadAsStringAsync();
 
             Assert.Equal(
-                "type=URL&image=http%3A%2F%2Fi.imgur.com%2FhxsPLa7.jpg&album=TheAlbum&name=TheName&title=TheTitle&description=TheDescription",
+                "type=URL&image=http%3A%2F%2Fi.imgur.com%2FhxsPLa7.jpg&name=TheName&album=TheAlbum&title=TheTitle&description=TheDescription",
                 expected);
         }
 
@@ -104,7 +104,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 (StreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
             var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
             var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
-            var name = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "name");
             var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
             var description =
                 (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
@@ -112,7 +111,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(imageContent);
             Assert.NotNull(type);
             Assert.NotNull(album);
-            Assert.NotNull(name);
             Assert.NotNull(title);
             Assert.NotNull(description);
 
@@ -121,7 +119,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal(imageLength, image.Length);
             Assert.Equal("file", await type.ReadAsStringAsync());
             Assert.Equal("TheAlbum", await album.ReadAsStringAsync());
-            Assert.Equal("TheName", await name.ReadAsStringAsync());
             Assert.Equal("TheTitle", await title.ReadAsStringAsync());
             Assert.Equal("TheDescription", await description.ReadAsStringAsync());
         }
@@ -149,7 +146,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 (ProgressStreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "image");
             var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
             var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
-            var name = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "name");
             var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
             var description =
                 (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
@@ -158,7 +154,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal(9999, imageContent._bufferSize);
             Assert.NotNull(type);
             Assert.NotNull(album);
-            Assert.NotNull(name);
             Assert.NotNull(title);
             Assert.NotNull(description);
 
@@ -167,7 +162,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal(imageLength, image.Length);
             Assert.Equal("file", await type.ReadAsStringAsync());
             Assert.Equal("TheAlbum", await album.ReadAsStringAsync());
-            Assert.Equal("TheName", await name.ReadAsStringAsync());
             Assert.Equal("TheTitle", await title.ReadAsStringAsync());
             Assert.Equal("TheDescription", await description.ReadAsStringAsync());
         }
@@ -218,7 +212,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 (StreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "video");
             var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
             var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
-            var name = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "name");
             var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
             var description =
                 (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
@@ -226,7 +219,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.NotNull(imageContent);
             Assert.NotNull(type);
             Assert.NotNull(album);
-            Assert.NotNull(name);
             Assert.NotNull(title);
             Assert.NotNull(description);
 
@@ -235,7 +227,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal(imageLength, image.Length);
             Assert.Equal("file", await type.ReadAsStringAsync());
             Assert.Equal("TheAlbum", await album.ReadAsStringAsync());
-            Assert.Equal("TheName", await name.ReadAsStringAsync());
             Assert.Equal("TheTitle", await title.ReadAsStringAsync());
             Assert.Equal("TheDescription", await description.ReadAsStringAsync());
         }
@@ -263,7 +254,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
                 (ProgressStreamContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "video");
             var album = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "album");
             var type = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "type");
-            var name = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "name");
             var title = (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "title");
             var description =
                 (StringContent)content.FirstOrDefault(x => x.Headers.ContentDisposition.Name == "description");
@@ -272,7 +262,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal(9999, imageContent._bufferSize);
             Assert.NotNull(type);
             Assert.NotNull(album);
-            Assert.NotNull(name);
             Assert.NotNull(title);
             Assert.NotNull(description);
 
@@ -281,7 +270,6 @@ namespace Imgur.API.Tests.RequestBuilderTests
             Assert.Equal(imageLength, image.Length);
             Assert.Equal("file", await type.ReadAsStringAsync());
             Assert.Equal("TheAlbum", await album.ReadAsStringAsync());
-            Assert.Equal("TheName", await name.ReadAsStringAsync());
             Assert.Equal("TheTitle", await title.ReadAsStringAsync());
             Assert.Equal("TheDescription", await description.ReadAsStringAsync());
         }

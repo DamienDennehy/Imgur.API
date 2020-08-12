@@ -88,7 +88,7 @@ jobs:
       with:
         file-url: https://github.com/DamienDennehy/Imgur.API/releases/download/v5.0.0/banana.mp4
         file-name: banana.mp4
-        location: ./artifacts
+        location: ./media
 
     - name: Restore
       run: dotnet restore --use-lock-file

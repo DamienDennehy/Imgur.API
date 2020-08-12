@@ -9,10 +9,10 @@ namespace Imgur.API
 {
     internal class ProgressStreamContent : HttpContent
     {
-        private const int DefaultBufferSize = 4096;
-        private readonly Stream _readStream;
-        private readonly IProgress<int> _progress;
-        private readonly CancellationToken _cancellationToken;
+        internal const int DefaultBufferSize = 4096;
+        internal readonly Stream _readStream;
+        internal readonly IProgress<int> _progress;
+        internal readonly CancellationToken _cancellationToken;
         internal readonly int _bufferSize = DefaultBufferSize;
 
         internal ProgressStreamContent(Stream content,

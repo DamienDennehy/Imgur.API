@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="OAuth2EndpointIntegrationTests.cs">
+    <Compile Update="EndpointTests\OAuth2EndpointIntegrationTests.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

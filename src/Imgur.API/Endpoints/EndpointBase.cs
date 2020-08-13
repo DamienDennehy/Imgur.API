@@ -57,7 +57,7 @@ namespace Imgur.API.Endpoints
         internal virtual async Task<T> SendRequestInternalAsync<T>(HttpRequestMessage httpRequestMessage,
                                                                    CancellationToken cancellationToken = default)
         {
-            using (var httpResponse = await _httpClient.SendAsync(httpRequestMessage)
+            using (var httpResponse = await _httpClient.SendAsync(httpRequestMessage, cancellationToken)
                                                        .ConfigureAwait(false))
             {
                 httpResponse.EnsureSuccessStatusCode();

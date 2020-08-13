@@ -223,7 +223,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task FavoriteImageAsync_WithOAuth2TokenNotSet_ThrowsArgumentNullException()
+        public async Task FavoriteImageAsync_WithOAuth2TokenNotSet_ThrowsInvalidOperationException()
         {
             var apiClient = new ApiClient("123");
             var endpoint = new ImageEndpoint(apiClient, new HttpClient());
@@ -235,10 +235,7 @@ namespace Imgur.API.Tests.EndpointTests
             }).ConfigureAwait(false);
 
             Assert.NotNull(exception);
-            Assert.IsType<ArgumentNullException>(exception);
-
-            var argNullException = (ArgumentNullException)exception;
-            Assert.Equal("token", argNullException.ParamName);
+            Assert.IsType<InvalidOperationException>(exception);
         }
 
         [Fact]

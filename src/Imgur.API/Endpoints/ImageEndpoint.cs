@@ -277,7 +277,7 @@ namespace Imgur.API.Endpoints
 
             if (_apiClient.OAuth2Token == null)
             {
-                throw new ArgumentException(OAuth2RequiredExceptionMessage);
+                throw new InvalidOperationException(OAuth2RequiredExceptionMessage);
             }
 
             return FavoriteImageInternalAsync(imageId);

@@ -202,5 +202,61 @@ namespace Imgur.API.Tests.EndpointTests
             var argNullException = (ArgumentNullException)exception;
             Assert.Equal("imageId", argNullException.ParamName);
         }
+
+        [Fact]
+        public async Task FavoriteImageAsync_WithIdNull_ThrowsArgumentNullException()
+        {
+            var apiClient = new ApiClient("123", "1234");
+            var endpoint = new ImageEndpoint(apiClient, new HttpClient());
+
+            var exception = await Record.ExceptionAsync(async () =>
+            {
+                await endpoint.FavoriteImageAsync(null)
+                                                                                                  .ConfigureAwait(false);
+            }).ConfigureAwait(false);
+
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal("imageId", argNullException.ParamName);
+        }
+
+        [Fact]
+        public async Task FavoriteImageAsync_WithOAuth2TokenNotSet_ThrowsArgumentNullException()
+        {
+            var apiClient = new ApiClient("123");
+            var endpoint = new ImageEndpoint(apiClient, new HttpClient());
+
+            var exception = await Record.ExceptionAsync(async () =>
+            {
+                await endpoint.FavoriteImageAsync("abc")
+                                                                                                  .ConfigureAwait(false);
+            }).ConfigureAwait(false);
+
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal("token", argNullException.ParamName);
+        }
+
+        [Fact]
+        public async Task FavoriteImageAsync_WithApiClient_ReturnsFavorited()
+        {
+            var mockUrl = "https://api.imgur.com/3/image/zVpyzhW/favorite";
+            var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(MockImageResponses.FavoriteImage)
+            };
+
+            var apiClient = new ApiClient("123");
+            apiClient.SetOAuth2Token(MockOAuth2Token.GetOAuth2Token());
+            var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
+            var endpoint = new ImageEndpoint(apiClient, httpClient);
+            var favorited = await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false);
+
+            Assert.NotNull(favorited);
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task GetTokenAsync_WithClientSecretNull_ThrowsArgumentNullException()
+        public async Task GetTokenAsync_WithClientSecretNull_ThrowsInvalidOperationException()
         {
             var apiClient = new ApiClient("123");
             var endpoint = new OAuth2Endpoint(apiClient, new HttpClient());
@@ -65,7 +65,7 @@ namespace Imgur.API.Tests.EndpointTests
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
 
-            var argNullException = (ArgumentNullException)exception;
+            var argNullException = (InvalidOperationException)exception;
             Assert.Equal("refreshToken", argNullException.ParamName);
         }
 

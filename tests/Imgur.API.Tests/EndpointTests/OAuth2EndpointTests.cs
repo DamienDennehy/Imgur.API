@@ -59,7 +59,7 @@ namespace Imgur.API.Tests.EndpointTests
 
             var exception = await Record.ExceptionAsync(async () =>
             {
-                await endpoint.GetTokenAsync(null);
+                await endpoint.GetTokenAsync("1234");
             });
 
             Assert.NotNull(exception);

@@ -14,7 +14,7 @@ namespace Imgur.API.Tests.RequestBuilderTests
             var apiClient = new ApiClient("123");
 
             var mockUrl = $"{apiClient.BaseAddress}account/bob";
-            var request = RequestBuilder.CreateRequest(HttpMethod.Get, mockUrl);
+            using var request = RequestBuilder.CreateRequest(HttpMethod.Get, mockUrl);
 
             Assert.NotNull(request);
             Assert.Equal("https://api.imgur.com/3/account/bob", request.RequestUri.ToString());

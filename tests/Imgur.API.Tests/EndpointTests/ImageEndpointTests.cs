@@ -22,7 +22,7 @@ namespace Imgur.API.Tests.EndpointTests
                 Content = new StringContent(MockImageResponses.GetImage)
             };
 
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
             var endpoint = new ImageEndpoint(apiClient, httpClient);
             var response = await endpoint.GetImageAsync("mvWNMH4");
@@ -35,7 +35,7 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public async Task GetImageAsync_WithImageNull_ThrowsArgumentNullException()
         {
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var endpoint = new ImageEndpoint(apiClient, new HttpClient());
 
             var exception = await Record.ExceptionAsync(async () =>
@@ -59,7 +59,7 @@ namespace Imgur.API.Tests.EndpointTests
                 Content = new StringContent(MockImageResponses.UploadImage)
             };
 
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
             var endpoint = new ImageEndpoint(apiClient, httpClient);
 
@@ -74,7 +74,7 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public async Task UploadImageAsync_WithImageNull_ThrowsArgumentNullException()
         {
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var endpoint = new ImageEndpoint(apiClient, new HttpClient());
 
             var exception = await Record.ExceptionAsync(async () =>
@@ -92,7 +92,7 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public async Task UploadVideoAsync_WithImageNull_ThrowsArgumentNullException()
         {
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var endpoint = new ImageEndpoint(apiClient, new HttpClient());
 
             var exception = await Record.ExceptionAsync(async () =>
@@ -116,7 +116,7 @@ namespace Imgur.API.Tests.EndpointTests
                 Content = new StringContent(MockImageResponses.UploadImage)
             };
 
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
             var endpoint = new ImageEndpoint(apiClient, httpClient);
 
@@ -131,7 +131,7 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public async Task UploadImageUrlAsync_WithImageIrlNull_ThrowsArgumentNullException()
         {
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var endpoint = new ImageEndpoint(apiClient, new HttpClient());
 
             var exception = await Record.ExceptionAsync(async () =>
@@ -155,7 +155,7 @@ namespace Imgur.API.Tests.EndpointTests
                 Content = new StringContent(MockImageResponses.UploadImage)
             };
 
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
             var endpoint = new ImageEndpoint(apiClient, httpClient);
 
@@ -175,7 +175,7 @@ namespace Imgur.API.Tests.EndpointTests
                 Content = new StringContent(MockImageResponses.DeleteImage)
             };
 
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
             var endpoint = new ImageEndpoint(apiClient, httpClient);
 
@@ -187,7 +187,7 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public async Task DeleteImageAsync_WithIdNull_ThrowsArgumentNullException()
         {
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var httpClient = new HttpClient();
             var endpoint = new ImageEndpoint(apiClient, httpClient);
 
@@ -206,7 +206,7 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public async Task FavoriteImageAsync_WithIdNull_ThrowsArgumentNullException()
         {
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var endpoint = new ImageEndpoint(apiClient, new HttpClient());
 
             var exception = await Record.ExceptionAsync(async () =>
@@ -254,6 +254,38 @@ namespace Imgur.API.Tests.EndpointTests
             var favorited = await endpoint.FavoriteImageAsync("zVpyzhW").ConfigureAwait(false);
 
             Assert.NotNull(favorited);
+        }
+
+
+        [Fact]
+        public async Task UpdateImageAsync_Equal()
+        {
+            var mockUrl = "https://api.imgur.com/3/image/123xyj";
+            var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(MockImageResponses.UpdateImage)
+            };
+
+            var client = new ApiClient("123");
+            var endpoint = new ImageEndpoint(client, new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse)));
+            var updated = await endpoint.UpdateImageAsync("123xyj").ConfigureAwait(false);
+
+            Assert.True(updated);
+        }
+
+        [Fact]
+        public async Task UpdateImageAsync_WithIdNull_ThrowsArgumentNullException()
+        {
+            var client = new ApiClient("123");
+            var endpoint = new ImageEndpoint(client, new HttpClient());
+
+            var exception = await Record.ExceptionAsync(async () =>
+            {
+                await endpoint.UpdateImageAsync(null).ConfigureAwait(false);
+            }).ConfigureAwait(false);
+
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
         }
     }
 }

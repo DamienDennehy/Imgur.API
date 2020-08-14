@@ -39,7 +39,7 @@ namespace Imgur.API.Tests.EndpointTests
         {
             var exception = Record.Exception(() =>
             {
-                return new MockEndpoint(new ApiClient("test", "test"), null);
+                return new MockEndpoint(new ApiClient("test"), null);
             });
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullException>(exception);
@@ -51,7 +51,7 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public void _httpClient_SetByConstructor_AreSame()
         {
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var httpCLient = new HttpClient();
 
             var endpoint = new MockEndpoint(apiClient, httpCLient);
@@ -62,7 +62,7 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public void _httpClient_SetByConstructor_HasBaseAddressSet()
         {
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var endpoint = new MockEndpoint(apiClient, new HttpClient());
 
             Assert.Equal(new Uri("https://api.imgur.com/3/"), endpoint._httpClient.BaseAddress);
@@ -71,7 +71,7 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public void _httpClient_SetByConstructor_HasHeadersSet()
         {
-            var apiClient = new ApiClient("123", "1234");
+            var apiClient = new ApiClient("123");
             var endpoint = new MockEndpoint(apiClient, new HttpClient());
             var authHeader = endpoint._httpClient.DefaultRequestHeaders.GetValues("Authorization").First();
             var accept = endpoint._httpClient.DefaultRequestHeaders.Accept.First();
@@ -82,7 +82,7 @@ namespace Imgur.API.Tests.EndpointTests
         [Fact]
         public async Task SendRequestAsync_WithNullMessage_ThrowsArgumentNullException()
         {
-            var endpoint = new MockEndpoint(new ApiClient("123", "1234"), new HttpClient());
+            var endpoint = new MockEndpoint(new ApiClient("123"), new HttpClient());
 
             var exception = await Record.ExceptionAsync(async () =>
             {
@@ -106,7 +106,7 @@ namespace Imgur.API.Tests.EndpointTests
             };
 
             var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
-            var endpoint = new MockEndpoint(new ApiClient("123", "1234"), httpClient);
+            var endpoint = new MockEndpoint(new ApiClient("123"), httpClient);
 
             //Query a url we know doesn't exist in the fake handler
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test2");
@@ -124,7 +124,7 @@ namespace Imgur.API.Tests.EndpointTests
         public async Task SendRequestAsync_WithMessage_Equal()
         {
             var constructorObjects = new object[2];
-            constructorObjects[0] = new ApiClient("123", "1234");
+            constructorObjects[0] = new ApiClient("123");
 
             var mockUrl = "http://example.org/test";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -133,7 +133,7 @@ namespace Imgur.API.Tests.EndpointTests
             };
 
             var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
-            var endpoint = new MockEndpoint(new ApiClient("123", "1234"), httpClient);
+            var endpoint = new MockEndpoint(new ApiClient("123"), httpClient);
 
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test");
             var image = await endpoint.SendRequestAsync<Image>(request);
@@ -145,7 +145,7 @@ namespace Imgur.API.Tests.EndpointTests
         public async Task SendRequestAsync_WithMessageNull_ThrowsArgumentNullException()
         {
             var httpClient = new HttpClient(new MockHttpMessageHandler());
-            var endpoint = new MockEndpoint(new ApiClient("123", "1234"), httpClient);
+            var endpoint = new MockEndpoint(new ApiClient("123"), httpClient);
 
             var exception = await Record.ExceptionAsync(async () =>
             {
@@ -166,7 +166,7 @@ namespace Imgur.API.Tests.EndpointTests
             var mockResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
 
             var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
-            var endpoint = new MockEndpoint(new ApiClient("123", "1234"), httpClient);
+            var endpoint = new MockEndpoint(new ApiClient("123"), httpClient);
 
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test");
 
@@ -189,7 +189,7 @@ namespace Imgur.API.Tests.EndpointTests
             };
 
             var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
-            var endpoint = new MockEndpoint(new ApiClient("123", "1234"), httpClient);
+            var endpoint = new MockEndpoint(new ApiClient("123"), httpClient);
 
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.org/test");
 

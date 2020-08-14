@@ -54,10 +54,14 @@ namespace Imgur.API.Endpoints
                 throw new ArgumentNullException("refreshToken", nameof(refreshToken));
             }
 
+            if (string.IsNullOrWhiteSpace(_apiClient.ClientSecret))
+            {
+                throw new InvalidOperationException(ClientSecretRequiredExceptionMessage);
+            }
+
             return GetTokenInternalAsync(refreshToken, cancellationToken);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
         internal async Task<IOAuth2Token> GetTokenInternalAsync(string refreshToken,
                                                                 CancellationToken cancellationToken = default)
         {

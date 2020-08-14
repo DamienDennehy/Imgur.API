@@ -258,7 +258,29 @@ namespace Imgur.API.Endpoints
                                            string description = null,
                                            CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(imageId))
+            {
+                throw new ArgumentNullException(nameof(imageId));
+            }
+
+            return UpdateImageInternalAsync(imageId, title, description);
+        }
+
+        private async Task<bool> UpdateImageInternalAsync(string imageId,
+                                                          string title = null,
+                                                          string description = null,
+                                                          CancellationToken cancellationToken = default)
+        {
+            var url = $"image/{imageId}";
+
+            using (var request = ImageRequestBuilder.UpdateImageRequest(url,
+                                                                        title,
+                                                                        description))
+            {
+                var updated = await SendRequestAsync<bool>(request,
+                                                           cancellationToken).ConfigureAwait(false);
+                return updated;
+            }
         }
 
         /// <summary>

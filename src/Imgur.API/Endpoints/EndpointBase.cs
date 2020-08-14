@@ -13,7 +13,8 @@ namespace Imgur.API.Endpoints
     /// </summary>
     public abstract class EndpointBase : IEndpoint
     {
-        internal const string OAuth2RequiredExceptionMessage = "OAuth authentication required and OAuth2Token not set.";
+        internal const string ClientSecretRequiredExceptionMessage = "ApiClient.ClientSecret not set.";
+        internal const string OAuth2RequiredExceptionMessage = "ApiClient.OAuth2Token not set.";
         internal readonly IApiClient _apiClient;
         internal readonly HttpClient _httpClient;
         internal readonly ResponseConverter _responseConverter;

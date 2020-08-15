@@ -105,7 +105,7 @@ jobs:
 
   deploy-packages-github:
 
-    needs: build
+    needs: ubuntu-latest
 
     if: github.ref == 'refs/heads/master' || github.event_name == 'release'
 

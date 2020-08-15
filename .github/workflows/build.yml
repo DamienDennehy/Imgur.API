@@ -61,7 +61,7 @@ jobs:
       run: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
 
     - name: Setup NuGet Cache
-      if: matrix.os == 'ubuntu-latest'
+      if: matrix.os == 'windows-latest'
       uses: actions/cache@v2
       with:
         path: ~/.nuget/packages

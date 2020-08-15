@@ -34,7 +34,6 @@ jobs:
         SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}   
         SONAR_PROJECT_KEY: ImgurAPI
         SONAR_PROJECT_NAME: Imgur.API
-        NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 
     steps:
     - name: Checkout      
@@ -60,14 +59,6 @@ jobs:
 
     - name: Setup SonarScanner
       run: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
-
-    - name: Setup NuGet Cache
-      uses: actions/cache@v2
-      with:
-        path: ${{ github.workspace }}/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-nuget-
   
     - name: Restore
       run: dotnet restore --use-lock-file

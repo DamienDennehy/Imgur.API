@@ -131,7 +131,7 @@ jobs:
         path: ./artifacts
 
     - name: Push to GitHub Packages
-      run: dotnet nuget push './artifacts/**/*.nupkg' --skip-duplicate --no-symbols true
+      run: dotnet nuget push .\artifacts\**\*.nupkg --skip-duplicate --no-symbols true
       env:
         DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLE: false   
 
@@ -155,6 +155,6 @@ jobs:
         path: ./artifacts
 
     - name: Push to NuGet
-      run: dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_AUTH_TOKEN}} './artifacts/**/*.nupkg' --skip-duplicate --no-symbols true
+      run: dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_AUTH_TOKEN}} .\artifacts\**\*.nupkg --skip-duplicate --no-symbols true
       env:
         DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLE: false   

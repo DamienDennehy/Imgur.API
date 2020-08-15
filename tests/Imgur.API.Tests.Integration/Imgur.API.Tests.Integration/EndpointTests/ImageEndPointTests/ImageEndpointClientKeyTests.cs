@@ -46,6 +46,29 @@ namespace Imgur.API.Tests.Integration.EndpointTests.ImageEndPointTests
         }
 
         [Fact]
+        public async Task UpdateImage_UpdatesImage()
+        {
+            var apiClient = _fixture.GetApiClientWithKey();
+            var httpClient = new HttpClient();
+
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "banana.jpg");
+            using var fileStream = File.OpenRead(filePath);
+
+            var imageEndpoint = new ImageEndpoint(apiClient, httpClient);
+
+            var imageUpload = await imageEndpoint.UploadImageAsync(fileStream, title: "uploaded");
+            await imageEndpoint.UpdateImageAsync(imageUpload.DeleteHash, title: "updated");
+            
+            var image = await imageEndpoint.GetImageAsync(imageUpload.Id);
+            var imageDeleted = await imageEndpoint.DeleteImageAsync(imageUpload.DeleteHash);
+
+            Assert.NotNull(imageUpload);
+            Assert.Equal("uploaded", imageUpload.Title);
+            Assert.Equal("updated", image.Title);
+            Assert.True(imageDeleted);
+        }
+
+        [Fact]
         public async Task UploadImageStream_UploadsImage()
         {
             var apiClient = _fixture.GetApiClientWithKey();

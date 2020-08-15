@@ -50,11 +50,6 @@ jobs:
       id: gitversion
       uses: gittools/actions/gitversion/execute@v0.9.4
 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.301
-
     - name: Setup Java JDK
       uses: actions/setup-java@v1
       with:
@@ -157,4 +152,4 @@ jobs:
     - name: Push to NuGet
       run: dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_AUTH_TOKEN}} .\artifacts\**\*.nupkg --skip-duplicate --no-symbols true
       env:
-        DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLE: false   
+        DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLE: false

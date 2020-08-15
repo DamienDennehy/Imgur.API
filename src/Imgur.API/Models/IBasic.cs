@@ -1,26 +1,24 @@
-﻿using System.Net;
-
-namespace Imgur.API.Models
+﻿namespace Imgur.API.Models
 {
     /// <summary>
-    ///     A response from the API.
+    /// A response from the API.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IBasic<T>
+    public interface IBasic<out T>
     {
         /// <summary>
-        ///     The data returned from the response.
+        /// The data returned from the response.
         /// </summary>
-        T Data { get; set; }
+        T Data { get; }
 
         /// <summary>
-        ///     HTTP Status Code.
+        /// HTTP Status Code.
         /// </summary>
-        HttpStatusCode Status { get; set; }
+        int Status { get; }
 
         /// <summary>
-        ///     Was the request successful.
+        /// Was the request successful.
         /// </summary>
-        bool Success { get; set; }
+        bool Success { get; }
     }
 }

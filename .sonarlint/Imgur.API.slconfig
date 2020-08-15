@@ -1,0 +1,15 @@
+{
+  "ServerUri": "https://sonarcloud.io/",
+  "Organization": {
+    "Key": "damiendennehy-github",
+    "Name": "Damien Dennehy"
+  },
+  "ProjectKey": "ImgurAPI",
+  "ProjectName": "Imgur.API",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AWLPj-QpXt8T3cY7QNn2",
+      "ProfileTimestamp": "2020-07-20T14:51:42+01:00"
+    }
+  }
+}

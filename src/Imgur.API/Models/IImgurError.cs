@@ -1,23 +1,23 @@
 ﻿namespace Imgur.API.Models
 {
     /// <summary>
-    ///     An error returned after an Endpoint request.
+    /// An error returned after an Endpoint request.
     /// </summary>
-    public interface IImgurError
+    public interface IImgurError: IDataModel
     {
         /// <summary>
-        ///     A description of the error.
+        /// A description of the error.
         /// </summary>
-        string Error { get; set; }
+        string Error { get; }
 
         /// <summary>
-        ///     The HttpMethod that was used to send the request.
+        /// The HttpMethod that was used to send the request.
         /// </summary>
-        string Method { get; set; }
+        string Method { get; }
 
         /// <summary>
-        ///     The request Uri that the error came from.
+        /// The request Uri that the error came from.
         /// </summary>
-        string Request { get; set; }
+        string Request { get; }
     }
 }

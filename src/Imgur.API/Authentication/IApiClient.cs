@@ -3,40 +3,34 @@
 namespace Imgur.API.Authentication
 {
     /// <summary>
-    ///     The type of client that will be used for authentication.
+    /// The client that will be used for authentication, containing ClientId, ClientSecret, etc.
     /// </summary>
     public interface IApiClient
     {
         /// <summary>
-        ///     The Imgur app's ClientId.
+        /// The client id obtained during application registration.
         /// </summary>
         string ClientId { get; }
 
         /// <summary>
-        ///     The Imgur app's ClientSecret.
+        /// The client secret obtained during application registration.
         /// </summary>
         string ClientSecret { get; }
 
         /// <summary>
-        ///     The Endpoint Url.
-        ///     https://api.imgur.com/3/ or https://imgur-apiv3.p.mashape.com/3/
-        /// </summary>
-        string EndpointUrl { get; }
-
-        /// <summary>
-        ///     An OAuth2 Token used for actions against a user's account.
+        /// An OAuth2 Token used for actions against a user's account.
         /// </summary>
         IOAuth2Token OAuth2Token { get; }
 
         /// <summary>
-        ///     Remaining credits for the application.
+        /// The Base Api Address. Typically https://api.imgur.com/3/
         /// </summary>
-        IRateLimit RateLimit { get; }
+        string BaseAddress { get; }
 
         /// <summary>
-        ///     Sets <see cref="OAuth2Token" />.
+        /// Sets the OAuth2Token to be used for authentication.
         /// </summary>
-        /// <param name="token">The token.</param>
+        /// <param name="token"></param>
         void SetOAuth2Token(IOAuth2Token token);
     }
 }

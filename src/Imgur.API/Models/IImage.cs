@@ -1,131 +1,141 @@
-﻿using System;
-using Imgur.API.Enums;
-
-namespace Imgur.API.Models
+﻿namespace Imgur.API.Models
 {
     /// <summary>
-    ///     An image.
+    /// An image.
     /// </summary>
     public interface IImage : IDataModel
     {
         /// <summary>
-        ///     Is the image animated.
+        /// The ID for the image.
         /// </summary>
-        bool Animated { get; set; }
+        string Id { get; }
 
         /// <summary>
-        ///     Bandwidth consumed by the image in bytes.
+        /// The title of the image.
         /// </summary>
-        long Bandwidth { get; set; }
+        string Title { get; }
 
         /// <summary>
-        ///     Utc timestamp of when the image was uploaded, converted from epoch time.
+        /// Description of the image.
         /// </summary>
-        DateTimeOffset DateTime { get; set; }
+        string Description { get; }
 
         /// <summary>
-        ///     OPTIONAL, the deletehash, if you're logged in as the image owner.
+        /// Utc timestamp of when the image was uploaded.
         /// </summary>
-        string DeleteHash { get; set; }
+        long DateTime { get; }
 
         /// <summary>
-        ///     Description of the image.
+        /// Image MIME type.
         /// </summary>
-        string Description { get; set; }
+        string Type { get; }
 
         /// <summary>
-        ///     Indicates if the current user favorited the image. Defaults to false if not signed in.
+        /// Is the image animated.
         /// </summary>
-        bool? Favorite { get; set; }
+        bool Animated { get; }
 
         /// <summary>
-        ///     OPTIONAL, The .gifv link. Only available if the image is animated and type is 'image/gif'.
+        /// The width of the image in pixels.
         /// </summary>
-        string Gifv { get; set; }
+        int Width { get; }
 
         /// <summary>
-        ///     The height of the image in pixels.
+        /// The height of the image in pixels.
         /// </summary>
-        int Height { get; set; }
+        int Height { get; }
 
         /// <summary>
-        ///     The ID for the image.
+        /// The size of the image in bytes.
         /// </summary>
-        string Id { get; set; }
+        int Size { get; }
 
         /// <summary>
-        ///     True if the image has been submitted to the gallery, false if otherwise.
+        /// The number of image views.
         /// </summary>
-        bool InGallery { get; set; }
+        int Views { get; }
 
         /// <summary>
-        ///     The direct link to the the image. (Note: if fetching an animated GIF that was over 20MB in original size, a .gif
-        ///     thumbnail will be returned)
+        /// Bandwidth consumed by the image in bytes.
         /// </summary>
-        string Link { get; set; }
+        long Bandwidth { get; }
 
         /// <summary>
-        ///     OPTIONAL, Whether the image has a looping animation. Only available if the image is animated and type is
-        ///     'image/gif'.
+        /// The current user's vote on the album. null if not signed in, if the user hasn't voted on it, or if not submitted to
+        /// the gallery.
         /// </summary>
-        bool Looping { get; set; }
+        string Vote { get; }
 
         /// <summary>
-        ///     OPTIONAL, The direct link to the .mp4. Only available if the image is animated and type is 'image/gif'.
+        /// Indicates if the current user favorited the image. Defaults to false if not signed in.
         /// </summary>
-        string Mp4 { get; set; }
+        bool Favorite { get; }
 
         /// <summary>
-        ///     OPTIONAL, The Content-Length of the .mp4. Only available if the image is animated and type is 'image/gif'. Note
-        ///     that a zero value (0) is possible if the video has not yet been generated.
+        /// Indicates if the image has been marked as nsfw or not. Defaults to null if information is not available.
         /// </summary>
-        int? Mp4Size { get; set; }
+        bool? Nsfw { get; }
 
         /// <summary>
-        ///     OPTIONAL, the original filename, if you're logged in as the image owner.
+        /// If the image has been categorized then this will contain the section the image belongs in. (funny, cats,
+        /// adviceanimals, wtf, etc)
         /// </summary>
-        string Name { get; set; }
+        string Section { get; }
 
         /// <summary>
-        ///     Indicates if the image has been marked as nsfw or not. Defaults to null if information is not available.
+        /// The account url.
         /// </summary>
-        bool? Nsfw { get; set; }
+        string AccountUrl { get; }
 
         /// <summary>
-        ///     If the image has been categorized then this will contain the section the image belongs in. (funny, cats,
-        ///     adviceanimals, wtf, etc)
+        /// The account id.
         /// </summary>
-        string Section { get; set; }
+        int? AccountId { get; }
 
         /// <summary>
-        ///     The size of the image in bytes.
+        /// True if the image is an ad, false if otherwise.
         /// </summary>
-        int Size { get; set; }
+        bool IsAd { get; }
 
         /// <summary>
-        ///     The title of the image.
+        /// True if the image is in most viral, false if otherwise.
         /// </summary>
-        string Title { get; set; }
+        bool InMostViral { get; }
 
         /// <summary>
-        ///     Image MIME type.
+        /// List of tags.
         /// </summary>
-        string Type { get; set; }
+        string[] Tags { get; }
 
         /// <summary>
-        ///     The number of image views.
+        /// The Ad Type.
         /// </summary>
-        int Views { get; set; }
+        int? AdType { get; }
 
         /// <summary>
-        ///     The current user's vote on the album. null if not signed in, if the user hasn't voted on it, or if not submitted to
-        ///     the gallery.
+        /// The ad url.
         /// </summary>
-        VoteOption? Vote { get; set; }
+        string AdUrl { get; }
 
         /// <summary>
-        ///     The width of the image in pixels.
+        /// True if the image has been submitted to the gallery, false if otherwise.
         /// </summary>
-        int Width { get; set; }
+        bool InGallery { get; }
+
+        /// <summary>
+        /// OPTIONAL, the deletehash, if you're logged in as the image owner.
+        /// </summary>
+        string DeleteHash { get; }
+
+        /// <summary>
+        /// OPTIONAL, the original filename, if you're logged in as the image owner.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
+        /// The direct link to the the image. (Note: if fetching an animated GIF that was over 20MB in original size, a .gif
+        /// thumbnail will be returned)
+        /// </summary>
+        string Link { get; }
     }
 }

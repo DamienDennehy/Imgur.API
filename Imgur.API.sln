@@ -1,15 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A1F3B271-82E2-4DC1-95AB-6C125192A515}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imgur.API", "src\Imgur.API\Imgur.API.csproj", "{164C1FDB-6455-4066-998F-78ADDDCCBF4B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F93128C4-6CED-401A-B188-7A779BA15613}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{09EF3665-F9F7-4E38-ADE7-3F87E4B4A98C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imgur.API", "src\Imgur.API\Imgur.API.csproj", "{9D8098F9-E636-4217-A663-AD8BFD6A593E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{95D79228-2307-4CD0-940D-35D89D59FCF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imgur.API.Tests", "test\Imgur.API.Tests\Imgur.API.Tests.csproj", "{464DA991-D1BD-4649-8FD2-EEBD9A3664FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imgur.API.Tests", "tests\Imgur.API.Tests\Imgur.API.Tests.csproj", "{65F14BBA-B4B5-4243-823A-4FAF41AB67BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imgur.API.Tests.Integration", "tests\Imgur.API.Tests.Integration\Imgur.API.Tests.Integration\Imgur.API.Tests.Integration.csproj", "{4AD6F734-769C-437F-88BC-75727427F210}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D42AD5DE-ED8F-42B5-A22D-4AC6B811DF95}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,20 +24,28 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9D8098F9-E636-4217-A663-AD8BFD6A593E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D8098F9-E636-4217-A663-AD8BFD6A593E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D8098F9-E636-4217-A663-AD8BFD6A593E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D8098F9-E636-4217-A663-AD8BFD6A593E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{464DA991-D1BD-4649-8FD2-EEBD9A3664FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{464DA991-D1BD-4649-8FD2-EEBD9A3664FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{464DA991-D1BD-4649-8FD2-EEBD9A3664FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{464DA991-D1BD-4649-8FD2-EEBD9A3664FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{164C1FDB-6455-4066-998F-78ADDDCCBF4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{164C1FDB-6455-4066-998F-78ADDDCCBF4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{164C1FDB-6455-4066-998F-78ADDDCCBF4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{164C1FDB-6455-4066-998F-78ADDDCCBF4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65F14BBA-B4B5-4243-823A-4FAF41AB67BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65F14BBA-B4B5-4243-823A-4FAF41AB67BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65F14BBA-B4B5-4243-823A-4FAF41AB67BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65F14BBA-B4B5-4243-823A-4FAF41AB67BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AD6F734-769C-437F-88BC-75727427F210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AD6F734-769C-437F-88BC-75727427F210}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AD6F734-769C-437F-88BC-75727427F210}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AD6F734-769C-437F-88BC-75727427F210}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{9D8098F9-E636-4217-A663-AD8BFD6A593E} = {A1F3B271-82E2-4DC1-95AB-6C125192A515}
-		{464DA991-D1BD-4649-8FD2-EEBD9A3664FC} = {F93128C4-6CED-401A-B188-7A779BA15613}
+		{164C1FDB-6455-4066-998F-78ADDDCCBF4B} = {09EF3665-F9F7-4E38-ADE7-3F87E4B4A98C}
+		{65F14BBA-B4B5-4243-823A-4FAF41AB67BD} = {95D79228-2307-4CD0-940D-35D89D59FCF5}
+		{4AD6F734-769C-437F-88BC-75727427F210} = {95D79228-2307-4CD0-940D-35D89D59FCF5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43AF52B9-DBB9-4B2E-BCA3-BBBD75CC56C5}
 	EndGlobalSection
 EndGlobal

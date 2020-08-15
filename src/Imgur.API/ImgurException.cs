@@ -3,13 +3,14 @@
 namespace Imgur.API
 {
     /// <summary>
-    ///     The exception that is thrown when an error is found in a response from an Imgur endpoint.
+    /// The exception that is thrown when an error is found in a response from an Imgur endpoint.
     /// </summary>
     [Serializable]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S3925:\"ISerializable\" should be implemented correctly", Justification = "<Pending>")]
     public class ImgurException : Exception
     {
         /// <summary>
-        ///     Initializes a new instance of the ImgurException class with a specified error message.
+        /// Initializes a new instance of the ImgurException class with a specified error message.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
         public ImgurException(string message)
@@ -18,7 +19,7 @@ namespace Imgur.API
         }
 
         /// <summary>
-        ///     Initializes a new instance of the ImgurException class with a specified error message.
+        /// Initializes a new instance of the ImgurException class with a specified error message.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>

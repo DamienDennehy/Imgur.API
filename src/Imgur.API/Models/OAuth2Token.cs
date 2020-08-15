@@ -1,72 +1,47 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Imgur.API.Models
 {
     /// <summary>
-    ///     The response from an OAuth2 Token request.
+    /// An OAuth2 Token used for actions against a user's account.
     /// </summary>
     public class OAuth2Token : IOAuth2Token
     {
         /// <summary>
-        ///     Initializes a new instance of the OAuth2Token class.
+        /// The secret key used to access the user's data. 
+        /// It can be thought of the user's password and username combined into one, and is used to access the user's account. It expires after 1 month.
         /// </summary>
-        /// <param name="accessToken">The access token.</param>
-        /// <param name="refreshToken">The refresh token.</param>
-        /// <param name="tokenType">The type of token, typically "Bearer".</param>
-        /// <param name="accountId">The account id.</param>
-        /// <param name="accountUsername">The account username.</param>
-        /// <param name="expiresIn">The time in seconds when the token expires. Usually one month from the request.</param>
-        public OAuth2Token(string accessToken, string refreshToken, string tokenType, string accountId,
-            string accountUsername, int expiresIn)
-        {
-            AccessToken = accessToken;
-            RefreshToken = refreshToken;
-            TokenType = tokenType;
-            AccountId = accountId;
-            AccountUsername = accountUsername;
-            ExpiresIn = expiresIn;
-        }
+        [JsonPropertyName("access_token")]
+        public virtual string AccessToken { get; set; }
 
         /// <summary>
-        ///     The user's access token.
+        /// The lifetime of the token in seconds.
         /// </summary>
-        [JsonProperty("access_token")]
-        public virtual string AccessToken { get; }
+        [JsonPropertyName("expires_in")]
+        public virtual int ExpiresIn { get; set; }
 
         /// <summary>
-        ///     The user's account id.
+        /// The kind of token that is being returned.
         /// </summary>
-        [JsonProperty("account_id")]
-        public virtual string AccountId { get; }
+        [JsonPropertyName("token_type")]
+        public virtual string TokenType { get; set; }
 
         /// <summary>
-        ///     The user's account username.
+        /// Used to generate an Access Token.
         /// </summary>
-        [JsonProperty("account_username")]
-        public virtual string AccountUsername { get; }
+        [JsonPropertyName("refresh_token")]
+        public virtual string RefreshToken { get; set; }
 
         /// <summary>
-        ///     The DateTimeOffset when the token expires. Usually one month from the request.
+        /// The account id.
         /// </summary>
-        public virtual DateTimeOffset ExpiresAt => DateTimeOffset.UtcNow.AddSeconds(ExpiresIn);
+        [JsonPropertyName("account_id")]
+        public virtual int AccountId { get; set; }
 
         /// <summary>
-        ///     The time in seconds when the token expires. Usually one month from the request.
+        /// The account's username.
         /// </summary>
-        [JsonProperty("expires_in")]
-        public virtual int ExpiresIn { get; }
-
-        /// <summary>
-        ///     The user's refresh token.
-        /// </summary>
-        [JsonProperty("refresh_token")]
-        public virtual string RefreshToken { get; }
-
-        /// <summary>
-        ///     The type of token that was requested, usually "bearer".
-        /// </summary>
-        [JsonProperty("token_type")]
-        public virtual string TokenType { get; }
+        [JsonPropertyName("account_username")]
+        public virtual string AccountUsername { get; set; }
     }
 }

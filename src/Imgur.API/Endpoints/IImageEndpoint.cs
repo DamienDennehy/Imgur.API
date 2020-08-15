@@ -1,93 +1,120 @@
-﻿using Imgur.API.Models;
-using System;
+﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
+using Imgur.API.Models;
 
 namespace Imgur.API.Endpoints
 {
     /// <summary>
-    ///     Image related actions.
+    /// Image Endpoint.
     /// </summary>
-    public interface IImageEndpoint : IEndpoint
+    public interface IImageEndpoint
     {
         /// <summary>
-        ///     Deletes an image. For an anonymous image, {id} must be the image's deletehash.
-        ///     If the image belongs to your account then passing the ID of the image is sufficient.
+        /// Get information about an image.
         /// </summary>
-        /// <param name="imageId">The image id.</param>
+        /// <param name="imageId"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<bool> DeleteImageAsync(string imageId);
+        Task<IImage> GetImageAsync(string imageId,
+                                   CancellationToken cancellationToken = default);
+
 
         /// <summary>
-        ///     Favorite an image with the given ID. OAuth authentication required.
+        /// Upload a new image.
         /// </summary>
-        /// <param name="imageId">The image id.</param>
+        /// <param name="image"></param>
+        /// <param name="album"></param>
+        /// <param name="name"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="progress"></param>
+        /// <param name="bufferSize"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<bool> FavoriteImageAsync(string imageId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
+        Task<IImage> UploadImageAsync(Stream image,
+                                      string album = null,
+                                      string name = null,
+                                      string title = null,
+                                      string description = null,
+                                      IProgress<int> progress = null,
+                                      int? bufferSize = 4096,
+                                      CancellationToken cancellationToken = default);
 
         /// <summary>
-        ///     Get information about an image.
+        /// Upload a new image.
         /// </summary>
-        /// <param name="imageId">The image id.</param>
+        /// <param name="imageUrl"></param>
+        /// <param name="album"></param>
+        /// <param name="name"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<IImage> GetImageAsync(string imageId);
+        Task<IImage> UploadImageAsync(string imageUrl,
+                                      string album = null,
+                                      string name = null,
+                                      string title = null,
+                                      string description = null,
+                                      CancellationToken cancellationToken = default);
 
         /// <summary>
-        ///     Updates the title or description of an image.
-        ///     You can only update an image you own and is associated with your account.
-        ///     For an anonymous image, {id} must be the image's deletehash.
+        /// Upload a new image.
         /// </summary>
-        /// <param name="imageId">The image id.</param>
-        /// <param name="title">The title of the image.</param>
-        /// <param name="description">The description of the image.</param>
+        /// <param name="video"></param>
+        /// <param name="album"></param>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="disableAudio"></param>
+        /// <param name="progress"></param>
+        /// <param name="bufferSize"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<bool> UpdateImageAsync(string imageId, string title = null, string description = null);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
+        Task<IImage> UploadVideoAsync(Stream video,
+                                      string album = null,
+                                      string type = null,
+                                      string name = null,
+                                      string title = null,
+                                      string description = null,
+                                      bool disableAudio = false,
+                                      IProgress<int> progress = null,
+                                      int? bufferSize = 4096,
+                                      CancellationToken cancellationToken = default);
 
         /// <summary>
-        ///     Upload a new image using a binary file.
+        /// Deletes an image.
         /// </summary>
-        /// <param name="image">A binary file.</param>
-        /// <param name="albumId">
-        ///     The id of the album you want to add the image to. For anonymous albums, {albumId} should be the
-        ///     deletehash that is returned at creation.
-        /// </param>
-        /// <param name="name">The name of the file.</param>
-        /// <param name="title">The title of the image.</param>
-        /// <param name="description">The description of the image.</param>
+        /// <param name="imageId"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<IImage> UploadImageBinaryAsync(byte[] image, string albumId = null, string name = null, string title = null,
-            string description = null);
+        Task<bool> DeleteImageAsync(string imageId,
+                                    CancellationToken cancellationToken = default);
 
         /// <summary>
-        ///     Upload a new image using a stream.
+        /// Updates the title or description of an image.
         /// </summary>
-        /// <param name="image">A stream.</param>
-        /// <param name="albumId">
-        ///     The id of the album you want to add the image to. For anonymous albums, {albumId} should be the
-        ///     deletehash that is returned at creation.
-        /// </param>
-        /// <param name="name">The name of the file.</param>
-        /// <param name="title">The title of the image.</param>
-        /// <param name="description">The description of the image.</param>
-        /// <param name="progressBytes">A provider for progress updates.</param>
-        /// <param name="progressBufferSize">The amount of bytes that should be uploaded while performing a progress upload.</param>
+        /// <param name="imageId"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<IImage> UploadImageStreamAsync(Stream image, string albumId = null, string name = null, string title = null,
-            string description = null, IProgress<int> progressBytes = null, int progressBufferSize = 4096);
+        Task<bool> UpdateImageAsync(string imageId,
+                                    string title = null,
+                                    string description = null,
+                                    CancellationToken cancellationToken = default);
 
         /// <summary>
-        ///     Upload a new image using a URL.
+        /// Favorite an image with the given ID. The user is required to be logged in to favorite the image.
         /// </summary>
-        /// <param name="image">The URL for the image.</param>
-        /// <param name="albumId">
-        ///     The id of the album you want to add the image to. For anonymous albums, {albumId} should be the
-        ///     deletehash that is returned at creation.
-        /// </param>
-        /// <param name="name">The name of the file.</param>
-        /// <param name="title">The title of the image.</param>
-        /// <param name="description">The description of the image.</param>
+        /// <param name="imageId"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<IImage> UploadImageUrlAsync(string image, string albumId = null, string name = null, string title = null,
-            string description = null);
+        Task<string> FavoriteImageAsync(string imageId,
+                                        CancellationToken cancellationToken = default);
     }
 }

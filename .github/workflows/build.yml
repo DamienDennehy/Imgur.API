@@ -1,0 +1,168 @@
+name: Build
+on:
+  # Manual Run.
+  workflow_dispatch:  
+  
+  # On a push to a branch or tag.
+  push:
+    branches: [ master, 'develop/**' ]
+
+  # On a PR to a branch or tag.
+  pull_request:
+    branches: [ master ]
+
+  # On a release.
+  release:
+    types:
+      - published
+
+jobs:
+  build:
+
+    name: build-${{matrix.os}}
+
+    runs-on: ${{matrix.os}}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    env:
+        DOTNET_NOLOGO: true
+        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}           
+        SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}   
+        SONAR_PROJECT_KEY: ImgurAPI
+        SONAR_PROJECT_NAME: Imgur.API   
+
+    steps:
+    - name: Checkout      
+      uses: actions/checkout@v2
+      with: 
+          fetch-depth: 0
+
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.4
+      with:
+          versionSpec: 5.3.x
+
+    - name: Use GitVersion
+      id: gitversion
+      uses: gittools/actions/gitversion/execute@v0.9.4
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+
+    - name: Setup Java JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: '14.0.1'
+        java-package: jdk
+        architecture: x64
+
+    - name: Setup SonarScanner
+      run: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
+
+    - name: Setup NuGet Cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+  
+    - name: Restore
+      run: dotnet restore --use-lock-file
+
+    - name: Begin Build Scan
+      if: matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request'
+      run: dotnet-sonarscanner begin /k:"$SONAR_PROJECT_KEY" /n:"$SONAR_PROJECT_NAME" /d:sonar.login="${{secrets.SONAR_TOKEN}}" /d:sonar.host.url="${{secrets.SONAR_URL}}" /o:"${{secrets.SONAR_ORG}}" /d:sonar.cs.opencover.reportsPaths="artifacts/**/*.xml" 
+
+    - name: Begin Build Scan (Pull Request)
+      if: matrix.os == 'ubuntu-latest' && github.event_name == 'pull_request'
+      run: dotnet-sonarscanner begin /k:"$SONAR_PROJECT_KEY" /n:"$SONAR_PROJECT_NAME" /d:sonar.login="${{secrets.SONAR_TOKEN}}" /d:sonar.host.url="${{secrets.SONAR_URL}}" /o:"${{secrets.SONAR_ORG}}" /d:sonar.cs.opencover.reportsPaths="artifacts/**/*.xml" /d:sonar.pullrequest.key=${{github.event.number}} /d:sonar.pullrequest.branch=${{github.head_ref}} /d:sonar.pullrequest.base=${{github.base_ref}} /d:sonar.pullrequest.github.repository=${{github.repository}} /d:sonar.pullrequest.provider=github
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore --verbosity minimal -p:Version=${{steps.gitversion.outputs.semVer}}
+
+    - name: Test
+      run: dotnet test --configuration Release --no-restore --no-build --verbosity minimal --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory ./artifacts --filter FullyQualifiedName!~Imgur.API.Tests.Integration
+
+    - name: End Build Scan
+      if: matrix.os == 'ubuntu-latest'
+      run: dotnet sonarscanner end /d:sonar.login="${{secrets.SONAR_TOKEN}}"
+      
+    - name: Pack
+      run: dotnet pack --configuration Release --no-restore --no-build --verbosity minimal --output ./artifacts -p:Version=${{steps.gitversion.outputs.semVer}}
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: ubuntu-latest
+        path: ./artifacts
+
+  deploy-packages-github:
+
+    needs: build
+
+    if: github.ref == 'refs/heads/master' || github.event_name == 'release'
+
+    runs-on: ubuntu-latest
+
+    env:
+        DOTNET_NOLOGO: true
+        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+    steps:
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+        source-url: https://nuget.pkg.github.com/DamienDennehy/index.json    
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        
+    - name: Download Artifacts 
+      uses: actions/download-artifact@v2
+      with:
+        name: ubuntu-latest
+        path: ./artifacts
+
+    - name: Push to GitHub Packages
+      run: dotnet nuget push './artifacts/**/*.nupkg' --skip-duplicate --no-symbols true
+      env:
+        DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLE: false   
+
+  deploy-packages-nuget:
+
+    needs: build
+
+    if: github.event_name == 'release'
+
+    runs-on: ubuntu-latest
+
+    env:
+        DOTNET_NOLOGO: true
+        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+    steps:
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+        source-url: https://api.nuget.org/v3/index.json  
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}
+        
+    - name: Download Artifacts 
+      uses: actions/download-artifact@v2
+      with:
+        name: ubuntu-latest
+        path: ./artifacts
+
+    - name: Push to NuGet
+      run: dotnet nuget push './artifacts/**/*.nupkg' --skip-duplicate --no-symbols true
+      env:
+        DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLE: false   

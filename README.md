@@ -1,8 +1,6 @@
 # Imgur.API
 Imgur.API is a .NET implementation of Imgur's API. 
 
-It supports Imgur's free and RapidAPI's commercial API endpoints.
-
 ![Build](https://github.com/DamienDennehy/Imgur.API/workflows/Build/badge.svg)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ImgurAPI&metric=alert_status)](https://sonarcloud.io/dashboard?id=ImgurAPI)

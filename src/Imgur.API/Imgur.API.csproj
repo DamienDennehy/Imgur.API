@@ -5,6 +5,9 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RepositoryUrl>https://github.com/DamienDennehy/Imgur.API</RepositoryUrl>
     <PackageIcon>icon.png</PackageIcon>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Description>Imgur.API is a .NET implementation of Imgur's API.</Description>
+    <PackageTags>imgur;media;image;video;upload</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -17,6 +20,7 @@
 
   <ItemGroup>
     <Content Include="..\..\icon.png" Link="icon.png" Pack="true" PackagePath="\" />
+    <Content Include="..\..\LICENSE" Link="LICENSE" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>

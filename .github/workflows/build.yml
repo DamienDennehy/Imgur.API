@@ -72,22 +72,7 @@ jobs:
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: |
           ${{ runner.os }}-nuget-
-          
-    - name: Setup Media Cache
-      id: media-cache
-      uses: actions/cache@v2
-      with:
-        path: ./media
-        key: media-cache-${{ hashFiles('./media') }}
-
-    - name: Download Video Data
-      uses: carlosperate/download-file-action@v1.0.3
-      if: steps.media-cache.outputs.cache-hit != 'true'
-      with:
-        file-url: https://github.com/DamienDennehy/Imgur.API/releases/download/v5.0.0/banana.mp4
-        file-name: banana.mp4
-        location: ./media
-
+  
     - name: Restore
       run: dotnet restore --use-lock-file
 

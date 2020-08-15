@@ -105,7 +105,7 @@ jobs:
 
   deploy-packages-github:
 
-    needs: build-ubuntu-latest
+    needs: build-${{matrix.os}}
 
     if: github.ref == 'refs/heads/master' || github.event_name == 'release'
 
@@ -137,7 +137,7 @@ jobs:
 
   deploy-packages-nuget:
 
-    needs: build-ubuntu-latest
+    needs: build-${{matrix.os}}
 
     if: github.event_name == 'release'
 

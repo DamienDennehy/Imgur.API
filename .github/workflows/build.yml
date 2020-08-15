@@ -137,7 +137,7 @@ jobs:
 
   deploy-packages-nuget:
 
-    needs: build-
+    needs: build
 
     if: github.event_name == 'release'
 

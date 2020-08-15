@@ -72,6 +72,10 @@ jobs:
     - name: Restore
       run: dotnet restore --use-lock-file
 
+    - name: List Packages
+      run: ls -s -h ~/ -R
+      shell: bash      
+
     - name: Begin Build Scan
       if: matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request'
       run: dotnet-sonarscanner begin /k:"$SONAR_PROJECT_KEY" /n:"$SONAR_PROJECT_NAME" /d:sonar.login="${{secrets.SONAR_TOKEN}}" /d:sonar.host.url="${{secrets.SONAR_URL}}" /o:"${{secrets.SONAR_ORG}}" /d:sonar.cs.opencover.reportsPaths="artifacts/**/*.xml" 

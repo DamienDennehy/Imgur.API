@@ -59,6 +59,15 @@ jobs:
 
     - name: Setup SonarScanner
       run: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
+
+    - name: Setup NuGet Cache
+      if: matrix.os == 'ubuntu-latest'
+      uses: actions/cache@v2
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
   
     - name: Restore
       run: dotnet restore --use-lock-file

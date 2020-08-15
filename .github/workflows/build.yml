@@ -149,3 +149,35 @@ jobs:
       run: dotnet nuget push './artifacts/**/*.nupkg' --skip-duplicate --no-symbols true
       env:
         DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLE: false   
+
+  deploy-packages-nuget:
+
+    needs: build
+
+    if: github.event_name == 'release'
+
+    runs-on: ubuntu-latest
+
+    env:
+        DOTNET_NOLOGO: true
+        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+    steps:
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+        source-url: https://api.nuget.org/v3/index.json  
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}
+        
+    - name: Download Artifacts 
+      uses: actions/download-artifact@v2
+      with:
+        name: ubuntu-latest
+        path: ./artifacts
+
+    - name: Push to NuGet
+      run: dotnet nuget push './artifacts/**/*.nupkg' --skip-duplicate --no-symbols true
+      env:
+        DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLE: false   

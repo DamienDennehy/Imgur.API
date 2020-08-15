@@ -61,10 +61,13 @@ namespace Imgur.API.Endpoints
             using (var httpResponse = await _httpClient.SendAsync(httpRequestMessage, cancellationToken)
                                                        .ConfigureAwait(false))
             {
-                httpResponse.EnsureSuccessStatusCode();
+                string response = null;
 
-                var response = await httpResponse.Content.ReadAsStringAsync()
+                if (httpResponse.Content != null)
+                {
+                    response = await httpResponse.Content.ReadAsStringAsync()
                                                          .ConfigureAwait(false);
+                }
 
                 return _responseConverter.ConvertResponse<T>(response);
             }

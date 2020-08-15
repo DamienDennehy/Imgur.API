@@ -97,7 +97,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task SendRequestAsync_WithInvalidUrl_ThrowsHttpRequestException()
+        public async Task SendRequestAsync_WithInvalidUrl_ThrowsImgurError()
         {
             var mockUrl = "http://example.org/test";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
@@ -117,7 +117,7 @@ namespace Imgur.API.Tests.EndpointTests
             });
 
             Assert.NotNull(exception);
-            Assert.IsType<HttpRequestException>(exception);
+            Assert.IsType<ImgurException>(exception);
         }
 
         [Fact]
@@ -160,7 +160,7 @@ namespace Imgur.API.Tests.EndpointTests
         }
 
         [Fact]
-        public async Task SendRequestInternalAsync_WithResponseNull_ThrowsHttpRequestException()
+        public async Task SendRequestInternalAsync_WithResponseNull_ThrowsImgurException()
         {
             var mockUrl = "http://example.org/test";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.InternalServerError);
@@ -176,11 +176,11 @@ namespace Imgur.API.Tests.EndpointTests
             });
 
             Assert.NotNull(exception);
-            Assert.IsType<HttpRequestException>(exception);
+            Assert.IsType<ImgurException>(exception);
         }
 
         [Fact]
-        public async Task SendRequestInternalAsync_WithUnauthorizedErrorMessage_ThrowsHttpRequestException()
+        public async Task SendRequestInternalAsync_WithUnauthorizedErrorMessage_ThrowsImgurException()
         {
             var mockUrl = "http://example.org/test";
             var mockResponse = new HttpResponseMessage(HttpStatusCode.Unauthorized)
@@ -199,7 +199,7 @@ namespace Imgur.API.Tests.EndpointTests
             });
 
             Assert.NotNull(exception);
-            Assert.IsType<HttpRequestException>(exception);
+            Assert.IsType<ImgurException>(exception);
         }
     }
 }

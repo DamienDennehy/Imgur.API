@@ -111,23 +111,18 @@ jobs:
         DOTNET_NOLOGO: true
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
-    steps:
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.301
-        source-url: https://nuget.pkg.github.com/DamienDennehy/index.json    
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        
+    steps:      
     - name: Download Artifacts 
       uses: actions/download-artifact@v2
       with:
         name: ubuntu-latest
         path: ./artifacts
 
-    - name: Push to GitHub Packages
-      run: dotnet nuget push .\artifacts\**\*.nupkg --skip-duplicate --no-symbols true
+    - name: Add GitHub Packages Source
+      run: dotnet nuget add source https://nuget.pkg.github.com/DamienDennehy/index.json --name GitHub --username DamienDennehy --password ${{secrets.GITHUB_TOKEN}} --store-password-in-clear-text
+      
+    - name: Push to GitHub Packages Source
+      run: dotnet nuget push .\artifacts\**\*.nupkg --source GitHub --skip-duplicate --no-symbols true
       env:
         DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLE: false   
 

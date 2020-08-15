@@ -6,17 +6,15 @@ on:
   # On a push to a branch or tag.
   push:
     branches: [ master, 'develop/**' ]
-    tags: ['*']
 
   # On a PR to a branch or tag.
   pull_request:
-    branches: [ master, 'develop/**' ]
-    tags: ['*']
+    branches: [ master ]
 
-  # On a schedule. Default branch only. 
-  # See https://crontab.guru/examples.html    
-  # schedule:
-  #   - cron:  '0 6 * * *'  
+  # On a release.
+  release:
+    types:
+      - published
 
 jobs:
   build:
@@ -113,3 +111,41 @@ jobs:
       
     - name: Pack
       run: dotnet pack --configuration Release --no-restore --no-build --verbosity minimal --output ./artifacts -p:Version=${{steps.gitversion.outputs.semVer}}
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: ubuntu-latest
+        path: ./artifacts
+
+  deploy-packages-github:
+
+    needs: build
+
+    if: github.ref == 'refs/heads/master' || github.event_name == 'release'
+
+    runs-on: ubuntu-latest
+
+    env:
+        DOTNET_NOLOGO: true
+        DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+    steps:
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+        source-url: https://nuget.pkg.github.com/DamienDennehy/index.json    
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        
+    - name: Download Artifacts 
+      uses: actions/download-artifact@v2
+      with:
+        name: ubuntu-latest
+        path: ./artifacts
+
+    - name: Push to GitHub Packages
+      run: dotnet nuget push './artifacts/**/*.nupkg' --skip-duplicate --no-symbols true
+      env:
+        DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLE: false   

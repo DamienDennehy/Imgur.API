@@ -121,7 +121,7 @@ jobs:
     - name: Add GitHub Packages Source
       run: dotnet nuget add source https://nuget.pkg.github.com/DamienDennehy/index.json --name GitHub --username DamienDennehy --password ${{secrets.GITHUB_TOKEN}} --store-password-in-clear-text
       
-    - name: Push to GitHub Packages Source
+    - name: Push to GitHub Packages
       run: dotnet nuget push .\artifacts\**\*.nupkg --source GitHub --skip-duplicate --no-symbols true
       env:
         DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLE: false   

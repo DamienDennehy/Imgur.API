@@ -229,16 +229,17 @@ namespace Imgur.API.Endpoints
                 throw new ArgumentNullException(nameof(imageId));
             }
 
-            return DeleteImageInternalAsync(imageId);
+            return DeleteImageInternalAsync(imageId, cancellationToken);
         }
 
-        private async Task<bool> DeleteImageInternalAsync(string imageId)
+        private async Task<bool> DeleteImageInternalAsync(string imageId,
+                                                          CancellationToken cancellationToken = default)
         {
             var url = $"image/{imageId}";
 
             using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
             {
-                var response = await SendRequestAsync<bool>(request).ConfigureAwait(false);
+                var response = await SendRequestAsync<bool>(request, cancellationToken).ConfigureAwait(false);
                 return response;
             }
         }

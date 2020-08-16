@@ -181,7 +181,24 @@ namespace Imgur.API.Endpoints
         public Task<bool> DeleteAlbumAsync(string albumId,
                                            CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(albumId))
+            {
+                throw new ArgumentNullException(nameof(albumId));
+            }
+
+            return DeleteAlbumInternalAsync(albumId, cancellationToken);
+        }
+
+        private async Task<bool> DeleteAlbumInternalAsync(string albumId,
+                                                          CancellationToken cancellationToken = default)
+        {
+            var url = $"album/{albumId}";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Delete, url))
+            {
+                var response = await SendRequestAsync<bool>(request, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
         }
 
         /// <summary>

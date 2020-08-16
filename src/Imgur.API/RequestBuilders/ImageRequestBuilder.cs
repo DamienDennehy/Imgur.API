@@ -38,7 +38,6 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
         internal static HttpRequestMessage UploadImageStreamRequest(string url,
                                                                     Stream image = null,
                                                                     string album = null,
@@ -104,7 +103,6 @@ namespace Imgur.API.RequestBuilders
             return request;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
         internal static HttpRequestMessage UploadVideoStreamRequest(string url,
                                                                     Stream video,
                                                                     string album = null,

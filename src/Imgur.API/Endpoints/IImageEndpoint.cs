@@ -9,7 +9,7 @@ namespace Imgur.API.Endpoints
     /// <summary>
     /// Image Endpoint.
     /// </summary>
-    public interface IImageEndpoint
+    public interface IImageEndpoint : IEndpoint
     {
         /// <summary>
         /// Get information about an image.
@@ -33,7 +33,6 @@ namespace Imgur.API.Endpoints
         /// <param name="bufferSize"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
         Task<IImage> UploadImageAsync(Stream image,
                                       string album = null,
                                       string name = null,
@@ -74,7 +73,6 @@ namespace Imgur.API.Endpoints
         /// <param name="bufferSize"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
         Task<IImage> UploadVideoAsync(Stream video,
                                       string album = null,
                                       string type = null,

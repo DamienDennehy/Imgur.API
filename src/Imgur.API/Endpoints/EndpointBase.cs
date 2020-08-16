@@ -11,7 +11,7 @@ namespace Imgur.API.Endpoints
     /// <summary>
     /// Endpoint base implementation.
     /// </summary>
-    public abstract class EndpointBase : IEndpoint
+    public abstract class EndpointBase
     {
         internal const string ClientSecretRequiredExceptionMessage = "ApiClient.ClientSecret not set.";
         internal const string OAuth2RequiredExceptionMessage = "ApiClient.OAuth2Token not set.";

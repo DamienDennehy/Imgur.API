@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Imgur.API
 {
@@ -6,9 +7,15 @@ namespace Imgur.API
     /// The exception that is thrown when an error is found in a response from an Imgur endpoint.
     /// </summary>
     [Serializable]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S3925:\"ISerializable\" should be implemented correctly", Justification = "<Pending>")]
     public class ImgurException : Exception
     {
+        /// <summary>
+        /// The exception that is thrown when an error is found in a response from an Imgur endpoint.
+        /// </summary>
+        public ImgurException()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the ImgurException class with a specified error message.
         /// </summary>
@@ -25,6 +32,15 @@ namespace Imgur.API
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public ImgurException(string message, Exception innerException)
             : base(message, innerException)
+        {
+        }
+
+        /// <summary>
+        /// The exception that is thrown when an error is found in a response from an Imgur endpoint.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected ImgurException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

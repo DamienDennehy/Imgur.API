@@ -1,4 +1,5 @@
-﻿using Imgur.API.Converters;
+﻿using System.Collections.Generic;
+using Imgur.API.Converters;
 using Imgur.API.Models;
 using Xunit;
 
@@ -34,6 +35,26 @@ namespace Imgur.API.Tests.ResponseTests
             Assert.False(response.InGallery);
             Assert.False(response.IsAd);
             Assert.Equal("SkWWotelbmyGqQg", response.DeleteHash);
+        }
+
+        [Fact]
+        public void ConvertResponse_WithGetAlbumImagesResponse_ReturnsImages()
+        {
+            var responseConverter = new ResponseConverter();
+            var response = responseConverter.ConvertResponse<IEnumerable<Image>>(Mocks.MockAlbumResponses.GetAlbumImages);
+            Assert.NotNull(response);
+            Assert.IsType<List<Image>>(response);
+            Assert.Single(response);
+        }
+
+        [Fact]
+        public void ConvertResponse_WithGetAlbumImagesResponse_ReturnsImage()
+        {
+            var responseConverter = new ResponseConverter();
+            var response = responseConverter.ConvertResponse<Image>(Mocks.MockAlbumResponses.GetAlbumImage);
+            Assert.NotNull(response);
+            Assert.IsType<Image>(response);
+            Assert.Equal("nAYq66G", response.Id);
         }
     }
 }

@@ -13,10 +13,8 @@ namespace Imgur.API.Endpoints
     /// </summary>
     public class OAuth2Endpoint : EndpointBase, IOAuth2Endpoint
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<Pending>")]
-        internal const string AuthorizationEndpointUrl = "https://api.imgur.com/oauth2/authorize";
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<Pending>")]
-        internal const string TokenEndpointUrl = "https://api.imgur.com/oauth2/token";
+        private const string AuthorizationEndpointUrl = "https://api.imgur.com/oauth2/authorize";
+        private const string TokenEndpointUrl = "https://api.imgur.com/oauth2/token";
 
         /// <summary>
         /// Declares a new instance of the endpoint.

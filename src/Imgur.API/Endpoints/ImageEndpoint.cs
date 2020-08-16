@@ -108,7 +108,6 @@ namespace Imgur.API.Endpoints
             return UploadImageInternalAsync(imageUrl: imageUrl, album, name, title, description, cancellationToken);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
         private async Task<IImage> UploadImageInternalAsync(Stream image,
                                                             string album = null,
                                                             string name = null,
@@ -190,7 +189,6 @@ namespace Imgur.API.Endpoints
             return UploadVideoInternalAsync(video, album, name, title, description, progress, bufferSize, cancellationToken);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "<Pending>")]
         private async Task<IImage> UploadVideoInternalAsync(Stream image,
                                                             string album = null,
                                                             string name = null,

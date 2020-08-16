@@ -16,7 +16,7 @@ namespace Imgur.API.Endpoints
         /// <param name="albumId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<IAlbum> GetImageAsync(string albumId,
+        Task<IAlbum> GetAlbumAsync(string albumId,
                                    CancellationToken cancellationToken = default);
 
         /// <summary>

@@ -65,7 +65,31 @@ namespace Imgur.API.Endpoints
                                                string albumId,
                                                CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(imageId))
+            {
+                throw new ArgumentNullException(nameof(imageId));
+            }
+
+            if (string.IsNullOrWhiteSpace(albumId))
+            {
+                throw new ArgumentNullException(nameof(albumId));
+            }
+
+            return GetAlbumImageInternalAsync(imageId, albumId, cancellationToken);
+        }
+
+        private async Task<IImage> GetAlbumImageInternalAsync(string imageId,
+                                                              string albumId,
+                                                              CancellationToken cancellationToken = default)
+        {
+            var url = $"album/{albumId}/image/{imageId}";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            {
+                var response = await SendRequestAsync<Image>(request,
+                                                             cancellationToken).ConfigureAwait(false);
+                return response;
+            }
         }
 
         /// <summary>
@@ -77,7 +101,25 @@ namespace Imgur.API.Endpoints
         public Task<IEnumerable<IImage>> GetAlbumImagesAsync(string albumId,
                                                              CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(albumId))
+            {
+                throw new ArgumentNullException(nameof(albumId));
+            }
+
+            return GetAlbumImagesInternalAsync(albumId, cancellationToken);
+        }
+
+        private async Task<IEnumerable<IImage>> GetAlbumImagesInternalAsync(string albumId,
+                                                                            CancellationToken cancellationToken = default)
+        {
+            var url = $"album/{albumId}/images";
+
+            using (var request = RequestBuilder.CreateRequest(HttpMethod.Get, url))
+            {
+                var response = await SendRequestAsync<IEnumerable<Image>>(request,
+                                                                          cancellationToken).ConfigureAwait(false);
+                return response;
+            }
         }
 
         /// <summary>

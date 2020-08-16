@@ -48,5 +48,60 @@ namespace Imgur.API.Tests.EndpointTests
             var argNullException = (ArgumentNullException)exception;
             Assert.Equal("albumId", argNullException.ParamName);
         }
+
+        [Fact]
+        public async Task GetAlbumImageAsync_Equal()
+        {
+            var mockUrl = "https://api.imgur.com/3/album/nIn0Ntl/image/nAYq66G";
+            var mockResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(MockAlbumResponses.GetAlbumImage)
+            };
+
+            var apiClient = new ApiClient("123");
+            var httpClient = new HttpClient(new MockHttpMessageHandler(mockUrl, mockResponse));
+            var endpoint = new AlbumEndpoint(apiClient, httpClient);
+            var response = await endpoint.GetAlbumImageAsync("nAYq66G", "nIn0Ntl");
+
+            Assert.NotNull(response);
+            Assert.IsAssignableFrom<IImage>(response);
+            Assert.Equal("nAYq66G", response.Id);
+        }
+
+        [Fact]
+        public async Task GetAlbumImageAsync_WithAlbumNull_ThrowsArgumentNullException()
+        {
+            var apiClient = new ApiClient("123");
+            var endpoint = new AlbumEndpoint(apiClient, new HttpClient());
+
+            var exception = await Record.ExceptionAsync(async () =>
+            {
+                await endpoint.GetAlbumImageAsync("image", null);
+            });
+
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal("albumId", argNullException.ParamName);
+        }
+
+        [Fact]
+        public async Task GetAlbumImageAsync_WithImageNull_ThrowsArgumentNullException()
+        {
+            var apiClient = new ApiClient("123");
+            var endpoint = new AlbumEndpoint(apiClient, new HttpClient());
+
+            var exception = await Record.ExceptionAsync(async () =>
+            {
+                await endpoint.GetAlbumImageAsync(null, "album");
+            });
+
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentNullException>(exception);
+
+            var argNullException = (ArgumentNullException)exception;
+            Assert.Equal("imageId", argNullException.ParamName);
+        }
     }
 }

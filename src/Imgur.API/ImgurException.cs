@@ -6,7 +6,6 @@ namespace Imgur.API
     /// The exception that is thrown when an error is found in a response from an Imgur endpoint.
     /// </summary>
     [Serializable]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S3925:\"ISerializable\" should be implemented correctly", Justification = "<Pending>")]
     public class ImgurException : Exception
     {
         /// <summary>

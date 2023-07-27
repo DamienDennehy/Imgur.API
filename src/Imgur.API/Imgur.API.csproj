@@ -8,6 +8,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Description>Imgur.API is a .NET implementation of Imgur's API.</Description>
     <PackageTags>imgur;media;image;video;upload</PackageTags>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
